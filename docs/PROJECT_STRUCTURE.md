@@ -105,6 +105,7 @@ src
 3. **Public API**
    - Features expose their functionality through a public API (`index.ts`)
    - Other parts of the application should only import from the feature's root:
+
    ```typescript
    // ✅ Good
    import { LoginForm } from '@/features/auth';
@@ -115,6 +116,7 @@ src
 
 4. **Import Rules**
    To enforce these principles, add the following ESLint rule:
+
    ```js
    {
        rules: {

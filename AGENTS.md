@@ -6,7 +6,7 @@ Humans: read CONTRIBUTING.md and docs/.
 ## 1. Authoritative References (Never Reproduce Content Here)
 
 | Topic | Source of Truth |
-|-------|-----------------|
+| ------- | ----------------- |
 | Project architecture | docs/PROJECT_STRUCTURE.md |
 | Component & styling patterns | docs/COMPONENTS_AND_STYLING.md |
 | Performance guidance | docs/PERFORMANCE.md |
@@ -20,7 +20,7 @@ Humans: read CONTRIBUTING.md and docs/.
 Run from the project root after installing dependencies:
 
 | Command | Purpose |
-|---------|---------|
+| --------- | --------- |
 | `npm run dev` | Start Next.js dev server |
 | `npm run build` | Production build |
 | `npm run start` | Serve production build |
