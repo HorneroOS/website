@@ -1,199 +1,89 @@
 # 🗄️ Project Structure
 
-This project follows a Feature-Based Architecture adapted for Next.js App Router, combining the best practices of Feature-Based Architecture with Next.js conventions. The main goal is to organize code around business capabilities while leveraging Next.js's powerful routing and server components.
+This Astro starter organizes code around **pages**, **layouts**, **components**, **content collections**, and **static assets**. The goal is a clear, content-first structure that stays easy to navigate as the site grows.
 
-## Architecture Overview
-
-The codebase is organized into three main categories:
-
-1. **App Router** (`src/app/`) - Next.js routing and layouts
-2. **Features** (`src/features/`) - Business capabilities
-3. **Shared Infrastructure** (`src/shared/`) - Common utilities and components
-
-### Directory Structure
+## Top-level layout
 
 ```sh
-src
-|
-+-- app # Next.js App Router
-|   |
-|   +-- (auth) # Auth group route
-|   |   +-- login
-|   |   |   +-- page.tsx
-|   |   +-- register
-|   |   |   +-- page.tsx
-|   |   +-- layout.tsx
-|   |
-|   +-- (dashboard) # Dashboard group route
-|   |   +-- page.tsx
-|   |   +-- layout.tsx
-|   |
-|   +-- layout.tsx # Root layout
-|   +-- page.tsx # Home page
-|
-+-- features # Feature modules
-|   |
-|   +-- auth # Authentication feature
-|   |   |
-|   |   +-- components # Feature-specific components
-|   |   |   +-- LoginForm.tsx
-|   |   |   +-- RegisterForm.tsx
-|   |   |
-|   |   +-- hooks # Feature-specific hooks
-|   |   |   +-- useAuth.ts
-|   |   |
-|   |   +-- services # Feature-specific services
-|   |   |   +-- authService.ts
-|   |   |
-|   |   +-- types # Feature-specific types
-|   |   |   +-- auth.types.ts
-|   |   |
-|   |   +-- utils # Feature-specific utilities
-|   |   |   +-- validation.ts
-|   |   |
-|   |   +-- index.ts # Public API
-|   |
-|   +-- dashboard # Dashboard feature
-|   |   |
-|   |   +-- components
-|   |   +-- hooks
-|   |   +-- services
-|   |   +-- types
-|   |   +-- utils
-|   |   +-- index.ts
-|
-+-- shared # Shared infrastructure
-    |
-    +-- components # Shared components
-    |   +-- ui # UI components
-    |   |   +-- Button.tsx
-    |   |   +-- Input.tsx
-    |   |
-    |   +-- layout # Layout components
-    |   |   +-- Header.tsx
-    |   |   +-- Footer.tsx
-    |
-    +-- hooks # Shared hooks
-    |   +-- useMediaQuery.ts
-    |   +-- useLocalStorage.ts
-    |
-    +-- lib # Shared libraries
-    |   +-- api.ts
-    |   +-- storage.ts
-    |
-    +-- styles # Shared styles
-    |   +-- theme.ts
-    |   +-- globals.css
-    |
-    +-- utils # Shared utilities
-    |   +-- format.ts
-    |   +-- validation.ts
+.
+├── public/                 # Static assets served as-is (favicon, images)
+├── src/
+│   ├── components/         # Reusable Astro (and optional island) components
+│   ├── content/            # Markdown/MDX entries for collections
+│   │   └── blog/           # Sample blog collection
+│   ├── content.config.ts   # Collection loaders and Zod schemas
+│   ├── layouts/            # Page shells (HTML document wrappers)
+│   ├── pages/              # File-based routes
+│   │   ├── index.astro     # CNA landing page
+│   │   └── blog/           # Blog list + [slug] detail routes
+│   └── styles/             # Shared CSS (landing, blog, etc.)
+├── docs/                   # Human-readable project guides
+├── astro.config.mjs
+├── eslint.config.mjs
+├── tsconfig.json
+└── package/                # CNA dynamic package.json resolution (template only)
 ```
 
-## Key Principles
+## Routing
 
-1. **Feature Encapsulation**
-   - Each feature is a self-contained module
-   - Features should not depend on the internal structure of other features
-   - All feature exports should go through the `index.ts` file
+Astro maps files in `src/pages/` to URLs:
 
-2. **Next.js Integration**
-   - Use route groups (folders in parentheses) to organize related routes
-   - Leverage server components for data fetching and server-side rendering
-   - Keep page components thin, delegating logic to features
+| File | Route |
+|------|-------|
+| `pages/index.astro` | `/` |
+| `pages/blog/index.astro` | `/blog` |
+| `pages/blog/[slug].astro` | `/blog/:slug` |
 
-3. **Public API**
-   - Features expose their functionality through a public API (`index.ts`)
-   - Other parts of the application should only import from the feature's root:
+## Content collections
 
-   ```typescript
-   // ✅ Good
-   import { LoginForm } from '@/features/auth';
+Build-time content lives in `src/content/` and is registered in `src/content.config.ts`.
 
-   // ❌ Bad
-   import { LoginForm } from '@/features/auth/components/LoginForm';
-   ```
+- **Loader**: `glob()` reads Markdown/MDX from `src/content/blog/`
+- **Schema**: Zod validates frontmatter (title, description, pubDate, draft, etc.)
+- **Query**: Pages use `getCollection()` and `render()` from `astro:content`
 
-4. **Import Rules**
-   To enforce these principles, add the following ESLint rule:
+Add new collections by defining another `defineCollection()` entry and exporting it from `collections`.
 
-   ```js
-   {
-       rules: {
-           'no-restricted-imports': [
-               'error',
-               {
-                   patterns: ['@/features/*/*'],
-               },
-           ],
-       }
-   }
-   ```
+## Layouts and components
 
-## Best Practices
+- **`layouts/BaseLayout.astro`** — document shell with `<html>`, `<body>`, and a default slot
+- **`components/BaseHead.astro`** — shared `<title>`, charset, viewport, and description meta
 
-1. **Route Organization**
-   - Use route groups to organize related routes
-   - Keep page components focused on routing and layout
-   - Delegate business logic to features
+Keep page-specific markup in `pages/` and promote repeated structure into layouts or components.
 
-2. **Feature Development**
-   - Keep features focused on a single business capability
-   - Minimize dependencies between features
-   - Use the shared infrastructure for common functionality
+## Import alias
 
-3. **Server Components**
-   - Use server components for data fetching and server-side rendering
-   - Keep client components minimal and focused on interactivity
-   - Leverage Next.js's built-in optimizations
+TypeScript path mapping is configured in `tsconfig.json`:
 
-4. **State Management**
-   - Use React Server Components for server state
-   - Use React Context for client state when needed
-   - Consider using libraries like Zustand for complex client state
-
-5. **Data Fetching**
-   - Use Next.js's built-in data fetching methods
-   - Keep data fetching logic in features
-   - Use React Query for client-side data fetching when needed
-
-## Example: Auth Feature
-
-Here's how a typical feature might be structured:
-
-```typescript
-// features/auth/index.ts
-export * from './components';
-export * from './hooks';
-export * from './services';
-export * from './types';
-
-// features/auth/components/LoginForm.tsx
-import { useAuth } from '../hooks';
-import { login } from '../services';
-
-export const LoginForm = () => {
-  const { login } = useAuth();
-  // Component implementation
-};
-
-// app/(auth)/login/page.tsx
-import { LoginForm } from '@/features/auth';
-
-export default function LoginPage() {
-  return (
-    <div>
-      <h1>Login</h1>
-      <LoginForm />
-    </div>
-  );
+```json
+"paths": {
+  "@/*": ["./src/*"]
 }
 ```
 
-## Benefits
+Example:
 
-1. **Maintainability**: Changes to a feature are isolated and don't affect other parts of the application
-2. **Scalability**: New features can be added without modifying existing code
-3. **Performance**: Leverages Next.js's built-in optimizations
-4. **Developer Experience**: Clear organization and separation of concerns
-5. **Type Safety**: Full TypeScript support throughout the application
+```astro
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+```
+
+## When to add folders
+
+| Need | Suggested location |
+|------|-------------------|
+| New marketing page | `pages/about.astro` |
+| Shared nav/footer | `components/` |
+| Blog or docs content | `content/<collection>/` |
+| Global styles | `styles/` or component `<style>` blocks |
+| Interactive widget | `components/` + optional `@astrojs/react` integration |
+
+## Principles
+
+1. **Content-first** — prefer static HTML and collections over client state
+2. **Colocate** — keep styles and helpers near the page or component that uses them
+3. **Honest routes** — every linked page should exist; remove or update stale links
+4. **Schema at the edge** — validate frontmatter in `content.config.ts` early
+
+For tooling and editor setup, see [Project Configuration](./PROJECT_CONFIGURATION.md).

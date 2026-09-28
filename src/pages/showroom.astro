@@ -1,0 +1,28 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+const shots = await getCollection('showroom');
+---
+
+<SiteLayout
+  title="Showroom — Hornero OS"
+  description="Screenshots of the Hornero OS desktop: launcher, dashboard, themes."
+>
+  <section class="section">
+    <h2>Showroom</h2>
+    <p>
+      Development snapshots of the Hornero desktop — Hyprland plus the Hornero
+      Shell on Arch, captured from the graphical test harness at 1280×720.
+    </p>
+    <div class="gallery">
+      {shots.map((s) => (
+        <figure class="shot">
+          <img src={s.data.image} alt={s.data.title} width="1280" height="720" loading="lazy" />
+          <figcaption>{s.data.title}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

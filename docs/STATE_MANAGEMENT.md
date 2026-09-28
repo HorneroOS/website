@@ -1,40 +1,91 @@
 # 🗃️ State Management
 
-There is no need to keep all of your state in a single centralized store. There are different needs for different types of state that can be split into several types:
+Most Astro pages are **static** and do not need client-side state. Reach for state only inside **islands** (hydrated components) or when integrating with external APIs at request time.
 
-## Component State
+## Default: no global store
 
-This is the state that only a component needs, and it is not meant to be shared anywhere else. But you can pass it as prop to children components if needed. Most of the time, you want to start from here and lift the state up if needed elsewhere. For this type of state, you will usually need:
+The starter intentionally avoids Redux, Zustand, or similar libraries. Static content, layouts, and content collections cover the common docs/marketing use case without a client store.
 
-- [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - for simpler states that are independent
-- [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) - for more complex states where on a single action you want to update several pieces of state
+## Where state belongs
 
-## Application State
+### 1. Content and configuration (build time)
 
-This is the state that controls interactive parts of an application. Opening modals, notifications, changing color mode, etc. For best performance and maintainability, keep the state as close as possible to the components that are using it. Don't make everything global out of the box.
+**Source of truth**: Markdown/MDX in `src/content/` plus schemas in `src/content.config.ts`.
 
-Our recommendation is to use any of the following state management libraries:
+Use `getCollection()` and `getEntry()` in pages — not client fetches — for blog posts, docs, and changelog entries.
 
-- [jotai](https://github.com/pmndrs/jotai)
-- [recoil](https://recoiljs.org/)
-- [zustand](https://github.com/pmndrs/zustand)
+### 2. Page-local data (server / build time)
 
-## Server Cache State
+Fetch or compute data in the frontmatter of `.astro` pages:
 
-This is the state that comes from the server which is being cached on the client for further usage. It is possible to store remote data inside a state management store such as redux, but there are better solutions for that.
+```astro
+---
+const items = (await getCollection('blog')).filter((p) => !p.data.draft);
+---
+<ul>
+  {items.map((item) => <li>{item.data.title}</li>)}
+</ul>
+```
 
-Our recommendation is:
+This runs at build time for static output and keeps HTML self-contained.
 
-- [react-query](https://react-query.tanstack.com/)
+### 3. Component state (client islands)
 
-## Form State
+When you add React, Preact, Solid, or Svelte via an Astro integration, use that framework's local state inside the island:
 
-This is a state that tracks users inputs in a form.
+- React: `useState`, `useReducer`
+- Vue: `ref`, `reactive`
+- Svelte: `$:` / stores
 
-Forms in React can be [controlled](https://reactjs.org/docs/forms.html#controlled-components) and [uncontrolled](https://reactjs.org/docs/uncontrolled-components.html).
+Keep state inside the smallest interactive subtree. Pass data from Astro as props:
 
-Depending on the application needs, they might be pretty complex with many different fields which require validation.
+```astro
+---
+import Search from '@/components/Search';
+const tags = ['astro', 'content'];
+---
+<Search client:load tags={tags} />
+```
 
-Although it is possible to build any form using only React, there are pretty good solutions out there that help with handling forms such as:
+### 4. URL as state
 
-- [React Hook Form](https://react-hook-form.com/)
+For filters, pagination, or tabs on mostly static sites, prefer:
+
+- Dedicated routes (`/blog/page/2`)
+- Query params parsed on the server (SSR/adapter mode)
+- Native `<details>` / anchor links for simple toggles
+
+### 5. Server cache / remote data
+
+If you later enable SSR or server endpoints:
+
+- Use `fetch` in Astro page frontmatter or `src/pages/api/*` routes
+- Consider TanStack Query or SWR **inside islands** when client refetching is required
+
+## Anti-patterns for Astro content sites
+
+| Avoid | Prefer |
+|-------|--------|
+| Global client store for static copy | Content collections + layouts |
+| Fetching markdown in the browser | Build-time `getCollection()` |
+| Hydrating entire pages | Small islands with `client:*` directives |
+| Duplicating frontmatter in components | Read from `post.data` once in the page |
+
+## When to add a client store
+
+Add Zustand, Nanostores, or similar only if:
+
+- Multiple islands must share live client state
+- You build a logged-in app shell with persistent UI state
+- Real-time collaboration or websockets drive the UI
+
+For those cases, colocate the store next to the feature and document the public API in `docs/`.
+
+## Forms
+
+Static sites often use:
+
+- HTML forms posting to external services (Formspree, Netlify Forms)
+- Server actions or API routes when you adopt an SSR adapter
+
+Client form libraries (React Hook Form, etc.) belong inside hydrated form islands, not in static `.astro` shells.

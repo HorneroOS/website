@@ -1,0 +1,73 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import '../styles/global.css';
+
+const title = 'Hornero OS — an Arch Linux desktop with Argentine soul';
+const description =
+  'Hornero OS: a Wayland/Hyprland desktop with a Quickshell shell, a native system CLI, and 15 curated themes. Built in the open.';
+
+const pillars = [
+  {
+    title: 'Quickshell desktop shell',
+    text: 'Bar, launcher, dashboard, notifications and session controls — one QML shell on Wayland, with 11 layout presets.',
+  },
+  {
+    title: 'horneroctl system CLI',
+    text: 'One front door for presets, appearance, shell lifecycle, snapshots and health. Non-interactive, scriptable, tested.',
+  },
+  {
+    title: '15 curated themes',
+    text: 'From Hornero Dark to Neon City and Pampa — token-driven packs with an offline-first catalogue, cyberpunk included.',
+  },
+  {
+    title: 'Cinematic greeter',
+    text: 'An SDDM theme with offline Argentine landscapes, day/golden-hour/night rotation, zero network.',
+  },
+];
+---
+
+<SiteLayout title={title} description={description}>
+  <section class="hero">
+    <h1>An Arch Linux desktop <span class="neon">with Argentine soul</span></h1>
+    <p>
+      Hornero OS is a Wayland desktop built around Hyprland and Quickshell —
+      deeply integrated, AI-native, and developed in the open. From pampa calm
+      to neon-city nights.
+    </p>
+    <div class="cta-row">
+      <a href="/install" class="cta primary">Install</a>
+      <a href="/showroom" class="cta secondary">See it running</a>
+    </div>
+    <div class="hero-shot">
+      <img
+        src="/showroom/desktop-neon.png"
+        alt="Hornero OS desktop, Neon City theme"
+        width="1280"
+        height="720"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>One system, four parts</h2>
+    <div class="cards">
+      {pillars.map((p) => (
+        <div class="card">
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Where it comes from</h2>
+    <p>
+      HorneroOS grows out of years of dotfiles craft — open-source projects and
+      the unixporn community — rebuilt as a real system: CLI, shell, config,
+      installer. No Omarchy fork, no web-wrapper storefront.
+      <a href="/roots">Read our roots and how we compare →</a>
+    </p>
+  </section>
+</SiteLayout>
