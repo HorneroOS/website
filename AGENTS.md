@@ -1,70 +1,70 @@
 # AGENTS.md – AI Interaction & Execution Guide (Human contributors: see CONTRIBUTING.md & docs/)
 
-This file is intentionally scoped only for AI assistants (Cursor, Copilot Chat, PR automation bots).
-Humans: read CONTRIBUTING.md and docs/.
+This file is scoped for AI assistants (Cursor, Copilot Chat, PR automation bots).
+Humans: read CONTRIBUTING.md and the documents under docs/.
 
 ## 1. Authoritative References (Never Reproduce Content Here)
 
 | Topic | Source of Truth |
-| ------- | ----------------- |
+|-------|-----------------|
 | Project architecture | docs/PROJECT_STRUCTURE.md |
 | Component & styling patterns | docs/COMPONENTS_AND_STYLING.md |
-| Performance guidance | docs/PERFORMANCE.md |
-| State management approach | docs/STATE_MANAGEMENT.md |
+| State & content data flow | docs/STATE_MANAGEMENT.md |
 | Project / build configuration | docs/PROJECT_CONFIGURATION.md |
 
-(.template files are materialized during project generation—still treat as authoritative.)
+(If a file ends with `.template` it is materialized during project generation — still treat it as authoritative.)
 
 ## Key Commands
 
 Run from the project root after installing dependencies:
 
 | Command | Purpose |
-| --------- | --------- |
-| `npm run dev` | Start Next.js dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve production build |
-| `npm run lint` | ESLint |
-| `npm run type-check` | TypeScript (`tsc --noEmit`) |
+|---------|---------|
+| `npm run dev` | Astro dev server (port 4321) |
+| `npm run build` | Static production build → `dist/` |
+| `npm run preview` | Preview production build |
+| `npm run lint` | ESLint (flat config + eslint-plugin-astro) |
+| `npm run type-check` | Astro check (`.astro` + content types) |
+| `npm run format` | Prettier with prettier-plugin-astro |
 
 ## 2. Operating Principles (AI Perspective)
 
 - Documentation-first
-- Reuse-before-build
-- Type safety always (no unvetted any)
+- Content-first — prefer collections and static HTML over client state
+- Type safety via TypeScript and Zod content schemas
 - Deterministic, incremental changes
-- Explicit assumption logging
+- Honest feature claims — do not imply islands, tests, or integrations that are not installed
 
-## 3. AI Execution Protocol (Next.js Feature / Route Work)
+## 3. AI Execution Protocol (Astro Feature Work)
 
-When asked to add/modify UI or route logic:
+When asked to add pages, content, or components:
 
-1. Identify target feature folder under `src/features/*` or app route segment (justify new ones)
-2. Read referenced docs before proposing code
-3. Prefer extending existing component / hook / state patterns
-4. Present proposed file tree + diff plan BEFORE writing code
-5. After code changes: list validation steps (format, lint, type check, test)
+1. Read docs/PROJECT_STRUCTURE.md and relevant guides before proposing code
+2. Place routes in `src/pages/`, shared UI in `components/` or `layouts/`
+3. Add or extend content collections in `content.config.ts` + `content/<name>/`
+4. Present file tree + diff plan before large changes
+5. After changes: run format, lint, type-check, and build when possible
 
 ## 4. Guardrails (Must Enforce)
 
-- Do NOT fabricate file paths, component APIs, or library versions
-- Do NOT remove existing accessibility props (aria-*, alt, role) without rationale + replacement
-- Do NOT introduce global untracked singletons—follow documented patterns
-- ALWAYS flag large dependency additions (>1 lib) for human confirmation
-- Surface potential performance regressions (server/client boundary issues, large client bundles)
+- Do NOT fabricate file paths, collection names, or Astro APIs
+- Do NOT add global client stores for static marketing content
+- Do NOT remove accessibility semantics without replacement
+- Do NOT commit `node_modules/`, `dist/`, or secrets
+- Flag new UI framework integrations for human confirmation
 
-## 5. Component / Route Creation Checklist
+## 5. Content & Page Checklist
 
-- Typed props / params interfaces exported
-- Proper Next.js conventions (RSC vs Client Component) respected
-- Accessibility reviewed (labels, semantics)
-- Example or usage snippet considered
-- Test file added or explicitly deferred with reason
+- Frontmatter matches Zod schema in `content.config.ts`
+- Pages using collections filter `draft` entries when appropriate
+- Layout receives `title` and `description` for SEO
+- Links point to existing routes (`/`, `/blog`, docs paths)
+- Scoped vs global CSS choice is intentional
 
 ## 6. When the AI Should Ask or Refuse
 
-Ask if: unclear route placement, conflicting patterns, missing target directory.
-Refuse if: asked to bypass validation, remove type safety, duplicate existing documented component.
+Ask if: collection schema unclear, SSR vs static tradeoff unresolved, missing target route.
+Refuse if: asked to bypass validation, commit build artifacts, or duplicate existing layout patterns poorly.
 
 ## 7. Post-Change Assistant Report
 
@@ -72,10 +72,10 @@ Return a bullet summary:
 
 - Files touched (concise)
 - New dependencies (if any)
-- Type/lint status
-- Suggested manual QA steps
-- Deferred items (tests, docs)
+- Lint / type-check / build status
+- Suggested manual QA (`/`, `/blog`, content edits)
+- Deferred items (tests, adapters, island integrations)
 
 ---
-Maintained automatically by create-awesome-node-app Next.js template provisioning.
-Humans: stop reading—go to CONTRIBUTING.md + docs/.
+Maintained by create-awesome-node-app Astro starter provisioning.
+Humans: stop reading — go to CONTRIBUTING.md + docs/.

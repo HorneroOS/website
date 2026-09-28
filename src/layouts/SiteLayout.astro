@@ -1,0 +1,42 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+/**
+ * @typedef {Object} Props
+ * @property {string} title
+ * @property {string} [description]
+ */
+const { title, description } = /** @type {Props} */ (Astro.props);
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/showroom', label: 'Showroom' },
+  { href: '/roots', label: 'Roots' },
+  { href: '/install', label: 'Install' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <header class="site-nav">
+      <a href="/" class="brand"><span class="brand-mark">⌂</span> Hornero OS</a>
+      <nav>
+        {nav.map((l) => <a href={l.href}>{l.label}</a>)}
+      </nav>
+    </header>
+    <main class="app">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>Hornero OS — built in the open.</span>
+      <span>
+        <a href="https://github.com/HorneroOS">GitHub</a>
+        {' · '}
+        <a href="https://github.com/HorneroOS/docs">Docs</a>
+      </span>
+    </footer>
+  </body>
+</html>

@@ -3,17 +3,18 @@
 Official website for Hornero OS: what it is, what it looks like, how to
 install it, and where it comes from.
 
-Scaffolded from the `nextjs-starter` template
-(`create-awesome-node-app`, same as
-[ulises-jeremias/website](https://github.com/ulises-jeremias/website)),
-then rewritten as HorneroOS content. Template auth/feature examples
-were removed; the App Router + TypeScript + ESLint/Prettier setup stays.
+An Astro static site (content-first, zero client JS by default), built
+the same way as
+[ulises-jeremias/website](https://github.com/ulises-jeremias/website):
+file-based routing, content collections, shared layout. Scaffolded from
+the `astro-starter` template (`create-awesome-node-app`); the sample
+blog was replaced with HorneroOS pages.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+npm run dev      # http://localhost:4321
 ```
 
 ## Gates
@@ -27,7 +28,7 @@ npm run build
 ## Pages
 
 - `/` — hero, pillars, roots teaser
-- `/showroom` — screenshots from `public/showroom`
+- `/showroom` — content collection (`src/content/showroom`)
 - `/roots` — heritage, credits, comparison table
 - `/install` — profiles, requirements, installer status
 

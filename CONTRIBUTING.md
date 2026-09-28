@@ -1,80 +1,89 @@
 # Contributing
 
-Thank you for contributing! This document guides human developers after reading the README.
+Thanks for contributing to a project generated from this Astro starter. Read the README first, then use this guide for day-to-day workflow.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Bootstrap](#bootstrap)
-- [Architecture & Routing](#architecture--routing)
-- [Feature Modules](#feature-modules)
-- [Server vs Client Components](#server-vs-client-components)
+- [Project Bootstrap](#project-bootstrap)
+- [Scripts & Tooling](#scripts--tooling)
+- [Architecture Conventions](#architecture-conventions)
 - [Coding Standards](#coding-standards)
-- [Branch & Commit Strategy](#branch--commit-strategy)
-- [Dependencies](#dependencies)
-- [Testing](#testing)
+- [Git / Branch Workflow](#git--branch-workflow)
+- [Commit Messages](#commit-messages)
+- [Adding Dependencies](#adding-dependencies)
+- [Testing Strategy](#testing-strategy)
 - [Documentation](#documentation)
-- [PR Checklist](#pr-checklist)
+- [Pull Request Checklist](#pull-request-checklist)
 
 ## Prerequisites
 
-Use the documented Node version (`fnm use`). Install dependencies:
+Install Node **22.22.0** (`fnm use` reads `.node-version`). Run `npm install` after project generation.
+
+## Project Bootstrap
 
 ```sh
 fnm use
 npm install
-```
-
-## Bootstrap
-
-Development server:
-
-```sh
 npm run dev
 ```
 
-## Architecture & Routing
+Open [http://localhost:4321](http://localhost:4321).
 
-Consult [docs/PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md). App Router layout lives under `src/app/`. Features expose components & logic under `src/features/<domain>`.
+## Scripts & Tooling
 
-## Feature Modules
+| Script | Purpose |
+|--------|---------|
+| `dev` | Astro dev server with hot reload |
+| `build` | Production static build to `dist/` |
+| `preview` | Serve the production build locally |
+| `lint` / `lint:fix` | ESLint (includes Astro files) |
+| `format` | Prettier (includes `.astro` via plugin) |
+| `type-check` | `astro check` |
 
-Encapsulate UI, hooks, services, and types. Export a minimal public surface (`index.ts`).
+## Architecture Conventions
 
-## Server vs Client Components
+Read [docs/PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md) first.
 
-- Prefer Server Components for data-fetch & static composition
-- Add `"use client"` only when needed (state, effects, event handlers)
+- Pages in `src/pages/` map to routes
+- Shared shells in `src/layouts/`
+- Markdown content in `src/content/` with schemas in `src/content.config.ts`
+- Prefer static HTML; add framework islands only when needed
 
 ## Coding Standards
 
-- Strict TypeScript
-- Accessibility by default
-- No large un-memoized lists; use streaming / pagination
-- Avoid leaking server-only code to client bundles
+- TypeScript strict mode — avoid `any` unless justified
+- Validate content frontmatter via Zod in `content.config.ts`
+- Keep components small; use layouts for repeated document structure
+- Accessibility: semantic HTML, alt text, visible focus states
 
-## Branch & Commit Strategy
+## Git / Branch Workflow
 
-`feat/*`, `fix/*`, `chore/*`. Conventional Commits format. Rebase before PR.
+- Branch from `main`: `feat/short-description`
+- Rebase before opening a PR
 
-## Dependencies
+## Commit Messages
 
-Justify additions > 0 new runtime deps in PR. Prefer built-in Next.js / React features.
+Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat: add changelog collection`, `fix: correct blog slug links`.
 
-## Testing
+## Adding Dependencies
 
-Add tests for business logic (services, hooks). Snapshot or interaction tests for critical UI.
+Prefer Astro integrations (`npx astro add …`) for official packages. Document non-obvious dependencies in the PR description.
+
+## Testing Strategy
+
+This starter does **not** include Vitest or Playwright. Add a test runner when you introduce non-trivial logic or interactive islands. Until then, rely on `type-check`, `lint`, and manual QA of `/` and `/blog`.
 
 ## Documentation
 
-Update `docs/` for architectural or pattern changes.
+Update files in `docs/` when you introduce new collections, layouts, or deployment steps.
 
-## PR Checklist
+## Pull Request Checklist
 
-- [ ] Lint & type check pass
-- [ ] Tests added/updated or reason stated
-- [ ] No unused exports
-- [ ] Accessible UI changes
-- [ ] Docs updated if needed
+- [ ] Change is scoped and documented
+- [ ] `lint` and `type-check` pass
+- [ ] `build` succeeds
+- [ ] Docs updated if behavior or structure changed
+- [ ] No secrets or `.env` files committed
 
-Happy building! 🚀
+Happy building!

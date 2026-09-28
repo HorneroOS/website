@@ -1,89 +1,100 @@
-# 🧱 Components And Styling
+# 🧱 Components and Styling
 
-## Components Best Practices
+Astro components are the primary building block. They can render static HTML, scoped CSS, and optional client-side JavaScript via [islands](https://docs.astro.build/en/concepts/islands/).
 
-### Colocate things as close as possible to where it's being used
+## Component patterns
 
-Keep components, functions, styles, state, etc. as close as possible to the component where it's being used. This will not only make your codebase more readable and easier to understand but it will also improve your application performance since it will reduce redundant re-renders on state updates.
+### Prefer `.astro` for static UI
 
-### Avoid large components with nested rendering functions
+Use `.astro` files when no client JavaScript is required. The compiler strips unused JS and ships HTML by default.
 
-Do not add multiple rendering functions inside your application, this gets out of control pretty quickly. What you should do instead is if there is a piece of UI that can be considered as a unit, is to extract it in a separate component.
-
-```javascript
-// this is very difficult to maintain as soon as the component starts growing
-function Component() {
-  function renderItems() {
-    return <ul>...</ul>;
-  }
-  return <div>{renderItems()}</div>;
+```astro
+---
+interface Props {
+  label: string;
 }
-
-// extract it in a separate component
-function Items() {
-  return <ul>...</ul>;
-}
-
-function Component() {
-  return (
-    <div>
-      <Items />
-    </div>
-  );
-}
+const { label } = Astro.props;
+---
+<button type="button">{label}</button>
 ```
 
-### Stay consistent
+### Colocate styles with components
 
-### Limit the number of props a component is accepting as input
+Scoped styles live in the same file:
 
-If your component is accepting too many props you might consider splitting it into multiple components or use the composition technique via children or slots.
+```astro
+<p class="note">Hello</p>
+<style>
+  .note {
+    color: var(--cna-text-muted);
+  }
+</style>
+```
 
-### Abstract shared components into a component library
+Use `is:global` sparingly — the landing page imports `src/styles/cna-landing.css` because those utilities span many elements.
 
-For larger projects, it is a good idea to build abstractions around all the shared components. It makes the application more consistent and easier to maintain. Identify repetitions before creating the components to avoid wrong abstractions.
+### Extract shared pieces early
 
-It is a good idea to wrap 3rd party components as well in order to adapt them to the application's needs. It might be easier to make the underlying changes in the future without affecting the application's functionality.
+When two pages repeat the same header, meta tags, or shell:
+
+- **`BaseHead.astro`** — SEO and document metadata
+- **`BaseLayout.astro`** — shared HTML document wrapper
+
+Add `SiteHeader.astro`, `SiteFooter.astro`, etc. as the site grows.
+
+### Keep components focused
+
+Avoid large single files with many responsibilities. Split cards, lists, and navigation into dedicated components under `src/components/`.
+
+## Styling options
+
+This starter uses plain CSS files under `src/styles/` for the CNA landing and blog pages. Astro supports multiple approaches:
+
+| Approach | Good for |
+|----------|----------|
+| Scoped `<style>` in `.astro` | Component-specific rules |
+| Global CSS imports | Shared tokens, landing themes |
+| [Tailwind](https://tailwindcss.com/) | Utility-first teams (add `@astrojs/tailwind`) |
+| [CSS Modules](https://docs.astro.build/en/guides/styling/#css-modules) | Locally scoped class names |
+| Sass/Less | Teams already standardized on preprocessors |
+
+Pick one primary strategy per project to avoid conflicting conventions.
+
+## Islands (interactive components)
+
+This template does **not** ship a UI framework integration. When you need hydration:
+
+1. Add an integration, e.g. `npx astro add react`
+2. Place interactive components in `src/components/`
+3. Opt in with a client directive:
+
+```astro
+---
+import Counter from '@/components/Counter';
+---
+<Counter client:load />
+```
+
+Use the smallest directive that fits (`client:visible`, `client:idle`) to limit JavaScript payload.
+
+## Accessibility
+
+- Use semantic HTML (`nav`, `main`, `article`, `time`)
+- Provide `alt` text on images and meaningful link labels
+- Prefer real headings in order (`h1` → `h2`)
+- Test keyboard focus when adding islands or custom buttons
 
 ## Component libraries
 
-Every project requires some UI components such as modals, tabs, sidebars, menus, etc. Instead of building those from scratch, you might want to use some of the existing, battle-tested component libraries.
+For marketing sites, consider:
 
-### Fully featured component libraries
+- **Headless + your CSS** — Radix primitives, Headless UI (via React/Vue/Solid islands)
+- **Full libraries** — only when their look-and-feel matches your brand
 
-These component libraries come with their components fully styled.
+Wrap third-party components in your own Astro wrapper so you can swap implementations later.
 
-- [Chakra UI](https://chakra-ui.com/) - great library with probably the best developer experience, allows very fast prototyping with decent design defaults. Plenty of components that are very customizable and flexible with accessibility already configured out of the box.
+## File naming
 
-- [AntD](https://ant.design/) - another great component library that has a lot of different components. Best suitable for creating admin dashboards. However, it might be a bit difficult to change the styles in order to adapt them to a custom design.
-
-- [MUI](https://mui.com/) - the most popular component library for React. Has a lot of different components. Can be used as a styled solution by implementing Material Design or as unstyled headless component library.
-
-### Headless component libraries
-
-These component libraries come with their components unstyled. If you have a specific design system to implement, it might be easier and better solution to go with headless components that come unstyled than to adapt a styled components library such as Material UI to your needs. Some good options are:
-
-- [Reakit](https://reakit.io/)
-- [Headless UI](https://headlessui.dev/)
-- [Radix UI](https://www.radix-ui.com/)
-- [react-aria](https://react-spectrum.adobe.com/react-aria/)
-
-## Styling Solutions
-
-There are multiple ways to style a react application. Some good options are:
-
-- [tailwind](https://tailwindcss.com/)
-- [styled-components](https://styled-components.com/)
-- [emotion](https://emotion.sh/docs/introduction)
-- [stitches](https://stitches.dev/)
-- [vanilla-extract](https://github.com/seek-oss/vanilla-extract)
-- [CSS modules](https://github.com/css-modules/css-modules)
-- [linaria](https://github.com/callstack/linaria)
-
-## Good combinations
-
-Some good combinations of component library + styling
-
-- [Chakra UI](https://chakra-ui.com/) + [emotion](https://emotion.sh/docs/introduction) - The best choice for most applications
-- [Headless UI](https://headlessui.dev/) + [tailwind](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/) + [stitches](https://stitches.dev/)
+- PascalCase for components: `BaseHead.astro`, `PostCard.astro`
+- kebab-case for routes: `pages/about.astro`
+- kebab-case for content slugs: `welcome-to-your-blog.md`
