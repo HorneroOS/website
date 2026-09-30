@@ -51,6 +51,9 @@ When asked to add pages, content, or components:
 - Do NOT add global client stores for static marketing content
 - Do NOT remove accessibility semantics without replacement
 - Do NOT commit `node_modules/`, `dist/`, or secrets
+- Website follows product: never claim an ISO, installer, or
+  download that does not exist; screenshots are real captures
+  with provenance (SHA/theme/resolution/date), never mockups
 - Flag new UI framework integrations for human confirmation
 
 ## 5. Content & Page Checklist
@@ -58,7 +61,7 @@ When asked to add pages, content, or components:
 - Frontmatter matches Zod schema in `content.config.ts`
 - Pages using collections filter `draft` entries when appropriate
 - Layout receives `title` and `description` for SEO
-- Links point to existing routes (`/`, `/blog`, docs paths)
+- Links point to existing routes (`/`, `/install`, `/roots`, `/showroom`)
 - Scoped vs global CSS choice is intentional
 
 ## 6. When the AI Should Ask or Refuse
