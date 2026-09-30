@@ -1,33 +1,52 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+// Bird mark: HorneroOS/config@5df8300 assets/brand/logo-dark.svg (MIT).
+import Logo from '../assets/brand/logo-dark.svg';
+import '../styles/global.css';
 
-/**
- * @typedef {Object} Props
- * @property {string} title
- * @property {string} [description]
- */
-const { title, description } = /** @type {Props} */ (Astro.props);
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex } = Astro.props;
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/showroom', label: 'Showroom' },
   { href: '/roots', label: 'Roots' },
   { href: '/install', label: 'Install' },
 ];
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} noindex={noindex} />
   </head>
   <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
     <header class="site-nav">
-      <a href="/" class="brand"><span class="brand-mark">⌂</span> Hornero OS</a>
-      <nav>
-        {nav.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="/" class="brand">
+        <Logo class="brand-mark" width="32" height="32" aria-hidden="true" focusable="false" />
+        <span>Hornero OS</span>
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((l) => (
+            <li>
+              <a href={l.href} aria-current={current === l.href ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
-    <main class="app">
+    <main id="main" class="app" tabindex="-1">
       <slot />
     </main>
     <footer class="site-footer">

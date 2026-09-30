@@ -19,7 +19,11 @@
 body {
   background: var(--hornero-bg);
   color: var(--hornero-text);
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
@@ -28,17 +32,47 @@ body {
 
 a {
   color: var(--hornero-celeste);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--hornero-neon);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--hornero-neon);
+  color: #04222a;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  top: 1rem;
 }
 
 .site-nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem 1.5rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--hornero-border);
   background: rgba(10, 13, 24, 0.9);
@@ -47,27 +81,45 @@ a:hover {
   z-index: 10;
 }
 
-.site-nav nav {
+.site-nav nav ul {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  list-style: none;
 }
 
 .site-nav nav a {
+  display: inline-block;
+  padding: 0.25rem 0;
   color: var(--hornero-text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
 }
 
 .site-nav nav a:hover {
   color: var(--hornero-text);
 }
 
+.site-nav nav a[aria-current='page'] {
+  color: var(--hornero-text);
+  border-bottom-color: var(--hornero-neon);
+}
+
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 800;
   font-size: 1.2rem;
   color: var(--hornero-text);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .brand-mark {
-  color: var(--hornero-neon);
+  flex: none;
+  width: 2rem;
+  height: 2rem;
 }
 
 .app {
@@ -80,6 +132,8 @@ a:hover {
 
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
   justify-content: space-between;
   padding: 1.5rem 2rem;
   border-top: 1px solid var(--hornero-border);
@@ -112,12 +166,14 @@ a:hover {
 
 .cta-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
   margin-bottom: 3rem;
 }
 
 .cta {
+  text-decoration: none;
   padding: 0.75rem 1.75rem;
   border-radius: 8px;
   font-weight: 700;
@@ -145,6 +201,11 @@ a:hover {
   box-shadow: 0 0 60px -20px var(--hornero-glow);
 }
 
+.hero-shot picture,
+.shot picture {
+  display: block;
+}
+
 .hero-shot img {
   width: 100%;
   height: auto;
@@ -153,7 +214,7 @@ a:hover {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: 1.25rem;
   margin: 3rem 0;
 }
@@ -193,9 +254,24 @@ a:hover {
   padding-left: 1.5rem;
 }
 
+.section li + li {
+  margin-top: 0.4rem;
+}
+
+/* The global reset zeroes margins; restore rhythm between prose blocks. */
+:is(.section, .hero) > :is(p, ul, .table-scroll) + :is(p, ul, .table-scroll) {
+  margin-top: 1rem;
+}
+
+.section h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.25rem;
   margin-top: 2rem;
 }
@@ -219,11 +295,30 @@ a:hover {
   color: var(--hornero-text-muted);
 }
 
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
 .compare {
   width: 100%;
+  min-width: 40rem;
   border-collapse: collapse;
-  margin-top: 1.5rem;
   font-size: 0.95rem;
+}
+
+.compare caption {
+  caption-side: top;
+  text-align: left;
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--hornero-text);
+}
+
+.section .table-note {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .compare th,
@@ -238,7 +333,8 @@ a:hover {
   background: var(--hornero-surface);
 }
 
-.compare td:first-child {
+.compare tbody th {
+  background: transparent;
   font-weight: 700;
   color: var(--hornero-text);
 }
@@ -254,4 +350,60 @@ code.inline {
   border-radius: 4px;
   font-size: 0.9em;
   color: var(--hornero-text);
+}
+
+code.inline {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .site-nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .site-nav nav ul {
+    gap: 0.25rem 1rem;
+  }
+
+  .app {
+    padding: 1.5rem 1rem;
+  }
+
+  .site-footer {
+    padding: 1.25rem 1rem;
+  }
+
+  .hero {
+    padding: 1.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+
+  .section h1 {
+    font-size: 1.9rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .cards {
+    margin: 2rem 0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .app {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
 }
