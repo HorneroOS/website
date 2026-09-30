@@ -14,13 +14,15 @@
   "description": "Official website for Hornero OS",
   "type": "module",
   "engines": {
-    "node": ">=22.22.0"
+    "node": ">=24.0.0"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.0.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@typescript-eslint/parser": "^8.71.0",
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.1.0",
