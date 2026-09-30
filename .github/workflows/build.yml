@@ -12,9 +12,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
         with:
-          node-version: 22
+          node-version-file: .node-version
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # `astro check` prints an error and exits 0 when @astrojs/check cannot be
+      # loaded, so prove the checker imports before trusting its exit code.
+      - name: Verify astro check toolchain loads
+        run: node --input-type=module -e "await import('@astrojs/check')"
       - run: npm run type-check
       - run: npm run build

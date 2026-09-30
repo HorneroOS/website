@@ -1,115 +1,119 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import '../styles/global.css';
+
+// Every cell is a checkable fact. Third-party cells cite the upstream
+// repository at the SHA/date in the table note; update the date when editing.
+const asOf = '2026-09-30';
 
 const rows = [
   {
     area: 'Origin',
-    hornero: 'Years of dotfiles craft, rebuilt as a system',
-    ryoku: 'Hand-built distro, Omarchy-descended',
-    omarchy: 'Arch/Hyprland distro by Basecamp',
+    hornero: 'Extracted in 2026-09 from ulises-jeremias/dotfiles (pin b26db04) into the HorneroOS organisation',
+    ryoku: 'Alpha series was a fork of Omarchy; rebuilt from an empty root from the beta series on (per its README)',
+    omarchy: 'Arch Linux + Hyprland distribution by DHH; repository created 2025-06',
+  },
+  {
+    area: 'License',
+    hornero: 'Shell runtime GPL-3.0-only; composition and config repositories MIT',
+    ryoku: 'GPL-3.0',
+    omarchy: 'MIT',
   },
   {
     area: 'System CLI',
-    hornero: 'horneroctl: presets, appearance, snapshots, doctor',
-    ryoku: 'ryoku CLI: update, rollback, snapshots, doctor',
-    omarchy: 'Theme-first scripts',
+    hornero: 'horneroctl (18 top-level commands, e.g. appearance, shell, config, doctor)',
+    ryoku: 'ryoku CLI; ryoku update takes a snapshot before and after each update',
+    omarchy: 'omarchy CLI command center plus omarchy-* scripts in bin/ (e.g. omarchy-update, omarchy-theme-set)',
   },
   {
     area: 'Shell',
-    hornero: 'Quickshell shell, 11 layout presets',
-    ryoku: 'Quickshell shell, bar styles + rices',
-    omarchy: 'Wayland stack with themes',
+    hornero: 'Quickshell shell adapted from Caelestia, 11 layout presets',
+    ryoku: 'Quickshell-based Ryoku shell (frame rendering adapted from Caelestia)',
+    omarchy: 'Quickshell-based Omarchy shell (bar, menu, notifications, OSD, lock)',
   },
   {
     area: 'Themes',
-    hornero: '15 token-driven packs, offline catalogue',
-    ryoku: 'Wallpaper-generated palette (matugen)',
-    omarchy: 'Theme folders, one active at a time',
+    hornero: '15 theme packs defined as JSON tokens in HorneroOS/config',
+    ryoku: 'Bar, widgets and frame retinted live from the wallpaper',
+    omarchy: '22 theme directories in themes/, applied with omarchy-theme-set',
   },
   {
     area: 'Delivery',
-    hornero: 'Release manifests + AUR',
-    ryoku: 'Signed [ryoku] pacman repo',
-    omarchy: 'Git + packages',
+    hornero:
+      '12 pinned composition manifests (v0.1.0-draft to v0.2.0-preview12); AUR horneroctl-bin at 0.2.0_preview2; no ISO or installer yet',
+    ryoku: 'Signed ISO and signed [ryoku] pacman repository',
+    omarchy: 'ISO download from omarchy.org',
   },
   {
     area: 'Compositors',
-    hornero: 'Hyprland, deeply integrated',
-    ryoku: 'Hyprland + niri via provider seam',
+    hornero: 'Hyprland only',
+    ryoku: 'Hyprland or niri',
     omarchy: 'Hyprland',
-  },
-  {
-    area: 'Identity',
-    hornero: 'Argentine soul: hornero, pampa, neon-city nights',
-    ryoku: 'Japanese craft aesthetic (power and beauty)',
-    omarchy: 'Opinionated minimalism',
   },
 ];
 ---
 
-<SiteLayout
-  title="Roots — Hornero OS"
-  description="Where Hornero OS comes from, what it credits, and how it compares."
->
+<SiteLayout title="Roots — Hornero OS" description="Where Hornero OS comes from, what it credits, and how it compares.">
   <section class="section">
-    <h2>Roots</h2>
+    <h1>Roots</h1>
     <p>
-      HorneroOS grows out of years of dotfiles work — open-source projects
-      studied line by line, and the unixporn community&apos;s endless
-      screenshots. When the desktop moved to Quickshell, two projects were
-      studied closely: <strong>Caelestia</strong> and <strong>Dank Shell</strong>.
+      HorneroOS grew out of the <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>{' '}
+      repository. In September 2026 its Quickshell desktop and configuration were extracted into the HorneroOS
+      organisation. While building that desktop, two Quickshell projects were studied closely:{' '}
+      <strong>Caelestia</strong> and <strong>DankMaterialShell</strong>.
     </p>
     <p>
-      Credit where it is due: the Hornero shell adapts 
-      <a href="https://github.com/caelestia-dots/shell">caelestia-dots/shell</a> 
-      (GPL-3.0), with attribution preserved in 
-      <code class="inline">shell/NOTICE</code>. Everything else is
-      Hornero-owned: the <code class="inline">horneroctl</code> CLI, the config
-      packs, the greeter, the installer contract, the release manifests.
+      Credits: the Hornero shell adapts <a href="https://github.com/caelestia-dots/shell">caelestia-dots/shell</a>{' '}
+      (GPL-3.0), with attribution preserved in{' '}
+      <a href="https://github.com/HorneroOS/shell/blob/main/NOTICE">shell/NOTICE</a>. The <code class="inline">horneroctl</code> CLI, the config packs, the greeter, the installer contract and the
+      release manifests are written in the HorneroOS repositories.
     </p>
     <p>
-      What HorneroOS is <strong>not</strong>: it is not based on Omarchy —
-      nothing in its history derives from it — and it is not a pile of dotfiles
-      with an installer stapled on. The dotfiles were the sketch; the system is
-      the work.
+      HorneroOS is not a fork of Omarchy: the shell was imported from the dotfiles repository, and the import record is
+      in <code class="inline">shell/NOTICE</code>.
     </p>
   </section>
 
   <section class="section">
-    <h2>How we compare</h2>
+    <h2 id="compare-heading">How it compares</h2>
     <p>
-      An honest table against two projects we respect: 
-      <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a> (whose docs and
-      engineering we studied for this very comparison) and Omarchy. Rows are
-      facts, not adjectives.
+      HorneroOS side by side with two other Arch Linux desktops built on Hyprland:{' '}
+      <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a> and{' '}
+      <a href="https://github.com/omacom/omarchy">Omarchy</a>. Third-party facts come from each project&apos;s own repository. Corrections are welcome as{' '}
+      <a href="https://github.com/HorneroOS/website/issues">website issues</a>.
     </p>
-    <table class="compare">
-      <thead>
-        <tr>
-          <th>Area</th>
-          <th>HorneroOS</th>
-          <th>Ryoku</th>
-          <th>Omarchy</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
+    <div class="table-scroll" role="region" aria-labelledby="compare-heading" tabindex="0">
+      <table class="compare">
+        <caption>HorneroOS, Ryoku and Omarchy compared</caption>
+        <thead>
           <tr>
-            <td>{r.area}</td>
-            <td>{r.hornero}</td>
-            <td>{r.ryoku}</td>
-            <td>{r.omarchy}</td>
+            <th scope="col">Area</th>
+            <th scope="col">HorneroOS</th>
+            <th scope="col">Ryoku</th>
+            <th scope="col">Omarchy</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-    <p style="margin-top: 1rem">
-      Our opinion, stated plainly: for a user who wants a finished, controllable
-      desktop rather than homework, HorneroOS is the better system — one CLI for
-      everything, presets and themes that survive updates, and an identity of its
-      own. Ryoku&apos;s provider seam and update lanes are excellent engineering;
-      ideas we admire are credited above and tracked in our public issues.
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row">{r.area}</th>
+              <td>{r.hornero}</td>
+              <td>{r.ryoku}</td>
+              <td>{r.omarchy}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">
+      Facts as of {asOf}. Sources: HorneroOS repositories; Ryoku README at{' '}
+      <a href="https://github.com/Ryoku-dev/ryoku/tree/98a0368">98a0368</a>{' '}
+      (2026-09-26); Omarchy repository at{' '}
+      <a href="https://github.com/omacom/omarchy/tree/8b4eae6">8b4eae6</a>{' '}
+      (2026-09-29).
+    </p>
+    <p>
+      Ideas taken from Ryoku are tracked as public issues, for example{' '}
+      <a href="https://github.com/HorneroOS/hornero/issues/62">hornero#62</a> (update, rollback and snapshot lanes).
     </p>
   </section>
 </SiteLayout>

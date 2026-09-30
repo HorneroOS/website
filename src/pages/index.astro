@@ -1,6 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import '../styles/global.css';
+import heroShot from '../../assets/screenshots/desktop-neon.png';
 
 const title = 'Hornero OS — an Arch Linux desktop with Argentine soul';
 const description =
@@ -20,7 +21,7 @@ const pillars = [
     text: 'From Hornero Dark to Neon City and Pampa — token-driven packs with an offline-first catalogue, cyberpunk included.',
   },
   {
-    title: 'Cinematic greeter',
+    title: 'SDDM greeter',
     text: 'An SDDM theme with offline Argentine landscapes, day/golden-hour/night rotation, zero network.',
   },
 ];
@@ -28,23 +29,31 @@ const pillars = [
 
 <SiteLayout title={title} description={description}>
   <section class="hero">
-    <h1>An Arch Linux desktop <span class="neon">with Argentine soul</span></h1>
+    <h1>
+      An Arch Linux desktop <span class="neon">with Argentine soul</span>
+    </h1>
     <p>
-      Hornero OS is a Wayland desktop built around Hyprland and Quickshell —
-      deeply integrated, AI-native, and developed in the open. From pampa calm
-      to neon-city nights.
+      Hornero OS is a Wayland desktop built around Hyprland and Quickshell, developed in the open. From pampa calm to
+      neon-city nights.
     </p>
     <div class="cta-row">
-      <a href="/install" class="cta primary">Install</a>
-      <a href="/showroom" class="cta secondary">See it running</a>
+      <a href="/install" class="cta primary">
+        Install
+      </a>
+      <a href="/showroom" class="cta secondary">
+        See it running
+      </a>
     </div>
     <div class="hero-shot">
-      <img
-        src="/showroom/desktop-neon.png"
+      <Picture
+        src={heroShot}
         alt="Hornero OS desktop, Neon City theme"
-        width="1280"
-        height="720"
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1100px) 1036px, calc(100vw - 2rem)"
         loading="eager"
+        fetchpriority="high"
       />
     </div>
   </section>
@@ -64,10 +73,9 @@ const pillars = [
   <section class="section">
     <h2>Where it comes from</h2>
     <p>
-      HorneroOS grows out of years of dotfiles craft — open-source projects and
-      the unixporn community — rebuilt as a real system: CLI, shell, config,
-      installer. No Omarchy fork, no web-wrapper storefront.
-      <a href="/roots">Read our roots and how we compare →</a>
+      HorneroOS grew out of the <code class="inline">ulises-jeremias/dotfiles</code> repository and the Quickshell
+      projects it learned from, and is now a system of its own: CLI, shell, config, and an installer contract.{' '}
+      <a href="/roots">Read where each piece comes from and how it compares</a>.
     </p>
   </section>
 </SiteLayout>

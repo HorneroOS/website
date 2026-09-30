@@ -18,7 +18,7 @@ Thanks for contributing to a project generated from this Astro starter. Read the
 
 ## Prerequisites
 
-Install Node **22.22.0** (`fnm use` reads `.node-version`). Run `npm install` after project generation.
+Install the Node version pinned in `.node-version` (Node 24; `fnm use` reads it). CI uses the same file. Run `npm install` after project generation.
 
 ## Project Bootstrap
 

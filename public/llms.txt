@@ -16,4 +16,4 @@ HorneroOS is pre-release. There is no ISO and no guided installer yet. On Arch t
 - `/` — what Hornero OS is
 - `/install` — install profiles and requirements
 - `/roots` — where each piece comes from
-- `/showroom` — desktop captures (provenance per caption)
+- `/showroom` — desktop captures from development builds

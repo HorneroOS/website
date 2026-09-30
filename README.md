@@ -31,6 +31,13 @@ npm run build
 - `/showroom` — content collection (`src/content/showroom`)
 - `/roots` — heritage, credits, comparison table
 - `/install` — profiles, requirements, installer status
+- `404` — not-found page (`noindex`)
+
+Screenshots live once in `assets/screenshots/` and are optimized at build
+time with `astro:assets` (AVIF/WebP, responsive widths). The canonical
+origin (`site` in `astro.config.mjs`) drives canonical URLs, OpenGraph
+tags and `@astrojs/sitemap`. The favicon and header mark are copied from
+[HorneroOS/config](https://github.com/HorneroOS/config) `assets/brand/`.
 
 Technical documentation lives in
 [HorneroOS/docs](https://github.com/HorneroOS/docs).

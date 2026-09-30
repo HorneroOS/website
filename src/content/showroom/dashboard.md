@@ -1,4 +1,4 @@
 ---
 title: "Dashboard: weather, calendar, system, media"
-image: "/showroom/dashboard.png"
+image: "../../../assets/screenshots/dashboard.png"
 ---
