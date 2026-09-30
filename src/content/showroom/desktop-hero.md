@@ -1,4 +1,4 @@
 ---
 title: "Desktop with launcher"
-image: "/showroom/desktop-hero.png"
+image: "../../../assets/screenshots/desktop-hero.png"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Application launcher"
-image: "/showroom/launcher.png"
+image: "../../../assets/screenshots/launcher.png"
 ---
