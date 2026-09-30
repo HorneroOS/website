@@ -21,7 +21,7 @@ const shots = await getCollection('showroom');
         <figure class="shot">
           <Picture
             src={s.data.image}
-            alt={s.data.title}
+            alt=""
             formats={['avif', 'webp']}
             fallbackFormat="jpg"
             widths={[480, 800, 1280]}

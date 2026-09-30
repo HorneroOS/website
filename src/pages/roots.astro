@@ -2,7 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 
 // Every cell is a checkable fact. Third-party cells cite the upstream
-// repository at the SHA/date in the caption; update the date when editing.
+// repository at the SHA/date in the table note; update the date when editing.
 const asOf = '2026-09-30';
 
 const rows = [
@@ -21,8 +21,8 @@ const rows = [
   {
     area: 'System CLI',
     hornero: 'horneroctl (18 top-level commands, e.g. appearance, shell, config, doctor)',
-    ryoku: 'ryoku (update, status, rollback, snapshots, doctor)',
-    omarchy: 'omarchy-* scripts in bin/ (e.g. omarchy-update, omarchy-theme-set, omarchy-menu)',
+    ryoku: 'ryoku CLI; ryoku update takes a snapshot before and after each update',
+    omarchy: 'omarchy CLI command center plus omarchy-* scripts in bin/ (e.g. omarchy-update, omarchy-theme-set)',
   },
   {
     area: 'Shell',
@@ -33,7 +33,7 @@ const rows = [
   {
     area: 'Themes',
     hornero: '15 theme packs defined as JSON tokens in HorneroOS/config',
-    ryoku: 'Palette generated from the wallpaper (matugen)',
+    ryoku: 'Bar, widgets and frame retinted live from the wallpaper',
     omarchy: '22 theme directories in themes/, applied with omarchy-theme-set',
   },
   {
@@ -83,7 +83,7 @@ const rows = [
     </p>
     <div class="table-scroll" role="region" aria-labelledby="compare-heading" tabindex="0">
       <table class="compare">
-        <caption>HorneroOS, Ryoku and Omarchy compared, as of {asOf}</caption>
+        <caption>HorneroOS, Ryoku and Omarchy compared</caption>
         <thead>
           <tr>
             <th scope="col">Area</th>
@@ -105,7 +105,7 @@ const rows = [
       </table>
     </div>
     <p class="table-note">
-      Sources: HorneroOS repositories; Ryoku README at{' '}
+      Facts as of {asOf}. Sources: HorneroOS repositories; Ryoku README at{' '}
       <a href="https://github.com/Ryoku-dev/ryoku/tree/98a0368">98a0368</a>{' '}
       (2026-09-26); Omarchy repository at{' '}
       <a href="https://github.com/omacom/omarchy/tree/8b4eae6">8b4eae6</a>{' '}
