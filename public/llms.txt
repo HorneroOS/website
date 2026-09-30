@@ -1,0 +1,19 @@
+# Hornero OS
+
+> Pre-release Arch Linux desktop: Hyprland + Quickshell shell, one CLI (`horneroctl`), pinned compositions.
+
+## Status
+
+HorneroOS is pre-release. There is no ISO and no guided installer yet. On Arch today: install `horneroctl-bin` from the AUR.
+
+- Docs: https://github.com/HorneroOS/docs
+- Composition: https://github.com/HorneroOS/hornero
+- Shell: https://github.com/HorneroOS/shell
+- Installer contract: https://github.com/HorneroOS/installer
+
+## Pages
+
+- `/` — what Hornero OS is
+- `/install` — install profiles and requirements
+- `/roots` — where each piece comes from
+- `/showroom` — desktop captures (provenance per caption)
