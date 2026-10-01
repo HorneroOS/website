@@ -47,7 +47,7 @@ a:hover {
   border-radius: 2px;
 }
 
-main:focus {
+main:focus:not(:focus-visible) {
   outline: none;
 }
 
