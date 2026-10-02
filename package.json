@@ -2,12 +2,12 @@
   "name": "hornero-website",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/sync-product-data.mjs --fetch-only && astro build && pagefind --site dist && node scripts/check-links.mjs",
     "preview": "astro preview",
     "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "astro check",
+    "type-check": "node scripts/sync-product-data.mjs --fetch-only && astro check",
     "data:sync": "node scripts/sync-product-data.mjs",
     "data:check": "node scripts/sync-product-data.mjs --check",
     "data:bump": "node scripts/sync-product-data.mjs --bump"
@@ -20,6 +20,7 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.1",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/martian-mono": "^5.3.0",
     "@fontsource-variable/rubik": "^5.3.0",
@@ -31,6 +32,7 @@
     "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.1.0",
+    "pagefind": "^1.5.2",
     "prettier": "^3.9.4",
     "prettier-plugin-astro": "^1.0.0",
     "typescript": "^6.0.3",

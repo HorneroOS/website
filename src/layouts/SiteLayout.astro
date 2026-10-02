@@ -20,13 +20,18 @@ const nav = [
   { href: '/themes', label: 'Themes' },
   { href: '/showroom', label: 'Showroom' },
   { href: '/releases', label: 'Releases' },
+  { href: '/docs/', label: 'Docs' },
   { href: '/roots', label: 'Roots' },
   { href: '/install', label: 'Install', className: 'nav-install' },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => {
+  const h = href.replace(/\/$/, '') || '/';
+  return current === h || (h !== '/' && current.startsWith(`${h}/`));
+};
 const repos = [
   { href: 'https://github.com/HorneroOS', label: 'GitHub' },
-  { href: 'https://github.com/HorneroOS/docs', label: 'Docs' },
+  { href: '/search/', label: 'Search' },
   { href: 'https://github.com/HorneroOS/website/issues', label: 'Report a site issue' },
 ];
 ---
@@ -52,7 +57,7 @@ const repos = [
         <ul>
           {nav.map((l) => (
             <li>
-              <a href={l.href} class={l.className} aria-current={current === l.href ? 'page' : undefined}>
+              <a href={l.href} class={l.className} aria-current={isCurrent(l.href) ? 'page' : undefined}>
                 {l.label}
               </a>
             </li>
@@ -60,7 +65,7 @@ const repos = [
         </ul>
       </nav>
     </header>
-    <main id="main" class="app" tabindex="-1">
+    <main id="main" class="app" tabindex="-1" data-pagefind-body>
       <slot />
     </main>
     <footer class="site-footer">

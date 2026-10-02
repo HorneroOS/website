@@ -54,7 +54,7 @@ export interface Release {
 export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
-export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero', { repo: string; sha: string }>;
+export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);
 export const commitUrl = (repo: string, sha: string) => `${repo}/commit/${sha}`;
