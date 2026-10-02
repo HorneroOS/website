@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/martian-mono": "^5.3.0",
+    "@fontsource-variable/rubik": "^5.3.0",
     "astro": "^7.0.6"
   },
   "devDependencies": {

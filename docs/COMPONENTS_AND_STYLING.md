@@ -98,3 +98,27 @@ Wrap third-party components in your own Astro wrapper so you can swap implementa
 - PascalCase for components: `BaseHead.astro`, `PostCard.astro`
 - kebab-case for routes: `pages/about.astro`
 - kebab-case for content slugs: `welcome-to-your-blog.md`
+
+## Hornero design system
+
+Tokens live in `src/styles/global.css` and come from HorneroOS/config
+`docs/BRAND.md` (hornero-dark / hornero-light ramps), so the site matches the
+default desktop. Dark is the default; light follows `prefers-color-scheme`.
+Use the role tokens (`--bg`, `--surface`, `--line`, `--text`,
+`--text-muted`, `--accent`, `--highlight`, `--secondary`, `--focus`), never
+raw hex values in components.
+
+Type: Rubik (`--font-ui`) for display and UI, Martian Mono (`--font-data`)
+for provenance and data. Both are self-hosted through `@fontsource-variable`
+packages: the site makes no third-party requests.
+
+Signature components:
+
+- `KilnStamp.astro`: the provenance plate (source, context, component pins,
+  theme, resolution, date). Every real capture carries one.
+- `ArchFrame.astro`: a capture with its plate. `variant="arch"` frames it in
+  the hornero's oven-nest arch (hero only); the default `plain` keeps every
+  corner visible so no product UI is cropped.
+
+Showroom entries declare `alt`, `order` and `provenance` in frontmatter
+(`src/content.config.ts` validates them).
