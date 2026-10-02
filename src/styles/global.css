@@ -154,6 +154,8 @@ samp {
 
 code.inline,
 :not(pre) > code {
+  /* Long paths and commands wrap instead of widening the page on phones. */
+  overflow-wrap: anywhere;
   padding: 0.1em 0.35em;
   border-radius: 6px;
   background: var(--surface);
