@@ -47,9 +47,27 @@ jobs:
           git switch -C "$branch"
           git add src/data/product
           git commit -m "chore(data): refresh product data from current mains"
-          git push --force-with-lease origin "$branch"
+          # Fetch the advertised head before using a lease. Without this,
+          # an existing PR branch has no local tracking ref and the first
+          # refresh after opening that PR is rejected as stale information.
+          if git ls-remote --exit-code --heads origin \
+            "$branch" > /dev/null; then
+            git fetch origin "+refs/heads/$branch:refs/remotes/origin/$branch"
+            expected=$(git rev-parse "refs/remotes/origin/$branch")
+            git push \
+              --force-with-lease="refs/heads/$branch:$expected" \
+              origin "$branch"
+          else
+            git push origin "$branch"
+          fi
           if ! gh pr view "$branch" > /dev/null 2>&1; then
-            gh pr create --head "$branch" --base main \
+            pr_body='Automated source and product data refresh; '
+            pr_body+='review before merging.'
+            if ! gh pr create --head "$branch" --base main \
               --title "chore(data): refresh product data from current mains" \
-              --body "Automated: \`npm run data:bump\` moved the pins in \`src/data/product/pins.json\` to the current shell/config/hornero mains and regenerated layouts, themes and releases. Review the diff before merging."
+              --body "$pr_body"; then
+              warning="Updated $branch, but repository policy blocks Actions "
+              warning+="from opening PRs; open the branch for review manually."
+              echo "::warning::$warning"
+            fi
           fi

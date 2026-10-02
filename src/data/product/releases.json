@@ -3,16 +3,16 @@
     "name": "v0.2.0-preview14",
     "version": "0.2.0-preview14",
     "date": "2026-10-02",
-    "status": "candidate",
-    "summary": "Development Preview 14 release candidate. Packaging truth milestone, found by the new Hornero QA acceptance layer: system preset/theme/M3 catalogues for package installs, the python-materialyoucolor dependency for theme switching, and optional-plugin config that never shows the config-error banner. Ships no installable artifacts: installer and iso remain future slots.",
+    "status": "tagged",
+    "summary": "Development Preview 14 release. Packaging truth milestone, found by the new Hornero QA acceptance layer: system preset/theme/M3 catalogues for package installs, the python-materialyoucolor dependency for theme switching, and optional-plugin config that never shows the config-error banner. Ships no installable artifacts: installer and iso remain future slots.",
     "manifest": "hornero-0.2.0-preview14",
     "shell": {
-      "sha": "b22d33319368263db39b09cdceecd42f04521b61",
-      "subject": "Merge pull request #95 from HorneroOS/fix/system-preset-catalogue"
+      "sha": "3658e1b2fc5ece22c54917f17ed803b02a47003e",
+      "subject": "fix(appearance): keep theme state and GTK changes coherent (#107)"
     },
     "config": {
-      "sha": "f5f7229d4322d2ac6d0a53b601d292e3849f3e49",
-      "subject": "Merge pull request #45 from HorneroOS/fix/optional-plugin-binds"
+      "sha": "96b68703ef88e64dcd2ce7f9bd224fd0c897c411",
+      "subject": "Merge pull request #47 from HorneroOS/fix/package-systemd-units"
     },
     "installer": "future",
     "iso": "future"
