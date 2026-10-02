@@ -1,0 +1,33 @@
+---
+/** Names the pinned commit a data-driven page was generated from. */
+import { pins, short } from '../data/product';
+
+interface Props {
+  source: 'shell' | 'config' | 'hornero';
+  path: string;
+}
+
+const { source, path } = Astro.props;
+const pin = pins[source];
+---
+
+<p class="source">
+  Generated from{' '}
+  <a href={`${pin.repo}/tree/${pin.sha}/${path}`}>
+    <code>
+      HorneroOS/{source}/{path}
+    </code>
+  </a>{' '}
+  at commit{' '}
+  <a href={`${pin.repo}/commit/${pin.sha}`}>
+    <code>{short(pin.sha)}</code>
+  </a>
+  . Nothing on this page is typed by hand.
+</p>
+
+<style>
+  .source {
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+</style>

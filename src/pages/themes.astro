@@ -1,0 +1,186 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SourcePlate from '../components/SourcePlate.astro';
+import { themes } from '../data/product';
+
+const official = themes.filter((t) => t.official);
+const others = themes.filter((t) => !t.official);
+const swatches = ['primary', 'secondary', 'accent'] as const;
+---
+
+<SiteLayout
+  title={`Themes — ${themes.length} theme packs for Hornero OS`}
+  description={`The ${themes.length} Hornero OS theme packs, each setting the shell palette, GTK, icons and wallpaper together. Hornero Dark, Hornero Light and Pampa are the official trio.`}
+>
+  <section class="section">
+    <p class="eyebrow">{themes.length} theme packs</p>
+    <h1>Themes</h1>
+    <p>
+      A theme pack sets the shell palette, the GTK theme, the icon theme and the wallpaper in one step. The official
+      trio ships fixed palettes, drawn below in their own colours; the other packs generate theirs from the wallpaper.
+    </p>
+    <SourcePlate source="config" path="profiles/themes" />
+  </section>
+
+  {[
+    {
+      title: 'The official trio',
+      note: (
+        <>
+          Switch with <code>horneroctl appearance theme set &lt;id&gt; --yes</code>: it applies the pack and verifies
+          that GTK and the shell agree.
+        </>
+      ),
+      list: official,
+    },
+    {
+      title: 'More packs',
+      note: (
+        <>
+          Apply with <code>horneroctl appearance theme apply &lt;id&gt; --yes</code>.
+        </>
+      ),
+      list: others,
+    },
+  ].map((group) => (
+    <section class="section">
+      <h2>{group.title}</h2>
+      <p>{group.note}</p>
+      <ul class="themes" role="list">
+        {group.list.map((t) => (
+          <li
+            class="theme"
+            id={t.id}
+            style={
+              t.palette.background
+                ? `--t-bg:${t.palette.background};--t-surface:${t.palette.surface};--t-text:${t.palette.text}`
+                : undefined
+            }
+          >
+            <div class="theme-head">
+              <h3>{t.name}</h3>
+              <span class="mode">{t.mode}</span>
+            </div>
+            <p class="theme-desc">{t.description}</p>
+            {!t.palette.background && (
+              <p class="derived">
+                Colours generated from the pack's wallpaper when applied
+                {t.schemeType && ` (Material You, ${t.schemeType})`}.
+              </p>
+            )}
+            <ul class="swatches" role="list" aria-label={`${t.name} accent colours`}>
+              {swatches
+                .filter((k) => t.palette[k])
+                .map((k) => (
+                  <li>
+                    <span class="chip" style={`background:${t.palette[k]}`} aria-hidden="true" />
+                    <span class="hex">
+                      {k} {t.palette[k]}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+            <p class="meta">
+              {[t.gtkTheme && `GTK ${t.gtkTheme}`, t.iconTheme && `icons ${t.iconTheme}`].filter(Boolean).join(' · ')}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</SiteLayout>
+
+<style>
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.25rem;
+  }
+
+  .theme {
+    --t-bg: var(--surface);
+    --t-surface: var(--bg);
+    --t-text: var(--text);
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding: 1.2rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--t-bg);
+    color: var(--t-text);
+    border: 1px solid color-mix(in oklab, var(--t-text) 18%, transparent);
+  }
+
+  .theme:target {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .theme-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .theme h3 {
+    font-size: var(--step-1);
+  }
+
+  .mode,
+  .hex,
+  .meta {
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+  }
+
+  .mode {
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .theme-desc {
+    font-size: 0.93rem;
+    opacity: 0.9;
+  }
+
+  .swatches {
+    display: grid;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0.75rem;
+    border-radius: 10px;
+    background: var(--t-surface);
+  }
+
+  .swatches li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .chip {
+    width: 1.6rem;
+    height: 1.1rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--t-text) 25%, transparent);
+  }
+
+  .meta {
+    opacity: 0.8;
+  }
+
+  .derived {
+    font-size: 0.88rem;
+    opacity: 0.85;
+  }
+
+  .swatches:empty {
+    display: none;
+  }
+</style>

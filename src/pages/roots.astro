@@ -1,5 +1,12 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { layouts, releases, themes } from '../data/product';
+
+// Hornero cells that count things come from src/data/product (pinned
+// sources), so they cannot drift from the product.
+const tagged = releases.filter((r) => r.status === 'tagged');
+const oldest = releases[releases.length - 1]?.name;
+const newest = releases[0]?.name;
 
 // Every cell is a checkable fact. Third-party cells cite the upstream
 // repository at the SHA/date in the table note; update the date when editing.
@@ -26,20 +33,19 @@ const rows = [
   },
   {
     area: 'Shell',
-    hornero: 'Quickshell shell adapted from Caelestia, 15 layout presets',
+    hornero: `Quickshell shell adapted from Caelestia, ${layouts.length} layout presets`,
     ryoku: 'Quickshell-based Ryoku shell (frame rendering adapted from Caelestia)',
     omarchy: 'Quickshell-based Omarchy shell (bar, menu, notifications, OSD, lock)',
   },
   {
     area: 'Themes',
-    hornero: '15 theme packs defined as JSON tokens in HorneroOS/config',
+    hornero: `${themes.length} theme packs defined in HorneroOS/config`,
     ryoku: 'Bar, widgets and frame retinted live from the wallpaper',
     omarchy: '22 theme directories in themes/, applied with omarchy-theme-set',
   },
   {
     area: 'Delivery',
-    hornero:
-      '12 pinned composition manifests (v0.1.0-draft to v0.2.0-preview12); AUR horneroctl-bin at 0.2.0_preview2; no ISO or installer yet',
+    hornero: `${releases.length} pinned composition manifests (${oldest} to ${newest}), ${tagged.length} of them tagged; component packages on the AUR; no ISO or installer yet`,
     ryoku: 'Signed ISO and signed [ryoku] pacman repository',
     omarchy: 'ISO download from omarchy.org',
   },

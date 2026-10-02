@@ -1,0 +1,202 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SourcePlate from '../components/SourcePlate.astro';
+import { candidate, commitUrl, latestTagged, pins, releases, short, type Release } from '../data/product';
+
+const title = (r: Release) => {
+  const n = /preview(\d+)$/.exec(r.version);
+  return n ? `Development Preview ${n[1]}` : r.version.replace(/-draft$/, ' draft');
+};
+const statusText: Record<Release['status'], string> = {
+  tagged: 'Tagged pre-release',
+  candidate: 'Release candidate',
+  untagged: 'Composition record, not tagged',
+};
+const hornero = (path: string) => `${pins.hornero.repo}/blob/${pins.hornero.sha}/${path}`;
+const shell = pins.shell.repo;
+const config = pins.config.repo;
+---
+
+<SiteLayout
+  title="Releases — Hornero OS"
+  description="Every Hornero OS composition: which shell and config commits it pins, whether it was tagged, and what changed. No ISO or installer has shipped yet."
+>
+  <section class="section">
+    <p class="eyebrow">Pre-release history</p>
+    <h1>Releases</h1>
+    <p>
+      A Hornero release is a composition manifest: it pins the exact shell and config commits that ship together, and
+      <code>horneroctl</code> is built from the same tree. No release has shipped an ISO or an installer yet; both are
+      reserved slots in every manifest.
+    </p>
+    <dl class="now">
+      {latestTagged && (
+        <div>
+          <dt>Latest tagged</dt>
+          <dd>
+            <a href={`#${latestTagged.name}`}>{title(latestTagged)}</a>, {latestTagged.date}
+          </dd>
+        </div>
+      )}
+      {candidate && (
+        <div>
+          <dt>In preparation</dt>
+          <dd>
+            <a href={`#${candidate.name}`}>{title(candidate)}</a> (release candidate)
+          </dd>
+        </div>
+      )}
+    </dl>
+    <SourcePlate source="hornero" path="releases" />
+  </section>
+
+  <ol class="timeline" role="list">
+    {releases.map((r) => (
+      <li class:list={['release', r.status]} id={r.name}>
+        <div class="release-head">
+          <h2>{title(r)}</h2>
+          <span class="status">{statusText[r.status]}</span>
+        </div>
+        <p class="when">
+          <code>{r.name}</code> · {r.date}
+        </p>
+        <p class="summary">{r.summary}</p>
+        <dl class="pins">
+          {r.shell && (
+            <div>
+              <dt>shell</dt>
+              <dd>
+                <a href={commitUrl(shell, r.shell.sha)}>
+                  <code>{short(r.shell.sha)}</code>
+                </a>{' '}
+                {r.shell.subject}
+              </dd>
+            </div>
+          )}
+          {r.config && (
+            <div>
+              <dt>config</dt>
+              <dd>
+                <a href={commitUrl(config, r.config.sha)}>
+                  <code>{short(r.config.sha)}</code>
+                </a>{' '}
+                {r.config.subject}
+              </dd>
+            </div>
+          )}
+        </dl>
+        <p class="links">
+          <a href={hornero(`manifests/v${r.version}.yaml`)}>Manifest</a>
+          {' · '}
+          <a href={hornero(`releases/v${r.version}-checklist.md`)}>Checklist</a>
+        </p>
+      </li>
+    ))}
+  </ol>
+</SiteLayout>
+
+<style>
+  .now {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.5rem;
+  }
+
+  .now dt {
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--secondary);
+  }
+
+  .timeline {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem;
+  }
+
+  .release {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.2rem 1.4rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .release.untagged {
+    background: transparent;
+  }
+
+  .release:target {
+    outline: 2px solid var(--accent);
+  }
+
+  .release-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+
+  .release h2 {
+    font-size: var(--step-1);
+  }
+
+  .status {
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+
+  .tagged .status {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .candidate .status {
+    border-color: var(--highlight);
+    color: var(--highlight);
+  }
+
+  .when,
+  .links {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+
+  .summary {
+    max-width: var(--measure);
+  }
+
+  .pins {
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .pins div {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.75rem;
+  }
+
+  .pins dt {
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    font-size: 0.78rem;
+    color: var(--secondary);
+  }
+</style>

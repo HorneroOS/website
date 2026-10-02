@@ -1,0 +1,127 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import LayoutDiagram from '../components/LayoutDiagram.astro';
+import SourcePlate from '../components/SourcePlate.astro';
+import { layouts } from '../data/product';
+
+const styleNames: Record<string, string> = {
+  attached: 'attached to the edge',
+  floating: 'floating',
+  dock: 'dock',
+  islands: 'islands',
+  inset: 'inset',
+};
+const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
+  [g.start, g.center, g.end]
+    .filter((x) => x.length)
+    .map((x) => x.join(', '))
+    .join(' · ');
+---
+
+<SiteLayout
+  title={`Layouts — ${layouts.length} shapes of the Hornero shell`}
+  description={`The ${layouts.length} layouts of the Hornero shell: where each bar sits, how it looks and what it holds. Switch with Super+Shift+B or horneroctl.`}
+>
+  <section class="section">
+    <p class="eyebrow">{layouts.length} layouts</p>
+    <h1>Layouts</h1>
+    <p>
+      The Hornero shell can sit on any edge, float, split into islands or turn transparent. Switch at any time from the
+      Layout Picker (<kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>) or with
+      <code>horneroctl shell preset apply &lt;name&gt; --yes</code>.
+    </p>
+    <SourcePlate source="shell" path="presets" />
+    <ul class="layouts" role="list">
+      {layouts.map((l) => (
+        <li class="layout" id={l.id}>
+          <LayoutDiagram bars={l.bars} name={l.name} />
+          <h2>{l.name}</h2>
+          <p class="desc">{l.description}</p>
+          <dl class="bars">
+            {l.bars.map((b) => (
+              <>
+                <dt>
+                  {b.edge} · {styleNames[b.style] ?? b.style}
+                  {b.clear && ' · clear'}
+                </dt>
+                <dd>{groupLine(b.groups) || 'No modules'}</dd>
+              </>
+            ))}
+          </dl>
+          <p class="cmd">
+            <code>horneroctl shell preset apply {l.id} --yes</code>
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</SiteLayout>
+
+<style>
+  .layouts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .layout {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 1.1rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .layout:target {
+    outline: 2px solid var(--accent);
+  }
+
+  .layout h2 {
+    font-size: var(--step-1);
+    margin-top: 0.4rem;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .bars {
+    display: grid;
+    gap: 0.15rem;
+    font-size: 0.88rem;
+  }
+
+  .bars dt {
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-top: 0.35rem;
+  }
+
+  .bars dd {
+    color: var(--text-muted);
+  }
+
+  .cmd {
+    margin-top: auto;
+    padding-top: 0.4rem;
+    font-size: 0.8rem;
+    overflow-x: auto;
+  }
+
+  kbd {
+    padding: 0.05em 0.4em;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+  }
+</style>

@@ -1,0 +1,463 @@
+[
+  {
+    "id": "classic-bottom",
+    "name": "Classic Bottom",
+    "description": "Bottom bar — dock-like layout with all status icons",
+    "icon": "vertical_align_bottom",
+    "bars": [
+      {
+        "edge": "bottom",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "classic-top",
+    "name": "Classic Top",
+    "description": "Traditional top bar with all status icons",
+    "icon": "vertical_align_top",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cockpit-clear",
+    "name": "Cockpit Clear",
+    "description": "The dual bar with no backdrop: controls and telemetry straight on the wallpaper",
+    "icon": "blur_on",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "attached",
+        "clear": true,
+        "groups": {
+          "start": [
+            "Logo",
+            "Quick actions",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock",
+            "Weather"
+          ],
+          "end": [
+            "Status icons",
+            "Tray",
+            "Power"
+          ]
+        }
+      },
+      {
+        "edge": "bottom",
+        "style": "attached",
+        "clear": true,
+        "groups": {
+          "start": [
+            "Workspaces"
+          ],
+          "center": [
+            "Media"
+          ],
+          "end": [
+            "Keyboard layout",
+            "Resources"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cockpit",
+    "name": "Cockpit",
+    "description": "Two bars: act on top, glance below — the legacy dual bar, rebuilt",
+    "icon": "view_agenda",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "inset",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Quick actions",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock",
+            "Weather"
+          ],
+          "end": [
+            "Battery",
+            "Status icons",
+            "Tray",
+            "Power"
+          ]
+        }
+      },
+      {
+        "edge": "bottom",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Workspaces"
+          ],
+          "center": [
+            "Media"
+          ],
+          "end": [
+            "Keyboard layout",
+            "Resources"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "cozy-minimal",
+    "name": "Cozy Minimal",
+    "description": "Soft floating top ribbon — workspaces, centred time, a few tools",
+    "icon": "weekend",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "floating",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Quick actions",
+            "Status icons",
+            "Battery",
+            "Tray"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dock-bottom",
+    "name": "Dock Bottom",
+    "description": "Bottom dock — launcher, workspaces, pinned apps, tools and status",
+    "icon": "dock_to_bottom",
+    "bars": [
+      {
+        "edge": "bottom",
+        "style": "dock",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [
+            "Pinned apps",
+            "Quick actions"
+          ],
+          "end": [
+            "Clock",
+            "Status icons",
+            "Battery",
+            "Tray"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "floating-island",
+    "name": "Floating Island",
+    "description": "Pill-shaped floating island on top — glassy and glowy",
+    "icon": "web_asset",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "floating",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "gaming",
+    "name": "Gaming",
+    "description": "Bottom bar — minimal footprint, no logo",
+    "icon": "sports_esports",
+    "bars": [
+      {
+        "edge": "bottom",
+        "style": "floating",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Workspaces"
+          ],
+          "center": [],
+          "end": [
+            "Status icons"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "horizon",
+    "name": "Horizon",
+    "description": "One slab carries every control and reading; workspaces rest on a clear line below",
+    "icon": "horizontal_split",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "inset",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Quick actions",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Weather",
+            "Resources",
+            "Battery",
+            "Status icons",
+            "Power"
+          ]
+        }
+      },
+      {
+        "edge": "bottom",
+        "style": "attached",
+        "clear": true,
+        "groups": {
+          "start": [
+            "Workspaces"
+          ],
+          "center": [],
+          "end": [
+            "Keyboard layout"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "hornero-left",
+    "name": "Hornero Left",
+    "description": "Left sidebar — full featured, reference shell style",
+    "icon": "dock_to_left",
+    "bars": [
+      {
+        "edge": "left",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [
+            "Active window"
+          ],
+          "end": [
+            "Tray",
+            "Clock",
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "hornero-right",
+    "name": "Hornero Right",
+    "description": "Right sidebar — full featured, mirrored reference shell style",
+    "icon": "dock_to_right",
+    "bars": [
+      {
+        "edge": "right",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [
+            "Active window"
+          ],
+          "end": [
+            "Tray",
+            "Clock",
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "islands",
+    "name": "Islands",
+    "description": "Three floating islands: controls, time, status",
+    "icon": "view_column",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "islands",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Quick actions",
+            "Volume",
+            "Brightness"
+          ],
+          "center": [
+            "Clock",
+            "Weather"
+          ],
+          "end": [
+            "Battery",
+            "Status icons",
+            "Tray",
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "minimal-left",
+    "name": "Minimal Left",
+    "description": "Clean left sidebar — workspaces and power only",
+    "icon": "view_sidebar",
+    "bars": [
+      {
+        "edge": "left",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces"
+          ],
+          "center": [],
+          "end": [
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "minimal-top",
+    "name": "Minimal Top",
+    "description": "Minimal top bar — workspaces + clock",
+    "icon": "minimize",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Workspaces"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Power"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "productivity",
+    "name": "Productivity",
+    "description": "Top bar optimized for focused work — no distractions",
+    "icon": "work",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Workspaces",
+            "Active window"
+          ],
+          "center": [
+            "Clock"
+          ],
+          "end": [
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
+  }
+]

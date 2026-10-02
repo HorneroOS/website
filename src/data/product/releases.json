@@ -1,0 +1,254 @@
+[
+  {
+    "name": "v0.2.0-preview14",
+    "version": "0.2.0-preview14",
+    "date": "2026-10-02",
+    "status": "candidate",
+    "summary": "Development Preview 14 release candidate. Packaging truth milestone, found by the new Hornero QA acceptance layer: system preset/theme/M3 catalogues for package installs, the python-materialyoucolor dependency for theme switching, and optional-plugin config that never shows the config-error banner. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview14",
+    "shell": {
+      "sha": "b22d33319368263db39b09cdceecd42f04521b61",
+      "subject": "Merge pull request #95 from HorneroOS/fix/system-preset-catalogue"
+    },
+    "config": {
+      "sha": "f5f7229d4322d2ac6d0a53b601d292e3849f3e49",
+      "subject": "Merge pull request #45 from HorneroOS/fix/optional-plugin-binds"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview13",
+    "version": "0.2.0-preview13",
+    "date": "2026-10-01",
+    "status": "tagged",
+    "summary": "Development Preview 13 release candidate. Layout fidelity milestone: clear bars (Polybar transparent lineage), Cockpit Clear and Horizon, per-layout entry options, topology-aware Layout Picker with working keyboard navigation, popout/panel alignment and hover-to-click fixes, factory shell default parity gate, notification ownership. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview13",
+    "shell": {
+      "sha": "25d22061af26c9aef394445d15a760e52bb38d58",
+      "subject": "Merge pull request #94 from HorneroOS/fix/clear-bar-tray-chip"
+    },
+    "config": {
+      "sha": "dae2255c7d0ba3649dff5fe131e6ca14aaa9353b",
+      "subject": "Merge pull request #44 from HorneroOS/fix/shell-owns-notifications"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview12",
+    "version": "0.2.0-preview12",
+    "date": "2026-09-29",
+    "status": "tagged",
+    "summary": "Development Preview 12 release candidate. Picks up everything in Preview 11 plus the capture-backend loud-failure fix (hornero#83). Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview12",
+    "shell": {
+      "sha": "07a339754f35cf2cc0fb9003c49e8e519ae3bf75",
+      "subject": "docs(notify): OSD/toast/notification roles + baseline fix note"
+    },
+    "config": {
+      "sha": "c4a25f0ef2196a9257582190447de9ebc6fd7528",
+      "subject": "docs(readme): 15 theme packs, drop first-extraction language"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview11",
+    "version": "0.2.0-preview11",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 11 release candidate. Picks up everything in Preview 10 plus the OSD/toast/notification roles doc. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview11",
+    "shell": {
+      "sha": "07a339754f35cf2cc0fb9003c49e8e519ae3bf75",
+      "subject": "docs(notify): OSD/toast/notification roles + baseline fix note"
+    },
+    "config": {
+      "sha": "c4a25f0ef2196a9257582190447de9ebc6fd7528",
+      "subject": "docs(readme): 15 theme packs, drop first-extraction language"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview10",
+    "version": "0.2.0-preview10",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 10 release candidate. Picks up everything in Preview 9 plus the bind-audit gate and the dashboard role statement. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview10",
+    "shell": {
+      "sha": "2f87ee3a3f2e781cd0e0c3f467542a01d5e40a64",
+      "subject": "docs(adr): dashboard acts on live session, not persisted config"
+    },
+    "config": {
+      "sha": "c4a25f0ef2196a9257582190447de9ebc6fd7528",
+      "subject": "docs(readme): 15 theme packs, drop first-extraction language"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview9",
+    "version": "0.2.0-preview9",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 9 release candidate. Picks up everything in Preview 8 plus the preset fallback chain and the perf baseline harness. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview9",
+    "shell": {
+      "sha": "2b023923ba170daa8001d39ad4366f6750aea09b",
+      "subject": "feat(perf): repeatable baseline harness + methodology"
+    },
+    "config": {
+      "sha": "c4a25f0ef2196a9257582190447de9ebc6fd7528",
+      "subject": "docs(readme): 15 theme packs, drop first-extraction language"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview8",
+    "version": "0.2.0-preview8",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 8 release candidate. Picks up everything in Preview 7 plus the docs-coherence README updates in both components. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview8",
+    "shell": {
+      "sha": "2675f03acaae9c697c77111f3e2951244ad1d222",
+      "subject": "docs(readme): reconcile status with current shell reality"
+    },
+    "config": {
+      "sha": "c4a25f0ef2196a9257582190447de9ebc6fd7528",
+      "subject": "docs(readme): 15 theme packs, drop first-extraction language"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview7",
+    "version": "0.2.0-preview7",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 7 release candidate. Picks up everything in Preview 6 plus the companion Settings yield with the documented z-order policy. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview7",
+    "shell": {
+      "sha": "98cac61c11adf87606df672163953f01381606a5",
+      "subject": "feat(companion): yield to open Settings window, document z-order policy"
+    },
+    "config": {
+      "sha": "f344f3064433d65933ad65af9ba0b401a6c34326",
+      "subject": "feat(catalogue): derived theme registry with freshness contract (#39)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview6",
+    "version": "0.2.0-preview6",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 6 release candidate. Picks up everything in Preview 5 plus the persisted Appearance section disclosure (Themes open by default). Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview6",
+    "shell": {
+      "sha": "002086ab3880cab095b2613061569eec5002cc55",
+      "subject": "feat(settings): persist Appearance section disclosure, Themes open by default"
+    },
+    "config": {
+      "sha": "f344f3064433d65933ad65af9ba0b401a6c34326",
+      "subject": "feat(catalogue): derived theme registry with freshness contract (#39)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview5",
+    "version": "0.2.0-preview5",
+    "date": "2026-09-29",
+    "status": "untagged",
+    "summary": "Development Preview 5 release candidate. Picks up the finished system-wide experience-overhaul slices (settings round-trip, lock privacy, Welcome labels, wallpaper names, Companion suppression, dashboard ADR 003, dash-media empty state) and the horneroctl theme-apply state sync. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview5",
+    "shell": {
+      "sha": "51397476f6bfb4434f9fc3ca0d562c4a7c41e39d",
+      "subject": "fix(dashboard): deliberate empty state for dash media card (#68)"
+    },
+    "config": {
+      "sha": "f344f3064433d65933ad65af9ba0b401a6c34326",
+      "subject": "feat(catalogue): derived theme registry with freshness contract (#39)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview4",
+    "version": "0.2.0-preview4",
+    "date": "2026-09-29",
+    "status": "tagged",
+    "summary": "Development Preview 4 (codename hornero). Composition hornero-0.2.0-preview4: shell 5bdd5f0 (the last dots-* wrappers retired into horneroctl verbs) and config f344f30. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview4",
+    "shell": {
+      "sha": "5bdd5f039f22a1c8b94e9e2c3f4ac1c6e764d106",
+      "subject": "chore: retire last dots-* wrappers into horneroctl verbs (#56)"
+    },
+    "config": {
+      "sha": "f344f3064433d65933ad65af9ba0b401a6c34326",
+      "subject": "feat(catalogue): derived theme registry with freshness contract (#39)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview3",
+    "version": "0.2.0-preview3",
+    "date": "2026-09-28",
+    "status": "untagged",
+    "summary": "Development Preview 3 release candidate. Picks up the finished horneroctl migration (shell preset grid, config defaults, dead wrapper removal), the theme catalogue registry, the release ledger, and the staged installer contract. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview3",
+    "shell": {
+      "sha": "60fda3f775ee6822af5e0b4268f73ba2b3d410e7",
+      "subject": "fix(dashboard): rename Keys component to Keybindings (#53)"
+    },
+    "config": {
+      "sha": "f344f3064433d65933ad65af9ba0b401a6c34326",
+      "subject": "feat(catalogue): derived theme registry with freshness contract (#39)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.2.0-preview2",
+    "version": "0.2.0-preview2",
+    "date": "2026-09-15",
+    "status": "tagged",
+    "summary": "Development Preview 2 release candidate. Resolves the Preview 2 composition manifest with the three editions. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.2.0-preview2",
+    "shell": {
+      "sha": "643185e839235242be40255d8f6aa02047407af1",
+      "subject": "feat(launcher): ship Welcome action, merge defaults by name (#43)"
+    },
+    "config": {
+      "sha": "4c761ae5e332f6920cf18a82d4b4863076cbc009",
+      "subject": "Merge pull request #35 from HorneroOS/feat/hyprland-debug-suppress-errors"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
+    "name": "v0.1.0-draft",
+    "version": "0.1.0-draft",
+    "date": "2026-09-13",
+    "status": "tagged",
+    "summary": "First composition pre-release. Defines the manifest, the three editions, and the release process. Ships no installable artifacts: installer and iso remain future slots.",
+    "manifest": "hornero-0.1.0-draft",
+    "shell": {
+      "sha": "b0a864cd57cfea01d7314c1de9823b873fb9269a",
+      "subject": "Merge pull request #16 from HorneroOS/feat/path-conform-shell"
+    },
+    "config": {
+      "sha": "c4ac00326cd5476c5efc05c11a403d1d6353a7d6",
+      "subject": "Merge pull request #7 from HorneroOS/feat/path-conform-config"
+    },
+    "installer": "future",
+    "iso": "future"
+  }
+]
