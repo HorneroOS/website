@@ -1,0 +1,181 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { pins, short } from '../data/product';
+
+// Real companion frames from HorneroOS/shell assets/companion at the shell
+// pin (checked out by the build); labels come from its manifest.json.
+const frames = import.meta.glob<ImageMetadata>('../../.cache/product-src/shell/assets/companion/frames/*.png', {
+  eager: true,
+  import: 'default',
+});
+const frame = (name: string) => {
+  const hit = Object.entries(frames).find(([path]) => path.endsWith(`/${name}.png`));
+  if (!hit) throw new Error(`companion frame ${name} missing at the shell pin`);
+  return hit[1];
+};
+const manifest = Object.values(
+  import.meta.glob<{ skins: Record<string, { label: string }> }>(
+    '../../.cache/product-src/shell/assets/companion/manifest.json',
+    { eager: true, import: 'default' },
+  ),
+)[0];
+if (!manifest) throw new Error('companion manifest missing at the shell pin');
+
+const poses = [
+  { id: 'idle', text: 'Resting: wings folded, a slow bob.' },
+  { id: 'walk', text: 'Greeting: a wing raised, beak open.' },
+  { id: 'fly', text: 'Flying in when summoned or moved.' },
+];
+const skinOrder = ['default', 'argentina', 'blue-gold', 'red', 'gaucho'].filter((s) => manifest.skins[s]);
+const shell = pins.shell;
+const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
+---
+
+<SiteLayout
+  title="Companion — the Hornero sidekick"
+  description="The Companion is a small hornero that lives on the Hornero OS desktop: it rests, greets and flies in, stays out of your way, and never takes input."
+>
+  <section class="section">
+    <p class="eyebrow">Part of the shell</p>
+    <h1>Companion</h1>
+    <p class="lede">
+      A small hornero lives on your desktop. It rests, greets you and flies in when you call it. It never wanders off on
+      its own and never takes a click meant for something else.
+    </p>
+    <ul class="poses" role="list">
+      {poses.map((p) => (
+        <li>
+          <Image
+            src={frame(`default-${p.id}`)}
+            alt={`The hornero companion, ${p.id} pose`}
+            height={200}
+            densities={[1, 2]}
+          />
+          <p>
+            <strong>{p.id}</strong> {p.text}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>How it behaves</h2>
+    <ul>
+      <li>It sleeps after ten minutes of quiet; any interaction wakes it.</li>
+      <li>Drag it anywhere. It remembers the spot on each monitor.</li>
+      <li>
+        It hides by itself on the lock screen, over fullscreen windows, in game mode and while Settings is open, and
+        comes back afterwards.
+      </li>
+      <li>It sits on its own layer with no keyboard focus, so it never steals clicks or typing.</li>
+      <li>With reduced motion turned on, its hops and flights become simple cuts.</li>
+      <li>Switched off, it costs nothing: every timer and surface is unloaded.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Five characters</h2>
+    <ul class="skins" role="list">
+      {skinOrder.map((s) => (
+        <li>
+          <Image
+            src={frame(`${s}-idle`)}
+            alt={`The ${manifest.skins[s].label} companion`}
+            height={140}
+            densities={[1, 2]}
+          />
+          <span>{manifest.skins[s].label}</span>
+        </li>
+      ))}
+    </ul>
+    <p>
+      Pick one in Control Center › Companion, along with its size, the edge it peeks from, tips and the speech-bubble
+      theme. The same controls work from a terminal:
+    </p>
+    <pre><code>qs ipc call companion summon
+qs ipc call companion setSkin gaucho
+qs ipc call companion say "Back in five minutes" 5000</code></pre>
+  </section>
+
+  <section class="section">
+    <h2>What it is not</h2>
+    <p>
+      The companion is presentation only. It already understands states such as <em>listening</em> and <em>thinking</em>
+      , reserved for a future assistant, but no assistant or AI service exists behind them today.
+    </p>
+    <p class="source">
+      Frames from{' '}
+      <a href={assets}>
+        <code>HorneroOS/shell/assets/companion</code>
+      </a>{' '}
+      at commit{' '}
+      <a href={`${shell.repo}/commit/${shell.sha}`}>
+        <code>{short(shell.sha)}</code>
+      </a>
+      , the production assets the shell draws, not illustrations.
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .poses,
+  .skins {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .poses {
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    margin-top: 2rem;
+  }
+
+  .skins {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .poses li,
+  .skins li {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at 50% 70%, var(--surface), transparent 70%);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .poses img {
+    height: 260px;
+    width: auto;
+  }
+
+  .skins img {
+    height: 170px;
+    width: auto;
+  }
+
+  .poses p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .poses strong {
+    display: block;
+    color: var(--text);
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.8rem;
+  }
+
+  .source {
+    font-size: var(--step--1);
+  }
+</style>
