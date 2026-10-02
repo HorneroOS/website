@@ -3,11 +3,11 @@
   "sources": {
     "shell": {
       "repo": "https://github.com/HorneroOS/shell",
-      "sha": "b22d33319368263db39b09cdceecd42f04521b61"
+      "sha": "aba99e4aa227766be6728bbb9ed921578fe74a67"
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "f5f7229d4322d2ac6d0a53b601d292e3849f3e49"
+      "sha": "96b68703ef88e64dcd2ce7f9bd224fd0c897c411"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
