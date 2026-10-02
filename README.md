@@ -27,17 +27,13 @@ npm run build
 
 ## Pages
 
-- `/` — hero, pillars, roots teaser
-- `/showroom` — content collection (`src/content/showroom`)
+- `/` — what Hornero OS is
+- `/layouts`, `/themes`, `/releases` — generated from pinned product sources
+  (see `docs/PRODUCT_DATA.md`)
+- `/showroom` — real captures with provenance plates
+- `/docs/` — HorneroOS/docs rendered at its pinned commit; `/search/`
 - `/roots` — heritage, credits, comparison table
-- `/install` — profiles, requirements, installer status
-- `404` — not-found page (`noindex`)
+- `/install` — current install status (not installable yet)
 
-Screenshots live once in `assets/screenshots/` and are optimized at build
-time with `astro:assets` (AVIF/WebP, responsive widths). The canonical
-origin (`site` in `astro.config.mjs`) drives canonical URLs, OpenGraph
-tags and `@astrojs/sitemap`. The favicon and header mark are copied from
-[HorneroOS/config](https://github.com/HorneroOS/config) `assets/brand/`.
-
-Technical documentation lives in
-[HorneroOS/docs](https://github.com/HorneroOS/docs).
+Technical documentation is written in
+[HorneroOS/docs](https://github.com/HorneroOS/docs) and published under `/docs/`.

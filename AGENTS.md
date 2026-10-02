@@ -6,7 +6,7 @@ Humans: read CONTRIBUTING.md and the documents under docs/.
 ## 1. Authoritative References (Never Reproduce Content Here)
 
 | Topic | Source of Truth |
-|-------|-----------------|
+| --- | --- |
 | Project architecture | docs/PROJECT_STRUCTURE.md |
 | Component & styling patterns | docs/COMPONENTS_AND_STYLING.md |
 | State & content data flow | docs/STATE_MANAGEMENT.md |
@@ -19,7 +19,7 @@ Humans: read CONTRIBUTING.md and the documents under docs/.
 Run from the project root after installing dependencies:
 
 | Command | Purpose |
-|---------|---------|
+| --- | --- |
 | `npm run dev` | Astro dev server (port 4321) |
 | `npm run build` | Static production build → `dist/` |
 | `npm run preview` | Preview production build |
@@ -61,7 +61,11 @@ When asked to add pages, content, or components:
 - Frontmatter matches Zod schema in `content.config.ts`
 - Pages using collections filter `draft` entries when appropriate
 - Layout receives `title` and `description` for SEO
-- Links point to existing routes (`/`, `/install`, `/roots`, `/showroom`)
+- Links point to existing routes (`/`, `/layouts`, `/themes`, `/showroom`,
+  `/releases`, `/docs/`, `/search/`, `/roots`, `/install`); the build fails
+  on broken internal links (`scripts/check-links.mjs`)
+- Product facts come from `src/data/product` (docs/PRODUCT_DATA.md), never
+  typed into pages
 - Scoped vs global CSS choice is intentional
 
 ## 6. When the AI Should Ask or Refuse

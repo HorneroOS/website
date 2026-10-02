@@ -5,6 +5,7 @@
 // Usage:   npm run data:sync   (regenerate from pins, refresh release tags)
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
+//          npm run build       (runs --fetch-only first: pinned docs checkout)
 // Outputs: src/data/product/{layouts,themes,releases}.json
 //
 // Every fact on /layouts, /themes and /releases comes from these files, and
@@ -26,6 +27,9 @@ const DATA = join(ROOT, 'src/data/product');
 const CACHE = join(ROOT, '.cache/product-src');
 const CHECK = process.argv.includes('--check');
 const BUMP = process.argv.includes('--bump');
+// --fetch-only: check out the pinned sources (the docs pages read
+// .cache/product-src/docs at build time) without regenerating any data.
+const FETCH_ONLY = process.argv.includes('--fetch-only');
 
 const MODULE_LABELS = {
   activeWindow: 'Active window',
@@ -252,6 +256,10 @@ if (BUMP) {
   }
 }
 const dirs = Object.fromEntries(Object.entries(pins.sources).map(([name, pin]) => [name, checkout(name, pin)]));
+if (FETCH_ONLY) {
+  console.log(`fetched ${Object.keys(dirs).join(', ')} at their pins`);
+  process.exit(0);
+}
 
 // Release tags are snapshotted into pins.json by a sync, so --check stays
 // deterministic (it never asks the network what was tagged since).
