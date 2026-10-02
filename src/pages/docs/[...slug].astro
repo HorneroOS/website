@@ -117,6 +117,9 @@ const current = entry.id;
 <style>
   .docs {
     display: grid;
+    /* One shrinkable column on phones: wide code blocks scroll inside their
+       <pre> instead of widening the page. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
 
