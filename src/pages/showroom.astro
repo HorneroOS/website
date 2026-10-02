@@ -25,7 +25,7 @@ const shots = (await getCollection('showroom')).sort((a, b) => a.data.order - b.
             src={s.data.image}
             alt={s.data.alt}
             eager={i < 2}
-            sizes="(min-width: 1180px) 540px, (min-width: 760px) calc(50vw - 3rem), calc(100vw - 2rem)"
+            sizes="(min-width: 1180px) 540px, (min-width: 920px) calc(50vw - 3rem), calc(100vw - 2rem)"
             provenance={s.data.provenance}
           />
         </article>
