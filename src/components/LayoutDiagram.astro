@@ -1,0 +1,94 @@
+---
+/**
+ * Topology of a shell layout, drawn from the preset's bar list
+ * (src/data/product/layouts.json): which edges carry a bar and in which
+ * style. A schematic, not a screenshot: the same shapes the Layout Picker
+ * previews.
+ */
+interface Bar {
+  edge: string;
+  style: string;
+  clear: boolean;
+  groups: { start: string[]; center: string[]; end: string[] };
+}
+
+interface Props {
+  bars: Bar[];
+  name: string;
+}
+
+const { bars, name } = Astro.props;
+const W = 160;
+const H = 100;
+const T = 8; // bar thickness
+const M = 4; // margin for detached styles
+
+type Rect = { x: number; y: number; w: number; h: number; r: number };
+
+function shapes(bar: Bar): Rect[] {
+  const horizontal = bar.edge === 'top' || bar.edge === 'bottom';
+  const detached = bar.style !== 'attached';
+  const m = detached ? M : 0;
+  const len = horizontal ? W : H;
+  const r = detached ? T / 2 : 0;
+  const along = (start: number, size: number): Rect => {
+    if (horizontal) {
+      const y = bar.edge === 'top' ? m : H - m - T;
+      return { x: start, y, w: size, h: T, r };
+    }
+    const x = bar.edge === 'left' ? m : W - m - T;
+    return { x, y: start, w: T, h: size, r };
+  };
+  if (bar.style === 'dock') return [along(len * 0.25, len * 0.5)];
+  if (bar.style === 'islands') {
+    const seg = len * 0.24;
+    const out: Rect[] = [];
+    if (bar.groups.start.length) out.push(along(m + 2, seg));
+    if (bar.groups.center.length) out.push(along((len - seg) / 2, seg));
+    if (bar.groups.end.length) out.push(along(len - m - 2 - seg, seg));
+    return out;
+  }
+  return [along(m, len - 2 * m)];
+}
+
+const describe = (b: Bar) => `${b.edge} bar, ${b.style}${b.clear ? ', clear' : ''}`;
+const label = `${name}: ${bars.map(describe).join('; ')}`;
+---
+
+<svg class="diagram" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}>
+  <rect class="screen" x="0.5" y="0.5" width={W - 1} height={H - 1} rx="6"></rect>
+  {bars.flatMap((b) =>
+    shapes(b).map((s) => (
+      <rect
+        class:list={['bar', { clear: b.clear }]}
+        x={s.x + 0.5}
+        y={s.y + 0.5}
+        width={Math.max(1, s.w - 1)}
+        height={Math.max(1, s.h - 1)}
+        rx={s.r}
+      />
+    )),
+  )}
+</svg>
+
+<style>
+  .diagram {
+    width: 100%;
+    height: auto;
+  }
+
+  .screen {
+    fill: color-mix(in oklab, var(--bg) 60%, var(--surface));
+    stroke: var(--line);
+  }
+
+  .bar {
+    fill: var(--accent);
+    stroke: var(--accent);
+  }
+
+  .bar.clear {
+    fill: color-mix(in oklab, var(--accent) 18%, transparent);
+    stroke-dasharray: 3 2;
+  }
+</style>

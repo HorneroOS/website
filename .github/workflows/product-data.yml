@@ -1,0 +1,55 @@
+name: product-data
+
+# Moves the product-data pins (src/data/product/pins.json) to the current
+# shell/config/hornero mains, regenerates the data and opens a pull request.
+# Nothing reaches the site without review.
+#
+# Note: a pull request created with GITHUB_TOKEN does not trigger other
+# workflows; push an empty commit (or close and reopen) to run the checks.
+
+"on":
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: product-data
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Bump pins and regenerate
+        run: npm run data:bump
+      - name: Open or update the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/data/product; then
+            echo "product data already current"
+            exit 0
+          fi
+          branch=chore/product-data-refresh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          git add src/data/product
+          git commit -m "chore(data): refresh product data from current mains"
+          git push --force-with-lease origin "$branch"
+          if ! gh pr view "$branch" > /dev/null 2>&1; then
+            gh pr create --head "$branch" --base main \
+              --title "chore(data): refresh product data from current mains" \
+              --body "Automated: \`npm run data:bump\` moved the pins in \`src/data/product/pins.json\` to the current shell/config/hornero mains and regenerated layouts, themes and releases. Review the diff before merging."
+          fi

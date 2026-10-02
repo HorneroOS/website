@@ -315,19 +315,21 @@ pre {
   margin-top: 1rem;
 }
 
+/* Prose lists only: component grids opt out with role="list". */
 .section > p,
-.section > ul,
-.section > ol {
+.section > ul:not([role='list']),
+.section > ol:not([role='list']) {
   max-width: var(--measure);
   color: var(--text-muted);
 }
 
-.section ul,
-.section ol {
+.section > ul:not([role='list']),
+.section > ol:not([role='list']) {
   padding-left: 1.25rem;
 }
 
-.section li + li {
+.section > ul:not([role='list']) > li + li,
+.section > ol:not([role='list']) > li + li {
   margin-top: 0.4rem;
 }
 

@@ -1,0 +1,188 @@
+[
+  {
+    "id": "hornero-dark",
+    "name": "Hornero Dark",
+    "mode": "dark",
+    "description": "Flagship Hornero dark theme: ember terracotta, warm clay and sunset amber on a toasted-adobe night surface",
+    "official": true,
+    "gtkTheme": "Hornero-Dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "vibrant",
+    "palette": {
+      "background": "#1D1410",
+      "surface": "#2B1F18",
+      "text": "#F6E9DB",
+      "primary": "#E07856",
+      "secondary": "#D9A05F",
+      "accent": "#F2B749"
+    }
+  },
+  {
+    "id": "hornero-light",
+    "name": "Hornero Light",
+    "mode": "light",
+    "description": "Flagship Hornero light theme: deep terracotta, fired clay and sunset amber on warm morning paper — a first-class light ramp, not an inverted dark",
+    "official": true,
+    "gtkTheme": "Hornero-Light",
+    "iconTheme": "Papirus",
+    "schemeType": "vibrant",
+    "palette": {
+      "background": "#FAF1E3",
+      "surface": "#FFFDF7",
+      "text": "#2B1A11",
+      "primary": "#B24827",
+      "secondary": "#7C4A2C",
+      "accent": "#96590A"
+    }
+  },
+  {
+    "id": "pampa",
+    "name": "Pampa",
+    "mode": "dark",
+    "description": "Hornero Pampa theme: deep grassland greens, olive and earth with warm cream and muted gold — the humid pampa night, not a recolored flagship",
+    "official": true,
+    "gtkTheme": "Hornero-Pampa",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "tonal-spot",
+    "palette": {
+      "background": "#141B13",
+      "surface": "#1D271C",
+      "text": "#F4ECDA",
+      "primary": "#93B25E",
+      "secondary": "#B3A24A",
+      "accent": "#D9A441"
+    }
+  },
+  {
+    "id": "catppuccin-latte",
+    "name": "Catppuccin Latte",
+    "mode": "light",
+    "description": "Light Catppuccin mauve for soft daytime sessions",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Papirus",
+    "schemeType": "tonal-spot",
+    "palette": {}
+  },
+  {
+    "id": "catppuccin-mocha",
+    "name": "Catppuccin Mocha",
+    "mode": "dark",
+    "description": "Cozy dark Catppuccin with soft pastels",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "tonal-spot",
+    "palette": {}
+  },
+  {
+    "id": "everforest",
+    "name": "Everforest",
+    "mode": "dark",
+    "description": "Soft green forest fidelity theme",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "fidelity",
+    "palette": {}
+  },
+  {
+    "id": "gruvbox",
+    "name": "Gruvbox",
+    "mode": "dark",
+    "description": "Warm retro palette with anime and pixel art",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "expressive",
+    "palette": {}
+  },
+  {
+    "id": "landscape",
+    "name": "Landscape",
+    "mode": "dark",
+    "description": "Cinematic nature vistas and fantasy scenery",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "fidelity",
+    "palette": {}
+  },
+  {
+    "id": "monochrome",
+    "name": "Monochrome",
+    "mode": "dark",
+    "description": "High-contrast black and white focus aesthetic",
+    "official": false,
+    "gtkTheme": "Adwaita-dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "monochrome",
+    "palette": {}
+  },
+  {
+    "id": "neon-city",
+    "name": "Neon City",
+    "mode": "dark",
+    "description": "Cyberpunk neon nights and futuristic streets",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "vibrant",
+    "palette": {}
+  },
+  {
+    "id": "nord-dreams",
+    "name": "Nord Dreams",
+    "mode": "dark",
+    "description": "Cool arctic Nord tones and frosty calm",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "tonal-spot",
+    "palette": {}
+  },
+  {
+    "id": "rose-pine",
+    "name": "Rosé Pine",
+    "mode": "dark",
+    "description": "Elegant muted rose and pine dark palette",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "expressive",
+    "palette": {}
+  },
+  {
+    "id": "soft-morning",
+    "name": "Soft Morning",
+    "mode": "light",
+    "description": "Calm mist, florals, and soft natural light",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "neutral",
+    "palette": {}
+  },
+  {
+    "id": "vapor-dreams",
+    "name": "Vapor Dreams",
+    "mode": "dark",
+    "description": "Nostalgic 80s/90s vaporwave with retro gradients",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "expressive",
+    "palette": {}
+  },
+  {
+    "id": "warm-sunset",
+    "name": "Warm Sunset",
+    "mode": "light",
+    "description": "Golden-hour landscapes with warm cinematic tones",
+    "official": false,
+    "gtkTheme": "Orchis-Light-Compact",
+    "iconTheme": "Numix-Circle",
+    "schemeType": "vibrant",
+    "palette": {}
+  }
+]

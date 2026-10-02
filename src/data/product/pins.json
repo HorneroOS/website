@@ -1,0 +1,24 @@
+{
+  "$comment": "Pinned sources for src/data/product/*.json. Bump SHAs here (or via the product-data workflow), then run npm run data:sync.",
+  "sources": {
+    "shell": {
+      "repo": "https://github.com/HorneroOS/shell",
+      "sha": "b22d33319368263db39b09cdceecd42f04521b61"
+    },
+    "config": {
+      "repo": "https://github.com/HorneroOS/config",
+      "sha": "f5f7229d4322d2ac6d0a53b601d292e3849f3e49"
+    },
+    "hornero": {
+      "repo": "https://github.com/HorneroOS/hornero",
+      "sha": "67752157a2590b0cc13bf15987b190a2c684a728"
+    }
+  },
+  "releaseTags": [
+    "v0.1.0-draft",
+    "v0.2.0-preview12",
+    "v0.2.0-preview13",
+    "v0.2.0-preview2",
+    "v0.2.0-preview4"
+  ]
+}

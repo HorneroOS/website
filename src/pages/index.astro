@@ -2,23 +2,49 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArchFrame from '../components/ArchFrame.astro';
 import heroShot from '../../assets/screenshots/desktop-hero.png';
+import { layouts, themes } from '../data/product';
 
-const title = 'Hornero OS — one desktop, fifteen shapes';
-const description =
-  'Hornero OS is a pre-release Arch Linux desktop on Hyprland: a Quickshell shell with 15 layouts, 15 themes and one CLI, horneroctl. Built and tested in the open.';
+const words = [
+  'zero',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen',
+  'twenty',
+];
+const say = (n: number) => words[n] ?? String(n);
+const cap = (t: string) => t[0].toUpperCase() + t.slice(1);
+
+const title = `Hornero OS — one desktop, ${say(layouts.length)} shapes`;
+const description = `Hornero OS is a pre-release Arch Linux desktop on Hyprland: a Quickshell shell with ${layouts.length} layouts, ${themes.length} themes and one CLI, horneroctl. Built and tested in the open.`;
 
 const parts = [
   {
     title: 'A shell that changes shape',
-    text: 'Bar, launcher, dashboard, notifications and session menu in one Quickshell shell. Fifteen layouts move it around: a side rail, twin transparent bars, floating islands, a dock.',
+    text: `Bar, launcher, dashboard, notifications and session menu in one Quickshell shell. ${cap(say(layouts.length))} layouts move it around: a side rail, twin transparent bars, floating islands, a dock.`,
   },
   {
     title: 'horneroctl',
     text: 'One command for layouts, appearance, the shell, snapshots and health checks. Scriptable, non-interactive, and the same tool the shell itself calls.',
   },
   {
-    title: 'Fifteen themes',
-    text: 'Hornero Dark, Hornero Light and Pampa lead fifteen packs. Each sets the shell palette, GTK, icons and wallpaper together.',
+    title: `${cap(say(themes.length))} themes`,
+    text: `Hornero Dark, Hornero Light and Pampa lead ${say(themes.length)} packs. Each sets the shell palette, GTK, icons and wallpaper together.`,
   },
   {
     title: 'A matching greeter',
@@ -31,10 +57,10 @@ const parts = [
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">Pre-release · no ISO or installer yet</p>
-      <h1>One desktop, fifteen shapes.</h1>
+      <h1>One desktop, {say(layouts.length)} shapes.</h1>
       <p class="lede">
-        Hornero OS is an Arch Linux desktop on Hyprland. Its shell rearranges into fifteen layouts, and one CLI,{' '}
-        <code>horneroctl</code>, drives all of it.
+        Hornero OS is an Arch Linux desktop on Hyprland. Its shell rearranges into {say(layouts.length)} layouts, and
+        one CLI, <code>horneroctl</code>, drives all of it.
       </p>
       <div class="cta-row">
         <a href="/showroom" class="cta primary">

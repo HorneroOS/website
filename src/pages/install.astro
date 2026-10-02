@@ -1,28 +1,103 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { candidate, latestTagged } from '../data/product';
+
+const packages = [
+  { name: 'horneroctl-bin', what: 'the system CLI (native binary)' },
+  { name: 'hornero-shell', what: 'the Quickshell desktop shell and its layout presets' },
+  { name: 'hornero-config', what: 'the desktop defaults and theme packs' },
+  { name: 'hornero-greeter', what: 'the SDDM login screen' },
+];
+const preview = (v: string) => /preview(\d+)$/.exec(v)?.[1];
 ---
 
-<SiteLayout title="Install — Hornero OS" description="How to install Hornero OS: profiles, requirements, status.">
+<SiteLayout
+  title="Install — Hornero OS"
+  description="Hornero OS is not installable yet: no ISO and no installer. What exists today, and how to follow the work."
+>
   <section class="section">
-    <h1>Install</h1>
-    <p>
-      HorneroOS is pre-release. The composition model is defined — release manifests pin every component — and three
-      profiles exist: <code class="inline">base</code>, <code class="inline">desktop</code>, and{' '}
-      <code class="inline">developer</code>.
+    <p class="eyebrow">Status</p>
+    <h1>Not installable yet</h1>
+    <p class="lede">
+      There is no Hornero OS ISO and no installer. Nothing on this site asks you to download one, because none exists.
     </p>
-    <ul>
-      <li>
-        Start with the <a href="https://github.com/HorneroOS/docs">documentation</a> and the{' '}
-        <a href="https://github.com/HorneroOS/hornero">composition repo</a>.
-      </li>
-      <li>
-        On Arch today: install <code class="inline">horneroctl-bin</code> from AUR and drive the desktop from one CLI.
-      </li>
-      <li>
-        The guided installer (archinstall, Calamares, or custom — undecided) is bound by the{' '}
-        <a href="https://github.com/HorneroOS/installer">staged install contract</a>.
-      </li>
+    <p>
+      Releases so far are compositions: exact shell and config commits tested together.
+      {latestTagged && (
+        <>
+          The latest tagged one is{' '}
+          <a href={`/releases#${latestTagged.name}`}>Development Preview {preview(latestTagged.version)}</a>
+          {candidate && (
+            <>
+              , and <a href={`/releases#${candidate.name}`}>Development Preview {preview(candidate.version)}</a> is
+              being prepared
+            </>
+          )}
+          .
+        </>
+      )}
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>What exists today</h2>
+    <p>
+      The pieces are packaged in the Arch User Repository. They target people already running Arch Linux with Hyprland
+      who want to look at the parts; there is no supported guide yet for assembling a full Hornero desktop from them.
+    </p>
+    <ul role="list" class="packages">
+      {packages.map((p) => (
+        <li>
+          <a href={`https://aur.archlinux.org/packages/${p.name}`}>
+            <code>{p.name}</code>
+          </a>
+          <span>{p.what}</span>
+        </li>
+      ))}
     </ul>
-    <p>Requirements: Arch Linux, Hyprland, Quickshell. The greeter needs SDDM plus Qt6 Multimedia.</p>
+    <p>Requirements for the parts: Arch Linux, Hyprland and Quickshell; the greeter needs SDDM with Qt 6 Multimedia.</p>
+  </section>
+
+  <section class="section">
+    <h2>How it will install</h2>
+    <p>
+      The guided installer is being designed against a staged install contract in{' '}
+      <a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>. Three editions are defined:{' '}
+      <code>base</code>, <code>desktop</code> and <code>developer</code>.
+    </p>
+    <p>
+      To follow the work, watch <a href="/releases">Releases</a> or the{' '}
+      <a href="https://github.com/HorneroOS">HorneroOS organisation</a> on GitHub.
+    </p>
   </section>
 </SiteLayout>
+
+<style>
+  .packages {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    max-width: var(--measure);
+  }
+
+  .packages li {
+    display: grid;
+    grid-template-columns: minmax(10rem, max-content) 1fr;
+    gap: 0.25rem 1rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .packages span {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 520px) {
+    .packages li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
