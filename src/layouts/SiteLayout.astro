@@ -1,7 +1,11 @@
 ---
+import '@fontsource-variable/rubik';
+import '@fontsource-variable/martian-mono/wdth.css';
 import BaseHead from '../components/BaseHead.astro';
-// Bird mark: HorneroOS/config@5df8300 assets/brand/logo-dark.svg (MIT).
-import Logo from '../assets/brand/logo-dark.svg';
+// Bird marks: HorneroOS/config assets/brand (MIT). logo-dark.svg @5df8300,
+// logo-light.svg @39c2bd8. Dark surfaces get the cream bird, light ones the adobe bird.
+import LogoDark from '../assets/brand/logo-dark.svg';
+import LogoLight from '../assets/brand/logo-light.svg';
 import '../styles/global.css';
 
 interface Props {
@@ -12,12 +16,16 @@ interface Props {
 
 const { title, description, noindex } = Astro.props;
 const nav = [
-  { href: '/', label: 'Home' },
   { href: '/showroom', label: 'Showroom' },
   { href: '/roots', label: 'Roots' },
-  { href: '/install', label: 'Install' },
+  { href: '/install', label: 'Install', className: 'nav-install' },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const repos = [
+  { href: 'https://github.com/HorneroOS', label: 'GitHub' },
+  { href: 'https://github.com/HorneroOS/docs', label: 'Docs' },
+  { href: 'https://github.com/HorneroOS/website/issues', label: 'Report a site issue' },
+];
 ---
 
 <!doctype html>
@@ -30,15 +38,18 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
       Skip to content
     </a>
     <header class="site-nav">
-      <a href="/" class="brand">
-        <Logo class="brand-mark" width="32" height="32" aria-hidden="true" focusable="false" />
-        <span>Hornero OS</span>
+      <a href="/" class="brand" aria-label="Hornero OS home">
+        <LogoDark class="brand-mark mark-on-dark" width="32" height="32" aria-hidden="true" focusable="false" />
+        <LogoLight class="brand-mark mark-on-light" width="32" height="32" aria-hidden="true" focusable="false" />
+        <span>
+          Hornero <span class="os">OS</span>
+        </span>
       </a>
       <nav aria-label="Main">
         <ul>
           {nav.map((l) => (
             <li>
-              <a href={l.href} aria-current={current === l.href ? 'page' : undefined}>
+              <a href={l.href} class={l.className} aria-current={current === l.href ? 'page' : undefined}>
                 {l.label}
               </a>
             </li>
@@ -50,12 +61,19 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
       <slot />
     </main>
     <footer class="site-footer">
-      <span>Hornero OS — built in the open.</span>
-      <span>
-        <a href="https://github.com/HorneroOS">GitHub</a>
-        {' · '}
-        <a href="https://github.com/HorneroOS/docs">Docs</a>
-      </span>
+      <nav aria-label="Project">
+        <ul>
+          {repos.map((r) => (
+            <li>
+              <a href={r.href}>{r.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <p class="fine">
+        Hornero OS is built in the open. This site sets no cookies, runs no analytics and loads nothing from other
+        servers. Every screenshot is a real capture labelled with where it came from.
+      </p>
     </footer>
   </body>
 </html>

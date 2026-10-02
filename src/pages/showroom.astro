@@ -1,37 +1,54 @@
 ---
-import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import ArchFrame from '../components/ArchFrame.astro';
 
-const shots = await getCollection('showroom');
+const shots = (await getCollection('showroom')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <SiteLayout
   title="Showroom — Hornero OS"
-  description="Screenshots of the Hornero OS desktop: launcher, dashboard, themes."
+  description="Real captures of the Hornero OS desktop: launcher, dashboard, themes, each labelled with where it came from."
 >
   <section class="section">
+    <p class="eyebrow">Real captures, no mockups</p>
     <h1>Showroom</h1>
     <p>
-      Development snapshots of the Hornero desktop — Hyprland plus the Hornero Shell on Arch. Most were captured from
-      the graphical test harness at 1280×720; the launcher capture is 1916×1078.
+      Development captures of the Hornero desktop: Hyprland and the Hornero shell on Arch. The plate under each picture
+      says what produced it, at which resolution and when.
     </p>
     <div class="gallery">
       {shots.map((s, i) => (
-        <figure class="shot">
-          <Picture
+        <article class="shot">
+          <h2>{s.data.title}</h2>
+          <ArchFrame
             src={s.data.image}
-            alt=""
-            formats={['avif', 'webp']}
-            fallbackFormat="jpg"
-            widths={[480, 800, 1280]}
-            sizes="(min-width: 1100px) 510px, (min-width: 700px) calc(50vw - 3rem), calc(100vw - 2rem)"
-            loading={i < 2 ? 'eager' : 'lazy'}
-            decoding="async"
+            alt={s.data.alt}
+            eager={i < 2}
+            sizes="(min-width: 1180px) 540px, (min-width: 920px) calc(50vw - 3rem), calc(100vw - 2rem)"
+            provenance={s.data.provenance}
           />
-          <figcaption>{s.data.title}</figcaption>
-        </figure>
+        </article>
       ))}
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+    gap: 2rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .shot {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+
+  .shot h2 {
+    font-size: var(--step-1);
+  }
+</style>

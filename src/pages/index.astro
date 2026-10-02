@@ -1,81 +1,127 @@
 ---
-import { Picture } from 'astro:assets';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import heroShot from '../../assets/screenshots/desktop-neon.png';
+import ArchFrame from '../components/ArchFrame.astro';
+import heroShot from '../../assets/screenshots/desktop-hero.png';
 
-const title = 'Hornero OS — an Arch Linux desktop with Argentine soul';
+const title = 'Hornero OS — one desktop, fifteen shapes';
 const description =
-  'Hornero OS: a Wayland/Hyprland desktop with a Quickshell shell, a native system CLI, and 15 curated themes. Built in the open.';
+  'Hornero OS is a pre-release Arch Linux desktop on Hyprland: a Quickshell shell with 15 layouts, 15 themes and one CLI, horneroctl. Built and tested in the open.';
 
-const pillars = [
+const parts = [
   {
-    title: 'Quickshell desktop shell',
-    text: 'Bar, launcher, dashboard, notifications and session controls — one QML shell on Wayland, with 15 layout presets, including dual, island, dock and clear (transparent) bars.',
+    title: 'A shell that changes shape',
+    text: 'Bar, launcher, dashboard, notifications and session menu in one Quickshell shell. Fifteen layouts move it around: a side rail, twin transparent bars, floating islands, a dock.',
   },
   {
-    title: 'horneroctl system CLI',
-    text: 'One front door for presets, appearance, shell lifecycle, snapshots and health. Non-interactive, scriptable, tested.',
+    title: 'horneroctl',
+    text: 'One command for layouts, appearance, the shell, snapshots and health checks. Scriptable, non-interactive, and the same tool the shell itself calls.',
   },
   {
-    title: '15 curated themes',
-    text: 'From Hornero Dark to Neon City and Pampa — token-driven packs with an offline-first catalogue, cyberpunk included.',
+    title: 'Fifteen themes',
+    text: 'Hornero Dark, Hornero Light and Pampa lead fifteen packs. Each sets the shell palette, GTK, icons and wallpaper together.',
   },
   {
-    title: 'SDDM greeter',
-    text: 'An SDDM theme with offline Argentine landscapes, day/golden-hour/night rotation, zero network.',
+    title: 'A matching greeter',
+    text: 'An SDDM login screen with offline Argentine landscapes that follow the time of day. It makes no network requests.',
   },
 ];
 ---
 
 <SiteLayout title={title} description={description}>
   <section class="hero">
-    <h1>
-      An Arch Linux desktop <span class="neon">with Argentine soul</span>
-    </h1>
-    <p>
-      Hornero OS is a Wayland desktop built around Hyprland and Quickshell, developed in the open. From pampa calm to
-      neon-city nights.
-    </p>
-    <div class="cta-row">
-      <a href="/install" class="cta primary">
-        Install
-      </a>
-      <a href="/showroom" class="cta secondary">
-        See it running
-      </a>
+    <div class="hero-copy">
+      <p class="eyebrow">Pre-release · no ISO or installer yet</p>
+      <h1>One desktop, fifteen shapes.</h1>
+      <p class="lede">
+        Hornero OS is an Arch Linux desktop on Hyprland. Its shell rearranges into fifteen layouts, and one CLI,{' '}
+        <code>horneroctl</code>, drives all of it.
+      </p>
+      <div class="cta-row">
+        <a href="/showroom" class="cta primary">
+          See it running
+        </a>
+        <a href="/install" class="cta secondary">
+          How to try it
+        </a>
+      </div>
     </div>
-    <div class="hero-shot">
-      <Picture
-        src={heroShot}
-        alt="Hornero OS desktop, Neon City theme"
-        formats={['avif', 'webp']}
-        fallbackFormat="jpg"
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 1100px) 1036px, calc(100vw - 2rem)"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
+    <ArchFrame
+      src={heroShot}
+      alt="An empty Hornero desktop: a slim rail on the left edge with workspaces, clock and status icons, over a lakeside cabin wallpaper."
+      variant="arch"
+      eager
+      sizes="(min-width: 1180px) 640px, calc(100vw - 2rem)"
+      widths={[480, 720, 1080, 1280]}
+      provenance={{
+        source: 'Development capture',
+        context: 'shell test VM',
+        resolution: '1280×720',
+        date: '2026-09-10',
+      }}
+    />
   </section>
 
   <section class="section">
-    <h2>One system, four parts</h2>
+    <h2>What you get</h2>
     <div class="cards">
-      {pillars.map((p) => (
-        <div class="card">
+      {parts.map((p) => (
+        <article class="card">
           <h3>{p.title}</h3>
           <p>{p.text}</p>
-        </div>
+        </article>
       ))}
     </div>
+  </section>
+
+  <section class="section proof">
+    <p class="eyebrow">How we know it works</p>
+    <h2>Tested on the exact build you see</h2>
+    <p>
+      <a href="https://github.com/HorneroOS/qa">Hornero QA</a> boots a Hornero build pinned to exact commits in a
+      virtual machine. It opens the launcher, switches layouts and locks the screen with a real keyboard and pointer,
+      and checks the result on screen and inside the system. Every picture on this site carries a plate that says what
+      produced it; captures from Hornero QA also name the exact build and the check that passed.
+    </p>
   </section>
 
   <section class="section">
     <h2>Where it comes from</h2>
     <p>
-      HorneroOS grew out of the <code class="inline">ulises-jeremias/dotfiles</code> repository and the Quickshell
-      projects it learned from, and is now a system of its own: CLI, shell, config, and an installer contract.{' '}
-      <a href="/roots">Read where each piece comes from and how it compares</a>.
+      Hornero OS grew out of the <code>ulises-jeremias/dotfiles</code> repository and the Quickshell projects it learned
+      from. <a href="/roots">Read where each piece comes from and how it compares</a>.
     </p>
   </section>
 </SiteLayout>
+
+<style>
+  .hero {
+    display: grid;
+    gap: clamp(2rem, 1rem + 3vw, 3.5rem);
+    align-items: center;
+    padding-block: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  }
+
+  .hero-copy {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 1.5rem + 3.4vw, 4.25rem);
+    line-height: 1;
+    max-width: 14ch;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  .proof {
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    border-radius: var(--radius);
+    border: 1px dashed color-mix(in oklab, var(--clay) 50%, var(--line));
+  }
+</style>

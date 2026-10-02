@@ -1,0 +1,67 @@
+---
+/**
+ * Provenance plate for a real capture: what produced the picture and which
+ * exact composition it shows. Every screenshot on the site carries one
+ * (AGENTS.md "Website follows product").
+ */
+export interface Provenance {
+  /** Who produced the frame, e.g. "Hornero QA" or "Development capture". */
+  source: string;
+  /** Scenario or context, e.g. "layouts/apply-cockpit-clear". */
+  context?: string;
+  /** Short component pins, e.g. { shell: '25d2206', config: 'dae2255' }. */
+  pins?: Record<string, string>;
+  resolution?: string;
+  theme?: string;
+  date: string;
+}
+
+interface Props extends Provenance {
+  class?: string;
+}
+
+const { source, context, pins = {}, resolution, theme, date, class: className } = Astro.props;
+const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), theme, resolution, date].filter(
+  (p): p is string => Boolean(p),
+);
+---
+
+<p class:list={['stamp', className]}>
+  <span class="stamp-source">{source}</span>
+  {parts.map((p) => (
+    <span class="stamp-part">{p}</span>
+  ))}
+</p>
+
+<style>
+  .stamp {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.6rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    background: color-mix(in oklab, var(--bg) 90%, transparent);
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    font-family: var(--font-data);
+    font-stretch: 75%;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .stamp-source {
+    color: var(--highlight);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .stamp-part + .stamp-part::before,
+  .stamp-source + .stamp-part::before {
+    content: '·';
+    margin-right: 0.6rem;
+    color: var(--line);
+  }
+</style>
