@@ -1,0 +1,25 @@
+{
+  "schema": "hornero.qa.screenshot/1",
+  "file": "001-pampa-horizon-preview.png",
+  "sha256": "b58222e1f6b271c566ba53c3d8698b7c35ab9c063d9f2180c9cf31257b2a21ab",
+  "run_id": "20261003T112446Z-themes-pampa-horizon-preview-1",
+  "scenario": "themes/pampa-horizon-preview",
+  "captured": "2026-10-03T11:26:03Z",
+  "t": 76.721,
+  "product": {
+    "shell_sha": "98a5de212b3f86f9a87d1b83eb3dc9b73b97fa64",
+    "config_sha": "96b68703ef88e64dcd2ce7f9bd224fd0c897c411",
+    "horneroctl": "horneroctl v0.2.0-preview14-3-g9c15172 (9c15172)",
+    "horneroctl_sha256": "e6d1177803018af3859f72d949318c97147c77c24eed8ce533ac59ea3291536d"
+  },
+  "environment": {
+    "engine": "native",
+    "hornero_qa": "0.1.0",
+    "host_kernel": "7.2.7-arch1-1",
+    "qemu": "QEMU emulator version 11.1.1",
+    "image": "rail-hover-125.qcow2",
+    "outputs": 1,
+    "resolution": "1280x800"
+  },
+  "step": 1
+}

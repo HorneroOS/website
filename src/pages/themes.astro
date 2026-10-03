@@ -1,186 +1,485 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import SourcePlate from '../components/SourcePlate.astro';
+import ArchFrame from '../components/ArchFrame.astro';
 import { themes } from '../data/product';
+import lightShot from '../../assets/screenshots/certified/hornero-light.png';
+import pampaShot from '../../assets/screenshots/certified/pampa.png';
 
-const official = themes.filter((t) => t.official);
-const others = themes.filter((t) => !t.official);
-const swatches = ['primary', 'secondary', 'accent'] as const;
+const flagship = themes.filter((theme) => theme.official);
+const recipes = themes.filter((theme) => !theme.official);
+const modes = (mode: string) => (mode === 'light' ? 'Light' : 'Dark');
+const provenance = (theme: string, source: string, pins: Record<string, string>) => ({
+  source,
+  context: 'Hornero QA · package-only theme run',
+  pins,
+  resolution: '1280×800',
+  theme,
+  date: '2026-10-03',
+});
+const lightProof = provenance('Hornero Light', 'Hornero QA', {
+  shell: '98a5de2',
+  config: '96b6870',
+  horneroctl: '9c15172',
+});
+const pampaProof = {
+  source: 'Hornero QA',
+  context: 'Runtime preview · revised artwork staged in guest',
+  pins: { shell: '98a5de2', 'base config': '96b6870', 'wallpaper source': 'ac42eef' },
+  resolution: '1280×800',
+  theme: 'Pampa',
+  date: '2026-10-03',
+};
 ---
 
 <SiteLayout
-  title={`Themes — ${themes.length} theme packs for Hornero OS`}
-  description={`The ${themes.length} Hornero OS theme packs, each setting the shell palette, GTK, icons and wallpaper together. Hornero Dark, Hornero Light and Pampa are the official trio.`}
+  title={`Themes — ${themes.length} ways to shape Hornero OS`}
+  description="Start with a Hornero look or choose a color recipe that follows its wallpaper. Real captures, clear dependency notes and one place to personalize the desktop."
 >
-  <section class="section">
-    <p class="eyebrow">{themes.length} theme packs</p>
-    <h1>Themes</h1>
-    <p>
-      A theme pack sets the shell palette, the GTK theme, the icon theme and the wallpaper in one step. The official
-      trio ships fixed palettes, drawn below in their own colours; the other packs generate theirs from the wallpaper.
+  <section class="intro section">
+    <p class="eyebrow">Personalize the whole desktop</p>
+    <h1>
+      Choose a feeling.
+      <br />
+      <em>Make it yours.</em>
+    </h1>
+    <p class="intro-copy">
+      A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune the
+      pieces when you want to.
     </p>
-    <SourcePlate source="config" path="profiles/themes" />
+    <div class="intro-meta">
+      <span>{flagship.length} Hornero looks</span>
+      <span>{recipes.length} color recipes</span>
+      <span>{themes.length} starting points</span>
+    </div>
   </section>
 
-  {[
-    {
-      title: 'The official trio',
-      note: (
-        <>
-          Switch with <code>horneroctl appearance theme set &lt;id&gt; --yes</code>: it applies the pack and verifies
-          that GTK and the shell agree.
-        </>
-      ),
-      list: official,
-    },
-    {
-      title: 'More packs',
-      note: (
-        <>
-          Apply with <code>horneroctl appearance theme apply &lt;id&gt; --yes</code>.
-        </>
-      ),
-      list: others,
-    },
-  ].map((group) => (
-    <section class="section">
-      <h2>{group.title}</h2>
-      <p>{group.note}</p>
-      <ul class="themes" role="list">
-        {group.list.map((t) => (
-          <li
-            class="theme"
-            id={t.id}
-            style={
-              t.palette.background
-                ? `--t-bg:${t.palette.background};--t-surface:${t.palette.surface};--t-text:${t.palette.text}`
-                : undefined
-            }
-          >
-            <div class="theme-head">
-              <h3>{t.name}</h3>
-              <span class="mode">{t.mode}</span>
-            </div>
-            <p class="theme-desc">{t.description}</p>
-            {!t.palette.background && (
-              <p class="derived">
-                Colours generated from the pack's wallpaper when applied
-                {t.schemeType && ` (Material You, ${t.schemeType})`}.
-              </p>
-            )}
-            <ul class="swatches" role="list" aria-label={`${t.name} accent colours`}>
-              {swatches
-                .filter((k) => t.palette[k])
-                .map((k) => (
-                  <li>
-                    <span class="chip" style={`background:${t.palette[k]}`} aria-hidden="true" />
-                    <span class="hex">
-                      {k} {t.palette[k]}
-                    </span>
-                  </li>
-                ))}
-            </ul>
-            <p class="meta">
-              {[t.gtkTheme && `GTK ${t.gtkTheme}`, t.iconTheme && `icons ${t.iconTheme}`].filter(Boolean).join(' · ')}
+  <section class="section featured" aria-labelledby="hornero-looks">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Designed for Hornero</p>
+        <h2 id="hornero-looks">The Hornero looks</h2>
+      </div>
+      <p>Distinct palettes with their own light, texture and character.</p>
+    </div>
+    <div class="flagship-grid">
+      {flagship.map((theme) => (
+        <article
+          class="flagship"
+          id={theme.id}
+          style={`--theme-bg:${theme.palette.background};--theme-surface:${theme.palette.surface};--theme-text:${theme.palette.text};--theme-primary:${theme.palette.primary};--theme-secondary:${theme.palette.secondary};--theme-accent:${theme.palette.accent}`}
+        >
+          <div class="flagship-top">
+            <span class="mode-tag">{modes(theme.mode)}</span>
+            <span class="swatch-row" aria-label="Theme color accents">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+          </div>
+          <div class="flagship-copy">
+            <h3>{theme.name}</h3>
+            <p>
+              {theme.id === 'hornero-dark'
+                ? 'Kiln-dark surfaces, ember orange and warm clay.'
+                : theme.id === 'hornero-light'
+                  ? 'Morning paper, fired clay and clear warm light.'
+                  : 'Moonlit grassland greens, olive and muted gold.'}
             </p>
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
+          </div>
+          <div class="palette-strip" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <small>Shell · GTK · icons · {theme.mode} mode</small>
+        </article>
+      ))}
+    </div>
+    <div class="proof-pair">
+      <article class="proof-shot">
+        <div>
+          <p class="eyebrow">Light, in use</p>
+          <h3>Hornero Light</h3>
+          <p>Warm morning color carried from the rail to the desktop.</p>
+        </div>
+        <ArchFrame
+          src={lightShot}
+          alt="Hornero Light running on a sunlit Patagonian landscape, with the side rail and confirmation that the theme applied."
+          provenance={lightProof}
+          sizes="(min-width: 1000px) 600px, calc(100vw - 2rem)"
+          widths={[480, 720, 1080, 1280]}
+        />
+      </article>
+      <article class="proof-shot pampa-shot">
+        <div>
+          <p class="eyebrow">A different landscape</p>
+          <h3>Pampa</h3>
+          <p>Deep grassland greens and a quiet moonlit horizon.</p>
+        </div>
+        <ArchFrame
+          src={pampaShot}
+          alt="Pampa theme applied to a dark grassland scene with a warm moon and a Hornero shell rail."
+          provenance={pampaProof}
+          sizes="(min-width: 1000px) 600px, calc(100vw - 2rem)"
+          widths={[480, 720, 1080, 1280]}
+        />
+      </article>
+    </div>
+  </section>
+
+  <section class="section recipes-section" id="more-packs">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A palette for every mood</p>
+        <h2>Color recipes</h2>
+      </div>
+      <p>Choose a direction. Hornero can derive the shell palette from the pack’s colors and wallpaper.</p>
+    </div>
+    <ul class="recipe-grid" role="list">
+      {recipes.map((theme) => (
+        <li class="recipe" id={theme.id}>
+          <div class="recipe-head">
+            <span class="mode-tag">{modes(theme.mode)}</span>
+            <span class="recipe-kind">Wallpaper colors</span>
+          </div>
+          <h3>{theme.name}</h3>
+          <p>{theme.description}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="recipe-note" id="wallpaper-colors">
+      <span aria-hidden="true">✳</span>
+      <p>
+        <strong>One wallpaper, your colors.</strong> Color recipes draw a coordinated palette from the pack’s image when
+        applied. You can choose a different generation style or save a palette in Appearance.
+      </p>
+    </div>
+  </section>
+
+  <section class="section practical">
+    <div>
+      <p class="eyebrow">The useful details</p>
+      <h2>Everything in step.</h2>
+      <p>
+        Applying a Hornero look updates its coordinated shell and desktop appearance. Recipe packs may call for
+        third-party GTK or icon themes; Hornero does not download them silently. If an optional look is missing, your
+        desktop can still use its shell palette and explain what is unavailable.
+      </p>
+    </div>
+    <div class="try-panel">
+      <span class="mode-tag">From the desktop</span>
+      <strong>Settings → Appearance</strong>
+      <span>Preview a look, apply it, then refine mode, wallpaper and colors.</span>
+      <a class="cta primary" href="/showroom">
+        See the desktop
+      </a>
+    </div>
+  </section>
 </SiteLayout>
 
 <style>
-  .themes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-    gap: 1.25rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 1.25rem;
+  .intro {
+    padding-block: clamp(1rem, 4vw, 4rem) 1rem;
   }
-
-  .theme {
-    --t-bg: var(--surface);
-    --t-surface: var(--bg);
-    --t-text: var(--text);
-    display: grid;
-    gap: 0.75rem;
-    align-content: start;
-    padding: 1.2rem 1.25rem;
-    border-radius: var(--radius);
-    background: var(--t-bg);
-    color: var(--t-text);
-    border: 1px solid color-mix(in oklab, var(--t-text) 18%, transparent);
+  .intro h1 {
+    margin-top: 0.7rem;
+    font-size: clamp(3rem, 2.2rem + 5vw, 6.3rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
   }
-
-  .theme:target {
-    outline: 3px solid var(--accent);
-    outline-offset: 3px;
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
   }
-
-  .theme-head {
+  .intro-copy {
+    max-width: 54ch;
+    margin-top: 1.2rem;
+    font-size: var(--step-1);
+    color: var(--text-muted);
+  }
+  .intro-meta {
     display: flex;
-    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+  }
+  .intro-meta span,
+  .mode-tag {
+    display: inline-flex;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font: 0.72rem var(--font-data);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .section-heading {
+    display: flex;
     justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 1.3rem;
+  }
+  .section-heading h2 {
+    margin-top: 0.35rem;
+  }
+  .section-heading > p {
+    max-width: 43ch;
+    color: var(--text-muted);
+  }
+  .flagship-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
   }
-
-  .theme h3 {
-    font-size: var(--step-1);
+  .flagship {
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    padding: 1.3rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in oklab, var(--theme-text) 17%, transparent);
+    border-radius: var(--radius);
+    color: var(--theme-text);
+    background:
+      radial-gradient(
+        ellipse at 92% 0%,
+        color-mix(in oklab, var(--theme-primary) 25%, var(--theme-bg)),
+        transparent 56%
+      ),
+      var(--theme-bg);
   }
-
-  .mode,
-  .hex,
-  .meta {
-    font-family: var(--font-data);
-    font-stretch: 87.5%;
-    font-size: 0.74rem;
-    letter-spacing: 0.03em;
+  .flagship-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-
-  .mode {
-    text-transform: uppercase;
-    opacity: 0.8;
+  .flagship .mode-tag {
+    border-color: color-mix(in oklab, var(--theme-text) 22%, transparent);
+    color: var(--theme-text);
   }
-
-  .theme-desc {
-    font-size: 0.93rem;
-    opacity: 0.9;
+  .swatch-row {
+    display: flex;
+    gap: 0.35rem;
   }
-
-  .swatches {
+  .swatch-row i {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: var(--theme-primary);
+  }
+  .swatch-row i:nth-child(1) {
+    background: var(--theme-primary);
+  }
+  .swatch-row i:nth-child(2) {
+    background: var(--theme-secondary);
+  }
+  .swatch-row i:nth-child(3) {
+    background: var(--theme-accent);
+  }
+  .flagship-copy {
+    margin-top: auto;
+    padding-top: 2.4rem;
+  }
+  .flagship h3 {
+    font-size: 1.6rem;
+  }
+  .flagship-copy p {
+    max-width: 31ch;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    opacity: 0.78;
+  }
+  .palette-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 0.38rem;
+    overflow: hidden;
+    margin-block: 1.3rem 0.65rem;
+    border-radius: 9px;
+  }
+  .palette-strip i:nth-child(1) {
+    background: var(--theme-bg);
+  }
+  .palette-strip i:nth-child(2) {
+    background: var(--theme-surface);
+  }
+  .palette-strip i:nth-child(3) {
+    background: var(--theme-primary);
+  }
+  .palette-strip i:nth-child(4) {
+    background: var(--theme-secondary);
+  }
+  .palette-strip i:nth-child(5) {
+    background: var(--theme-accent);
+  }
+  .flagship > small {
+    opacity: 0.68;
+    font: 0.66rem var(--font-data);
+  }
+  .proof-pair {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+  .proof-shot {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+  }
+  .proof-shot > div:first-child {
     display: grid;
     gap: 0.35rem;
+    align-content: center;
+  }
+  .proof-shot h3 {
+    font-size: var(--step-2);
+  }
+  .proof-shot p:not(.eyebrow) {
+    max-width: 38ch;
+    color: var(--text-muted);
+  }
+  .proof-shot :global(.frame) {
+    width: 100%;
+    min-width: 0;
+  }
+  .proof-shot :global(.frame-shot) :global(img) {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+    gap: 0.75rem;
     list-style: none;
-    padding: 0.75rem;
-    border-radius: 10px;
-    background: var(--t-surface);
   }
-
-  .swatches li {
+  .recipe {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    min-height: 155px;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .recipe-head {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.6rem;
   }
-
-  .chip {
-    width: 1.6rem;
-    height: 1.1rem;
-    border-radius: 999px;
-    border: 1px solid color-mix(in oklab, var(--t-text) 25%, transparent);
+  .recipe .mode-tag {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.62rem;
   }
-
-  .meta {
-    opacity: 0.8;
+  .recipe-kind {
+    color: var(--text-muted);
+    font: 0.62rem var(--font-data);
   }
-
-  .derived {
+  .recipe h3 {
+    font-size: 1.12rem;
+  }
+  .recipe p {
+    color: var(--text-muted);
     font-size: 0.88rem;
-    opacity: 0.85;
   }
-
-  .swatches:empty {
-    display: none;
+  .recipe-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    max-width: 72ch;
+    margin-top: 1.4rem;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--secondary);
+    background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .recipe-note > span {
+    color: var(--secondary);
+    font-size: 1.2rem;
+  }
+  .recipe-note p {
+    color: var(--text-muted);
+  }
+  .recipe-note strong {
+    color: var(--text);
+  }
+  .practical {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding: clamp(1.3rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .practical h2 {
+    margin-block: 0.4rem 0.7rem;
+  }
+  .practical > div:first-child > p:last-child {
+    max-width: 59ch;
+    color: var(--text-muted);
+  }
+  .try-panel {
+    display: grid;
+    justify-items: start;
+    gap: 0.7rem;
+    padding: 1.2rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .try-panel > span:not(.mode-tag) {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  @media (min-width: 920px) {
+    .proof-shot {
+      grid-template-columns: 0.65fr 1fr;
+      gap: 2rem;
+    }
+    .proof-shot:nth-child(2) {
+      grid-template-columns: 1fr 0.65fr;
+    }
+    .proof-shot:nth-child(2) > div:first-child {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .proof-shot:nth-child(2) .frame {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .practical {
+      grid-template-columns: 1fr minmax(270px, 0.55fr);
+    }
+  }
+  @media (max-width: 720px) {
+    .section-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .flagship-grid {
+      grid-template-columns: 1fr;
+    }
+    .flagship {
+      min-height: 190px;
+    }
+    .recipe-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .recipe {
+      min-height: 175px;
+    }
+  }
+  @media (max-width: 420px) {
+    .recipe-grid {
+      grid-template-columns: 1fr;
+    }
+    .recipe {
+      min-height: 0;
+    }
   }
 </style>

@@ -8,14 +8,14 @@ const shots = (await getCollection('showroom')).sort((a, b) => a.data.order - b.
 
 <SiteLayout
   title="Showroom — Hornero OS"
-  description="Real captures of the Hornero OS desktop: launcher, dashboard, themes, each labelled with where it came from."
+  description="Real Hornero QA captures of flagship themes and shell layouts, each labelled with the build, test run and resolution that produced it."
 >
   <section class="section">
-    <p class="eyebrow">Real captures, no mockups</p>
+    <p class="eyebrow">Captured from the running desktop</p>
     <h1>Showroom</h1>
     <p>
-      Development captures of the Hornero desktop: Hyprland and the Hornero shell on Arch. The plate under each picture
-      says what produced it, at which resolution and when.
+      These are real Hornero QA captures, not polished mockups. Each plate names the tested build, desktop state,
+      resolution and date. Preview and candidate runs are labelled so the screenshots never imply a released system.
     </p>
     <div class="gallery">
       {shots.map((s, i) => (
@@ -46,6 +46,10 @@ const shots = (await getCollection('showroom')).sort((a, b) => a.data.order - b.
     display: grid;
     gap: 0.75rem;
     align-content: start;
+  }
+
+  .shot :global(.frame) {
+    width: 100%;
   }
 
   .shot h2 {

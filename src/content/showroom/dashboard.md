@@ -1,11 +1,16 @@
 ---
-title: 'Dashboard: weather, calendar, system, media'
-image: '../../../assets/screenshots/dashboard.png'
-alt: 'The dashboard drawer open over a forest wallpaper: weather, system uptime, a September 2026 calendar, resource meters and an empty media player.'
+title: 'Cockpit Clear · a quieter line'
+image: '../../../assets/screenshots/certified/cockpit-clear.png'
+alt: 'Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper.'
 order: 2
 provenance:
-  source: Development capture
-  context: shell test VM
-  resolution: 1280×720
-  date: '2026-09-10'
+  source: Hornero QA
+  context: Layout acceptance · visual review
+  pins:
+    shell: 98a5de2
+    config: 96b6870
+    horneroctl: 9c15172
+  resolution: 1280×800
+  theme: Hornero Dark
+  date: '2026-10-03'
 ---

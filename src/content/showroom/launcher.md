@@ -1,11 +1,16 @@
 ---
-title: 'Application launcher'
-image: '../../../assets/screenshots/launcher.png'
-alt: 'The application launcher open at the bottom of the screen listing installed apps with a search field, over a sunset above the clouds.'
+title: 'Layout Picker · choose your topology'
+image: '../../../assets/screenshots/certified/layout-picker.png'
+alt: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
 order: 4
 provenance:
-  source: Maintainer capture
-  context: real host
-  resolution: 1916×1078
-  date: '2026-09-28'
+  source: Hornero QA
+  context: Keyboard layout apply · Preview 14 candidate
+  pins:
+    shell: '360bb6b'
+    config: 'f5f7229'
+    horneroctl: '6775215'
+  resolution: 1280×800
+  theme: Hornero Dark
+  date: '2026-10-02'
 ---
