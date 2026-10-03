@@ -1,0 +1,20 @@
+{
+  "schema": "hornero.qa.screenshot/1",
+  "file": "001-dashboard-companion-layer-bottom.png",
+  "sha256": "aab8138a377da7b59c307d77b94174e496ac973273719c0cc00d3b8b334c348e",
+  "run_id": "20261003T160310Z-development-companion-layer-dashboard-1",
+  "scenario": "development/companion-layer-dashboard",
+  "captured": "2026-10-03T16:04:30Z",
+  "t": 80.517,
+  "product": {},
+  "environment": {
+    "engine": "native",
+    "hornero_qa": "0.1.0",
+    "host_kernel": "7.2.7-arch1-1",
+    "qemu": "QEMU emulator version 11.1.1",
+    "image": "hornero-dashboard-media-1080p.qcow2",
+    "outputs": 1,
+    "resolution": "1920x1080"
+  },
+  "proof": true
+}
