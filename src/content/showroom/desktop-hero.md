@@ -1,11 +1,16 @@
 ---
-title: 'Desktop with the side rail'
-image: '../../../assets/screenshots/desktop-hero.png'
-alt: 'An empty Hornero desktop: a slim rail on the left edge with workspaces, clock and status icons, over a pixel-art lakeside cabin wallpaper.'
+title: 'Hornero Light · morning landscape'
+image: '../../../assets/screenshots/certified/hornero-light.png'
+alt: 'Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied.'
 order: 1
 provenance:
-  source: Development capture
-  context: shell test VM
-  resolution: 1280×720
-  date: '2026-09-10'
+  source: Hornero QA
+  context: Package-only flagship theme run
+  pins:
+    shell: 98a5de2
+    config: 96b6870
+    horneroctl: 9c15172
+  resolution: 1280×800
+  theme: Hornero Light
+  date: '2026-10-03'
 ---

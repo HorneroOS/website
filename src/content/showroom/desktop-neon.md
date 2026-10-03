@@ -1,11 +1,16 @@
 ---
-title: 'Neon city nights'
-image: '../../../assets/screenshots/desktop-neon.png'
-alt: 'The Hornero side rail over a neon cyberpunk city wallpaper with an elevated yellow train and a red tower.'
+title: 'Pampa · moonlit grassland'
+image: '../../../assets/screenshots/certified/pampa.png'
+alt: 'Pampa theme applied to a deep green grassland scene with a warm moon, rolling horizon and slim Hornero rail.'
 order: 3
 provenance:
-  source: Development capture
-  context: shell test VM
-  resolution: 1280×720
-  date: '2026-09-10'
+  source: Hornero QA
+  context: Runtime preview · revised artwork staged in guest
+  pins:
+    shell: 98a5de2
+    base config: 96b6870
+    wallpaper source: ac42eef
+  resolution: 1280×800
+  theme: Pampa
+  date: '2026-10-03'
 ---

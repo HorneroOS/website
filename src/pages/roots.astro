@@ -1,124 +1,328 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { layouts, releases, themes } from '../data/product';
+import { layouts, pins, releases, themes, short } from '../data/product';
 
-// Hornero cells that count things come from src/data/product (pinned
-// sources), so they cannot drift from the product.
-const tagged = releases.filter((r) => r.status === 'tagged');
-const oldest = releases[releases.length - 1]?.name;
-const newest = releases[0]?.name;
-
-// Every cell is a checkable fact. Third-party cells cite the upstream
-// repository at the SHA/date in the table note; update the date when editing.
-const asOf = '2026-09-30';
-
-const rows = [
-  {
-    area: 'Origin',
-    hornero: 'Extracted in 2026-09 from ulises-jeremias/dotfiles (pin b26db04) into the HorneroOS organisation',
-    ryoku: 'Alpha series was a fork of Omarchy; rebuilt from an empty root from the beta series on (per its README)',
-    omarchy: 'Arch Linux + Hyprland distribution by DHH; repository created 2025-06',
-  },
-  {
-    area: 'License',
-    hornero: 'Shell runtime GPL-3.0-only; composition and config repositories MIT',
-    ryoku: 'GPL-3.0',
-    omarchy: 'MIT',
-  },
-  {
-    area: 'System CLI',
-    hornero: 'horneroctl (18 top-level commands, e.g. appearance, shell, config, doctor)',
-    ryoku: 'ryoku CLI; ryoku update takes a snapshot before and after each update',
-    omarchy: 'omarchy CLI command center plus omarchy-* scripts in bin/ (e.g. omarchy-update, omarchy-theme-set)',
-  },
-  {
-    area: 'Shell',
-    hornero: `Quickshell shell adapted from Caelestia, ${layouts.length} layout presets`,
-    ryoku: 'Quickshell-based Ryoku shell (frame rendering adapted from Caelestia)',
-    omarchy: 'Quickshell-based Omarchy shell (bar, menu, notifications, OSD, lock)',
-  },
-  {
-    area: 'Themes',
-    hornero: `${themes.length} theme packs defined in HorneroOS/config`,
-    ryoku: 'Bar, widgets and frame retinted live from the wallpaper',
-    omarchy: '22 theme directories in themes/, applied with omarchy-theme-set',
-  },
-  {
-    area: 'Delivery',
-    hornero: `${releases.length} pinned composition manifests (${oldest} to ${newest}), ${tagged.length} of them tagged; component packages on the AUR; no ISO or installer yet`,
-    ryoku: 'Signed ISO and signed [ryoku] pacman repository',
-    omarchy: 'ISO download from omarchy.org',
-  },
-  {
-    area: 'Compositors',
-    hornero: 'Hyprland only',
-    ryoku: 'Hyprland or niri',
-    omarchy: 'Hyprland',
-  },
-];
+const shell = pins.shell;
+const config = pins.config;
+const hornero = pins.hornero;
+const currentRelease = releases.find((release) => release.status === 'tagged');
 ---
 
-<SiteLayout title="Roots — Hornero OS" description="Where Hornero OS comes from, what it credits, and how it compares.">
-  <section class="section">
-    <h1>Roots</h1>
+<SiteLayout
+  title="Roots — Hornero OS"
+  description="How Hornero grew from a personal desktop configuration into an open operating-system project, with its sources and credits intact."
+>
+  <section class="intro section">
+    <p class="eyebrow">An open project, with its history intact</p>
+    <h1>
+      Built from a desktop.
+      <br />
+      <em>Grown into a system.</em>
+    </h1>
     <p>
-      HorneroOS grew out of the <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>{' '}
-      repository. In September 2026 its Quickshell desktop and configuration were extracted into the HorneroOS
-      organisation. While building that desktop, two Quickshell projects were studied closely:{' '}
-      <strong>Caelestia</strong> and <strong>DankMaterialShell</strong>.
-    </p>
-    <p>
-      Credits: the Hornero shell adapts <a href="https://github.com/caelestia-dots/shell">caelestia-dots/shell</a>{' '}
-      (GPL-3.0), with attribution preserved in{' '}
-      <a href="https://github.com/HorneroOS/shell/blob/main/NOTICE">shell/NOTICE</a>. The{' '}
-      <code class="inline">horneroctl</code> CLI, the config packs, the greeter, the installer contract and the release
-      manifests are written in the HorneroOS repositories.
-    </p>
-    <p>
-      HorneroOS is not a fork of Omarchy: the shell was imported from the dotfiles repository, and the import record is
-      in <code class="inline">shell/NOTICE</code>.
+      Hornero began as a personal configuration, then grew into a set of maintained projects for the shell, themes,
+      operating-system tools, testing and documentation.
     </p>
   </section>
 
-  <section class="section">
-    <h2 id="compare-heading">How it compares</h2>
-    <p>
-      HorneroOS side by side with two other Arch Linux desktops built on Hyprland:{' '}
-      <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a> and <a href="https://github.com/omacom/omarchy">Omarchy</a>
-      . Third-party facts come from each project&apos;s own repository. Corrections are welcome as{' '}
-      <a href="https://github.com/HorneroOS/website/issues">website issues</a>.
-    </p>
-    <div class="table-scroll" role="region" aria-labelledby="compare-heading" tabindex="0">
-      <table class="compare">
-        <caption>HorneroOS, Ryoku and Omarchy compared</caption>
-        <thead>
-          <tr>
-            <th scope="col">Area</th>
-            <th scope="col">HorneroOS</th>
-            <th scope="col">Ryoku</th>
-            <th scope="col">Omarchy</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr>
-              <th scope="row">{r.area}</th>
-              <td>{r.hornero}</td>
-              <td>{r.ryoku}</td>
-              <td>{r.omarchy}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  <section class="section timeline-section">
+    <p class="eyebrow">How it grew</p>
+    <h2>From dotfiles to HorneroOS</h2>
+    <ol class="timeline">
+      <li>
+        <span class="timeline-mark">01</span>
+        <div>
+          <h3>A desktop takes shape in dotfiles</h3>
+          <p>
+            The original Quickshell setup lived in{' '}
+            <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>, alongside the rest of a
+            personal Arch Linux environment.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-mark">02</span>
+        <div>
+          <h3>The shell becomes its own project</h3>
+          <p>
+            Hornero copied the shell into its own repository while preserving the original source and license. The
+            migration replaced workstation-only paths with XDG-based configuration so installed packages can stand on
+            their own.
+          </p>
+          <a href={`${shell.repo}/blob/${shell.sha}/NOTICE`}>
+            Read the shell attribution and migration record <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-mark">03</span>
+        <div>
+          <h3>One shell, many arrangements</h3>
+          <p>
+            Earlier Polybar and Waybar configurations informed several familiar topologies. <em>Cockpit Clear</em> and{' '}
+            <em>Islands</em> cite Polybar; <em>Cozy Minimal</em> and <em>Dock Bottom</em> cite Waybar. Today,{' '}
+            <strong>{layouts.length} layouts</strong> arrange bars and islands through one Quickshell system and one
+            shared preset format.
+          </p>
+          <a href="/layouts">
+            Explore the current layouts <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </li>
+      <li>
+        <span class="timeline-mark">04</span>
+        <div>
+          <h3>The operating system grows around it</h3>
+          <p>
+            Theme packs, <code>horneroctl</code>, the greeter, an installer contract and a dedicated QA repository give
+            the desktop a path from source code to a tested system.
+          </p>
+          <a href="/releases">
+            See the release history <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section map-section">
+    <div>
+      <p class="eyebrow">Maintained in clear pieces</p>
+      <h2>Every part has a home.</h2>
+      <p>The repositories are separate so each layer can be reviewed, packaged and tested at the right boundary.</p>
     </div>
-    <p class="table-note">
-      Facts as of {asOf}. Sources: HorneroOS repositories; Ryoku README at{' '}
-      <a href="https://github.com/Ryoku-dev/ryoku/tree/98a0368">98a0368</a> (2026-09-26); Omarchy repository at{' '}
-      <a href="https://github.com/omacom/omarchy/tree/8b4eae6">8b4eae6</a> (2026-09-29).
-    </p>
-    <p>
-      Ideas taken from Ryoku are tracked as public issues, for example{' '}
-      <a href="https://github.com/HorneroOS/hornero/issues/62">hornero#62</a> (update, rollback and snapshot lanes).
+    <div class="repo-list">
+      <a href={`${shell.repo}/tree/${shell.sha}`}>
+        <span class="repo-mark">01</span>
+        <span>
+          <strong>Shell</strong>
+          <small>Quickshell runtime, layout presets, Companion and shell services</small>
+        </span>
+        <code>{short(shell.sha)}</code>
+      </a>
+      <a href={`${config.repo}/tree/${config.sha}`}>
+        <span class="repo-mark">02</span>
+        <span>
+          <strong>Config</strong>
+          <small>Appearance packs, defaults, brand assets and package data</small>
+        </span>
+        <code>{short(config.sha)}</code>
+      </a>
+      <a href={`${hornero.repo}/tree/${hornero.sha}`}>
+        <span class="repo-mark">03</span>
+        <span>
+          <strong>Hornero</strong>
+          <small>Native CLI, release compositions and system capabilities</small>
+        </span>
+        <code>{short(hornero.sha)}</code>
+      </a>
+      <a href="https://github.com/HorneroOS/greeter">
+        <span class="repo-mark">04</span>
+        <span>
+          <strong>Greeter</strong>
+          <small>Hornero’s SDDM login screen and its Qt 6 runtime</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href="https://github.com/HorneroOS/installer">
+        <span class="repo-mark">05</span>
+        <span>
+          <strong>Installer</strong>
+          <small>Staged installation contract; a public ISO is not available yet</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href="https://github.com/HorneroOS/qa">
+        <span class="repo-mark">06</span>
+        <span>
+          <strong>QA</strong>
+          <small>Virtual-machine journeys and evidence for complete product builds</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section lineage">
+    <p class="eyebrow">Influence, credit and direction</p>
+    <h2>Learn from good work. Keep our own shape.</h2>
+    <div class="lineage-grid">
+      <article>
+        <h3>Code ancestry</h3>
+        <p>
+          The Quickshell shell is adapted from <a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>.
+          The upstream author, license and imported commit remain documented in the repository.
+        </p>
+      </article>
+      <article>
+        <h3>Design references</h3>
+        <p>
+          <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a>,{' '}
+          <a href="https://github.com/AvengeMedia/DankMaterialShell">DankMaterialShell</a> and{' '}
+          <a href="https://github.com/omacom/omarchy">Omarchy</a> help us study how other teams make settings
+          discoverable, themes coherent and Linux desktops approachable.
+        </p>
+      </article>
+      <article>
+        <h3>Hornero’s direction</h3>
+        <p>
+          Those references inform the questions we ask, not the answers we copy. Hornero keeps its own visual range,
+          open development and product decisions.
+        </p>
+      </article>
+    </div>
+    <p class="source-line">
+      Sources checked at Shell{' '}
+      <a href={`${shell.repo}/commit/${shell.sha}`}>
+        <code>{short(shell.sha)}</code>
+      </a>
+      , Config{' '}
+      <a href={`${config.repo}/commit/${config.sha}`}>
+        <code>{short(config.sha)}</code>
+      </a>{' '}
+      and Hornero{' '}
+      <a href={`${hornero.repo}/commit/${hornero.sha}`}>
+        <code>{short(hornero.sha)}</code>
+      </a>
+      . The pinned sources define {themes.length} theme packs
+      {currentRelease && (
+        <>
+          {' '}
+          and include the tagged composition <a href={`/releases#${currentRelease.name}`}>{currentRelease.name}</a>
+        </>
+      )}
+      .
     </p>
   </section>
 </SiteLayout>
+
+<style>
+  .intro {
+    padding-block: clamp(1rem, 4vw, 4rem) 1.5rem;
+  }
+  .intro h1 {
+    margin-top: 0.7rem;
+    font-size: clamp(3rem, 2rem + 5vw, 6.2rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .intro > p:last-child {
+    max-width: 59ch;
+    margin-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: var(--step-1);
+  }
+  .timeline-section > h2,
+  .map-section h2,
+  .lineage > h2 {
+    margin-top: 0.4rem;
+  }
+  .timeline {
+    display: grid;
+    gap: 0;
+    max-width: 850px;
+    margin-top: 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.35rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .timeline-mark,
+  .repo-mark {
+    color: var(--secondary);
+    font: 0.75rem var(--font-data);
+  }
+  .timeline h3 {
+    font-size: var(--step-1);
+  }
+  .timeline p {
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+  }
+  .timeline a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .map-section {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.3rem, 4vw, 2.6rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .map-section > div:first-child > p:last-child {
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+  }
+  .repo-list {
+    display: grid;
+  }
+  .repo-list > a {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    padding: 0.9rem 0.1rem;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .repo-list strong,
+  .repo-list small {
+    display: block;
+  }
+  .repo-list small {
+    margin-top: 0.12rem;
+    color: var(--text-muted);
+  }
+  .repo-list code {
+    color: var(--secondary);
+  }
+  .repo-list a:hover strong {
+    color: var(--accent);
+  }
+  .lineage-grid {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  .lineage-grid article {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .lineage-grid p {
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+  }
+  .source-line {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  @media (min-width: 900px) {
+    .map-section {
+      grid-template-columns: 0.7fr 1.3fr;
+      align-items: start;
+    }
+    .lineage-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

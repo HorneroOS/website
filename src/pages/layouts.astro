@@ -1,56 +1,155 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import LayoutDiagram from '../components/LayoutDiagram.astro';
-import SourcePlate from '../components/SourcePlate.astro';
+import ArchFrame from '../components/ArchFrame.astro';
 import { layouts } from '../data/product';
+import horneroLeftShot from '../../assets/screenshots/certified/hornero-left.png';
+import cockpitShot from '../../assets/screenshots/certified/cockpit-clear.png';
+import horizonShot from '../../assets/screenshots/certified/horizon.png';
+import islandsShot from '../../assets/screenshots/certified/islands.png';
+import dockShot from '../../assets/screenshots/certified/dock-bottom.png';
 
 const styleNames: Record<string, string> = {
-  attached: 'attached to the edge',
-  floating: 'floating',
+  attached: 'edge bar',
+  floating: 'floating bar',
   dock: 'dock',
   islands: 'islands',
-  inset: 'inset',
+  inset: 'inset bar',
 };
 const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
   [g.start, g.center, g.end]
     .filter((x) => x.length)
     .map((x) => x.join(', '))
     .join(' · ');
+const selected = [
+  {
+    id: 'hornero-left',
+    shot: horneroLeftShot,
+    descriptor: 'A vertical rhythm',
+    text: 'A side rail that keeps the useful controls within reach and the workspace open.',
+  },
+  {
+    id: 'cockpit-clear',
+    shot: cockpitShot,
+    descriptor: 'A clear horizon',
+    text: 'A restrained full-width line for a desktop that lets the wallpaper breathe.',
+  },
+  {
+    id: 'horizon',
+    shot: horizonShot,
+    descriptor: 'A balanced overview',
+    text: 'A top bar with room for status, context and a centered clock.',
+  },
+  {
+    id: 'islands',
+    shot: islandsShot,
+    descriptor: 'Independent surfaces',
+    text: 'Separate islands make groups feel light and intentional.',
+  },
+  {
+    id: 'dock-bottom',
+    shot: dockShot,
+    descriptor: 'A grounded workspace',
+    text: 'A bottom dock gives the desktop a familiar anchor.',
+  },
+];
+const proof = {
+  source: 'Hornero QA',
+  context: 'Layout acceptance · visual review',
+  pins: { shell: '98a5de2', config: '96b6870', horneroctl: '9c15172' },
+  resolution: '1280×800',
+  theme: 'Hornero Dark',
+  date: '2026-10-03',
+};
 ---
 
 <SiteLayout
-  title={`Layouts — ${layouts.length} shapes of the Hornero shell`}
-  description={`The ${layouts.length} layouts of the Hornero shell: where each bar sits, how it looks and what it holds. Switch with Super+Shift+B or horneroctl.`}
+  title={`Layouts — ${layouts.length} ways to arrange the Hornero shell`}
+  description={`Real Hornero desktop captures across ${layouts.length} layouts: side rails, paired bars, clear surfaces, islands and docks.`}
 >
-  <section class="section">
-    <p class="eyebrow">{layouts.length} layouts</p>
-    <h1>Layouts</h1>
+  <section class="intro section">
+    <p class="eyebrow">The shell, in different shapes</p>
+    <h1>
+      Same desktop.
+      <br />
+      <em>Different rhythm.</em>
+    </h1>
     <p>
-      The Hornero shell can sit on any edge, float, split into islands or turn transparent. Switch at any time from the
-      Layout Picker (<kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>) or with
-      <code>horneroctl shell preset apply &lt;name&gt; --yes</code>.
+      Choose where the shell lives: along an edge, in a pair of bars, as floating islands or at the bottom of the
+      screen. Your launcher, notifications and settings remain part of the same system.
     </p>
-    <SourcePlate source="shell" path="presets" />
-    <ul class="layouts" role="list">
-      {layouts.map((l) => (
-        <li class="layout" id={l.id}>
-          <LayoutDiagram bars={l.bars} name={l.name} />
-          <h2>{l.name}</h2>
-          <p class="desc">{l.description}</p>
-          <dl class="bars">
-            {l.bars.map((b) => (
-              <>
-                <dt>
-                  {b.edge} · {styleNames[b.style] ?? b.style}
-                  {b.clear && ' · clear'}
-                </dt>
-                <dd>{groupLine(b.groups) || 'No modules'}</dd>
-              </>
-            ))}
-          </dl>
-          <p class="cmd">
-            <code>horneroctl shell preset apply {l.id} --yes</code>
-          </p>
+    <div class="intro-actions">
+      <a class="cta primary" href="/showroom">
+        See it running
+      </a>
+      <span>
+        Switch from the Layout Picker with <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+      </span>
+    </div>
+  </section>
+
+  <section class="section gallery" aria-label="Selected layouts in the running desktop">
+    {selected.map((entry, index) => {
+      const layout = layouts.find((item) => item.id === entry.id);
+      return (
+        <article class:list={['layout-showcase', `showcase-${index + 1}`]} id={entry.id}>
+          <ArchFrame
+            src={entry.shot}
+            alt={`${layout?.name ?? entry.id} running in a real Hornero desktop, captured during layout acceptance.`}
+            eager={index < 2}
+            sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)"
+            widths={[480, 720, 1080, 1280]}
+            provenance={proof}
+          />
+          <div class="showcase-copy">
+            <p class="eyebrow">{entry.descriptor}</p>
+            <h2>{layout?.name}</h2>
+            <p>{entry.text}</p>
+            <a href={`#catalog-${entry.id}`} class="text-link">
+              Layout details <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </section>
+
+  <section class="section catalog" id="all-layouts">
+    <div class="catalog-heading">
+      <div>
+        <p class="eyebrow">The full set</p>
+        <h2>All {layouts.length} layouts</h2>
+      </div>
+      <p>
+        Every option comes from the same shell. The small maps show bar placement; each layout page has its topology and
+        scriptable preset name.
+      </p>
+    </div>
+    <ul class="layout-grid" role="list">
+      {layouts.map((layout) => (
+        <li class="layout-card" id={`catalog-${layout.id}`}>
+          <LayoutDiagram bars={layout.bars} name={layout.name} />
+          <div class="layout-title">
+            <h3>{layout.name}</h3>
+            <span>
+              {layout.bars.length} {layout.bars.length === 1 ? 'surface' : 'surfaces'}
+            </span>
+          </div>
+          <p>{layout.description}</p>
+          <details>
+            <summary>See arrangement</summary>
+            <dl class="bars">
+              {layout.bars.map((bar) => (
+                <>
+                  <dt>
+                    {bar.edge} · {styleNames[bar.style] ?? bar.style}
+                    {bar.clear && ' · transparent'}
+                  </dt>
+                  <dd>{groupLine(bar.groups) || 'No modules'}</dd>
+                </>
+              ))}
+            </dl>
+          </details>
         </li>
       ))}
     </ul>
@@ -58,70 +157,192 @@ const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
 </SiteLayout>
 
 <style>
-  .layouts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-    gap: 1.25rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 2rem;
+  .intro {
+    padding-block: clamp(1rem, 4vw, 4rem) 2rem;
   }
-
-  .layout {
-    display: grid;
-    gap: 0.6rem;
-    align-content: start;
-    padding: 1.1rem;
-    border-radius: var(--radius);
-    background: var(--surface);
-    border: 1px solid var(--line);
+  .intro h1 {
+    margin-top: 0.65rem;
+    font-size: clamp(3rem, 2rem + 5vw, 6.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
   }
-
-  .layout:target {
-    outline: 2px solid var(--accent);
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
   }
-
-  .layout h2 {
+  .intro > p:not(.eyebrow) {
+    max-width: 57ch;
+    margin-top: 1.1rem;
     font-size: var(--step-1);
-    margin-top: 0.4rem;
-  }
-
-  .desc {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-  }
-
-  .bars {
-    display: grid;
-    gap: 0.15rem;
-    font-size: 0.88rem;
-  }
-
-  .bars dt {
-    font-family: var(--font-data);
-    font-stretch: 87.5%;
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--secondary);
-    margin-top: 0.35rem;
-  }
-
-  .bars dd {
     color: var(--text-muted);
   }
-
-  .cmd {
-    margin-top: auto;
-    padding-top: 0.4rem;
-    font-size: 0.8rem;
-    overflow-x: auto;
+  .intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.4rem;
   }
-
+  .intro-actions > span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
   kbd {
     padding: 0.05em 0.4em;
     border: 1px solid var(--line);
     border-bottom-width: 2px;
     border-radius: 5px;
+  }
+  .gallery {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  .layout-showcase {
+    display: grid;
+    align-items: center;
+    gap: 1.3rem;
+  }
+  .layout-showcase :global(.frame) {
+    width: 100%;
+    min-width: 0;
+  }
+  .layout-showcase :global(.frame-shot) :global(img) {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+  .showcase-copy {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 0.55rem;
+  }
+  .showcase-copy h2 {
+    font-size: var(--step-2);
+  }
+  .showcase-copy > p:not(.eyebrow) {
+    max-width: 37ch;
+    color: var(--text-muted);
+  }
+  .text-link {
+    margin-top: 0.5rem;
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .text-link:hover {
+    color: var(--accent);
+  }
+  .catalog {
+    padding-top: clamp(2rem, 4vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+  .catalog-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .catalog-heading h2 {
+    margin-top: 0.35rem;
+  }
+  .catalog-heading > p {
+    max-width: 48ch;
+    color: var(--text-muted);
+  }
+  .layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1rem;
+    list-style: none;
+  }
+  .layout-card {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    scroll-margin-top: 7rem;
+  }
+  .layout-card:target {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .layout-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .layout-title h3 {
+    font-size: 1.15rem;
+  }
+  .layout-title span {
+    color: var(--text-muted);
+    font: 0.67rem var(--font-data);
+    white-space: nowrap;
+  }
+  .layout-card > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .layout-card details {
+    border-top: 1px solid var(--line);
+    padding-top: 0.55rem;
+    color: var(--text-muted);
+    font-size: 0.83rem;
+  }
+  .layout-card summary {
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .layout-card summary::marker {
+    color: var(--secondary);
+  }
+  .bars {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 0.7rem;
+  }
+  .bars dt {
+    margin-top: 0.35rem;
+    color: var(--secondary);
+    font: 0.69rem var(--font-data);
+    text-transform: uppercase;
+  }
+  .bars dd {
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 900px) {
+    .layout-showcase {
+      grid-template-columns: minmax(0, 1.35fr) minmax(230px, 0.65fr);
+    }
+    .layout-showcase:nth-child(even) {
+      grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1.35fr);
+    }
+    .layout-showcase:nth-child(even) :global(.frame) {
+      grid-column: 2;
+    }
+    .layout-showcase:nth-child(even) .showcase-copy {
+      grid-column: 1;
+      grid-row: 1;
+      padding-left: clamp(0rem, 3vw, 3rem);
+    }
+  }
+  @media (max-width: 640px) {
+    .catalog-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .intro-actions {
+      align-items: start;
+      flex-direction: column;
+    }
   }
 </style>
