@@ -1,5 +1,5 @@
 ---
-title: 'Layout Picker · choose your topology'
+title: 'Layout Picker · preview the topology'
 image: '../../../assets/screenshots/certified/layout-picker.png'
 alt: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
 order: 4

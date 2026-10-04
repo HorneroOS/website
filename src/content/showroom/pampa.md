@@ -1,7 +1,7 @@
 ---
 title: 'Pampa · moonlit grassland'
 image: '../../../assets/screenshots/certified/pampa.png'
-alt: 'Pampa theme applied to a deep green grassland scene with a warm moon, rolling horizon and slim Hornero rail.'
+alt: 'Pampa appearance preview in Hornero, with a deep green grassland scene, warm moon and slim shell rail.'
 order: 3
 provenance:
   source: Hornero QA

@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
 import { themes } from '../data/product';
@@ -35,6 +36,12 @@ const wallpaperProof = {
   date: '2026-10-03',
 };
 const paletteVariants = variantSample.variants;
+const showroom = await getCollection('showroom');
+const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
+  const capture = showroom.find((item) => item.id === id);
+  if (!capture) throw new Error(`Showroom capture not found: ${id}`);
+  return capture;
+});
 ---
 
 <SiteLayout
@@ -73,6 +80,37 @@ const paletteVariants = variantSample.variants;
         <strong>Neon City</strong>
       </p>
     </div>
+  </section>
+
+  <section class="section desktop-gallery" aria-labelledby="desktop-gallery-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Looks on a running desktop</p>
+        <h2 id="desktop-gallery-title">From scene to whole system.</h2>
+      </div>
+      <p>
+        Wallpapers set a mood; the real desktop shows how bars, colors and controls meet it. These captures span a light
+        first-party look, an Argentine grassland palette, a neon city and a synthwave road.
+      </p>
+    </div>
+    <div class="desktop-capture-grid">
+      {desktopCaptures.map((capture, i) => (
+        <article class:list={['desktop-capture', `capture-${i + 1}`]}>
+          <ArchFrame
+            src={capture.data.image}
+            alt={capture.data.alt}
+            provenance={capture.data.provenance}
+            sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
+            widths={[480, 720, 960, 1280]}
+          />
+          <h3>{capture.data.title}</h3>
+        </article>
+      ))}
+    </div>
+    <p class="capture-footnote">
+      The capture plates carry their own source and date. The wallpaper cards below show artwork; this gallery shows the
+      Shell running over selected scenes. <a href="/showroom">Browse the complete desktop showcase</a>.
+    </p>
   </section>
 
   <section class="section collection-section" aria-labelledby="looks-title">
@@ -257,6 +295,59 @@ const paletteVariants = variantSample.variants;
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
+  }
+  .desktop-gallery {
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-block: 1px solid var(--line);
+  }
+  .desktop-gallery .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .desktop-gallery .section-heading h2 {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+  }
+  .desktop-gallery .section-heading > p {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--muted);
+  }
+  .desktop-capture-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .desktop-capture {
+    min-width: 0;
+    grid-column: span 2;
+  }
+  .desktop-capture.capture-1,
+  .desktop-capture.capture-2 {
+    grid-column: span 3;
+  }
+  .desktop-capture :global(.frame-shot) {
+    aspect-ratio: 16 / 10;
+  }
+  .desktop-capture :global(.frame-shot img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .desktop-capture h3 {
+    margin: 0.65rem 0 0;
+    font-size: var(--step-1);
+  }
+  .capture-footnote {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .capture-footnote a {
+    color: var(--ink);
   }
   .intro-preview > p {
     display: flex;
@@ -648,6 +739,22 @@ const paletteVariants = variantSample.variants;
     .variant-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .desktop-gallery .section-heading {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 0.65rem;
+    }
+    .desktop-capture-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .desktop-capture,
+    .desktop-capture.capture-1,
+    .desktop-capture.capture-2 {
+      grid-column: auto;
+    }
+    .desktop-capture.capture-1 {
+      grid-column: 1 / -1;
+    }
   }
   @media (min-width: 721px) and (max-width: 1100px) {
     .intro {
@@ -656,6 +763,12 @@ const paletteVariants = variantSample.variants;
     }
   }
   @media (max-width: 420px) {
+    .desktop-capture-grid {
+      grid-template-columns: 1fr;
+    }
+    .desktop-capture.capture-1 {
+      grid-column: auto;
+    }
     .variant-grid {
       grid-template-columns: 1fr;
     }

@@ -3,57 +3,479 @@ import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArchFrame from '../components/ArchFrame.astro';
 
-const shots = (await getCollection('showroom')).sort((a, b) => a.data.order - b.data.order);
+const shots = await getCollection('showroom');
+const shot = (id: string) => {
+  const capture = shots.find((item) => item.id === id);
+  if (!capture) throw new Error(`Showroom capture not found: ${id}`);
+  return capture;
+};
+const atmospheres = [
+  shot('neon-city'),
+  shot('vapor-roadtrip'),
+  shot('morning-lake'),
+  shot('pampa'),
+  shot('hornero-light'),
+];
+const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon'), shot('islands'), shot('dock-bottom')];
 ---
 
 <SiteLayout
   title="Showroom — Hornero OS"
-  description="Real Hornero QA and live-host captures of themes, wallpapers, and shell layouts, each labelled with provenance."
+  description="Explore real Hornero desktop captures: visual worlds, layouts, Settings and the surfaces that make up a complete desktop."
 >
-  <section class="section">
-    <p class="eyebrow">Captured from the running desktop</p>
-    <h1>Showroom</h1>
-    <p>
-      Every image is a real capture, not a mockup. QA plates name their tested build; live-host captures name the
-      installed environment and wallpaper. Preview and development captures are labelled so they never imply an
-      installable system image.
-    </p>
-    <div class="gallery">
-      {shots.map((s, i) => (
-        <article class="shot">
-          <h2>{s.data.title}</h2>
+  <section class="showcase-hero section">
+    <div class="hero-copy">
+      <p class="eyebrow">A desktop with room to become yours</p>
+      <h1>
+        See Hornero
+        <br />
+        <em>in its element.</em>
+      </h1>
+      <p>
+        A working desktop is more than a wallpaper. Follow the same Shell through different landscapes, change how it
+        occupies the screen, then step into the tools that shape it.
+      </p>
+      <nav class="hero-links" aria-label="Explore the showcase">
+        <a href="#visual-worlds">
+          Visual worlds <span aria-hidden="true">↓</span>
+        </a>
+        <a href="#layouts">
+          Layouts <span aria-hidden="true">↓</span>
+        </a>
+        <a href="#control-center">
+          Settings <span aria-hidden="true">↓</span>
+        </a>
+      </nav>
+    </div>
+    <div class="hero-shot">
+      <ArchFrame
+        src={shot('dashboard').data.image}
+        alt={shot('dashboard').data.alt}
+        eager
+        provenance={shot('dashboard').data.provenance}
+        sizes="(min-width: 1180px) 64vw, 100vw"
+        widths={[640, 960, 1280, 1600]}
+      />
+      <p class="image-note">
+        <span>01 / THE DESKTOP AT A GLANCE</span> Dashboard, Companion and the wallpaper share one space.
+      </p>
+    </div>
+  </section>
+
+  <section class="section atmosphere-section" id="visual-worlds" aria-labelledby="worlds-title">
+    <div class="section-intro">
+      <p class="eyebrow">One Shell, many atmospheres</p>
+      <h2 id="worlds-title">
+        The wallpaper changes.
+        <br />
+        <em>The desktop comes along.</em>
+      </h2>
+      <p>
+        These real captures keep Hornero’s vertical rail in view while the scene moves from an electric city to a
+        synthwave road, a pale alpine morning and Pampa’s moonlit grassland. Palette generation can draw a coordinated
+        color system from the wallpaper you choose.
+      </p>
+      <a class="text-link" href="/themes">
+        Explore all looks <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="atmosphere-grid">
+      {atmospheres.map((s, i) => (
+        <article class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
             alt={s.data.alt}
-            eager={i < 2}
-            sizes="(min-width: 1180px) 540px, (min-width: 920px) calc(50vw - 3rem), calc(100vw - 2rem)"
             provenance={s.data.provenance}
+            sizes="(min-width: 1050px) 45vw, (min-width: 700px) 50vw, calc(100vw - 2rem)"
+            widths={[480, 720, 960, 1280]}
           />
+          <div class="story-caption">
+            <span>
+              0{i + 2} / {s.data.provenance.theme ?? 'WALLPAPER COLOR'}
+            </span>
+            <h3>{s.data.title}</h3>
+            <p>{s.data.provenance.context}</p>
+          </div>
         </article>
       ))}
     </div>
+    <p class="section-tail">
+      Artwork previews and the complete wallpaper collection live in <a href="/themes#hornero-originals">Themes</a>.
+    </p>
+  </section>
+
+  <section class="section topology-section" id="layouts" aria-labelledby="layouts-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Space, not skin</p>
+        <h2 id="layouts-title">The Shell takes different shapes.</h2>
+      </div>
+      <p>
+        A side rail, paired bars, a horizon-wide composition, separate islands or a bottom dock: layouts change the
+        desktop’s rhythm while shared controls and visual language stay familiar.
+      </p>
+    </div>
+    <div class="topology-grid">
+      {topologies.map((s, i) => (
+        <article class:list={['topology-card', `topology-${i + 1}`]}>
+          <ArchFrame
+            src={s.data.image}
+            alt={s.data.alt}
+            provenance={s.data.provenance}
+            sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
+            widths={[480, 720, 960, 1280]}
+          />
+          <h3>{s.data.title}</h3>
+        </article>
+      ))}
+    </div>
+    <a class="text-link section-cta" href="/layouts">
+      See the layout collection <span aria-hidden="true">→</span>
+    </a>
+  </section>
+
+  <section class="section controls-section" id="control-center" aria-labelledby="controls-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Your desktop, within reach</p>
+        <h2 id="controls-title">Settings is part of the experience.</h2>
+      </div>
+      <p>
+        Search across destinations and land on the control you need. Appearance brings looks, wallpaper, colors and
+        previews together; the rest of Control Center gives the desktop a clear home for everyday choices.
+      </p>
+    </div>
+    <div class="controls-grid">
+      <article class="control-feature">
+        <ArchFrame
+          src={shot('appearance-search').data.image}
+          alt={shot('appearance-search').data.alt}
+          provenance={shot('appearance-search').data.provenance}
+          sizes="(min-width: 1100px) 58vw, 100vw"
+          widths={[520, 800, 1080, 1280]}
+        />
+        <div class="story-caption">
+          <span>SETTINGS SEARCH · KEYBOARD FLOW</span>
+          <h3>Ask for what you need.</h3>
+          <p>Searching “wallpaper” surfaces the exact Appearance controls and their destination.</p>
+        </div>
+      </article>
+      <article class="control-secondary">
+        <ArchFrame
+          src={shot('layout-picker').data.image}
+          alt={shot('layout-picker').data.alt}
+          provenance={shot('layout-picker').data.provenance}
+          sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
+          widths={[480, 720, 960]}
+        />
+        <div class="story-caption">
+          <span>LAYOUT PICKER · SPATIAL PREVIEW</span>
+          <h3>Choose the shape of your workspace.</h3>
+          <p>Topology previews make a structural change visible before it becomes your desktop.</p>
+        </div>
+      </article>
+    </div>
+    <p class="capture-note">
+      Captures are shown with their date and source. QA sidecars identify the exact scenario and package revisions; the
+      Settings-search image is a visual review capture from the merged search implementation. These are product views,
+      not a claim that every shot comes from the same build.
+    </p>
   </section>
 </SiteLayout>
 
 <style>
-  .gallery {
+  :global(main.app) {
+    padding-top: 0.75rem;
+  }
+  .showcase-hero {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
-    gap: 2rem 1.5rem;
-    margin-top: 2rem;
+    grid-template-columns: minmax(19rem, 0.9fr) minmax(0, 1.35fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-block: clamp(2rem, 6vw, 5.5rem) clamp(3rem, 7vw, 6rem);
   }
-
-  .shot {
-    display: grid;
-    gap: 0.75rem;
-    align-content: start;
+  .hero-copy {
+    max-width: 34rem;
   }
-
-  .shot :global(.frame) {
-    width: 100%;
+  h1 {
+    font-size: clamp(3.2rem, 4.6vw, 5.25rem);
+    line-height: 0.98;
+    letter-spacing: -0.065em;
   }
-
-  .shot h2 {
+  h1 em,
+  .section-intro h2 em {
+    color: var(--clay);
+    font-style: normal;
+  }
+  .hero-copy > p:not(.eyebrow) {
+    max-width: 31rem;
+    color: var(--muted);
     font-size: var(--step-1);
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1.6rem;
+  }
+  .hero-links a {
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+  .hero-links a:hover {
+    border-color: var(--clay);
+    color: var(--clay);
+  }
+  .hero-shot {
+    min-width: 0;
+  }
+  .hero-shot :global(.frame-arch .frame-shot) {
+    border-radius: 42% 42% var(--radius) var(--radius) / 12% 12% var(--radius) var(--radius);
+  }
+  .image-note,
+  .story-caption > span {
+    color: var(--muted);
+    font: 0.72rem/1.45 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .image-note {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .image-note span {
+    color: var(--clay);
+    white-space: nowrap;
+  }
+  .atmosphere-section {
+    padding-block: clamp(4rem, 9vw, 8rem);
+    border-block: 1px solid var(--line);
+  }
+  .section-intro {
+    max-width: 55rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  .section-intro h2,
+  .section-heading h2 {
+    font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+  }
+  .section-intro > p:not(.eyebrow) {
+    max-width: 46rem;
+    color: var(--muted);
+    font-size: var(--step-1);
+  }
+  .text-link {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    color: var(--clay);
+    font-weight: 600;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+  .atmosphere-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem);
+  }
+  .atmosphere-card {
+    min-width: 0;
+  }
+  .atmosphere-2,
+  .atmosphere-4 {
+    margin-top: 4rem;
+  }
+  .atmosphere-card :global(.frame-shot) {
+    aspect-ratio: 16 / 10;
+  }
+  .atmosphere-card :global(.frame-shot img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .story-caption {
+    margin-top: 1rem;
+  }
+  .story-caption > span {
+    color: var(--clay);
+  }
+  .story-caption h3,
+  .topology-card h3 {
+    margin: 0.25rem 0;
+    font-size: var(--step-2);
+  }
+  .story-caption p {
+    max-width: 38rem;
+    margin: 0.35rem 0;
+    color: var(--muted);
+  }
+  .section-tail {
+    margin-top: 2rem;
+    color: var(--muted);
+  }
+  .section-tail a {
+    color: var(--ink);
+  }
+  .topology-section,
+  .controls-section {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 2.25rem;
+  }
+  .section-heading h2 {
+    margin-bottom: 0;
+  }
+  .section-heading > p {
+    max-width: 40rem;
+    margin: 0;
+    color: var(--muted);
+  }
+  .topology-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.3rem;
+  }
+  .topology-card {
+    min-width: 0;
+    grid-column: span 2;
+  }
+  .topology-1,
+  .topology-2 {
+    grid-column: span 3;
+  }
+  .topology-card :global(.frame-shot) {
+    aspect-ratio: 16 / 10;
+  }
+  .topology-card :global(.frame-shot img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .topology-card h3 {
+    margin-top: 0.65rem;
+    font-size: var(--step-1);
+  }
+  .section-cta {
+    margin-top: 1.6rem;
+  }
+  .controls-section {
+    background: color-mix(in oklab, var(--surface) 55%, transparent);
+  }
+  .controls-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(16rem, 0.8fr);
+    align-items: start;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .control-feature,
+  .control-secondary {
+    min-width: 0;
+  }
+  .controls-grid :global(.frame-shot) {
+    aspect-ratio: 16 / 10;
+  }
+  .controls-grid :global(.frame-shot img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .control-secondary {
+    margin-top: 4rem;
+  }
+  .capture-note {
+    max-width: 66rem;
+    margin: 2.5rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 900px) {
+    .showcase-hero {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+    .hero-copy {
+      max-width: 45rem;
+    }
+    .hero-shot {
+      padding-inline: 0.25rem;
+    }
+    .section-heading {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 0.6rem;
+    }
+    .topology-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .topology-card,
+    .topology-1,
+    .topology-2 {
+      grid-column: auto;
+    }
+    .topology-1 {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 620px) {
+    .showcase-hero {
+      padding-top: 2rem;
+    }
+    h1 {
+      font-size: clamp(2.75rem, 13.5vw, 3.4rem);
+    }
+    .image-note {
+      display: grid;
+      gap: 0.25rem;
+    }
+    .atmosphere-grid,
+    .topology-grid,
+    .controls-grid {
+      grid-template-columns: 1fr;
+    }
+    .atmosphere-2,
+    .atmosphere-4,
+    .control-secondary {
+      margin-top: 0;
+    }
+    .topology-1 {
+      grid-column: auto;
+    }
+    .topology-card {
+      grid-column: auto !important;
+    }
+    .atmosphere-card :global(.frame-shot),
+    .topology-card :global(.frame-shot),
+    .controls-grid :global(.frame-shot) {
+      aspect-ratio: 4 / 3;
+    }
+    .hero-links {
+      gap: 0.4rem;
+    }
+    .hero-links a {
+      font-size: 0.84rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
   }
 </style>
