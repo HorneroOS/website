@@ -63,6 +63,7 @@ const paletteVariants = variantSample.variants;
       <ArchFrame
         src={neonCityShot}
         alt="Live Hornero desktop capture with a cyan and amber cyberpunk skyline behind its shell rail."
+        eager
         provenance={wallpaperProof}
         sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
         widths={[480, 720, 1080, 1280]}
@@ -609,8 +610,11 @@ const paletteVariants = variantSample.variants;
       grid-template-columns: 1fr;
       gap: 1.4rem;
     }
+    .intro-preview {
+      order: -1;
+    }
     .intro h1 {
-      font-size: clamp(3rem, 12vw, 4.4rem);
+      font-size: clamp(2.55rem, 10vw, 3.4rem);
     }
     .section-heading {
       align-items: start;
