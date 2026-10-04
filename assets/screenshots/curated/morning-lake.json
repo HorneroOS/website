@@ -10,7 +10,7 @@
     "resolution": "1920x1080",
     "outputs": 1,
     "wallpaper": "soft-morning/morning-lake-2.jpg",
-    "wallpaper_source": "~/.dotfiles/home/dot_local/share/dots/wallpapers",
+    "wallpaper_source": "https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/dots/wallpapers",
     "theme_state": "custom, dark, expressive"
   },
   "environment": {
