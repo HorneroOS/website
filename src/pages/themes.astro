@@ -4,6 +4,9 @@ import ArchFrame from '../components/ArchFrame.astro';
 import { themes } from '../data/product';
 import lightShot from '../../assets/screenshots/certified/hornero-light.png';
 import pampaShot from '../../assets/screenshots/certified/pampa.png';
+import neonCityShot from '../../assets/screenshots/curated/neon-city.webp';
+import vaporRoadtripShot from '../../assets/screenshots/curated/vapor-roadtrip.webp';
+import morningLakeShot from '../../assets/screenshots/curated/morning-lake.webp';
 
 const flagship = themes.filter((theme) => theme.official);
 const recipes = themes.filter((theme) => !theme.official);
@@ -29,6 +32,36 @@ const pampaProof = {
   theme: 'Pampa',
   date: '2026-10-03',
 };
+const wallpaperProof = {
+  source: 'Hornero host capture',
+  context: 'Live Arch + Hyprland host · empty workspace',
+  resolution: '1920×1080',
+  theme: 'Custom · dark · expressive colors',
+  date: '2026-10-03',
+};
+const wallpaperScenes = [
+  {
+    name: 'Neon City',
+    id: 'neon-city-wallpaper',
+    note: 'Cyan glass, amber transit and rain-lit towers.',
+    image: neonCityShot,
+    alt: 'Real Hornero desktop capture with a cyan and amber cyberpunk skyline behind the shell rail.',
+  },
+  {
+    name: 'Vapor Dreams',
+    id: 'vapor-roadtrip-wallpaper',
+    note: 'Coral stone and lavender dusk on an open road.',
+    image: vaporRoadtripShot,
+    alt: 'Real Hornero desktop capture with coral desert cliffs and a lavender synthwave sky behind the shell rail.',
+  },
+  {
+    name: 'Soft Morning',
+    id: 'morning-lake-wallpaper',
+    note: 'Cool peaks, pale sky and a mint-tinted rail.',
+    image: morningLakeShot,
+    alt: 'Real Hornero desktop capture with a pale sunrise over snow and cloud behind a mint-accented shell rail.',
+  },
+];
 ---
 
 <SiteLayout
@@ -156,6 +189,35 @@ const pampaProof = {
         applied. You can choose a different generation style or save a palette in Appearance.
       </p>
     </div>
+  </section>
+
+  <section class="section wallpaper-section" id="wallpaper-scenes" aria-labelledby="wallpaper-scenes-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A wallpaper changes the atmosphere</p>
+        <h2 id="wallpaper-scenes-title">Same shell. Different worlds.</h2>
+      </div>
+      <p>These 1920×1080 host captures use three different wallpapers. The live palette shifts with each image.</p>
+    </div>
+    <div class="wallpaper-scenes">
+      {wallpaperScenes.map((scene) => (
+        <article class="wallpaper-scene" id={scene.id}>
+          <ArchFrame
+            src={scene.image}
+            alt={scene.alt}
+            provenance={wallpaperProof}
+            sizes="(min-width: 1180px) 370px, (min-width: 720px) 42vw, calc(100vw - 2rem)"
+            widths={[360, 480, 720, 960]}
+          />
+          <h3>{scene.name}</h3>
+          <p>{scene.note}</p>
+        </article>
+      ))}
+    </div>
+    <p class="capture-note">
+      These are captures from a live development host running Arch and Hyprland, not a Hornero ISO. See the full
+      <a href="/showroom">Showroom and capture provenance</a>.
+    </p>
   </section>
 
   <section class="section practical">
@@ -406,6 +468,40 @@ const pampaProof = {
     color: var(--text-muted);
   }
   .recipe-note strong {
+    color: var(--text);
+  }
+  .wallpaper-scenes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 1rem;
+  }
+  .wallpaper-scene {
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+  .wallpaper-scene :global(.frame) {
+    width: 100%;
+  }
+  .wallpaper-scene :global(.frame-shot) :global(img) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .wallpaper-scene h3 {
+    font-size: 1.15rem;
+  }
+  .wallpaper-scene > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .capture-note {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  .capture-note a {
     color: var(--text);
   }
   .practical {

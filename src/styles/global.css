@@ -355,6 +355,22 @@ pre {
   margin-block: clamp(2.5rem, 1.5rem + 4vw, 5rem);
 }
 
+.section[id] {
+  scroll-margin-top: 10rem;
+}
+
+@media (min-width: 421px) and (max-width: 899px) {
+  .section[id] {
+    scroll-margin-top: 7rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
 .section > * + * {
   margin-top: 1rem;
 }
