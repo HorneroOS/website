@@ -27,6 +27,9 @@ export interface Theme {
   mode: 'dark' | 'light';
   description: string;
   official: boolean;
+  collection: string | null;
+  collectionOrder: number | null;
+  paletteModel: 'semantic' | 'wallpaper';
   gtkTheme: string | null;
   iconTheme: string | null;
   schemeType: string | null;
