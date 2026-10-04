@@ -3,6 +3,7 @@
 export const docsAreas = [
   { id: 'getting-started', label: 'Getting started' },
   { id: 'desktop', label: 'Desktop' },
+  { id: 'applications', label: 'Apps & workflows' },
   { id: 'hardware', label: 'Hardware' },
   { id: 'troubleshooting', label: 'Troubleshooting' },
   { id: 'security', label: 'Security & privacy' },
