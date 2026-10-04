@@ -1,5 +1,5 @@
 ---
-title: 'Dock Bottom · room to roam'
+title: 'Dock Bottom · a floating home for your controls'
 image: '../../../assets/screenshots/certified/dock-bottom.png'
 alt: 'Dock Bottom layout in a real Hornero desktop, with a floating dock along the bottom edge.'
 order: 5
