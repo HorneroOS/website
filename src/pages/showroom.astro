@@ -4,7 +4,11 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import ArchFrame from '../components/ArchFrame.astro';
 
 const shots = await getCollection('showroom');
-const shot = (id: string) => shots.find((item) => item.id === id)!;
+const shot = (id: string) => {
+  const capture = shots.find((item) => item.id === id);
+  if (!capture) throw new Error(`Showroom capture not found: ${id}`);
+  return capture;
+};
 const atmospheres = [
   shot('neon-city'),
   shot('vapor-roadtrip'),

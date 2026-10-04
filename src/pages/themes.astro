@@ -37,9 +37,11 @@ const wallpaperProof = {
 };
 const paletteVariants = variantSample.variants;
 const showroom = await getCollection('showroom');
-const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) =>
-  showroom.find((item) => item.id === id)!,
-);
+const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
+  const capture = showroom.find((item) => item.id === id);
+  if (!capture) throw new Error(`Showroom capture not found: ${id}`);
+  return capture;
+});
 ---
 
 <SiteLayout
