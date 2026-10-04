@@ -172,6 +172,9 @@ function themes(configDir, official) {
         mode: t.mode ?? (t.darkMode ? 'dark' : 'light'),
         description: t.description ?? '',
         official: official.includes(t.id),
+        collection: t.collection ?? null,
+        collectionOrder: t.collectionOrder ?? null,
+        paletteModel: t.family ? 'semantic' : 'wallpaper',
         gtkTheme: t.gtkTheme ?? null,
         iconTheme: t.iconTheme ?? null,
         // Packs without a static palette derive their colours from the
@@ -180,7 +183,7 @@ function themes(configDir, official) {
         palette: Object.fromEntries(keep.filter((k) => t.palette?.[k]).map((k) => [k, t.palette[k].toUpperCase()])),
       };
     });
-  const rank = (t) => (official.includes(t.id) ? official.indexOf(t.id) : 100);
+  const rank = (t) => (t.collection === 'hornero-originals' ? t.collectionOrder : 1000);
   return list.sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
 }
 

@@ -3,30 +3,30 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
 import { themes } from '../data/product';
-import lightShot from '../../assets/screenshots/certified/hornero-light.png';
 import neonCityShot from '../../assets/screenshots/curated/neon-city.webp';
-import vaporRoadtripShot from '../../assets/screenshots/curated/vapor-roadtrip.webp';
-import morningLakeShot from '../../assets/screenshots/curated/morning-lake.webp';
-import patagoniaWallpaper from '../../assets/screenshots/wallpapers/patagonia-glacier-01.jpg';
-import finDelMundoWallpaper from '../../assets/screenshots/wallpapers/beagle-blue-hour-01.jpg';
 import variantSample from '../data/product/palette-variants.json';
 
-const flagship = themes.filter((theme) => theme.official);
-const recipes = themes.filter((theme) => !theme.official);
+const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
+const otherLooks = themes.filter((theme) => theme.collection !== 'hornero-originals');
+const wallpaperMedia = {
+  'hornero-dark': (await import('../../assets/screenshots/theme-wallpapers/hornero-dark.webp')).default,
+  'hornero-light': (await import('../../assets/screenshots/theme-wallpapers/hornero-light.webp')).default,
+  pampa: (await import('../../assets/screenshots/theme-wallpapers/pampa.webp')).default,
+  patagonia: (await import('../../assets/screenshots/theme-wallpapers/patagonia.webp')).default,
+  'fin-del-mundo': (await import('../../assets/screenshots/theme-wallpapers/fin-del-mundo.webp')).default,
+  quebrada: (await import('../../assets/screenshots/theme-wallpapers/quebrada.webp')).default,
+  ibera: (await import('../../assets/screenshots/theme-wallpapers/ibera.webp')).default,
+  'buenos-aires-nocturno': (await import('../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp'))
+    .default,
+  gruvbox: (await import('../../assets/screenshots/theme-wallpapers/gruvbox.webp')).default,
+  landscape: (await import('../../assets/screenshots/theme-wallpapers/landscape.webp')).default,
+  monochrome: (await import('../../assets/screenshots/theme-wallpapers/monochrome.webp')).default,
+  'neon-city': (await import('../../assets/screenshots/theme-wallpapers/neon-city.webp')).default,
+  'soft-morning': (await import('../../assets/screenshots/theme-wallpapers/soft-morning.webp')).default,
+  'vapor-dreams': (await import('../../assets/screenshots/theme-wallpapers/vapor-dreams.webp')).default,
+  'warm-sunset': (await import('../../assets/screenshots/theme-wallpapers/warm-sunset.webp')).default,
+};
 const modes = (mode: string) => (mode === 'light' ? 'Light' : 'Dark');
-const provenance = (theme: string, source: string, pins: Record<string, string>) => ({
-  source,
-  context: 'Hornero QA · package-only theme run',
-  pins,
-  resolution: '1280×800',
-  theme,
-  date: '2026-10-03',
-});
-const lightProof = provenance('Hornero Light', 'Hornero QA', {
-  shell: '98a5de2',
-  config: '96b6870',
-  horneroctl: '9c15172',
-});
 const wallpaperProof = {
   source: 'Hornero host capture',
   context: 'Live Arch + Hyprland host · empty workspace',
@@ -34,49 +34,12 @@ const wallpaperProof = {
   theme: 'Custom · dark · expressive colors',
   date: '2026-10-03',
 };
-const wallpaperScenes = [
-  {
-    name: 'Neon City',
-    id: 'neon-city-wallpaper',
-    note: 'Cyan glass, amber transit and rain-lit towers.',
-    image: neonCityShot,
-    alt: 'Real Hornero desktop capture with a cyan and amber cyberpunk skyline behind the shell rail.',
-  },
-  {
-    name: 'Vapor Dreams',
-    id: 'vapor-roadtrip-wallpaper',
-    note: 'Coral stone and lavender dusk on an open road.',
-    image: vaporRoadtripShot,
-    alt: 'Real Hornero desktop capture with coral desert cliffs and a lavender synthwave sky behind the shell rail.',
-  },
-  {
-    name: 'Soft Morning',
-    id: 'morning-lake-wallpaper',
-    note: 'Cool peaks, pale sky and a mint-tinted rail.',
-    image: morningLakeShot,
-    alt: 'Real Hornero desktop capture with a pale sunrise over snow and cloud behind a mint-accented shell rail.',
-  },
-];
 const paletteVariants = variantSample.variants;
-const landscapeArtworks = [
-  {
-    name: 'Patagonia',
-    image: patagoniaWallpaper,
-    alt: 'Original HorneroOS wallpaper artwork of a Patagonian glacier, basalt peaks, and blue glacial water at dusk.',
-    note: 'Glacier blue, dark basalt and a narrow copper horizon.',
-  },
-  {
-    name: 'Fin del Mundo',
-    image: finDelMundoWallpaper,
-    alt: 'Original HorneroOS wallpaper artwork of the Beagle Channel, southern forest, and muted harbor light at blue hour.',
-    note: 'Southern forest, Beagle Channel water and harbor light.',
-  },
-];
 ---
 
 <SiteLayout
-  title={`Themes — ${themes.length} ways to shape Hornero OS`}
-  description="Start with a Hornero look or choose a color recipe that follows its wallpaper. Real captures, clear dependency notes and one place to personalize the desktop."
+  title={`Themes — ${themes.length} coordinated looks for Hornero OS`}
+  description="Explore Hornero Originals and a broad collection of natural, minimal, cyberpunk, synthwave and classic looks. Each appearance coordinates the desktop and can be shaped with wallpaper color variants."
 >
   <section class="intro section">
     <div class="intro-copy-column">
@@ -87,13 +50,13 @@ const landscapeArtworks = [
         <em>Make it yours.</em>
       </h1>
       <p class="intro-copy">
-        A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune the
-        pieces when you want to.
+        A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune
+        the pieces when you want to.
       </p>
       <div class="intro-meta">
-        <span>{flagship.length} Hornero looks</span>
-        <span>{recipes.length} color recipes</span>
-        <span>{themes.length} starting points</span>
+        <span>{themes.length} coordinated looks</span>
+        <span>{originals.length} Hornero Originals</span>
+        <span>7 palette-generation styles</span>
       </div>
     </div>
     <div class="intro-preview">
@@ -104,186 +67,144 @@ const landscapeArtworks = [
         sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
         widths={[480, 720, 1080, 1280]}
       />
-      <p><span>Live desktop capture</span><strong>Neon City</strong></p>
+      <p>
+        <span>Live desktop capture</span>
+        <strong>Neon City</strong>
+      </p>
     </div>
   </section>
 
-  <section class="section featured" aria-labelledby="hornero-looks">
+  <section class="section collection-section" aria-labelledby="looks-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Designed for Hornero</p>
-        <h2 id="hornero-looks">The Hornero looks</h2>
+        <p class="eyebrow">One desktop, many visual worlds</p>
+        <h2 id="looks-title">A look for the way you work.</h2>
       </div>
-      <p>Distinct palettes with their own light, texture and character.</p>
+      <p>
+        Hornero Originals sit alongside classic, natural, minimal, cyberpunk and synthwave directions. Every card is a
+        complete appearance choice; the artwork is a wallpaper preview, not a desktop screenshot.
+      </p>
     </div>
-    <div class="flagship-grid">
-      {flagship.map((theme) => (
-        <article
-          class="flagship"
-          id={theme.id}
-          style={`--theme-bg:${theme.palette.background};--theme-surface:${theme.palette.surface};--theme-text:${theme.palette.text};--theme-primary:${theme.palette.primary};--theme-secondary:${theme.palette.secondary};--theme-accent:${theme.palette.accent}`}
-        >
-          <div class="flagship-top">
-            <span class="mode-tag">{modes(theme.mode)}</span>
-            <span class="swatch-row" aria-label="Theme color accents">
-              <i></i>
-              <i></i>
-              <i></i>
-            </span>
-          </div>
-          <div class="flagship-copy">
-            <h3>{theme.name}</h3>
-            <p>
-              {theme.id === 'hornero-dark'
-                ? 'Kiln-dark surfaces, ember orange and warm clay.'
-                : theme.id === 'hornero-light'
-                  ? 'Morning paper, fired clay and clear warm light.'
-                  : 'Moonlit grassland greens, olive and muted gold.'}
-            </p>
-          </div>
-          <div class="palette-strip" aria-hidden="true">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-          <small>Shell · GTK · icons · {theme.mode} mode</small>
-        </article>
-      ))}
-    </div>
-    <div class="proof-pair">
-      <article class="proof-shot">
-        <div>
-          <p class="eyebrow">Light, in use</p>
-          <h3>Hornero Light</h3>
-          <p>Warm morning color carried from the rail to the desktop.</p>
-        </div>
-        <ArchFrame
-          src={lightShot}
-          alt="Hornero Light running on a sunlit Patagonian landscape, with the side rail and confirmation that the theme applied."
-          provenance={lightProof}
-          sizes="(min-width: 1000px) 600px, calc(100vw - 2rem)"
-          widths={[480, 720, 1080, 1280]}
-        />
-      </article>
-    </div>
-  </section>
-
-  <section class="section recipes-section" id="more-packs">
-    <div class="section-heading">
+    <div class="collection-label" id="hornero-originals">
       <div>
-        <p class="eyebrow">A palette for every mood</p>
-        <h2>Color recipes</h2>
+        <span class="collection-index">01</span>
+        <h3>Hornero Originals</h3>
       </div>
-      <p>Start with a scene, then decide how much color the shell should draw from it.</p>
+      <p>First-party looks shaped by Hornero’s visual identity and the places, materials and light that inspire it.</p>
     </div>
-    <ul class="recipe-grid" role="list">
-      {recipes.map((theme) => (
-        <li class="recipe" id={theme.id}>
-          <div class="recipe-head">
-            <span class="mode-tag">{modes(theme.mode)}</span>
-            <span class="recipe-kind">Color recipe</span>
+    <ul class="look-grid" role="list">
+      {originals.map((theme) => (
+        <li class="look-card" id={theme.id}>
+          <div class="look-art">
+            {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
+              <Picture
+                src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
+                alt={`Wallpaper artwork associated with the ${theme.name} appearance.`}
+                formats={['webp']}
+                fallbackFormat="webp"
+                widths={[520, 800]}
+                sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="artwork-unavailable">
+                <span aria-hidden="true">◌</span>
+                <span>Choose a wallpaper</span>
+              </div>
+            )}
+            <span class="look-mode">{modes(theme.mode)}</span>
+            <span class="look-category">Hornero Original</span>
           </div>
-          <h3>{theme.name}</h3>
-          <p>{theme.description}</p>
+          <div class="look-copy">
+            <h4>{theme.name}</h4>
+            <p>{theme.description}</p>
+          </div>
         </li>
       ))}
     </ul>
-    <div class="recipe-note" id="wallpaper-colors">
-      <span aria-hidden="true">✳</span>
-      <p>
-        <strong>One wallpaper, your colors.</strong> Hornero can derive coordinated shell colors from the active
-        wallpaper. Choose a generation style or save a palette in Appearance; GTK and icon themes remain separate parts
-        of the look.
-      </p>
+    <div class="collection-label other-label" id="more-looks">
+      <div>
+        <span class="collection-index">02</span>
+        <h3>The wider collection</h3>
+      </div>
+      <p>Distinct directions, chosen for how they feel across the Shell—not ranked by how they are implemented.</p>
     </div>
+    <ul class="look-grid" role="list">
+      {otherLooks.map((theme) => (
+        <li class="look-card" id={theme.id}>
+          <div class="look-art">
+            {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
+              <Picture
+                src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
+                alt={`Wallpaper artwork associated with the ${theme.name} appearance.`}
+                formats={['webp']}
+                fallbackFormat="webp"
+                widths={[520, 800]}
+                sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="artwork-unavailable">
+                <span aria-hidden="true">◌</span>
+                <span>Pair with your wallpaper</span>
+              </div>
+            )}
+            <span class="look-mode">{modes(theme.mode)}</span>
+            <span class="look-category">
+              {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? 'Wallpaper look' : 'Wallpaper-led'}
+            </span>
+          </div>
+          <div class="look-copy">
+            <h4>{theme.name}</h4>
+            <p>{theme.description}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="artwork-note">
+      Wallpaper previews are original Hornero artwork or media from the public{' '}
+      <a href="https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers">
+        Hornero wallpaper collection
+      </a>
+      . They show the scene associated with a look, not a photograph of the running desktop.{' '}
+      <a href="/showroom">See verified desktop captures in the Showroom</a>.
+    </p>
   </section>
 
   <section class="section variants-section" id="palette-variants" aria-labelledby="palette-variants-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Shape the color, keep the scene</p>
-        <h2 id="palette-variants-title">Seven ways to read a wallpaper.</h2>
+        <p class="eyebrow">Color is part of the look</p>
+        <h2 id="palette-variants-title">Seven palette-generation styles.</h2>
       </div>
-      <p>These are palette-generation styles, not extra themes. Pick one in Appearance to change the shell’s color character while keeping your wallpaper.</p>
+      <p>
+        Choose a style to change how Hornero reads the wallpaper and shapes Shell colors. Keep the same scene while
+        moving from restrained tones to a more expressive palette.
+      </p>
     </div>
     <ul class="variant-grid" role="list">
       {paletteVariants.map((variant) => (
         <li class="variant-card" data-variant={variant.id}>
-          <span class="variant-swatches" aria-hidden="true" style={`--swatch-a:${variant.colors[0]};--swatch-b:${variant.colors[1]};--swatch-c:${variant.colors[2]}`}>
-            <i></i><i></i><i></i>
+          <span
+            class="variant-swatches"
+            aria-hidden="true"
+            style={`--swatch-a:${variant.colors[0]};--swatch-b:${variant.colors[1]};--swatch-c:${variant.colors[2]}`}
+          >
+            <i></i>
+            <i></i>
+            <i></i>
           </span>
           <strong>{variant.name}</strong>
           <span>{variant.mood}</span>
         </li>
       ))}
     </ul>
-    <p class="variant-footnote">All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s Material 3 generator. They are real outputs for that image; another wallpaper or light mode produces different colors. <a href="/docs/desktop/appearance/">Read how wallpaper colors work</a>.</p>
-  </section>
-
-  <section class="section wallpaper-section" id="wallpaper-scenes" aria-labelledby="wallpaper-scenes-title">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">A wallpaper changes the atmosphere</p>
-        <h2 id="wallpaper-scenes-title">The same desktop, reimagined by its wallpaper.</h2>
-      </div>
-      <p>Explore the collection through real captures: electric city light, a synthwave road and a quiet Patagonian dawn.</p>
-    </div>
-    <div class="wallpaper-scenes">
-      {wallpaperScenes.map((scene) => (
-        <article class="wallpaper-scene" id={scene.id}>
-          <ArchFrame
-            src={scene.image}
-            alt={scene.alt}
-            provenance={wallpaperProof}
-            sizes="(min-width: 1180px) 370px, (min-width: 720px) 42vw, calc(100vw - 2rem)"
-            widths={[360, 480, 720, 960]}
-          />
-          <h3>{scene.name}</h3>
-          <p>{scene.note}</p>
-        </article>
-      ))}
-    </div>
-    <p class="capture-note">
-      These are captures from a live development host running Arch and Hyprland, not a Hornero ISO. See the full
-      <a href="/showroom">Showroom and capture provenance</a>.
-    </p>
-  </section>
-
-  <section class="section landscape-art" aria-labelledby="landscape-art-title">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">New wallpaper artworks</p>
-        <h2 id="landscape-art-title">From the southern edge.</h2>
-      </div>
-      <p>Two original scenes take different routes through Patagonia and Tierra del Fuego—without turning either into a souvenir.</p>
-    </div>
-    <div class="landscape-grid">
-      {landscapeArtworks.map((artwork) => (
-        <article class="landscape-card">
-          <Picture
-            src={artwork.image}
-            alt={artwork.alt}
-            formats={['avif', 'webp']}
-            fallbackFormat="jpg"
-            widths={[480, 720, 1080, 1440]}
-            sizes="(min-width: 900px) 46vw, calc(100vw - 2rem)"
-            loading="lazy"
-            decoding="async"
-          />
-          <div>
-            <h3>{artwork.name}</h3>
-            <p>{artwork.note}</p>
-          </div>
-          <small>Wallpaper artwork · included in the public workstation collection</small>
-        </article>
-      ))}
-    </div>
-    <p class="artwork-note">
-      These are original generated wallpaper artworks, not documentary photographs or desktop captures. The wallpaper files are maintained in the public
-      <a href="https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers">dotfiles wallpaper collection</a>;
-      Hornero Config owns the theme catalogue and palette behavior.
+    <p class="variant-footnote">
+      All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s
+      Material 3 generator. They are real outputs for that image; another wallpaper or light mode produces different
+      colors. <a href="/docs/desktop/appearance/">Read how wallpaper colors work</a>.
     </p>
   </section>
 
@@ -292,9 +213,9 @@ const landscapeArtworks = [
       <p class="eyebrow">The useful details</p>
       <h2>Everything in step.</h2>
       <p>
-        Applying a Hornero look updates its coordinated shell and desktop appearance. Recipe packs may call for
-        third-party GTK or icon themes; Hornero does not download them silently. If an optional look is missing, your
-        desktop can still use its shell palette and explain what is unavailable.
+        A look brings the Shell, GTK policy, icons and wallpaper together. Some packs reference optional GTK or icon
+        styles; Hornero checks availability and never downloads them silently. Palette-generation style and light/dark
+        mode can be refined in Appearance.
       </p>
     </div>
     <div class="try-panel">
@@ -397,182 +318,132 @@ const landscapeArtworks = [
     max-width: 43ch;
     color: var(--text-muted);
   }
-  .flagship-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-  .flagship {
-    min-height: 230px;
-    display: flex;
-    flex-direction: column;
-    padding: 1.3rem;
-    overflow: hidden;
-    border: 1px solid color-mix(in oklab, var(--theme-text) 17%, transparent);
-    border-radius: var(--radius);
-    color: var(--theme-text);
-    background:
-      radial-gradient(
-        ellipse at 92% 0%,
-        color-mix(in oklab, var(--theme-primary) 25%, var(--theme-bg)),
-        transparent 56%
-      ),
-      var(--theme-bg);
-  }
-  .flagship-top {
+  .collection-label {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
+    gap: 1.5rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
   }
-  .flagship .mode-tag {
-    border-color: color-mix(in oklab, var(--theme-text) 22%, transparent);
-    color: var(--theme-text);
-  }
-  .swatch-row {
+  .collection-label > div {
     display: flex;
-    gap: 0.35rem;
-  }
-  .swatch-row i {
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 50%;
-    background: var(--theme-primary);
-  }
-  .swatch-row i:nth-child(1) {
-    background: var(--theme-primary);
-  }
-  .swatch-row i:nth-child(2) {
-    background: var(--theme-secondary);
-  }
-  .swatch-row i:nth-child(3) {
-    background: var(--theme-accent);
-  }
-  .flagship-copy {
-    margin-top: auto;
-    padding-top: 2.4rem;
-  }
-  .flagship h3 {
-    font-size: 1.6rem;
-  }
-  .flagship-copy p {
-    max-width: 31ch;
-    margin-top: 0.35rem;
-    font-size: 0.9rem;
-    opacity: 0.78;
-  }
-  .palette-strip {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    height: 0.38rem;
-    overflow: hidden;
-    margin-block: 1.3rem 0.65rem;
-    border-radius: 9px;
-  }
-  .palette-strip i:nth-child(1) {
-    background: var(--theme-bg);
-  }
-  .palette-strip i:nth-child(2) {
-    background: var(--theme-surface);
-  }
-  .palette-strip i:nth-child(3) {
-    background: var(--theme-primary);
-  }
-  .palette-strip i:nth-child(4) {
-    background: var(--theme-secondary);
-  }
-  .palette-strip i:nth-child(5) {
-    background: var(--theme-accent);
-  }
-  .flagship > small {
-    opacity: 0.68;
-    font: 0.66rem var(--font-data);
-  }
-  .proof-pair {
-    display: grid;
-    gap: 2.5rem;
-    margin-top: 2.5rem;
-  }
-  .proof-shot {
-    display: grid;
-    gap: 1rem;
-    align-items: center;
-  }
-  .proof-shot > div:first-child {
-    display: grid;
-    gap: 0.35rem;
-    align-content: center;
-  }
-  .proof-shot h3 {
-    font-size: var(--step-2);
-  }
-  .proof-shot p:not(.eyebrow) {
-    max-width: 38ch;
-    color: var(--text-muted);
-  }
-  .proof-shot :global(.frame) {
-    width: 100%;
-    min-width: 0;
-  }
-  .proof-shot :global(.frame-shot) :global(img) {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-  }
-  .recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+    align-items: baseline;
     gap: 0.75rem;
+  }
+  .collection-index {
+    color: var(--accent);
+    font: 0.72rem var(--font-data);
+  }
+  .collection-label h3 {
+    font-size: 1.35rem;
+  }
+  .collection-label > p {
+    max-width: 48ch;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .look-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0;
     list-style: none;
   }
-  .recipe {
-    display: grid;
-    align-content: start;
-    gap: 0.5rem;
-    min-height: 155px;
-    padding: 1rem;
+  .look-card {
+    min-width: 0;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
+    transition:
+      border-color 180ms ease,
+      transform 180ms ease;
   }
-  .recipe-head {
-    display: flex;
-    justify-content: space-between;
+  .look-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--accent) 50%, var(--line));
+  }
+  .look-art {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 28%, var(--surface)), var(--surface));
+  }
+  .look-art :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 350ms ease;
+  }
+  .look-card:hover .look-art :global(img) {
+    transform: scale(1.025);
+  }
+  .look-mode,
+  .look-category {
+    position: absolute;
+    bottom: 0.55rem;
+    display: inline-flex;
     align-items: center;
-  }
-  .recipe .mode-tag {
-    padding: 0.2rem 0.45rem;
-    font-size: 0.62rem;
-  }
-  .recipe-kind {
-    color: var(--text-muted);
+    min-height: 1.5rem;
+    padding: 0.2rem 0.48rem;
+    border: 1px solid color-mix(in oklab, white 24%, transparent);
+    border-radius: 999px;
+    color: white;
+    background: color-mix(in oklab, #111 74%, transparent);
+    backdrop-filter: blur(8px);
     font: 0.62rem var(--font-data);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
-  .recipe h3 {
-    font-size: 1.12rem;
+  .look-mode {
+    left: 0.55rem;
   }
-  .recipe p {
+  .look-category {
+    right: 0.55rem;
+  }
+  .artwork-unavailable {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 0.45rem;
+    height: 100%;
     color: var(--text-muted);
-    font-size: 0.88rem;
+    font: 0.72rem var(--font-data);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
-  .recipe-note {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.9rem;
-    max-width: 72ch;
-    margin-top: 1.4rem;
-    padding: 1rem 1.2rem;
-    border-left: 3px solid var(--secondary);
-    background: var(--surface);
-    border-radius: 0 var(--radius) var(--radius) 0;
+  .artwork-unavailable span:first-child {
+    color: var(--accent);
+    font-size: 1.5rem;
   }
-  .recipe-note > span {
-    color: var(--secondary);
-    font-size: 1.2rem;
+  .look-copy {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.85rem 0.9rem 1rem;
   }
-  .recipe-note p {
+  .look-copy h4 {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .look-copy p {
+    display: -webkit-box;
+    overflow: hidden;
     color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
-  .recipe-note strong {
+  .artwork-note {
+    margin-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  .artwork-note a {
     color: var(--text);
   }
   .variant-grid {
@@ -606,10 +477,18 @@ const landscapeArtworks = [
     border-radius: 50%;
     background: var(--swatch-a);
   }
-  .variant-swatches i:nth-child(2) { background: var(--swatch-b); }
-  .variant-swatches i:nth-child(3) { background: var(--swatch-c); }
-  .variant-footnote { margin-top: 0.9rem; }
-  .variant-footnote a { color: var(--text); }
+  .variant-swatches i:nth-child(2) {
+    background: var(--swatch-b);
+  }
+  .variant-swatches i:nth-child(3) {
+    background: var(--swatch-c);
+  }
+  .variant-footnote {
+    margin-top: 0.9rem;
+  }
+  .variant-footnote a {
+    color: var(--text);
+  }
   .wallpaper-scenes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
@@ -738,20 +617,29 @@ const landscapeArtworks = [
       flex-direction: column;
       gap: 0.5rem;
     }
-    .flagship-grid {
-      grid-template-columns: 1fr;
+    .look-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+    .collection-label {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .look-copy {
+      padding: 0.7rem;
+    }
+    .look-copy h4 {
+      font-size: 0.92rem;
+    }
+    .look-copy p {
+      font-size: 0.74rem;
+    }
+    .look-category {
+      display: none;
     }
     .landscape-grid {
       grid-template-columns: 1fr;
-    }
-    .flagship {
-      min-height: 190px;
-    }
-    .recipe-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .recipe {
-      min-height: 175px;
     }
     .variant-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -764,14 +652,24 @@ const landscapeArtworks = [
     }
   }
   @media (max-width: 420px) {
-    .recipe-grid {
-      grid-template-columns: 1fr;
-    }
-    .recipe {
-      min-height: 0;
-    }
     .variant-grid {
       grid-template-columns: 1fr;
+    }
+    .look-grid {
+      grid-template-columns: 1fr;
+    }
+    .look-art {
+      aspect-ratio: 16 / 8.5;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .look-card,
+    .look-art :global(img) {
+      transition: none;
+    }
+    .look-card:hover,
+    .look-card:hover .look-art :global(img) {
+      transform: none;
     }
   }
 </style>
