@@ -8,9 +8,9 @@ import remarkDocsLinks from './src/lib/remark-docs-links.mjs';
 const pins = JSON.parse(readFileSync(new URL('./src/data/product/pins.json', import.meta.url), 'utf8'));
 
 // Canonical origin used for <link rel="canonical">, OpenGraph URLs and the
-// sitemap. This is the live Vercel deployment (no custom domain yet).
+// sitemap. The apex domain redirects to this www hostname.
 export default defineConfig({
-  site: 'https://website-zcra.vercel.app',
+  site: 'https://www.horneroos.com',
   output: 'static',
   // The single global stylesheet is small; inline it to avoid a render-blocking request.
   build: { inlineStylesheets: 'always' },
