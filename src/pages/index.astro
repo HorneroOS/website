@@ -6,6 +6,9 @@ import heroShot from '../../assets/screenshots/certified/hornero-light.png';
 import cockpit from '../../assets/screenshots/certified/cockpit-clear.png';
 import islands from '../../assets/screenshots/certified/islands.png';
 import dock from '../../assets/screenshots/certified/dock-bottom.png';
+import neonCity from '../../assets/screenshots/curated/neon-city.webp';
+import vaporRoadtrip from '../../assets/screenshots/curated/vapor-roadtrip.webp';
+import morningLake from '../../assets/screenshots/curated/morning-lake.webp';
 import { layouts, themes } from '../data/product';
 
 const heroProvenance = {
@@ -20,6 +23,26 @@ const layoutShots = [
   { name: 'Cockpit Clear', note: 'One calm line, edge to edge.', src: cockpit, href: '/layouts#cockpit-clear' },
   { name: 'Islands', note: 'Separate surfaces, one shell.', src: islands, href: '/layouts#islands' },
   { name: 'Dock Bottom', note: 'A dock that leaves the sky open.', src: dock, href: '/layouts#dock-bottom' },
+];
+const wallpaperShots = [
+  {
+    name: 'Neon City',
+    note: 'Electric cyan and amber, after dark.',
+    src: neonCity,
+    alt: 'Hornero desktop with the Neon City cyberpunk skyline behind its left rail.',
+  },
+  {
+    name: 'Vapor Dreams',
+    note: 'Coral cliffs under a synthwave sky.',
+    src: vaporRoadtrip,
+    alt: 'Hornero desktop with a coral synthwave road and dusk-purple sky behind its left rail.',
+  },
+  {
+    name: 'Soft Morning',
+    note: 'A cool alpine dawn above cloud.',
+    src: morningLake,
+    alt: 'Hornero desktop with a pale alpine sunrise above cloud behind its left rail.',
+  },
 ];
 const title = 'Hornero OS — one shell, made yours';
 const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.length} layouts and ${themes.length} themes. Explore real captures, not mockups.`;
@@ -150,6 +173,40 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
         <span aria-hidden="true">↗</span>
       </a>
     </div>
+  </section>
+
+  <section class="section wallpaper-worlds" aria-labelledby="wallpaper-worlds-title">
+    <div class="wallpaper-heading">
+      <div>
+        <p class="eyebrow">The wallpaper changes the atmosphere</p>
+        <h2 id="wallpaper-worlds-title">Same rail. Three color worlds.</h2>
+      </div>
+      <p>Real host captures show how one Hornero desktop sits over cyberpunk neon, synthwave dusk and an alpine dawn.</p>
+    </div>
+    <div class="wallpaper-grid">
+      {wallpaperShots.map((shot) => (
+        <a class="wallpaper-shot" href="/showroom">
+          <Picture
+            src={shot.src}
+            alt={shot.alt}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            widths={[360, 540, 720, 960]}
+            sizes="(min-width: 1180px) 30vw, (min-width: 720px) 45vw, calc(100vw - 2rem)"
+            loading="lazy"
+            decoding="async"
+          />
+          <span>
+            <strong>{shot.name}</strong>
+            <small>{shot.note}</small>
+          </span>
+        </a>
+      ))}
+    </div>
+    <p class="wallpaper-credit">
+      Captured at 1920×1080 on a live development host using three images from the wallpaper collection. Each image's
+      provenance is in the <a href="/showroom">Showroom</a>.
+    </p>
   </section>
 
   <section class="section closing">
@@ -353,6 +410,63 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
     margin-top: 0.2rem;
     color: var(--text-muted);
   }
+  .wallpaper-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 1.2rem;
+  }
+  .wallpaper-heading h2 {
+    margin-top: 0.4rem;
+  }
+  .wallpaper-heading > p {
+    max-width: 43ch;
+    color: var(--text-muted);
+  }
+  .wallpaper-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .wallpaper-shot {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .wallpaper-shot :global(picture) {
+    display: block;
+    overflow: hidden;
+  }
+  .wallpaper-shot :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .wallpaper-shot:hover :global(img) {
+    transform: scale(1.025);
+  }
+  .wallpaper-shot > span {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem 0.95rem;
+  }
+  .wallpaper-shot small,
+  .wallpaper-credit {
+    color: var(--text-muted);
+  }
+  .wallpaper-credit {
+    margin-top: 0.85rem;
+    font-size: 0.8rem;
+  }
+  .wallpaper-credit a {
+    color: var(--text);
+  }
   .closing {
     display: flex;
     justify-content: space-between;
@@ -392,12 +506,19 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
   }
   @media (max-width: 700px) {
     .section-heading,
+    .wallpaper-heading,
     .closing {
       align-items: start;
       flex-direction: column;
     }
     .section-heading {
       gap: 0.9rem;
+    }
+    .wallpaper-heading {
+      gap: 0.75rem;
+    }
+    .wallpaper-grid {
+      grid-template-columns: 1fr;
     }
     .layout-stories {
       grid-template-columns: 1fr 1fr;
@@ -413,8 +534,12 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .layout-story :global(img) {
+    .layout-story :global(img),
+    .wallpaper-shot :global(img) {
       transition: none;
+    }
+    .wallpaper-shot:hover :global(img) {
+      transform: none;
     }
   }
 </style>

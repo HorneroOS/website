@@ -1,0 +1,24 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "neon-city.png",
+  "sha256": "98f49caeae13d37868da6ef4dec556f78b21d1ebc39b520041cd882a56706a8f",
+  "captured": "2026-10-03",
+  "capture": {
+    "source": "live host with grim",
+    "workspace": 10,
+    "windows": 0,
+    "resolution": "1920x1080",
+    "outputs": 1,
+    "wallpaper": "neon-city/neon-city-01.jpg",
+    "wallpaper_source": "~/.dotfiles/home/dot_local/share/dots/wallpapers",
+    "theme_state": "custom, dark, expressive"
+  },
+  "environment": {
+    "dotfiles": "9b6ea87",
+    "hornero_config_package": "0.2.2-1",
+    "horneroctl": "v0.2.0-preview14-3-g9c15172",
+    "quickshell": "0.3.1",
+    "hyprland": "0.56.2"
+  },
+  "note": "Development host capture; not an ISO or complete installation claim."
+}
