@@ -87,6 +87,17 @@
     "palette": {}
   },
   {
+    "id": "fin-del-mundo",
+    "name": "Fin del Mundo",
+    "mode": "dark",
+    "description": "A maritime twilight of Beagle water, wind-shaped southern forest and distant harbor light",
+    "official": false,
+    "gtkTheme": "Adwaita-dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "expressive",
+    "palette": {}
+  },
+  {
     "id": "gruvbox",
     "name": "Gruvbox",
     "mode": "dark",
@@ -139,6 +150,17 @@
     "gtkTheme": "Orchis-Light-Compact",
     "iconTheme": "Numix-Circle",
     "schemeType": "tonal-spot",
+    "palette": {}
+  },
+  {
+    "id": "patagonia",
+    "name": "Patagonia",
+    "mode": "dark",
+    "description": "Blue-hour ice, basalt and glacial water with a restrained copper horizon",
+    "official": false,
+    "gtkTheme": "Adwaita-dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "fidelity",
     "palette": {}
   },
   {

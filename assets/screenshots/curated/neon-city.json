@@ -10,7 +10,9 @@
     "resolution": "1920x1080",
     "outputs": 1,
     "wallpaper": "neon-city/neon-city-01.jpg",
-    "wallpaper_source": "https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/dots/wallpapers",
+    "wallpaper_source": "https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers",
+    "wallpaper_source_commit": "4a15cb7b78a4fbb669425f74b1b6d6e45fb12f39",
+    "wallpaper_sha256": "61f366322f7ea488a502d188dd5f2dcf773a4efc1f3bab71317c710c665b4e2b",
     "theme_state": "custom, dark, expressive"
   },
   "environment": {

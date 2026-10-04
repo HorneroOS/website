@@ -10,7 +10,9 @@
     "resolution": "1920x1080",
     "outputs": 1,
     "wallpaper": "soft-morning/morning-lake-2.jpg",
-    "wallpaper_source": "https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/dots/wallpapers",
+    "wallpaper_source": "https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers",
+    "wallpaper_source_commit": "4a15cb7b78a4fbb669425f74b1b6d6e45fb12f39",
+    "wallpaper_sha256": "21300cd595ba16b21f0706a601bd6f4dcc3d63c5c372eaf38d427736e378b682",
     "theme_state": "custom, dark, expressive"
   },
   "environment": {

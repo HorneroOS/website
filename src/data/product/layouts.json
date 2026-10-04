@@ -105,7 +105,7 @@
   {
     "id": "cockpit",
     "name": "Cockpit",
-    "description": "Two bars: act on top, glance below — the legacy dual bar, rebuilt",
+    "description": "Two bars: act on top, glance below — a classic desktop composition",
     "icon": "view_agenda",
     "bars": [
       {

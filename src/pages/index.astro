@@ -164,11 +164,11 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
         </span>
         <span aria-hidden="true">↗</span>
       </a>
-      <a href="/themes#wallpaper-colors">
+      <a href="/themes#palette-variants">
         <span class="model-index">03</span>
         <span>
-          <strong>Let your wallpaper shape the colors</strong>
-          <small>Optional color generation for a look that follows your background.</small>
+          <strong>Shape colors from your wallpaper</strong>
+          <small>Choose among seven generation styles while keeping the same scene.</small>
         </span>
         <span aria-hidden="true">↗</span>
       </a>
@@ -179,9 +179,11 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
     <div class="wallpaper-heading">
       <div>
         <p class="eyebrow">The wallpaper changes the atmosphere</p>
-        <h2 id="wallpaper-worlds-title">Same rail. Three color worlds.</h2>
+        <h2 id="wallpaper-worlds-title">One Hornero shell. Three scenes.</h2>
       </div>
-      <p>Real host captures show how one Hornero desktop sits over cyberpunk neon, synthwave dusk and an alpine dawn.</p>
+      <p>
+        The rail stays familiar while the view moves from a rain-lit city to a synthwave road and a Patagonian sunrise.
+      </p>
     </div>
     <div class="wallpaper-grid">
       {wallpaperShots.map((shot) => (
@@ -204,8 +206,9 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
       ))}
     </div>
     <p class="wallpaper-credit">
-      Captured at 1920×1080 on a live development host using three images from the wallpaper collection. Each image's
-      provenance is in the <a href="/showroom">Showroom</a>.
+      Three real desktop captures, each using a different wallpaper already in the collection. Wallpaper-derived
+      colors are an optional Appearance setting; these captures show the scenes, not a palette-generation comparison.
+      See the <a href="/showroom">Showroom</a> for capture context.
     </p>
   </section>
 
@@ -444,6 +447,7 @@ const description = `An Arch-based desktop on Hyprland, shaped by ${layouts.leng
   .wallpaper-shot :global(img) {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);

@@ -1,12 +1,15 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
 import { themes } from '../data/product';
 import lightShot from '../../assets/screenshots/certified/hornero-light.png';
-import pampaShot from '../../assets/screenshots/certified/pampa.png';
 import neonCityShot from '../../assets/screenshots/curated/neon-city.webp';
 import vaporRoadtripShot from '../../assets/screenshots/curated/vapor-roadtrip.webp';
 import morningLakeShot from '../../assets/screenshots/curated/morning-lake.webp';
+import patagoniaWallpaper from '../../assets/screenshots/wallpapers/patagonia-glacier-01.jpg';
+import finDelMundoWallpaper from '../../assets/screenshots/wallpapers/beagle-blue-hour-01.jpg';
+import variantSample from '../data/product/palette-variants.json';
 
 const flagship = themes.filter((theme) => theme.official);
 const recipes = themes.filter((theme) => !theme.official);
@@ -24,14 +27,6 @@ const lightProof = provenance('Hornero Light', 'Hornero QA', {
   config: '96b6870',
   horneroctl: '9c15172',
 });
-const pampaProof = {
-  source: 'Hornero QA',
-  context: 'Runtime preview · revised artwork staged in guest',
-  pins: { shell: '98a5de2', 'base config': '96b6870', 'wallpaper source': 'ac42eef' },
-  resolution: '1280×800',
-  theme: 'Pampa',
-  date: '2026-10-03',
-};
 const wallpaperProof = {
   source: 'Hornero host capture',
   context: 'Live Arch + Hyprland host · empty workspace',
@@ -62,6 +57,21 @@ const wallpaperScenes = [
     alt: 'Real Hornero desktop capture with a pale sunrise over snow and cloud behind a mint-accented shell rail.',
   },
 ];
+const paletteVariants = variantSample.variants;
+const landscapeArtworks = [
+  {
+    name: 'Patagonia',
+    image: patagoniaWallpaper,
+    alt: 'Original HorneroOS wallpaper artwork of a Patagonian glacier, basalt peaks, and blue glacial water at dusk.',
+    note: 'Glacier blue, dark basalt and a narrow copper horizon.',
+  },
+  {
+    name: 'Fin del Mundo',
+    image: finDelMundoWallpaper,
+    alt: 'Original HorneroOS wallpaper artwork of the Beagle Channel, southern forest, and muted harbor light at blue hour.',
+    note: 'Southern forest, Beagle Channel water and harbor light.',
+  },
+];
 ---
 
 <SiteLayout
@@ -69,20 +79,32 @@ const wallpaperScenes = [
   description="Start with a Hornero look or choose a color recipe that follows its wallpaper. Real captures, clear dependency notes and one place to personalize the desktop."
 >
   <section class="intro section">
-    <p class="eyebrow">Personalize the whole desktop</p>
-    <h1>
-      Choose a feeling.
-      <br />
-      <em>Make it yours.</em>
-    </h1>
-    <p class="intro-copy">
-      A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune the
-      pieces when you want to.
-    </p>
-    <div class="intro-meta">
-      <span>{flagship.length} Hornero looks</span>
-      <span>{recipes.length} color recipes</span>
-      <span>{themes.length} starting points</span>
+    <div class="intro-copy-column">
+      <p class="eyebrow">Personalize the whole desktop</p>
+      <h1>
+        Choose a feeling.
+        <br />
+        <em>Make it yours.</em>
+      </h1>
+      <p class="intro-copy">
+        A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune the
+        pieces when you want to.
+      </p>
+      <div class="intro-meta">
+        <span>{flagship.length} Hornero looks</span>
+        <span>{recipes.length} color recipes</span>
+        <span>{themes.length} starting points</span>
+      </div>
+    </div>
+    <div class="intro-preview">
+      <ArchFrame
+        src={neonCityShot}
+        alt="Live Hornero desktop capture with a cyan and amber cyberpunk skyline behind its shell rail."
+        provenance={wallpaperProof}
+        sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
+        widths={[480, 720, 1080, 1280]}
+      />
+      <p><span>Live desktop capture</span><strong>Neon City</strong></p>
     </div>
   </section>
 
@@ -145,20 +167,6 @@ const wallpaperScenes = [
           widths={[480, 720, 1080, 1280]}
         />
       </article>
-      <article class="proof-shot pampa-shot">
-        <div>
-          <p class="eyebrow">A different landscape</p>
-          <h3>Pampa</h3>
-          <p>Deep grassland greens and a quiet moonlit horizon.</p>
-        </div>
-        <ArchFrame
-          src={pampaShot}
-          alt="Pampa theme applied to a dark grassland scene with a warm moon and a Hornero shell rail."
-          provenance={pampaProof}
-          sizes="(min-width: 1000px) 600px, calc(100vw - 2rem)"
-          widths={[480, 720, 1080, 1280]}
-        />
-      </article>
     </div>
   </section>
 
@@ -168,14 +176,14 @@ const wallpaperScenes = [
         <p class="eyebrow">A palette for every mood</p>
         <h2>Color recipes</h2>
       </div>
-      <p>Choose a direction. Hornero can derive the shell palette from the pack’s colors and wallpaper.</p>
+      <p>Start with a scene, then decide how much color the shell should draw from it.</p>
     </div>
     <ul class="recipe-grid" role="list">
       {recipes.map((theme) => (
         <li class="recipe" id={theme.id}>
           <div class="recipe-head">
             <span class="mode-tag">{modes(theme.mode)}</span>
-            <span class="recipe-kind">Wallpaper colors</span>
+            <span class="recipe-kind">Color recipe</span>
           </div>
           <h3>{theme.name}</h3>
           <p>{theme.description}</p>
@@ -185,19 +193,42 @@ const wallpaperScenes = [
     <div class="recipe-note" id="wallpaper-colors">
       <span aria-hidden="true">✳</span>
       <p>
-        <strong>One wallpaper, your colors.</strong> Color recipes draw a coordinated palette from the pack’s image when
-        applied. You can choose a different generation style or save a palette in Appearance.
+        <strong>One wallpaper, your colors.</strong> Hornero can derive coordinated shell colors from the active
+        wallpaper. Choose a generation style or save a palette in Appearance; GTK and icon themes remain separate parts
+        of the look.
       </p>
     </div>
+  </section>
+
+  <section class="section variants-section" id="palette-variants" aria-labelledby="palette-variants-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Shape the color, keep the scene</p>
+        <h2 id="palette-variants-title">Seven ways to read a wallpaper.</h2>
+      </div>
+      <p>These are palette-generation styles, not extra themes. Pick one in Appearance to change the shell’s color character while keeping your wallpaper.</p>
+    </div>
+    <ul class="variant-grid" role="list">
+      {paletteVariants.map((variant) => (
+        <li class="variant-card" data-variant={variant.id}>
+          <span class="variant-swatches" aria-hidden="true" style={`--swatch-a:${variant.colors[0]};--swatch-b:${variant.colors[1]};--swatch-c:${variant.colors[2]}`}>
+            <i></i><i></i><i></i>
+          </span>
+          <strong>{variant.name}</strong>
+          <span>{variant.mood}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="variant-footnote">All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s Material 3 generator. They are real outputs for that image; another wallpaper or light mode produces different colors. <a href="/docs/desktop/appearance/">Read how wallpaper colors work</a>.</p>
   </section>
 
   <section class="section wallpaper-section" id="wallpaper-scenes" aria-labelledby="wallpaper-scenes-title">
     <div class="section-heading">
       <div>
         <p class="eyebrow">A wallpaper changes the atmosphere</p>
-        <h2 id="wallpaper-scenes-title">Same shell. Different worlds.</h2>
+        <h2 id="wallpaper-scenes-title">The same desktop, reimagined by its wallpaper.</h2>
       </div>
-      <p>These 1920×1080 host captures use three different wallpapers. The live palette shifts with each image.</p>
+      <p>Explore the collection through real captures: electric city light, a synthwave road and a quiet Patagonian dawn.</p>
     </div>
     <div class="wallpaper-scenes">
       {wallpaperScenes.map((scene) => (
@@ -217,6 +248,42 @@ const wallpaperScenes = [
     <p class="capture-note">
       These are captures from a live development host running Arch and Hyprland, not a Hornero ISO. See the full
       <a href="/showroom">Showroom and capture provenance</a>.
+    </p>
+  </section>
+
+  <section class="section landscape-art" aria-labelledby="landscape-art-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">New wallpaper artworks</p>
+        <h2 id="landscape-art-title">From the southern edge.</h2>
+      </div>
+      <p>Two original scenes take different routes through Patagonia and Tierra del Fuego—without turning either into a souvenir.</p>
+    </div>
+    <div class="landscape-grid">
+      {landscapeArtworks.map((artwork) => (
+        <article class="landscape-card">
+          <Picture
+            src={artwork.image}
+            alt={artwork.alt}
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            widths={[480, 720, 1080, 1440]}
+            sizes="(min-width: 900px) 46vw, calc(100vw - 2rem)"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3>{artwork.name}</h3>
+            <p>{artwork.note}</p>
+          </div>
+          <small>Wallpaper artwork · included in the public workstation collection</small>
+        </article>
+      ))}
+    </div>
+    <p class="artwork-note">
+      These are original generated wallpaper artworks, not documentary photographs or desktop captures. The wallpaper files are maintained in the public
+      <a href="https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers">dotfiles wallpaper collection</a>;
+      Hornero Config owns the theme catalogue and palette behavior.
     </p>
   </section>
 
@@ -242,12 +309,50 @@ const wallpaperScenes = [
 </SiteLayout>
 
 <style>
+  :global(main.app) {
+    padding-top: 1.5rem;
+  }
   .intro {
-    padding-block: clamp(1rem, 4vw, 4rem) 1rem;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding-block: clamp(0.5rem, 2vw, 2rem) 1rem;
+    margin-block-start: 0.75rem;
+  }
+  .intro > * + * {
+    margin-top: 0;
+  }
+  .intro-preview {
+    position: relative;
+    min-width: 0;
+  }
+  .intro-preview :global(.frame) {
+    width: 100%;
+  }
+  .intro-preview :global(.frame-shot) :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .intro-preview > p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    color: var(--text-muted);
+    font: 0.7rem var(--font-data);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .intro-preview strong {
+    color: var(--text);
+    font-weight: 600;
   }
   .intro h1 {
     margin-top: 0.7rem;
-    font-size: clamp(3rem, 2.2rem + 5vw, 6.3rem);
+    font-size: clamp(3rem, 3.65vw, 4.3rem);
     line-height: 0.98;
     letter-spacing: -0.055em;
   }
@@ -470,6 +575,41 @@ const wallpaperScenes = [
   .recipe-note strong {
     color: var(--text);
   }
+  .variant-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+  .variant-card {
+    display: grid;
+    gap: 0.4rem;
+    padding: 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .variant-card > span:last-child,
+  .variant-footnote {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  .variant-swatches {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.25rem;
+  }
+  .variant-swatches i {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--swatch-a);
+  }
+  .variant-swatches i:nth-child(2) { background: var(--swatch-b); }
+  .variant-swatches i:nth-child(3) { background: var(--swatch-c); }
+  .variant-footnote { margin-top: 0.9rem; }
+  .variant-footnote a { color: var(--text); }
   .wallpaper-scenes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
@@ -486,6 +626,7 @@ const wallpaperScenes = [
   }
   .wallpaper-scene :global(.frame-shot) :global(img) {
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
   }
@@ -502,6 +643,39 @@ const wallpaperScenes = [
     font-size: 0.82rem;
   }
   .capture-note a {
+    color: var(--text);
+  }
+  .landscape-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  .landscape-card {
+    display: grid;
+    gap: 0.7rem;
+    min-width: 0;
+  }
+  .landscape-card :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .landscape-card h3 {
+    font-size: 1.2rem;
+  }
+  .landscape-card p,
+  .landscape-card small,
+  .artwork-note {
+    color: var(--text-muted);
+  }
+  .landscape-card small,
+  .artwork-note {
+    font-size: 0.82rem;
+  }
+  .artwork-note a {
     color: var(--text);
   }
   .practical {
@@ -552,12 +726,22 @@ const wallpaperScenes = [
     }
   }
   @media (max-width: 720px) {
+    .intro {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+    .intro h1 {
+      font-size: clamp(3rem, 12vw, 4.4rem);
+    }
     .section-heading {
       align-items: start;
       flex-direction: column;
       gap: 0.5rem;
     }
     .flagship-grid {
+      grid-template-columns: 1fr;
+    }
+    .landscape-grid {
       grid-template-columns: 1fr;
     }
     .flagship {
@@ -569,6 +753,15 @@ const wallpaperScenes = [
     .recipe {
       min-height: 175px;
     }
+    .variant-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 721px) and (max-width: 1100px) {
+    .intro {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
   }
   @media (max-width: 420px) {
     .recipe-grid {
@@ -576,6 +769,9 @@ const wallpaperScenes = [
     }
     .recipe {
       min-height: 0;
+    }
+    .variant-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

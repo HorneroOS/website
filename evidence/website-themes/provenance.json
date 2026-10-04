@@ -1,0 +1,16 @@
+{
+  "captured": "2026-10-04",
+  "page": "/themes",
+  "before": {
+    "url": "https://hornero-os.vercel.app/themes",
+    "viewport": "1440x1000",
+    "meaning": "Public website before the theme gallery refresh"
+  },
+  "after": {
+    "url": "http://127.0.0.1:4322/themes",
+    "viewport_desktop": "1440x1000",
+    "viewport_mobile": "390x844",
+    "branch": "docs/app-stack-polish",
+    "meaning": "Locally rendered theme gallery with expanded color and wallpaper variety"
+  }
+}
