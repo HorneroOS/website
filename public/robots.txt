@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://website-zcra.vercel.app/sitemap-index.xml
+Sitemap: https://www.horneroos.com/sitemap-index.xml
