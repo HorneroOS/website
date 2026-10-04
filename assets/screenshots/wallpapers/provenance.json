@@ -1,0 +1,17 @@
+{
+  "source_repository": "https://github.com/ulises-jeremias/dotfiles",
+  "source_commit": "d6e57e86fa04619d83dfd574891734009de628e1",
+  "source_files": [
+    {
+      "file": "home/dot_local/share/hornero/wallpapers/patagonia/patagonia-glacier-01.jpg",
+      "sha256": "1fbceee4379a8eb7730eb71ce286069fe6d77f4ead4b045170a72be9fdb8ace8",
+      "artwork": "Original generated wallpaper artwork for HorneroOS; Patagonia, glacier, basalt and glacial water."
+    },
+    {
+      "file": "home/dot_local/share/hornero/wallpapers/fin-del-mundo/beagle-blue-hour-01.jpg",
+      "sha256": "53b7757b823464d9a612da93fb8961c39e82a7abbc4ddb000758350886141a96",
+      "artwork": "Original generated wallpaper artwork for HorneroOS; Beagle Channel, southern forest and harbor light."
+    }
+  ],
+  "presentation": "Wallpaper artwork previews only. They are not desktop screenshots."
+}

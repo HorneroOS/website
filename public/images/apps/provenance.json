@@ -1,0 +1,28 @@
+{
+  "capture_date": "2026-10-04",
+  "capture_environment": "Live Hornero host; app launched in an isolated temporary Hyprland workspace and closed after capture.",
+  "kitty": {
+    "source": "Kitty with the current host Hornero terminal configuration; horneroctl appearance theme list and appearance colors status.",
+    "resolution": "1100x720"
+  },
+  "yazi": {
+    "source": "Yazi running in Kitty with the current personal workstation Yazi configuration; isolated temporary sample directory.",
+    "resolution": "1320x820"
+  },
+  "sample_wallpapers": {
+    "repository": "https://github.com/ulises-jeremias/dotfiles",
+    "commit": "fb03cc2a8829712333ab544f799243b5c4e0e663",
+    "directory": "home/dot_local/share/hornero/wallpapers",
+    "items": [
+      "Fin del Mundo / Beagle Channel",
+      "Patagonia Glacier",
+      "Neon City",
+      "Vapor Dreams",
+      "Soft Morning / Morning Lake"
+    ]
+  },
+  "thunar": {
+    "source": "Thunar opened on a temporary sample folder containing five public Hornero wallpaper files; no personal files are shown.",
+    "resolution": "1020x220 crop from a 1804x1016 host window capture."
+  }
+}

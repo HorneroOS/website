@@ -1,0 +1,25 @@
+{
+  "sample": {
+    "mode": "dark",
+    "wallpaper": {
+      "repository": "https://github.com/ulises-jeremias/dotfiles",
+      "commit": "4a15cb7b78a4fbb669425f74b1b6d6e45fb12f39",
+      "path": "home/dot_local/share/hornero/wallpapers/neon-city/neon-city-01.jpg"
+    },
+    "generator": {
+      "repository": "https://github.com/HorneroOS/config",
+      "commit": "cdd455d70849a95856da604e7b773e01471e1a66",
+      "path": "lib/hornero/generate-m3-colors.py",
+      "quality": 5
+    }
+  },
+  "variants": [
+    { "id": "vibrant", "name": "Vibrant", "mood": "Clear, energetic accents", "colors": ["#6FB1FF", "#679DFE", "#E1A4FF"] },
+    { "id": "tonal-spot", "name": "Tonal spot", "mood": "Balanced and softly tinted", "colors": ["#B0C8EC", "#BBC7DB", "#E1D7FF"] },
+    { "id": "expressive", "name": "Expressive", "mood": "A broader mix of related hues", "colors": ["#BAD7FF", "#B5CCBA", "#DEFFE1"] },
+    { "id": "fidelity", "name": "Fidelity", "mood": "Stays close to the source color", "colors": ["#A7C9F7", "#BBC7DC", "#ECBF77"] },
+    { "id": "content", "name": "Content", "mood": "Lets the image lead key colors", "colors": ["#A7C9F7", "#BBC7DC", "#E6B7EA"] },
+    { "id": "neutral", "name": "Neutral", "mood": "Quiet, restrained color", "colors": ["#BFC7D5", "#9C9EA4", "#EDECFF"] },
+    { "id": "monochrome", "name": "Monochrome", "mood": "Near-grayscale and focused", "colors": ["#FFFFFF", "#C6C6C6", "#E2E2E2"] }
+  ]
+}

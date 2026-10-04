@@ -90,48 +90,26 @@ function enabledIds(list) {
   return (Array.isArray(list) ? list : []).filter((e) => e && e.enabled !== false && e.id).map((e) => e.id);
 }
 
-// Legacy single-bar presets list `entries` split by spacers: before the
-// first spacer is the start group, between spacers the centre, after the
-// last spacer the end (the same rule horneroctl's preset summary uses).
-function splitLegacy(ids) {
-  const spacers = ids.flatMap((id, i) => (id === 'spacer' ? [i] : []));
-  if (spacers.length === 0) return { start: ids, center: [], end: [] };
-  const first = spacers[0];
-  const last = spacers[spacers.length - 1];
-  const strip = (xs) => xs.filter((id) => id !== 'spacer');
-  return {
-    start: strip(ids.slice(0, first)),
-    center: first === last ? [] : strip(ids.slice(first + 1, last)),
-    end: strip(ids.slice(last + 1)),
-  };
-}
-
 function presetBars(bar) {
   const groupsOf = (g = {}) => ({
     start: enabledIds(g.start).map(label),
     center: enabledIds(g.center).map(label),
     end: enabledIds(g.end).map(label),
   });
-  if (Array.isArray(bar.bars) && bar.bars.length > 0) {
-    const seen = new Set();
-    return bar.bars
-      .filter((b) => EDGES.includes(b.edge) && !seen.has(b.edge) && seen.add(b.edge))
-      .map((b) => ({
-        edge: b.edge,
-        style: STYLES.includes(b.style) ? b.style : 'attached',
-        clear: b.backdrop === 'clear',
-        groups: groupsOf(b.groups),
-      }));
+  if (!Array.isArray(bar.bars) || bar.bars.length === 0) {
+    throw new Error('preset must declare at least one bar in bar.bars');
   }
-  const split = splitLegacy(enabledIds(bar.entries));
-  return [
-    {
-      edge: EDGES.includes(bar.position) ? bar.position : 'top',
-      style: STYLES.includes(bar.style) ? bar.style : 'attached',
-      clear: bar.backdrop === 'clear',
-      groups: { start: split.start.map(label), center: split.center.map(label), end: split.end.map(label) },
-    },
-  ];
+  const seen = new Set();
+  const normalized = bar.bars
+    .filter((b) => EDGES.includes(b.edge) && !seen.has(b.edge) && seen.add(b.edge))
+    .map((b) => ({
+      edge: b.edge,
+      style: STYLES.includes(b.style) ? b.style : 'attached',
+      clear: b.backdrop === 'clear',
+      groups: groupsOf(b.groups),
+    }));
+  if (normalized.length === 0) throw new Error('preset has no bars with a valid edge');
+  return normalized;
 }
 
 function layouts(shellDir) {
@@ -158,6 +136,27 @@ function officialThemes(horneroDir) {
   const m = /fn official_theme_ids\(\) \[\]string \{\s*return \[([^\]]*)\]/.exec(src);
   if (!m) fail('official_theme_ids() not found in hornero theme_switch.v');
   return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
+}
+
+// Color generation variants are exposed by the native Hornero CLI. Keep the
+// editorial sample palettes on /themes honest when that command changes.
+function schemeFlavours(horneroDir) {
+  const src = readFileSync(join(horneroDir, 'cli/modules/hornero_core/scheme_apply.v'), 'utf8');
+  const m = /pub fn scheme_flavours\(\) \[\]string \{\s*return \[([^\]]*)\]/.exec(src);
+  if (!m) fail('scheme_flavours() not found in hornero scheme_apply.v');
+  return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
+}
+
+function checkPaletteVariantSamples(horneroDir) {
+  const data = readJson(join(DATA, 'palette-variants.json'));
+  const expected = schemeFlavours(horneroDir);
+  const actual = (data.variants ?? []).map((v) => v.id);
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+    fail(`palette-variants.json IDs do not match horneroctl scheme_flavours(): ${actual.join(', ')}`);
+  }
+  if (data.sample?.mode !== 'dark' || !data.sample?.wallpaper || !data.sample?.generator) {
+    fail('palette-variants.json needs sample mode, wallpaper, and generator provenance');
+  }
 }
 
 function themes(configDir, official) {
@@ -256,6 +255,7 @@ if (BUMP) {
   }
 }
 const dirs = Object.fromEntries(Object.entries(pins.sources).map(([name, pin]) => [name, checkout(name, pin)]));
+checkPaletteVariantSamples(dirs.hornero);
 if (FETCH_ONLY) {
   console.log(`fetched ${Object.keys(dirs).join(', ')} at their pins`);
   process.exit(0);
