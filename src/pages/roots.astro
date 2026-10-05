@@ -34,9 +34,10 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
         <div>
           <h3>A desktop takes shape in dotfiles</h3>
           <p>
-            The original Quickshell setup lived in{' '}
-            <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>, alongside the rest of a
-            personal Arch Linux environment.
+            The personal Linux environment behind Hornero has been developed, used, refined and tested for more than
+            eight years. Its public configuration continues in{' '}
+            <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>, alongside the broader
+            Arch Linux setup it grew from.
           </p>
         </div>
       </li>
@@ -143,7 +144,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     </div>
   </section>
 
-  <section class="section lineage">
+  <section class="section lineage" id="community">
     <p class="eyebrow">Influence, credit and direction</p>
     <h2>Learn from good work. Keep our own shape.</h2>
     <div class="lineage-grid">
@@ -168,6 +169,15 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
         <p>
           Those references inform the questions we ask, not the answers we copy. Hornero keeps its own visual range,
           open development and product decisions.
+        </p>
+      </article>
+      <article>
+        <h3>Community support</h3>
+        <p>
+          Hornero also benefits from the support and contributions of{' '}
+          <a href="https://gitlab.com/anarchy-linux/installer/-/tags">Panda Foss</a>, one of the maintainers of the
+          Anarchy Linux installer. That experience adds perspective from years of building and maintaining Linux
+          installation tools.
         </p>
       </article>
     </div>
@@ -322,7 +332,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
       align-items: start;
     }
     .lineage-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

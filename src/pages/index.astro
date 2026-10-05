@@ -60,23 +60,47 @@ const family = editionOrder.map((id) => {
     })),
   };
 });
-const title = 'Hornero OS — one shell, made yours';
-const description = `An Arch-based operating system centered on a customizable Wayland desktop, shaped by ${layouts.length} layouts and ${themes.length} coordinated looks.`;
+const title = 'Hornero OS — refined in daily use since 2018';
+const description = `HorneroOS grows from a Linux setup developed, used and refined since 2018: an open, Wayland-first desktop shaped by ${layouts.length} layouts and ${themes.length} coordinated looks.`;
 ---
 
 <SiteLayout title={title} description={description}>
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">
-        <span class="status-dot" aria-hidden="true"></span> Arch-based · Wayland-first desktop · Pre-release
+        <span class="status-dot" aria-hidden="true"></span> Linux, shaped in daily use since 2018 · Arch-based ·
+        Wayland-first
       </p>
       <h1>
         A desktop with room to become <em>yours.</em>
       </h1>
       <p class="lede">
-        One Quickshell system brings the bars, launcher, dashboard and settings together. Shape its layout, palette and
-        rhythm without stitching together separate tools.
+        HorneroOS grows from a Linux setup developed, used, refined and tested for more than eight years. That work
+        lives on as an open, coherent desktop with its own shell, themes and layouts.
       </p>
+      <ul class="heritage" aria-label="HorneroOS origins and community support">
+        <li>
+          <span class="heritage-mark" aria-hidden="true">
+            01
+          </span>
+          <span>
+            <strong>Built from lived experience</strong>
+            <br />
+            Follow the work from <a href="https://github.com/ulises-jeremias/dotfiles">the public dotfiles</a> into
+            HorneroOS.
+          </span>
+        </li>
+        <li>
+          <span class="heritage-mark heritage-community" aria-hidden="true">
+            02
+          </span>
+          <span>
+            <strong>Made with the Linux community</strong>
+            <br />
+            With support and contributions from Panda Foss, an <a href="/roots#community">Anarchy Linux maintainer</a>.
+          </span>
+        </li>
+      </ul>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span>
           <strong>{layouts.length}</strong> layouts
@@ -313,6 +337,52 @@ const description = `An Arch-based operating system centered on a customizable W
   .hero .lede {
     max-width: 44ch;
     font-size: clamp(1.08rem, 1rem + 0.5vw, 1.3rem);
+  }
+  .heritage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    width: min(100%, 44rem);
+    margin: 0;
+    padding: 0;
+    padding-block: 0.1rem;
+    list-style: none;
+  }
+  .heritage li {
+    display: grid;
+    grid-template-columns: 1.7rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .heritage strong {
+    color: var(--text);
+    font-size: 0.81rem;
+  }
+  .heritage a {
+    color: var(--text);
+    text-decoration-color: color-mix(in oklab, var(--accent) 65%, transparent);
+    text-underline-offset: 0.16em;
+  }
+  .heritage a:hover {
+    color: var(--accent);
+  }
+  .heritage-mark {
+    display: grid;
+    width: 1.6rem;
+    height: 1.6rem;
+    place-items: center;
+    border: 1px solid color-mix(in oklab, var(--accent) 45%, var(--line));
+    border-radius: 50%;
+    color: var(--accent);
+    font: 0.58rem var(--font-data);
+  }
+  .heritage-community {
+    border-color: color-mix(in oklab, #a68bd0 55%, var(--line));
+    color: #a68bd0;
   }
   .family-snapshot {
     padding: clamp(1.2rem, 3vw, 2rem);
@@ -640,6 +710,10 @@ const description = `An Arch-based operating system centered on a customizable W
     .family-heading {
       align-items: start;
       flex-direction: column;
+    }
+    .heritage {
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
     }
     .family-rail {
       grid-template-columns: repeat(2, minmax(0, 1fr));
