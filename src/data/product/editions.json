@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "editions": [
+    {
+      "id": "desktop",
+      "title": "HorneroOS Desktop",
+      "maturity": "preview",
+      "role": "desktop",
+      "extends": null,
+      "packageSets": [
+        "desktop"
+      ],
+      "compositor": {
+        "default": "hyprland",
+        "supported": [
+          "hyprland",
+          "niri"
+        ]
+      }
+    },
+    {
+      "id": "server",
+      "title": "HorneroOS Server",
+      "maturity": "planned",
+      "role": "server",
+      "extends": null,
+      "packageSets": [
+        "server"
+      ],
+      "compositor": null
+    },
+    {
+      "id": "agents",
+      "title": "HorneroOS Agents",
+      "maturity": "planned",
+      "role": "agent-host",
+      "extends": "server",
+      "packageSets": [
+        "agents"
+      ],
+      "compositor": null
+    },
+    {
+      "id": "studio",
+      "title": "HorneroOS Studio",
+      "maturity": "planned",
+      "role": "creative-workstation",
+      "extends": "desktop",
+      "packageSets": [
+        "studio"
+      ],
+      "compositor": {
+        "inherit": "desktop"
+      }
+    }
+  ],
+  "compositors": [
+    {
+      "id": "hyprland",
+      "maturity": "supported",
+      "capabilities": [
+        "workspaces",
+        "windows",
+        "outputs",
+        "keyboard-layouts",
+        "screenshot",
+        "screencast"
+      ]
+    },
+    {
+      "id": "niri",
+      "maturity": "experimental",
+      "capabilities": [
+        "workspaces",
+        "windows",
+        "outputs",
+        "keyboard-layouts",
+        "screenshot",
+        "screencast"
+      ]
+    },
+    {
+      "id": "labwc",
+      "maturity": "planned",
+      "capabilities": []
+    }
+  ]
+}

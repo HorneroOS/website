@@ -2,6 +2,7 @@
 // scripts/sync-product-data.mjs from the pins in pins.json; never edit them
 // by hand (CI fails when they drift from their pins).
 import layoutsJson from './layouts.json';
+import editionsJson from './editions.json';
 import pinsJson from './pins.json';
 import releasesJson from './releases.json';
 import themesJson from './themes.json';
@@ -54,9 +55,40 @@ export interface Release {
   iso: string;
 }
 
+export type Maturity = 'planned' | 'experimental' | 'preview' | 'supported';
+
+export interface CompositorChoice {
+  default: string;
+  supported: string[];
+}
+
+export interface Edition {
+  id: string;
+  title: string;
+  maturity: Maturity;
+  role: string;
+  extends: string | null;
+  packageSets: string[];
+  compositor: CompositorChoice | null;
+}
+
+export interface Compositor {
+  id: string;
+  maturity: Maturity;
+  capabilities: string[];
+}
+
+export interface EditionCatalogue {
+  version: number;
+  editions: Edition[];
+  compositors: Compositor[];
+}
+
 export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
+export const editionCatalogue = editionsJson as EditionCatalogue;
+export const editions = editionCatalogue.editions;
 export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);

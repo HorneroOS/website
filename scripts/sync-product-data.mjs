@@ -6,7 +6,7 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions}.json
 //
 // Every fact on /layouts, /themes and /releases comes from these files, and
 // these files come only from the pinned commits: never edit them by hand.
@@ -147,6 +147,28 @@ function schemeFlavours(horneroDir) {
   return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
 }
 
+// Edition names, composition, and maturity come from the same catalogue used
+// by the CLI and future installer consumers. The website adds editorial copy,
+// but never maintains a second availability matrix.
+function editionCatalogue(horneroDir) {
+  const source = parseYaml(readFileSync(join(horneroDir, 'editions/catalogue.yaml'), 'utf8'));
+  const editions = Object.entries(source.editions ?? {}).map(([id, edition]) => ({
+    id,
+    title: edition.title,
+    maturity: edition.maturity,
+    role: edition.role,
+    extends: edition.extends ?? null,
+    packageSets: edition.packageSets ?? [],
+    compositor: edition.compositor ?? null,
+  }));
+  const compositors = Object.entries(source.compositors ?? {}).map(([id, compositor]) => ({
+    id,
+    maturity: compositor.maturity,
+    capabilities: compositor.capabilities ?? [],
+  }));
+  return { version: source.version, editions, compositors };
+}
+
 function checkPaletteVariantSamples(horneroDir) {
   const data = readJson(join(DATA, 'palette-variants.json'));
   const expected = schemeFlavours(horneroDir);
@@ -285,6 +307,7 @@ const generated = {
   'layouts.json': layouts(dirs.shell),
   'themes.json': themes(dirs.config, officialThemes(dirs.hornero)),
   'releases.json': releases(dirs.hornero, pins.releaseTags ?? []),
+  'editions.json': editionCatalogue(dirs.hornero),
 };
 
 let drift = 0;
@@ -299,7 +322,8 @@ for (const [file, data] of Object.entries(generated)) {
     }
   } else {
     writeFileSync(path, body);
-    console.log(`wrote src/data/product/${file} (${data.length} entries)`);
+    const count = Array.isArray(data) ? `${data.length} entries` : 'catalogue';
+    console.log(`wrote src/data/product/${file} (${count})`);
   }
 }
 if (drift) process.exit(1);
