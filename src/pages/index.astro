@@ -9,7 +9,7 @@ import dock from '../../assets/screenshots/certified/dock-bottom.png';
 import neonCity from '../../assets/screenshots/curated/neon-city.webp';
 import vaporRoadtrip from '../../assets/screenshots/curated/vapor-roadtrip.webp';
 import morningLake from '../../assets/screenshots/curated/morning-lake.webp';
-import { layouts, themes } from '../data/product';
+import { editionCatalogue, editions, layouts, themes } from '../data/product';
 
 const heroProvenance = {
   source: 'Hornero QA',
@@ -44,6 +44,22 @@ const wallpaperShots = [
     alt: 'Hornero desktop with a pale alpine sunrise above cloud behind its left rail.',
   },
 ];
+const editionOrder = ['desktop', 'server', 'agents', 'studio'];
+const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
+const maturityNames = { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+const family = editionOrder.map((id) => {
+  const edition = editionById[id];
+  if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
+  return {
+    ...edition,
+    name: edition.title.replace('HorneroOS ', ''),
+    status: maturityNames[edition.maturity],
+    compositors: (edition.compositor?.supported ?? []).map((backend) => ({
+      id: backend,
+      maturity: editionCatalogue.compositors.find((item) => item.id === backend)?.maturity ?? 'planned',
+    })),
+  };
+});
 const title = 'Hornero OS — one shell, made yours';
 const description = `An Arch-based operating system centered on a customizable Wayland desktop, shaped by ${layouts.length} layouts and ${themes.length} coordinated looks.`;
 ---
@@ -93,6 +109,44 @@ const description = `An Arch-based operating system centered on a customizable W
       widths={[480, 720, 1080, 1280]}
       provenance={heroProvenance}
     />
+  </section>
+
+  <section class="section family-snapshot" aria-labelledby="family-title">
+    <div class="family-heading">
+      <div>
+        <p class="eyebrow">One foundation, composed by role</p>
+        <h2 id="family-title">HorneroOS is a family, not a single desktop.</h2>
+      </div>
+      <a class="text-link" href="/editions">
+        Explore the editions <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="family-rail">
+      {family.map((edition) => (
+        <a class:list={['family-cell', `family-${edition.id}`, `maturity-${edition.maturity}`]} href="/editions">
+          <span class="family-cell-top">
+            <strong>{edition.name}</strong>
+            <small>{edition.status}</small>
+          </span>
+          {edition.compositors.length > 0 ? (
+            <span class="family-detail">
+              Wayland ·{' '}
+              {edition.compositors.map((backend) => (backend.id === 'hyprland' ? 'Hyprland' : 'Niri')).join(' / ')}
+            </span>
+          ) : (
+            <span class="family-detail">Headless role</span>
+          )}
+          {edition.extends && (
+            <span class="family-inherit">
+              Builds on {editionById[edition.extends]?.title.replace('HorneroOS ', '') ?? edition.extends}
+            </span>
+          )}
+        </a>
+      ))}
+    </div>
+    <p class="family-note">
+      Desktop is the current preview. Server, Agents and Studio remain planned; none has an installable image yet.
+    </p>
   </section>
 
   <section class="section worlds" aria-labelledby="worlds-title">
@@ -258,6 +312,78 @@ const description = `An Arch-based operating system centered on a customizable W
   .hero .lede {
     max-width: 44ch;
     font-size: clamp(1.08rem, 1rem + 0.5vw, 1.3rem);
+  }
+  .family-snapshot {
+    padding: clamp(1.2rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .family-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .family-heading h2 {
+    max-width: 24ch;
+    margin-top: 0.35rem;
+  }
+  .family-rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+  .family-cell {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+    padding: 0.8rem;
+    border-top: 2px solid var(--secondary);
+    background: color-mix(in oklab, var(--bg) 55%, transparent);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .family-desktop {
+    border-top-color: var(--accent);
+  }
+  .family-server {
+    border-top-color: #7daab4;
+  }
+  .family-agents {
+    border-top-color: #a68bd0;
+  }
+  .family-studio {
+    border-top-color: #8eab72;
+  }
+  .family-cell-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 0.5rem;
+  }
+  .family-cell-top small {
+    color: var(--secondary);
+    font: 0.63rem var(--font-data);
+    text-transform: uppercase;
+  }
+  .family-detail {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+  }
+  .family-inherit {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+  }
+  .family-note {
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.77rem;
+  }
+  .family-cell:hover .family-cell-top strong {
+    color: var(--accent);
   }
   .hero :global(.frame) {
     width: 100%;
@@ -510,6 +636,13 @@ const description = `An Arch-based operating system centered on a customizable W
     }
   }
   @media (max-width: 700px) {
+    .family-heading {
+      align-items: start;
+      flex-direction: column;
+    }
+    .family-rail {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .section-heading,
     .wallpaper-heading,
     .closing {

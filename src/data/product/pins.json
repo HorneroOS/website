@@ -3,15 +3,15 @@
   "sources": {
     "shell": {
       "repo": "https://github.com/HorneroOS/shell",
-      "sha": "d3172586e12e860c2ebc169d7e41c2979f02c135"
+      "sha": "801c324a9245f4f00a21963a72e4c5ebc179096e"
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "cf84be607659ec8da2cf98434ac293931f9da4b1"
+      "sha": "0ee0f3778cc272406f08dbbbc5bf212912f753b9"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "d8c7af38ccaf6c5be7b731424a2f2b4ee1bce888"
+      "sha": "8b7a9c1cecd5d20438873a3d137622d51d902abd"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
