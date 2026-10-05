@@ -293,7 +293,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   .intro-preview :global(.frame-shot) :global(img) {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    /* Preserve the full 16:9 desktop capture, including its vertical rail. */
+    aspect-ratio: 16 / 9;
     object-fit: cover;
   }
   .desktop-gallery {

@@ -66,6 +66,23 @@ const repos = [
           ))}
         </ul>
       </nav>
+      <details class="mobile-menu">
+        <summary>
+          <span>Menu</span>
+          <span aria-hidden="true">☰</span>
+        </summary>
+        <nav aria-label="Mobile main">
+          <ul>
+            {nav.map((l) => (
+              <li>
+                <a href={l.href} class={l.className} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
     </header>
     <main id="main" class="app" tabindex="-1" data-pagefind-body>
       <slot />
