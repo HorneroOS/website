@@ -1,11 +1,18 @@
 # Hornero OS
 
-> Pre-release Arch Linux desktop: Hyprland + Quickshell shell, one CLI (`horneroctl`), pinned compositions.
+> HorneroOS is an Arch-based operating-system family. Its current preview is a Wayland-first desktop powered by Hornero Shell; Hyprland is the supported default compositor and Niri is experimental.
 
 ## Status
 
-HorneroOS is pre-release. There is no ISO and no guided installer yet. On Arch today: install `horneroctl-bin` from the AUR.
+HorneroOS is pre-release. The Desktop is available as Arch packages for existing Arch systems. Server, Agents, and Studio are defined as composable editions with planned maturity. There is no published ISO or guided installer yet.
 
+- Official site: https://horneroos.com
+- Editions: https://horneroos.com/editions
+- Themes: https://horneroos.com/themes
+- Layouts: https://horneroos.com/layouts
+- Showroom: https://horneroos.com/showroom
+- Application and workflow handbook: https://horneroos.com/docs/applications/
+- Search: https://horneroos.com/search/
 - Docs: https://github.com/HorneroOS/docs
 - Composition: https://github.com/HorneroOS/hornero
 - Shell: https://github.com/HorneroOS/shell
@@ -14,6 +21,10 @@ HorneroOS is pre-release. There is no ISO and no guided installer yet. On Arch t
 ## Pages
 
 - `/` — what Hornero OS is
-- `/install` — install profiles and requirements
+- `/install` — installation availability and current requirements
+- `/editions` — Desktop, Server, Agents, and Studio composition and maturity
+- `/themes` — the coordinated look catalogue and palette generation
+- `/layouts` — bar, dock, island, and rail arrangements
 - `/roots` — where each piece comes from
-- `/showroom` — desktop captures from development builds
+- `/showroom` — real desktop captures with provenance
+- `/docs/` — the user and contributor handbook
