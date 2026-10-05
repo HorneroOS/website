@@ -147,9 +147,12 @@ function schemeFlavours(horneroDir) {
   return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
 }
 
-// Edition names, composition, and maturity come from the same catalogue used
-// by the CLI and future installer consumers. The website adds editorial copy,
-// but never maintains a second availability matrix.
+/**
+ * Build the site's edition/compositor data from the pinned Hornero catalogue.
+ * Editorial copy stays in Astro; readiness and composition remain canonical.
+ * @param {string} horneroDir Checkout directory for the pinned Hornero source.
+ * @returns {{version: number, editions: object[], compositors: object[]}}
+ */
 function editionCatalogue(horneroDir) {
   const source = parseYaml(readFileSync(join(horneroDir, 'editions/catalogue.yaml'), 'utf8'));
   const editions = Object.entries(source.editions ?? {}).map(([id, edition]) => ({
