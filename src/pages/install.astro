@@ -19,13 +19,14 @@ const statusName = {
 
 <SiteLayout
   title="Install — Hornero OS"
-  description="HorneroOS is a pre-release operating system family. Desktop is available as Arch packages; edition images and a guided installer are not published."
+  description="HorneroOS Desktop is available as Arch packages. The provisional Calamares installer has not completed VM acceptance, and no install image is published."
 >
   <section class="section">
     <p class="eyebrow">Status</p>
-    <h1>No installer image yet</h1>
+    <h1>No published install image</h1>
     <p class="lede">
-      There is no Hornero OS ISO and no installer. Nothing on this site asks you to download one, because none exists.
+      HorneroOS has no published ISO. A provisional Calamares installer is in development, but it has not completed
+      virtual-machine installation acceptance and is not a supported general install path.
     </p>
     <p>
       Releases so far are compositions: exact shell and config commits tested together.{' '}
@@ -49,8 +50,9 @@ const statusName = {
     <h2>What exists today</h2>
     <p>
       The Desktop preview is distributed as Arch User Repository packages for people who already run Arch Linux. Those
-      packages are components of a desktop, not a turnkey HorneroOS installation; the supported installer workflow and
-      edition images are still in development.
+      packages are components of a Wayland-first desktop, not a turnkey HorneroOS installation. Hyprland is its
+      supported default compositor; Niri is experimental. Quickshell is the current shell runtime, not the identity of
+      the operating system.
     </p>
     <ul role="list" class="packages">
       {packages.map((p) => (
@@ -63,8 +65,8 @@ const statusName = {
       ))}
     </ul>
     <p>
-      The validated Desktop default uses Hyprland and Quickshell. Niri is an experimental compositor backend. The
-      greeter package is optional and requires SDDM with Qt 6 Multimedia.
+      The greeter package is optional and requires SDDM with Qt 6 Multimedia. Other compositors are not advertised as
+      supported unless the edition catalogue and acceptance evidence say so.
     </p>
   </section>
 
@@ -92,9 +94,10 @@ const statusName = {
   <section class="section">
     <h2>Install work follows product truth</h2>
     <p>
-      The guided installer is being developed in{' '}
-      <a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>. It will consume the edition and
-      compositor contract rather than define its own package sets. No ISO download is available from this page.
+      The provisional Calamares work lives in{' '}
+      <a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>. It consumes the edition and compositor
+      contract rather than defining a separate package model. Its ISO and install flow remain uncertified until UEFI and
+      BIOS installs pass in a disposable virtual machine. No ISO download is available from this page.
     </p>
     <p>
       To follow tagged compositions, see <a href="/releases">Releases</a> or the{' '}

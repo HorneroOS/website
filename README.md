@@ -33,7 +33,7 @@ npm run build
 - `/showroom` — real captures with provenance plates
 - `/docs/` — HorneroOS/docs rendered at its pinned commit; `/search/`
 - `/roots` — heritage, credits, comparison table
-- `/install` — current install status (not installable yet)
+- `/install` — package availability and provisional installer acceptance status
 
 Technical documentation is written in
 [HorneroOS/docs](https://github.com/HorneroOS/docs) and published under `/docs/`.

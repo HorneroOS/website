@@ -19,15 +19,15 @@ const config = pins.config.repo;
 
 <SiteLayout
   title="Releases — Hornero OS"
-  description="Every Hornero OS composition: which shell and config commits it pins, whether it was tagged, and what changed. No ISO or installer has shipped yet."
+  description="Every HorneroOS composition: the shell and config commits it pins, whether it was tagged, and what changed. No install image or installer has shipped."
 >
   <section class="section">
     <p class="eyebrow">Pre-release history</p>
     <h1>Releases</h1>
     <p>
       A Hornero release is a composition manifest: it pins the exact shell and config commits that ship together, and
-      <code>horneroctl</code> is built from the same tree. No release has shipped an ISO or an installer yet; both are
-      reserved slots in every manifest.
+      <code>horneroctl</code> is built from the same tree. No release has shipped an ISO or an installer. A provisional
+      Calamares implementation remains under development and awaits virtual-machine acceptance.
     </p>
     <dl class="now">
       {latestTagged && (
