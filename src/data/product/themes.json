@@ -29,7 +29,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 2,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita-dark",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "fidelity",
     "palette": {}
@@ -43,7 +43,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 3,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita",
+    "gtkTheme": "Hornero-Light",
     "iconTheme": "Papirus",
     "schemeType": "fidelity",
     "palette": {}
@@ -78,7 +78,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 5,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita-dark",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "expressive",
     "palette": {}
@@ -92,7 +92,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 6,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita-dark",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "expressive",
     "palette": {}
@@ -106,7 +106,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 7,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita-dark",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "vibrant",
     "palette": {}
@@ -141,7 +141,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Light",
     "iconTheme": "Papirus",
     "schemeType": "tonal-spot",
     "palette": {}
@@ -155,7 +155,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "tonal-spot",
     "palette": {}
@@ -169,7 +169,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "fidelity",
     "palette": {}
@@ -183,7 +183,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "expressive",
     "palette": {}
@@ -197,7 +197,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "fidelity",
     "palette": {}
@@ -211,7 +211,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Adwaita-dark",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Papirus-Dark",
     "schemeType": "monochrome",
     "palette": {}
@@ -225,7 +225,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "vibrant",
     "palette": {}
@@ -239,7 +239,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "tonal-spot",
     "palette": {}
@@ -253,7 +253,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "expressive",
     "palette": {}
@@ -267,7 +267,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Light",
     "iconTheme": "Numix-Circle",
     "schemeType": "neutral",
     "palette": {}
@@ -281,7 +281,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Dark",
     "iconTheme": "Numix-Circle",
     "schemeType": "expressive",
     "palette": {}
@@ -295,7 +295,7 @@
     "collection": null,
     "collectionOrder": null,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Orchis-Light-Compact",
+    "gtkTheme": "Hornero-Light",
     "iconTheme": "Numix-Circle",
     "schemeType": "vibrant",
     "palette": {}
