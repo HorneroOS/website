@@ -60,29 +60,30 @@ const family = editionOrder.map((id) => {
     })),
   };
 });
-const title = 'Hornero OS — refined in daily use since 2018';
-const description = `HorneroOS grows from a Linux setup developed, used and refined since 2018: an open, Wayland-first desktop shaped by ${layouts.length} layouts and ${themes.length} coordinated looks.`;
+const title = 'HorneroOS | A Wayland desktop shaped by daily use since 2018';
+const description = `HorneroOS grows from a Linux setup used and tested daily since 2018. Explore its open, Wayland-first desktop, ${layouts.length} layouts and ${themes.length} coordinated looks.`;
 ---
 
 <SiteLayout title={title} description={description}>
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">
-        <span class="status-dot" aria-hidden="true"></span> Wayland desktop · used daily since 2018
+        <span class="status-dot" aria-hidden="true"></span> Arch Linux · used daily since 2018
       </p>
       <h1>
         Eight years of Linux. <em>HorneroOS.</em>
       </h1>
       <p class="lede">
-        An Arch-based desktop carrying forward an open Linux setup developed, used, refined and tested over eight years,
-        with its own shell, themes and layouts.
+        HorneroOS is an open, Wayland-first desktop evolved from Ulises Jeremías’s battle-tested Arch Linux setup,
+        used, tested and refined every day since 2018. That work predates today’s AI OS trend.
       </p>
       <p class="heritage">
-        Follow the work from <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>’{' '}
-        <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a> into HorneroOS. Ulises is the
-        principal maintainer; <a href="https://github.com/PandaFoss">Panda Foss</a> contributes and maintains the{' '}
-        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Installer</a>. Both are part of the{' '}
-        <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
+        Follow the work in Ulises’s{' '}
+        <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a>.{' '}
+        <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> is the principal maintainer.{' '}
+        <a href="https://github.com/PandaFoss">Panda Foss</a> contributes to HorneroOS, is one of the maintainers of{' '}
+        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>, and will lead HorneroOS’s future custom installer.{' '}
+        Both are part of the <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
       </p>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span>
@@ -104,7 +105,7 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
         </a>
       </div>
       <p class="release-note">
-        Development preview · no published ISO; provisional installer awaits VM acceptance{' '}
+        Development preview · no published ISO; the Calamares installer is provisional until Panda Foss’s custom version is ready{' '}
         <a href="/install">See install status</a>
       </p>
     </div>

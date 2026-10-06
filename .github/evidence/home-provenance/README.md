@@ -3,11 +3,14 @@
 These captures show the static production build of the homepage at desktop and
 mobile sizes. The hero uses a real Hornero QA capture; its provenance plate is
 visible beneath the image. The captures were taken with Playwright Chromium on
-2026-10-06 and reviewed at native size.
+2026-10-06 and reviewed at native size. The first screen credits Ulises
+Jeremías as principal maintainer and Panda Foss as contributor, names Panda's
+Anarchy Linux maintainer role, and explains that he will lead the future custom
+HorneroOS installer.
 
-The first screen states the eight-year Linux origin, links the public dotfiles
-history, names the principal maintainer and contributor, and labels the
-Calamares installer as a provisional development path awaiting VM acceptance.
+The first screen states the eight-year Arch Linux origin, links the public
+dotfiles history, names both maintainers and their roles, and labels the
+Calamares installer as provisional until Panda Foss's custom version is ready.
 
 ## Capture details
 
@@ -15,7 +18,7 @@ Calamares installer as a provisional development path awaiting VM acceptance.
 - Browser: Chromium revision 1247 through Playwright 1.63
 - Desktop: 1280 × 720, [capture](desktop-1280x720.png)
 - Mobile: 390 × 844, [capture](mobile-390x844.png)
-- Source: `src/pages/index.astro`, SHA-256 `ad74aab7a543ef6a24c7f013c3bf43165b2ed281210a840071442a10d06bb27a`
+- Source: `src/pages/index.astro`, SHA-256 `aabc9fbff0642fee54ad74afbbcc38807b3056534ee29c600838a985ceec1a28`
 
 ## Desktop performance sample
 
@@ -23,19 +26,21 @@ Calamares installer as a provisional development path awaiting VM acceptance.
 |---|---:|---:|
 | Desktop JavaScript transfer (1280 × 720) | 0 B | 0 B |
 | Desktop image transfer | 55,839 B | 55,839 B |
-| Desktop page weight | 180,296 B | 141,885 B |
-| Desktop LCP | 200 ms | 180 ms |
-| Desktop CLS | 0 | 0.0064 |
+| Desktop page weight | 180,296 B | 141,931 B |
+| Desktop LCP | 200 ms | 264 ms |
+| Desktop CLS | 0 | 0 |
 | Mobile JavaScript transfer (390 × 844) | 0 B | 0 B |
-| Mobile image transfer | 24,341 B | 24,341 B |
-| Mobile page weight | 148,798 B | 110,387 B |
-| Mobile LCP | 184 ms | 168 ms |
-| Mobile CLS | 0.00016 | 0.00015 |
+| Mobile image transfer | 24,341 B | 13,954 B |
+| Mobile page weight | 148,798 B | 15,154 B |
+| Mobile LCP | 184 ms | 44 ms |
+| Mobile CLS | 0.00016 | 0 |
 
 Before and after are production static builds served locally and measured in
 fresh Chromium contexts at the same two viewports. Both builds transfer no
-JavaScript. The first-screen content reduces transfer by about 21% on desktop
-and 26% on mobile while retaining the same responsive image bytes. The desktop
-0.0064 layout shift comes from the self-hosted provenance font changing the
-width of metadata tokens after load; it remains below the 0.1 “good” CLS
-threshold.
+JavaScript. The refreshed mobile screenshot uses the smaller responsive hero
+image. Desktop image dimensions and transfer remain unchanged. The refreshed
+copy introduces no measurable layout shift in the local preview. The final
+desktop sample is a fresh Chromium session; the final mobile transfer sample
+is a warm second viewport in that session and is not directly comparable to
+the earlier cold-context mobile sample. These local preview figures are not a
+network-performance claim.
