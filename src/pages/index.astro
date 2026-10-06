@@ -68,42 +68,22 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">
-        <span class="status-dot" aria-hidden="true"></span> Linux, shaped in daily use since 2018 · Arch-based ·
-        Wayland-first
+        <span class="status-dot" aria-hidden="true"></span> Wayland desktop · used daily since 2018
       </p>
       <h1>
-        A desktop with room to become <em>yours.</em>
+        Eight years of Linux. <em>HorneroOS.</em>
       </h1>
       <p class="lede">
-        HorneroOS grows from a Linux setup developed, used, refined and tested for more than eight years. That work
-        lives on as an open, coherent desktop with its own shell, themes and layouts.
+        An Arch-based desktop carrying forward an open Linux setup developed, used, refined and tested over eight years,
+        with its own shell, themes and layouts.
       </p>
-      <ul class="heritage" aria-label="HorneroOS origins and community support">
-        <li>
-          <span class="heritage-mark" aria-hidden="true">
-            01
-          </span>
-          <span>
-            <strong>Built from lived experience</strong>
-            <br />
-            Follow the work from <a href="https://github.com/ulises-jeremias/dotfiles">the public dotfiles</a> into
-            HorneroOS.
-          </span>
-        </li>
-        <li>
-          <span class="heritage-mark heritage-community" aria-hidden="true">
-            02
-          </span>
-          <span>
-            <strong>Built in the open by its maintainers</strong>
-            <br />
-            <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, principal maintainer, works with{' '}
-            <a href="https://github.com/PandaFoss">Panda Foss</a>, contributor and maintainer of the{' '}
-            <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Installer</a>. Both are part of{' '}
-            <a href="https://github.com/HorneroOS">HorneroOS</a>.
-          </span>
-        </li>
-      </ul>
+      <p class="heritage">
+        Follow the work from <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>’{' '}
+        <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a> into HorneroOS. Ulises is the
+        principal maintainer; <a href="https://github.com/PandaFoss">Panda Foss</a> contributes and maintains the{' '}
+        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Installer</a>. Both are part of the{' '}
+        <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
+      </p>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span>
           <strong>{layouts.length}</strong> layouts
@@ -324,12 +304,12 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
   }
   .hero-copy {
     display: grid;
-    gap: 1.25rem;
+    gap: 0.95rem;
     justify-items: start;
   }
   .hero h1 {
-    max-width: 13ch;
-    font-size: clamp(2.8rem, 2rem + 4.3vw, 5.5rem);
+    max-width: 18ch;
+    font-size: clamp(2.8rem, 2.25rem + 1.8vw, 4rem);
     line-height: 0.99;
     letter-spacing: -0.055em;
   }
@@ -342,28 +322,13 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
     font-size: clamp(1.08rem, 1rem + 0.5vw, 1.3rem);
   }
   .heritage {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem;
-    width: min(100%, 44rem);
-    margin: 0;
-    padding: 0;
-    padding-block: 0.1rem;
-    list-style: none;
-  }
-  .heritage li {
-    display: grid;
-    grid-template-columns: 1.7rem minmax(0, 1fr);
-    gap: 0.65rem;
-    align-items: start;
+    max-width: 54ch;
     margin: 0;
     color: var(--text-muted);
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     line-height: 1.5;
-  }
-  .heritage strong {
-    color: var(--text);
-    font-size: 0.81rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--accent);
   }
   .heritage a {
     color: var(--text);
@@ -372,20 +337,6 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
   }
   .heritage a:hover {
     color: var(--accent);
-  }
-  .heritage-mark {
-    display: grid;
-    width: 1.6rem;
-    height: 1.6rem;
-    place-items: center;
-    border: 1px solid color-mix(in oklab, var(--accent) 45%, var(--line));
-    border-radius: 50%;
-    color: var(--accent);
-    font: 0.58rem var(--font-data);
-  }
-  .heritage-community {
-    border-color: color-mix(in oklab, #a68bd0 55%, var(--line));
-    color: #a68bd0;
   }
   .family-snapshot {
     padding: clamp(1.2rem, 3vw, 2rem);
@@ -702,7 +653,7 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
   }
   @media (min-width: 960px) {
     .hero {
-      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     }
     .product-model {
       grid-template-columns: 0.9fr 1.1fr;
@@ -713,10 +664,6 @@ const description = `HorneroOS grows from a Linux setup developed, used and refi
     .family-heading {
       align-items: start;
       flex-direction: column;
-    }
-    .heritage {
-      grid-template-columns: 1fr;
-      gap: 0.55rem;
     }
     .family-rail {
       grid-template-columns: repeat(2, minmax(0, 1fr));
