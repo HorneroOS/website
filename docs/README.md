@@ -1,16 +1,26 @@
-# Extra Documentation
+# Website contributor documentation
 
-This folder contains project documentation: structure, styling patterns, content collections, and tooling configuration.
+These notes describe the current HorneroOS website implementation. Public
+product and user documentation lives at [horneroos.com](https://www.horneroos.com/)
+and is sourced from the HorneroOS repositories.
 
-## Resources
+- [Project structure](./PROJECT_STRUCTURE.md) — routes, source tree and data flow.
+- [Product data](./PRODUCT_DATA.md) — pinned repositories and catalogue generation.
+- [Components and styling](./COMPONENTS_AND_STYLING.md) — design tokens,
+  accessibility, imagery and shared components.
+- [State management](./STATE_MANAGEMENT.md) — static content and the limited
+  browser interactions.
+- [Project configuration](./PROJECT_CONFIGURATION.md) — commands, checks,
+  Node version and deployment.
+- [Performance](./PERFORMANCE.md) — static delivery and loading guidance.
+- [Internationalization](./I18N.md) — language and translation policy.
 
-- [Project Structure](./PROJECT_STRUCTURE.md)
-- [Project Configuration](./PROJECT_CONFIGURATION.md)
-- [Components and Styling](./COMPONENTS_AND_STYLING.md)
-- [State Management](./STATE_MANAGEMENT.md)
+## Useful routes
 
-## Quick links in the app
-
-- Landing page: `/`
-- Sample blog index: `/blog`
-- Sample blog post: `/blog/welcome-to-your-blog`
+- `/` — product introduction
+- `/editions/` — product family and maturity
+- `/layouts/` and `/themes/` — desktop configurations and appearances
+- `/showroom/` — real product captures with provenance
+- `/docs/` — technical and user documentation
+- `/install/` — installation status and requirements
+- `/search/` — searchable site documentation

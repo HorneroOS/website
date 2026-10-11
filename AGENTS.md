@@ -1,88 +1,55 @@
-# AGENTS.md – AI Interaction & Execution Guide (Human contributors: see CONTRIBUTING.md & docs/)
+# HorneroOS website agent guide
 
-This file is scoped for AI assistants (Cursor, Copilot Chat, PR automation bots).
-Humans: read CONTRIBUTING.md and the documents under docs/.
+This repository owns the public HorneroOS website. Human contribution
+workflow is in [CONTRIBUTING.md](CONTRIBUTING.md); structure and design
+contracts are in [`docs/`](docs/).
 
-## 1. Authoritative References (Never Reproduce Content Here)
+## Product truth
 
-| Topic | Source of Truth |
-| --- | --- |
-| Project architecture | docs/PROJECT_STRUCTURE.md |
-| Component & styling patterns | docs/COMPONENTS_AND_STYLING.md |
-| State & content data flow | docs/STATE_MANAGEMENT.md |
-| Project / build configuration | docs/PROJECT_CONFIGURATION.md |
+- Product facts come from `src/data/product/`, generated from the full commit
+  pins in `src/data/product/pins.json`. Never hand-edit generated catalogue
+  files or invent product capabilities in page copy.
+- Technical and user documentation belongs to
+  [HorneroOS/docs](https://github.com/HorneroOS/docs); `/docs/` renders the
+  pinned commit.
+- Follow maturity labels from the edition catalogue and installation status
+  from HorneroOS. Do not imply that a planned or experimental edition is a
+  supported release.
+- Every product screenshot must be a real capture with truthful alt text and
+  provenance. Do not use mock desktop UI or decorative stock screenshots.
+- Describe product capabilities in present-tense, factual language. Reserve
+  launch/update language for release history.
 
-(If a file ends with `.template` it is materialized during project generation — still treat it as authoritative.)
+## Architecture and style
 
-## Key Commands
+- Astro pages are statically rendered; prefer HTML and CSS over client-side
+  state or a new framework.
+- Shared navigation, color modes, and document shell are in
+  `src/layouts/SiteLayout.astro`. Shared styling tokens are in
+  `src/styles/global.css`.
+- Use the global role tokens across pages. Preserve the Buenos Aires
+  cyberpunk identity in both color modes without sacrificing text contrast or
+  turning long-form content into decoration.
+- Preserve semantic landmarks, descriptive labels, visible focus, keyboard
+  operation, reduced-motion behavior, responsive layouts and image
+  alternatives.
+- `src/content.config.ts` validates showroom and documentation collections.
+  Update schemas and their consumers together.
 
-Run from the project root after installing dependencies:
+## Commands
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Astro dev server (port 4321) |
-| `npm run build` | Static production build → `dist/` |
-| `npm run preview` | Preview production build |
-| `npm run lint` | ESLint (flat config + eslint-plugin-astro) |
-| `npm run type-check` | Astro check (`.astro` + content types) |
-| `npm run format` | Prettier with prettier-plugin-astro |
+```sh
+npm run data:check
+npm run lint
+npm run type-check
+npm run build
+```
 
-## 2. Operating Principles (AI Perspective)
+`npm run build` fetches pinned source repositories, builds static pages,
+generates Pagefind search, and checks internal links. CI runs data consistency,
+lint, type-check, build, and Markdown lint.
 
-- Documentation-first
-- Content-first — prefer collections and static HTML over client state
-- Type safety via TypeScript and Zod content schemas
-- Deterministic, incremental changes
-- Honest feature claims — do not imply islands, tests, or integrations that are not installed
-
-## 3. AI Execution Protocol (Astro Feature Work)
-
-When asked to add pages, content, or components:
-
-1. Read docs/PROJECT_STRUCTURE.md and relevant guides before proposing code
-2. Place routes in `src/pages/`, shared UI in `components/` or `layouts/`
-3. Add or extend content collections in `content.config.ts` + `content/<name>/`
-4. Present file tree + diff plan before large changes
-5. After changes: run format, lint, type-check, and build when possible
-
-## 4. Guardrails (Must Enforce)
-
-- Do NOT fabricate file paths, collection names, or Astro APIs
-- Do NOT add global client stores for static marketing content
-- Do NOT remove accessibility semantics without replacement
-- Do NOT commit `node_modules/`, `dist/`, or secrets
-- Website follows product: never claim an ISO, installer, or
-  download that does not exist; screenshots are real captures
-  with provenance (SHA/theme/resolution/date), never mockups
-- Flag new UI framework integrations for human confirmation
-
-## 5. Content & Page Checklist
-
-- Frontmatter matches Zod schema in `content.config.ts`
-- Pages using collections filter `draft` entries when appropriate
-- Layout receives `title` and `description` for SEO
-- Links point to existing routes (`/`, `/layouts`, `/themes`, `/showroom`,
-  `/releases`, `/docs/`, `/search/`, `/roots`, `/install`); the build fails
-  on broken internal links (`scripts/check-links.mjs`)
-- Product facts come from `src/data/product` (docs/PRODUCT_DATA.md), never
-  typed into pages
-- Scoped vs global CSS choice is intentional
-
-## 6. When the AI Should Ask or Refuse
-
-Ask if: collection schema unclear, SSR vs static tradeoff unresolved, missing target route.
-Refuse if: asked to bypass validation, commit build artifacts, or duplicate existing layout patterns poorly.
-
-## 7. Post-Change Assistant Report
-
-Return a bullet summary:
-
-- Files touched (concise)
-- New dependencies (if any)
-- Lint / type-check / build status
-- Suggested manual QA (`/`, `/blog`, content edits)
-- Deferred items (tests, adapters, island integrations)
-
----
-Maintained by create-awesome-node-app Astro starter provisioning.
-Humans: stop reading — go to CONTRIBUTING.md + docs/.
+For presentation changes, inspect real rendered pages at desktop and phone
+widths, and test keyboard operation and System/Light/Dark behavior. Read
+[`docs/COMPONENTS_AND_STYLING.md`](docs/COMPONENTS_AND_STYLING.md) before
+changing shared UI.

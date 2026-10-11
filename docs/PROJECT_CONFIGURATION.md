@@ -1,90 +1,59 @@
-# ⚙️ Project Configuration
+# Project configuration
 
-This project is bootstrapped with [create-awesome-node-app](https://www.npmjs.com/package/create-awesome-node-app). Dependencies and scripts are resolved from the template's `package/` folder at generation time.
+The site is an Astro static build deployed at `www.horneroos.com`. Its
+product inputs are pinned HorneroOS repositories, not runtime APIs.
 
-## Node.js
+## Node and package scripts
 
-- **Pinned version**: `22.14.0` (see `.node-version` and `engines.node` in `package.json`)
-- Use `fnm use`, `nvm use`, or your preferred version manager before installing
+Use Node `v24.17.0`, as recorded in `.node-version`, then install the exact
+lockfile dependencies with `npm ci`.
 
-## Astro
+| Command              | Purpose                                                                        |
+| -------------------- | ------------------------------------------------------------------------------ |
+| `npm run dev`        | Start Astro at `http://localhost:4321`                                         |
+| `npm run lint`       | Run ESLint, including Astro files                                              |
+| `npm run type-check` | Sync pinned sources and run `astro check`                                      |
+| `npm run data:check` | Verify generated product data matches its source pins                          |
+| `npm run build`      | Sync pinned sources, build static pages, create Pagefind index and check links |
+| `npm run preview`    | Serve the generated `dist/` build locally                                      |
+| `npm run format`     | Format source files with Prettier and the Astro plugin                         |
 
-Configuration lives in [`astro.config.mjs`](../astro.config.mjs). The starter uses static output:
+GitHub Actions runs data consistency, lint, type-check and build checks for
+pull requests. The build is bounded by the static output; no server adapter or
+client framework is configured.
 
-```js
-export default defineConfig({
-  output: 'static',
-});
-```
+## Astro and TypeScript
 
-Change `output` or add integrations (React, Tailwind, sitemap) as your deployment target requires.
+`astro.config.mjs` sets static output, the canonical origin, sitemap
+generation, inline global styles and the Markdown plugin that rewrites links
+to pinned documentation. `tsconfig.json` extends Astro strict mode and maps
+`@/` to `src/`.
 
-## TypeScript
+The content schema lives in `src/content.config.ts`. It validates showroom
+capture metadata and loads documentation from the pinned docs checkout. Update
+schemas together with their content and run `npm run type-check`.
 
-[`tsconfig.json`](../tsconfig.json) enables strict mode and path aliases (`@/` → `src/`).
+## Generated product data
 
-Run type checking with:
-
-```sh
-npm run type-check
-```
-
-This invokes `astro check`, which understands `.astro` files and content collection types.
-
-## ESLint
-
-[`eslint.config.mjs`](../eslint.config.mjs) uses the flat config format with `eslint-plugin-astro`:
-
-- Recommended Astro rules via `astro.configs['flat/recommended']`
-- Ignores: `dist/`, `.astro/`, `node_modules/`
-
-```sh
-npm run lint
-npm run lint:fix
-```
-
-## Prettier
-
-[`/.prettierrc.js`](../.prettierrc.js) includes `prettier-plugin-astro` for `.astro` file formatting.
+The full commit pins live in `src/data/product/pins.json`. Use:
 
 ```sh
-npm run format
+npm run data:sync   # regenerate data from existing pins
+npm run data:check  # verify generated files without changing them
+npm run data:bump   # advance pins to upstream main and regenerate
 ```
 
-Enable format-on-save in your editor for consistent style.
+Review every generated diff after syncing. A pin bump changes public product
+truth, so confirm catalogue changes against their source repositories before
+merging. See [`PRODUCT_DATA.md`](./PRODUCT_DATA.md).
 
-## Content collections
+## Deployment and environment
 
-[`src/content.config.ts`](../src/content.config.ts) registers collections with loaders and Zod schemas. After changing schemas:
+`npm run build` writes static files to `dist/`; `vercel.json` configures the
+current Vercel deployment and domain routing. `.cache/`, `.astro/`,
+`node_modules/` and `dist/` are local or generated state and are ignored by
+Git. There is no checked-in `.env.example` and no product facts should be
+injected through ad-hoc environment variables.
 
-1. Restart the dev server
-2. Run `npm run type-check` to surface frontmatter errors
-
-See [Project Structure](./PROJECT_STRUCTURE.md) for folder conventions.
-
-## Environment variables
-
-Copy [`.env.example`](../.env.example) to `.env` for local values.
-
-- **`PUBLIC_*`** — exposed to client code (e.g. site name, analytics flags)
-- **Unprefixed** — server/build only; never leak secrets to the browser
-
-`.env`, `.env.local`, and similar files are gitignored.
-
-## EditorConfig
-
-[`.editorconfig`](../.editorconfig) sets two-space indentation, LF line endings, and UTF-8 encoding across editors.
-
-## Absolute imports
-
-Configure `baseUrl` and `paths` in `tsconfig.json` (already set for `@/`). Import from `@/layouts/BaseLayout.astro` instead of deep relative paths like `../../layouts/...`.
-
-## Optional tooling (not included)
-
-The starter does **not** ship Husky, lint-staged, or Vitest. Add them when your team needs pre-commit hooks or automated tests — see [CONTRIBUTING.md](../CONTRIBUTING.md).
-
-## Deployment
-
-`npm run build` writes static assets to `dist/`. Deploy that folder to any static host (Netlify, Vercel, Cloudflare Pages, S3 + CDN).
-
-If you need SSR, server islands, or on-demand rendering, add an [Astro adapter](https://docs.astro.build/en/guides/deploy/) and update `astro.config.mjs`.
+For layout and component contracts, see [`PROJECT_STRUCTURE.md`](./PROJECT_STRUCTURE.md)
+and [`COMPONENTS_AND_STYLING.md`](./COMPONENTS_AND_STYLING.md).

@@ -1,89 +1,61 @@
-# Contributing
+# Contributing to the HorneroOS website
 
-Thanks for contributing to a project generated from this Astro starter. Read the README first, then use this guide for day-to-day workflow.
+Thanks for helping improve HorneroOS's public product experience. The website
+is an Astro static site; product facts and technical documentation stay owned
+by their respective HorneroOS repositories.
 
-## Table of Contents
+## Local setup
 
-- [Prerequisites](#prerequisites)
-- [Project Bootstrap](#project-bootstrap)
-- [Scripts & Tooling](#scripts--tooling)
-- [Architecture Conventions](#architecture-conventions)
-- [Coding Standards](#coding-standards)
-- [Git / Branch Workflow](#git--branch-workflow)
-- [Commit Messages](#commit-messages)
-- [Adding Dependencies](#adding-dependencies)
-- [Testing Strategy](#testing-strategy)
-- [Documentation](#documentation)
-- [Pull Request Checklist](#pull-request-checklist)
-
-## Prerequisites
-
-Install the Node version pinned in `.node-version` (Node 24; `fnm use` reads it). CI uses the same file. Run `npm install` after project generation.
-
-## Project Bootstrap
+Use Node `v24.17.0` from `.node-version` and install from the lockfile:
 
 ```sh
 fnm use
-npm install
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:4321](http://localhost:4321).
+Open `http://localhost:4321`.
 
-## Scripts & Tooling
+## Project boundaries
 
-| Script | Purpose |
-|--------|---------|
-| `dev` | Astro dev server with hot reload |
-| `build` | Production static build to `dist/` |
-| `preview` | Serve the production build locally |
-| `lint` / `lint:fix` | ESLint (includes Astro files) |
-| `format` | Prettier (includes `.astro` via plugin) |
-| `type-check` | `astro check` |
+- Route composition lives in `src/pages/`; shared shell and interactions live
+  in `src/layouts/SiteLayout.astro` and focused components in `src/components/`.
+- Real showroom captures and their provenance live in `src/content/showroom/`.
+- Theme, layout, edition and release facts are generated from full-SHA pins in
+  `src/data/product/pins.json`. Do not edit generated catalogue JSON by hand.
+- User and technical documentation is authored in `HorneroOS/docs`; the site
+  renders that repository's pinned commit under `/docs/`.
+- Keep the public copy declarative and aligned with the maturity data. Do not
+  claim an ISO, installer path, supported compositor or release that has not
+  passed its documented acceptance gates.
 
-## Architecture Conventions
+## Validation
 
-Read [docs/PROJECT_STRUCTURE.md](./docs/PROJECT_STRUCTURE.md) first.
+Run the same checks as CI:
 
-- Pages in `src/pages/` map to routes
-- Shared shells in `src/layouts/`
-- Markdown content in `src/content/` with schemas in `src/content.config.ts`
-- Prefer static HTML; add framework islands only when needed
+```sh
+npm run data:check
+npm run lint
+npm run type-check
+npm run build
+```
 
-## Coding Standards
+The build fetches pinned sources, renders static pages, generates the Pagefind
+index and checks internal links. If dependencies are already installed, these
+checks need no local virtual machine.
 
-- TypeScript strict mode — avoid `any` unless justified
-- Validate content frontmatter via Zod in `content.config.ts`
-- Keep components small; use layouts for repeated document structure
-- Accessibility: semantic HTML, alt text, visible focus states
+For visual or interaction changes, also inspect the rendered route at desktop
+and narrow mobile widths. Exercise keyboard navigation, focus visibility,
+System/Light/Dark behavior and reduced motion when those areas change. Use
+real Hornero captures with provenance; do not replace them with interface
+mockups.
 
-## Git / Branch Workflow
+## Change workflow
 
-- Branch from `main`: `feat/short-description`
-- Rebase before opening a PR
-
-## Commit Messages
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat: add changelog collection`, `fix: correct blog slug links`.
-
-## Adding Dependencies
-
-Prefer Astro integrations (`npx astro add …`) for official packages. Document non-obvious dependencies in the PR description.
-
-## Testing Strategy
-
-This starter does **not** include Vitest or Playwright. Add a test runner when you introduce non-trivial logic or interactive islands. Until then, rely on `type-check`, `lint`, and manual QA of `/` and `/blog`.
-
-## Documentation
-
-Update files in `docs/` when you introduce new collections, layouts, or deployment steps.
-
-## Pull Request Checklist
-
-- [ ] Change is scoped and documented
-- [ ] `lint` and `type-check` pass
-- [ ] `build` succeeds
-- [ ] Docs updated if behavior or structure changed
-- [ ] No secrets or `.env` files committed
-
-Happy building!
+- Branch from `main` using `feat/…` or `fix/…` prefixes (the push workflows
+  cover these prefixes and pull requests).
+- Keep each pull request focused and describe the user-facing result.
+- Include relevant command results and visual evidence for presentation
+  changes; do not commit `node_modules/`, `.cache/`, `.astro/` or `dist/`.
+- Use Conventional Commit messages, for example `docs: refresh contributor guide`.
+- Update the owning product repository before bumping website data pins.

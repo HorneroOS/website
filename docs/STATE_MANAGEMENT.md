@@ -1,91 +1,52 @@
-# 🗃️ State Management
+# Site state and content flow
 
-Most Astro pages are **static** and do not need client-side state. Reach for state only inside **islands** (hydrated components) or when integrating with external APIs at request time.
+The website is static-first. Most product content is resolved at build time
+from versioned data and Markdown; browser state is limited to the few
+interactions that benefit from it.
 
-## Default: no global store
+## Build-time product data
 
-The starter intentionally avoids Redux, Zustand, or similar libraries. Static content, layouts, and content collections cover the common docs/marketing use case without a client store.
+`src/data/product/pins.json` pins the Config, Shell, Hornero CLI and docs
+commits. `scripts/sync-product-data.mjs` reads those sources and generates
+theme, layout, edition, palette-variant and release data. Pages import the
+typed catalogue through `src/data/product/index.ts`; they do not make
+client-side API calls for product facts. The generated JSON must match its
+pins (`npm run data:check`). See [`PRODUCT_DATA.md`](./PRODUCT_DATA.md).
 
-## Where state belongs
+The docs collection reads the pinned HorneroOS/docs checkout from `.cache/`
+during the Astro build. Search indexes the rendered static pages with Pagefind.
+Its search script is included only on `/search/`.
 
-### 1. Content and configuration (build time)
+## Authored content
 
-**Source of truth**: Markdown/MDX in `src/content/` plus schemas in `src/content.config.ts`.
+`src/content/showroom/` contains Markdown entries for real captures. The Zod
+schema in `src/content.config.ts` validates image, alt text, order and
+provenance before pages can render them. Add new product facts to their
+authoritative HorneroOS source first, then refresh the pins and generated data;
+do not create a second catalogue in page frontmatter.
 
-Use `getCollection()` and `getEntry()` in pages — not client fetches — for blog posts, docs, and changelog entries.
+## Browser state
 
-### 2. Page-local data (server / build time)
+The global color selector uses the native radio group in `SiteLayout.astro`.
+The saved key `hornero-color-mode` stores only explicit `light` or `dark`
+choices; `system` follows the operating system's `prefers-color-scheme` value.
+The head script applies the saved mode before the page body is rendered; the
+choice persists between routes and reacts to system preference changes while
+System is selected. The `storage` event synchronizes choices across tabs. Keep
+this behavior small and avoid adding a global client store for it.
 
-Fetch or compute data in the frontmatter of `.astro` pages:
+Navigation disclosures use native `<details>` and local script for Escape and
+outside-pointer behavior. Search is a separate static route with Pagefind.
+Other pages should keep state in the URL or native HTML controls where
+possible.
 
-```astro
----
-const items = (await getCollection('blog')).filter((p) => !p.data.draft);
----
-<ul>
-  {items.map((item) => <li>{item.data.title}</li>)}
-</ul>
-```
+## Rules for new interaction
 
-This runs at build time for static output and keeps HTML self-contained.
-
-### 3. Component state (client islands)
-
-When you add React, Preact, Solid, or Svelte via an Astro integration, use that framework's local state inside the island:
-
-- React: `useState`, `useReducer`
-- Vue: `ref`, `reactive`
-- Svelte: `$:` / stores
-
-Keep state inside the smallest interactive subtree. Pass data from Astro as props:
-
-```astro
----
-import Search from '@/components/Search';
-const tags = ['astro', 'content'];
----
-<Search client:load tags={tags} />
-```
-
-### 4. URL as state
-
-For filters, pagination, or tabs on mostly static sites, prefer:
-
-- Dedicated routes (`/blog/page/2`)
-- Query params parsed on the server (SSR/adapter mode)
-- Native `<details>` / anchor links for simple toggles
-
-### 5. Server cache / remote data
-
-If you later enable SSR or server endpoints:
-
-- Use `fetch` in Astro page frontmatter or `src/pages/api/*` routes
-- Consider TanStack Query or SWR **inside islands** when client refetching is required
-
-## Anti-patterns for Astro content sites
-
-| Avoid | Prefer |
-|-------|--------|
-| Global client store for static copy | Content collections + layouts |
-| Fetching markdown in the browser | Build-time `getCollection()` |
-| Hydrating entire pages | Small islands with `client:*` directives |
-| Duplicating frontmatter in components | Read from `post.data` once in the page |
-
-## When to add a client store
-
-Add Zustand, Nanostores, or similar only if:
-
-- Multiple islands must share live client state
-- You build a logged-in app shell with persistent UI state
-- Real-time collaboration or websockets drive the UI
-
-For those cases, colocate the store next to the feature and document the public API in `docs/`.
-
-## Forms
-
-Static sites often use:
-
-- HTML forms posting to external services (Formspree, Netlify Forms)
-- Server actions or API routes when you adopt an SSR adapter
-
-Client form libraries (React Hook Form, etc.) belong inside hydrated form islands, not in static `.astro` shells.
+- Render content at build time unless it depends on live user input or a
+  browser API.
+- Prefer anchors, forms, radio groups and `<details>` over custom widgets.
+- Keep JavaScript progressive and isolated to the interaction that needs it.
+- Verify keyboard operation, focus restoration, reduced motion and both color
+  modes when changing a shared interaction.
+- Do not add hydration or a state library without a concrete need and a small
+  blast radius.
