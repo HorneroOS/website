@@ -29,6 +29,10 @@ interactions.
   capture.
 - Avoid autoplay video and large client-side galleries. Use a poster and
   native controls when motion genuinely improves product understanding.
+- The interactive greeter recreation loads only its active, muted 10-second
+  preview. Its scene cards use 1280x720 WebP posters; video playback pauses
+  when the preview leaves the viewport or the document is hidden. Reduced
+  motion and Save-Data start with still images.
 
 ## Validation
 

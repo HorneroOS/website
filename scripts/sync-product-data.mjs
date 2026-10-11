@@ -172,6 +172,90 @@ function editionCatalogue(horneroDir) {
   return { version: source.version, editions, compositors };
 }
 
+// The greeter catalog and per-scene provenance are canonical. This generated
+// website projection carries only metadata and local preview paths; preview
+// binaries are built separately by greeter/scripts/media/export-web-previews.py.
+function greeterScenes(greeterDir) {
+  const catalog = readJson(join(greeterDir, 'media/catalog.json'));
+  const manifests = new Map(
+    readdirSync(join(greeterDir, 'media/manifests'))
+      .filter((file) => file.endsWith('.json'))
+      .map((file) => {
+        const data = readJson(join(greeterDir, 'media/manifests', file));
+        return [data.id, data];
+      }),
+  );
+  const stills = readdirSync(join(greeterDir, 'media/stills'))
+    .filter((file) => file.endsWith('.json'))
+    .map((file) => readJson(join(greeterDir, 'media/stills', file)));
+  const scenes = [];
+  for (const [daypart, entries] of Object.entries(catalog.dayparts)) {
+    for (const entry of entries) {
+      const source = manifests.get(entry.id);
+      if (!source) fail(`greeter catalog entry ${entry.id} has no manifest`);
+      if (!['own-work', 'reviewed', 'written-permission'].includes(source.review?.status)) {
+        fail(`greeter catalog entry ${entry.id} has no approved redistribution review`);
+      }
+      scenes.push({
+        id: source.id,
+        title: source.title,
+        place: source.location.place,
+        province: source.location.province,
+        region: source.location.region,
+        daypart,
+        kind: 'video',
+        preview: `/media/greeter/${source.id}.mp4`,
+        poster: `/media/greeter/${source.id}.webp`,
+        creator: source.creator,
+        license: source.license.short,
+        licenseUrl: source.license.url,
+        sourceUrl: source.source.page,
+        description: source.description ?? source.notes,
+      });
+    }
+  }
+  for (const source of stills) {
+    if (!['own-work', 'reviewed', 'written-permission'].includes(source.review?.status)) {
+      fail(`greeter still ${source.id} has no approved redistribution review`);
+    }
+    if (!['static-golden-hour-fallback', 'static-night-fallback'].includes(source.role)) {
+      fail(`greeter still ${source.id} has unsupported role ${source.role}`);
+    }
+    scenes.push({
+      id: source.id,
+      title: source.title,
+      place: source.location.place,
+      province: source.location.province,
+      region: source.location.region,
+      daypart: source.role === 'static-golden-hour-fallback' ? 'golden-hour' : 'night',
+      kind: 'still',
+      preview: null,
+      poster: `/media/greeter/${source.id}.webp`,
+      creator: source.creator,
+      license: source.license.short,
+      licenseUrl: source.license.url,
+      sourceUrl: source.source.page,
+      description: source.description ?? source.notes,
+    });
+  }
+  const theme = readFileSync(join(greeterDir, 'theme.conf'), 'utf8');
+  const value = (key) => {
+    const match = new RegExp(`^${key}=(\\d+)$`, 'm').exec(theme);
+    if (!match) fail(`greeter theme.conf is missing numeric ${key}`);
+    return Number(match[1]);
+  };
+  return {
+    version: 1,
+    dayparts: {
+      dayStart: value('dayTimeStart'),
+      dayEnd: value('dayTimeEnd'),
+      goldenHourStart: value('goldenHourStart'),
+      goldenHourEnd: value('goldenHourEnd'),
+    },
+    scenes,
+  };
+}
+
 function checkPaletteVariantSamples(horneroDir) {
   const data = readJson(join(DATA, 'palette-variants.json'));
   const expected = schemeFlavours(horneroDir);
@@ -311,6 +395,7 @@ const generated = {
   'themes.json': themes(dirs.config, officialThemes(dirs.hornero)),
   'releases.json': releases(dirs.hornero, pins.releaseTags ?? []),
   'editions.json': editionCatalogue(dirs.hornero),
+  'greeter-scenes.json': greeterScenes(dirs.greeter),
 };
 
 let drift = 0;

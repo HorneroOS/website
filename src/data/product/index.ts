@@ -6,6 +6,7 @@ import editionsJson from './editions.json';
 import pinsJson from './pins.json';
 import releasesJson from './releases.json';
 import themesJson from './themes.json';
+import greeterScenesJson from './greeter-scenes.json';
 
 export interface LayoutBar {
   edge: 'top' | 'bottom' | 'left' | 'right';
@@ -84,12 +85,37 @@ export interface EditionCatalogue {
   compositors: Compositor[];
 }
 
+export interface GreeterScene {
+  id: string;
+  title: string;
+  place: string;
+  province: string;
+  region: string;
+  daypart: 'day' | 'golden-hour' | 'night';
+  kind: 'video' | 'still';
+  preview: string | null;
+  poster: string;
+  creator: string;
+  license: string;
+  licenseUrl: string;
+  sourceUrl: string;
+  description: string;
+}
+
+export interface GreeterSceneCatalogue {
+  version: number;
+  dayparts: { dayStart: number; dayEnd: number; goldenHourStart: number; goldenHourEnd: number };
+  scenes: GreeterScene[];
+}
+
 export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
 export const editionCatalogue = editionsJson as EditionCatalogue;
+export const greeterSceneCatalogue = greeterScenesJson as GreeterSceneCatalogue;
+export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
-export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs', { repo: string; sha: string }>;
+export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);
 export const commitUrl = (repo: string, sha: string) => `${repo}/commit/${sha}`;
