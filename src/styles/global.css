@@ -63,23 +63,23 @@
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  /* Cool daylight on city stone: legible ink with electric sign colors. */
-  --bg: #f2f0f8;
-  --surface: #e8e6f0;
-  --surface-raised: #fcfbff;
-  --line: #c6c1d1;
-  --text: #211d2b;
-  --text-muted: #555064;
-  --accent: #902467;
+  /* River fog over concrete: daylight keeps the same sign-glass and sodium. */
+  --bg: #edf2f8;
+  --surface: #e2e9f2;
+  --surface-raised: #fbfcff;
+  --line: #bdc9d9;
+  --text: #172132;
+  --text-muted: #46556b;
+  --accent: #971e6c;
   --accent-ink: #fff9ff;
-  --highlight: #006877;
-  --secondary: #7a4b13;
-  --focus: #005765;
-  --browser-theme-color: #f2f0f8;
-  --signal-grid: color-mix(in srgb, var(--highlight) 2.7%, transparent);
-  --sign-haze: 16%;
-  --river-haze: 14%;
-  --sodium-haze: 12%;
+  --highlight: #00677f;
+  --secondary: #765013;
+  --focus: #00566c;
+  --browser-theme-color: #edf2f8;
+  --signal-grid: color-mix(in srgb, var(--highlight) 3.4%, transparent);
+  --sign-haze: 19%;
+  --river-haze: 18%;
+  --sodium-haze: 13%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
