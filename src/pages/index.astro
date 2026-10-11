@@ -335,6 +335,15 @@ const description = `An Arch-based operating system family evolved from a Linux 
     padding-block: clamp(0.8rem, 1.2rem + 1.6vw, 2rem) 2rem;
   }
   .hero-copy {
+    /* The hero stays a night scene in both site modes, like a lit city window. */
+    --hero-night: #090b17;
+    --hero-ink: #f3f2fb;
+    --hero-muted: #c0c8d8;
+    --hero-copy-ink: #e4e6f0;
+    --hero-sign: #ff91df;
+    --hero-river: #79e4ef;
+    --hero-sodium: #ffc878;
+
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -344,8 +353,8 @@ const description = `An Arch-based operating system family evolved from a Linux 
     padding: clamp(1.15rem, 2.5vw, 2rem);
     border: 1px solid color-mix(in oklab, var(--highlight) 36%, var(--line));
     border-radius: calc(var(--radius) + 4px);
-    background: #090b17;
-    color: #f3f2fb;
+    background: var(--hero-night);
+    color: var(--hero-ink);
     box-shadow: 0 1rem 3.2rem rgb(2 5 18 / 24%);
   }
   .hero-copy::after {
@@ -381,58 +390,58 @@ const description = `An Arch-based operating system family evolved from a Linux 
     opacity: 0.82;
   }
   .hero-copy .eyebrow {
-    color: #ffc878;
+    color: var(--hero-sodium);
   }
   .hero-copy .status-dot {
-    background: #79e4ef;
+    background: var(--hero-river);
     margin-right: 0;
     box-shadow:
-      0 0 0 4px rgb(105 222 235 / 18%),
-      0 0 1rem rgb(105 222 235 / 55%);
+      0 0 0 4px color-mix(in srgb, var(--hero-river) 18%, transparent),
+      0 0 1rem color-mix(in srgb, var(--hero-river) 55%, transparent);
   }
   .hero .hero-copy h1 em {
-    color: #ff91df;
-    text-shadow: 0 0 1.5rem rgb(242 118 209 / 24%);
+    color: var(--hero-sign);
+    text-shadow: 0 0 1.5rem color-mix(in srgb, var(--hero-sign) 24%, transparent);
   }
   .hero-copy .lede {
-    color: #e4e6f0;
+    color: var(--hero-copy-ink);
   }
   .hero-copy .heritage {
-    color: #c0c8d8;
+    color: var(--hero-muted);
   }
   .hero-copy .heritage a,
   .hero-copy .release-note a {
-    color: #fff;
+    color: var(--hero-ink);
   }
   .hero-copy .hero-route {
-    color: #c0c8d8;
+    color: var(--hero-muted);
   }
   .hero-copy .hero-route span:first-child {
-    color: #79e4ef;
+    color: var(--hero-river);
   }
   .hero-copy .hero-route span:nth-of-type(2) {
-    color: #ff91df;
+    color: var(--hero-sign);
   }
   .hero-copy .hero-route i {
-    color: #ffc878;
+    color: var(--hero-sodium);
   }
   .hero-copy .hero-facts {
-    color: #c0c8d8;
+    color: var(--hero-muted);
   }
   .hero-copy .hero-facts strong {
-    color: #fff;
+    color: var(--hero-ink);
   }
   .hero-copy .cta.secondary {
-    color: #fff;
+    color: var(--hero-ink);
     border-color: rgb(255 255 255 / 48%);
     background: rgb(9 11 23 / 25%);
     backdrop-filter: blur(8px);
   }
   .hero-copy .release-note {
-    color: #c0c8d8;
+    color: var(--hero-muted);
   }
   .artwork-caption {
-    color: #9ba5bc;
+    color: var(--hero-muted);
     font: 0.62rem var(--font-data);
     letter-spacing: 0.075em;
     text-transform: uppercase;
