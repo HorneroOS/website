@@ -455,7 +455,7 @@ hr {
   flex: none;
   margin-inline: 0.35rem 0.15rem;
   color: var(--text-muted);
-  font: 0.62rem var(--font-data);
+  font: 0.6rem var(--font-data);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -495,8 +495,8 @@ hr {
   display: inline-flex;
   min-height: 2rem;
   align-items: center;
-  gap: 0.38rem;
-  padding-inline: 0.55rem;
+  gap: 0.4rem;
+  padding-inline: 0.6rem;
   border: 1px solid transparent;
   border-radius: inherit;
   transition:
@@ -505,15 +505,16 @@ hr {
     border-color 160ms ease;
 }
 
-.color-switch label span::before {
-  width: 0.34rem;
-  height: 0.34rem;
+.color-switch label svg {
+  width: 0.86rem;
+  height: 0.86rem;
   flex: none;
-  border-radius: 50%;
-  background: var(--choice-signal);
-  box-shadow: 0 0 0.5rem color-mix(in srgb, var(--choice-signal) 60%, transparent);
-  content: '';
-  opacity: 0.68;
+  fill: none;
+  stroke: var(--choice-signal);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.35;
+  opacity: 0.78;
   transition:
     opacity 160ms ease,
     box-shadow 160ms ease,
@@ -529,7 +530,7 @@ hr {
     0 0 1rem color-mix(in srgb, var(--choice-signal, var(--accent)) 10%, transparent);
 }
 
-.color-switch input:checked + span::before {
+.color-switch input:checked + span svg {
   opacity: 1;
   transform: scale(1.18);
   box-shadow: 0 0 0.7rem color-mix(in srgb, var(--choice-signal) 78%, transparent);
@@ -542,6 +543,10 @@ hr {
 
 .color-switch label:hover span {
   color: var(--text);
+}
+
+.color-switch label:hover svg {
+  opacity: 1;
 }
 
 .mobile-menu {
