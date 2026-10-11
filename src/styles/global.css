@@ -1,33 +1,31 @@
 /*
  * Hornero OS site design system.
  *
- * Palette: Buenos Aires after rain, with Patagonia's blue-hour horizon:
- * ink navy, signal magenta, river cyan and sodium amber. Dark mode recalls a
- * wet Buenos Aires night; light mode is cool mineral daylight with the same
- * sign-glass, river-cyan and sodium signals still visible.
- * Type: Rubik (display + UI) and Martian Mono (provenance data), both
- * self-hosted: the site makes no third-party requests.
+ * Palette: Buenos Aires after rain — ink, river light, sign-magenta and sodium.
+ * The city grid belongs to the shared canvas; each route chooses how much of
+ * that signal to show. Type is Bricolage Grotesque for display, Rubik for UI,
+ * and Martian Mono for source and provenance data. All are self-hosted.
  */
 
 :root {
   color-scheme: dark;
 
-  /* Southern Signal: wet asphalt, river light, sign glass and sodium lamps. */
-  --night: #0a1016;
-  --night-surface: #111a21;
-  --night-raised: #1a252d;
-  --ice: #f2f0e9;
-  --ice-muted: #b1b7b7;
-  --signal: #ed84bd;
-  --river: #76cbd2;
-  --sodium: #e9b56d;
+  /* A port city at night: wet asphalt, sign-glass, river and sodium lamps. */
+  --night: #080b14;
+  --night-surface: #0e1321;
+  --night-raised: #171d2d;
+  --ice: #f3f2fb;
+  --ice-muted: #aeb3cc;
+  --signal: #f276d1;
+  --river: #69deeb;
+  --sodium: #f1b967;
   --mint: #a6dfc1;
 
   /* Roles */
   --bg: var(--night);
   --surface: var(--night-surface);
   --surface-raised: var(--night-raised);
-  --line: #34444a;
+  --line: #2b3954;
   --text: var(--ice);
   --text-muted: var(--ice-muted);
   --accent: var(--signal);
@@ -36,11 +34,16 @@
   --highlight: var(--river);
   --secondary: var(--sodium);
   --focus: #8cebf0;
-  --browser-theme-color: #0a1016;
+  --browser-theme-color: #080b14;
+  --signal-grid: color-mix(in srgb, var(--river) 2.1%, transparent);
+  --sign-haze: 12%;
+  --river-haze: 9%;
+  --sodium-haze: 7%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
 
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
   --font-ui: 'Rubik Variable', 'Rubik', system-ui, sans-serif;
   --font-data: 'Martian Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
 
@@ -53,7 +56,6 @@
   --gutter: clamp(1rem, 0.7rem + 2vw, 2.5rem);
   --measure: 66ch;
   --radius: 10px;
-  --font-display: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
   /* The hornero's oven nest: a rounded arch over a flat sill. */
   --arch: 46% 46% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
 }
@@ -61,18 +63,22 @@
 :root[data-color-mode='light'] {
   color-scheme: light;
   /* River fog over concrete: daylight keeps the same sign-glass and sodium. */
-  --bg: #f0eee7;
-  --surface: #e8e5dc;
-  --surface-raised: #faf8f1;
-  --line: #c8c4b9;
-  --text: #1b292e;
-  --text-muted: #526066;
-  --accent: #9a356b;
+  --bg: #f2f0f6;
+  --surface: #e9e8f1;
+  --surface-raised: #faf9fc;
+  --line: #c4c8d8;
+  --text: #171a27;
+  --text-muted: #4a5268;
+  --accent: #90255f;
   --accent-ink: #fff9ff;
-  --highlight: #176c76;
-  --secondary: #76552b;
-  --focus: #075b65;
-  --browser-theme-color: #f0eee7;
+  --highlight: #11666e;
+  --secondary: #795211;
+  --focus: #075a70;
+  --browser-theme-color: #f2f0f6;
+  --signal-grid: color-mix(in srgb, var(--highlight) 2.2%, transparent);
+  --sign-haze: 5%;
+  --river-haze: 5%;
+  --sodium-haze: 3%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -105,11 +111,13 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg);
-  background-image: radial-gradient(
-    70rem 34rem at 88% 0%,
-    color-mix(in srgb, var(--highlight) 5%, transparent),
-    transparent 76%
-  );
+  background-image:
+    radial-gradient(62rem 34rem at 96% -8%, color-mix(in srgb, var(--accent) var(--sign-haze), transparent), transparent 84%),
+    radial-gradient(46rem 34rem at -12% 34%, color-mix(in srgb, var(--highlight) var(--river-haze), transparent), transparent 84%),
+    radial-gradient(42rem 24rem at 62% 108%, color-mix(in srgb, var(--secondary) var(--sodium-haze), transparent), transparent 82%),
+    linear-gradient(var(--signal-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--signal-grid) 1px, transparent 1px);
+  background-size: auto, auto, auto, 56px 56px, 56px 56px;
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--step-0);
@@ -146,6 +154,7 @@ a:hover {
 h1,
 h2,
 h3 {
+  font-family: var(--font-display), var(--font-ui);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.02em;
@@ -235,10 +244,10 @@ hr {
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
   padding: 0.75rem var(--gutter);
-  background: color-mix(in oklab, var(--bg) 97%, transparent);
-  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--bg) 91%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
   border-bottom: 1px solid var(--line);
-  box-shadow: 0 0.35rem 1.2rem color-mix(in srgb, var(--bg) 18%, transparent);
+  box-shadow: 0 0.6rem 1.8rem color-mix(in srgb, var(--bg) 34%, transparent);
   transition:
     background-color 180ms ease,
     border-color 180ms ease;
@@ -439,8 +448,8 @@ hr {
   padding: 0.18rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--surface);
-  box-shadow: none;
+  background: color-mix(in oklab, var(--surface) 82%, var(--bg));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
 }
 
 .color-switch legend {
@@ -517,13 +526,15 @@ hr {
   border-color: color-mix(in oklab, var(--choice-signal, var(--accent)) 54%, var(--line));
   background: color-mix(in oklab, var(--choice-signal, var(--accent)) 10%, var(--surface-raised));
   color: var(--text);
-  box-shadow: inset 0 -2px var(--choice-signal, var(--accent));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--choice-signal, var(--accent)) 12%, transparent),
+    0 0 1rem color-mix(in srgb, var(--choice-signal, var(--accent)) 10%, transparent);
 }
 
 .color-switch input:checked + span svg {
   opacity: 1;
   transform: scale(1.18);
-  box-shadow: none;
+  box-shadow: 0 0 0.7rem color-mix(in srgb, var(--choice-signal) 78%, transparent);
 }
 
 .color-switch input:focus-visible + span {
@@ -589,7 +600,7 @@ hr {
   gap: 0.75rem;
   padding: 2rem var(--gutter) 2.5rem;
   border-top: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 34%, transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 56%);
   color: var(--text-muted);
   font-size: var(--step--1);
   transition:
@@ -895,9 +906,9 @@ hr {
 .card {
   padding: 1.4rem 1.5rem;
   border-radius: var(--radius);
-  background: var(--surface);
+  background: linear-gradient(145deg, color-mix(in oklab, var(--surface-raised) 54%, var(--surface)), var(--surface));
   border: 1px solid var(--line);
-  box-shadow: none;
+  box-shadow: 0 1rem 2.4rem color-mix(in srgb, var(--bg) 12%, transparent);
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,

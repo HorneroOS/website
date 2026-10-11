@@ -3,8 +3,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
-import { themes } from '../data/product';
-import neonCityShot from '../../assets/screenshots/curated/neon-city.webp';
+import { themes, wallpapers } from '../data/product';
 import variantSample from '../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
@@ -28,13 +27,8 @@ const wallpaperMedia = {
   'warm-sunset': (await import('../../assets/screenshots/theme-wallpapers/warm-sunset.webp')).default,
 };
 const modes = (mode: string) => (mode === 'light' ? 'Light' : 'Dark');
-const wallpaperProof = {
-  source: 'Hornero host capture',
-  context: 'Live Arch + Hyprland host · empty workspace',
-  resolution: '1920×1080',
-  theme: 'Custom · dark · expressive colors',
-  date: '2026-10-03',
-};
+const buenosAires = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
+if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pinned wallpaper catalogue');
 const paletteVariants = variantSample.variants;
 const showroom = await getCollection('showroom');
 const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
@@ -67,17 +61,20 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </div>
     </div>
     <div class="intro-preview">
-      <ArchFrame
-        src={neonCityShot}
-        alt="Live Hornero desktop capture with a cyan and amber cyberpunk skyline behind its shell rail."
-        eager
-        provenance={wallpaperProof}
-        sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
+      <Picture
+        src={wallpaperMedia['buenos-aires-nocturno']}
+        alt={buenosAires.previewAlt}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
         widths={[480, 720, 1080, 1280]}
+        sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
+        loading="eager"
+        decoding="async"
       />
       <p>
-        <span>Live desktop capture</span>
-        <strong>Neon City</strong>
+        <span>{buenosAires.place}</span>
+        <strong>{buenosAires.title}</strong>
+        <small>Photograph by {buenosAires.photographer} · <a href={buenosAires.licenseUrl}>{buenosAires.license}</a></small>
       </p>
     </div>
   </section>
@@ -89,8 +86,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
         <h2 id="desktop-gallery-title">From scene to whole system.</h2>
       </div>
       <p>
-        Wallpapers set a mood; the real desktop shows how bars, colors and controls meet it. These captures span a light
-        first-party look, an Argentine grassland palette, a neon city and a synthwave road.
+        These real Hornero captures document the Shell as it appeared in the 3 October development review. They show
+        layout and controls; the six photographic Argentina Originals below reflect the current wallpaper catalogue.
       </p>
     </div>
     <div class="desktop-capture-grid">
@@ -285,15 +282,17 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     position: relative;
     min-width: 0;
   }
-  .intro-preview :global(.frame) {
-    width: 100%;
-  }
-  .intro-preview :global(.frame-shot) :global(img) {
+  .intro-preview :global(picture) {
     display: block;
     width: 100%;
-    /* Preserve the full 16:9 desktop capture, including its vertical rail. */
-    aspect-ratio: 16 / 9;
+  }
+  .intro-preview img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
+    border: 1px solid color-mix(in srgb, var(--highlight) 45%, var(--line));
+    box-shadow: 0.7rem 0.7rem 0 -0.1rem var(--bg), 0.7rem 0.7rem 0 var(--highlight);
   }
   .desktop-gallery {
     padding-block: clamp(3rem, 7vw, 6rem);
@@ -349,19 +348,23 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     color: var(--ink);
   }
   .intro-preview > p {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
     margin-top: 0.6rem;
     color: var(--text-muted);
     font: 0.7rem var(--font-data);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
   .intro-preview strong {
     color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
     font-weight: 600;
   }
+  .intro-preview small { grid-column: 1 / -1; color: var(--text-muted); font: 0.68rem/1.45 var(--font-data); }
+  .intro-preview small a { color: var(--text); text-decoration-color: var(--accent); }
   .intro h1 {
     margin-top: 0.7rem;
     font-size: clamp(3rem, 3.65vw, 4.3rem);

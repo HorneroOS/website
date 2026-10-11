@@ -1,5 +1,5 @@
 # Website redesign visual evidence
 
-The `before-*` images are captures of website `HorneroOS/website` at baseline `89389e3578b9fdf1109bf9ded739d8da84148af0`. The `after-*` images are captures of the redesigned site from its production build, both at 1440px desktop and 390px mobile widths. All are Chromium screenshots in dark theme; the `home` images are full-page captures. Native lazy-loaded images were scrolled into view and awaited before capture.
+`before-*` records the website at baseline `89389e3578b9fdf1109bf9ded739d8da84148af0`. `after-*` records the earlier editorial redesign. `final-home-dark-1440.png`, `final-home-dark-390.png`, and `final-home-light-1440.png` show the current PR branch after restoring the Buenos Aires night palette and bringing licensed Argentine photography into the homepage. They are Chromium captures of the locally built static site at desktop and mobile viewport widths.
 
-The website pages reference real runtime captures from Hornero QA, with their source, resolution, theme, pins, and date shown alongside the images. Those product screenshots are separate from these before/after website captures.
+The product imagery shown on the pages remains authentic Hornero QA capture or licensed photography. The website captures in this directory document page layout, not product screenshots. Historical desktop captures retain their capture date and provenance in the page content.

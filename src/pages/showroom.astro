@@ -35,6 +35,11 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
         A working desktop is more than a wallpaper. Follow the same Shell through different landscapes, change how it
         occupies the screen, then step into the tools that shape it.
       </p>
+      <p class="capture-era-note">
+        The captures on this page come from the 3 October 2026 review. Their layout and control surfaces are real; their
+        wallpaper artwork predates the current photo-backed Hornero Originals. Browse <a href="/wallpapers">the current
+        licensed Argentina collection</a> for today’s scenes.
+      </p>
       <nav class="hero-links" aria-label="Explore the showcase">
         <a href="#visual-worlds">
           Visual worlds <span aria-hidden="true">↓</span>
@@ -71,9 +76,9 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
         <em>The desktop comes along.</em>
       </h2>
       <p>
-        These real captures keep Hornero’s vertical rail in view while the scene moves from an electric city to a
-        synthwave road, a pale alpine morning and Pampa’s moonlit grassland. Palette generation can draw a coordinated
-        color system from the wallpaper you choose.
+        These dated development captures keep Hornero’s vertical rail in view while the wallpaper changes. Palette
+        generation can draw a coordinated color system from the scene you choose. The current Argentina Originals use
+        the attributed photographs in the wallpaper collection.
       </p>
       <a class="text-link" href="/themes">
         Explore all looks <span aria-hidden="true">→</span>
@@ -212,6 +217,16 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     color: var(--muted);
     font-size: var(--step-1);
   }
+  .hero-copy > .capture-era-note {
+    max-width: 34rem;
+    padding: 0.8rem 0.9rem;
+    border-inline-start: 2px solid var(--secondary);
+    background: color-mix(in oklab, var(--surface) 62%, transparent);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .capture-era-note a { color: var(--text); text-decoration-color: var(--accent); }
   .hero-links {
     display: flex;
     flex-wrap: wrap;
