@@ -118,6 +118,13 @@ the role tokens (`--bg`,
 `--surface`, `--line`, `--text`, `--text-muted`, `--accent`, `--highlight`,
 `--secondary`, `--focus`), never raw hex values in components.
 
+The desktop navigation keeps the core product routes visible and groups the
+reference routes under the native `More` disclosure. Its current-page marker
+stays visible when the active route is inside that group; Escape and an outside
+pointer press close the disclosure. The mobile menu keeps every route in one
+list. Keep the color-mode fieldset present in both layouts: it offers `System`,
+`Light` and `Dark`, and must remain operable by keyboard.
+
 Type: Rubik (`--font-ui`) for display and UI, Martian Mono (`--font-data`)
 for provenance and data. Both are self-hosted through `@fontsource-variable`
 packages: the site makes no third-party requests.
