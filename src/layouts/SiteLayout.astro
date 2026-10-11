@@ -14,18 +14,27 @@ interface Props {
   noindex?: boolean;
 }
 
+interface NavLink {
+  href: string;
+  label: string;
+  className?: string;
+}
+
 const { title, description, noindex } = Astro.props;
-const nav = [
+const primaryNav: NavLink[] = [
   { href: '/editions', label: 'Editions' },
   { href: '/layouts', label: 'Layouts' },
   { href: '/themes', label: 'Themes' },
   { href: '/companion', label: 'Companion' },
   { href: '/showroom', label: 'Showroom' },
+];
+const utilityNav: NavLink[] = [
   { href: '/releases', label: 'Releases' },
   { href: '/docs/', label: 'Docs' },
+  { href: '/search/', label: 'Search' },
   { href: '/roots', label: 'Roots' },
-  { href: '/install', label: 'Install', className: 'nav-install' },
 ];
+const nav = [...primaryNav, ...utilityNav, { href: '/install', label: 'Install', className: 'nav-install' }];
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => {
   const h = href.replace(/\/$/, '') || '/';
@@ -60,19 +69,45 @@ const repos = [
       </a>
       <nav aria-label="Main">
         <ul>
-          {nav.map((l) => (
+          {primaryNav.map((l) => (
             <li>
               <a href={l.href} class={l.className} aria-current={isCurrent(l.href) ? 'page' : undefined}>
                 {l.label}
               </a>
             </li>
           ))}
+          <li class="nav-more-item">
+            <details class="nav-more">
+              <summary
+                class={utilityNav.some((l) => isCurrent(l.href)) ? 'more-current' : undefined}
+                aria-label="More pages"
+              >
+                More <span aria-hidden="true">⌄</span>
+              </summary>
+              <ul aria-label="More pages">
+                {utilityNav.map((l) => (
+                  <li>
+                    <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+          <li>
+            <a href="/install" class="nav-install" aria-current={isCurrent('/install') ? 'page' : undefined}>
+              Install
+            </a>
+          </li>
         </ul>
       </nav>
       <details class="mobile-menu">
         <summary>
           <span>Menu</span>
-          <span aria-hidden="true">☰</span>
+          <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18" fill="none">
+            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
         </summary>
         <nav aria-label="Mobile main">
           <ul>
@@ -123,6 +158,18 @@ const repos = [
     </footer>
     <script is:inline>
       (() => {
+        const moreMenu = document.querySelector('.nav-more');
+        const moreSummary = moreMenu?.querySelector('summary');
+        document.addEventListener('pointerdown', (event) => {
+          if (moreMenu?.open && !moreMenu.contains(event.target)) moreMenu.open = false;
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && moreMenu?.open) {
+            moreMenu.open = false;
+            moreSummary?.focus();
+          }
+        });
+
         const key = 'hornero-color-mode';
         const media = matchMedia('(prefers-color-scheme: light)');
         const controls = [...document.querySelectorAll('[data-color-switch] input')];
