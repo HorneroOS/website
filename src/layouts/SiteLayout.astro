@@ -51,8 +51,11 @@ const repos = [
       <a href="/" class="brand" aria-label="Hornero OS home">
         <LogoDark class="brand-mark mark-on-dark" width="32" height="32" aria-hidden="true" focusable="false" />
         <LogoLight class="brand-mark mark-on-light" width="32" height="32" aria-hidden="true" focusable="false" />
-        <span>
-          Hornero <span class="os">OS</span>
+        <span class="brand-copy">
+          <span>
+            Hornero <span class="os">OS</span>
+          </span>
+          <small>Buenos Aires · Argentina</small>
         </span>
       </a>
       <nav aria-label="Main">
@@ -131,7 +134,7 @@ const repos = [
           document.documentElement.dataset.colorPreference = next;
           document.documentElement.dataset.colorMode = mode;
           const themeColor = document.querySelector('meta[name="theme-color"]');
-          if (themeColor) themeColor.content = mode === 'light' ? '#f5efe5' : '#090b17';
+          if (themeColor) themeColor.content = mode === 'light' ? '#f1ece4' : '#080b14';
           controls.forEach((control) => {
             control.checked = control.value === next;
           });

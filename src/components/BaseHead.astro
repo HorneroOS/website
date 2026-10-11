@@ -25,7 +25,7 @@ const socialAlt = 'Hornero OS desktop running Hornero Light';
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
-<meta name="theme-color" content="#090b17" />
+<meta name="theme-color" content="#080b14" />
 <script is:inline>
   (() => {
     const key = 'hornero-color-mode';
@@ -43,7 +43,7 @@ const socialAlt = 'Hornero OS desktop running Hornero Light';
     document.documentElement.dataset.colorPreference = preference;
     document.documentElement.dataset.colorMode = mode;
     const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) themeColor.content = mode === 'light' ? '#f5efe5' : '#090b17';
+    if (themeColor) themeColor.content = mode === 'light' ? '#f1ece4' : '#080b14';
   })();
 </script>
 <title>{title}</title>
