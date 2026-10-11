@@ -231,8 +231,21 @@ const current = entry.id;
   }
 
   .prose :global(h2) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
     font-size: var(--step-2);
     margin: 2.25rem 0 0.75rem;
+  }
+
+  .prose :global(h2)::before {
+    width: 1.1rem;
+    height: 2px;
+    flex: none;
+    background: linear-gradient(90deg, var(--secondary), var(--accent), var(--highlight));
+    box-shadow: 0 0 0.65rem color-mix(in srgb, var(--highlight) 18%, transparent);
+    content: '';
+    transform: translateY(-0.28em);
   }
 
   .prose :global(h3) {
@@ -255,7 +268,7 @@ const current = entry.id;
   .prose :global(blockquote) {
     padding: 0.75rem 1rem;
     border-left: 3px solid var(--secondary);
-    background: var(--surface);
+    background: linear-gradient(110deg, color-mix(in srgb, var(--secondary) 5%, var(--surface)), var(--surface) 48%);
     border-radius: 0 10px 10px 0;
     color: var(--text-muted);
   }
@@ -268,6 +281,7 @@ const current = entry.id;
   .prose :global(img) {
     border-radius: 10px;
     border: 1px solid var(--line);
+    box-shadow: 0 0.8rem 2rem color-mix(in srgb, var(--bg) 15%, transparent);
   }
 
   .doc-foot {
