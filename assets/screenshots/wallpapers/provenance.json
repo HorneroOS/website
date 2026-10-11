@@ -1,7 +1,7 @@
 {
   "source_repository": "https://github.com/HorneroOS/config",
   "source_manifest": "profiles/themes/wallpaper-provenance.json",
-  "source_commit": "045149e7e29e75956ba5ae526b5f16be9fd4f265",
+  "source_commit": "be0064fe3b354a44960b8fb1edf62e335b7adc4a",
   "source_files": [
     {
       "file": "assets/screenshots/wallpapers/patagonia-glacier-01.jpg",
