@@ -10,6 +10,7 @@ import neonCity from '../../assets/screenshots/curated/neon-city.webp';
 import vaporRoadtrip from '../../assets/screenshots/curated/vapor-roadtrip.webp';
 import morningLake from '../../assets/screenshots/curated/morning-lake.webp';
 import buenosAiresNocturno from '../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp';
+import buenosAiresCyberpunkArtwork from '../../assets/brand/buenos-aires-cyberpunk.webp';
 import { editionCatalogue, editions, layouts, themes } from '../data/product';
 
 const showcase = await getCollection('showroom');
@@ -77,6 +78,18 @@ const description = `An Arch-based operating system family evolved from a Linux 
 <SiteLayout title={title} description={description}>
   <section class="hero">
     <div class="hero-copy">
+      <div class="hero-artwork">
+        <Picture
+          src={buenosAiresCyberpunkArtwork}
+          alt="Original concept artwork reimagining Buenos Aires at night: the Obelisk, Avenida 9 de Julio, a city bus and rain-reflected cyan, fuchsia and sodium light. This is artwork, not a desktop capture."
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[640, 900, 1200]}
+          sizes="(min-width: 960px) 44vw, calc(100vw - 2rem)"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
       <p class="eyebrow">
         <span class="status-dot" aria-hidden="true"></span> Arch Linux · daily use since 2018
       </p>
@@ -84,16 +97,15 @@ const description = `An Arch-based operating system family evolved from a Linux 
         Eight years of Linux. <em>HorneroOS.</em>
       </h1>
       <p class="lede">
-        HorneroOS grew out of Ulises Jeremías’s Arch Linux setup—a real working environment used, tested and refined
-        every day since 2018. It carries that experience into a Wayland-first desktop and a wider operating-system
-        family.
+        Built from Ulises Jeremías’s Arch Linux setup, used, tested and refined daily since 2018—now a Wayland-first
+        desktop and a wider operating-system family.
       </p>
       <p class="heritage">
-        Follow the work in Ulises’s <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a>.{' '}
-        <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> is the principal maintainer.{' '}
+        <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> leads HorneroOS and maintains the setup’s{' '}
+        <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a>.{' '}
         <a href="https://github.com/PandaFoss">Panda Foss</a> contributes to HorneroOS, is one of the maintainers of{' '}
-        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>, and will lead HorneroOS’s future
-        custom installer. Both are part of the <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
+        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>, and will lead HorneroOS’s custom
+        installer. Both are part of the <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
       </p>
       <p class="hero-route" aria-label="Visual roots: Buenos Aires, Patagonia and beyond">
         <span>BUENOS AIRES</span>
@@ -122,9 +134,10 @@ const description = `An Arch-based operating system family evolved from a Linux 
         </a>
       </div>
       <p class="release-note">
-        Development preview · no published ISO; the Calamares installer is provisional until Panda Foss’s custom version
-        is ready <a href="/install">See install status</a>
+        Development preview · no ISO yet; Calamares is provisional until Panda Foss’s custom installer is ready.{' '}
+        <a href="/install">Install status</a>
       </p>
+      <p class="artwork-caption">Buenos Aires nocturno · original concept artwork</p>
     </div>
     <ArchFrame
       src={heroCapture.data.image}
@@ -322,9 +335,106 @@ const description = `An Arch-based operating system family evolved from a Linux 
     padding-block: clamp(0.8rem, 1.2rem + 1.6vw, 2rem) 2rem;
   }
   .hero-copy {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: grid;
     gap: 0.95rem;
     justify-items: start;
+    padding: clamp(1.15rem, 2.5vw, 2rem);
+    border: 1px solid color-mix(in oklab, var(--highlight) 36%, var(--line));
+    border-radius: calc(var(--radius) + 4px);
+    background: #090b17;
+    color: #f3f2fb;
+    box-shadow: 0 1rem 3.2rem rgb(2 5 18 / 24%);
+  }
+  .hero-copy::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(6 8 20 / 84%) 0%, rgb(6 8 20 / 72%) 53%, rgb(6 8 20 / 45%) 100%),
+      linear-gradient(0deg, rgb(6 8 20 / 34%), transparent 38%);
+    content: '';
+    pointer-events: none;
+  }
+  .hero-copy > *:not(.hero-artwork) {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-copy > .hero-artwork {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-copy .hero-artwork :global(picture),
+  .hero-copy .hero-artwork :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-copy .hero-artwork :global(img) {
+    object-fit: cover;
+    object-position: 63% center;
+    opacity: 0.82;
+  }
+  .hero-copy .eyebrow {
+    color: #ffc878;
+  }
+  .hero-copy .status-dot {
+    background: #79e4ef;
+    box-shadow:
+      0 0 0 4px rgb(105 222 235 / 18%),
+      0 0 1rem rgb(105 222 235 / 55%);
+  }
+  .hero .hero-copy h1 em {
+    color: #ff91df;
+    text-shadow: 0 0 1.5rem rgb(242 118 209 / 24%);
+  }
+  .hero-copy .lede {
+    color: #e4e6f0;
+  }
+  .hero-copy .heritage {
+    color: #c0c8d8;
+  }
+  .hero-copy .heritage a,
+  .hero-copy .release-note a {
+    color: #fff;
+  }
+  .hero-copy .hero-route {
+    color: #c0c8d8;
+  }
+  .hero-copy .hero-route span:first-child {
+    color: #79e4ef;
+  }
+  .hero-copy .hero-route span:nth-of-type(2) {
+    color: #ff91df;
+  }
+  .hero-copy .hero-route i {
+    color: #ffc878;
+  }
+  .hero-copy .hero-facts {
+    color: #c0c8d8;
+  }
+  .hero-copy .hero-facts strong {
+    color: #fff;
+  }
+  .hero-copy .cta.secondary {
+    color: #fff;
+    border-color: rgb(255 255 255 / 48%);
+    background: rgb(9 11 23 / 25%);
+    backdrop-filter: blur(8px);
+  }
+  .hero-copy .release-note {
+    color: #c0c8d8;
+  }
+  .artwork-caption {
+    color: #9ba5bc;
+    font: 0.62rem var(--font-data);
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
   }
   .hero-route {
     display: flex;
@@ -719,6 +829,8 @@ const description = `An Arch-based operating system family evolved from a Linux 
     }
     .hero-copy {
       grid-row: 1;
+      padding: 1.15rem;
+      gap: 0.75rem;
     }
     .family-heading {
       align-items: start;
