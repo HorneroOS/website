@@ -34,12 +34,14 @@ const socialAltValue = socialImageAlt ?? socialAlt;
   (() => {
     const key = 'hornero-color-mode';
     const valid = ['system', 'light', 'dark'];
-    let preference = 'system';
+    // Hornero's nocturnal signal palette is the site's first impression; visitors
+    // can still opt into their OS theme or switch to the daylight palette below.
+    let preference = 'dark';
     try {
       const saved = localStorage.getItem(key);
       if (valid.includes(saved)) preference = saved;
     } catch {
-      // Storage can be disabled; follow the operating-system preference.
+      // Storage can be disabled; keep the branded dark default.
     }
 
     const mode =
