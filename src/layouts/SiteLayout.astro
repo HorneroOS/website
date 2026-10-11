@@ -84,7 +84,7 @@ const repos = [
         </nav>
       </details>
       <fieldset class="color-switch" data-color-switch>
-        <legend>Color theme</legend>
+        <legend>Color mode</legend>
         <label>
           <input type="radio" name="color-theme" value="system" checked />
           <span>System</span>
@@ -131,7 +131,7 @@ const repos = [
           document.documentElement.dataset.colorPreference = next;
           document.documentElement.dataset.colorMode = mode;
           const themeColor = document.querySelector('meta[name="theme-color"]');
-          if (themeColor) themeColor.content = mode === 'light' ? '#f3f3fa' : '#090b17';
+          if (themeColor) themeColor.content = mode === 'light' ? '#f5efe5' : '#090b17';
           controls.forEach((control) => {
             control.checked = control.value === next;
           });
