@@ -36,9 +36,11 @@ not replace role tokens with ad-hoc colors across ordinary UI.
 
 The `SiteLayout` control exposes System, Light and Dark on every route.
 System follows `prefers-color-scheme`; explicit choices persist in local
-storage and sync across tabs. Keep all three options keyboard accessible,
-visibly focused and available in desktop and mobile navigation. Respect
-reduced motion and preserve readable contrast in both palettes.
+storage and sync across tabs. Dark mode draws from wet asphalt and night
+signage. Light mode reads as river fog over city concrete, with the same cyan,
+magenta and sodium signals. Keep all three options keyboard accessible,
+visibly focused and available at desktop and mobile widths. Respect reduced
+motion and preserve readable contrast in both palettes.
 
 Rubik is the UI/display face and Martian Mono is reserved for provenance and
 data. Both are self-hosted through Fontsource packages.
