@@ -160,13 +160,21 @@ const repos = [
       (() => {
         const moreMenu = document.querySelector('.nav-more');
         const moreSummary = moreMenu?.querySelector('summary');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileSummary = mobileMenu?.querySelector('summary');
         document.addEventListener('pointerdown', (event) => {
           if (moreMenu?.open && !moreMenu.contains(event.target)) moreMenu.open = false;
+          if (mobileMenu?.open && !mobileMenu.contains(event.target)) mobileMenu.open = false;
         });
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && moreMenu?.open) {
             moreMenu.open = false;
             moreSummary?.focus();
+            return;
+          }
+          if (event.key === 'Escape' && mobileMenu?.open) {
+            mobileMenu.open = false;
+            mobileSummary?.focus();
           }
         });
 
@@ -181,7 +189,11 @@ const repos = [
           document.documentElement.dataset.colorPreference = next;
           document.documentElement.dataset.colorMode = mode;
           const themeColor = document.querySelector('meta[name="theme-color"]');
-          if (themeColor) themeColor.content = mode === 'light' ? '#f1ece4' : '#080b14';
+          if (themeColor) {
+            themeColor.content = getComputedStyle(document.documentElement)
+              .getPropertyValue('--browser-theme-color')
+              .trim();
+          }
           controls.forEach((control) => {
             control.checked = control.value === next;
           });

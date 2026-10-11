@@ -106,24 +106,28 @@ Wrap third-party components in your own Astro wrapper so you can swap implementa
 Tokens live in `src/styles/global.css`. The website uses its own complementary
 “Southern Signal” palette: Buenos Aires night ink, river cyan, electric sign
 magenta and sodium-lamp amber. Dark mode evokes a rain-lit Buenos Aires street;
-light mode carries the same signals over warm stone and paper. The site shares
+light mode carries the same signals over cool mineral daylight. The site shares
 HorneroOS’s visual vocabulary without pretending that the website palette is a
 desktop theme. The shared navigation offers System, Light and Dark; System
 follows `prefers-color-scheme`, while an explicit choice is stored locally and
-synchronized across tabs. The shared wordmark places the project in Buenos
-Aires; a cyan / magenta / sodium signal and low-contrast route line carry that
-Argentine cyberpunk identity through long pages without turning content into
-decoration. Light mode keeps the same signals over warm daylight surfaces. Use
-the role tokens (`--bg`,
-`--surface`, `--line`, `--text`, `--text-muted`, `--accent`, `--highlight`,
-`--secondary`, `--focus`), never raw hex values in components.
+synchronized across tabs. Browser chrome follows the selected canvas through
+the `--browser-theme-color` token. The shared wordmark places the project in
+Buenos Aires; a cyan / magenta / sodium signal and low-contrast route line carry
+that Argentine cyberpunk identity through long pages without turning content
+into decoration. The homepage hero stays a night-lit city scene in either
+mode, while the surrounding site follows the selected palette. Use the role
+tokens (`--bg`, `--surface`, `--line`, `--text`, `--text-muted`, `--accent`,
+`--highlight`, `--secondary`, `--focus`) throughout. A photographed surface such
+as the homepage hero may use local scene tokens to preserve text contrast over
+the image.
 
 The desktop navigation keeps the core product routes visible and groups the
 reference routes under the native `More` disclosure. Its current-page marker
-stays visible when the active route is inside that group; Escape and an outside
-pointer press close the disclosure. The mobile menu keeps every route in one
-list. Keep the color-mode fieldset present in both layouts: it offers `System`,
-`Light` and `Dark`, and must remain operable by keyboard.
+stays visible when the active route is inside that group. Both it and the
+mobile menu close with Escape or an outside pointer press, returning focus to
+the trigger on Escape. The mobile menu keeps every route in one list and opens
+below the color selector. Keep the color-mode fieldset present in both layouts:
+it offers `System`, `Light` and `Dark`, and must remain operable by keyboard.
 
 Type: Rubik (`--font-ui`) for display and UI, Martian Mono (`--font-data`)
 for provenance and data. Both are self-hosted through `@fontsource-variable`

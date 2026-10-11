@@ -3,8 +3,8 @@
  *
  * Palette: Buenos Aires after rain, with Patagonia's blue-hour horizon:
  * ink navy, signal magenta, river cyan and sodium amber. Dark mode recalls a
- * wet Buenos Aires night; light mode carries the same signals across warm
- * stone and paper, like street posters in afternoon light.
+ * wet Buenos Aires night; light mode is cool mineral daylight with the same
+ * sign-glass, river-cyan and sodium signals still visible.
  * Type: Rubik (display + UI) and Martian Mono (provenance data), both
  * self-hosted: the site makes no third-party requests.
  */
@@ -27,7 +27,7 @@
   --bg: var(--night);
   --surface: var(--night-surface);
   --surface-raised: var(--night-raised);
-  --line: #29334a;
+  --line: #2b3954;
   --text: var(--ice);
   --text-muted: var(--ice-muted);
   --accent: var(--signal);
@@ -35,6 +35,7 @@
   --highlight: var(--river);
   --secondary: var(--sodium);
   --focus: #8cebf0;
+  --browser-theme-color: #080b14;
   --signal-grid: color-mix(in srgb, var(--river) 1.35%, transparent);
   --ink: var(--text);
   --muted: var(--text-muted);
@@ -58,19 +59,20 @@
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  /* Daylight on Buenos Aires stone, with ink, river glass and sign color. */
-  --bg: #f1ece4;
-  --surface: #e8e0d7;
-  --surface-raised: #fffaf3;
-  --line: #c9bdb4;
-  --text: #201d29;
-  --text-muted: #554e5b;
-  --accent: #92236d;
-  --accent-ink: #fff8fe;
-  --highlight: #006b78;
-  --secondary: #80501e;
-  --focus: #005d68;
-  --signal-grid: color-mix(in srgb, var(--highlight) 1.25%, transparent);
+  /* Cool daylight on city stone: legible ink with electric sign colors. */
+  --bg: #f2f0f8;
+  --surface: #e8e6f0;
+  --surface-raised: #fcfbff;
+  --line: #c6c1d1;
+  --text: #211d2b;
+  --text-muted: #555064;
+  --accent: #902467;
+  --accent-ink: #fff9ff;
+  --highlight: #006877;
+  --secondary: #7a4b13;
+  --focus: #005765;
+  --browser-theme-color: #f2f0f8;
+  --signal-grid: color-mix(in srgb, var(--highlight) 1.55%, transparent);
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -626,7 +628,8 @@ pre {
   .mobile-menu nav {
     position: absolute;
     z-index: 20;
-    top: calc(100% + 0.6rem);
+    /* Keep the second-row color selector clear while the menu is open. */
+    top: calc(100% + 3.75rem);
     right: 0;
     width: min(19rem, calc(100vw - 1.6rem));
     padding: 0.6rem;
