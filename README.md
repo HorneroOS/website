@@ -30,6 +30,8 @@ npm run build
 - `/layouts`, `/themes`, `/releases` — generated from pinned product sources
   (see `docs/PRODUCT_DATA.md`)
 - `/showroom` — real captures with provenance plates
+- `/greeter` — interactive browser recreation of the offline SDDM greeter,
+  with local-time moods and a provenance-backed Argentina scene collection
 - `/docs/` — HorneroOS/docs rendered at its pinned commit
 - `/search/` — Pagefind search over site content
 - `/roots` — heritage, credits, comparison table

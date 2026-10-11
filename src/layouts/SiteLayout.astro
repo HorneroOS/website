@@ -11,6 +11,8 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  socialImage?: string;
+  socialImageAlt?: string;
   noindex?: boolean;
 }
 
@@ -20,11 +22,12 @@ interface NavLink {
   className?: string;
 }
 
-const { title, description, noindex } = Astro.props;
+const { title, description, noindex, socialImage, socialImageAlt } = Astro.props;
 const primaryNav: NavLink[] = [
   { href: '/editions', label: 'Editions' },
   { href: '/layouts', label: 'Layouts' },
   { href: '/themes', label: 'Themes' },
+  { href: '/greeter', label: 'Greeter' },
   { href: '/companion', label: 'Companion' },
   { href: '/showroom', label: 'Showroom' },
 ];
@@ -50,7 +53,13 @@ const repos = [
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} noindex={noindex} />
+    <BaseHead
+      title={title}
+      description={description}
+      noindex={noindex}
+      socialImage={socialImage}
+      socialImageAlt={socialImageAlt}
+    />
   </head>
   <body>
     <a class="skip-link" href="#main">

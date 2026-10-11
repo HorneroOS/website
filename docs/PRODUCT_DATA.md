@@ -8,6 +8,8 @@ pinned Hornero sources, never typed into pages.
 | `src/data/product/layouts.json` | HorneroOS/shell `presets/*.json` |
 | `src/data/product/themes.json` | HorneroOS/config `profiles/themes/*/theme.json`; the official trio from HorneroOS/hornero `official_theme_ids()` |
 | `src/data/product/releases.json` | HorneroOS/hornero `releases/`, `manifests/` and the candidate pointer; tagged status from git tags |
+| `src/data/product/editions.json` | HorneroOS/hornero `editions/catalogue.yaml` |
+| `src/data/product/greeter-scenes.json` | Pinned HorneroOS/greeter runtime catalog, approved scene manifests, still provenance records, and daypart windows |
 
 ## Documentation pages
 
@@ -40,6 +42,17 @@ npm run data:check   # CI: committed data must equal data generated from the pin
 The sync fetches each pinned commit shallowly into `.cache/` (git and
 network, no token). It refuses abbreviated SHAs and release records whose
 name, version and manifest disagree.
+
+The `/greeter` browser recreation uses generated scene metadata and local
+preview paths. Do not hand-edit its generated scene catalogue. After greeter
+media is reviewed and merged, update the `greeter` pin to the reviewed commit
+and run `npm run data:sync`. From the greeter checkout, run
+`scripts/media/build.py`, then
+`scripts/media/export-web-previews.py --output /path/to/website/public/media/greeter`.
+Review the generated metadata and assets, then run `npm run data:check` in the
+website checkout. The website previews are short web derivatives and are not
+the offline SDDM media pack. They are served locally; no third-party player is
+embedded.
 
 ## Updating
 

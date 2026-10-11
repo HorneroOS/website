@@ -16,6 +16,10 @@
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
       "sha": "a12ad445d0a12be68901536902918d0832eb0bc8"
+    },
+    "greeter": {
+      "repo": "https://github.com/HorneroOS/greeter",
+      "sha": "a3029407f3f2cd78d75d68ac64747eeace6c4de5"
     }
   },
   "releaseTags": [
