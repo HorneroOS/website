@@ -1,147 +1,69 @@
-# 🧱 Components and Styling
+# Components and styling
 
-Astro components are the primary building block. They can render static HTML, scoped CSS, and optional client-side JavaScript via [islands](https://docs.astro.build/en/concepts/islands/).
+The website is built with Astro components and plain CSS. Most routes render
+to static HTML and need no client-side framework.
 
-## Component patterns
+## Component boundaries
 
-### Prefer `.astro` for static UI
+- `SiteLayout.astro` owns the shared document shell, main navigation, color
+  mode selector and footer.
+- `BaseHead.astro` owns document metadata and shared head tags.
+- `ArchFrame.astro` renders responsive product imagery and its provenance
+  plate. `KilnStamp.astro` carries capture metadata.
+- `LayoutDiagram.astro` and `SourcePlate.astro` render focused product
+  explanations.
+- Route components under `src/pages/` own page-specific stories and styles.
 
-Use `.astro` files when no client JavaScript is required. The compiler strips unused JS and ships HTML by default.
+Prefer `.astro` for content and interfaces that do not need browser state.
+Extract a component when markup or behavior is reused; keep single-use,
+page-specific composition with its route.
 
-```astro
----
-interface Props {
-  label: string;
-}
-const { label } = Astro.props;
----
+## Design tokens and color modes
 
-<button type="button">{label}</button>
-```
+`src/styles/global.css` defines the shared role tokens used across the site:
+canvas, surface, line, text, muted text, accent, highlight, secondary and
+focus. The palette is a cyberpunk interpretation of Buenos Aires: night ink,
+river cyan, electric-sign magenta and sodium amber. Light mode carries those
+signals over a mineral daylight canvas. A scene may use local overlay tokens
+when text must remain legible over artwork; do not replace role tokens with
+ad-hoc colors across ordinary UI.
 
-### Colocate styles with components
+The `SiteLayout` control exposes System, Light and Dark. System follows
+`prefers-color-scheme`; explicit choices persist in local storage and sync
+across tabs. Keep all three options keyboard accessible, visibly focused and
+available in desktop and mobile navigation. Respect reduced motion.
 
-Scoped styles live in the same file:
+Rubik is the UI/display face and Martian Mono is reserved for provenance and
+data. Both are self-hosted through Fontsource packages.
 
-```astro
-<p class="note">Hello</p>
-<style>
-  .note {
-    color: var(--cna-text-muted);
-  }
-</style>
-```
+## Images and provenance
 
-Use `is:global` sparingly — the landing page imports `src/styles/cna-landing.css` because those utilities span many elements.
+Use Astro's image pipeline for responsive formats, widths, sizes and loading
+priority. Real product captures need meaningful alt text and a provenance
+plate with available source, context, revision, theme, resolution and date.
+The schema lives in `src/content.config.ts`. Keep the full image visible in
+product frames; do not crop away controls or interface details that the
+caption claims to show.
 
-### Extract shared pieces early
+## Accessibility and motion
 
-When two pages repeat the same header, meta tags, or shell:
+- Use semantic landmarks, ordered headings, descriptive link names and image
+  alternatives.
+- Preserve visible focus styles and sufficient contrast in both color modes.
+- Use native controls (`button`, `fieldset`, `details`) where they fit.
+- Keep decorative background grids and glow effects out of the accessibility
+  tree.
+- Disable nonessential transitions under `prefers-reduced-motion: reduce`.
+- Avoid adding client-side state when CSS, native HTML or URL state is enough.
 
-- **`BaseHead.astro`** — SEO and document metadata
-- **`BaseLayout.astro`** — shared HTML document wrapper
+## Styling conventions
 
-Add `SiteHeader.astro`, `SiteFooter.astro`, etc. as the site grows.
+Use the global token system for site-wide styles and scoped `<style>` blocks
+for route-specific composition. Keep selectors local, avoid a second utility
+framework, and avoid introducing a UI framework island for static product
+content. When a behavior genuinely needs JavaScript, keep it small, progressive
+and test it with keyboard input as well as pointer interaction.
 
-### Keep components focused
-
-Avoid large single files with many responsibilities. Split cards, lists, and navigation into dedicated components under `src/components/`.
-
-## Styling options
-
-This starter uses plain CSS files under `src/styles/` for the CNA landing and blog pages. Astro supports multiple approaches:
-
-| Approach                                                               | Good for                                      |
-| ---------------------------------------------------------------------- | --------------------------------------------- |
-| Scoped `<style>` in `.astro`                                           | Component-specific rules                      |
-| Global CSS imports                                                     | Shared tokens, landing themes                 |
-| [Tailwind](https://tailwindcss.com/)                                   | Utility-first teams (add `@astrojs/tailwind`) |
-| [CSS Modules](https://docs.astro.build/en/guides/styling/#css-modules) | Locally scoped class names                    |
-| Sass/Less                                                              | Teams already standardized on preprocessors   |
-
-Pick one primary strategy per project to avoid conflicting conventions.
-
-## Islands (interactive components)
-
-This template does **not** ship a UI framework integration. When you need hydration:
-
-1. Add an integration, e.g. `npx astro add react`
-2. Place interactive components in `src/components/`
-3. Opt in with a client directive:
-
-```astro
----
-import Counter from '@/components/Counter';
----
-
-<Counter client:load />
-```
-
-Use the smallest directive that fits (`client:visible`, `client:idle`) to limit JavaScript payload.
-
-## Accessibility
-
-- Use semantic HTML (`nav`, `main`, `article`, `time`)
-- Provide `alt` text on images and meaningful link labels
-- Prefer real headings in order (`h1` → `h2`)
-- Test keyboard focus when adding islands or custom buttons
-
-## Component libraries
-
-For marketing sites, consider:
-
-- **Headless + your CSS** — Radix primitives, Headless UI (via React/Vue/Solid islands)
-- **Full libraries** — only when their look-and-feel matches your brand
-
-Wrap third-party components in your own Astro wrapper so you can swap implementations later.
-
-## File naming
-
-- PascalCase for components: `BaseHead.astro`, `PostCard.astro`
-- kebab-case for routes: `pages/about.astro`
-- kebab-case for content slugs: `welcome-to-your-blog.md`
-
-## Hornero design system
-
-Tokens live in `src/styles/global.css`. The website uses its own complementary
-“Southern Signal” palette: Buenos Aires night ink, river cyan, electric sign
-magenta and sodium-lamp amber. Dark mode evokes a rain-lit Buenos Aires street;
-light mode carries the same signals over cool mineral daylight. The site shares
-HorneroOS’s visual vocabulary without pretending that the website palette is a
-desktop theme. The shared navigation labels its three-way selector `Site color`:
-System, Light and Dark. System follows `prefers-color-scheme`, while an explicit
-choice is stored locally and synchronized across tabs. Each option carries its
-own sodium, river-cyan or sign-magenta marker; browser chrome follows the
-selected canvas through the `--browser-theme-color` token. The shared wordmark
-places the project in Buenos Aires; a cyan / magenta / sodium signal and
-low-contrast street grid carry that Argentine cyberpunk identity through long
-pages without turning content into decoration. The homepage hero stays a
-night-lit city scene in either mode, while the surrounding site follows the
-selected palette. Use the role
-tokens (`--bg`, `--surface`, `--line`, `--text`, `--text-muted`, `--accent`,
-`--highlight`, `--secondary`, `--focus`) throughout. A photographed surface such
-as the homepage hero may use local scene tokens to preserve text contrast over
-the image.
-
-The desktop navigation keeps the core product routes visible and groups the
-reference routes under the native `More` disclosure. Its current-page marker
-stays visible when the active route is inside that group. Both it and the
-mobile menu close with Escape or an outside pointer press, returning focus to
-the trigger on Escape. The mobile menu keeps every route in one list and opens
-below the color selector. Keep the color-mode fieldset present in both layouts:
-it offers `System`, `Light` and `Dark`, and must remain operable by keyboard.
-
-Type: Rubik (`--font-ui`) for display and UI, Martian Mono (`--font-data`)
-for provenance and data. Both are self-hosted through `@fontsource-variable`
-packages: the site makes no third-party requests.
-
-Signature components:
-
-- `KilnStamp.astro`: the provenance plate (source, context, component pins,
-  theme, resolution, date). Every real capture carries one.
-- `ArchFrame.astro`: a capture with its plate. `variant="arch"` frames it in
-  the hornero's oven-nest arch (hero only); the default `plain` keeps every
-  corner visible so no product UI is cropped.
-
-Showroom entries declare `alt`, `order` and `provenance` in frontmatter
-(`src/content.config.ts` validates them).
+For content collections, schemas and source pins, see
+[`PROJECT_STRUCTURE.md`](./PROJECT_STRUCTURE.md) and
+[`PRODUCT_DATA.md`](./PRODUCT_DATA.md).

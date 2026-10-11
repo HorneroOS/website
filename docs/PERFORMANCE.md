@@ -1,43 +1,39 @@
-# 🚄 Performance
+# Website performance
 
-## Code Splitting
+The website is a static product showcase, so its default performance strategy
+is to render pages at build time and keep browser JavaScript limited to real
+interactions.
 
-Code splitting is a technique of splitting production JavaScript into smaller files, thus allowing the application to be only partially downloaded. Any unused code will not be downloaded until it is required by the application.
+## Keep delivery small
 
-Most of the time code splitting should be done on the routes level, but can also be used for other lazy loaded parts of application.
+- Prefer Astro-rendered HTML and CSS; do not hydrate a whole page for static
+  copy or a small control.
+- `astro.config.mjs` emits static output and inlines the shared stylesheet.
+  Review the generated HTML and asset sizes if global styles grow materially.
+- The System/Light/Dark selector and mobile navigation are small shared
+  interactions. Avoid adding a client state framework for them.
+- Pagefind's search script loads on `/search/`, not every route.
+- Self-host the site's fonts; do not introduce third-party font or analytics
+  requests without a deliberate product decision.
 
-Do not code split everything as it might even worsen your application's performance.
+## Images
 
-## Component and state optimizations
+- Use Astro's image pipeline to emit responsive AVIF/WebP with a fallback,
+  suitable `widths` and accurate `sizes`.
+- Give the first viewport's key image eager/high priority loading; defer
+  below-the-fold captures and decode asynchronously.
+- Use the smallest source image that still preserves visible interface text
+  at its rendered size. Keep responsive variants instead of shipping a single
+  oversized PNG to every device.
+- Preserve meaningful alt text and provenance when optimizing or replacing a
+  capture.
+- Avoid autoplay video and large client-side galleries. Use a poster and
+  native controls when motion genuinely improves product understanding.
 
-- Do not put everything in a single state. That might trigger unnecessary re-renders. Instead split the global state into multiple stores according to where it is being used.
+## Validation
 
-- Keep the state as close as possible to where it is being used. This will prevent re-rendering components that do not depend on the updated state.
-
-- If you have a piece of state that is initialized by an expensive computation, use the state initializer function instead of executing it directly because the expensive function will be run only once as it is supposed to. e.g:
-
-```javascript
-import { useState } from "react";
-
-// instead of this which would be executed on every re-render:
-const [state, setState] = useState(myExpensiveFn());
-
-// prefer this which is executed only once:
-const [state, setState] = useState(() => myExpensiveFn());
-```
-
-- If you develop an application that requires the state to track many elements at once, you might consider state management libraries with atomic updates such as [recoil](https://recoiljs.org/) or [jotai](https://jotai.pmnd.rs/).
-
-- If your application is expected to have frequent updates that might affect performance, consider switching from runtime styling solutions ([Chakra UI](https://chakra-ui.com/), [emotion](https://emotion.sh/docs/introduction), [styled-components](https://styled-components.com/) that generate styles during runtime) to zero runtime styling solutions ([tailwind](https://tailwindcss.com/), [linaria](https://github.com/callstack/linaria), [vanilla-extract](https://github.com/seek-oss/vanilla-extract), [CSS modules](https://github.com/css-modules/css-modules) which generate styles during build time).
-
-## Image optimizations
-
-Consider lazy loading images that are not in the viewport.
-
-Use modern image formats such as WEBP for faster image loading.
-
-Use `srcset` to load the most optimal image for the clients screen size.
-
-## Web vitals
-
-Since Google started taking web vitals in account when indexing websites, you should keep an eye on web vitals scores from [Lighthouse](https://web.dev/measure/) and [Pagespeed Insights](https://pagespeed.web.dev/).
+Run `npm run build` to exercise static generation, Pagefind indexing and
+internal-link checks. For a presentation change, compare desktop and mobile
+renders and inspect the browser network panel for oversized media or scripts.
+Use Lighthouse or WebPageTest when investigating a measured regression; do
+not report a performance score without a current run and its test conditions.

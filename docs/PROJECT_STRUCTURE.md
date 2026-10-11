@@ -1,89 +1,84 @@
-# 🗄️ Project Structure
+# Website project structure
 
-This Astro starter organizes code around **pages**, **layouts**, **components**, **content collections**, and **static assets**. The goal is a clear, content-first structure that stays easy to navigate as the site grows.
+The HorneroOS website is a static Astro site. Product facts and documentation
+are generated from pinned HorneroOS repositories; authored pages explain and
+show that product without duplicating its catalogues.
 
-## Top-level layout
+## Source tree
 
-```sh
-.
-├── public/                 # Static assets served as-is (favicon, images)
-├── src/
-│   ├── components/         # Reusable Astro (and optional island) components
-│   ├── content/            # Markdown/MDX entries for collections
-│   │   └── blog/           # Sample blog collection
-│   ├── content.config.ts   # Collection loaders and Zod schemas
-│   ├── layouts/            # Page shells (HTML document wrappers)
-│   ├── pages/              # File-based routes
-│   │   ├── index.astro     # CNA landing page
-│   │   └── blog/           # Blog list + [slug] detail routes
-│   └── styles/             # Shared CSS (landing, blog, etc.)
-├── docs/                   # Human-readable project guides
-├── astro.config.mjs
-├── eslint.config.mjs
-├── tsconfig.json
-└── package/                # CNA dynamic package.json resolution (template only)
+```text
+src/
+├── assets/brand/          # Optimized brand marks imported by Astro
+├── components/            # Capture frames, provenance plates, diagrams
+├── content/
+│   └── showroom/          # Real captures with validated provenance metadata
+├── data/
+│   ├── docs-nav.ts        # Documentation navigation groups
+│   └── product/           # Generated data and full-SHA source pins
+├── layouts/
+│   └── SiteLayout.astro   # Shared navigation, color mode, footer, page shell
+├── lib/                   # Markdown link rewriting and build helpers
+├── pages/                 # Public routes (listed below)
+└── styles/                # Global tokens, color modes, shared site styling
+
+scripts/
+├── sync-product-data.mjs  # Fetches pins and generates/checks product data
+└── check-links.mjs        # Fails builds on unresolved internal links
 ```
 
-## Routing
+Astro's generated `.astro/`, fetched `.cache/`, `dist/`, and Pagefind output
+are build artifacts. Do not commit them.
 
-Astro maps files in `src/pages/` to URLs:
+## Public routes
 
-| File | Route |
-|------|-------|
-| `pages/index.astro` | `/` |
-| `pages/blog/index.astro` | `/blog` |
-| `pages/blog/[slug].astro` | `/blog/:slug` |
+| Source                           | Route         | Role                                          |
+| -------------------------------- | ------------- | --------------------------------------------- |
+| `src/pages/index.astro`          | `/`           | Product introduction and real desktop capture |
+| `src/pages/editions.astro`       | `/editions/`  | Edition composition and maturity              |
+| `src/pages/layouts.astro`        | `/layouts/`   | Shell layout catalogue                        |
+| `src/pages/themes.astro`         | `/themes/`    | Themes, wallpapers and palette generation     |
+| `src/pages/showroom.astro`       | `/showroom/`  | Curated visual stories using real captures    |
+| `src/pages/companion.astro`      | `/companion/` | Companion experience                          |
+| `src/pages/install.astro`        | `/install/`   | Current installation availability and caveats |
+| `src/pages/releases.astro`       | `/releases/`  | Product releases from pinned metadata         |
+| `src/pages/roots.astro`          | `/roots/`     | Project history, people and provenance        |
+| `src/pages/search.astro`         | `/search/`    | Pagefind-powered site search                  |
+| `src/pages/docs/[...slug].astro` | `/docs/**`    | HorneroOS/docs rendered at its pinned commit  |
 
-## Content collections
+The 404 page is `src/pages/404.astro`.
 
-Build-time content lives in `src/content/` and is registered in `src/content.config.ts`.
+## Product data and documentation
 
-- **Loader**: `glob()` reads Markdown/MDX from `src/content/blog/`
-- **Schema**: Zod validates frontmatter (title, description, pubDate, draft, etc.)
-- **Query**: Pages use `getCollection()` and `render()` from `astro:content`
+`src/data/product/pins.json` pins complete commits for Config, Shell, Hornero
+CLI and docs. `scripts/sync-product-data.mjs` reads those sources and
+generates the JSON consumed by product pages. Never edit generated catalogue
+JSON by hand. Use `npm run data:sync`, `npm run data:bump`, or
+`npm run data:check` according to [`PRODUCT_DATA.md`](./PRODUCT_DATA.md).
 
-Add new collections by defining another `defineCollection()` entry and exporting it from `collections`.
+The documentation route reads the pinned docs checkout under `.cache/` at
+build time. `src/lib/remark-docs-links.mjs` rewrites relative Markdown links
+to website routes or pinned GitHub source links. `src/data/docs-nav.ts`
+controls the documentation sidebar. Pagefind indexes the generated site and
+its client script is loaded on `/search/` only.
 
-## Layouts and components
+## Real captures
 
-- **`layouts/BaseLayout.astro`** — document shell with `<html>`, `<body>`, and a default slot
-- **`components/BaseHead.astro`** — shared `<title>`, charset, viewport, and description meta
+Showroom entries live in `src/content/showroom/*.md`. The collection schema in
+`src/content.config.ts` requires a real image, meaningful alt text, display
+order and provenance. Keep the source commit, scenario/context, theme,
+resolution and date with each capture where available. `ArchFrame.astro` and
+`KilnStamp.astro` render the image and its provenance; do not substitute
+concept mockups for product evidence.
 
-Keep page-specific markup in `pages/` and promote repeated structure into layouts or components.
+## Shared presentation
 
-## Import alias
+`SiteLayout.astro` provides the header, navigation, three-way System/Light/Dark
+color control and footer. `src/styles/global.css` owns role-based design
+tokens and both color modes. `BaseHead.astro` owns shared metadata. Keep
+static content in Astro components and avoid hydrating a framework for content
+that can be rendered at build time.
 
-TypeScript path mapping is configured in `tsconfig.json`:
-
-```json
-"paths": {
-  "@/*": ["./src/*"]
-}
-```
-
-Example:
-
-```astro
----
-import BaseLayout from '@/layouts/BaseLayout.astro';
----
-```
-
-## When to add folders
-
-| Need | Suggested location |
-|------|-------------------|
-| New marketing page | `pages/about.astro` |
-| Shared nav/footer | `components/` |
-| Blog or docs content | `content/<collection>/` |
-| Global styles | `styles/` or component `<style>` blocks |
-| Interactive widget | `components/` + optional `@astrojs/react` integration |
-
-## Principles
-
-1. **Content-first** — prefer static HTML and collections over client state
-2. **Colocate** — keep styles and helpers near the page or component that uses them
-3. **Honest routes** — every linked page should exist; remove or update stale links
-4. **Schema at the edge** — validate frontmatter in `content.config.ts` early
-
-For tooling and editor setup, see [Project Configuration](./PROJECT_CONFIGURATION.md).
+See [`COMPONENTS_AND_STYLING.md`](./COMPONENTS_AND_STYLING.md),
+[`STATE_MANAGEMENT.md`](./STATE_MANAGEMENT.md),
+[`PROJECT_CONFIGURATION.md`](./PROJECT_CONFIGURATION.md), and
+[`PRODUCT_DATA.md`](./PRODUCT_DATA.md) for the corresponding contracts.
