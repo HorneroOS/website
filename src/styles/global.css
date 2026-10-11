@@ -1,9 +1,9 @@
 /*
  * Hornero OS site design system.
  *
- * Palette: HorneroOS/config docs/BRAND.md (hornero-dark / hornero-light
- * ramps), so the site always matches the default desktop. Dark first, like
- * the desktop; light follows the visitor's preference.
+ * Palette: Buenos Aires after rain, with Patagonia's blue-hour horizon:
+ * ink navy, signal magenta, river cyan and sodium amber. Dark first; light
+ * mode keeps the same colors in an editorial, high-contrast surface.
  * Type: Rubik (display + UI) and Martian Mono (provenance data), both
  * self-hosted: the site makes no third-party requests.
  */
@@ -11,27 +11,32 @@
 :root {
   color-scheme: dark;
 
-  /* Brand ramp (dark surface) */
-  --adobe-night: #1d1410;
-  --adobe-kiln: #271b15;
-  --adobe-wall: #3a2920;
-  --cream: #f6e9db;
-  --cream-muted: #cdb9a6;
-  --ember: #e07856;
-  --sunset: #f2b749;
-  --clay: #d9a05f;
+  /* Southern Signal: city ink, electric signage, river light, sodium lamps. */
+  --night: #090b17;
+  --night-surface: #111528;
+  --night-raised: #191d34;
+  --ice: #f3f2fb;
+  --ice-muted: #aeb3cc;
+  --signal: #f276d1;
+  --river: #69deeb;
+  --sodium: #f1b967;
+  --mint: #a6dfc1;
 
   /* Roles */
-  --bg: var(--adobe-night);
-  --surface: var(--adobe-kiln);
-  --line: var(--adobe-wall);
-  --text: var(--cream);
-  --text-muted: var(--cream-muted);
-  --accent: var(--ember);
-  --accent-ink: #1d1410;
-  --highlight: var(--sunset);
-  --secondary: var(--clay);
-  --focus: var(--sunset);
+  --bg: var(--night);
+  --surface: var(--night-surface);
+  --surface-raised: var(--night-raised);
+  --line: #2a304d;
+  --text: var(--ice);
+  --text-muted: var(--ice-muted);
+  --accent: var(--signal);
+  --accent-ink: #210b24;
+  --highlight: var(--river);
+  --secondary: var(--sodium);
+  --focus: #8cebf0;
+  --ink: var(--text);
+  --muted: var(--text-muted);
+  --clay: var(--secondary);
 
   --font-ui: 'Rubik Variable', 'Rubik', system-ui, sans-serif;
   --font-data: 'Martian Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
@@ -52,16 +57,20 @@
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --bg: #faf1e3;
-    --surface: #f2e2cc;
-    --line: #dcc3a4;
-    --text: #2b1a11;
-    --text-muted: #6b4e3a;
-    --accent: #b24827;
-    --accent-ink: #faf1e3;
-    --highlight: #9a5b0a;
-    --secondary: #7c4a2c;
-    --focus: #b24827;
+    --bg: #f3f3fa;
+    --surface: #e9eaf5;
+    --surface-raised: #ffffff;
+    --line: #c8cbe0;
+    --text: #17192d;
+    --text-muted: #4e536c;
+    --accent: #922a80;
+    --accent-ink: #fff8fe;
+    --highlight: #006c83;
+    --secondary: #805019;
+    --focus: #006c83;
+    --ink: var(--text);
+    --muted: var(--text-muted);
+    --clay: var(--secondary);
   }
 }
 
@@ -85,7 +94,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(70rem 36rem at 86% -12%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 68%),
+    radial-gradient(54rem 30rem at -16% 34%, color-mix(in srgb, var(--highlight) 5%, transparent), transparent 70%);
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--step-0);
@@ -370,7 +382,7 @@ pre {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--bg);
-    box-shadow: 0 1rem 2.5rem rgb(28 18 12 / 18%);
+    box-shadow: 0 1rem 2.5rem rgb(9 11 23 / 24%);
   }
 
   .mobile-menu nav ul {

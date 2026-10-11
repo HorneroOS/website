@@ -1,24 +1,20 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArchFrame from '../components/ArchFrame.astro';
+import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
-import heroShot from '../../assets/screenshots/certified/hornero-light.png';
 import cockpit from '../../assets/screenshots/certified/cockpit-clear.png';
 import islands from '../../assets/screenshots/certified/islands.png';
 import dock from '../../assets/screenshots/certified/dock-bottom.png';
 import neonCity from '../../assets/screenshots/curated/neon-city.webp';
 import vaporRoadtrip from '../../assets/screenshots/curated/vapor-roadtrip.webp';
 import morningLake from '../../assets/screenshots/curated/morning-lake.webp';
+import buenosAiresNocturno from '../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp';
 import { editionCatalogue, editions, layouts, themes } from '../data/product';
 
-const heroProvenance = {
-  source: 'Hornero QA',
-  context: 'Package-only flagship theme run',
-  pins: { shell: '98a5de2', config: '96b6870', horneroctl: '9c15172' },
-  resolution: '1280×800',
-  theme: 'Hornero Light',
-  date: '2026-10-03',
-};
+const showcase = await getCollection('showroom');
+const heroCapture = showcase.find((capture) => capture.id === 'neon-city');
+if (!heroCapture) throw new Error('Neon City capture is missing from the showroom catalogue');
 const layoutShots = [
   { name: 'Cockpit Clear', note: 'One calm line, edge to edge.', src: cockpit, href: '/layouts#cockpit-clear' },
   { name: 'Islands', note: 'Separate surfaces, one shell.', src: islands, href: '/layouts#islands' },
@@ -27,21 +23,35 @@ const layoutShots = [
 const wallpaperShots = [
   {
     name: 'Neon City',
-    note: 'Electric cyan and amber, after dark.',
+    note: 'Electric signs and amber transit.',
     src: neonCity,
     alt: 'Hornero desktop with the Neon City cyberpunk skyline behind its left rail.',
+    kind: 'Live desktop capture',
+    href: '/showroom#visual-worlds',
   },
   {
     name: 'Vapor Dreams',
     note: 'Coral cliffs under a synthwave sky.',
     src: vaporRoadtrip,
     alt: 'Hornero desktop with a coral synthwave road and dusk-purple sky behind its left rail.',
+    kind: 'Live desktop capture',
+    href: '/showroom#visual-worlds',
   },
   {
     name: 'Soft Morning',
     note: 'A cool alpine dawn above cloud.',
     src: morningLake,
     alt: 'Hornero desktop with a pale alpine sunrise above cloud behind its left rail.',
+    kind: 'Live desktop capture',
+    href: '/showroom#visual-worlds',
+  },
+  {
+    name: 'Buenos Aires Nocturno',
+    note: 'Rain-dark avenues and sodium light, drawn from the city at night.',
+    src: buenosAiresNocturno,
+    alt: 'Hornero Buenos Aires Nocturno wallpaper artwork: a rain-lit avenue through dense city blocks after dark.',
+    kind: 'Wallpaper artwork',
+    href: '/themes#buenos-aires-nocturno',
   },
 ];
 const editionOrder = ['desktop', 'server', 'agents', 'studio'];
@@ -85,6 +95,13 @@ const description = `An Arch-based operating system family evolved from a Linux 
         <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>, and will lead HorneroOS’s future
         custom installer. Both are part of the <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
       </p>
+      <p class="hero-route" aria-label="Visual roots: Buenos Aires, Patagonia and beyond">
+        <span>BUENOS AIRES</span>
+        <i aria-hidden="true">→</i>
+        <span>PATAGONIA</span>
+        <i aria-hidden="true">→</i>
+        <span>BEYOND</span>
+      </p>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span>
           <strong>{layouts.length}</strong> layouts
@@ -110,13 +127,13 @@ const description = `An Arch-based operating system family evolved from a Linux 
       </p>
     </div>
     <ArchFrame
-      src={heroShot}
-      alt="Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied."
-      variant="arch"
+      src={heroCapture.data.image}
+      alt={heroCapture.data.alt}
+      variant="plain"
       eager
       sizes="(min-width: 1180px) 720px, calc(100vw - 2rem)"
       widths={[480, 720, 1080, 1280]}
-      provenance={heroProvenance}
+      provenance={heroCapture.data.provenance}
     />
   </section>
 
@@ -251,7 +268,7 @@ const description = `An Arch-based operating system family evolved from a Linux 
     </div>
     <div class="wallpaper-grid">
       {wallpaperShots.map((shot) => (
-        <a class="wallpaper-shot" href="/showroom">
+        <a class="wallpaper-shot" href={shot.href}>
           <Picture
             src={shot.src}
             alt={shot.alt}
@@ -264,15 +281,16 @@ const description = `An Arch-based operating system family evolved from a Linux 
           />
           <span>
             <strong>{shot.name}</strong>
-            <small>{shot.note}</small>
+            <small>{shot.kind}</small>
+            <span>{shot.note}</span>
           </span>
         </a>
       ))}
     </div>
     <p class="wallpaper-credit">
-      Three real desktop captures, each using a different wallpaper already in the collection. Wallpaper-derived colors
-      are an optional Appearance setting; these captures show the scenes, not a palette-generation comparison. See the{' '}
-      <a href="/showroom">Showroom</a> for capture context.
+      Three live desktop captures show the Shell against different scenes; Buenos Aires Nocturno is the wallpaper
+      artwork itself. Wallpaper-derived colors are an optional Appearance setting. The <a href="/showroom">Showroom</a>{' '}
+      lists capture context and dates.
     </p>
   </section>
 
@@ -307,6 +325,25 @@ const description = `An Arch-based operating system family evolved from a Linux 
     display: grid;
     gap: 0.95rem;
     justify-items: start;
+  }
+  .hero-route {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font: 0.66rem var(--font-data);
+    letter-spacing: 0.07em;
+  }
+  .hero-route span:first-child {
+    color: var(--highlight);
+  }
+  .hero-route span:nth-of-type(2) {
+    color: var(--accent);
+  }
+  .hero-route i {
+    color: var(--secondary);
+    font-style: normal;
   }
   .hero h1 {
     max-width: 18ch;
@@ -375,13 +412,13 @@ const description = `An Arch-based operating system family evolved from a Linux 
     border-top-color: var(--accent);
   }
   .family-server {
-    border-top-color: #7daab4;
+    border-top-color: var(--highlight);
   }
   .family-agents {
-    border-top-color: #a68bd0;
+    border-top-color: var(--accent);
   }
   .family-studio {
-    border-top-color: #8eab72;
+    border-top-color: var(--mint);
   }
   .family-cell-top {
     display: flex;
@@ -415,7 +452,12 @@ const description = `An Arch-based operating system family evolved from a Linux 
     width: 100%;
   }
   .hero :global(.frame-shot) {
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/9;
+    border-color: color-mix(in oklab, var(--highlight) 42%, var(--line));
+    box-shadow:
+      0 0 0 6px var(--surface),
+      0 0 0 7px var(--line),
+      0 0 2.5rem color-mix(in srgb, var(--highlight) 12%, transparent);
   }
   .hero :global(.frame-shot) :global(img) {
     width: 100%;
@@ -428,8 +470,8 @@ const description = `An Arch-based operating system family evolved from a Linux 
     height: 0.55rem;
     margin-right: 0.45rem;
     border-radius: 50%;
-    background: #86ae68;
-    box-shadow: 0 0 0 4px color-mix(in oklab, #86ae68 18%, transparent);
+    background: var(--highlight);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--highlight) 18%, transparent);
   }
   .hero-facts {
     display: flex;
@@ -582,8 +624,13 @@ const description = `An Arch-based operating system family evolved from a Linux 
   }
   .wallpaper-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+  }
+  @media (max-width: 1100px) {
+    .wallpaper-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   .wallpaper-shot {
     overflow: hidden;
@@ -612,6 +659,12 @@ const description = `An Arch-based operating system family evolved from a Linux 
     display: grid;
     gap: 0.25rem;
     padding: 0.8rem 0.9rem 0.95rem;
+  }
+  .wallpaper-shot small {
+    color: var(--highlight);
+    font: 0.62rem var(--font-data);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
   .wallpaper-shot small,
   .wallpaper-credit {
@@ -662,6 +715,12 @@ const description = `An Arch-based operating system family evolved from a Linux 
     }
   }
   @media (max-width: 700px) {
+    .hero > :global(.frame) {
+      grid-row: 1;
+    }
+    .hero-copy {
+      grid-row: 2;
+    }
     .family-heading {
       align-items: start;
       flex-direction: column;
@@ -682,7 +741,7 @@ const description = `An Arch-based operating system family evolved from a Linux 
       gap: 0.75rem;
     }
     .wallpaper-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .layout-stories {
       grid-template-columns: 1fr 1fr;
@@ -695,6 +754,11 @@ const description = `An Arch-based operating system family evolved from a Linux 
     }
     .layout-story :global(img) {
       height: clamp(145px, 38vw, 220px);
+    }
+  }
+  @media (max-width: 480px) {
+    .wallpaper-grid {
+      grid-template-columns: 1fr;
     }
   }
   @media (prefers-reduced-motion: reduce) {

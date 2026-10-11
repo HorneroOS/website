@@ -101,12 +101,13 @@ Wrap third-party components in your own Astro wrapper so you can swap implementa
 
 ## Hornero design system
 
-Tokens live in `src/styles/global.css` and come from HorneroOS/config
-`docs/BRAND.md` (hornero-dark / hornero-light ramps), so the site matches the
-default desktop. Dark is the default; light follows `prefers-color-scheme`.
-Use the role tokens (`--bg`, `--surface`, `--line`, `--text`,
-`--text-muted`, `--accent`, `--highlight`, `--secondary`, `--focus`), never
-raw hex values in components.
+Tokens live in `src/styles/global.css`. The website uses its own complementary
+“Southern Signal” palette: Buenos Aires night ink, river cyan, electric sign
+magenta and sodium-lamp amber. It shares HorneroOS’s visual vocabulary without
+pretending that the website palette is a desktop theme. Dark is the default;
+light mode follows `prefers-color-scheme`. Use the role tokens (`--bg`,
+`--surface`, `--line`, `--text`, `--text-muted`, `--accent`, `--highlight`,
+`--secondary`, `--focus`), never raw hex values in components.
 
 Type: Rubik (`--font-ui`) for display and UI, Martian Mono (`--font-data`)
 for provenance and data. Both are self-hosted through `@fontsource-variable`
