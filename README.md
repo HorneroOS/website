@@ -29,6 +29,8 @@ npm run build
 - `/editions` — the composed product family and maturity
 - `/layouts`, `/themes`, `/releases` — generated from pinned product sources
   (see `docs/PRODUCT_DATA.md`)
+- `/wallpapers` — location, theme, photographer and license gallery generated
+  from HorneroOS/config's pinned photo provenance, with local responsive previews
 - `/showroom` — real captures with provenance plates
 - `/greeter` — interactive browser recreation of the offline SDDM greeter,
   with local-time moods and a provenance-backed Argentina scene collection

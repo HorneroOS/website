@@ -1,17 +1,26 @@
 {
-  "source_repository": "https://github.com/ulises-jeremias/dotfiles",
-  "source_commit": "d6e57e86fa04619d83dfd574891734009de628e1",
+  "source_repository": "https://github.com/HorneroOS/config",
+  "source_manifest": "profiles/themes/wallpaper-provenance.json",
+  "source_commit": "045149e7e29e75956ba5ae526b5f16be9fd4f265",
   "source_files": [
     {
-      "file": "home/dot_local/share/hornero/wallpapers/patagonia/patagonia-glacier-01.jpg",
-      "sha256": "1fbceee4379a8eb7730eb71ce286069fe6d77f4ead4b045170a72be9fdb8ace8",
-      "artwork": "Original generated wallpaper artwork for HorneroOS; Patagonia, glacier, basalt and glacial water."
+      "file": "assets/screenshots/wallpapers/patagonia-glacier-01.jpg",
+      "theme": "patagonia",
+      "photographer": "ThartmannWiki",
+      "source": "https://commons.wikimedia.org/wiki/File:Perito_Moreno_Glacier_Panorama.jpg",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sha256": "2fbfd75b5a2c69918c65d4ab1612c56daadff53e1bff11b40c9c46387753a14b"
     },
     {
-      "file": "home/dot_local/share/hornero/wallpapers/fin-del-mundo/beagle-blue-hour-01.jpg",
-      "sha256": "53b7757b823464d9a612da93fb8961c39e82a7abbc4ddb000758350886141a96",
-      "artwork": "Original generated wallpaper artwork for HorneroOS; Beagle Channel, southern forest and harbor light."
+      "file": "assets/screenshots/wallpapers/beagle-blue-hour-01.jpg",
+      "theme": "fin-del-mundo",
+      "photographer": "RAYANDBEE",
+      "source": "https://commons.wikimedia.org/wiki/File:Beagle_Channel_-m.jpg",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "sha256": "ac6160e5701a16469482a63fa7b85d56a1650ed4bc6dee298b4740af402c393a"
     }
   ],
-  "presentation": "Wallpaper artwork previews only. They are not desktop screenshots."
+  "presentation": "Photographic wallpaper assets, not desktop screenshots. Website preview derivatives are optimized separately under public/wallpapers/argentina/."
 }

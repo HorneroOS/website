@@ -10,6 +10,7 @@ pinned Hornero sources, never typed into pages.
 | `src/data/product/releases.json` | HorneroOS/hornero `releases/`, `manifests/` and the candidate pointer; tagged status from git tags |
 | `src/data/product/editions.json` | HorneroOS/hornero `editions/catalogue.yaml` |
 | `src/data/product/greeter-scenes.json` | Pinned HorneroOS/greeter runtime catalog, approved scene manifests, still provenance records, and daypart windows |
+| `src/data/product/wallpapers.json` | Pinned HorneroOS/config photo provenance manifest; local website previews are checked against its output hashes |
 
 ## Documentation pages
 
