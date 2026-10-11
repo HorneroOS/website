@@ -10,7 +10,6 @@ import neonCity from '../../assets/screenshots/curated/neon-city.webp';
 import vaporRoadtrip from '../../assets/screenshots/curated/vapor-roadtrip.webp';
 import morningLake from '../../assets/screenshots/curated/morning-lake.webp';
 import buenosAiresNocturno from '../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp';
-import buenosAiresCyberpunkArtwork from '../../assets/brand/buenos-aires-cyberpunk.webp';
 import { editionCatalogue, editions, layouts, themes } from '../data/product';
 
 const showcase = await getCollection('showroom');
@@ -79,46 +78,34 @@ const family = editionOrder.map((id) => {
 });
 const title = 'HorneroOS | An operating system family shaped by daily use';
 const description = `An Arch-based operating system family evolved from a Linux setup used daily since 2018. Explore the Wayland-first Desktop preview, ${layouts.length} layouts and ${themes.length} coordinated looks.`;
+const heroProvenance = {
+  ...heroCapture.data.provenance,
+  context: 'Live host capture · not an installer image',
+  pins: {},
+  resolution: undefined,
+  theme: undefined,
+};
 ---
 
 <SiteLayout title={title} description={description}>
   <section class="hero">
     <div class="hero-copy">
-      <div class="hero-artwork">
-        <Picture
-          src={buenosAiresCyberpunkArtwork}
-          alt="Original concept artwork reimagining Buenos Aires at night: the Obelisk, Avenida 9 de Julio, a city bus and rain-reflected cyan, fuchsia and sodium light. This is artwork, not a desktop capture."
-          formats={['avif', 'webp']}
-          fallbackFormat="webp"
-          widths={[640, 900, 1200]}
-          sizes="(min-width: 960px) 44vw, calc(100vw - 2rem)"
-          loading="eager"
-          decoding="async"
-        />
-      </div>
       <p class="eyebrow">
         <span class="status-dot" aria-hidden="true"></span> Arch Linux · daily use since 2018
       </p>
       <h1>
-        Eight years of Linux. <em>HorneroOS.</em>
+        Eight years in use.
+        <br />
+        <em>HorneroOS.</em>
       </h1>
       <p class="lede">
-        HorneroOS evolves Ulises Jeremías’s Arch Linux setup, used, tested and refined daily since 2018. It is a
-        Wayland-first desktop within a wider operating-system family.
+        An Arch-based, Wayland-first desktop, evolved from the Linux setup Ulises Jeremías has used, tested and refined
+        since 2018.
       </p>
       <p class="heritage">
-        <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> leads HorneroOS and maintains the setup’s{' '}
-        <a href="https://github.com/ulises-jeremias/dotfiles">public dotfiles</a>.{' '}
-        <a href="https://github.com/PandaFoss">Panda Foss</a> contributes to HorneroOS, is one of the maintainers of{' '}
-        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>, and will lead HorneroOS’s custom
-        installer. Both are part of the <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
-      </p>
-      <p class="hero-route" aria-label="Visual roots: Buenos Aires, Patagonia and beyond">
-        <span>BUENOS AIRES</span>
-        <i aria-hidden="true">→</i>
-        <span>PATAGONIA</span>
-        <i aria-hidden="true">→</i>
-        <span>BEYOND</span>
+        Maintained by <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, with contributions from{' '}
+        <a href="https://github.com/PandaFoss">Panda Foss</a>. Built in the open by the{' '}
+        <a href="https://github.com/HorneroOS">HorneroOS community</a>.
       </p>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span>
@@ -143,7 +130,6 @@ const description = `An Arch-based operating system family evolved from a Linux 
         Development preview · no ISO yet; Calamares is provisional until Panda Foss’s custom installer is ready.{' '}
         <a href="/install">Install status</a>
       </p>
-      <p class="artwork-caption">Buenos Aires nocturno · original concept artwork</p>
     </div>
     <ArchFrame
       src={heroCapture.data.image}
@@ -152,7 +138,7 @@ const description = `An Arch-based operating system family evolved from a Linux 
       eager
       sizes="(min-width: 1180px) 720px, calc(100vw - 2rem)"
       widths={[480, 720, 1080, 1280]}
-      provenance={heroCapture.data.provenance}
+      provenance={heroProvenance}
     />
   </section>
 
@@ -309,23 +295,39 @@ const description = `An Arch-based operating system family evolved from a Linux 
     <p class="wallpaper-credit">
       Three live desktop captures show the Shell against different scenes; Buenos Aires Nocturno is an attributed
       photograph. Wallpaper-derived colors are an optional Appearance setting. Browse the{' '}
-      <a href="/wallpapers">photographic collection</a> or the <a href="/showroom">Showroom</a>{' '}
-      lists capture context and dates.
+      <a href="/wallpapers">photographic collection</a> or the <a href="/showroom">Showroom</a> lists capture context
+      and dates.
     </p>
   </section>
 
   <section class="greeter-feature" aria-labelledby="greeter-feature-title">
     <a class="greeter-feature-image" href="/greeter" aria-label="Explore the interactive HorneroOS greeter preview">
-      <img src="/media/greeter/ar-er-el-palmar-golden-hour.webp" alt="Browser recreation of the HorneroOS greeter over a golden-hour view of El Palmar; this is not a desktop screenshot." width="1280" height="720" loading="lazy" decoding="async" />
+      <img
+        src="/media/greeter/ar-er-el-palmar-golden-hour.webp"
+        alt="Browser recreation of the HorneroOS greeter over a golden-hour view of El Palmar; this is not a desktop screenshot."
+        width="1280"
+        height="720"
+        loading="lazy"
+        decoding="async"
+      />
       <span class="feature-preview-label">BROWSER RECREATION</span>
-      <span class="feature-clock" aria-hidden="true">17:42</span>
-      <span class="feature-signature" aria-hidden="true">HORNERO <i>OS</i></span>
+      <span class="feature-clock" aria-hidden="true">
+        17:42
+      </span>
+      <span class="feature-signature" aria-hidden="true">
+        HORNERO <i>OS</i>
+      </span>
     </a>
     <div class="greeter-feature-copy">
       <p class="eyebrow">THE FIRST MOMENT OF THE DESKTOP</p>
       <h2 id="greeter-feature-title">Argentina, before the desktop.</h2>
-      <p>The HorneroOS greeter pairs a calm login screen with landscapes and city lights from Argentina. Explore its local-time moods in an interactive browser recreation.</p>
-      <a class="text-link" href="/greeter">Experience the greeter <span aria-hidden="true">→</span></a>
+      <p>
+        The HorneroOS greeter pairs a calm login screen with landscapes and city lights from Argentina. Explore its
+        local-time moods in an interactive browser recreation.
+      </p>
+      <a class="text-link" href="/greeter">
+        Experience the greeter <span aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -357,135 +359,9 @@ const description = `An Arch-based operating system family evolved from a Linux 
     padding-block: clamp(0.8rem, 1.2rem + 1.6vw, 2rem) 2rem;
   }
   .hero-copy {
-    /* The hero stays a night scene in both site modes, like a lit city window. */
-    --hero-night: #090b17;
-    --hero-ink: #f3f2fb;
-    --hero-muted: #c0c8d8;
-    --hero-copy-ink: #e4e6f0;
-    --hero-sign: #ff91df;
-    --hero-river: #79e4ef;
-    --hero-sodium: #ffc878;
-
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
     display: grid;
     gap: 0.95rem;
     justify-items: start;
-    padding: clamp(1.15rem, 2.5vw, 2rem);
-    border: 1px solid color-mix(in oklab, var(--highlight) 36%, var(--line));
-    border-radius: calc(var(--radius) + 4px);
-    background: var(--hero-night);
-    color: var(--hero-ink);
-    box-shadow: 0 1rem 3.2rem rgb(2 5 18 / 24%);
-  }
-  .hero-copy::after {
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgb(6 8 20 / 84%) 0%, rgb(6 8 20 / 72%) 53%, rgb(6 8 20 / 45%) 100%),
-      linear-gradient(0deg, rgb(6 8 20 / 34%), transparent 38%);
-    content: '';
-    pointer-events: none;
-  }
-  .hero-copy > *:not(.hero-artwork) {
-    position: relative;
-    z-index: 2;
-  }
-  .hero-copy > .hero-artwork {
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .hero-copy .hero-artwork :global(picture),
-  .hero-copy .hero-artwork :global(img) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .hero-copy .hero-artwork :global(img) {
-    object-fit: cover;
-    object-position: 63% center;
-    opacity: 0.82;
-  }
-  .hero-copy .eyebrow {
-    color: var(--hero-sodium);
-  }
-  .hero-copy .status-dot {
-    background: var(--hero-river);
-    margin-right: 0;
-    box-shadow:
-      0 0 0 4px color-mix(in srgb, var(--hero-river) 18%, transparent),
-      0 0 1rem color-mix(in srgb, var(--hero-river) 55%, transparent);
-  }
-  .hero .hero-copy h1 em {
-    color: var(--hero-sign);
-    text-shadow: 0 0 1.5rem color-mix(in srgb, var(--hero-sign) 24%, transparent);
-  }
-  .hero-copy .lede {
-    color: var(--hero-copy-ink);
-  }
-  .hero-copy .heritage {
-    color: var(--hero-muted);
-  }
-  .hero-copy .heritage a,
-  .hero-copy .release-note a {
-    color: var(--hero-ink);
-  }
-  .hero-copy .hero-route {
-    color: var(--hero-muted);
-  }
-  .hero-copy .hero-route span:first-child {
-    color: var(--hero-river);
-  }
-  .hero-copy .hero-route span:nth-of-type(2) {
-    color: var(--hero-sign);
-  }
-  .hero-copy .hero-route i {
-    color: var(--hero-sodium);
-  }
-  .hero-copy .hero-facts {
-    color: var(--hero-muted);
-  }
-  .hero-copy .hero-facts strong {
-    color: var(--hero-ink);
-  }
-  .hero-copy .cta.secondary {
-    color: var(--hero-ink);
-    border-color: rgb(255 255 255 / 48%);
-    background: rgb(9 11 23 / 25%);
-    backdrop-filter: blur(8px);
-  }
-  .hero-copy .release-note {
-    color: var(--hero-muted);
-  }
-  .artwork-caption {
-    color: var(--hero-muted);
-    font: 0.62rem var(--font-data);
-    letter-spacing: 0.075em;
-    text-transform: uppercase;
-  }
-  .hero-route {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--text-muted);
-    font: 0.66rem var(--font-data);
-    letter-spacing: 0.07em;
-  }
-  .hero-route span:first-child {
-    color: var(--highlight);
-  }
-  .hero-route span:nth-of-type(2) {
-    color: var(--accent);
-  }
-  .hero-route i {
-    color: var(--secondary);
-    font-style: normal;
   }
   .hero h1 {
     max-width: 18ch;
@@ -873,17 +749,63 @@ const description = `An Arch-based operating system family evolved from a Linux 
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
   }
-  .greeter-feature-image:hover img { transform: scale(1.025); }
-  .feature-clock, .feature-signature { position: absolute; z-index: 1; color: white; text-shadow: 0 2px 14px #111; }
-  .feature-clock { left: 8%; top: 40%; font-size: clamp(2.7rem, 8vw, 6rem); font-weight: 350; letter-spacing: -.07em; }
-  .feature-preview-label { position: absolute; z-index: 1; top: 1rem; left: 1rem; padding: .4rem .55rem; border: 1px solid rgb(255 255 255 / .38); border-radius: 3px; background: rgb(6 9 15 / .65); color: #fff; font: 600 .55rem var(--font-data); letter-spacing: .1em; }
-  .feature-signature { right: 1rem; bottom: .85rem; font: 600 .62rem var(--font-data); letter-spacing: .1em; }
-  .feature-signature i { color: #ff796c; font-style: normal; }
-  .greeter-feature-copy h2 { margin-top: .8rem; font-size: clamp(1.8rem, 3.6vw, 3.2rem); line-height: 1.05; }
-  .greeter-feature-copy > p:not(.eyebrow) { margin-top: .8rem; max-width: 52ch; color: var(--text-muted); line-height: 1.6; }
-  .greeter-feature-copy .text-link { display: inline-block; margin-top: 1.2rem; }
+  .greeter-feature-image:hover img {
+    transform: scale(1.025);
+  }
+  .feature-clock,
+  .feature-signature {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    text-shadow: 0 2px 14px #111;
+  }
+  .feature-clock {
+    left: 8%;
+    top: 40%;
+    font-size: clamp(2.7rem, 8vw, 6rem);
+    font-weight: 350;
+    letter-spacing: -0.07em;
+  }
+  .feature-preview-label {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.55rem;
+    border: 1px solid rgb(255 255 255 / 0.38);
+    border-radius: 3px;
+    background: rgb(6 9 15 / 0.65);
+    color: #fff;
+    font: 600 0.55rem var(--font-data);
+    letter-spacing: 0.1em;
+  }
+  .feature-signature {
+    right: 1rem;
+    bottom: 0.85rem;
+    font: 600 0.62rem var(--font-data);
+    letter-spacing: 0.1em;
+  }
+  .feature-signature i {
+    color: #ff796c;
+    font-style: normal;
+  }
+  .greeter-feature-copy h2 {
+    margin-top: 0.8rem;
+    font-size: clamp(1.8rem, 3.6vw, 3.2rem);
+    line-height: 1.05;
+  }
+  .greeter-feature-copy > p:not(.eyebrow) {
+    margin-top: 0.8rem;
+    max-width: 52ch;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .greeter-feature-copy .text-link {
+    display: inline-block;
+    margin-top: 1.2rem;
+  }
   @media (min-width: 960px) {
     .hero {
       grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
@@ -892,7 +814,9 @@ const description = `An Arch-based operating system family evolved from a Linux 
       grid-template-columns: 0.9fr 1.1fr;
       align-items: center;
     }
-    .greeter-feature { grid-template-columns: 1.15fr .85fr; }
+    .greeter-feature {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
   }
   @media (max-width: 700px) {
     .hero > :global(.frame) {
@@ -922,7 +846,9 @@ const description = `An Arch-based operating system family evolved from a Linux 
     .wallpaper-heading {
       gap: 0.75rem;
     }
-    .greeter-feature { grid-template-columns: 1fr; }
+    .greeter-feature {
+      grid-template-columns: 1fr;
+    }
     .wallpaper-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -952,6 +878,177 @@ const description = `An Arch-based operating system family evolved from a Linux 
     .wallpaper-shot:hover :global(img) {
       transform: none;
     }
-    .greeter-feature-image img { transition: none; }
+    .greeter-feature-image img {
+      transition: none;
+    }
+  }
+
+  /* Editorial lead: the product capture is the first image; the story sits beside it. */
+  .hero {
+    grid-template-columns: minmax(0, 1.22fr) minmax(18rem, 0.78fr);
+    grid-template-areas: 'capture copy';
+    gap: clamp(2rem, 5vw, 5.5rem);
+    align-items: center;
+    padding-block: clamp(1rem, 2vw, 2rem) clamp(3rem, 7vw, 6.5rem);
+  }
+  .hero > :global(.frame) {
+    grid-area: capture;
+    min-width: 0;
+    align-self: center;
+  }
+  .hero-copy {
+    grid-area: copy;
+    padding: 0;
+    overflow: visible;
+    gap: 1.1rem;
+    background: transparent;
+    color: var(--text);
+    box-shadow: none;
+    border: 0;
+  }
+  .hero-copy::after {
+    content: none;
+  }
+  .hero-copy .eyebrow {
+    color: var(--secondary);
+  }
+  .hero-copy .status-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+    background: var(--highlight);
+    box-shadow: none;
+  }
+  .hero h1 {
+    max-width: 12ch;
+    font-size: clamp(2.7rem, 4.7vw, 5.1rem);
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+  }
+  .hero h1 em {
+    display: inline-block;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 0.92em;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.06em;
+  }
+  .hero .lede {
+    max-width: 39ch;
+    color: var(--text-muted);
+    font-size: clamp(1.05rem, 1rem + 0.35vw, 1.24rem);
+    line-height: 1.55;
+  }
+  .hero .heritage {
+    max-width: 42ch;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--secondary);
+    color: var(--text-muted);
+  }
+  .hero .heritage a {
+    color: var(--text);
+    text-decoration-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  }
+  .hero .hero-facts {
+    gap: 0.45rem 1.15rem;
+    padding-block: 0.65rem;
+    border-block: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+  .hero .hero-facts strong {
+    color: var(--text);
+  }
+  .hero .release-note {
+    max-width: 46ch;
+    color: var(--text-muted);
+    font-size: 0.76rem;
+  }
+  .hero .release-note a {
+    color: var(--text);
+  }
+  .hero :global(.frame-shot) {
+    border-color: var(--line);
+    border-radius: 3px;
+    box-shadow: 0 1.4rem 4rem color-mix(in srgb, var(--bg) 25%, transparent);
+  }
+  .hero :global(.frame figcaption) {
+    max-width: 100%;
+  }
+  .family-snapshot {
+    border: 0;
+    border-block: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    padding-inline: 0;
+  }
+  .family-cell {
+    padding-inline: 0.7rem;
+  }
+  .product-model {
+    border-radius: 2px;
+    border-color: var(--line);
+    background: var(--surface);
+  }
+  .layout-story,
+  .wallpaper-shot {
+    border-radius: 3px;
+    border-color: transparent;
+    background: transparent;
+  }
+  .layout-story :global(img),
+  .wallpaper-shot :global(img) {
+    border-radius: 3px;
+  }
+  .greeter-feature {
+    border: 0;
+    border-block: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    padding-inline: 0;
+  }
+  .greeter-feature-image,
+  .greeter-feature-image img {
+    border-radius: 3px;
+  }
+  .closing {
+    border-radius: 2px;
+  }
+  @media (max-width: 959px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'capture' 'copy';
+    }
+    .hero-copy {
+      max-width: 48rem;
+      padding-inline: clamp(0rem, 3vw, 1.5rem);
+    }
+    .hero h1 {
+      max-width: 18ch;
+      font-size: clamp(2.7rem, 6.4vw, 4.5rem);
+    }
+  }
+  @media (max-width: 480px) {
+    .hero {
+      gap: 1.2rem;
+      padding-bottom: 2.5rem;
+    }
+    .hero-copy {
+      gap: 0.9rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.55rem, 12vw, 3.6rem);
+    }
+    .hero .heritage {
+      font-size: 0.79rem;
+    }
+    .hero .cta-row .cta {
+      min-height: 2.8rem;
+      padding-inline: 1rem;
+    }
+    .hero .hero-facts {
+      width: 100%;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
   }
 </style>

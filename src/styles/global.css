@@ -13,21 +13,21 @@
   color-scheme: dark;
 
   /* Southern Signal: wet asphalt, river light, sign glass and sodium lamps. */
-  --night: #080b14;
-  --night-surface: #0e1321;
-  --night-raised: #171d2d;
-  --ice: #f3f2fb;
-  --ice-muted: #aeb3cc;
-  --signal: #f276d1;
-  --river: #69deeb;
-  --sodium: #f1b967;
+  --night: #0a1016;
+  --night-surface: #111a21;
+  --night-raised: #1a252d;
+  --ice: #f2f0e9;
+  --ice-muted: #b1b7b7;
+  --signal: #ed84bd;
+  --river: #76cbd2;
+  --sodium: #e9b56d;
   --mint: #a6dfc1;
 
   /* Roles */
   --bg: var(--night);
   --surface: var(--night-surface);
   --surface-raised: var(--night-raised);
-  --line: #2b3954;
+  --line: #34444a;
   --text: var(--ice);
   --text-muted: var(--ice-muted);
   --accent: var(--signal);
@@ -36,11 +36,7 @@
   --highlight: var(--river);
   --secondary: var(--sodium);
   --focus: #8cebf0;
-  --browser-theme-color: #080b14;
-  --signal-grid: color-mix(in srgb, var(--river) 2.1%, transparent);
-  --sign-haze: 18%;
-  --river-haze: 14%;
-  --sodium-haze: 10%;
+  --browser-theme-color: #0a1016;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -54,9 +50,10 @@
   --step-2: clamp(1.6rem, 1.4rem + 0.9vw, 2.1rem);
   --step-3: clamp(2.2rem, 1.7rem + 2.2vw, 3.6rem);
 
-  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --gutter: clamp(1rem, 0.7rem + 2vw, 2.5rem);
   --measure: 66ch;
-  --radius: 14px;
+  --radius: 10px;
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
   /* The hornero's oven nest: a rounded arch over a flat sill. */
   --arch: 46% 46% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
 }
@@ -64,22 +61,18 @@
 :root[data-color-mode='light'] {
   color-scheme: light;
   /* River fog over concrete: daylight keeps the same sign-glass and sodium. */
-  --bg: #edf2f8;
-  --surface: #e2e9f2;
-  --surface-raised: #fbfcff;
-  --line: #bdc9d9;
-  --text: #172132;
-  --text-muted: #46556b;
-  --accent: #971e6c;
+  --bg: #f0eee7;
+  --surface: #e8e5dc;
+  --surface-raised: #faf8f1;
+  --line: #c8c4b9;
+  --text: #1b292e;
+  --text-muted: #526066;
+  --accent: #9a356b;
   --accent-ink: #fff9ff;
-  --highlight: #00677f;
-  --secondary: #765013;
-  --focus: #00566c;
-  --browser-theme-color: #edf2f8;
-  --signal-grid: color-mix(in srgb, var(--highlight) 3.4%, transparent);
-  --sign-haze: 19%;
-  --river-haze: 18%;
-  --sodium-haze: 13%;
+  --highlight: #176c76;
+  --secondary: #76552b;
+  --focus: #075b65;
+  --browser-theme-color: #f0eee7;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -112,30 +105,11 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg);
-  background-image:
-    radial-gradient(
-      62rem 34rem at 96% -8%,
-      color-mix(in srgb, var(--accent) var(--sign-haze), transparent),
-      transparent 84%
-    ),
-    radial-gradient(
-      46rem 34rem at -12% 34%,
-      color-mix(in srgb, var(--highlight) var(--river-haze), transparent),
-      transparent 84%
-    ),
-    radial-gradient(
-      42rem 24rem at 62% 108%,
-      color-mix(in srgb, var(--secondary) var(--sodium-haze), transparent),
-      transparent 82%
-    ),
-    linear-gradient(var(--signal-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--signal-grid) 1px, transparent 1px);
-  background-size:
-    auto,
-    auto,
-    auto,
-    56px 56px,
-    56px 56px;
+  background-image: radial-gradient(
+    70rem 34rem at 88% 0%,
+    color-mix(in srgb, var(--highlight) 5%, transparent),
+    transparent 76%
+  );
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--step-0);
@@ -261,10 +235,10 @@ hr {
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
   padding: 0.75rem var(--gutter);
-  background: color-mix(in oklab, var(--bg) 91%, transparent);
-  backdrop-filter: blur(14px) saturate(1.2);
+  background: color-mix(in oklab, var(--bg) 97%, transparent);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
-  box-shadow: 0 0.6rem 1.8rem color-mix(in srgb, var(--bg) 34%, transparent);
+  box-shadow: 0 0.35rem 1.2rem color-mix(in srgb, var(--bg) 18%, transparent);
   transition:
     background-color 180ms ease,
     border-color 180ms ease;
@@ -343,7 +317,7 @@ hr {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem 1.25rem;
+  gap: 0.25rem clamp(0.55rem, 1vw, 1rem);
   list-style: none;
 }
 
@@ -465,17 +439,17 @@ hr {
   padding: 0.18rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: color-mix(in oklab, var(--surface) 82%, var(--bg));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+  background: var(--surface);
+  box-shadow: none;
 }
 
 .color-switch legend {
-  flex: none;
-  margin-inline: 0.35rem 0.15rem;
-  color: var(--text-muted);
-  font: 0.66rem var(--font-data);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .color-switch label {
@@ -543,15 +517,13 @@ hr {
   border-color: color-mix(in oklab, var(--choice-signal, var(--accent)) 54%, var(--line));
   background: color-mix(in oklab, var(--choice-signal, var(--accent)) 10%, var(--surface-raised));
   color: var(--text);
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--choice-signal, var(--accent)) 12%, transparent),
-    0 0 1rem color-mix(in srgb, var(--choice-signal, var(--accent)) 10%, transparent);
+  box-shadow: inset 0 -2px var(--choice-signal, var(--accent));
 }
 
 .color-switch input:checked + span svg {
   opacity: 1;
   transform: scale(1.18);
-  box-shadow: 0 0 0.7rem color-mix(in srgb, var(--choice-signal) 78%, transparent);
+  box-shadow: none;
 }
 
 .color-switch input:focus-visible + span {
@@ -617,7 +589,7 @@ hr {
   gap: 0.75rem;
   padding: 2rem var(--gutter) 2.5rem;
   border-top: 1px solid var(--line);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 56%);
+  background: color-mix(in srgb, var(--surface) 34%, transparent);
   color: var(--text-muted);
   font-size: var(--step--1);
   transition:
@@ -641,7 +613,7 @@ hr {
     position: sticky;
     flex-wrap: wrap;
     gap: 0.35rem 0.75rem;
-    padding: 0.45rem 0.8rem;
+    padding: 0.4rem var(--gutter);
   }
 
   .site-nav > nav[aria-label='Main'] {
@@ -651,14 +623,15 @@ hr {
   .mobile-menu {
     display: block;
     position: relative;
+    order: 3;
     margin-left: auto;
   }
 
   .color-switch {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: center;
-    margin-inline: auto;
+    order: 2;
+    flex-basis: auto;
+    justify-content: flex-end;
+    margin: 0;
   }
 
   .mobile-menu summary {
@@ -689,8 +662,8 @@ hr {
   .mobile-menu nav {
     position: absolute;
     z-index: 20;
-    /* Keep the second-row color selector clear while the menu is open. */
-    top: calc(100% + 3.75rem);
+    /* Keep the compact menu close to its trigger. */
+    top: calc(100% + 0.5rem);
     right: 0;
     width: min(19rem, calc(100vw - 1.6rem));
     padding: 0.6rem;
@@ -736,6 +709,37 @@ hr {
     border-color: var(--accent);
     background: color-mix(in oklab, var(--accent) 12%, var(--surface));
     color: var(--text);
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-menu {
+    order: 1;
+  }
+
+  .color-switch {
+    order: 2;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .mobile-menu nav {
+    top: calc(100% + 3.2rem);
+  }
+
+  .color-switch {
+    gap: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .color-switch label span {
+    min-width: 2.65rem;
+    justify-content: center;
+    padding-inline: 0.45rem;
+    font-size: 0.68rem;
   }
 }
 
@@ -891,9 +895,9 @@ hr {
 .card {
   padding: 1.4rem 1.5rem;
   border-radius: var(--radius);
-  background: linear-gradient(145deg, color-mix(in oklab, var(--surface-raised) 54%, var(--surface)), var(--surface));
+  background: var(--surface);
   border: 1px solid var(--line);
-  box-shadow: 0 1rem 2.4rem color-mix(in srgb, var(--bg) 12%, transparent);
+  box-shadow: none;
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease,
