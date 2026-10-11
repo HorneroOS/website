@@ -37,7 +37,10 @@
   --secondary: var(--sodium);
   --focus: #8cebf0;
   --browser-theme-color: #080b14;
-  --signal-grid: color-mix(in srgb, var(--river) 1.35%, transparent);
+  --signal-grid: color-mix(in srgb, var(--river) 2.1%, transparent);
+  --sign-haze: 18%;
+  --river-haze: 14%;
+  --sodium-haze: 10%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -73,7 +76,10 @@
   --secondary: #7a4b13;
   --focus: #005765;
   --browser-theme-color: #f2f0f8;
-  --signal-grid: color-mix(in srgb, var(--highlight) 1.55%, transparent);
+  --signal-grid: color-mix(in srgb, var(--highlight) 2.7%, transparent);
+  --sign-haze: 16%;
+  --river-haze: 14%;
+  --sodium-haze: 12%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -107,9 +113,21 @@ body {
   flex-direction: column;
   background-color: var(--bg);
   background-image:
-    radial-gradient(62rem 34rem at 92% -13%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%),
-    radial-gradient(46rem 34rem at -18% 31%, color-mix(in srgb, var(--highlight) 6%, transparent), transparent 72%),
-    radial-gradient(42rem 24rem at 56% 104%, color-mix(in srgb, var(--secondary) 4%, transparent), transparent 72%),
+    radial-gradient(
+      62rem 34rem at 96% -8%,
+      color-mix(in srgb, var(--accent) var(--sign-haze), transparent),
+      transparent 84%
+    ),
+    radial-gradient(
+      46rem 34rem at -12% 34%,
+      color-mix(in srgb, var(--highlight) var(--river-haze), transparent),
+      transparent 84%
+    ),
+    radial-gradient(
+      42rem 24rem at 62% 108%,
+      color-mix(in srgb, var(--secondary) var(--sodium-haze), transparent),
+      transparent 82%
+    ),
     linear-gradient(var(--signal-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--signal-grid) 1px, transparent 1px);
   background-size:
@@ -455,7 +473,7 @@ hr {
   flex: none;
   margin-inline: 0.35rem 0.15rem;
   color: var(--text-muted);
-  font: 0.6rem var(--font-data);
+  font: 0.66rem var(--font-data);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -468,7 +486,7 @@ hr {
   border-radius: 999px;
   color: var(--text-muted);
   cursor: pointer;
-  font: 0.7rem var(--font-data);
+  font: 0.74rem var(--font-data);
   letter-spacing: 0.015em;
 }
 
