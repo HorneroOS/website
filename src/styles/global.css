@@ -1,9 +1,9 @@
 /*
  * Hornero OS site design system.
  *
- * Palette: HorneroOS/config docs/BRAND.md (hornero-dark / hornero-light
- * ramps), so the site always matches the default desktop. Dark first, like
- * the desktop; light follows the visitor's preference.
+ * Palette: Buenos Aires after rain, with Patagonia's blue-hour horizon:
+ * ink navy, signal magenta, river cyan and sodium amber. Dark first; light
+ * mode keeps the same colors in an editorial, high-contrast surface.
  * Type: Rubik (display + UI) and Martian Mono (provenance data), both
  * self-hosted: the site makes no third-party requests.
  */
@@ -11,27 +11,32 @@
 :root {
   color-scheme: dark;
 
-  /* Brand ramp (dark surface) */
-  --adobe-night: #1d1410;
-  --adobe-kiln: #271b15;
-  --adobe-wall: #3a2920;
-  --cream: #f6e9db;
-  --cream-muted: #cdb9a6;
-  --ember: #e07856;
-  --sunset: #f2b749;
-  --clay: #d9a05f;
+  /* Southern Signal: city ink, electric signage, river light, sodium lamps. */
+  --night: #090b17;
+  --night-surface: #111528;
+  --night-raised: #191d34;
+  --ice: #f3f2fb;
+  --ice-muted: #aeb3cc;
+  --signal: #f276d1;
+  --river: #69deeb;
+  --sodium: #f1b967;
+  --mint: #a6dfc1;
 
   /* Roles */
-  --bg: var(--adobe-night);
-  --surface: var(--adobe-kiln);
-  --line: var(--adobe-wall);
-  --text: var(--cream);
-  --text-muted: var(--cream-muted);
-  --accent: var(--ember);
-  --accent-ink: #1d1410;
-  --highlight: var(--sunset);
-  --secondary: var(--clay);
-  --focus: var(--sunset);
+  --bg: var(--night);
+  --surface: var(--night-surface);
+  --surface-raised: var(--night-raised);
+  --line: #2a304d;
+  --text: var(--ice);
+  --text-muted: var(--ice-muted);
+  --accent: var(--signal);
+  --accent-ink: #210b24;
+  --highlight: var(--river);
+  --secondary: var(--sodium);
+  --focus: #8cebf0;
+  --ink: var(--text);
+  --muted: var(--text-muted);
+  --clay: var(--secondary);
 
   --font-ui: 'Rubik Variable', 'Rubik', system-ui, sans-serif;
   --font-data: 'Martian Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
@@ -49,20 +54,22 @@
   --arch: 46% 46% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #faf1e3;
-    --surface: #f2e2cc;
-    --line: #dcc3a4;
-    --text: #2b1a11;
-    --text-muted: #6b4e3a;
-    --accent: #b24827;
-    --accent-ink: #faf1e3;
-    --highlight: #9a5b0a;
-    --secondary: #7c4a2c;
-    --focus: #b24827;
-  }
+:root[data-color-mode='light'] {
+  color-scheme: light;
+  --bg: #f3f3fa;
+  --surface: #e9eaf5;
+  --surface-raised: #ffffff;
+  --line: #c8cbe0;
+  --text: #17192d;
+  --text-muted: #4e536c;
+  --accent: #922a80;
+  --accent-ink: #fff8fe;
+  --highlight: #006c83;
+  --secondary: #805019;
+  --focus: #006c83;
+  --ink: var(--text);
+  --muted: var(--text-muted);
+  --clay: var(--secondary);
 }
 
 *,
@@ -85,7 +92,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(70rem 36rem at 86% -12%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 68%),
+    radial-gradient(54rem 30rem at -16% 34%, color-mix(in srgb, var(--highlight) 5%, transparent), transparent 70%);
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--step-0);
@@ -231,14 +241,12 @@ pre {
   display: none;
 }
 
-@media (prefers-color-scheme: light) {
-  .mark-on-dark {
-    display: none;
-  }
+:root[data-color-mode='light'] .mark-on-dark {
+  display: none;
+}
 
-  .mark-on-light {
-    display: block;
-  }
+:root[data-color-mode='light'] .mark-on-light {
+  display: block;
 }
 
 .site-nav ul {
@@ -277,6 +285,74 @@ pre {
 .site-nav ul a.nav-install:hover {
   background: var(--accent);
   color: var(--accent-ink);
+}
+
+.color-switch {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.12rem;
+  padding: 0.18rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.color-switch legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.color-switch label {
+  position: relative;
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font: 0.7rem var(--font-data);
+  letter-spacing: 0.015em;
+}
+
+.color-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.color-switch label span {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  padding-inline: 0.55rem;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.color-switch input:checked + span {
+  border-color: color-mix(in oklab, var(--accent) 48%, var(--line));
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.color-switch input:focus-visible + span {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.color-switch label:hover span {
+  color: var(--text);
 }
 
 .mobile-menu {
@@ -320,7 +396,7 @@ pre {
 @media (max-width: 960px) {
   .site-nav {
     position: sticky;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 0.35rem 0.75rem;
     padding: 0.45rem 0.8rem;
   }
@@ -333,6 +409,13 @@ pre {
     display: block;
     position: relative;
     margin-left: auto;
+  }
+
+  .color-switch {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    margin-inline: auto;
   }
 
   .mobile-menu summary {
@@ -370,7 +453,7 @@ pre {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--bg);
-    box-shadow: 0 1rem 2.5rem rgb(28 18 12 / 18%);
+    box-shadow: 0 1rem 2.5rem rgb(9 11 23 / 24%);
   }
 
   .mobile-menu nav ul {
@@ -403,6 +486,12 @@ pre {
   .mobile-menu nav ul a.nav-install {
     margin: 0;
     padding-inline: 0.65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .color-switch label span {
+    transition: none;
   }
 }
 

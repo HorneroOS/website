@@ -83,6 +83,21 @@ const repos = [
           </ul>
         </nav>
       </details>
+      <fieldset class="color-switch" data-color-switch>
+        <legend>Color theme</legend>
+        <label>
+          <input type="radio" name="color-theme" value="system" checked />
+          <span>System</span>
+        </label>
+        <label>
+          <input type="radio" name="color-theme" value="light" />
+          <span>Light</span>
+        </label>
+        <label>
+          <input type="radio" name="color-theme" value="dark" />
+          <span>Dark</span>
+        </label>
+      </fieldset>
     </header>
     <main id="main" class="app" tabindex="-1" data-pagefind-body>
       <slot />
@@ -98,9 +113,51 @@ const repos = [
         </ul>
       </nav>
       <p class="fine">
-        Hornero OS is built in the open. This site sets no cookies, runs no analytics and loads nothing from other
-        servers. Every screenshot is a real capture labelled with where it came from.
+        Hornero OS is built in the open. This site uses no cookies or analytics; your color choice stays in this
+        browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its
+        source.
       </p>
     </footer>
+    <script is:inline>
+      (() => {
+        const key = 'hornero-color-mode';
+        const media = matchMedia('(prefers-color-scheme: light)');
+        const controls = [...document.querySelectorAll('[data-color-switch] input')];
+        let preference = document.documentElement.dataset.colorPreference || 'system';
+
+        const apply = (next, persist = true) => {
+          preference = next;
+          const mode = next === 'system' ? (media.matches ? 'light' : 'dark') : next;
+          document.documentElement.dataset.colorPreference = next;
+          document.documentElement.dataset.colorMode = mode;
+          const themeColor = document.querySelector('meta[name="theme-color"]');
+          if (themeColor) themeColor.content = mode === 'light' ? '#f3f3fa' : '#090b17';
+          controls.forEach((control) => {
+            control.checked = control.value === next;
+          });
+          if (persist) {
+            try {
+              localStorage.setItem(key, next);
+            } catch {
+              // Keep the selection for this page even when storage is unavailable.
+            }
+          }
+        };
+
+        controls.forEach((control) => {
+          control.addEventListener('change', () => apply(control.value));
+        });
+        media.addEventListener('change', () => {
+          if (preference === 'system') apply('system', false);
+        });
+        window.addEventListener('storage', (event) => {
+          if (event.key === key || event.key === null) {
+            const next = ['system', 'light', 'dark'].includes(event.newValue) ? event.newValue : 'system';
+            apply(next, false);
+          }
+        });
+        apply(preference, false);
+      })();
+    </script>
   </body>
 </html>
