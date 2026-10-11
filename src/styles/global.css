@@ -736,6 +736,10 @@ hr {
   .nav-more > summary span {
     transition: none;
   }
+
+  .card:hover {
+    transform: none;
+  }
 }
 
 /* ----------------------------------------------------------- sections --- */
