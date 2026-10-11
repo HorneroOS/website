@@ -58,6 +58,11 @@ const wallpaperShots = [
 const editionOrder = ['desktop', 'server', 'agents', 'studio'];
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const maturityNames = { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+const familyRoleLabels: Record<string, string> = {
+  server: 'Headless · homelab and services',
+  'agent-host': 'Headless · agent infrastructure',
+  'creative-workstation': 'Desktop · creative production',
+};
 const family = editionOrder.map((id) => {
   const edition = editionById[id];
   if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
@@ -65,6 +70,7 @@ const family = editionOrder.map((id) => {
     ...edition,
     name: edition.title.replace('HorneroOS ', ''),
     status: maturityNames[edition.maturity],
+    roleLabel: familyRoleLabels[edition.role] ?? edition.role,
     compositors: (edition.compositor?.supported ?? []).map((backend) => ({
       id: backend,
       maturity: editionCatalogue.compositors.find((item) => item.id === backend)?.maturity ?? 'planned',
@@ -173,7 +179,7 @@ const description = `An Arch-based operating system family evolved from a Linux 
               {edition.compositors.map((backend) => (backend.id === 'hyprland' ? 'Hyprland' : 'Niri')).join(' / ')}
             </span>
           ) : (
-            <span class="family-detail">Headless role</span>
+            <span class="family-detail">{edition.roleLabel}</span>
           )}
           {edition.extends && (
             <span class="family-inherit">
