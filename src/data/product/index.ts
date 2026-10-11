@@ -7,6 +7,7 @@ import pinsJson from './pins.json';
 import releasesJson from './releases.json';
 import themesJson from './themes.json';
 import greeterScenesJson from './greeter-scenes.json';
+import wallpapersJson from './wallpapers.json';
 
 export interface LayoutBar {
   edge: 'top' | 'bottom' | 'left' | 'right';
@@ -108,11 +109,30 @@ export interface GreeterSceneCatalogue {
   scenes: GreeterScene[];
 }
 
+export interface Wallpaper {
+  id: string;
+  title: string;
+  place: string;
+  themeId: string;
+  aestheticTags: string[];
+  photographer: string;
+  sourcePage: string;
+  license: string;
+  licenseUrl: string;
+  attribution: string;
+  modification: string;
+  preview: string;
+  previewSmall: string;
+  previewAlt: string;
+  previewSha256: string | null;
+}
+
 export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
 export const editionCatalogue = editionsJson as EditionCatalogue;
 export const greeterSceneCatalogue = greeterScenesJson as GreeterSceneCatalogue;
+export const wallpapers = wallpapersJson as Wallpaper[];
 export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
 export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter', { repo: string; sha: string }>;

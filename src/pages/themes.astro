@@ -121,7 +121,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </div>
       <p>
         Hornero Originals sit alongside classic, natural, minimal, cyberpunk and synthwave directions. Every card is a
-        complete appearance choice; the artwork is a wallpaper preview, not a desktop screenshot.
+        complete appearance choice; each image is the scene associated with a look, not a desktop screenshot. Six
+        Hornero Originals use attributed photography from Argentina.
       </p>
     </div>
     <div class="collection-label" id="hornero-originals">
@@ -138,7 +139,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
             {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
               <Picture
                 src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
-                alt={`Wallpaper artwork associated with the ${theme.name} appearance.`}
+                alt={`${['pampa', 'patagonia', 'fin-del-mundo', 'quebrada', 'ibera', 'buenos-aires-nocturno'].includes(theme.id) ? 'Photograph' : 'Wallpaper preview'} for ${theme.name}.`}
                 formats={['webp']}
                 fallbackFormat="webp"
                 widths={[520, 800]}
@@ -176,7 +177,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
             {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
               <Picture
                 src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
-                alt={`Wallpaper artwork associated with the ${theme.name} appearance.`}
+                alt={`${['pampa', 'patagonia', 'fin-del-mundo', 'quebrada', 'ibera', 'buenos-aires-nocturno'].includes(theme.id) ? 'Photograph' : 'Wallpaper preview'} for ${theme.name}.`}
                 formats={['webp']}
                 fallbackFormat="webp"
                 widths={[520, 800]}
@@ -203,11 +204,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       ))}
     </ul>
     <p class="artwork-note">
-      Wallpaper previews are original Hornero artwork or media from the public{' '}
-      <a href="https://github.com/ulises-jeremias/dotfiles/tree/main/home/dot_local/share/hornero/wallpapers">
-        Hornero wallpaper collection
-      </a>
-      . They show the scene associated with a look, not a photograph of the running desktop.{' '}
+      These cards show the scene associated with a look, not a photograph of the running desktop. The six Argentina-inspired Hornero Originals use verified, attributed photography; other optional media remains a separate user collection. Browse the{' '}
+      <a href="/wallpapers">photographic wallpaper collection</a> for locations, photographers and licenses.{' '}
       <a href="/showroom">See verified desktop captures in the Showroom</a>.
     </p>
   </section>

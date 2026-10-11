@@ -6,7 +6,7 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases,editions}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers}.json
 //
 // Every fact on /layouts, /themes and /releases comes from these files, and
 // these files come only from the pinned commits: never edit them by hand.
@@ -17,6 +17,7 @@
 // script needs git and network access but no GitHub token.
 
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -296,6 +297,44 @@ function themes(configDir, official) {
   return list.sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
 }
 
+// The wallpaper photo catalogue is a projection of the config repository's
+// provenance manifest. Website cards must not invent or duplicate credits.
+function wallpapers(configDir) {
+  const source = readJson(join(configDir, 'profiles/themes/wallpaper-provenance.json'));
+  if (source.schemaVersion !== 1 || !Array.isArray(source.items)) {
+    fail('wallpaper provenance manifest has an unsupported shape');
+  }
+  return source.items.map((item) => {
+    for (const width of [720, 1280]) {
+      const path = join(ROOT, 'public/wallpapers/argentina', `${item.id}-${width}.webp`);
+      if (!existsSync(path)) fail(`wallpaper ${item.id} has no ${width}px website preview ${path}`);
+      const hash = createHash('sha256').update(readFileSync(path)).digest('hex');
+      if (item[`websitePreview${width}Sha256`] && hash !== item[`websitePreview${width}Sha256`]) {
+        fail(`wallpaper ${item.id} ${width}px preview SHA-256 differs from config provenance`);
+      }
+    }
+    const previewPath = join(ROOT, 'public/wallpapers/argentina', `${item.id}-1280.webp`);
+    const previewHash = createHash('sha256').update(readFileSync(previewPath)).digest('hex');
+    return {
+    id: item.id,
+    title: item.title,
+    place: item.place,
+    themeId: item.themeId,
+    aestheticTags: item.aestheticTags,
+    photographer: item.photographer,
+    sourcePage: item.sourcePage,
+    license: item.license,
+    licenseUrl: item.licenseUrl,
+    attribution: item.attribution,
+    modification: item.modification,
+    preview: `/wallpapers/argentina/${item.id}-1280.webp`,
+    previewSmall: `/wallpapers/argentina/${item.id}-720.webp`,
+    previewAlt: `${item.title}, a photograph of ${item.place}.`,
+    previewSha256: previewHash,
+    };
+  });
+}
+
 function releases(horneroDir, tags) {
   const relDir = join(horneroDir, 'releases');
   const manDir = join(horneroDir, 'manifests');
@@ -393,6 +432,7 @@ if (!CHECK) {
 const generated = {
   'layouts.json': layouts(dirs.shell),
   'themes.json': themes(dirs.config, officialThemes(dirs.hornero)),
+  'wallpapers.json': wallpapers(dirs.config),
   'releases.json': releases(dirs.hornero, pins.releaseTags ?? []),
   'editions.json': editionCatalogue(dirs.hornero),
   'greeter-scenes.json': greeterScenes(dirs.greeter),

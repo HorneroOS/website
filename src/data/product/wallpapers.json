@@ -1,0 +1,128 @@
+[
+  {
+    "id": "buenos-aires-nocturno",
+    "title": "Buenos Aires after dark",
+    "place": "Puerto Madero, Buenos Aires, Argentina",
+    "themeId": "buenos-aires-nocturno",
+    "aestheticTags": [
+      "urban-night",
+      "amber",
+      "cinematic"
+    ],
+    "photographer": "Luis Argerich",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Buenos_Aires_at_night.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "Luis Argerich — Buenos Aires after dark — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Buenos_Aires_at_night.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
+    "preview": "/wallpapers/argentina/buenos-aires-nocturno-1280.webp",
+    "previewSmall": "/wallpapers/argentina/buenos-aires-nocturno-720.webp",
+    "previewAlt": "Buenos Aires after dark, a photograph of Puerto Madero, Buenos Aires, Argentina.",
+    "previewSha256": "cf36d2111a9c55d24c1f4590846980bce37712e1fba71acf1ee887c1ada55cef"
+  },
+  {
+    "id": "fin-del-mundo",
+    "title": "Blue hour on the Beagle Channel",
+    "place": "Beagle Channel, Tierra del Fuego, Argentina",
+    "themeId": "fin-del-mundo",
+    "aestheticTags": [
+      "blue-hour",
+      "water",
+      "southern-coast"
+    ],
+    "photographer": "RAYANDBEE",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Beagle_Channel_-m.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "RAYANDBEE — Blue hour on the Beagle Channel — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Beagle_Channel_-m.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
+    "preview": "/wallpapers/argentina/fin-del-mundo-1280.webp",
+    "previewSmall": "/wallpapers/argentina/fin-del-mundo-720.webp",
+    "previewAlt": "Blue hour on the Beagle Channel, a photograph of Beagle Channel, Tierra del Fuego, Argentina.",
+    "previewSha256": "d1cf15c7802393c78ca571144c37d65179a66b6eea8d74c6b7e9cc07c810cc3a"
+  },
+  {
+    "id": "ibera",
+    "title": "Lagoon in the Esteros del Iberá",
+    "place": "Esteros del Iberá, Corrientes, Argentina",
+    "themeId": "ibera",
+    "aestheticTags": [
+      "wetlands",
+      "green",
+      "water"
+    ],
+    "photographer": "Phillip Capper",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Esteros_del_Ibera,_Corrientes,_Argentina,_Jan._2011_-_Flickr_-_PhillipC_(1).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "Phillip Capper — Lagoon in the Esteros del Iberá — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Esteros_del_Ibera,_Corrientes,_Argentina,_Jan._2011_-_Flickr_-_PhillipC_(1).jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
+    "preview": "/wallpapers/argentina/ibera-1280.webp",
+    "previewSmall": "/wallpapers/argentina/ibera-720.webp",
+    "previewAlt": "Lagoon in the Esteros del Iberá, a photograph of Esteros del Iberá, Corrientes, Argentina.",
+    "previewSha256": "84f7c7b68deeade009b8002384187b464d737fe686657986afe2fcd09218c4e5"
+  },
+  {
+    "id": "pampa",
+    "title": "Laguna de Rocha from above",
+    "place": "Laguna de Rocha, Buenos Aires Province, Argentina",
+    "themeId": "pampa",
+    "aestheticTags": [
+      "aerial",
+      "grassland",
+      "river"
+    ],
+    "photographer": "Alejandro Barrios",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Drone_Laguna_de_rocha.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "attribution": "Alejandro Barrios — Laguna de Rocha from above — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Drone_Laguna_de_rocha.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications. Share-alike obligation applies to modified photo output.",
+    "preview": "/wallpapers/argentina/pampa-1280.webp",
+    "previewSmall": "/wallpapers/argentina/pampa-720.webp",
+    "previewAlt": "Laguna de Rocha from above, a photograph of Laguna de Rocha, Buenos Aires Province, Argentina.",
+    "previewSha256": "0afec05752e0344a5d789b93275404bc9690e4fe68424a8fc380c507df6f9cd8"
+  },
+  {
+    "id": "patagonia",
+    "title": "Perito Moreno Glacier panorama",
+    "place": "Los Glaciares National Park, Santa Cruz, Argentina",
+    "themeId": "patagonia",
+    "aestheticTags": [
+      "glacier",
+      "ice",
+      "panorama"
+    ],
+    "photographer": "ThartmannWiki",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Perito_Moreno_Glacier_Panorama.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "attribution": "ThartmannWiki — Perito Moreno Glacier panorama — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Perito_Moreno_Glacier_Panorama.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications. Share-alike obligation applies to modified photo output.",
+    "preview": "/wallpapers/argentina/patagonia-1280.webp",
+    "previewSmall": "/wallpapers/argentina/patagonia-720.webp",
+    "previewAlt": "Perito Moreno Glacier panorama, a photograph of Los Glaciares National Park, Santa Cruz, Argentina.",
+    "previewSha256": "5dbee218882fab51e6c0f918d516dae71c094898f21ee0891f964c69951e2c2f"
+  },
+  {
+    "id": "quebrada",
+    "title": "Hornocal mineral ridges",
+    "place": "Serranía de Hornocal, Jujuy, Argentina",
+    "themeId": "quebrada",
+    "aestheticTags": [
+      "mineral",
+      "mountain",
+      "rose-violet"
+    ],
+    "photographer": "Bernard Gagnon",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Serran%C3%ADa_de_Hornocal_03.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "attribution": "Bernard Gagnon — Hornocal mineral ridges — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Serran%C3%ADa_de_Hornocal_03.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications. Share-alike obligation applies to modified photo output.",
+    "preview": "/wallpapers/argentina/quebrada-1280.webp",
+    "previewSmall": "/wallpapers/argentina/quebrada-720.webp",
+    "previewAlt": "Hornocal mineral ridges, a photograph of Serranía de Hornocal, Jujuy, Argentina.",
+    "previewSha256": "7b863451b12d8b69cf013f26a5d630175143b09ad67ecac7df4bee6e01512e7b"
+  }
+]
