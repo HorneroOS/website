@@ -15,6 +15,7 @@ interface Props {
 }
 const { label } = Astro.props;
 ---
+
 <button type="button">{label}</button>
 ```
 
@@ -50,13 +51,13 @@ Avoid large single files with many responsibilities. Split cards, lists, and nav
 
 This starter uses plain CSS files under `src/styles/` for the CNA landing and blog pages. Astro supports multiple approaches:
 
-| Approach | Good for |
-|----------|----------|
-| Scoped `<style>` in `.astro` | Component-specific rules |
-| Global CSS imports | Shared tokens, landing themes |
-| [Tailwind](https://tailwindcss.com/) | Utility-first teams (add `@astrojs/tailwind`) |
-| [CSS Modules](https://docs.astro.build/en/guides/styling/#css-modules) | Locally scoped class names |
-| Sass/Less | Teams already standardized on preprocessors |
+| Approach                                                               | Good for                                      |
+| ---------------------------------------------------------------------- | --------------------------------------------- |
+| Scoped `<style>` in `.astro`                                           | Component-specific rules                      |
+| Global CSS imports                                                     | Shared tokens, landing themes                 |
+| [Tailwind](https://tailwindcss.com/)                                   | Utility-first teams (add `@astrojs/tailwind`) |
+| [CSS Modules](https://docs.astro.build/en/guides/styling/#css-modules) | Locally scoped class names                    |
+| Sass/Less                                                              | Teams already standardized on preprocessors   |
 
 Pick one primary strategy per project to avoid conflicting conventions.
 
@@ -72,6 +73,7 @@ This template does **not** ship a UI framework integration. When you need hydrat
 ---
 import Counter from '@/components/Counter';
 ---
+
 <Counter client:load />
 ```
 
@@ -108,8 +110,11 @@ light mode carries the same signals over warm stone and paper. The site shares
 HorneroOS’s visual vocabulary without pretending that the website palette is a
 desktop theme. The shared navigation offers System, Light and Dark; System
 follows `prefers-color-scheme`, while an explicit choice is stored locally and
-synchronized across tabs. Use the role
-tokens (`--bg`,
+synchronized across tabs. The shared wordmark places the project in Buenos
+Aires; a cyan / magenta / sodium signal and low-contrast route line carry that
+Argentine cyberpunk identity through long pages without turning content into
+decoration. Light mode keeps the same signals over warm daylight surfaces. Use
+the role tokens (`--bg`,
 `--surface`, `--line`, `--text`, `--text-muted`, `--accent`, `--highlight`,
 `--secondary`, `--focus`), never raw hex values in components.
 
