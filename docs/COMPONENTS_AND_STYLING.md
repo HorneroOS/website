@@ -104,8 +104,10 @@ Wrap third-party components in your own Astro wrapper so you can swap implementa
 Tokens live in `src/styles/global.css`. The website uses its own complementary
 “Southern Signal” palette: Buenos Aires night ink, river cyan, electric sign
 magenta and sodium-lamp amber. It shares HorneroOS’s visual vocabulary without
-pretending that the website palette is a desktop theme. Dark is the default;
-light mode follows `prefers-color-scheme`. Use the role tokens (`--bg`,
+pretending that the website palette is a desktop theme. The shared navigation
+offers System, Light and Dark; System follows `prefers-color-scheme`, while an
+explicit choice is stored locally and synchronized across tabs. Use the role
+tokens (`--bg`,
 `--surface`, `--line`, `--text`, `--text-muted`, `--accent`, `--highlight`,
 `--secondary`, `--focus`), never raw hex values in components.
 

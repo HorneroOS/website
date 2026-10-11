@@ -25,8 +25,27 @@ const socialAlt = 'Hornero OS desktop running Hornero Light';
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
-<meta name="theme-color" content="#1d1410" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#faf1e3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#090b17" />
+<script is:inline>
+  (() => {
+    const key = 'hornero-color-mode';
+    const valid = ['system', 'light', 'dark'];
+    let preference = 'system';
+    try {
+      const saved = localStorage.getItem(key);
+      if (valid.includes(saved)) preference = saved;
+    } catch {
+      // Storage can be disabled; follow the operating-system preference.
+    }
+
+    const mode =
+      preference === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : preference;
+    document.documentElement.dataset.colorPreference = preference;
+    document.documentElement.dataset.colorMode = mode;
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = mode === 'light' ? '#f3f3fa' : '#090b17';
+  })();
+</script>
 <title>{title}</title>
 {description && <meta name="description" content={description} />}
 
