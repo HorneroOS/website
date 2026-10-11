@@ -108,14 +108,16 @@ Tokens live in `src/styles/global.css`. The website uses its own complementary
 magenta and sodium-lamp amber. Dark mode evokes a rain-lit Buenos Aires street;
 light mode carries the same signals over cool mineral daylight. The site shares
 HorneroOS’s visual vocabulary without pretending that the website palette is a
-desktop theme. The shared navigation offers System, Light and Dark; System
-follows `prefers-color-scheme`, while an explicit choice is stored locally and
-synchronized across tabs. Browser chrome follows the selected canvas through
-the `--browser-theme-color` token. The shared wordmark places the project in
-Buenos Aires; a cyan / magenta / sodium signal and low-contrast route line carry
-that Argentine cyberpunk identity through long pages without turning content
-into decoration. The homepage hero stays a night-lit city scene in either
-mode, while the surrounding site follows the selected palette. Use the role
+desktop theme. The shared navigation labels its three-way selector `Site color`:
+System, Light and Dark. System follows `prefers-color-scheme`, while an explicit
+choice is stored locally and synchronized across tabs. Each option carries its
+own sodium, river-cyan or sign-magenta marker; browser chrome follows the
+selected canvas through the `--browser-theme-color` token. The shared wordmark
+places the project in Buenos Aires; a cyan / magenta / sodium signal and
+low-contrast street grid carry that Argentine cyberpunk identity through long
+pages without turning content into decoration. The homepage hero stays a
+night-lit city scene in either mode, while the surrounding site follows the
+selected palette. Use the role
 tokens (`--bg`, `--surface`, `--line`, `--text`, `--text-muted`, `--accent`,
 `--highlight`, `--secondary`, `--focus`) throughout. A photographed surface such
 as the homepage hero may use local scene tokens to preserve text contrast over
