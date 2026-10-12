@@ -38,7 +38,7 @@ const docs = defineCollection({
       return id.endsWith('/README') ? id.slice(0, -'/README'.length) : id;
     },
   }),
-  schema: z.object({}).passthrough(),
+  schema: z.looseObject({}),
 });
 
 export const collections = { showroom, docs };

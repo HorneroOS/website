@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import remarkDocsLinks from './src/lib/remark-docs-links.mjs';
 
@@ -16,11 +17,11 @@ export default defineConfig({
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],
   markdown: {
-    remarkPlugins: [
-      [
+    processor: unified({
+      remarkPlugins: [[
         remarkDocsLinks,
         { docsRoot: './.cache/product-src/docs', repo: pins.sources.docs.repo, sha: pins.sources.docs.sha },
-      ],
-    ],
+      ]],
+    }),
   },
 });
