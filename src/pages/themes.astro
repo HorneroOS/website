@@ -78,27 +78,58 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
         <h2 id="desktop-gallery-title">From scene to whole system.</h2>
       </div>
       <p>
-        These real Hornero captures document the Shell as it appeared in the 3 October development review. They show
-        layout and controls; the six photographic Argentina Originals below reflect the current wallpaper catalogue.
+        Choose a real capture to see how each look carries into the Shell. Each frame keeps its source and capture
+        details; these are separate product captures, not a simulated live desktop.
       </p>
     </div>
-    <div class="desktop-capture-grid">
-      {desktopCaptures.map((capture, i) => (
-        <article class:list={['desktop-capture', `capture-${i + 1}`]}>
-          <ArchFrame
-            src={capture.data.image}
-            alt={capture.data.alt}
-            provenance={capture.data.provenance}
-            sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
-            widths={[480, 720, 960, 1280]}
-          />
-          <h3>{capture.data.title}</h3>
-        </article>
-      ))}
-    </div>
+    <fieldset class="capture-switcher">
+      <legend>Explore real Hornero desktop captures</legend>
+      {desktopCaptures.map((capture, i) => {
+        const captureId = `capture-${capture.id}`;
+        return (
+          <>
+            <input
+              class="capture-radio"
+              type="radio"
+              name="desktop-capture"
+              id={`${captureId}-choice`}
+              value={capture.id}
+              checked={i === 0}
+            />
+            <label class="capture-tab" for={`${captureId}-choice`}>
+              <span class="capture-index">0{i + 1}</span>
+              <span class="capture-tab-copy">
+                <strong>{capture.data.title}</strong>
+                <small>{capture.data.provenance.theme ?? 'Custom appearance'}</small>
+              </span>
+              <span class="capture-arrow" aria-hidden="true">↗</span>
+            </label>
+          </>
+        );
+      })}
+      <div class="capture-stage">
+        {desktopCaptures.map((capture) => {
+          const captureId = `capture-${capture.id}`;
+          return (
+            <article class="capture-slide" id={`${captureId}-panel`} aria-label={capture.data.title}>
+              <ArchFrame
+                src={capture.data.image}
+                alt={capture.data.alt}
+                provenance={capture.data.provenance}
+                sizes="(min-width: 1100px) 68vw, calc(100vw - 2rem)"
+                widths={[480, 800, 1280, 1600]}
+              />
+              <div class="capture-slide-copy">
+                <h3>{capture.data.title}</h3>
+                <p>{capture.data.alt}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </fieldset>
     <p class="capture-footnote">
-      The capture plates carry their own source and date. The wallpaper cards below show artwork; this gallery shows the
-      Shell running over selected scenes. <a href="/showroom">Browse the complete desktop showcase</a>.
+      Keyboard users can move between captures with the arrow keys. <a href="/showroom">Browse the complete desktop showcase</a>.
     </p>
   </section>
 
@@ -372,30 +403,129 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     margin: 0;
     color: var(--muted);
   }
-  .desktop-capture-grid {
+  .capture-switcher {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: minmax(13rem, 0.32fr) minmax(0, 1fr);
+    grid-template-rows: auto repeat(5, minmax(4.5rem, auto));
+    align-items: stretch;
+    gap: 0.4rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
-  .desktop-capture {
+  .capture-switcher legend {
+    grid-column: 1 / -1;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+    font: 0.72rem var(--font-data);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .capture-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .capture-tab {
+    display: grid;
     min-width: 0;
-    grid-column: span 2;
+    grid-column: 1;
+    grid-template-columns: 2rem minmax(0, 1fr) 1rem;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
   }
-  .desktop-capture.capture-1,
-  .desktop-capture.capture-2 {
-    grid-column: span 3;
+  .capture-tab:hover,
+  .capture-radio:checked + .capture-tab {
+    color: var(--ink);
+    border-color: var(--highlight);
+    background: color-mix(in srgb, var(--highlight) 8%, transparent);
   }
-  .desktop-capture :global(.frame-shot) {
+  .capture-radio:focus-visible + .capture-tab {
+    outline: 2px solid var(--highlight);
+    outline-offset: 2px;
+  }
+  .capture-index {
+    color: var(--text-muted);
+    font: 0.68rem var(--font-data);
+  }
+  .capture-tab-copy {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+  .capture-tab-copy strong {
+    font-size: 0.88rem;
+    line-height: 1.25;
+  }
+  .capture-tab-copy small {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+  .capture-arrow {
+    opacity: 0;
+    transform: translate(-0.2rem, 0.2rem);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .capture-radio:checked + .capture-tab .capture-arrow,
+  .capture-tab:hover .capture-arrow {
+    opacity: 1;
+    transform: none;
+  }
+  .capture-stage {
+    grid-column: 2;
+    grid-row: 2 / span 5;
+    min-width: 0;
+  }
+  .capture-slide {
+    display: none;
+    margin: 0;
+    animation: capture-arrive 260ms ease both;
+  }
+  .capture-slide :global(.frame-shot) {
     aspect-ratio: 16 / 10;
   }
-  .desktop-capture :global(.frame-shot img) {
+  .capture-slide :global(.frame-shot img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .desktop-capture h3 {
-    margin: 0.65rem 0 0;
+  .capture-slide-copy {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.7rem;
+  }
+  .capture-slide-copy h3 {
+    margin: 0;
     font-size: var(--step-1);
+  }
+  .capture-slide-copy p {
+    max-width: 52ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+  #capture-hornero-light-choice:checked ~ .capture-stage #capture-hornero-light-panel,
+  #capture-pampa-choice:checked ~ .capture-stage #capture-pampa-panel,
+  #capture-neon-city-choice:checked ~ .capture-stage #capture-neon-city-panel,
+  #capture-vapor-roadtrip-choice:checked ~ .capture-stage #capture-vapor-roadtrip-panel,
+  #capture-morning-lake-choice:checked ~ .capture-stage #capture-morning-lake-panel {
+    display: block;
+  }
+  @keyframes capture-arrive {
+    from { opacity: 0.65; }
+    to { opacity: 1; }
   }
   .capture-footnote {
     color: var(--muted);
@@ -932,16 +1062,26 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       align-items: start;
       gap: 0.65rem;
     }
-    .desktop-capture-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .capture-switcher {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto repeat(5, auto) auto;
+      gap: 0.3rem;
     }
-    .desktop-capture,
-    .desktop-capture.capture-1,
-    .desktop-capture.capture-2 {
-      grid-column: auto;
+    .capture-switcher legend {
+      grid-column: 1;
     }
-    .desktop-capture.capture-1 {
-      grid-column: 1 / -1;
+    .capture-tab {
+      grid-column: 1;
+      min-height: 3.5rem;
+    }
+    .capture-stage {
+      grid-column: 1;
+      grid-row: 7;
+      margin-top: 0.8rem;
+    }
+    .capture-slide-copy {
+      display: grid;
+      gap: 0.3rem;
     }
   }
   @media (min-width: 721px) and (max-width: 1100px) {
@@ -951,11 +1091,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
   }
   @media (max-width: 420px) {
-    .desktop-capture-grid {
-      grid-template-columns: 1fr;
-    }
-    .desktop-capture.capture-1 {
-      grid-column: auto;
+    .capture-slide-copy h3 {
+      font-size: 1.15rem;
     }
     .variant-grid {
       grid-template-columns: 1fr;
@@ -968,6 +1105,12 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
   }
   @media (prefers-reduced-motion: reduce) {
+    .capture-tab,
+    .capture-arrow,
+    .capture-slide {
+      transition: none;
+      animation: none;
+    }
     .look-card,
     .look-art :global(img) {
       transition: none;
