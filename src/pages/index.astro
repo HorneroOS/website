@@ -200,7 +200,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
             <span class="photo-place">{wallpaper.place}</span>
             <h3>{wallpaper.title}</h3>
             <p>Photograph by {wallpaper.photographer} · <a href={wallpaper.licenseUrl}>{wallpaper.license}</a></p>
-            <a class="photo-theme" href={`/themes#${wallpaper.themeId}`}>Explore {wallpaper.themeId} <span aria-hidden="true">→</span></a>
+            <a class="photo-theme" href={`/themes#${wallpaper.themeId}`}>Explore {themes.find((theme) => theme.id === wallpaper.themeId)?.name ?? 'this look'} <span aria-hidden="true">→</span></a>
           </div>
         </li>
       ))}

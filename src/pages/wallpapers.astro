@@ -160,6 +160,7 @@ const filters = [
   for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-lightbox-image]')) {
     link.addEventListener('click', (event) => {
       if (!lightbox?.showModal || !lightboxImage || !lightboxTitle || !lightboxPlace || !lightboxCredit) return;
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       const data = link.dataset;
       lightboxImage.src = data.lightboxImage ?? link.href;
