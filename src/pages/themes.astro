@@ -8,16 +8,8 @@ import variantSample from '../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
 const otherLooks = themes.filter((theme) => theme.collection !== 'hornero-originals');
+const photosByTheme = new Map(wallpapers.map((wallpaper) => [wallpaper.themeId, wallpaper]));
 const wallpaperMedia = {
-  'hornero-dark': (await import('../../assets/screenshots/theme-wallpapers/hornero-dark.webp')).default,
-  'hornero-light': (await import('../../assets/screenshots/theme-wallpapers/hornero-light.webp')).default,
-  pampa: (await import('../../assets/screenshots/theme-wallpapers/pampa.webp')).default,
-  patagonia: (await import('../../assets/screenshots/theme-wallpapers/patagonia.webp')).default,
-  'fin-del-mundo': (await import('../../assets/screenshots/theme-wallpapers/fin-del-mundo.webp')).default,
-  quebrada: (await import('../../assets/screenshots/theme-wallpapers/quebrada.webp')).default,
-  ibera: (await import('../../assets/screenshots/theme-wallpapers/ibera.webp')).default,
-  'buenos-aires-nocturno': (await import('../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp'))
-    .default,
   gruvbox: (await import('../../assets/screenshots/theme-wallpapers/gruvbox.webp')).default,
   landscape: (await import('../../assets/screenshots/theme-wallpapers/landscape.webp')).default,
   monochrome: (await import('../../assets/screenshots/theme-wallpapers/monochrome.webp')).default,
@@ -61,14 +53,14 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </div>
     </div>
     <div class="intro-preview">
-      <Picture
-        src={wallpaperMedia['buenos-aires-nocturno']}
-        alt={buenosAires.previewAlt}
-        formats={['avif', 'webp']}
-        fallbackFormat="webp"
-        widths={[480, 720, 1080, 1280]}
+      <img
+        src={buenosAires.previewSmall}
+        srcset={`${buenosAires.previewSmall} 720w, ${buenosAires.preview} 1280w`}
         sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
-        loading="eager"
+        alt={buenosAires.previewAlt}
+        width="1280"
+        height="720"
+        fetchpriority="high"
         decoding="async"
       />
       <p>
@@ -133,17 +125,30 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       {originals.map((theme) => (
         <li class="look-card" id={theme.id}>
           <div class="look-art">
-            {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
-              <Picture
-                src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
-                alt={`${['pampa', 'patagonia', 'fin-del-mundo', 'quebrada', 'ibera', 'buenos-aires-nocturno'].includes(theme.id) ? 'Photograph' : 'Wallpaper preview'} for ${theme.name}.`}
-                formats={['webp']}
-                fallbackFormat="webp"
-                widths={[520, 800]}
-                sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
-                loading="lazy"
-                decoding="async"
-              />
+            {photosByTheme.has(theme.id) ? (
+              <a class="look-photo" href={`/wallpapers#${theme.id}`} aria-label={`View ${theme.name} photograph and credits`}>
+                <img
+                  src={photosByTheme.get(theme.id)!.previewSmall}
+                  srcset={`${photosByTheme.get(theme.id)!.previewSmall} 720w, ${photosByTheme.get(theme.id)!.preview} 1280w`}
+                  sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
+                  alt={photosByTheme.get(theme.id)!.previewAlt}
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            ) : theme.palette ? (
+              <div
+                class="palette-study"
+                style={`--palette-background:${theme.palette.background};--palette-surface:${theme.palette.surface};--palette-text:${theme.palette.text};--palette-primary:${theme.palette.primary};--palette-secondary:${theme.palette.secondary};--palette-accent:${theme.palette.accent}`}
+                role="img"
+                aria-label={`${theme.name} color palette: background ${theme.palette.background}, primary ${theme.palette.primary}, secondary ${theme.palette.secondary}, accent ${theme.palette.accent}`}
+              >
+                <div class="palette-arch" aria-hidden="true"><span></span></div>
+                <div class="palette-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                <span class="palette-caption" aria-hidden="true">Color study · {theme.mode}</span>
+              </div>
             ) : (
               <div class="artwork-unavailable">
                 <span aria-hidden="true">◌</span>
@@ -156,6 +161,13 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
           <div class="look-copy">
             <h4>{theme.name}</h4>
             <p>{theme.description}</p>
+            {photosByTheme.get(theme.id) ? (
+              <p class="look-credit">
+                {photosByTheme.get(theme.id)!.photographer} · <a href={photosByTheme.get(theme.id)!.licenseUrl}>{photosByTheme.get(theme.id)!.license}</a>
+              </p>
+            ) : (
+              <p class="look-credit">Color palette from Hornero Config · pair with any wallpaper</p>
+            )}
           </div>
         </li>
       ))}
@@ -289,7 +301,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   .intro-preview img {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     border: 1px solid color-mix(in srgb, var(--highlight) 45%, var(--line));
     box-shadow: 0.7rem 0.7rem 0 -0.1rem var(--bg), 0.7rem 0.7rem 0 var(--highlight);
@@ -466,6 +479,70 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     aspect-ratio: 16 / 10;
     background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 28%, var(--surface)), var(--surface));
   }
+  .look-photo,
+  .palette-study {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .look-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .palette-study {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-content: end;
+    gap: 1.25rem;
+    padding: clamp(1rem, 2.4vw, 2rem);
+    background:
+      radial-gradient(ellipse at 68% 26%, color-mix(in srgb, var(--palette-accent) 35%, transparent), transparent 38%),
+      linear-gradient(140deg, var(--palette-background), var(--palette-surface));
+  }
+  .palette-arch {
+    position: absolute;
+    inset: 10% 14% 17%;
+    border: 1px solid color-mix(in srgb, var(--palette-primary) 70%, transparent);
+    border-bottom: 0;
+    border-radius: 48% 48% 0 0 / 35% 35% 0 0;
+    opacity: 0.78;
+  }
+  .palette-arch span {
+    position: absolute;
+    inset: 16% 18% 0;
+    border: 1px solid color-mix(in srgb, var(--palette-secondary) 55%, transparent);
+    border-bottom: 0;
+    border-radius: 48% 48% 0 0 / 35% 35% 0 0;
+  }
+  .palette-swatches { position: relative; display: flex; gap: 0.55rem; }
+  .palette-swatches i {
+    width: clamp(1.4rem, 3vw, 2rem);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+    border-radius: 50%;
+    background: var(--palette-primary);
+  }
+  .palette-swatches i:nth-child(2) { background: var(--palette-secondary); }
+  .palette-swatches i:nth-child(3) { background: var(--palette-accent); }
+  .palette-swatches i:nth-child(4) { background: var(--palette-background); }
+  .palette-caption {
+    position: absolute;
+    top: 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.28rem 0.48rem;
+    border: 1px solid color-mix(in srgb, var(--palette-text) 25%, transparent);
+    background: color-mix(in srgb, var(--palette-background) 88%, transparent);
+    color: var(--palette-text);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .look-credit { margin-top: 0.45rem; color: var(--muted); font: 0.68rem/1.5 var(--font-data); }
+  .look-credit a { color: var(--text); text-decoration-color: var(--accent); }
   .look-art :global(img) {
     display: block;
     width: 100%;
