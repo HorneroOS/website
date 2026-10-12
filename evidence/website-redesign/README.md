@@ -12,3 +12,10 @@ attribution dialog, Escape-to-close, and the Light color mode. The modal is a
 browser capture of the website interface, not a HorneroOS desktop capture.
 
 The theme-photo integration pass adds `photo-linked-themes-dark-1440.png` and `photo-linked-themes-light-mobile-390.png`, captured from the local static preview on 2026-10-11. The theme page now uses approved, attributed catalog photography for the six photo-backed Argentine originals; Hornero Light and Dark are shown as palette studies sourced from Hornero Config, not as wallpaper or desktop screenshots. Chromium verified the local page, the Light color mode, image loading, and no mobile horizontal overflow.
+
+The terminal showcase pass adds `terminal-showcase-1440.png` and
+`terminal-showcase-mobile-390.png`, captured from the local website preview on
+2026-10-12. They document the three real palette integrations shipped by
+Hornero Config: Kitty, Alacritty, and Ghostty. Chromium confirmed the three
+cards, terminal-guide link, keyboard focus, no browser errors, and no mobile
+horizontal overflow. These are website captures, not terminal-app screenshots.

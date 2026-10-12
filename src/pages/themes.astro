@@ -254,6 +254,49 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </p>
   </section>
 
+  <section class="section terminals-section" aria-labelledby="terminals-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">One palette, in your tools</p>
+        <h2 id="terminals-title">Your terminal keeps the same color story.</h2>
+      </div>
+      <p>
+        Hornero writes the active wallpaper palette in each terminal's native format. Kitty is the included default;
+        Alacritty and Ghostty are optional alternatives.
+      </p>
+    </div>
+    <div class="terminal-grid">
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Kitty</h3>
+          <span>Included default</span>
+        </div>
+        <p>The packaged config includes the palette generated for your current appearance.</p>
+        <pre><code>include ~/.cache/hornero/smart-colors/colors-kitty.conf</code></pre>
+      </article>
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Alacritty</h3>
+          <span>Optional</span>
+        </div>
+        <p>A native TOML import keeps the static Hornero colors as a fallback.</p>
+        <pre><code>import = ["hornero-dark.toml", "hornero-colors.toml"]</code></pre>
+      </article>
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Ghostty</h3>
+          <span>Optional</span>
+        </div>
+        <p>The stable theme name points to a generated palette, with a packaged fallback.</p>
+        <pre><code>theme = Hornero Dynamic</code></pre>
+      </article>
+    </div>
+    <p class="terminal-note">
+      Choose an installed terminal with <code>horneroctl config default-apps set terminal ghostty --yes</code>.
+      <a href="/docs/applications/terminal">Read the terminal guide</a> for setup and appearance details.
+    </p>
+  </section>
+
   <section class="section practical">
     <div>
       <p class="eyebrow">The useful details</p>
@@ -660,6 +703,68 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   .variant-footnote a {
     color: var(--text);
   }
+  .terminal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .terminal-card {
+    display: grid;
+    align-content: start;
+    gap: 0.8rem;
+    min-width: 0;
+    padding: clamp(1rem, 2vw, 1.4rem);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .terminal-card-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 0.8rem;
+  }
+  .terminal-card-heading h3 {
+    font-size: 1.15rem;
+  }
+  .terminal-card-heading span {
+    color: var(--accent);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .terminal-card > p,
+  .terminal-note {
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+  .terminal-card pre {
+    display: flex;
+    align-items: center;
+    min-height: 4.25rem;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0.8rem;
+    border-left: 2px solid var(--highlight);
+    background: var(--canvas);
+    color: var(--text);
+    font: 0.72rem/1.55 var(--font-data);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .terminal-note {
+    margin-top: 1rem;
+  }
+  .terminal-note code {
+    color: var(--text);
+    font: 0.78em var(--font-data);
+    overflow-wrap: anywhere;
+  }
+  .terminal-note a {
+    display: inline-block;
+    color: var(--text);
+    margin-inline-start: 0.25em;
+  }
   .wallpaper-scenes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
@@ -817,6 +922,9 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
     .variant-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .terminal-grid {
+      grid-template-columns: 1fr;
     }
     .desktop-gallery .section-heading {
       grid-template-columns: 1fr;
