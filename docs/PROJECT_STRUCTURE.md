@@ -12,6 +12,7 @@ src/
 ├── components/            # Capture frames, provenance plates, diagrams
 ├── content/
 │   └── showroom/          # Real captures with validated provenance metadata
+├── assets/                # Optimized images and brand assets processed by Astro
 ├── data/
 │   ├── docs-nav.ts        # Documentation navigation groups
 │   └── product/           # Generated data and full-SHA source pins
@@ -20,6 +21,11 @@ src/
 ├── lib/                   # Markdown link rewriting and build helpers
 ├── pages/                 # Public routes (listed below)
 └── styles/                # Global tokens, color modes, shared site styling
+
+public/
+├── images/                # Locally served product imagery
+├── media/greeter/         # Small browser-preview derivatives and posters
+└── wallpapers/            # Responsive licensed photography previews
 
 scripts/
 ├── sync-product-data.mjs  # Fetches pins and generates/checks product data
@@ -31,19 +37,22 @@ are build artifacts. Do not commit them.
 
 ## Public routes
 
-| Source                           | Route         | Role                                          |
-| -------------------------------- | ------------- | --------------------------------------------- |
-| `src/pages/index.astro`          | `/`           | Product introduction and real desktop capture |
-| `src/pages/editions.astro`       | `/editions/`  | Edition composition and maturity              |
-| `src/pages/layouts.astro`        | `/layouts/`   | Shell layout catalogue                        |
-| `src/pages/themes.astro`         | `/themes/`    | Themes, wallpapers and palette generation     |
-| `src/pages/showroom.astro`       | `/showroom/`  | Curated visual stories using real captures    |
-| `src/pages/companion.astro`      | `/companion/` | Companion experience                          |
-| `src/pages/install.astro`        | `/install/`   | Current installation availability and caveats |
-| `src/pages/releases.astro`       | `/releases/`  | Product releases from pinned metadata         |
-| `src/pages/roots.astro`          | `/roots/`     | Project history, people and provenance        |
-| `src/pages/search.astro`         | `/search/`    | Pagefind-powered site search                  |
-| `src/pages/docs/[...slug].astro` | `/docs/**`    | HorneroOS/docs rendered at its pinned commit  |
+| Source                           | Route          | Role                                             |
+| -------------------------------- | -------------- | ------------------------------------------------ |
+| `src/pages/index.astro`          | `/`            | Product introduction and real desktop capture    |
+| `src/pages/editions.astro`       | `/editions/`   | Edition composition and maturity                 |
+| `src/pages/layouts.astro`        | `/layouts/`    | Shell layout catalogue                           |
+| `src/pages/themes.astro`         | `/themes/`     | Themes, wallpapers and palette generation        |
+| `src/pages/wallpapers.astro`     | `/wallpapers/` | Licensed Argentina photography and credits       |
+| `src/pages/showroom.astro`       | `/showroom/`   | Curated visual stories using real captures       |
+| `src/pages/greeter.astro`        | `/greeter/`    | Interactive browser recreation and scene credits |
+| `src/pages/companion.astro`      | `/companion/`  | Companion experience                             |
+| `src/pages/install.astro`        | `/install/`    | Current installation availability and caveats    |
+| `src/pages/releases.astro`       | `/releases/`   | Product releases from pinned metadata            |
+| `src/pages/roots.astro`          | `/roots/`      | Project history, people and provenance           |
+| `src/pages/404.astro`            | `/404.html`    | Branded not-found page                           |
+| `src/pages/search.astro`         | `/search/`     | Pagefind-powered site search                     |
+| `src/pages/docs/[...slug].astro` | `/docs/**`     | HorneroOS/docs rendered at its pinned commit     |
 
 The 404 page is `src/pages/404.astro`.
 
