@@ -20,7 +20,12 @@ and is sourced from the HorneroOS repositories.
 - `/` — product introduction
 - `/editions/` — product family and maturity
 - `/layouts/` and `/themes/` — desktop configurations and appearances
+- `/wallpapers/` — location-verified photography, theme associations and credits
+- `/greeter/` — interactive browser recreation of the SDDM greeter
 - `/showroom/` — real product captures with provenance
+- `/companion/` — the desktop Companion experience
+- `/roots/` — project history, contributors and repository map
+- `/releases/` — tagged compositions and development previews
 - `/docs/` — technical and user documentation
 - `/install/` — installation status and requirements
 - `/search/` — searchable site documentation

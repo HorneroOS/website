@@ -36,7 +36,7 @@ npm run build
   with local-time moods and a provenance-backed Argentina scene collection
 - `/docs/` — HorneroOS/docs rendered at its pinned commit
 - `/search/` — Pagefind search over site content
-- `/roots` — heritage, credits, comparison table
+- `/roots` — project history, contributor credits and repository ownership map
 - `/install` — package availability and provisional installer acceptance status
 - `/companion` — the Hornero Companion experience
 
