@@ -86,11 +86,18 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     </ol>
   </section>
 
-  <section class="section map-section">
+  <section class="section map-section" id="repositories" aria-labelledby="repositories-title">
     <div>
       <p class="eyebrow">Maintained in clear pieces</p>
-      <h2>Every part has a home.</h2>
-      <p>The repositories are separate so each layer can be reviewed, packaged and tested at the right boundary.</p>
+      <h2 id="repositories-title">Core repositories, clear boundaries.</h2>
+      <p>
+        The product components are maintained separately so each layer can be reviewed, packaged and tested at the right
+        boundary. The{' '}
+        <a href="https://github.com/HorneroOS/.github/blob/main/governance/docs/repository-map.md">
+          full organization map
+        </a>{' '}
+        also covers Docs, Website, QA and shared governance.
+      </p>
     </div>
     <div class="repo-list">
       <a href={`${shell.repo}/tree/${shell.sha}`}>
@@ -144,6 +151,37 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     </div>
   </section>
 
+  <section class="section contributor-guide" id="contribute" aria-labelledby="contributor-guide-title">
+    <div>
+      <p class="eyebrow">For contributors</p>
+      <h2 id="contributor-guide-title">Start with the shared design language.</h2>
+      <p>
+        It sets cross-project identity and interaction principles. Each repository remains the source for its own
+        implementation rules and tested capabilities.
+      </p>
+    </div>
+    <nav aria-label="Contributor references">
+      <a href="/docs/development/design-language/">
+        <span>Product policy</span>
+        <strong>
+          HorneroOS design language <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/governance/docs/repository-map.md">
+        <span>Ownership</span>
+        <strong>
+          Repository map <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">
+        <span>Workflow</span>
+        <strong>
+          Contribution guide <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+    </nav>
+  </section>
+
   <section class="section lineage" id="community">
     <p class="eyebrow">Influence, credit and direction</p>
     <h2>Learn from good work. Keep our own shape.</h2>
@@ -175,8 +213,8 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
         <h3>People behind HorneroOS</h3>
         <p>
           <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> is HorneroOS’s principal maintainer.{' '}
-          <a href="https://github.com/PandaFoss">Panda Foss</a> contributes to HorneroOS and is one of the maintainers of{' '}
-          <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>. Panda will lead development of
+          <a href="https://github.com/PandaFoss">Panda Foss</a> contributes to HorneroOS and is one of the maintainers
+          of <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>. Panda will lead development of
           HorneroOS’s future custom installer. The current <a href="/install">Calamares path</a> remains provisional
           until that installer is ready. Both are part of the{' '}
           <a href="https://github.com/HorneroOS">HorneroOS organization</a>.
@@ -230,6 +268,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   }
   .timeline-section > h2,
   .map-section h2,
+  .contributor-guide h2,
   .lineage > h2 {
     margin-top: 0.4rem;
   }
@@ -306,6 +345,40 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   .repo-list a:hover strong {
     color: var(--accent);
   }
+  .contributor-guide {
+    display: grid;
+    gap: 1.5rem;
+    padding-inline-start: clamp(1rem, 3vw, 2rem);
+    border-inline-start: 2px solid var(--highlight);
+  }
+  .contributor-guide > div > p:last-child {
+    max-width: 58ch;
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+  }
+  .contributor-guide nav {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+  .contributor-guide nav a {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.1rem;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .contributor-guide nav a > span {
+    color: var(--secondary);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .contributor-guide nav a strong {
+    color: var(--text);
+  }
+  .contributor-guide nav a:hover strong {
+    color: var(--accent);
+  }
   .lineage-grid {
     display: grid;
     gap: 0.8rem;
@@ -330,6 +403,10 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   }
   @media (min-width: 900px) {
     .map-section {
+      grid-template-columns: 0.7fr 1.3fr;
+      align-items: start;
+    }
+    .contributor-guide {
       grid-template-columns: 0.7fr 1.3fr;
       align-items: start;
     }
