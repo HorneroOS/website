@@ -48,7 +48,19 @@ const filters = [
       <ul class="wallpaper-grid" role="list">
         {wallpapers.map((wallpaper, index) => (
           <li id={wallpaper.id} class:list={['wallpaper-card', `wallpaper-card-${index + 1}`]} data-tags={wallpaper.aestheticTags.join(' ')}>
-            <a class="wallpaper-image" href={wallpaper.preview} aria-label={`Open full preview: ${wallpaper.title}`}>
+            <a
+              class="wallpaper-image"
+              href={wallpaper.preview}
+              aria-label={`Open full preview: ${wallpaper.title}`}
+              data-lightbox-image={wallpaper.preview}
+              data-lightbox-alt={wallpaper.previewAlt}
+              data-lightbox-title={wallpaper.title}
+              data-lightbox-place={wallpaper.place}
+              data-lightbox-photographer={wallpaper.photographer}
+              data-lightbox-license={wallpaper.license}
+              data-lightbox-license-url={wallpaper.licenseUrl}
+              data-lightbox-source={wallpaper.sourcePage}
+            >
               <picture>
                 <source
                   srcset={`${wallpaper.previewSmall} 720w, ${wallpaper.preview} 1280w`}
@@ -81,6 +93,24 @@ const filters = [
         ))}
       </ul>
       <p class="no-results" hidden>No scenes match that filter.</p>
+      <dialog class="wallpaper-lightbox" aria-labelledby="lightbox-title">
+        <form method="dialog" class="lightbox-close-row">
+          <button type="submit" class="lightbox-close" aria-label="Close wallpaper preview">Close <span aria-hidden="true">×</span></button>
+        </form>
+        <figure>
+          <img class="lightbox-image" src="" alt="" width="1280" height="720" />
+          <figcaption>
+            <p class="lightbox-place"></p>
+            <h2 id="lightbox-title"></h2>
+            <p class="lightbox-credit"></p>
+            <div class="lightbox-links">
+              <a class="lightbox-license" href=""></a>
+              <a class="lightbox-source" href="">Source and attribution ↗</a>
+              <a class="lightbox-original" href="">Open full image ↗</a>
+            </div>
+          </figcaption>
+        </figure>
+      </dialog>
     </section>
 
     <section class="photo-note" aria-labelledby="photo-note-title">
@@ -117,6 +147,40 @@ const filters = [
       if (empty) empty.hidden = visible !== 0;
     });
   }
+
+  const lightbox = document.querySelector<HTMLDialogElement>('.wallpaper-lightbox');
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>('.lightbox-image');
+  const lightboxPlace = lightbox?.querySelector<HTMLElement>('.lightbox-place');
+  const lightboxTitle = lightbox?.querySelector<HTMLElement>('#lightbox-title');
+  const lightboxCredit = lightbox?.querySelector<HTMLElement>('.lightbox-credit');
+  const lightboxLicense = lightbox?.querySelector<HTMLAnchorElement>('.lightbox-license');
+  const lightboxSource = lightbox?.querySelector<HTMLAnchorElement>('.lightbox-source');
+  const lightboxOriginal = lightbox?.querySelector<HTMLAnchorElement>('.lightbox-original');
+
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-lightbox-image]')) {
+    link.addEventListener('click', (event) => {
+      if (!lightbox?.showModal || !lightboxImage || !lightboxTitle || !lightboxPlace || !lightboxCredit) return;
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const data = link.dataset;
+      lightboxImage.src = data.lightboxImage ?? link.href;
+      lightboxImage.alt = data.lightboxAlt ?? '';
+      lightboxTitle.textContent = data.lightboxTitle ?? '';
+      lightboxPlace.textContent = data.lightboxPlace ?? '';
+      lightboxCredit.textContent = `Photograph by ${data.lightboxPhotographer ?? 'unknown photographer'}`;
+      if (lightboxLicense) {
+        lightboxLicense.href = data.lightboxLicenseUrl ?? '#';
+        lightboxLicense.textContent = data.lightboxLicense ?? 'License details';
+      }
+      if (lightboxSource) lightboxSource.href = data.lightboxSource ?? link.href;
+      if (lightboxOriginal) lightboxOriginal.href = link.href;
+      lightbox.showModal();
+    });
+  }
+
+  lightbox?.addEventListener('click', (event) => {
+    if (event.target === lightbox) lightbox.close();
+  });
 </script>
 
 <style>
@@ -133,7 +197,7 @@ const filters = [
   h2 { margin: 0.6rem 0; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.06em; }
   .gallery-heading > p { max-width: 27rem; color: var(--muted); }
   .filters { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.8rem 0 2rem; }
-  .filters button { color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 0.6rem 0.9rem; cursor: pointer; font: 0.7rem var(--font-data); }
+  .filters button { min-height: 2.75rem; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 0.6rem 0.9rem; cursor: pointer; font: 0.7rem var(--font-data); }
   .filters button[aria-pressed="true"] { color: var(--surface); background: var(--accent); border-color: var(--accent); }
   .filters button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   .wallpaper-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 1.1rem; }
@@ -160,6 +224,21 @@ const filters = [
   .photo-note > p:not(.eyebrow) { max-width: 46rem; color: var(--muted); line-height: 1.7; }
   .note-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; margin-top: 1.5rem; font-size: 0.82rem; }
   .no-results { color: var(--muted); }
+  .wallpaper-lightbox { width: min(72rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100dvh - 2rem); margin: auto; padding: clamp(0.75rem, 2vw, 1.25rem); overflow: auto; border: 1px solid var(--line); background: var(--bg); color: var(--text); box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 55%); }
+  .wallpaper-lightbox::backdrop { background: rgb(4 7 13 / 82%); backdrop-filter: blur(5px); }
+  .lightbox-close-row { display: flex; justify-content: end; margin-bottom: 0.6rem; }
+  .lightbox-close { display: inline-flex; min-height: 2.75rem; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; font: 0.75rem var(--font-data); }
+  .lightbox-close span { color: var(--accent); font-size: 1.2rem; line-height: 1; }
+  .wallpaper-lightbox figure { margin: 0; }
+  .lightbox-image { display: block; width: 100%; height: auto; max-height: min(68vh, 48rem); aspect-ratio: 16 / 9; object-fit: contain; background: #080b14; }
+  .wallpaper-lightbox figcaption { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 1rem; padding-top: 1rem; }
+  .lightbox-place { color: var(--highlight); font: 0.7rem var(--font-data); text-transform: uppercase; letter-spacing: 0.08em; }
+  .wallpaper-lightbox h2 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+  .lightbox-credit { grid-column: 1 / -1; color: var(--muted); font-size: 0.85rem; }
+  .lightbox-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.65rem 1.4rem; margin-top: 0.25rem; font-size: 0.82rem; }
+  .lightbox-links a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  .wallpaper-image:focus-visible, .lightbox-close:focus-visible, .filters button:focus-visible, .lightbox-links a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   @media (max-width: 700px) { .gallery-heading { display: block; } .wallpaper-grid { display: block; } .wallpaper-card + .wallpaper-card { margin-top: 1rem; } .wallpaper-title { display: block; } .theme-link { display: inline-block; margin-top: 0.75rem; } }
+  @media (max-width: 520px) { .wallpaper-lightbox { width: calc(100vw - 1rem); max-height: calc(100dvh - 1rem); padding: 0.65rem; } .wallpaper-lightbox figcaption { grid-template-columns: 1fr; } .lightbox-credit, .lightbox-links { grid-column: auto; } }
   @media (prefers-reduced-motion: reduce) { .wallpaper-image img { transition: none; } }
 </style>

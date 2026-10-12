@@ -3,22 +3,13 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
-import { themes } from '../data/product';
-import neonCityShot from '../../assets/screenshots/curated/neon-city.webp';
+import { themes, wallpapers } from '../data/product';
 import variantSample from '../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
 const otherLooks = themes.filter((theme) => theme.collection !== 'hornero-originals');
+const photosByTheme = new Map(wallpapers.map((wallpaper) => [wallpaper.themeId, wallpaper]));
 const wallpaperMedia = {
-  'hornero-dark': (await import('../../assets/screenshots/theme-wallpapers/hornero-dark.webp')).default,
-  'hornero-light': (await import('../../assets/screenshots/theme-wallpapers/hornero-light.webp')).default,
-  pampa: (await import('../../assets/screenshots/theme-wallpapers/pampa.webp')).default,
-  patagonia: (await import('../../assets/screenshots/theme-wallpapers/patagonia.webp')).default,
-  'fin-del-mundo': (await import('../../assets/screenshots/theme-wallpapers/fin-del-mundo.webp')).default,
-  quebrada: (await import('../../assets/screenshots/theme-wallpapers/quebrada.webp')).default,
-  ibera: (await import('../../assets/screenshots/theme-wallpapers/ibera.webp')).default,
-  'buenos-aires-nocturno': (await import('../../assets/screenshots/theme-wallpapers/buenos-aires-nocturno.webp'))
-    .default,
   gruvbox: (await import('../../assets/screenshots/theme-wallpapers/gruvbox.webp')).default,
   landscape: (await import('../../assets/screenshots/theme-wallpapers/landscape.webp')).default,
   monochrome: (await import('../../assets/screenshots/theme-wallpapers/monochrome.webp')).default,
@@ -28,13 +19,8 @@ const wallpaperMedia = {
   'warm-sunset': (await import('../../assets/screenshots/theme-wallpapers/warm-sunset.webp')).default,
 };
 const modes = (mode: string) => (mode === 'light' ? 'Light' : 'Dark');
-const wallpaperProof = {
-  source: 'Hornero host capture',
-  context: 'Live Arch + Hyprland host · empty workspace',
-  resolution: '1920×1080',
-  theme: 'Custom · dark · expressive colors',
-  date: '2026-10-03',
-};
+const buenosAires = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
+if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pinned wallpaper catalogue');
 const paletteVariants = variantSample.variants;
 const showroom = await getCollection('showroom');
 const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
@@ -67,17 +53,20 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </div>
     </div>
     <div class="intro-preview">
-      <ArchFrame
-        src={neonCityShot}
-        alt="Live Hornero desktop capture with a cyan and amber cyberpunk skyline behind its shell rail."
-        eager
-        provenance={wallpaperProof}
+      <img
+        src={buenosAires.previewSmall}
+        srcset={`${buenosAires.previewSmall} 720w, ${buenosAires.preview} 1280w`}
         sizes="(min-width: 900px) 50vw, calc(100vw - 2rem)"
-        widths={[480, 720, 1080, 1280]}
+        alt={buenosAires.previewAlt}
+        width="1280"
+        height="720"
+        fetchpriority="high"
+        decoding="async"
       />
       <p>
-        <span>Live desktop capture</span>
-        <strong>Neon City</strong>
+        <span>{buenosAires.place}</span>
+        <strong>{buenosAires.title}</strong>
+        <small>Photograph by {buenosAires.photographer} · <a href={buenosAires.licenseUrl}>{buenosAires.license}</a></small>
       </p>
     </div>
   </section>
@@ -89,8 +78,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
         <h2 id="desktop-gallery-title">From scene to whole system.</h2>
       </div>
       <p>
-        Wallpapers set a mood; the real desktop shows how bars, colors and controls meet it. These captures span a light
-        first-party look, an Argentine grassland palette, a neon city and a synthwave road.
+        These real Hornero captures document the Shell as it appeared in the 3 October development review. They show
+        layout and controls; the six photographic Argentina Originals below reflect the current wallpaper catalogue.
       </p>
     </div>
     <div class="desktop-capture-grid">
@@ -136,17 +125,30 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       {originals.map((theme) => (
         <li class="look-card" id={theme.id}>
           <div class="look-art">
-            {wallpaperMedia[theme.id as keyof typeof wallpaperMedia] ? (
-              <Picture
-                src={wallpaperMedia[theme.id as keyof typeof wallpaperMedia]}
-                alt={`${['pampa', 'patagonia', 'fin-del-mundo', 'quebrada', 'ibera', 'buenos-aires-nocturno'].includes(theme.id) ? 'Photograph' : 'Wallpaper preview'} for ${theme.name}.`}
-                formats={['webp']}
-                fallbackFormat="webp"
-                widths={[520, 800]}
-                sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
-                loading="lazy"
-                decoding="async"
-              />
+            {photosByTheme.has(theme.id) ? (
+              <a class="look-photo" href={`/wallpapers#${theme.id}`} aria-label={`View ${theme.name} photograph and credits`}>
+                <img
+                  src={photosByTheme.get(theme.id)!.previewSmall}
+                  srcset={`${photosByTheme.get(theme.id)!.previewSmall} 720w, ${photosByTheme.get(theme.id)!.preview} 1280w`}
+                  sizes="(min-width: 1100px) 28vw, (min-width: 720px) 44vw, calc(100vw - 2rem)"
+                  alt={photosByTheme.get(theme.id)!.previewAlt}
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            ) : theme.palette ? (
+              <div
+                class="palette-study"
+                style={`--palette-background:${theme.palette.background};--palette-surface:${theme.palette.surface};--palette-text:${theme.palette.text};--palette-primary:${theme.palette.primary};--palette-secondary:${theme.palette.secondary};--palette-accent:${theme.palette.accent}`}
+                role="img"
+                aria-label={`${theme.name} color palette: background ${theme.palette.background}, primary ${theme.palette.primary}, secondary ${theme.palette.secondary}, accent ${theme.palette.accent}`}
+              >
+                <div class="palette-arch" aria-hidden="true"><span></span></div>
+                <div class="palette-swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                <span class="palette-caption" aria-hidden="true">Color study · {theme.mode}</span>
+              </div>
             ) : (
               <div class="artwork-unavailable">
                 <span aria-hidden="true">◌</span>
@@ -159,6 +161,13 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
           <div class="look-copy">
             <h4>{theme.name}</h4>
             <p>{theme.description}</p>
+            {photosByTheme.get(theme.id) ? (
+              <p class="look-credit">
+                {photosByTheme.get(theme.id)!.photographer} · <a href={photosByTheme.get(theme.id)!.licenseUrl}>{photosByTheme.get(theme.id)!.license}</a>
+              </p>
+            ) : (
+              <p class="look-credit">Color palette from Hornero Config · pair with any wallpaper</p>
+            )}
           </div>
         </li>
       ))}
@@ -245,6 +254,49 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </p>
   </section>
 
+  <section class="section terminals-section" aria-labelledby="terminals-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">One palette, in your tools</p>
+        <h2 id="terminals-title">Your terminal keeps the same color story.</h2>
+      </div>
+      <p>
+        Hornero writes the active wallpaper palette in each terminal's native format. Kitty is the included default;
+        Alacritty and Ghostty are optional alternatives.
+      </p>
+    </div>
+    <div class="terminal-grid">
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Kitty</h3>
+          <span>Included default</span>
+        </div>
+        <p>The packaged config includes the palette generated for your current appearance.</p>
+        <pre><code>include ~/.cache/hornero/smart-colors/colors-kitty.conf</code></pre>
+      </article>
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Alacritty</h3>
+          <span>Optional</span>
+        </div>
+        <p>A native TOML import keeps the static Hornero colors as a fallback.</p>
+        <pre><code>import = ["hornero-dark.toml", "hornero-colors.toml"]</code></pre>
+      </article>
+      <article class="terminal-card">
+        <div class="terminal-card-heading">
+          <h3>Ghostty</h3>
+          <span>Optional</span>
+        </div>
+        <p>The stable theme name points to a generated palette, with a packaged fallback.</p>
+        <pre><code>theme = Hornero Dynamic</code></pre>
+      </article>
+    </div>
+    <p class="terminal-note">
+      Choose an installed terminal with <code>horneroctl config default-apps set terminal ghostty --yes</code>.
+      <a href="/docs/applications/terminal">Read the terminal guide</a> for setup and appearance details.
+    </p>
+  </section>
+
   <section class="section practical">
     <div>
       <p class="eyebrow">The useful details</p>
@@ -285,15 +337,18 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     position: relative;
     min-width: 0;
   }
-  .intro-preview :global(.frame) {
-    width: 100%;
-  }
-  .intro-preview :global(.frame-shot) :global(img) {
+  .intro-preview :global(picture) {
     display: block;
     width: 100%;
-    /* Preserve the full 16:9 desktop capture, including its vertical rail. */
+  }
+  .intro-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    border: 1px solid color-mix(in srgb, var(--highlight) 45%, var(--line));
+    box-shadow: 0.7rem 0.7rem 0 -0.1rem var(--bg), 0.7rem 0.7rem 0 var(--highlight);
   }
   .desktop-gallery {
     padding-block: clamp(3rem, 7vw, 6rem);
@@ -349,19 +404,23 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     color: var(--ink);
   }
   .intro-preview > p {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
     margin-top: 0.6rem;
     color: var(--text-muted);
     font: 0.7rem var(--font-data);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
   .intro-preview strong {
     color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
     font-weight: 600;
   }
+  .intro-preview small { grid-column: 1 / -1; color: var(--text-muted); font: 0.68rem/1.45 var(--font-data); }
+  .intro-preview small a { color: var(--text); text-decoration-color: var(--accent); }
   .intro h1 {
     margin-top: 0.7rem;
     font-size: clamp(3rem, 3.65vw, 4.3rem);
@@ -463,6 +522,70 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     aspect-ratio: 16 / 10;
     background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 28%, var(--surface)), var(--surface));
   }
+  .look-photo,
+  .palette-study {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .look-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .palette-study {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-content: end;
+    gap: 1.25rem;
+    padding: clamp(1rem, 2.4vw, 2rem);
+    background:
+      radial-gradient(ellipse at 68% 26%, color-mix(in srgb, var(--palette-accent) 35%, transparent), transparent 38%),
+      linear-gradient(140deg, var(--palette-background), var(--palette-surface));
+  }
+  .palette-arch {
+    position: absolute;
+    inset: 10% 14% 17%;
+    border: 1px solid color-mix(in srgb, var(--palette-primary) 70%, transparent);
+    border-bottom: 0;
+    border-radius: 48% 48% 0 0 / 35% 35% 0 0;
+    opacity: 0.78;
+  }
+  .palette-arch span {
+    position: absolute;
+    inset: 16% 18% 0;
+    border: 1px solid color-mix(in srgb, var(--palette-secondary) 55%, transparent);
+    border-bottom: 0;
+    border-radius: 48% 48% 0 0 / 35% 35% 0 0;
+  }
+  .palette-swatches { position: relative; display: flex; gap: 0.55rem; }
+  .palette-swatches i {
+    width: clamp(1.4rem, 3vw, 2rem);
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+    border-radius: 50%;
+    background: var(--palette-primary);
+  }
+  .palette-swatches i:nth-child(2) { background: var(--palette-secondary); }
+  .palette-swatches i:nth-child(3) { background: var(--palette-accent); }
+  .palette-swatches i:nth-child(4) { background: var(--palette-background); }
+  .palette-caption {
+    position: absolute;
+    top: 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.28rem 0.48rem;
+    border: 1px solid color-mix(in srgb, var(--palette-text) 25%, transparent);
+    background: color-mix(in srgb, var(--palette-background) 88%, transparent);
+    color: var(--palette-text);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .look-credit { margin-top: 0.45rem; color: var(--muted); font: 0.68rem/1.5 var(--font-data); }
+  .look-credit a { color: var(--text); text-decoration-color: var(--accent); }
   .look-art :global(img) {
     display: block;
     width: 100%;
@@ -579,6 +702,68 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   }
   .variant-footnote a {
     color: var(--text);
+  }
+  .terminal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .terminal-card {
+    display: grid;
+    align-content: start;
+    gap: 0.8rem;
+    min-width: 0;
+    padding: clamp(1rem, 2vw, 1.4rem);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .terminal-card-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 0.8rem;
+  }
+  .terminal-card-heading h3 {
+    font-size: 1.15rem;
+  }
+  .terminal-card-heading span {
+    color: var(--accent);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .terminal-card > p,
+  .terminal-note {
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+  .terminal-card pre {
+    display: flex;
+    align-items: center;
+    min-height: 4.25rem;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0.8rem;
+    border-left: 2px solid var(--highlight);
+    background: var(--canvas);
+    color: var(--text);
+    font: 0.72rem/1.55 var(--font-data);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .terminal-note {
+    margin-top: 1rem;
+  }
+  .terminal-note code {
+    color: var(--text);
+    font: 0.78em var(--font-data);
+    overflow-wrap: anywhere;
+  }
+  .terminal-note a {
+    display: inline-block;
+    color: var(--text);
+    margin-inline-start: 0.25em;
   }
   .wallpaper-scenes {
     display: grid;
@@ -701,7 +886,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       gap: 1.4rem;
     }
     .intro-preview {
-      order: -1;
+      order: 0;
     }
     .intro h1 {
       font-size: clamp(2.55rem, 10vw, 3.4rem);
@@ -737,6 +922,9 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
     .variant-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .terminal-grid {
+      grid-template-columns: 1fr;
     }
     .desktop-gallery .section-heading {
       grid-template-columns: 1fr;

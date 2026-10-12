@@ -76,3 +76,8 @@ and test it with keyboard input as well as pointer interaction.
 For content collections, schemas and source pins, see
 [`PROJECT_STRUCTURE.md`](./PROJECT_STRUCTURE.md) and
 [`PRODUCT_DATA.md`](./PRODUCT_DATA.md).
+
+The website's visual language is a presentation layer, not the desktop's
+theme contract. For shared product identity and the sources that govern the
+desktop, greeter, and installer, see the
+[HorneroOS design language](/docs/development/design-language/).
