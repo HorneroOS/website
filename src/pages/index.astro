@@ -63,23 +63,6 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
       </p>
     </div>
 
-    <figure class="hero-scene">
-      <img
-        src={heroScene.poster}
-        alt={heroScene.description}
-        width="1280"
-        height="720"
-        fetchpriority="high"
-        decoding="async"
-      />
-      <figcaption>
-        <span class="scene-title">{heroScene.title}</span>
-        <span class="scene-place">{heroScene.place} · {heroScene.province}</span>
-        <span class="scene-credit">Photograph by <a href={heroScene.sourceUrl}>{heroScene.creator}</a> · <a href={heroScene.licenseUrl}>{heroScene.license}</a></span>
-      </figcaption>
-      <span class="scene-index" aria-hidden="true">ARG / NIGHT</span>
-    </figure>
-
     <div class="hero-detail">
       <p class="heritage">
         Led by <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, with contributions from
@@ -100,6 +83,23 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
         installer. <a href="/install">Install status</a>
       </p>
     </div>
+
+    <figure class="hero-scene">
+      <img
+        src={heroScene.poster}
+        alt={heroScene.description}
+        width="1280"
+        height="720"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption>
+        <span class="scene-title">{heroScene.title}</span>
+        <span class="scene-place">{heroScene.place} · {heroScene.province}</span>
+        <span class="scene-credit">Photograph by <a href={heroScene.sourceUrl}>{heroScene.creator}</a> · <a href={heroScene.licenseUrl}>{heroScene.license}</a></span>
+      </figcaption>
+      <span class="scene-index" aria-hidden="true">ARG / NIGHT</span>
+    </figure>
   </section>
 
   <section class="section family-snapshot" aria-labelledby="family-title">
