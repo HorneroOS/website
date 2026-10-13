@@ -56,8 +56,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   }
 
   .search mark {
-    color: var(--accent-ink);
-    background: var(--accent);
+    /* Pagefind uses high-specificity selectors for highlighted excerpts. */
+    background: var(--accent) !important;
     border-radius: 0.15em;
     padding-inline: 0.12em;
   }
