@@ -182,9 +182,11 @@ function terminalIntegrations(configDir) {
     fail('factory profile is missing terminal.integrations');
   }
   const ids = new Set();
+  const requiredMetadata = ['name', 'package', 'configPath', 'configExample', 'palette', 'palettePath', 'detail', 'note'];
   for (const item of terminal.integrations) {
-    if (!item.id || ids.has(item.id)) fail(`terminal integration has a missing or duplicate id: ${item.id}`);
-    if (!item.name || !item.package || !item.configPath || !item.configExample || !item.palette || !item.palettePath || !item.detail || !item.note) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) fail('terminal integration must be an object');
+    if (typeof item.id !== 'string' || !item.id.trim() || ids.has(item.id)) fail(`terminal integration has a missing or duplicate id: ${item.id}`);
+    if (!requiredMetadata.every((key) => typeof item[key] === 'string' && item[key].trim())) {
       fail(`terminal integration ${item.id} is missing required display or configuration metadata`);
     }
     if (!['default', 'optional'].includes(item.role)) {

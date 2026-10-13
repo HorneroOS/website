@@ -4,8 +4,10 @@ import { terminalCatalogue } from '../data/product';
 
 const terminals = terminalCatalogue.integrations;
 const defaultTerminal = terminals.find((terminal) => terminal.id === terminalCatalogue.default);
+const exampleTerminal = terminals.find((terminal) => terminal.id !== defaultTerminal?.id) ?? terminals[0];
+const alternativeTerminalIds = terminals.filter((terminal) => terminal.id !== exampleTerminal?.id).map((terminal) => terminal.id);
 const terminalNames = terminals.map((terminal) => terminal.name).join(', ');
-const displayPath = (path: string) => path.replace('{config}', '~/.config').replace('{cache}', '~/.cache');
+const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').replaceAll('{cache}', '~/.cache');
 ---
 
 <SiteLayout
@@ -29,8 +31,8 @@ const displayPath = (path: string) => path.replace('{config}', '~/.config').repl
       <span class="note-index">SYSTEM / DEFAULT APPS</span>
       <strong>Choose from what is installed.</strong>
       <p>Settings shows the supported emulators, marks which are installed, and only enables available choices. {defaultTerminal?.name ?? 'The default terminal'} is the factory choice.</p>
-      <code class="command">horneroctl config default-apps set terminal ghostty --yes</code>
-      <small>Replace <code>ghostty</code> with <code>kitty</code> or <code>alacritty</code>.</small>
+      {exampleTerminal && <code class="command">horneroctl config default-apps set terminal {exampleTerminal.id} --yes</code>}
+      {exampleTerminal && alternativeTerminalIds.length > 0 && <small>Replace <code>{exampleTerminal.id}</code> with {alternativeTerminalIds.map((id, index) => <>{index > 0 && ' or '}<code>{id}</code></>)}.</small>}
     </aside>
   </section>
 
