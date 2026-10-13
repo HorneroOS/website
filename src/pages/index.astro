@@ -61,6 +61,12 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
         HorneroOS is an Arch-based, Wayland-first desktop grown from the environment Ulises Jeremías has used, tested
         and refined every day since 2018.
       </p>
+      <p class="heritage">
+        Built by <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, with contributions from{' '}
+        <a href="https://github.com/PandaFoss">Panda Foss</a>, one of the maintainers of{' '}
+        <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>. Shaped in the open with the{' '}
+        <a href="https://github.com/HorneroOS">HorneroOS community</a>.
+      </p>
       <div class="cta-row">
         <a href="/showroom" class="cta primary">Explore the desktop <span aria-hidden="true">↗</span></a>
         <a href="/install" class="cta secondary">Try Hornero</a>
@@ -68,11 +74,6 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     </div>
 
     <div class="hero-detail">
-      <p class="heritage">
-        Led by <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, with contributions from{' '}
-        <a href="https://github.com/PandaFoss">Panda Foss</a> of the Anarchy Linux maintainers. Built in the open by
-        the <a href="https://github.com/HorneroOS">HorneroOS community</a>.
-      </p>
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span><strong>{layouts.length}</strong> layouts</span>
         <span><strong>{themes.length}</strong> coordinated looks</span>
@@ -275,7 +276,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero h1 .phrase-tail { white-space: nowrap; }
   .hero .lede { max-width: 42ch; font-size: clamp(1.08rem, 1rem + 0.45vw, 1.3rem); line-height: 1.5; }
-  .heritage { max-width: 52ch; padding-left: 0.85rem; border-left: 2px solid var(--accent); color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
+  .heritage { max-width: 50ch; padding-left: 0.85rem; border-left: 2px solid var(--accent); color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; }
   .heritage a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
   .heritage a:hover { color: var(--accent); }
   .hero-facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; padding-block: 0.6rem; border-block: 1px solid var(--line); color: var(--text-muted); font-size: 0.9rem; }
