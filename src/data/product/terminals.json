@@ -1,0 +1,41 @@
+{
+  "default": "kitty",
+  "integrations": [
+    {
+      "id": "kitty",
+      "name": "Kitty",
+      "role": "default",
+      "package": "kitty",
+      "detail": "GPU-accelerated, with the Kitty graphics protocol used by Yazi previews.",
+      "configExample": "include ~/.cache/hornero/smart-colors/colors-kitty.conf",
+      "configPath": "{config}/kitty/kitty.conf",
+      "palette": "colors-kitty.conf",
+      "palettePath": "{cache}/hornero/smart-colors/",
+      "note": "A static Hornero Dark or Light palette keeps the terminal readable before the first generated scheme."
+    },
+    {
+      "id": "alacritty",
+      "name": "Alacritty",
+      "role": "optional",
+      "package": "alacritty",
+      "detail": "A compact TOML configuration with live reload; Yazi image previews use the Wayland adapter through Überzug++ where configured.",
+      "configExample": "import = [\"hornero-dark.toml\", \"hornero-colors.toml\"]",
+      "configPath": "{config}/alacritty/alacritty.toml",
+      "palette": "hornero-colors.toml",
+      "palettePath": "{config}/alacritty/",
+      "note": "The packaged dark/light fallback and generated color file are imported separately, so wallpaper colors can update without replacing your base config."
+    },
+    {
+      "id": "ghostty",
+      "name": "Ghostty",
+      "role": "optional",
+      "package": "ghostty",
+      "detail": "A native Ghostty theme with a stable name that Hornero can refresh when appearance changes.",
+      "configExample": "theme = Hornero Dynamic",
+      "configPath": "{config}/ghostty/config.ghostty",
+      "palette": "Hornero Dynamic",
+      "palettePath": "{config}/ghostty/themes/",
+      "note": "A packaged system fallback is available before Hornero writes the user-level wallpaper palette."
+    }
+  ]
+}

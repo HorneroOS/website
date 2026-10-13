@@ -8,6 +8,7 @@ import releasesJson from './releases.json';
 import themesJson from './themes.json';
 import greeterScenesJson from './greeter-scenes.json';
 import wallpapersJson from './wallpapers.json';
+import terminalsJson from './terminals.json';
 
 export interface LayoutBar {
   edge: 'top' | 'bottom' | 'left' | 'right';
@@ -127,12 +128,31 @@ export interface Wallpaper {
   previewSha256: string | null;
 }
 
+export interface TerminalIntegration {
+  id: string;
+  name: string;
+  role: 'default' | 'optional';
+  package: string;
+  detail: string;
+  configExample: string;
+  configPath: string;
+  palette: string;
+  palettePath: string;
+  note: string;
+}
+
+export interface TerminalCatalogue {
+  default: string;
+  integrations: TerminalIntegration[];
+}
+
 export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
 export const editionCatalogue = editionsJson as EditionCatalogue;
 export const greeterSceneCatalogue = greeterScenesJson as GreeterSceneCatalogue;
 export const wallpapers = wallpapersJson as Wallpaper[];
+export const terminalCatalogue = terminalsJson as TerminalCatalogue;
 export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
 export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter', { repo: string; sha: string }>;
