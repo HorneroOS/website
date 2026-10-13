@@ -53,8 +53,14 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
           </div>
           <p>{terminal.detail}</p>
           <div class="terminal-config" aria-label={`${terminal.name} configuration example`}>
-            <span class="config-label">FACTORY CONFIG</span>
-            <code>{terminal.configExample}</code>
+            <div class="terminal-package">
+              <span class="config-label">INSTALL FROM ARCH REPOSITORIES</span>
+              <code>sudo pacman -S --needed {terminal.package}</code>
+            </div>
+            <div class="terminal-factory-config">
+              <span class="config-label">FACTORY CONFIG</span>
+              <code>{terminal.configExample}</code>
+            </div>
           </div>
           <dl class="terminal-output">
             <div><dt>Config file</dt><dd><code>{displayPath(terminal.configPath)}</code></dd></div>
@@ -104,7 +110,8 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
   .terminal-entry h3 { font-size: 1.6rem; }
   .terminal-role { display: block; margin-top: 0.1rem; color: var(--text-muted); font: 0.64rem var(--font-data); text-transform: uppercase; }
   .terminal-entry > p { max-width: 38ch; color: var(--text-muted); font-size: 0.9rem; }
-  .terminal-config { display: grid; gap: 0.6rem; min-width: 0; padding: 0.75rem; border-left: 2px solid var(--accent); background: var(--surface); }
+  .terminal-config { display: grid; gap: 0.9rem; min-width: 0; padding: 0.75rem; border-left: 2px solid var(--accent); background: var(--surface); }
+  .terminal-package, .terminal-factory-config { display: grid; gap: 0.45rem; min-width: 0; }
   .terminal-config code { overflow-wrap: anywhere; color: var(--text); font-size: 0.77rem; }
   .terminal-output { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; margin: 0; }
   .terminal-output div { display: grid; gap: 0.2rem; }
