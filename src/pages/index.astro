@@ -56,7 +56,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
       <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Arch Linux · Wayland-first · daily use since 2018</p>
-      <h1 id="hero-title">A Linux desktop,<br /><em>built the long way.</em></h1>
+      <h1 id="hero-title">A Linux desktop,<br /><em>built the <span class="phrase-tail">long way.</span></em></h1>
       <p class="lede">
         HorneroOS is an Arch-based, Wayland-first desktop grown from the environment Ulises Jeremías has used, tested
         and refined every day since 2018.
@@ -271,8 +271,9 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   .hero-copy { grid-area: copy; display: grid; justify-items: start; gap: 1rem; }
   .hero-detail { grid-area: detail; display: grid; justify-items: start; gap: 1rem; }
   .hero-copy .eyebrow { max-width: 43rem; }
-  .hero h1 { max-width: 12ch; font-size: clamp(3.15rem, 5.5vw, 6.3rem); line-height: 0.91; letter-spacing: -0.075em; }
+  .hero h1 { max-width: none; font-size: clamp(3.15rem, 4.6vw, 5.9rem); line-height: 0.91; letter-spacing: -0.075em; }
   .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero h1 .phrase-tail { white-space: nowrap; }
   .hero .lede { max-width: 42ch; font-size: clamp(1.08rem, 1rem + 0.45vw, 1.3rem); line-height: 1.5; }
   .heritage { max-width: 52ch; padding-left: 0.85rem; border-left: 2px solid var(--accent); color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
   .heritage a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
