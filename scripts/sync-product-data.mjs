@@ -6,9 +6,9 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers,terminals}.json
 //
-// Every fact on /layouts, /themes and /releases comes from these files, and
+// Product facts on /layouts, /themes, /releases and /terminals come from these files, and
 // these files come only from the pinned commits: never edit them by hand.
 // `--check` regenerates into memory and fails when the committed files
 // differ (CI), so the data can never drift from its pins.
@@ -171,6 +171,45 @@ function editionCatalogue(horneroDir) {
     capabilities: compositor.capabilities ?? [],
   }));
   return { version: source.version, editions, compositors };
+}
+
+// Terminal integrations and their package roles are owned by the pinned
+// config factory profile. Keep the website a projection of that contract.
+function terminalIntegrations(configDir) {
+  const factory = readJson(join(configDir, 'profiles/factory.json'));
+  const terminal = factory.terminal;
+  if (!terminal || !Array.isArray(terminal.integrations)) {
+    fail('factory profile is missing terminal.integrations');
+  }
+  const ids = new Set();
+  const requiredMetadata = ['name', 'package', 'configPath', 'configExample', 'palette', 'palettePath', 'detail', 'note'];
+  for (const item of terminal.integrations) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) fail('terminal integration must be an object');
+    if (typeof item.id !== 'string' || !item.id.trim() || ids.has(item.id)) fail(`terminal integration has a missing or duplicate id: ${item.id}`);
+    if (!requiredMetadata.every((key) => typeof item[key] === 'string' && item[key].trim())) {
+      fail(`terminal integration ${item.id} is missing required display or configuration metadata`);
+    }
+    if (!['default', 'optional'].includes(item.role)) {
+      fail(`terminal integration ${item.id} has unsupported role ${item.role}`);
+    }
+    ids.add(item.id);
+  }
+  if (!ids.has(terminal.default)) fail(`default terminal ${terminal.default} is not in terminal.integrations`);
+  return {
+    default: terminal.default,
+    integrations: terminal.integrations.map((item) => ({
+      id: item.id,
+      name: item.name,
+      role: item.role,
+      package: item.package,
+      detail: item.detail,
+      configExample: item.configExample,
+      configPath: item.configPath,
+      palette: item.palette,
+      palettePath: item.palettePath,
+      note: item.note,
+    })),
+  };
 }
 
 // The greeter catalog and per-scene provenance are canonical. This generated
@@ -436,6 +475,7 @@ const generated = {
   'releases.json': releases(dirs.hornero, pins.releaseTags ?? []),
   'editions.json': editionCatalogue(dirs.hornero),
   'greeter-scenes.json': greeterScenes(dirs.greeter),
+  'terminals.json': terminalIntegrations(dirs.config),
 };
 
 let drift = 0;

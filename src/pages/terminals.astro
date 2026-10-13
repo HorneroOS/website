@@ -1,50 +1,25 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { terminalCatalogue } from '../data/product';
 
-const terminals = [
-  {
-    id: 'kitty',
-    name: 'Kitty',
-    role: 'Factory choice',
-    detail: 'GPU-accelerated, with the Kitty graphics protocol used by Yazi previews.',
-    config: 'include ~/.cache/hornero/smart-colors/colors-kitty.conf',
-    palette: 'colors-kitty.conf',
-    path: '~/.cache/hornero/smart-colors/',
-    note: 'A static Hornero Dark or Light palette keeps the terminal readable before the first generated scheme.',
-  },
-  {
-    id: 'alacritty',
-    name: 'Alacritty',
-    role: 'Supported alternative',
-    detail: 'A compact TOML configuration with live reload; Yazi image previews use the Wayland adapter through Überzug++ where configured.',
-    config: 'import = ["hornero-dark.toml", "hornero-colors.toml"]',
-    palette: 'hornero-colors.toml',
-    path: '~/.config/alacritty/',
-    note: 'The packaged dark/light fallback and generated color file are imported separately, so wallpaper colors can update without replacing your base config.',
-  },
-  {
-    id: 'ghostty',
-    name: 'Ghostty',
-    role: 'Supported alternative',
-    detail: 'A native Ghostty theme with a stable name that Hornero can refresh when appearance changes.',
-    config: 'theme = Hornero Dynamic',
-    palette: 'Hornero Dynamic',
-    path: '~/.config/ghostty/themes/',
-    note: 'A packaged system fallback is available before Hornero writes the user-level wallpaper palette.',
-  },
-];
+const terminals = terminalCatalogue.integrations;
+const defaultTerminal = terminals.find((terminal) => terminal.id === terminalCatalogue.default);
+const exampleTerminal = terminals.find((terminal) => terminal.id !== defaultTerminal?.id) ?? terminals[0];
+const alternativeTerminalIds = terminals.filter((terminal) => terminal.id !== exampleTerminal?.id).map((terminal) => terminal.id);
+const terminalNames = terminals.map((terminal) => terminal.name).join(', ');
+const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').replaceAll('{cache}', '~/.cache');
 ---
 
 <SiteLayout
-  title="Terminals — Kitty, Alacritty and Ghostty | HorneroOS"
-  description="Choose an installed Kitty, Alacritty or Ghostty terminal in Hornero Settings. One Hornero appearance is rendered in each terminal's native palette format."
+  title={`Terminals — ${terminalNames} | HorneroOS`}
+  description={`Choose among ${terminalNames} in Hornero Settings. One Hornero appearance is rendered in each terminal's native palette format.`}
 >
   <section class="terminal-intro section" aria-labelledby="terminal-title">
     <div class="terminal-heading">
       <p class="eyebrow">One appearance · native terminal configs</p>
       <h1 id="terminal-title">Your terminal.<br /><em>Still in tune.</em></h1>
       <p class="lede">
-        Kitty, Alacritty and Ghostty can follow the same Hornero appearance. The desktop generates a palette in each
+        {terminalNames} can follow the same Hornero appearance. The desktop generates a palette in each
         terminal’s own format and leaves your chosen emulator yours to select.
       </p>
       <div class="terminal-actions">
@@ -55,16 +30,16 @@ const terminals = [
     <aside class="terminal-note" aria-label="How terminal selection works">
       <span class="note-index">SYSTEM / DEFAULT APPS</span>
       <strong>Choose from what is installed.</strong>
-      <p>Settings lists the supported emulators present on your system. Select one there or set it with <code>horneroctl</code>.</p>
-      <code class="command">horneroctl config default-apps set terminal ghostty --yes</code>
-      <small>Replace <code>ghostty</code> with <code>kitty</code> or <code>alacritty</code>.</small>
+      <p>Settings shows the supported emulators, marks which are installed, and only enables available choices. {defaultTerminal?.name ?? 'The default terminal'} is the factory choice.</p>
+      {exampleTerminal && <code class="command">horneroctl config default-apps set terminal {exampleTerminal.id} --yes</code>}
+      {exampleTerminal && alternativeTerminalIds.length > 0 && <small>Replace <code>{exampleTerminal.id}</code> with {alternativeTerminalIds.map((id, index) => <>{index > 0 && ' or '}<code>{id}</code></>)}.</small>}
     </aside>
   </section>
 
   <section class="terminal-field section" aria-labelledby="terminal-field-title">
     <div class="field-heading">
       <div>
-        <p class="eyebrow">Three emulators, one color source</p>
+        <p class="eyebrow">{terminals.length} emulators, one color source</p>
         <h2 id="terminal-field-title">Native where it matters.</h2>
       </div>
       <p>Hornero keeps each terminal’s conventions intact. Your selected wallpaper palette is translated to the native format rather than forcing every emulator through one generic theme file.</p>
@@ -74,16 +49,17 @@ const terminals = [
         <article class="terminal-entry" id={terminal.id}>
           <div class="terminal-entry-heading">
             <span class="terminal-number">0{index + 1}</span>
-            <div><h3>{terminal.name}</h3><span class="terminal-role">{terminal.role}</span></div>
+            <div><h3>{terminal.name}</h3><span class="terminal-role">{terminal.role === 'default' ? 'Factory choice' : 'Supported alternative'}</span></div>
           </div>
           <p>{terminal.detail}</p>
           <div class="terminal-config" aria-label={`${terminal.name} configuration example`}>
             <span class="config-label">FACTORY CONFIG</span>
-            <code>{terminal.config}</code>
+            <code>{terminal.configExample}</code>
           </div>
           <dl class="terminal-output">
+            <div><dt>Config file</dt><dd><code>{displayPath(terminal.configPath)}</code></dd></div>
             <div><dt>Generated palette</dt><dd><code>{terminal.palette}</code></dd></div>
-            <div><dt>Written under</dt><dd><code>{terminal.path}</code></dd></div>
+            <div><dt>Written under</dt><dd><code>{displayPath(terminal.palettePath)}</code></dd></div>
           </dl>
           <p class="terminal-footnote">{terminal.note}</p>
         </article>
@@ -97,9 +73,9 @@ const terminals = [
       <p class="eyebrow">A practical workflow</p>
       <h2 id="terminal-flow-title">Install. Choose. Apply a look.</h2>
       <ol class="flow-steps">
-        <li><strong>Install a terminal</strong><span>Kitty is the factory choice. Alacritty and Ghostty remain optional packages.</span></li>
-        <li><strong>Select it in Settings</strong><span>Control Center shows only supported terminals that are actually installed.</span></li>
-        <li><strong>Change appearance</strong><span>Hornero writes fresh native palettes for all three integrations; the active terminal reads its own file.</span></li>
+        <li><strong>Install a terminal</strong><span>{defaultTerminal?.name ?? 'The default terminal'} is the factory choice. The other listed emulators remain optional packages.</span></li>
+        <li><strong>Select it in Settings</strong><span>Control Center marks installed choices and prevents selecting a terminal that is not present.</span></li>
+        <li><strong>Change appearance</strong><span>Hornero writes fresh native palettes for all {terminals.length} integrations; the active terminal reads its own file.</span></li>
       </ol>
       <p class="terminal-caveat">This page describes the current Arch package integration. Terminal packages are separate from Hornero Shell; installing Hornero does not require installing every emulator.</p>
     </div>
