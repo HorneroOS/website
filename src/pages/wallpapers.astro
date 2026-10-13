@@ -249,30 +249,52 @@ const filters = [
   const feature = document.querySelector<HTMLElement>('.wallpaper-feature');
   const intro = document.querySelector<HTMLElement>('.wallpaper-intro');
   const empty = document.querySelector<HTMLElement>('.no-results');
+  const filterIds = buttons.map((button) => button.dataset.filter ?? 'all');
+  const filterStatus = document.querySelector<HTMLElement>('.filter-status');
+
+  function applyFilter(tag: string): void {
+    const button = buttons.find((candidate) => candidate.dataset.filter === tag);
+    if (!button) return;
+
+    let visible = 0;
+    const featureMatches = tag === 'all' || (feature?.dataset.tags ?? '').split(' ').includes(tag);
+    if (feature) feature.hidden = !featureMatches;
+    intro?.classList.toggle('feature-hidden', !featureMatches);
+    visible += Number(featureMatches);
+    for (const card of cards) {
+      const show = tag === 'all' || (card.dataset.tags ?? '').split(' ').includes(tag);
+      card.hidden = !show;
+      visible += Number(show);
+    }
+    buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
+    if (empty) empty.hidden = visible !== 0;
+    const noun = visible === 1 ? 'photograph' : 'photographs';
+    if (filterStatus)
+      filterStatus.textContent =
+        tag === 'all'
+          ? `Showing all ${visible} ${noun}.`
+          : `Showing ${visible} ${noun} for ${(button.dataset.label ?? 'this filter').toLowerCase()}.`;
+  }
+
   for (const button of buttons) {
     button.addEventListener('click', () => {
-      const tag = button.dataset.filter;
-      let visible = 0;
-      const featureMatches = tag === 'all' || (feature?.dataset.tags ?? '').split(' ').includes(tag ?? '');
-      if (feature) feature.hidden = !featureMatches;
-      intro?.classList.toggle('feature-hidden', !featureMatches);
-      visible += Number(featureMatches);
-      for (const card of cards) {
-        const show = tag === 'all' || (card.dataset.tags ?? '').split(' ').includes(tag ?? '');
-        card.hidden = !show;
-        visible += Number(show);
-      }
-      buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
-      if (empty) empty.hidden = visible !== 0;
-      const status = document.querySelector<HTMLElement>('.filter-status');
-      const noun = visible === 1 ? 'photograph' : 'photographs';
-      if (status)
-        status.textContent =
-          tag === 'all'
-            ? `Showing all ${visible} ${noun}.`
-            : `Showing ${visible} ${noun} for ${(button.dataset.label ?? 'this filter').toLowerCase()}.`;
+      const tag = button.dataset.filter ?? 'all';
+      if (button.getAttribute('aria-pressed') === 'true') return;
+
+      const url = new URL(window.location.href);
+      if (tag === 'all') url.searchParams.delete('scene');
+      else url.searchParams.set('scene', tag);
+      window.history.pushState({ wallpaperScene: tag }, '', url);
+      applyFilter(tag);
     });
   }
+
+  const initialScene = new URL(window.location.href).searchParams.get('scene');
+  applyFilter(initialScene && filterIds.includes(initialScene) ? initialScene : 'all');
+  window.addEventListener('popstate', () => {
+    const scene = new URL(window.location.href).searchParams.get('scene');
+    applyFilter(scene && filterIds.includes(scene) ? scene : 'all');
+  });
 
   const lightbox = document.querySelector<HTMLDialogElement>('.wallpaper-lightbox');
   const lightboxImage = lightbox?.querySelector<HTMLImageElement>('.lightbox-image');
