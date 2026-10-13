@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview19",
     "shell": {
-      "sha": "77eed105407fae4101da043ae534a13796d0d767",
-      "subject": "fix(shell): make settings navigation keyboard accessible (#177)"
+      "sha": "e514eb859c5b6066870887a021aed9d2cb271615",
+      "subject": "Merge pull request #185 from HorneroOS/release/hornero-shell-v1.2.13"
     },
     "config": {
       "sha": "4ef767d13ca1474031c1ac7c034c4639ea9dadb8",
