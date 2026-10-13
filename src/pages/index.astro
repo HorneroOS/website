@@ -48,6 +48,12 @@ const family = editionOrder.map((id) => {
     })),
   };
 });
+const desktopCompositors = (editionById.desktop?.compositor?.supported ?? []).map((id) => {
+  const compositor = editionCatalogue.compositors.find((item) => item.id === id);
+  const name = id === 'hyprland' ? 'Hyprland' : id === 'niri' ? 'Niri' : id;
+  const maturity = compositor?.maturity ?? 'planned';
+  return { name, maturity: maturity[0].toUpperCase() + maturity.slice(1) };
+});
 const title = 'HorneroOS | A Linux desktop, built the long way';
 const description = `An Arch-based, Wayland-first desktop grown from an environment used daily since 2018. Explore ${layouts.length} layouts, ${themes.length} coordinated looks and licensed photographs from Argentina.`;
 ---
@@ -77,11 +83,12 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
       <div class="hero-facts" aria-label="Hornero at a glance">
         <span><strong>{layouts.length}</strong> layouts</span>
         <span><strong>{themes.length}</strong> coordinated looks</span>
-        <span><strong>1</strong> shell</span>
+        <span><strong>{desktopCompositors.length}</strong> compositor backends</span>
       </div>
       <p class="release-note">
         Development preview · no ISO is published. Calamares remains provisional while Panda Foss develops the custom
-        installer. <a href="/install">Install status</a>
+        installer. {desktopCompositors.map((compositor) => `${compositor.name} ${compositor.maturity}`).join(' · ')}.
+        {' '}<a href="/editions#desktop">Desktop support status</a> · <a href="/install">Install status</a>
       </p>
     </div>
 
