@@ -172,6 +172,20 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     </div>
   </section>
 
+  <section class="terminal-feature" aria-labelledby="terminal-feature-title">
+    <div class="terminal-feature-intro">
+      <p class="eyebrow">The rest of the workspace, in step</p>
+      <h2 id="terminal-feature-title">One palette.<br /><em>Three native terminals.</em></h2>
+      <p>Hornero translates the selected appearance into native color files for Kitty, Alacritty and Ghostty. Pick an installed emulator in Settings; each keeps its own config format.</p>
+      <a class="text-link" href="/terminals">See how the terminal integration works <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="terminal-strip" aria-label="Supported terminal emulators and their native color formats">
+      <div><span class="terminal-glyph" aria-hidden="true">K</span><strong>Kitty</strong><code>conf</code></div>
+      <div><span class="terminal-glyph" aria-hidden="true">A</span><strong>Alacritty</strong><code>TOML</code></div>
+      <div><span class="terminal-glyph" aria-hidden="true">G</span><strong>Ghostty</strong><code>theme</code></div>
+    </div>
+  </section>
+
   <section class="section photo-atlas" aria-labelledby="photo-atlas-title">
     <div class="photo-heading">
       <div>
@@ -311,6 +325,17 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   .model-index { color: var(--secondary); font: 0.76rem var(--font-data); }
   .model-list strong, .model-list small { display: block; }
   .model-list small { margin-top: 0.2rem; color: var(--text-muted); }
+  .terminal-feature { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 7vw, 7rem); padding: clamp(1.5rem, 4vw, 3.5rem) 0; border-block: 1px solid var(--line); }
+  .terminal-feature h2 { margin-top: 0.45rem; font-size: clamp(2rem, 4.2vw, 4rem); line-height: 1; letter-spacing: -0.055em; }
+  .terminal-feature h2 em { color: var(--accent); font-style: normal; }
+  .terminal-feature-intro > p:not(.eyebrow) { max-width: 50ch; margin-top: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+  .terminal-feature-intro .text-link { display: inline-flex; margin-top: 1rem; }
+  .terminal-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .terminal-strip > div { display: grid; justify-items: start; gap: 0.55rem; min-width: 0; padding: 1rem 0.6rem; border-right: 1px solid var(--line); }
+  .terminal-strip > div:last-child { border: 0; }
+  .terminal-glyph { display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--highlight); color: var(--highlight); font: 1rem var(--font-data); }
+  .terminal-strip strong { font-family: var(--font-display); font-size: 0.9rem; }
+  .terminal-strip code { color: var(--secondary); font-size: 0.65rem; }
   .photo-atlas { margin-block: clamp(4rem, 8vw, 8rem); }
   .photo-heading > p { max-width: 39ch; color: var(--text-muted); }
   .photo-heading h2 em { color: var(--accent); font-weight: 500; }
@@ -363,7 +388,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     .story-1 { grid-column: span 2; }
     .story-1 :global(img) { height: clamp(200px, 55vw, 340px); }
     .layout-story :global(img) { height: clamp(145px, 38vw, 220px); }
-    .product-model, .greeter-feature { grid-template-columns: 1fr; }
+    .product-model, .greeter-feature, .terminal-feature { grid-template-columns: 1fr; }
     .photo-card, .photo-card-1, .photo-card-2 { grid-column: span 6; }
   }
   @media (max-width: 500px) {
