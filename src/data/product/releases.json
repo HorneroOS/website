@@ -2,13 +2,13 @@
   {
     "name": "v0.2.0-preview19",
     "version": "0.2.0-preview19",
-    "date": "2026-10-12",
+    "date": "2026-10-13",
     "status": "candidate",
-    "summary": "Unpublished composition candidate for the Shell-owned community plugin validator and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
+    "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview19",
     "shell": {
-      "sha": "6abfa29e5ca52c30fbbe6272cb52de086f8259d8",
-      "subject": "Merge pull request #174 from HorneroOS/fix/tray-menu-null-entry-guards"
+      "sha": "77eed105407fae4101da043ae534a13796d0d767",
+      "subject": "fix(shell): make settings navigation keyboard accessible (#177)"
     },
     "config": {
       "sha": "4ef767d13ca1474031c1ac7c034c4639ea9dadb8",
