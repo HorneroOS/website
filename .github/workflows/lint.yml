@@ -9,10 +9,9 @@ jobs:
   markdownlint:
     runs-on: ubuntu-latest
     steps:
-      # actions/checkout v7.0.1, pinned to its verified release commit.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      # markdownlint-cli2-action v18.0.0, pinned to its verified commit.
-      - uses: >-
-          DavidAnson/markdownlint-cli2-action@eb5ca3ab411449c66620fe7f1b3c9e10547144b0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # yamllint disable rule:line-length
+      - uses: DavidAnson/markdownlint-cli2-action@eb5ca3ab411449c66620fe7f1b3c9e10547144b0 # v18.0.0
+      # yamllint enable rule:line-length
         with:
           globs: '**/*.md'
