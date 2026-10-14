@@ -1,0 +1,516 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import KilnStamp from './KilnStamp.astro';
+
+interface Props {
+  captures: CollectionEntry<'showroom'>[];
+  layoutCount: number;
+}
+
+const { captures, layoutCount } = Astro.props;
+const selections = [
+  { id: 'dashboard', label: 'Dashboard', group: 'Workspace' },
+  { id: 'hornero-left', label: 'Hornero Left', group: 'Layout' },
+  { id: 'appearance-search', label: 'Appearance search', group: 'Settings' },
+  { id: 'layout-picker', label: 'Layout Picker', group: 'Layout' },
+  { id: 'cockpit-clear', label: 'Cockpit Clear', group: 'Bars' },
+];
+
+const views = await Promise.all(
+  selections.map(async (selection) => {
+    const capture = captures.find((item) => item.id === selection.id);
+    if (!capture) throw new Error(`Desktop capture is missing from the showroom collection: ${selection.id}`);
+
+    const variants = await Promise.all(
+      [480, 800, 1280].map((width) => getImage({ src: capture.data.image, width, format: 'webp', quality: 78 })),
+    );
+
+    return {
+      ...selection,
+      ...capture.data,
+      src: variants[1]?.src ?? variants[0]?.src,
+      srcset: variants.map((variant) => `${variant.src} ${variant.options.width}w`).join(', '),
+    };
+  }),
+);
+
+const firstView = views[0];
+if (!firstView?.src) throw new Error('The desktop capture explorer has no initial image.');
+---
+
+<section class="section desktop-capture-explorer" aria-labelledby="capture-explorer-title" data-capture-explorer>
+  <header class="explorer-heading">
+    <div>
+      <p class="eyebrow">Real Hornero sessions · choose a view</p>
+      <h2 id="capture-explorer-title">See the Shell at work.</h2>
+    </div>
+    <p>
+      Each frame comes from a Hornero QA or visual review capture. Pick a surface to inspect the desktop, its layout
+      controls and Settings.
+    </p>
+  </header>
+
+  <div class="explorer-layout">
+    <figure class="capture-stage">
+      <div class="stage-heading" aria-hidden="true">
+        <span>HORNERO / DESKTOP</span>
+        <span data-capture-group>{firstView.group}</span>
+      </div>
+      <div class="capture-screen">
+        <img
+          data-capture-image
+          src={firstView.src}
+          srcset={firstView.srcset}
+          sizes="(min-width: 1160px) 66vw, (min-width: 720px) 60vw, 100vw"
+          alt={firstView.alt}
+          width="1280"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figcaption>
+        <div class="capture-caption">
+          <p class="capture-kicker" data-capture-group-caption>
+            {firstView.group}
+          </p>
+          <h3 data-capture-title>{firstView.title}</h3>
+          <p class="capture-context" data-capture-context>
+            {firstView.provenance.context}
+          </p>
+        </div>
+        <div class="capture-provenance" data-capture-provenance>
+          <KilnStamp {...firstView.provenance} />
+        </div>
+      </figcaption>
+    </figure>
+
+    <nav class="capture-navigation" aria-label="Choose a real Hornero capture">
+      <p class="navigation-label">Explore a surface</p>
+      <ul>
+        {views.map((view, index) => (
+          <li>
+            <a
+              href={`/showroom#${view.id}`}
+              data-capture-choice
+              data-capture-id={view.id}
+              data-capture-group={view.group}
+              data-capture-title={view.title}
+              data-capture-context={view.provenance.context ?? ''}
+              data-capture-alt={view.alt}
+              data-capture-src={view.src}
+              data-capture-srcset={view.srcset}
+              aria-current={index === 0 ? 'true' : undefined}
+            >
+              <span class="choice-label">{view.label}</span>
+              <span class="choice-group">{view.group}</span>
+              <span class="choice-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+            <template data-capture-provenance-template={view.id}>
+              <KilnStamp {...view.provenance} />
+            </template>
+          </li>
+        ))}
+      </ul>
+      <p class="navigation-note">
+        The controls change the image and its source record. The desktop itself is not simulated.
+      </p>
+      <a class="text-link" href="/layouts">
+        Explore all {layoutCount} layouts <span aria-hidden="true">→</span>
+      </a>
+      <a class="text-link archive-link" href="/showroom">
+        Browse the full capture archive <span aria-hidden="true">→</span>
+      </a>
+    </nav>
+    <p class="capture-announcement" aria-live="polite" data-capture-announcement></p>
+  </div>
+</section>
+
+<script>
+  const explorer = document.querySelector<HTMLElement>('[data-capture-explorer]');
+
+  if (explorer) {
+    const image = explorer.querySelector<HTMLImageElement>('[data-capture-image]');
+    const title = explorer.querySelector<HTMLElement>('[data-capture-title]');
+    const group = explorer.querySelector<HTMLElement>('[data-capture-group]');
+    const captionGroup = explorer.querySelector<HTMLElement>('[data-capture-group-caption]');
+    const context = explorer.querySelector<HTMLElement>('[data-capture-context]');
+    const provenance = explorer.querySelector<HTMLElement>('[data-capture-provenance]');
+    const announcement = explorer.querySelector<HTMLElement>('[data-capture-announcement]');
+
+    explorer.querySelectorAll<HTMLAnchorElement>('[data-capture-choice]').forEach((choice) => {
+      choice.addEventListener('click', (event) => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+
+        if (!image || !title || !group || !captionGroup || !context || !provenance || !announcement) return;
+
+        const id = choice.dataset.captureId;
+        const source = choice.dataset.captureSrc;
+        const sourceSet = choice.dataset.captureSrcset;
+        const nextTitle = choice.dataset.captureTitle;
+        const nextGroup = choice.dataset.captureGroup;
+        const nextAlt = choice.dataset.captureAlt;
+        if (!id || !source || !sourceSet || !nextTitle || !nextGroup || !nextAlt) return;
+
+        const template = explorer.querySelector<HTMLTemplateElement>(
+          `template[data-capture-provenance-template="${CSS.escape(id)}"]`,
+        );
+        if (!template) return;
+
+        event.preventDefault();
+        image.srcset = sourceSet;
+        image.src = source;
+        image.alt = nextAlt;
+        image.classList.remove('capture-arrive');
+        requestAnimationFrame(() => image.classList.add('capture-arrive'));
+        title.textContent = nextTitle;
+        group.textContent = nextGroup;
+        captionGroup.textContent = nextGroup;
+        context.textContent = choice.dataset.captureContext ?? '';
+        provenance.replaceChildren(template.content.cloneNode(true));
+        announcement.textContent = `${nextTitle} capture selected. ${choice.dataset.captureContext ?? ''}`;
+
+        explorer.querySelectorAll<HTMLAnchorElement>('[data-capture-choice]').forEach((item) => {
+          item.removeAttribute('aria-current');
+        });
+        choice.setAttribute('aria-current', 'true');
+      });
+    });
+  }
+</script>
+
+<style>
+  .desktop-capture-explorer {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-block: 1px solid var(--line);
+    scroll-margin-top: 8rem;
+  }
+
+  .explorer-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.62fr);
+    align-items: end;
+    gap: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .explorer-heading h2 {
+    max-width: 14ch;
+    margin-top: 0.45rem;
+    font-size: clamp(2.1rem, 4vw, 3.7rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .explorer-heading > p {
+    max-width: 40ch;
+    color: var(--text-muted);
+    font-size: var(--step-0);
+  }
+
+  .explorer-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(15rem, 0.58fr);
+    align-items: start;
+    gap: clamp(1.2rem, 3vw, 2.5rem);
+  }
+
+  .capture-stage {
+    min-width: 0;
+    padding: 0.65rem;
+    border: 1px solid var(--line);
+    border-top-color: color-mix(in srgb, var(--highlight) 58%, var(--line));
+    background: var(--surface);
+    box-shadow: 0.55rem 0.55rem 0 color-mix(in srgb, var(--highlight) 14%, transparent);
+  }
+
+  .stage-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.25rem 0.35rem 0.65rem;
+    color: var(--text-muted);
+    font: 0.64rem var(--font-data);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .stage-heading span:first-child {
+    color: var(--highlight);
+  }
+
+  .capture-screen {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--night);
+    border: 1px solid var(--line);
+  }
+
+  .capture-screen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .capture-screen img.capture-arrive {
+    animation: capture-arrive 180ms ease-out both;
+  }
+
+  .capture-stage figcaption {
+    display: grid;
+    gap: 0.8rem;
+    padding: 1rem 0.4rem 0.35rem;
+  }
+
+  .capture-kicker,
+  .navigation-label {
+    color: var(--secondary);
+    font: 0.65rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .capture-caption h3 {
+    margin-top: 0.2rem;
+    font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+    line-height: 1.15;
+  }
+
+  .capture-context {
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .capture-provenance :global(.stamp) {
+    background: var(--bg);
+  }
+
+  .capture-navigation {
+    min-width: 0;
+    padding-top: 0.25rem;
+  }
+
+  .capture-navigation ul {
+    display: grid;
+    margin-top: 0.6rem;
+    list-style: none;
+  }
+
+  .capture-navigation li {
+    border-top: 1px solid var(--line);
+  }
+
+  .capture-navigation li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .capture-navigation a[data-capture-choice] {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.18rem 0.65rem;
+    align-items: center;
+    min-height: 4.35rem;
+    padding: 0.72rem 0.4rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition:
+      color 160ms ease,
+      padding 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .capture-navigation a[data-capture-choice]::before {
+    position: absolute;
+    inset-block: 0.6rem;
+    left: -0.66rem;
+    width: 2px;
+    background: var(--highlight);
+    content: '';
+    opacity: 0;
+    transform: scaleY(0.6);
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .choice-label {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.06rem;
+    font-weight: 650;
+    line-height: 1.15;
+  }
+
+  .choice-group {
+    grid-column: 1;
+    color: var(--text-muted);
+    font: 0.61rem var(--font-data);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .choice-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    color: var(--secondary);
+    font-size: 1.1rem;
+    opacity: 0.45;
+    transform: translate(-0.2rem, 0.2rem);
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .capture-navigation a[data-capture-choice]:hover,
+  .capture-navigation a[data-capture-choice][aria-current='true'] {
+    color: var(--text);
+    background: color-mix(in srgb, var(--highlight) 5%, transparent);
+  }
+
+  .capture-navigation a[data-capture-choice][aria-current='true'] {
+    padding-left: 0.7rem;
+  }
+
+  .capture-navigation a[data-capture-choice][aria-current='true']::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  .capture-navigation a[data-capture-choice]:hover .choice-arrow,
+  .capture-navigation a[data-capture-choice][aria-current='true'] .choice-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .capture-navigation a[data-capture-choice]:focus-visible {
+    z-index: 1;
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .navigation-note {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .capture-navigation > .text-link {
+    display: flex;
+    width: fit-content;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .capture-navigation > .archive-link {
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .capture-announcement {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes capture-arrive {
+    from {
+      opacity: 0.68;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .explorer-heading {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .explorer-heading > p {
+      max-width: 58ch;
+    }
+    .explorer-layout {
+      grid-template-columns: minmax(0, 1.3fr) minmax(13rem, 0.7fr);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .explorer-layout {
+      grid-template-columns: 1fr;
+    }
+    .capture-navigation ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .capture-navigation li:nth-child(odd) {
+      border-right: 1px solid var(--line);
+    }
+    .capture-navigation li:nth-last-child(2):nth-child(odd) {
+      border-bottom: 1px solid var(--line);
+    }
+    .capture-navigation li:last-child {
+      border-bottom: 0;
+    }
+    .capture-navigation a[data-capture-choice] {
+      min-height: 4.15rem;
+      padding-inline: 0.55rem;
+    }
+    .capture-navigation a[data-capture-choice]::before {
+      left: 0;
+    }
+    .capture-navigation a[data-capture-choice][aria-current='true'] {
+      padding-left: 0.8rem;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .capture-stage {
+      padding: 0.4rem;
+    }
+    .capture-navigation ul {
+      grid-template-columns: 1fr;
+    }
+    .capture-navigation li:nth-child(odd) {
+      border-right: 0;
+    }
+    .capture-navigation li:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .capture-screen img.capture-arrive {
+      animation: none;
+    }
+    .capture-navigation a[data-capture-choice],
+    .capture-navigation a[data-capture-choice]::before,
+    .choice-arrow {
+      transition: none;
+    }
+  }
+</style>

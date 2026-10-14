@@ -37,8 +37,8 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
       </p>
       <p class="capture-era-note">
         The captures on this page come from the 3 October 2026 review. Their layout and control surfaces are real; their
-        wallpaper artwork predates the current photo-backed Hornero Originals. Browse <a href="/wallpapers">the current
-        licensed Argentina collection</a> for today’s scenes.
+        wallpaper artwork predates the current photo-backed Hornero Originals. Browse{' '}
+        <a href="/wallpapers">the current licensed Argentina collection</a> for today’s scenes.
       </p>
       <nav class="hero-links" aria-label="Explore the showcase">
         <a href="#visual-worlds">
@@ -52,7 +52,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
         </a>
       </nav>
     </div>
-    <div class="hero-shot">
+    <div class="hero-shot" id="dashboard">
       <ArchFrame
         src={shot('dashboard').data.image}
         alt={shot('dashboard').data.alt}
@@ -86,7 +86,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     </div>
     <div class="atmosphere-grid">
       {atmospheres.map((s, i) => (
-        <article class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
+        <article id={s.id} class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
             alt={s.data.alt}
@@ -122,7 +122,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     </div>
     <div class="topology-grid">
       {topologies.map((s, i) => (
-        <article class:list={['topology-card', `topology-${i + 1}`]}>
+        <article id={s.id} class:list={['topology-card', `topology-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
             alt={s.data.alt}
@@ -151,7 +151,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
       </p>
     </div>
     <div class="controls-grid">
-      <article class="control-feature">
+      <article class="control-feature" id="appearance-search">
         <ArchFrame
           src={shot('appearance-search').data.image}
           alt={shot('appearance-search').data.alt}
@@ -165,7 +165,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
           <p>Searching “wallpaper” surfaces the exact Appearance controls and their destination.</p>
         </div>
       </article>
-      <article class="control-secondary">
+      <article class="control-secondary" id="layout-picker">
         <ArchFrame
           src={shot('layout-picker').data.image}
           alt={shot('layout-picker').data.alt}
@@ -226,7 +226,10 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     font-size: 0.78rem;
     line-height: 1.5;
   }
-  .capture-era-note a { color: var(--text); text-decoration-color: var(--accent); }
+  .capture-era-note a {
+    color: var(--text);
+    text-decoration-color: var(--accent);
+  }
   .hero-links {
     display: flex;
     flex-wrap: wrap;
