@@ -3,10 +3,15 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
+import ThemePaletteStudy from '../components/ThemePaletteStudy.astro';
 import { themes, wallpapers } from '../data/product';
 import variantSample from '../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
+const paletteRoles = ['background', 'surface', 'text', 'primary', 'secondary', 'accent'] as const;
+const paletteStudies = originals.filter(
+  (theme) => theme.paletteModel === 'semantic' && paletteRoles.every((role) => theme.palette[role]),
+);
 const otherLooks = themes.filter((theme) => theme.collection !== 'hornero-originals');
 const photosByTheme = new Map(wallpapers.map((wallpaper) => [wallpaper.themeId, wallpaper]));
 const wallpaperMedia = {
@@ -132,6 +137,8 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       Keyboard users can move between captures with the arrow keys. <a href="/showroom">Browse the complete desktop showcase</a>.
     </p>
   </section>
+
+  <ThemePaletteStudy themes={paletteStudies} />
 
   <section class="section collection-section" aria-labelledby="looks-title">
     <div class="section-heading">
