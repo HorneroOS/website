@@ -52,7 +52,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
         </a>
       </nav>
     </div>
-    <div class="hero-shot" id="dashboard">
+    <div class="hero-shot" id="dashboard" tabindex="-1">
       <ArchFrame
         src={shot('dashboard').data.image}
         alt={shot('dashboard').data.alt}
@@ -86,7 +86,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     </div>
     <div class="atmosphere-grid">
       {atmospheres.map((s, i) => (
-        <article id={s.id} class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
+        <article id={s.id} tabindex="-1" class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
             alt={s.data.alt}
@@ -122,7 +122,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     </div>
     <div class="topology-grid">
       {topologies.map((s, i) => (
-        <article id={s.id} class:list={['topology-card', `topology-${i + 1}`]}>
+        <article id={s.id} tabindex="-1" class:list={['topology-card', `topology-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
             alt={s.data.alt}
@@ -151,7 +151,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
       </p>
     </div>
     <div class="controls-grid">
-      <article class="control-feature" id="appearance-search">
+      <article class="control-feature" id="appearance-search" tabindex="-1">
         <ArchFrame
           src={shot('appearance-search').data.image}
           alt={shot('appearance-search').data.alt}
@@ -165,7 +165,7 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
           <p>Searching “wallpaper” surfaces the exact Appearance controls and their destination.</p>
         </div>
       </article>
-      <article class="control-secondary" id="layout-picker">
+      <article class="control-secondary" id="layout-picker" tabindex="-1">
         <ArchFrame
           src={shot('layout-picker').data.image}
           alt={shot('layout-picker').data.alt}

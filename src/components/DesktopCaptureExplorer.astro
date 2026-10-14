@@ -52,7 +52,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   </header>
 
   <div class="explorer-layout">
-    <figure class="capture-stage">
+    <figure class="capture-stage" id="capture-panel" role="tabpanel" aria-label={firstView.title} tabindex="0">
       <div class="stage-heading" aria-hidden="true">
         <span>HORNERO / DESKTOP</span>
         <span data-capture-group>{firstView.group}</span>
@@ -86,13 +86,19 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       </figcaption>
     </figure>
 
-    <nav class="capture-navigation" aria-label="Choose a real Hornero capture">
+    <div class="capture-navigation" aria-label="Choose a real Hornero capture">
       <p class="navigation-label">Explore a surface</p>
       <ul>
         {views.map((view, index) => (
           <li>
-            <a
-              href={`/showroom#${view.id}`}
+            <button
+              type="button"
+              role="tab"
+              id={`capture-tab-${view.id}`}
+              aria-controls="capture-panel"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              hidden
               data-capture-choice
               data-capture-id={view.id}
               data-capture-group={view.group}
@@ -101,13 +107,15 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
               data-capture-alt={view.alt}
               data-capture-src={view.src}
               data-capture-srcset={view.srcset}
-              aria-current={index === 0 ? 'true' : undefined}
             >
               <span class="choice-label">{view.label}</span>
               <span class="choice-group">{view.group}</span>
               <span class="choice-arrow" aria-hidden="true">
                 ↗
               </span>
+            </button>
+            <a class="capture-fallback-link" href={`/showroom#${view.id}`}>
+              Open {view.label} in the capture archive <span aria-hidden="true">↗</span>
             </a>
             <template data-capture-provenance-template={view.id}>
               <KilnStamp {...view.provenance} />
@@ -124,7 +132,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       <a class="text-link archive-link" href="/showroom">
         Browse the full capture archive <span aria-hidden="true">→</span>
       </a>
-    </nav>
+    </div>
     <p class="capture-announcement" aria-live="polite" data-capture-announcement></p>
   </div>
 </section>
@@ -140,53 +148,104 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     const context = explorer.querySelector<HTMLElement>('[data-capture-context]');
     const provenance = explorer.querySelector<HTMLElement>('[data-capture-provenance]');
     const announcement = explorer.querySelector<HTMLElement>('[data-capture-announcement]');
+    const panel = explorer.querySelector<HTMLElement>('#capture-panel');
+    const navigation = explorer.querySelector<HTMLElement>('.capture-navigation');
+    const choices = [...explorer.querySelectorAll<HTMLButtonElement>('[data-capture-choice]')];
+    let selectionRequest = 0;
 
-    explorer.querySelectorAll<HTMLAnchorElement>('[data-capture-choice]').forEach((choice) => {
-      choice.addEventListener('click', (event) => {
-        if (
-          event.defaultPrevented ||
-          event.button !== 0 ||
-          event.metaKey ||
-          event.ctrlKey ||
-          event.shiftKey ||
-          event.altKey
-        )
-          return;
+    const selectCapture = async (choice: HTMLButtonElement) => {
+      if (!image || !title || !group || !captionGroup || !context || !provenance || !announcement || !panel) return;
 
-        if (!image || !title || !group || !captionGroup || !context || !provenance || !announcement) return;
+      const id = choice.dataset.captureId;
+      const source = choice.dataset.captureSrc;
+      const sourceSet = choice.dataset.captureSrcset;
+      const nextTitle = choice.dataset.captureTitle;
+      const nextGroup = choice.dataset.captureGroup;
+      const nextAlt = choice.dataset.captureAlt;
+      if (!id || !source || !sourceSet || !nextTitle || !nextGroup || !nextAlt) return;
 
-        const id = choice.dataset.captureId;
-        const source = choice.dataset.captureSrc;
-        const sourceSet = choice.dataset.captureSrcset;
-        const nextTitle = choice.dataset.captureTitle;
-        const nextGroup = choice.dataset.captureGroup;
-        const nextAlt = choice.dataset.captureAlt;
-        if (!id || !source || !sourceSet || !nextTitle || !nextGroup || !nextAlt) return;
+      const template = explorer.querySelector<HTMLTemplateElement>(
+        `template[data-capture-provenance-template="${CSS.escape(id)}"]`,
+      );
+      if (!template) return;
 
-        const template = explorer.querySelector<HTMLTemplateElement>(
-          `template[data-capture-provenance-template="${CSS.escape(id)}"]`,
-        );
-        if (!template) return;
+      const request = ++selectionRequest;
+      const incoming = new Image();
+      incoming.sizes = image.sizes;
+      incoming.srcset = sourceSet;
+      incoming.src = source;
+
+      try {
+        await incoming.decode();
+      } catch {
+        if (request === selectionRequest)
+          announcement.textContent = `${nextTitle} could not be loaded. The current capture remains visible.`;
+        return;
+      }
+
+      if (request !== selectionRequest) return;
+
+      image.srcset = sourceSet;
+      image.src = source;
+      image.alt = nextAlt;
+      image.classList.remove('capture-arrive');
+      requestAnimationFrame(() => image.classList.add('capture-arrive'));
+      title.textContent = nextTitle;
+      group.textContent = nextGroup;
+      captionGroup.textContent = nextGroup;
+      context.textContent = choice.dataset.captureContext ?? '';
+      provenance.replaceChildren(template.content.cloneNode(true));
+      announcement.textContent = `${nextTitle} capture selected. ${choice.dataset.captureContext ?? ''}`;
+      panel.setAttribute('aria-labelledby', choice.id);
+
+      choices.forEach((item) => {
+        const selected = item === choice;
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+      });
+    };
+
+    choices.forEach((choice) => {
+      choice.addEventListener('click', () => selectCapture(choice));
+      choice.addEventListener('keydown', (event) => {
+        const currentIndex = choices.indexOf(choice);
+        let nextIndex: number | undefined;
+
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % choices.length;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')
+          nextIndex = (currentIndex - 1 + choices.length) % choices.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = choices.length - 1;
+        if (nextIndex === undefined) return;
 
         event.preventDefault();
-        image.srcset = sourceSet;
-        image.src = source;
-        image.alt = nextAlt;
-        image.classList.remove('capture-arrive');
-        requestAnimationFrame(() => image.classList.add('capture-arrive'));
-        title.textContent = nextTitle;
-        group.textContent = nextGroup;
-        captionGroup.textContent = nextGroup;
-        context.textContent = choice.dataset.captureContext ?? '';
-        provenance.replaceChildren(template.content.cloneNode(true));
-        announcement.textContent = `${nextTitle} capture selected. ${choice.dataset.captureContext ?? ''}`;
-
-        explorer.querySelectorAll<HTMLAnchorElement>('[data-capture-choice]').forEach((item) => {
-          item.removeAttribute('aria-current');
-        });
-        choice.setAttribute('aria-current', 'true');
+        const nextChoice = choices[nextIndex];
+        if (!nextChoice) return;
+        selectCapture(nextChoice);
+        nextChoice.focus();
       });
     });
+
+    if (
+      navigation &&
+      choices.length &&
+      image &&
+      title &&
+      group &&
+      captionGroup &&
+      context &&
+      provenance &&
+      announcement &&
+      panel
+    ) {
+      navigation.setAttribute('role', 'tablist');
+      navigation.querySelectorAll<HTMLAnchorElement>('.capture-fallback-link').forEach((link) => link.remove());
+      choices.forEach((choice) => (choice.hidden = false));
+      panel.removeAttribute('aria-label');
+      const selectedChoice = choices.find((choice) => choice.getAttribute('aria-selected') === 'true');
+      if (selectedChoice) panel.setAttribute('aria-labelledby', selectedChoice.id);
+      navigation.dataset.enhanced = 'true';
+    }
   }
 </script>
 
@@ -321,7 +380,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     border-bottom: 1px solid var(--line);
   }
 
-  .capture-navigation a[data-capture-choice] {
+  .capture-navigation button[data-capture-choice] {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -329,7 +388,13 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     align-items: center;
     min-height: 4.35rem;
     padding: 0.72rem 0.4rem;
+    width: 100%;
+    border: 0;
+    background: transparent;
     color: var(--text-muted);
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
     text-decoration: none;
     transition:
       color 160ms ease,
@@ -337,7 +402,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       background-color 160ms ease;
   }
 
-  .capture-navigation a[data-capture-choice]::before {
+  .capture-navigation button[data-capture-choice]::before {
     position: absolute;
     inset-block: 0.6rem;
     left: -0.66rem;
@@ -379,28 +444,28 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       transform 160ms ease;
   }
 
-  .capture-navigation a[data-capture-choice]:hover,
-  .capture-navigation a[data-capture-choice][aria-current='true'] {
+  .capture-navigation button[data-capture-choice]:hover,
+  .capture-navigation button[data-capture-choice][aria-selected='true'] {
     color: var(--text);
     background: color-mix(in srgb, var(--highlight) 5%, transparent);
   }
 
-  .capture-navigation a[data-capture-choice][aria-current='true'] {
+  .capture-navigation button[data-capture-choice][aria-selected='true'] {
     padding-left: 0.7rem;
   }
 
-  .capture-navigation a[data-capture-choice][aria-current='true']::before {
+  .capture-navigation button[data-capture-choice][aria-selected='true']::before {
     opacity: 1;
     transform: scaleY(1);
   }
 
-  .capture-navigation a[data-capture-choice]:hover .choice-arrow,
-  .capture-navigation a[data-capture-choice][aria-current='true'] .choice-arrow {
+  .capture-navigation button[data-capture-choice]:hover .choice-arrow,
+  .capture-navigation button[data-capture-choice][aria-selected='true'] .choice-arrow {
     opacity: 1;
     transform: translate(0, 0);
   }
 
-  .capture-navigation a[data-capture-choice]:focus-visible {
+  .capture-navigation button[data-capture-choice]:focus-visible {
     z-index: 1;
     outline: 2px solid var(--focus);
     outline-offset: 2px;
@@ -411,6 +476,21 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     color: var(--text-muted);
     font-size: 0.82rem;
     line-height: 1.5;
+  }
+
+  .capture-fallback-link {
+    display: inline-flex;
+    margin: 0.15rem 0 0.65rem 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .capture-navigation[data-enhanced='true'] .capture-fallback-link {
+    display: none;
+  }
+
+  .capture-navigation:not([data-enhanced='true']) button[data-capture-choice] {
+    display: none;
   }
 
   .capture-navigation > .text-link {
@@ -476,14 +556,14 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     .capture-navigation li:last-child {
       border-bottom: 0;
     }
-    .capture-navigation a[data-capture-choice] {
+    .capture-navigation button[data-capture-choice] {
       min-height: 4.15rem;
       padding-inline: 0.55rem;
     }
-    .capture-navigation a[data-capture-choice]::before {
+    .capture-navigation button[data-capture-choice]::before {
       left: 0;
     }
-    .capture-navigation a[data-capture-choice][aria-current='true'] {
+    .capture-navigation button[data-capture-choice][aria-selected='true'] {
       padding-left: 0.8rem;
     }
   }
@@ -507,8 +587,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     .capture-screen img.capture-arrive {
       animation: none;
     }
-    .capture-navigation a[data-capture-choice],
-    .capture-navigation a[data-capture-choice]::before,
+    .capture-navigation button[data-capture-choice],
+    .capture-navigation button[data-capture-choice]::before,
     .choice-arrow {
       transition: none;
     }
