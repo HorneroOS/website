@@ -7,6 +7,7 @@ import {
   editions,
   greeterScenes,
   layouts,
+  paletteApplications,
   themes,
   wallpapers,
 } from '../data/product';
@@ -141,14 +142,21 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   <section class="terminal-feature" aria-labelledby="terminal-feature-title">
     <div class="terminal-feature-intro">
       <p class="eyebrow">The rest of the workspace, in step</p>
-      <h2 id="terminal-feature-title">One palette.<br /><em>Three native terminals.</em></h2>
-      <p>Hornero translates the selected appearance into native color files for Kitty, Alacritty and Ghostty. Pick an installed emulator in Settings; each keeps its own config format.</p>
+      <h2 id="terminal-feature-title">One palette.<br /><em>Across your workspace.</em></h2>
+      <p>Hornero translates the selected appearance into native color files for Kitty, Alacritty and Ghostty. Its shared configuration also provides wallpaper-derived themes for btop and Cava; both apps remain optional.</p>
       <a class="text-link" href="/terminals">See how the terminal integration works <span aria-hidden="true">→</span></a>
     </div>
-    <div class="terminal-strip" aria-label="Supported terminal emulators and their native color formats">
-      <div><span class="terminal-glyph" aria-hidden="true">K</span><strong>Kitty</strong><code>conf</code></div>
-      <div><span class="terminal-glyph" aria-hidden="true">A</span><strong>Alacritty</strong><code>TOML</code></div>
-      <div><span class="terminal-glyph" aria-hidden="true">G</span><strong>Ghostty</strong><code>theme</code></div>
+    <div class="palette-tools">
+      <div class="terminal-strip" aria-label="Supported terminal emulators and their native color formats">
+        <div><span class="terminal-glyph" aria-hidden="true">K</span><strong>Kitty</strong><code>conf</code></div>
+        <div><span class="terminal-glyph" aria-hidden="true">A</span><strong>Alacritty</strong><code>TOML</code></div>
+        <div><span class="terminal-glyph" aria-hidden="true">G</span><strong>Ghostty</strong><code>theme</code></div>
+      </div>
+      <div class="palette-extensions" aria-label="Additional optional applications with native Hornero themes">
+        {paletteApplications.map((application) => (
+          <div><strong>{application.name}</strong><span>{application.category}</span><small>optional</small></div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -293,6 +301,13 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   .terminal-glyph { display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--highlight); color: var(--highlight); font: 1rem var(--font-data); }
   .terminal-strip strong { font-family: var(--font-display); font-size: 0.9rem; }
   .terminal-strip code { color: var(--secondary); font-size: 0.65rem; }
+  .palette-tools { min-width: 0; }
+  .palette-extensions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+  .palette-extensions > div { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 0.5rem; min-width: 0; padding: 0.7rem 0.6rem; border-right: 1px solid var(--line); }
+  .palette-extensions > div:last-child { border: 0; }
+  .palette-extensions strong { font-family: var(--font-display); font-size: 0.84rem; }
+  .palette-extensions span { color: var(--text-muted); font-size: 0.72rem; }
+  .palette-extensions small { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--secondary); font: 0.58rem var(--font-data); text-transform: uppercase; }
   .photo-atlas { margin-block: clamp(4rem, 8vw, 8rem); }
   .photo-heading > p { max-width: 39ch; color: var(--text-muted); }
   .photo-heading h2 em { color: var(--accent); font-weight: 500; }
