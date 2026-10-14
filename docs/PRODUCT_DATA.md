@@ -1,6 +1,6 @@
 # Product data
 
-Facts about the product (layouts, theme packs, releases, terminal integrations) are generated from
+Facts about the product (layouts, theme packs, releases, terminal and palette-app integrations) are generated from
 pinned Hornero sources, never typed into pages.
 
 | File | Generated from |
@@ -12,6 +12,7 @@ pinned Hornero sources, never typed into pages.
 | `src/data/product/greeter-scenes.json` | Pinned HorneroOS/greeter runtime catalog, approved scene manifests, still provenance records, and daypart windows |
 | `src/data/product/wallpapers.json` | Pinned HorneroOS/config photo provenance manifest; local website previews are checked against its output hashes |
 | `src/data/product/terminals.json` | Pinned HorneroOS/config `profiles/factory.json` terminal integration catalogue |
+| `src/data/product/palette-applications.json` | Pinned HorneroOS/config `profiles/factory.json` optional palette application catalogue |
 
 ## Documentation pages
 

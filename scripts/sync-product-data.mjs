@@ -6,7 +6,7 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers,terminals}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers,terminals,palette-applications}.json
 //
 // Product facts on /layouts, /themes, /releases and /terminals come from these files, and
 // these files come only from the pinned commits: never edit them by hand.
@@ -210,6 +210,37 @@ function terminalIntegrations(configDir) {
       note: item.note,
     })),
   };
+}
+
+// Optional non-terminal applications with native wallpaper-derived themes
+// are catalogued by the same factory profile and projected onto the site.
+function paletteApplications(configDir) {
+  const factory = readJson(join(configDir, 'profiles/factory.json'));
+  const items = factory.paletteApplications;
+  if (!Array.isArray(items)) fail('factory profile is missing paletteApplications');
+  const ids = new Set();
+  const requiredMetadata = ['name', 'package', 'category', 'configSource', 'configPath', 'theme', 'themeSource', 'themePath', 'detail', 'note'];
+  for (const item of items) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) fail('palette application must be an object');
+    if (typeof item.id !== 'string' || !item.id.trim() || ids.has(item.id)) {
+      fail(`palette application has a missing or duplicate id: ${item.id}`);
+    }
+    if (!requiredMetadata.every((key) => typeof item[key] === 'string' && item[key].trim())) {
+      fail(`palette application ${item.id} is missing required display or configuration metadata`);
+    }
+    if (item.role !== 'optional') fail(`palette application ${item.id} must remain explicitly optional`);
+    ids.add(item.id);
+  }
+  return items.map(({ id, name, package: packageName, category, theme, detail, note }) => ({
+    id,
+    name,
+    package: packageName,
+    category,
+    theme,
+    detail,
+    note,
+    role: 'optional',
+  }));
 }
 
 // The greeter catalog and per-scene provenance are canonical. This generated
@@ -476,6 +507,7 @@ const generated = {
   'editions.json': editionCatalogue(dirs.hornero),
   'greeter-scenes.json': greeterScenes(dirs.greeter),
   'terminals.json': terminalIntegrations(dirs.config),
+  'palette-applications.json': paletteApplications(dirs.config),
 };
 
 let drift = 0;

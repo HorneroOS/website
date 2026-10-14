@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
 import ThemePaletteStudy from '../components/ThemePaletteStudy.astro';
-import { themes, wallpapers } from '../data/product';
+import { paletteApplications, themes, wallpapers } from '../data/product';
 import variantSample from '../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
@@ -336,7 +336,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </p>
     <aside class="native-tool-note" aria-label="Other applications with native Hornero color themes">
       <span class="native-tool-label">Beyond the prompt</span>
-      <p>Hornero Config can generate native wallpaper-derived themes for <strong>btop</strong> and <strong>Cava</strong>. Their curated configurations select <code>Hornero Dynamic</code>; both applications remain optional Arch packages.</p>
+      <p>Hornero Config can generate native wallpaper-derived themes for <strong>{paletteApplications.map((application) => application.name).join(' and ')}</strong>. Their curated configurations select <code>Hornero Dynamic</code>; these applications remain optional Arch packages.</p>
     </aside>
   </section>
 

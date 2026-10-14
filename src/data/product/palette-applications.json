@@ -1,0 +1,22 @@
+[
+  {
+    "id": "btop",
+    "name": "btop",
+    "package": "btop",
+    "category": "System monitor",
+    "theme": "Hornero Dynamic",
+    "detail": "A native btop theme generated from the active Hornero wallpaper palette.",
+    "note": "btop remains an optional application; Hornero Config provides its defaults and theme when installed.",
+    "role": "optional"
+  },
+  {
+    "id": "cava",
+    "name": "Cava",
+    "package": "cava",
+    "category": "Audio visualizer",
+    "theme": "Hornero Dynamic",
+    "detail": "A native Cava theme generated from the active Hornero wallpaper palette.",
+    "note": "Cava remains an optional application; Hornero Config provides its defaults and theme when installed.",
+    "role": "optional"
+  }
+]

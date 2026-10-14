@@ -7,6 +7,7 @@ import {
   editions,
   greeterScenes,
   layouts,
+  paletteApplications,
   themes,
   wallpapers,
 } from '../data/product';
@@ -152,8 +153,9 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
         <div><span class="terminal-glyph" aria-hidden="true">G</span><strong>Ghostty</strong><code>theme</code></div>
       </div>
       <div class="palette-extensions" aria-label="Additional optional applications with native Hornero themes">
-        <div><strong>btop</strong><span>system monitor</span><small>optional</small></div>
-        <div><strong>Cava</strong><span>audio visualizer</span><small>optional</small></div>
+        {paletteApplications.map((application) => (
+          <div><strong>{application.name}</strong><span>{application.category}</span><small>optional</small></div>
+        ))}
       </div>
     </div>
   </section>

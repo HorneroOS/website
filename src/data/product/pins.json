@@ -7,7 +7,7 @@
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "e49340a71d87ad0cac7b6ab6184463158cebb69b"
+      "sha": "29a6d3f3373bde186a04cc583c4dc118b45d8ed1"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
