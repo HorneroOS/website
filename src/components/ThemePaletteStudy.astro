@@ -1,0 +1,458 @@
+---
+import type { Theme } from '../data/product';
+
+interface Props {
+  themes: Theme[];
+}
+
+const { themes } = Astro.props;
+const [initialTheme] = themes;
+
+if (!initialTheme) {
+  throw new Error('Theme palette study needs at least one catalogued semantic palette');
+}
+
+const requiredColor = (theme: Theme, role: string) => {
+  const value = theme.palette[role as keyof Theme['palette']];
+  if (!value) throw new Error(`Theme ${theme.id} is missing its ${role} palette color`);
+  return value;
+};
+
+const paletteFor = (theme: Theme) => ({
+  background: requiredColor(theme, 'background'),
+  surface: requiredColor(theme, 'surface'),
+  text: requiredColor(theme, 'text'),
+  primary: requiredColor(theme, 'primary'),
+  secondary: requiredColor(theme, 'secondary'),
+  accent: requiredColor(theme, 'accent'),
+});
+
+const paletteStyle = (theme: Theme) => {
+  const palette = paletteFor(theme);
+  return Object.entries(palette)
+    .map(([role, value]) => `--study-${role}:${value}`)
+    .join(';');
+};
+
+const colorRoles = [
+  { key: 'background', label: 'Canvas' },
+  { key: 'surface', label: 'Surface' },
+  { key: 'primary', label: 'Primary' },
+  { key: 'accent', label: 'Accent' },
+] as const;
+---
+
+<section class="palette-study" aria-labelledby="palette-study-title" data-palette-playground>
+  <div class="palette-intro">
+    <p class="eyebrow">A palette, in context</p>
+    <h2 id="palette-study-title">See the colors work together.</h2>
+    <p>
+      Switch between Hornero’s catalogued semantic palettes. This small web color study uses the same published
+      background, surface, text and accent roles; it is not a desktop screenshot.
+    </p>
+    <p class="palette-mode-note">The page’s System, Light and Dark setting remains independent.</p>
+  </div>
+
+  <div class="palette-controls" role="group" aria-label="Choose a Hornero color palette" data-palette-options hidden>
+    {themes.map((theme, index) => (
+      <button
+        class="palette-choice"
+        type="button"
+        aria-pressed={index === 0 ? 'true' : 'false'}
+        data-theme-id={theme.id}
+        data-theme-name={theme.name}
+        data-theme-description={theme.description}
+        data-theme-mode={theme.mode}
+        data-background={paletteFor(theme).background}
+        data-surface={paletteFor(theme).surface}
+        data-text={paletteFor(theme).text}
+        data-primary={paletteFor(theme).primary}
+        data-secondary={paletteFor(theme).secondary}
+        data-accent={paletteFor(theme).accent}
+        style={paletteStyle(theme)}
+      >
+        <span class="choice-swatches" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+        <span class="choice-copy">
+          <strong>{theme.name}</strong>
+          <small>{theme.mode} palette</small>
+        </span>
+        <span class="choice-check" aria-hidden="true">
+          ✓
+        </span>
+      </button>
+    ))}
+  </div>
+  <p class="palette-fallback" data-palette-fallback>
+    Static color study · {initialTheme.name}. The complete theme catalog and real desktop captures remain available
+    below.
+  </p>
+
+  <article
+    class="palette-specimen"
+    data-palette-specimen
+    data-mode={initialTheme.mode}
+    style={paletteStyle(initialTheme)}
+  >
+    <div class="specimen-heading">
+      <span>
+        HorneroOS <span aria-hidden="true">/</span> Appearance
+      </span>
+      <span data-specimen-mode>{initialTheme.mode} palette</span>
+    </div>
+    <div class="specimen-content">
+      <p class="specimen-kicker">
+        Color roles · <span data-specimen-id>{initialTheme.id}</span>
+      </p>
+      <h3 data-specimen-name>{initialTheme.name}</h3>
+      <p data-specimen-description>{initialTheme.description}</p>
+      <a class="specimen-link" href={`/themes#${initialTheme.id}`}>
+        Explore this look <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="specimen-roles" aria-label="Palette color roles">
+      {colorRoles.map((role) => (
+        <div class="role-swatch" data-role={role.key}>
+          <span aria-hidden="true"></span>
+          <small>{role.label}</small>
+          <code data-role-value>{paletteFor(initialTheme)[role.key]}</code>
+        </div>
+      ))}
+    </div>
+  </article>
+  <p class="palette-status" data-palette-status aria-live="polite"></p>
+</section>
+
+<script>
+  const playground = document.querySelector<HTMLElement>('[data-palette-playground]');
+  const specimen = playground?.querySelector<HTMLElement>('[data-palette-specimen]');
+  const options = playground?.querySelector<HTMLElement>('[data-palette-options]');
+  const fallback = playground?.querySelector<HTMLElement>('[data-palette-fallback]');
+  const status = playground?.querySelector<HTMLElement>('[data-palette-status]');
+  const name = playground?.querySelector<HTMLElement>('[data-specimen-name]');
+  const description = playground?.querySelector<HTMLElement>('[data-specimen-description]');
+  const identifier = playground?.querySelector<HTMLElement>('[data-specimen-id]');
+  const mode = playground?.querySelector<HTMLElement>('[data-specimen-mode]');
+  const choices = [...(playground?.querySelectorAll<HTMLButtonElement>('.palette-choice') ?? [])];
+  const roles = [...(playground?.querySelectorAll<HTMLElement>('.role-swatch') ?? [])];
+
+  if (specimen && options && fallback && status && name && description && identifier && mode && choices.length) {
+    options.hidden = false;
+    fallback.hidden = true;
+
+    const applyPalette = (choice: HTMLButtonElement) => {
+      const values = {
+        background: choice.dataset.background,
+        surface: choice.dataset.surface,
+        text: choice.dataset.text,
+        primary: choice.dataset.primary,
+        secondary: choice.dataset.secondary,
+        accent: choice.dataset.accent,
+      };
+
+      for (const [role, value] of Object.entries(values)) {
+        if (value) specimen.style.setProperty(`--study-${role}`, value);
+      }
+
+      specimen.dataset.mode = choice.dataset.themeMode ?? 'dark';
+      name.textContent = choice.dataset.themeName ?? '';
+      description.textContent = choice.dataset.themeDescription ?? '';
+      identifier.textContent = choice.dataset.themeId ?? '';
+      mode.textContent = `${choice.dataset.themeMode ?? 'dark'} palette`;
+
+      roles.forEach((swatch) => {
+        const value = values[swatch.dataset.role as keyof typeof values];
+        const output = swatch.querySelector<HTMLElement>('[data-role-value]');
+        if (output && value) output.textContent = value;
+      });
+
+      choices.forEach((item) => item.setAttribute('aria-pressed', String(item === choice)));
+      status.textContent = `${choice.dataset.themeName ?? 'Hornero'} palette selected for the color study.`;
+    };
+
+    choices.forEach((choice) => choice.addEventListener('click', () => applyPalette(choice)));
+  }
+</script>
+
+<style>
+  .palette-study {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1fr);
+    gap: 1.25rem clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-block: 1px solid var(--line);
+  }
+
+  .palette-intro {
+    grid-row: span 3;
+  }
+
+  .palette-intro h2 {
+    margin-block: 0.4rem 0.75rem;
+    font-size: clamp(2rem, 3.3vw, 3.3rem);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+  }
+
+  .palette-intro > p:not(.eyebrow) {
+    max-width: 46ch;
+    color: var(--text-muted);
+  }
+
+  .palette-intro .palette-mode-note {
+    margin-top: 0.7rem;
+    font: 0.7rem/1.5 var(--font-data);
+  }
+
+  .palette-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .palette-controls[hidden],
+  .palette-fallback[hidden] {
+    display: none;
+  }
+
+  .palette-choice {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    padding: 0.7rem;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .palette-choice:hover,
+  .palette-choice[aria-pressed='true'] {
+    border-color: var(--highlight);
+    background: color-mix(in srgb, var(--highlight) 8%, var(--surface));
+  }
+
+  .choice-swatches {
+    display: flex;
+    align-items: center;
+    width: 2.3rem;
+  }
+
+  .choice-swatches i {
+    width: 0.8rem;
+    aspect-ratio: 1;
+    margin-inline-end: -0.18rem;
+    border: 1px solid color-mix(in srgb, var(--study-text) 35%, transparent);
+    border-radius: 50%;
+    background: var(--study-primary);
+  }
+
+  .choice-swatches i:nth-child(2) {
+    background: var(--study-secondary);
+  }
+  .choice-swatches i:nth-child(3) {
+    background: var(--study-accent);
+  }
+
+  .choice-copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.08rem;
+  }
+
+  .choice-copy strong {
+    overflow: hidden;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .choice-copy small,
+  .choice-check {
+    color: var(--text-muted);
+    font: 0.6rem var(--font-data);
+    text-transform: uppercase;
+  }
+
+  .choice-check {
+    opacity: 0;
+  }
+  .palette-choice[aria-pressed='true'] .choice-check {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+  .palette-specimen {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(1.2rem, 3vw, 2.3rem);
+    min-width: 0;
+    padding: clamp(1rem, 3vw, 2rem);
+    border: 1px solid color-mix(in srgb, var(--study-primary) 65%, var(--study-surface));
+    background: var(--study-background);
+    color: var(--study-text);
+    box-shadow:
+      0.55rem 0.55rem 0 -0.1rem var(--bg),
+      0.55rem 0.55rem 0 var(--study-primary);
+  }
+
+  .specimen-heading {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--study-text) 20%, transparent);
+    color: color-mix(in srgb, var(--study-text) 72%, var(--study-background));
+    font: 0.65rem var(--font-data);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .specimen-content {
+    align-self: center;
+    max-width: 34rem;
+  }
+  .specimen-kicker {
+    color: var(--study-secondary);
+    font: 0.65rem var(--font-data);
+    text-transform: uppercase;
+  }
+  .specimen-content h3 {
+    margin-top: 0.4rem;
+    font-size: clamp(1.6rem, 2.8vw, 2.7rem);
+  }
+  .specimen-content > p:not(.specimen-kicker) {
+    margin-top: 0.55rem;
+    color: color-mix(in srgb, var(--study-text) 76%, var(--study-background));
+    font-size: 0.9rem;
+  }
+
+  .specimen-link {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0.42rem 0.65rem;
+    border: 1px solid var(--study-primary);
+    color: var(--study-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .specimen-link:hover {
+    background: color-mix(in srgb, var(--study-primary) 12%, transparent);
+  }
+
+  .specimen-roles {
+    display: grid;
+    align-self: stretch;
+    gap: 0.4rem;
+    width: clamp(6.5rem, 15vw, 9rem);
+  }
+
+  .role-swatch {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.2rem 0.45rem;
+    padding: 0.45rem;
+    border: 1px solid color-mix(in srgb, var(--study-text) 16%, transparent);
+    background: var(--study-surface);
+  }
+
+  .role-swatch > span {
+    grid-row: span 2;
+    width: 1rem;
+    aspect-ratio: 1;
+    border: 1px solid color-mix(in srgb, var(--study-text) 20%, transparent);
+    border-radius: 50%;
+  }
+  .role-swatch[data-role='background'] > span {
+    background: var(--study-background);
+  }
+  .role-swatch[data-role='surface'] > span {
+    background: var(--study-surface);
+  }
+  .role-swatch[data-role='primary'] > span {
+    background: var(--study-primary);
+  }
+  .role-swatch[data-role='accent'] > span {
+    background: var(--study-accent);
+  }
+  .role-swatch small {
+    color: color-mix(in srgb, var(--study-text) 76%, var(--study-background));
+    font-size: 0.62rem;
+  }
+  .role-swatch code {
+    color: var(--study-text);
+    font: 0.55rem var(--font-data);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow-wrap: normal;
+  }
+
+  .palette-fallback,
+  .palette-status {
+    grid-column: 2;
+    color: var(--text-muted);
+    font: 0.68rem/1.5 var(--font-data);
+  }
+
+  .palette-status {
+    min-height: 1em;
+  }
+
+  @media (max-width: 860px) {
+    .palette-study {
+      grid-template-columns: 1fr;
+    }
+    .palette-intro {
+      grid-row: auto;
+    }
+    .palette-fallback,
+    .palette-status {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .palette-controls {
+      grid-template-columns: 1fr;
+    }
+    .palette-choice {
+      min-height: 3.2rem;
+    }
+    .palette-specimen {
+      grid-template-columns: 1fr;
+    }
+    .specimen-heading {
+      align-items: start;
+      flex-direction: column;
+    }
+    .specimen-roles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .palette-choice {
+      transition: none;
+    }
+  }
+</style>
