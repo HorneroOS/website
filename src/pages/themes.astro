@@ -334,6 +334,10 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       <code>horneroctl config default-apps set terminal ghostty --yes</code>.
       <a href="/docs/applications/terminal">Read the terminal guide</a> for setup and appearance details.
     </p>
+    <aside class="native-tool-note" aria-label="Other applications with native Hornero color themes">
+      <span class="native-tool-label">Beyond the prompt</span>
+      <p><strong>btop</strong> and <strong>Cava</strong> also have native Hornero themes generated from the wallpaper palette. They are optional Arch packages; this dotfiles setup selects the generated themes when the apps are installed.</p>
+    </aside>
   </section>
 
   <section class="section practical">
@@ -903,6 +907,19 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     color: var(--text);
     margin-inline-start: 0.25em;
   }
+  .native-tool-note {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.28fr) 1fr;
+    gap: 0.75rem 1.2rem;
+    align-items: baseline;
+    margin-top: 1.2rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .native-tool-label { color: var(--secondary); font: 0.65rem var(--font-data); letter-spacing: 0.08em; text-transform: uppercase; }
+  .native-tool-note p { max-width: 70ch; color: var(--text-muted); font-size: 0.86rem; }
+  .native-tool-note strong { color: var(--text); }
   .wallpaper-scenes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
@@ -1064,6 +1081,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     .terminal-grid {
       grid-template-columns: 1fr;
     }
+    .native-tool-note { grid-template-columns: 1fr; gap: 0.4rem; }
     .desktop-gallery .section-heading {
       grid-template-columns: 1fr;
       align-items: start;
