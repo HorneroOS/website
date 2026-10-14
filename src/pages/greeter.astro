@@ -155,7 +155,7 @@ const description =
               <span aria-hidden="true">Ⅱ</span>
             </button>
             <button type="button" class="next-button" id="next-scene">
-              <span>Next landscape</span>
+              <span class="next-label">Next landscape</span>
               <span aria-hidden="true">↗</span>
             </button>
           </div>
@@ -418,6 +418,19 @@ const description =
       credit: document.querySelector<HTMLElement>('#scene-credit'),
       location: document.querySelector<HTMLElement>('#scene-location'),
     };
+    const nextButton = document.querySelector<HTMLButtonElement>('#next-scene');
+    const updateNextButton = (activeMood: string) => {
+      if (!nextButton) return;
+      const hasAlternatives = scenes.filter((scene) => scene.daypart === activeMood).length > 1;
+      const moodName = activeMood.replace('-', ' ');
+      nextButton.disabled = !hasAlternatives;
+      nextButton.setAttribute(
+        'aria-label',
+        hasAlternatives ? 'Show another landscape' : `Only one landscape is available for ${moodName}`,
+      );
+      const label = nextButton.querySelector<HTMLElement>('.next-label');
+      if (label) label.textContent = hasAlternatives ? 'Next landscape' : 'Only scene';
+    };
     const hourMood = (hour: number) => {
       if (!windows) return 'day';
       if (hour >= windows.goldenStart && hour < windows.goldenEnd) return 'golden-hour';
@@ -428,6 +441,7 @@ const description =
     const choose = (activeMood: string, preferred?: Scene) => {
       const available = scenes.filter((scene) => scene.daypart === activeMood);
       if (!available.length) return;
+      updateNextButton(activeMood);
       const pool = available.filter((scene) => scene.id !== current?.id);
       const next = preferred ?? pool[Math.floor(Math.random() * Math.max(pool.length, 1))] ?? available[0];
       current = next;
@@ -901,8 +915,16 @@ const description =
     font-size: 0.75rem;
   }
   .icon-button:hover,
-  .next-button:hover {
+  .next-button:hover:not(:disabled) {
     border-color: var(--accent);
+  }
+  .next-button:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.72;
+  }
+  .next-button:disabled > [aria-hidden] {
+    display: none;
   }
   .experience-caption {
     display: flex;
