@@ -178,7 +178,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     <ul class="photo-grid" role="list">
       {wallpapers.map((wallpaper, index) => (
         <li class:list={['photo-card', `photo-card-${index + 1}`]}>
-          <a class="photo-image" href={wallpaper.preview} aria-label={`Open full photograph: ${wallpaper.title}`}>
+          <a class="photo-image" href={wallpaper.preview} aria-label={`View scene: open full photograph: ${wallpaper.title}`}>
             <img
               src={wallpaper.previewSmall}
               srcset={`${wallpaper.previewSmall} 720w, ${wallpaper.preview} 1280w`}
