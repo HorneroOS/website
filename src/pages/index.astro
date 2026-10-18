@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import DesktopCaptureExplorer from '../components/DesktopCaptureExplorer.astro';
 import poster199x from '../assets/brand/hornero-199x-poster.jpg';
+import kittyLogo from '../assets/apps/kitty.png';
+import alacrittyLogo from '../assets/apps/alacritty.svg';
+import ghosttyLogo from '../assets/apps/ghostty.png';
 import {
   editionCatalogue,
   editions,
@@ -155,9 +158,9 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     </div>
     <div class="palette-tools">
       <div class="terminal-strip" aria-label="Supported terminal emulators and their native color formats">
-        <div><span class="terminal-glyph" aria-hidden="true">K</span><strong>Kitty</strong><code>conf</code></div>
-        <div><span class="terminal-glyph" aria-hidden="true">A</span><strong>Alacritty</strong><code>TOML</code></div>
-        <div><span class="terminal-glyph" aria-hidden="true">G</span><strong>Ghostty</strong><code>theme</code></div>
+        <div><img class="terminal-logo" src={kittyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Kitty</strong><code>conf</code></div>
+        <div><img class="terminal-logo" src={alacrittyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Alacritty</strong><code>TOML</code></div>
+        <div><img class="terminal-logo" src={ghosttyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Ghostty</strong><code>theme</code></div>
       </div>
       <div class="palette-extensions" aria-label="Additional optional applications with native Hornero themes">
         {paletteApplications.map((application) => (
@@ -233,7 +236,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     <div class="poster-copy">
       <p class="chapter"><b>06</b><span>Las raíces — The roots, reimagined</span></p>
       <h2 id="poster199x-title">A future imagined here,<br /><em>printed like 1992.</em></h2>
-      <p>Hornero 199X is the design language of this site: Argentine editorial and broadcast graphics, La Plata's diagonal grid, and the hornero's own architecture. An optional desktop theme in the same palette is in review in HorneroOS/config; Hornero Dark remains the factory default.</p>
+      <p>Hornero 199X is the design language of this site: Argentine editorial and broadcast graphics, La Plata's diagonal grid, and the hornero's own architecture. An optional desktop theme in the same palette ships in HorneroOS/config; Hornero Dark remains the factory default.</p>
       <a class="text-link" href="/roots">Read the roots story <span aria-hidden="true">→</span></a>
     </div>
   </section>
@@ -320,7 +323,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
   .terminal-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .terminal-strip > div { display: grid; justify-items: start; gap: 0.55rem; min-width: 0; padding: 1rem 0.6rem; border-right: 1px solid var(--line); }
   .terminal-strip > div:last-child { border: 0; }
-  .terminal-glyph { display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--highlight); color: var(--highlight); font: 1rem var(--font-data); }
+  .terminal-logo { width: 2.5rem; height: 2.5rem; object-fit: contain; }
   .terminal-strip strong { font-family: var(--font-display); font-size: 0.9rem; }
   .terminal-strip code { color: var(--secondary); font-size: 0.65rem; }
   .palette-tools { min-width: 0; }
