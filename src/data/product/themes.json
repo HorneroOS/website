@@ -115,7 +115,7 @@
     "id": "pampa",
     "name": "Pampa",
     "mode": "dark",
-    "description": "An aerial view of the humid pampas: green grassland, river water and soft earth beneath a warm, open sky",
+    "description": "A caldén tree silhouetted against a saturated pampas sunset: grassland green, earth and gold over a warm dark surface",
     "official": true,
     "collection": "hornero-originals",
     "collectionOrder": 8,
@@ -152,6 +152,48 @@
       "secondary": "#7FB0E6",
       "accent": "#91C8A2"
     }
+  },
+  {
+    "id": "cuyo",
+    "name": "Cuyo",
+    "mode": "light",
+    "description": "The Aconcagua and the high Cuyo desert: snow, stone and thin Andean light over Mendoza",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 10,
+    "paletteModel": "wallpaper",
+    "gtkTheme": "Hornero-Light",
+    "iconTheme": "Papirus",
+    "schemeType": "fidelity",
+    "palette": {}
+  },
+  {
+    "id": "iguazu",
+    "name": "Iguazú",
+    "mode": "dark",
+    "description": "The Iguazú Falls in close view: white water, basalt and dense subtropical green in Misiones",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 11,
+    "paletteModel": "wallpaper",
+    "gtkTheme": "Hornero-Dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "expressive",
+    "palette": {}
+  },
+  {
+    "id": "sierras",
+    "name": "Sierras",
+    "mode": "light",
+    "description": "Golden highlands of the Sierras de Córdoba at Quebrada del Condorito: dry grass, rock and long light",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 12,
+    "paletteModel": "wallpaper",
+    "gtkTheme": "Hornero-Light",
+    "iconTheme": "Papirus",
+    "schemeType": "fidelity",
+    "palette": {}
   },
   {
     "id": "catppuccin-latte",
