@@ -64,24 +64,25 @@
   },
   {
     "id": "pampa",
-    "title": "Laguna de Rocha from above",
-    "place": "Laguna de Rocha, Buenos Aires Province, Argentina",
+    "title": "Caldén silhouette at sunset",
+    "place": "Caldén forest, La Pampa, Argentina",
     "themeId": "pampa",
     "aestheticTags": [
-      "aerial",
+      "sunset",
       "grassland",
-      "river"
+      "silhouette",
+      "warm"
     ],
-    "photographer": "Alejandro Barrios",
-    "sourcePage": "https://commons.wikimedia.org/wiki/File:Drone_Laguna_de_rocha.jpg",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "attribution": "Alejandro Barrios — Laguna de Rocha from above — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Drone_Laguna_de_rocha.jpg",
-    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications. Share-alike obligation applies to modified photo output.",
+    "photographer": "Juanedc",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Atardecer_en_el_caldenal_(8280706996).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "Juanedc — Caldén silhouette at sunset — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Atardecer_en_el_caldenal_(8280706996).jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
     "preview": "/wallpapers/argentina/pampa-1280.webp",
     "previewSmall": "/wallpapers/argentina/pampa-720.webp",
-    "previewAlt": "Laguna de Rocha from above, a photograph of Laguna de Rocha, Buenos Aires Province, Argentina.",
-    "previewSha256": "0afec05752e0344a5d789b93275404bc9690e4fe68424a8fc380c507df6f9cd8"
+    "previewAlt": "Caldén silhouette at sunset, a photograph of Caldén forest, La Pampa, Argentina.",
+    "previewSha256": "2225111a84b92bc428aca363f3c2439e6f936fa7f3c5ddd916707b3dac560d0a"
   },
   {
     "id": "patagonia",
@@ -124,5 +125,71 @@
     "previewSmall": "/wallpapers/argentina/quebrada-720.webp",
     "previewAlt": "Hornocal mineral ridges, a photograph of Serranía de Hornocal, Jujuy, Argentina.",
     "previewSha256": "7b863451b12d8b69cf013f26a5d630175143b09ad67ecac7df4bee6e01512e7b"
+  },
+  {
+    "id": "cuyo",
+    "title": "Aconcagua over the Horcones valley",
+    "place": "Aconcagua Provincial Park, Mendoza, Argentina",
+    "themeId": "cuyo",
+    "aestheticTags": [
+      "mountain",
+      "andes",
+      "snow",
+      "high-desert"
+    ],
+    "photographer": "Mauricio V. Genta",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Aconcagua_(Mendoza)_2022-11_(1).jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "attribution": "Mauricio V. Genta — Aconcagua over the Horcones valley — CC BY-SA 4.0 — https://commons.wikimedia.org/wiki/File:Aconcagua_(Mendoza)_2022-11_(1).jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications. Share-alike obligation applies to modified photo output.",
+    "preview": "/wallpapers/argentina/cuyo-1280.webp",
+    "previewSmall": "/wallpapers/argentina/cuyo-720.webp",
+    "previewAlt": "Aconcagua over the Horcones valley, a photograph of Aconcagua Provincial Park, Mendoza, Argentina.",
+    "previewSha256": "30dad06546d97706237bc37fe2c260c5d15bbe733db025d8b74427334b55d9c7"
+  },
+  {
+    "id": "iguazu",
+    "title": "Iguazú Falls, close view",
+    "place": "Iguazú National Park, Misiones, Argentina",
+    "themeId": "iguazu",
+    "aestheticTags": [
+      "waterfall",
+      "jungle",
+      "water",
+      "green"
+    ],
+    "photographer": "Güldem Üstün",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Argentina-Iguazu-Close_view_of_waterfall_(Explored,_29-07-2015)_-_Flickr_-_ustung.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "Güldem Üstün — Iguazú Falls, close view — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Argentina-Iguazu-Close_view_of_waterfall_(Explored,_29-07-2015)_-_Flickr_-_ustung.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
+    "preview": "/wallpapers/argentina/iguazu-1280.webp",
+    "previewSmall": "/wallpapers/argentina/iguazu-720.webp",
+    "previewAlt": "Iguazú Falls, close view, a photograph of Iguazú National Park, Misiones, Argentina.",
+    "previewSha256": "d17588d5fec4d91bd0455d869dc290f553d0f28b82d64b122c5e9eebdf7b778e"
+  },
+  {
+    "id": "sierras",
+    "title": "Golden hour over Quebrada del Condorito",
+    "place": "Quebrada del Condorito National Park, Córdoba, Argentina",
+    "themeId": "sierras",
+    "aestheticTags": [
+      "highlands",
+      "golden-hour",
+      "mountain",
+      "grassland"
+    ],
+    "photographer": "Kevin Jones",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Quebrada_del_Condorito_panorama.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "Kevin Jones — Golden hour over Quebrada del Condorito — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Quebrada_del_Condorito_panorama.jpg",
+    "modification": "Center-cropped to 16:9 and resized to 2560×1440 using Pillow LANCZOS; no generative modifications.",
+    "preview": "/wallpapers/argentina/sierras-1280.webp",
+    "previewSmall": "/wallpapers/argentina/sierras-720.webp",
+    "previewAlt": "Golden hour over Quebrada del Condorito, a photograph of Quebrada del Condorito National Park, Córdoba, Argentina.",
+    "previewSha256": "13378ba62d787f1260ef529ec29a74f5acfe5352fab54b0ff69a704d189864a1"
   }
 ]
