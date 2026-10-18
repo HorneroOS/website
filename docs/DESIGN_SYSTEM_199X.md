@@ -92,7 +92,7 @@ HorneroOS/config) is hand-authored original vector artwork.
 ## Desktop counterpart
 
 `HorneroOS/config` ships an optional `hornero-199x` theme pack using the
-same palette through the existing semantic-token pipeline. Hornero Dark
-remains the factory default. The website catalogue picks the theme up only
-through the pinned product-data workflow (`npm run data:bump` after the
-config change lands) — never by hand-editing generated files.
+same palette through the existing semantic-token pipeline (merged in
+HorneroOS/config#83). Hornero Dark remains the factory default. The website
+catalogue picks the theme up only through the pinned product-data workflow
+(`npm run data:bump`) — never by hand-editing generated files.

@@ -88,9 +88,9 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
     <div class="capture-navigation" aria-label="Choose a real Hornero capture">
       <p class="navigation-label">Explore a surface</p>
-      <ul role="tablist" aria-label="Choose a real Hornero capture">
+      <ul aria-label="Choose a real Hornero capture">
         {views.map((view, index) => (
-          <li role="presentation">
+          <li>
             <button
               type="button"
               role="tab"
@@ -238,7 +238,9 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       announcement &&
       panel
     ) {
-      navigation.setAttribute('role', 'tablist');
+      const tabList = navigation.querySelector('ul');
+      tabList?.setAttribute('role', 'tablist');
+      tabList?.querySelectorAll('li').forEach((item) => item.setAttribute('role', 'presentation'));
       navigation.querySelectorAll<HTMLAnchorElement>('.capture-fallback-link').forEach((link) => link.remove());
       choices.forEach((choice) => (choice.hidden = false));
       panel.removeAttribute('aria-label');
