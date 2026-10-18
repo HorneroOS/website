@@ -38,6 +38,7 @@ const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
   description="The Companion is a small hornero that lives on the Hornero OS desktop: it rests, greets and flies in, stays out of your way, and never takes input."
 >
   <section class="section">
+    <p class="plate-id"><strong>Compañero Hornero</strong><span>ARG / 199X</span><span>Parte del shell</span></p>
     <p class="eyebrow">Part of the shell</p>
     <h1>Companion</h1>
     <p class="lede">
@@ -178,4 +179,10 @@ qs ipc call companion say "Back in five minutes" 5000</code></pre>
   .source {
     font-size: var(--step--1);
   }
+</style>
+
+<style>
+  /* 199X per-page direction: the companion as a character specimen plate. */
+  .poses > *, .skins > * { border-radius: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--secondary) 16%, transparent); }
+  .source { border-top: 3px solid var(--accent); padding-top: 0.6rem; }
 </style>

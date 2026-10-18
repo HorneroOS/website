@@ -27,8 +27,8 @@ contracts are in [`docs/`](docs/).
 - Shared navigation, color modes, and document shell are in
   `src/layouts/SiteLayout.astro`. Shared styling tokens are in
   `src/styles/global.css`.
-- Use the global role tokens across pages. Preserve the Buenos Aires
-  cyberpunk identity in both color modes without sacrificing text contrast or
+- Use the global role tokens across pages. Preserve the Hornero 199X
+  Argentine retrofuturist identity (docs/DESIGN_SYSTEM_199X.md) in both color modes without sacrificing text contrast or
   turning long-form content into decoration.
 - Preserve semantic landmarks, descriptive labels, visible focus, keyboard
   operation, reduced-motion behavior, responsive layouts and image

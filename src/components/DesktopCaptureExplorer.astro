@@ -52,7 +52,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   </header>
 
   <div class="explorer-layout">
-    <figure class="capture-stage" id="capture-panel" role="tabpanel" aria-label={firstView.title} tabindex="0">
+    <div class="capture-stage" id="capture-panel" role="tabpanel" aria-label={firstView.title} tabindex="0">
       <div class="stage-heading" aria-hidden="true">
         <span>HORNERO / DESKTOP</span>
         <span data-capture-group>{firstView.group}</span>
@@ -70,7 +70,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
           decoding="async"
         />
       </div>
-      <figcaption>
+      <div class="capture-caption-wrap">
         <div class="capture-caption">
           <p class="capture-kicker" data-capture-group-caption>
             {firstView.group}
@@ -83,12 +83,12 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
         <div class="capture-provenance" data-capture-provenance>
           <KilnStamp {...firstView.provenance} />
         </div>
-      </figcaption>
-    </figure>
+      </div>
+    </div>
 
     <div class="capture-navigation" aria-label="Choose a real Hornero capture">
       <p class="navigation-label">Explore a surface</p>
-      <ul>
+      <ul aria-label="Choose a real Hornero capture">
         {views.map((view, index) => (
           <li>
             <button
@@ -238,7 +238,9 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       announcement &&
       panel
     ) {
-      navigation.setAttribute('role', 'tablist');
+      const tabList = navigation.querySelector('ul');
+      tabList?.setAttribute('role', 'tablist');
+      tabList?.querySelectorAll('li').forEach((item) => item.setAttribute('role', 'presentation'));
       navigation.querySelectorAll<HTMLAnchorElement>('.capture-fallback-link').forEach((link) => link.remove());
       choices.forEach((choice) => (choice.hidden = false));
       panel.removeAttribute('aria-label');
@@ -331,7 +333,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     animation: capture-arrive 180ms ease-out both;
   }
 
-  .capture-stage figcaption {
+  .capture-stage .capture-caption-wrap {
     display: grid;
     gap: 0.8rem;
     padding: 1rem 0.4rem 0.35rem;

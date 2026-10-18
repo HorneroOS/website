@@ -1,44 +1,50 @@
 /*
- * Hornero OS site design system.
+ * Hornero OS site design system — Hornero 199X.
  *
- * Palette: Buenos Aires after rain — ink, river light, sign-magenta and sodium.
- * The city grid belongs to the shared canvas; each route chooses how much of
- * that signal to show. Type is Bricolage Grotesque for display, Rubik for UI,
- * and Martian Mono for source and provenance data. All are self-hosted.
+ * Argentine retrofuturism, 1985-1995: broadcast identification plates,
+ * editorial print on warm paper, La Plata's diagonal grid, and restrained
+ * phosphor/orange signal color. Night mode is the broadcast studio;
+ * light mode is the printed daytime edition. See docs/DESIGN_SYSTEM_199X.md.
+ * Type is Bricolage Grotesque for display, Rubik for UI, and Martian Mono
+ * for technical identification. All are self-hosted.
  */
 
 :root {
   color-scheme: dark;
 
-  /* A port city at night: wet asphalt, sign-glass, river and sodium lamps. */
-  --night: #080b14;
-  --night-surface: #0e1321;
-  --night-raised: #171d2d;
-  --ice: #f3f2fb;
-  --ice-muted: #aeb3cc;
-  --signal: #f276d1;
-  --river: #69deeb;
-  --sodium: #f1b967;
-  --mint: #a6dfc1;
+  /* Nighttime / Broadcast: deep CRT ink, midnight blue, signal orange. */
+  --night: #0b1018;
+  --night-surface: #142745;
+  --night-raised: #1b335c;
+  --ice: #fff6e6;
+  --ice-muted: #b9c6de;
+  --signal: #f08b43;
+  --river: #7fb0e6;
+  --electric: #427ccd;
+  --sodium: #f5a76c;
+  --mint: #91c8a2;
+  --phosphor: #91c8a2;
+  --paper: #ede5d2;
 
   /* Roles */
   --bg: var(--night);
   --surface: var(--night-surface);
   --surface-raised: var(--night-raised);
-  --line: #2b3954;
+  --line: #2e4a73;
   --text: var(--ice);
   --text-muted: var(--ice-muted);
   --accent: var(--signal);
   accent-color: var(--accent);
-  --accent-ink: #210b24;
+  --accent-ink: #0b1018;
   --highlight: var(--river);
-  --secondary: var(--sodium);
-  --focus: #8cebf0;
-  --browser-theme-color: #080b14;
-  --signal-grid: color-mix(in srgb, var(--river) 2.1%, transparent);
-  --sign-haze: 12%;
-  --river-haze: 9%;
-  --sodium-haze: 7%;
+  --secondary: var(--mint);
+  --focus: #91c8a2;
+  --browser-theme-color: #0b1018;
+  --signal-grid: color-mix(in srgb, var(--river) 2.4%, transparent);
+  --diag-grid: color-mix(in srgb, var(--signal) 3.2%, transparent);
+  --sign-haze: 10%;
+  --river-haze: 10%;
+  --sodium-haze: 8%;
   --ink: var(--text);
   --muted: var(--text-muted);
   --clay: var(--secondary);
@@ -55,27 +61,32 @@
 
   --gutter: clamp(1rem, 0.7rem + 2vw, 2.5rem);
   --measure: 66ch;
-  --radius: 10px;
+  --radius: 6px;
+  --step-4: clamp(2.8rem, 2rem + 4.5vw, 5.6rem);
+  /* Motion tokens: mechanical, brief, broadcast-like. */
+  --motion-fast: 160ms;
+  --motion-panel: 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
   /* The hornero's oven nest: a rounded arch over a flat sill. */
   --arch: 46% 46% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
 }
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  /* River fog over concrete: daylight keeps the same sign-glass and sodium. */
-  --bg: #f2f0f6;
-  --surface: #e9e8f1;
-  --surface-raised: #faf9fc;
-  --line: #c4c8d8;
-  --text: #171a27;
-  --text-muted: #4a5268;
-  --accent: #90255f;
-  --accent-ink: #fff9ff;
-  --highlight: #11666e;
-  --secondary: #795211;
-  --focus: #075a70;
-  --browser-theme-color: #f2f0f6;
-  --signal-grid: color-mix(in srgb, var(--highlight) 2.2%, transparent);
+  /* Daytime / Editorial: warm printed paper, midnight type, burnt signal. */
+  --bg: #ede5d2;
+  --surface: #e3d8bf;
+  --surface-raised: #fff6e6;
+  --line: #b3a888;
+  --text: #142745;
+  --text-muted: #3d4e6b;
+  --accent: #9a4a12;
+  --accent-ink: #fff6e6;
+  --highlight: #1f4e79;
+  --secondary: #7c4d0f;
+  --focus: #1f4e79;
+  --browser-theme-color: #ede5d2;
+  --signal-grid: color-mix(in srgb, var(--highlight) 3%, transparent);
+  --diag-grid: color-mix(in srgb, var(--accent) 4%, transparent);
   --sign-haze: 5%;
   --river-haze: 5%;
   --sodium-haze: 3%;
@@ -115,9 +126,11 @@ body {
     radial-gradient(62rem 34rem at 96% -8%, color-mix(in srgb, var(--accent) var(--sign-haze), transparent), transparent 84%),
     radial-gradient(46rem 34rem at -12% 34%, color-mix(in srgb, var(--highlight) var(--river-haze), transparent), transparent 84%),
     radial-gradient(42rem 24rem at 62% 108%, color-mix(in srgb, var(--secondary) var(--sodium-haze), transparent), transparent 82%),
+    /* La Plata diagonal: one 45deg cut across the orthogonal city grid. */
+    repeating-linear-gradient(45deg, var(--diag-grid) 0 1px, transparent 1px 112px),
     linear-gradient(var(--signal-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--signal-grid) 1px, transparent 1px);
-  background-size: auto, auto, auto, 56px 56px, 56px 56px;
+  background-size: auto, auto, auto, auto, 56px 56px, 56px 56px;
   color: var(--text);
   font-family: var(--font-ui);
   font-size: var(--step-0);
@@ -930,6 +943,114 @@ hr {
 .card p {
   color: var(--text-muted);
   font-size: 0.97rem;
+}
+
+/* ------------------------------------------------ Hornero 199X plates --- */
+
+/* Numbered editorial chapter head: 01 / LA SEÑAL — vintage technical press. */
+.chapter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-bottom: 1.15rem;
+  font-family: var(--font-data);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.chapter b {
+  color: var(--accent);
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.chapter::after {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line), transparent);
+  content: '';
+}
+
+/* Broadcast identification plate: mechanical frame, registration marks. */
+.broadcast-plate {
+  position: relative;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--surface) 72%, transparent);
+  padding: clamp(1rem, 2.5vw, 1.6rem);
+}
+.broadcast-plate::before,
+.broadcast-plate::after {
+  position: absolute;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0 solid var(--accent);
+  content: '';
+  pointer-events: none;
+}
+.broadcast-plate::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.broadcast-plate::after {
+  right: -1px;
+  bottom: -1px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+main p.plate-id {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-data);
+  /* Page-scoped hero rules must not inflate the identification plate. */
+  font-size: 0.62rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+.plate-id strong {
+  color: var(--text);
+}
+
+/* Signal acquisition: three bars settle once on load; static otherwise. */
+@keyframes signal-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.signal-bars {
+  display: flex;
+  gap: 4px;
+  height: 4px;
+  margin-top: 0.7rem;
+}
+.signal-bars i {
+  flex: 1;
+  transform-origin: left;
+  animation: signal-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.signal-bars i:nth-child(1) {
+  background: var(--electric, #427ccd);
+}
+.signal-bars i:nth-child(2) {
+  background: var(--accent);
+  animation-delay: 120ms;
+}
+.signal-bars i:nth-child(3) {
+  background: var(--secondary);
+  animation-delay: 240ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-bars i {
+    animation: none;
+  }
 }
 
 /* ------------------------------------------------------------- tables --- */

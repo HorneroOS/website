@@ -32,6 +32,7 @@ const filters = [
   <main class="wallpapers-page">
     <header class="wallpaper-intro">
       <div class="wallpaper-intro-copy">
+        <p class="plate-id"><strong>Fotografía argentina</strong><span>ARG / 199X</span><span>Autor y licencia en cada obra</span></p>
         <p class="eyebrow">Hornero Originals · Argentina</p>
         <h1>
           Places, seen
@@ -801,4 +802,12 @@ const filters = [
       transition: none;
     }
   }
+</style>
+
+<style>
+  /* 199X per-page direction: photography as a printed contact sheet. */
+  .gallery figure, .gallery .photo-card { border-radius: 2px; }
+  .feature-index { font-family: var(--font-data); color: var(--accent); }
+  :root[data-color-mode='light'] .feature-index { color: var(--ice, #fff6e6); }
+  .credits { border-top: 3px solid var(--accent); padding-top: 0.6rem; }
 </style>

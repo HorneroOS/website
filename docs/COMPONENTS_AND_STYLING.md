@@ -1,11 +1,11 @@
 # Components and styling
 
 The website is built with Astro components and plain CSS. Most routes render
-to static HTML and need no client-side framework. Its visual language draws
-from Buenos Aires after rain and the southern blue hour: city-grid lines,
-river cyan, electric-sign magenta and sodium amber carry through the shared
-canvas and navigation, while real Hornero captures provide the strongest
-visual statements.
+to static HTML and need no client-side framework. Its visual language is Hornero 199X (see
+[`DESIGN_SYSTEM_199X.md`](./DESIGN_SYSTEM_199X.md)): Argentine editorial and
+broadcast design from 1985-1995, La Plata's diagonal grid, signal orange and
+phosphor over midnight blue at night, and warm printed paper by day. Real
+Hornero captures provide the strongest visual statements.
 
 ## Component boundaries
 
@@ -26,19 +26,18 @@ page-specific composition with its route.
 
 `src/styles/global.css` defines the shared role tokens used across the site:
 canvas, surface, line, text, muted text, accent, highlight, secondary and
-focus. The palette is a cyberpunk interpretation of Buenos Aires: night ink,
-river cyan, electric-sign magenta and sodium amber. The page-wide urban grid
-and atmospheric color fields use those same tokens, so informational routes
-keep the product identity without placing decoration over their reading
-surfaces. Light mode carries the same signals over mineral daylight. A scene
-may use local overlay tokens when text must remain legible over artwork; do
-not replace role tokens with ad-hoc colors across ordinary UI.
+focus. The palette is Hornero 199X: deep CRT ink and midnight broadcast blue
+with signal orange and phosphor at night; warm printed paper with midnight
+type by day. The page-wide La Plata diagonal over the orthogonal grid uses
+those same tokens, so informational routes keep the product identity without
+placing decoration over their reading surfaces. A scene may use local overlay
+tokens when text must remain legible over artwork; do not replace role
+tokens with ad-hoc colors across ordinary UI.
 
 The `SiteLayout` control exposes System, Light and Dark on every route.
 System follows `prefers-color-scheme`; explicit choices persist in local
-storage and sync across tabs. Dark mode draws from wet asphalt and night
-signage. Light mode reads as river fog over city concrete, with the same cyan,
-magenta and sodium signals. Keep all three options keyboard accessible,
+storage and sync across tabs. Dark mode is the nighttime broadcast
+studio. Light mode is the daytime printed edition on warm paper. Keep all three options keyboard accessible,
 visibly focused and available at desktop and mobile widths. Respect reduced
 motion and preserve readable contrast in both palettes.
 

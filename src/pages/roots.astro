@@ -13,6 +13,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   description="How Hornero grew from a personal desktop configuration into an open operating-system project, with its sources and credits intact."
 >
   <section class="intro section">
+    <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>ARG / 199X</span><span>Las raíces del proyecto</span></p>
     <p class="eyebrow">An open project, with its history intact</p>
     <h1>
       Built from a desktop.
@@ -26,6 +27,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   </section>
 
   <section class="section timeline-section">
+    <p class="chapter"><b>2018</b><span>Cómo creció — How it grew</span></p>
     <p class="eyebrow">How it grew</p>
     <h2>From dotfiles to HorneroOS</h2>
     <ol class="timeline">
@@ -414,4 +416,12 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+</style>
+
+<style>
+  /* 199X per-page direction: roots as an archival timeline. */
+  .timeline { border-left: 3px solid var(--accent); }
+  .timeline-mark { font-family: var(--font-data); color: var(--accent); }
+  .repo-mark { font-family: var(--font-data); }
+  .lineage-grid > * { border-radius: 2px; }
 </style>
