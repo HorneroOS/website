@@ -133,6 +133,27 @@
     }
   },
   {
+    "id": "hornero-199x",
+    "name": "Hornero 199X",
+    "mode": "dark",
+    "description": "Optional Argentine retrofuturism: midnight broadcast blue, signal orange and phosphor green over deep CRT ink — a future imagined in Argentina in the 1990s",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 9,
+    "paletteModel": "semantic",
+    "gtkTheme": "Hornero-Dark",
+    "iconTheme": "Papirus-Dark",
+    "schemeType": "vibrant",
+    "palette": {
+      "background": "#0B1018",
+      "surface": "#142745",
+      "text": "#FFF6E6",
+      "primary": "#F08B43",
+      "secondary": "#7FB0E6",
+      "accent": "#91C8A2"
+    }
+  },
+  {
     "id": "catppuccin-latte",
     "name": "Catppuccin Latte",
     "mode": "light",

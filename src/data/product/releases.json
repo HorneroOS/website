@@ -7,12 +7,12 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview19",
     "shell": {
-      "sha": "1a09e0f5bca0429b86f8caa7c7d44614a6ad05b3",
-      "subject": "docs(perf): add a later steady-state observation (#192)"
+      "sha": "0fc4d17819e0dca7a6f938b9b2070b7abbf56189",
+      "subject": "fix(shell): align Control Center actions and refresh audio controls"
     },
     "config": {
-      "sha": "5d315558f30a188a1c54796e886f97a28644ebbe",
-      "subject": "feat(config): catalog terminal integrations (#74)"
+      "sha": "c2e33e81de74bef98205dde85f321961c6ebfe6d",
+      "subject": "feat(config): catalogue native palette integrations"
     },
     "installer": "future",
     "iso": "future"
