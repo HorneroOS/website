@@ -8,6 +8,9 @@ interface Props {
   socialImageAlt?: string;
 }
 
+import bricolageWoff2 from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2';
+import rubikWoff2 from '@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2';
+
 const { title, description, noindex = false, socialImage, socialImageAlt } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, site);
@@ -22,6 +25,9 @@ const socialAltValue = socialImageAlt ?? socialAlt;
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Preload the two latin display/UI faces so hero text paints without waiting on CSS discovery. -->
+<link rel="preload" href={bricolageWoff2} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={rubikWoff2} as="font" type="font/woff2" crossorigin />
 <!-- Favicon: HorneroOS/config@5df8300 assets/brand/favicon.svg (MIT) -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
