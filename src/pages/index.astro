@@ -43,18 +43,20 @@ const desktopCompositors = (editionById.desktop?.compositor?.supported ?? []).ma
   const maturity = compositor?.maturity ?? 'planned';
   return { name, maturity: maturity[0].toUpperCase() + maturity.slice(1) };
 });
-const title = 'HorneroOS | A Linux desktop, built the long way';
-const description = `An Arch-based, Wayland-first desktop grown from an environment used daily since 2018. Explore ${layouts.length} layouts, ${themes.length} coordinated looks and licensed photographs from Argentina.`;
+const title = 'HorneroOS | El futuro se construye acá — The future is built here';
+const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined in Argentina and built in the open since 2018. Explore ${layouts.length} layouts, ${themes.length} coordinated looks and licensed photographs from Argentina. Development preview — no ISO is published yet.`;
 ---
 
 <SiteLayout title={title} description={description}>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Arch Linux · Wayland-first · daily use since 2018</p>
-      <h1 id="hero-title">A Linux desktop,<br /><em>built the <span class="phrase-tail">long way.</span></em></h1>
+      <p class="plate-id"><strong>Transmisión 001</strong><span>ARG / 199X</span><span>HorneroOS · Señal abierta</span></p>
+      <div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1 id="hero-title">El futuro se<br /><em>construye <span class="phrase-tail">acá.</span></em></h1>
+      <p class="hero-en" lang="en">The future is built here.</p>
       <p class="lede">
         HorneroOS is an Arch-based, Wayland-first desktop grown from the environment Ulises Jeremías has used, tested
-        and refined every day since 2018.
+        and refined every day since 2018 — an Argentine vision of the future, made real with modern open-source technology.
       </p>
       <p class="heritage">
         Built by <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>, with contributions from{' '}
@@ -95,12 +97,14 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
         <span class="scene-place">{heroScene.place} · {heroScene.province}</span>
         <span class="scene-credit">Photograph by <a href={heroScene.sourceUrl}>{heroScene.creator}</a> · <a href={heroScene.licenseUrl}>{heroScene.license}</a></span>
       </figcaption>
-      <span class="scene-index" aria-hidden="true">ARG / NIGHT</span>
+      <span class="scene-index" aria-hidden="true">ARG / 199X · TRANSMISIÓN 001</span>
     </figure>
   </section>
 
+  <p class="chapter"><b>02</b><span>El sistema — The system, on real captures</span></p>
   <DesktopCaptureExplorer captures={captures} layoutCount={layouts.length} />
 
+  <p class="chapter"><b>06</b><span>El futuro — What is next, honestly labelled</span></p>
   <section class="section family-snapshot" aria-labelledby="family-title">
     <div class="family-heading">
       <div>
@@ -125,6 +129,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     <p class="family-note">Desktop is the current preview. Server, Agents and Studio remain planned; none has an installable image yet.</p>
   </section>
 
+  <p class="chapter"><b>03</b><span>Elegí tu mundo — Make it yours</span></p>
   <section class="section product-model" aria-labelledby="personalize-title">
     <div class="model-intro">
       <p class="eyebrow">Personalization that stays coherent</p>
@@ -139,6 +144,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     </div>
   </section>
 
+  <p class="chapter"><b>04</b><span>Bajo el capó — Under the hood</span></p>
   <section class="terminal-feature" aria-labelledby="terminal-feature-title">
     <div class="terminal-feature-intro">
       <p class="eyebrow">The rest of the workspace, in step</p>
@@ -218,6 +224,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
     </div>
   </section>
 
+  <p class="chapter"><b>07</b><span>Sumate — Join the project</span></p>
   <section class="section closing" aria-labelledby="closing-title">
     <div>
       <p class="eyebrow">Built in the open</p>
@@ -248,6 +255,7 @@ const description = `An Arch-based, Wayland-first desktop grown from an environm
   .hero h1 { max-width: none; font-size: clamp(3.15rem, 4.6vw, 5.9rem); line-height: 0.91; letter-spacing: -0.075em; }
   .hero h1 em { color: var(--accent); font-style: normal; }
   .hero h1 .phrase-tail { white-space: nowrap; }
+  .hero-en { font-family: var(--font-display); font-size: clamp(1.1rem, 1rem + 0.6vw, 1.45rem); color: var(--highlight); letter-spacing: -0.01em; }
   .hero .lede { max-width: 42ch; font-size: clamp(1.08rem, 1rem + 0.45vw, 1.3rem); line-height: 1.5; }
   .heritage { max-width: 50ch; padding-left: 0.85rem; border-left: 2px solid var(--accent); color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; }
   .heritage a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }

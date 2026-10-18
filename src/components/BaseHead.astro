@@ -26,13 +26,13 @@ const socialAltValue = socialImageAlt ?? socialAlt;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
-<meta name="theme-color" content="#080b14" />
+<meta name="theme-color" content="#0b1018" />
 <script is:inline>
   (() => {
     const key = 'hornero-color-mode';
     const valid = ['system', 'light', 'dark'];
-    // Hornero's nocturnal signal palette is the site's first impression; visitors
-    // can still opt into their OS theme or switch to the daylight palette below.
+    // Hornero 199X nighttime broadcast is the site's first impression; visitors
+    // can still opt into their OS theme or switch to the daylight edition below.
     let preference = 'dark';
     try {
       const saved = localStorage.getItem(key);
@@ -46,7 +46,7 @@ const socialAltValue = socialImageAlt ?? socialAlt;
     document.documentElement.dataset.colorPreference = preference;
     document.documentElement.dataset.colorMode = mode;
     const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) themeColor.content = mode === 'light' ? '#f2f0f6' : '#080b14';
+    if (themeColor) themeColor.content = mode === 'light' ? '#ede5d2' : '#0b1018';
   })();
 </script>
 <title>{title}</title>
