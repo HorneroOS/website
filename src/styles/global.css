@@ -999,11 +999,15 @@ hr {
   border-right-width: 2px;
   border-bottom-width: 2px;
 }
-.plate-id {
-  display: inline-flex;
+main p.plate-id {
+  display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
-  font: 0.62rem var(--font-data);
+  margin-bottom: 0.9rem;
+  font-family: var(--font-data);
+  /* Page-scoped hero rules must not inflate the identification plate. */
+  font-size: 0.62rem !important;
+  line-height: 1.5 !important;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--secondary);
