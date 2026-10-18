@@ -89,6 +89,12 @@ homepage it is explicitly captioned as artwork, never as a screenshot.
 The config wallpaper (`assets/brand/wallpaper/hornero-199x.svg` in
 HorneroOS/config) is hand-authored original vector artwork.
 
+The terminal logos in `src/assets/apps/` (`kitty.png`, `alacritty.svg`,
+`ghostty.png`) are the official upstream application icons, vendored
+unmodified from the Kitty, Alacritty and Ghostty projects for nominative
+identification only. They remain the trademarks of their respective
+projects and are not HorneroOS artwork.
+
 ## Desktop counterpart
 
 `HorneroOS/config` ships an optional `hornero-199x` theme pack using the

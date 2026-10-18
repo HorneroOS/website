@@ -999,7 +999,7 @@ hr {
   border-right-width: 2px;
   border-bottom-width: 2px;
 }
-main p.plate-id {
+main .plate-id {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
