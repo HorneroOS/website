@@ -79,6 +79,16 @@ English is the product language. Spanish appears selectively as identity
 explanations. Maturity labels (preview / experimental / planned) come from
 the pinned product data; the 199X framing never upgrades a claim.
 
+## Artwork provenance
+
+`src/assets/brand/hornero-199x-poster.jpg` is original artwork generated
+for this project (AI-assisted illustration, directed and reviewed by the
+project): a hornero and its nest over the La Plata grid. It contains no
+third-party imagery, no copied broadcaster artwork and no text. On the
+homepage it is explicitly captioned as artwork, never as a screenshot.
+The config wallpaper (`assets/brand/wallpaper/hornero-199x.svg` in
+HorneroOS/config) is hand-authored original vector artwork.
+
 ## Desktop counterpart
 
 `HorneroOS/config` ships an optional `hornero-199x` theme pack using the

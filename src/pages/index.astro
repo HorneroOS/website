@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import DesktopCaptureExplorer from '../components/DesktopCaptureExplorer.astro';
+import poster199x from '../assets/brand/hornero-199x-poster.jpg';
 import {
   editionCatalogue,
   editions,
@@ -104,7 +105,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
   <p class="chapter"><b>02</b><span>El sistema — The system, on real captures</span></p>
   <DesktopCaptureExplorer captures={captures} layoutCount={layouts.length} />
 
-  <p class="chapter"><b>06</b><span>El futuro — What is next, honestly labelled</span></p>
+  <p class="chapter"><b>03</b><span>El futuro — What is next, honestly labelled</span></p>
   <section class="section family-snapshot" aria-labelledby="family-title">
     <div class="family-heading">
       <div>
@@ -129,7 +130,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     <p class="family-note">Desktop is the current preview. Server, Agents and Studio remain planned; none has an installable image yet.</p>
   </section>
 
-  <p class="chapter"><b>03</b><span>Elegí tu mundo — Make it yours</span></p>
+  <p class="chapter"><b>04</b><span>Elegí tu mundo — Make it yours</span></p>
   <section class="section product-model" aria-labelledby="personalize-title">
     <div class="model-intro">
       <p class="eyebrow">Personalization that stays coherent</p>
@@ -144,7 +145,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     </div>
   </section>
 
-  <p class="chapter"><b>04</b><span>Bajo el capó — Under the hood</span></p>
+  <p class="chapter"><b>05</b><span>Bajo el capó — Under the hood</span></p>
   <section class="terminal-feature" aria-labelledby="terminal-feature-title">
     <div class="terminal-feature-intro">
       <p class="eyebrow">The rest of the workspace, in step</p>
@@ -221,6 +222,19 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
       <h2 id="greeter-feature-title">Argentina, before the desktop.</h2>
       <p>The HorneroOS greeter pairs a calm login screen with landscapes and city lights from Argentina. Explore its local-time moods in an interactive browser recreation.</p>
       <a class="text-link" href="/greeter">Experience the greeter <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section poster199x" aria-labelledby="poster199x-title">
+    <figure class="poster-frame">
+      <img src={poster199x.src} width={poster199x.width} height={poster199x.height} loading="lazy" decoding="async" alt="Original Hornero 199X illustration: a hornero bird and its arched mud nest over the midnight-blue La Plata street grid cut by a diagonal avenue, under a signal-orange sun with phosphor registration marks. This is artwork, not a desktop screenshot." />
+      <figcaption><span class="plate-id"><strong>Hornero 199X</strong><span>Original artwork</span><span>Not a screenshot</span></span></figcaption>
+    </figure>
+    <div class="poster-copy">
+      <p class="chapter"><b>06</b><span>Las raíces — The roots, reimagined</span></p>
+      <h2 id="poster199x-title">A future imagined here,<br /><em>printed like 1992.</em></h2>
+      <p>Hornero 199X is the design language of this site: Argentine editorial and broadcast graphics, La Plata's diagonal grid, and the hornero's own architecture. An optional desktop theme in the same palette is in review in HorneroOS/config; Hornero Dark remains the factory default.</p>
+      <a class="text-link" href="/roots">Read the roots story <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -348,6 +362,15 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
   .greeter-feature-copy h2 { margin-top: 0.7rem; font-size: clamp(1.8rem, 3.6vw, 3.2rem); line-height: 1.05; }
   .greeter-feature-copy > p:not(.eyebrow) { max-width: 52ch; margin-top: 0.8rem; color: var(--text-muted); line-height: 1.6; }
   .greeter-feature-copy .text-link { display: inline-flex; margin-top: 1.2rem; }
+  .poster199x { display: grid; grid-template-columns: 1.15fr 0.85fr; align-items: center; gap: clamp(1.5rem, 4vw, 4rem); }
+  .poster-frame { border: 1px solid var(--line); background: var(--surface); }
+  .poster-frame img { width: 100%; height: auto; }
+  .poster-frame figcaption { padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); }
+  .poster-copy h2 { font-size: clamp(1.9rem, 3.6vw, 3.2rem); line-height: 1.02; }
+  .poster-copy h2 em { color: var(--accent); font-style: normal; }
+  .poster-copy > p:not(.chapter) { max-width: 48ch; margin-top: 0.8rem; color: var(--text-muted); }
+  .poster-copy .text-link { display: inline-flex; margin-top: 1rem; }
+  @media (max-width: 840px) { .poster199x { grid-template-columns: 1fr; } }
   .closing { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); background: var(--surface); }
   .closing h2 { margin-block: 0.4rem; }
   .closing p:not(.eyebrow) { max-width: 45ch; color: var(--text-muted); }
