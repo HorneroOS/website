@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview19",
     "shell": {
-      "sha": "b9e1732fe0ef1964692aea1f65bed98052ca0dcb",
-      "subject": "feat(launcher): Ask Hornero action (>ai prompt via Companion IPC) (#216)"
+      "sha": "2cb90a16dd85dda0a4408bc36a0b79ee0b326938",
+      "subject": "feat(plugins): dashboard placement - Extensions tab cards (M2 slice 3) (#217)"
     },
     "config": {
       "sha": "76a552f7ec56f00ed52e122150f27639a3a8d70a",

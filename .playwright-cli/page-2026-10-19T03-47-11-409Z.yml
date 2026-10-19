@@ -1,0 +1,232 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS ARG / 199X · La Plata — Buenos Aires" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e16]:
+        - generic [ref=e17]: Hornero OS
+        - generic [ref=e18]: ARG / 199X · La Plata — Buenos Aires
+    - navigation "Main" [ref=e19]:
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "Editions" [ref=e22] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e23]:
+          - link "Layouts" [ref=e24] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e25]:
+          - link "Themes" [ref=e26] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e27]:
+          - link "Greeter" [ref=e28] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e29]:
+          - link "Companion" [ref=e30] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e31]:
+          - link "Showroom" [ref=e32] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e33]:
+          - link "Wallpapers" [ref=e34] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e35]:
+          - group [ref=e36]:
+            - generic "More pages" [ref=e37] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e38]: ⌄
+        - listitem [ref=e39]:
+          - link "Install" [ref=e40] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e41]:
+      - generic [ref=e43] [cursor=pointer]:
+        - radio "System" [ref=e44]
+        - generic [ref=e45]: System
+      - generic [ref=e49] [cursor=pointer]:
+        - radio "Light" [ref=e50]
+        - generic [ref=e51]: Light
+      - generic [ref=e55] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e56]
+        - generic [ref=e57]: Dark
+  - main [ref=e61]:
+    - region [ref=e62]:
+      - generic [ref=e63]:
+        - paragraph [ref=e64]: One appearance · native terminal configs
+        - heading [level=1] [ref=e65]:
+          - text: Your terminal.
+          - emphasis [ref=e66]: Still in tune.
+        - paragraph [ref=e67]: Kitty, Alacritty, Ghostty can follow the same Hornero appearance. The desktop renders colors in each terminal’s native format. Install the emulators you want, then choose which one Hornero opens.
+        - generic [ref=e68]:
+          - link "Read the terminal guide" [ref=e69] [cursor=pointer]:
+            - /url: /docs/applications/terminal/
+            - text: Read the terminal guide
+            - generic [aria-hidden] [ref=e70]: ↗
+          - link "Explore Hornero appearances" [ref=e71] [cursor=pointer]:
+            - /url: /themes
+            - text: Explore Hornero appearances →
+      - complementary "How terminal selection works" [ref=e72]:
+        - generic [ref=e73]: SYSTEM / DEFAULT APPS
+        - strong [ref=e74]: Choose from what is installed.
+        - paragraph [ref=e75]: Settings shows the supported emulators, marks which are installed, and only enables available choices. Kitty is the factory choice.
+        - code [ref=e76]: horneroctl config default-apps set terminal alacritty --yes
+        - generic [ref=e77]:
+          - text: Replace
+          - code [ref=e78]: alacritty
+          - text: with
+          - code [ref=e79]: kitty
+          - text: or
+          - code [ref=e80]: ghostty
+          - text: .
+    - region [ref=e81]:
+      - figure "Hornero development host ·Kitty · appearance CLI ·Dark ·1100 × 720 ·2026-10-04" [ref=e82]:
+        - img "Kitty on Hornero showing the available appearance themes and the generated dark color palette." [ref=e84]
+        - paragraph [ref=e86]:
+          - generic [ref=e87]: Hornero development host
+          - generic [ref=e88]: ·Kitty · appearance CLI
+          - generic [ref=e89]: ·Dark
+          - generic [ref=e90]: ·1100 × 720
+          - generic [ref=e91]: ·2026-10-04
+      - generic [ref=e92]:
+        - paragraph [ref=e93]: A real session, not a theme mockup
+        - heading "The palette reaches the prompt." [level=2] [ref=e94]
+        - paragraph [ref=e95]: Kitty keeps its native configuration and receives Hornero’s generated colors in Kitty’s own format. The same appearance engine writes the matching output for Alacritty and Ghostty when they are installed.
+        - link "See how appearances carry across the desktop" [ref=e96] [cursor=pointer]:
+          - /url: /themes
+          - text: See how appearances carry across the desktop
+          - generic [aria-hidden] [ref=e97]: →
+    - region [ref=e98]:
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - paragraph [ref=e101]: 3 emulators, one color source
+          - heading "Native where it matters." [level=2] [ref=e102]
+        - paragraph [ref=e103]: Hornero keeps each terminal’s conventions intact. Your selected wallpaper palette is translated to the native format rather than forcing every emulator through one generic theme file.
+      - generic [ref=e104]:
+        - article [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e107]: "01"
+            - generic [ref=e108]:
+              - heading "Kitty" [level=3] [ref=e109]
+              - generic [ref=e110]: Factory choice
+          - paragraph [ref=e111]: GPU-accelerated, with the Kitty graphics protocol used by Yazi previews.
+          - generic "Kitty configuration example" [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: INSTALL FROM ARCH REPOSITORIES
+              - code [ref=e115]: sudo pacman -S --needed kitty
+            - generic [ref=e116]:
+              - generic [ref=e117]: FACTORY CONFIG
+              - code [ref=e118]: include ~/.cache/hornero/smart-colors/colors-kitty.conf
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - term [ref=e121]: Config file
+              - definition [ref=e122]:
+                - code [ref=e123]: ~/.config/kitty/kitty.conf
+            - generic [ref=e124]:
+              - term [ref=e125]: Generated palette
+              - definition [ref=e126]:
+                - code [ref=e127]: colors-kitty.conf
+            - generic [ref=e128]:
+              - term [ref=e129]: Written under
+              - definition [ref=e130]:
+                - code [ref=e131]: ~/.cache/hornero/smart-colors/
+          - paragraph [ref=e132]: A static Hornero Dark or Light palette keeps the terminal readable before the first generated scheme.
+        - article [ref=e133]:
+          - generic [ref=e134]:
+            - generic [ref=e135]: "02"
+            - generic [ref=e136]:
+              - heading "Alacritty" [level=3] [ref=e137]
+              - generic [ref=e138]: Supported alternative
+          - paragraph [ref=e139]: A compact TOML configuration with live reload; Yazi image previews use the Wayland adapter through Überzug++ where configured.
+          - generic "Alacritty configuration example" [ref=e140]:
+            - generic [ref=e141]:
+              - generic [ref=e142]: INSTALL FROM ARCH REPOSITORIES
+              - code [ref=e143]: sudo pacman -S --needed alacritty
+            - generic [ref=e144]:
+              - generic [ref=e145]: FACTORY CONFIG
+              - code [ref=e146]: import = ["hornero-dark.toml", "hornero-colors.toml"]
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - term [ref=e149]: Config file
+              - definition [ref=e150]:
+                - code [ref=e151]: ~/.config/alacritty/alacritty.toml
+            - generic [ref=e152]:
+              - term [ref=e153]: Generated palette
+              - definition [ref=e154]:
+                - code [ref=e155]: hornero-colors.toml
+            - generic [ref=e156]:
+              - term [ref=e157]: Written under
+              - definition [ref=e158]:
+                - code [ref=e159]: ~/.config/alacritty/
+          - paragraph [ref=e160]: The packaged dark/light fallback and generated color file are imported separately, so wallpaper colors can update without replacing your base config.
+        - article [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]: "03"
+            - generic [ref=e164]:
+              - heading "Ghostty" [level=3] [ref=e165]
+              - generic [ref=e166]: Supported alternative
+          - paragraph [ref=e167]: A native Ghostty theme with a stable name that Hornero can refresh when appearance changes.
+          - generic "Ghostty configuration example" [ref=e168]:
+            - generic [ref=e169]:
+              - generic [ref=e170]: INSTALL FROM ARCH REPOSITORIES
+              - code [ref=e171]: sudo pacman -S --needed ghostty
+            - generic [ref=e172]:
+              - generic [ref=e173]: FACTORY CONFIG
+              - code [ref=e174]: theme = Hornero Dynamic
+          - generic [ref=e175]:
+            - generic [ref=e176]:
+              - term [ref=e177]: Config file
+              - definition [ref=e178]:
+                - code [ref=e179]: ~/.config/ghostty/config.ghostty
+            - generic [ref=e180]:
+              - term [ref=e181]: Generated palette
+              - definition [ref=e182]:
+                - code [ref=e183]: Hornero Dynamic
+            - generic [ref=e184]:
+              - term [ref=e185]: Written under
+              - definition [ref=e186]:
+                - code [ref=e187]: ~/.config/ghostty/themes/
+          - paragraph [ref=e188]: A packaged system fallback is available before Hornero writes the user-level wallpaper palette.
+      - complementary "Image previews with Yazi" [ref=e189]:
+        - paragraph [ref=e190]:
+          - strong [ref=e191]: Previews ride along.
+          - text: Yazi shows image previews inside your terminal — through Kitty's graphics protocol, or the Wayland adapter through Überzug++ under Alacritty where configured.
+    - region [ref=e192]:
+      - generic [aria-hidden] [ref=e193]:
+        - generic [ref=e194]: "01"
+        - generic [ref=e196]: "02"
+        - generic [ref=e198]: "03"
+      - generic [ref=e199]:
+        - paragraph [ref=e200]: A practical workflow
+        - heading "Install. Choose. Apply a look." [level=2] [ref=e201]
+        - list [ref=e202]:
+          - listitem [ref=e203]:
+            - strong [ref=e204]: Install a terminal
+            - generic [ref=e205]: Kitty is the factory choice. The other listed emulators remain optional packages.
+          - listitem [ref=e206]:
+            - strong [ref=e207]: Select it in Settings
+            - generic [ref=e208]: Control Center marks installed choices and prevents selecting a terminal that is not present.
+          - listitem [ref=e209]:
+            - strong [ref=e210]: Change appearance
+            - generic [ref=e211]: Hornero writes fresh native palettes for all 3 integrations; the active terminal reads its own file.
+        - paragraph [ref=e212]: This page describes the current Arch package integration. Terminal packages are separate from Hornero Shell; installing Hornero does not require installing every emulator.
+  - contentinfo [ref=e213]:
+    - navigation "Project" [ref=e214]:
+      - list [ref=e215]:
+        - listitem [ref=e216]:
+          - link "GitHub" [ref=e217] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e218]:
+          - link "Project map" [ref=e219] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e220]:
+          - link "Design language" [ref=e221] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e222]:
+          - link "Contribute" [ref=e223] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e224]:
+          - link "Search" [ref=e225] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e226]:
+          - link "Report a site issue" [ref=e227] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e228]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.

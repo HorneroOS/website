@@ -1,0 +1,599 @@
+- generic [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS ARG / 199X · La Plata — Buenos Aires" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e16]:
+        - generic [ref=e17]: Hornero OS
+        - generic [ref=e18]: ARG / 199X · La Plata — Buenos Aires
+    - navigation "Main" [ref=e19]:
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "Editions" [ref=e22] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e23]:
+          - link "Layouts" [ref=e24] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e25]:
+          - link "Themes" [ref=e26] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e27]:
+          - link "Greeter" [ref=e28] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e29]:
+          - link "Companion" [ref=e30] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e31]:
+          - link "Showroom" [ref=e32] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e33]:
+          - link "Wallpapers" [ref=e34] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e35]:
+          - group [ref=e36]:
+            - generic "More pages" [ref=e37] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e38]: ⌄
+        - listitem [ref=e39]:
+          - link "Install" [ref=e40] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e41]:
+      - generic [ref=e43] [cursor=pointer]:
+        - radio "System" [ref=e44]
+        - generic [ref=e45]: System
+      - generic [ref=e49] [cursor=pointer]:
+        - radio "Light" [checked] [active] [ref=e50]
+        - generic [ref=e51]: Light
+      - generic [ref=e55] [cursor=pointer]:
+        - radio "Dark" [ref=e56]
+        - generic [ref=e57]: Dark
+  - main [ref=e61]:
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - paragraph [ref=e64]:
+          - strong [ref=e65]: Catálogo de apariencias
+          - generic [ref=e66]: ARG / 199X
+          - generic [ref=e67]: Temas · paletas · fondos
+        - paragraph [ref=e68]: Personalize the whole desktop
+        - heading [level=1] [ref=e69]:
+          - text: Choose a feeling.
+          - emphasis [ref=e70]: Make it yours.
+        - paragraph [ref=e71]: A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune the pieces when you want to.
+        - generic [ref=e72]:
+          - generic [ref=e73]: 24 coordinated looks
+          - generic [ref=e74]: 12 Hornero Originals
+          - generic [ref=e75]: 7 palette-generation styles
+      - generic [ref=e76]:
+        - img "Buenos Aires after dark, a photograph of Puerto Madero, Buenos Aires, Argentina." [ref=e77]
+        - paragraph [ref=e78]:
+          - generic [ref=e79]: Puerto Madero, Buenos Aires, Argentina
+          - strong [ref=e80]: Buenos Aires after dark
+          - generic [ref=e81]:
+            - text: Photograph by Luis Argerich ·
+            - link "CC BY 2.0" [ref=e82] [cursor=pointer]:
+              - /url: https://creativecommons.org/licenses/by/2.0/
+    - region [ref=e83]:
+      - generic [ref=e84]:
+        - generic [ref=e85]:
+          - paragraph [ref=e86]:
+            - generic [ref=e87]: A
+            - generic [ref=e88]: Del papel al escritorio — Looks on a running desktop
+          - paragraph [ref=e89]: Looks on a running desktop
+          - heading "From scene to whole system." [level=2] [ref=e90]
+        - paragraph [ref=e91]: Choose a real capture to see how each look carries into the Shell. Each frame keeps its source and capture details; these are separate product captures, not a simulated live desktop.
+      - group "Explore real Hornero desktop captures" [ref=e92]:
+        - radio "01 Hornero Light · a softer daylight palette Hornero Light" [checked] [ref=e94]
+        - generic [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: "01"
+          - generic [ref=e97]:
+            - strong [ref=e98]: Hornero Light · a softer daylight palette
+            - generic [ref=e99]: Hornero Light
+          - generic [aria-hidden] [ref=e100]: ↗
+        - radio "02 Pampa · moonlit grassland Pampa" [ref=e101]
+        - generic [ref=e102] [cursor=pointer]:
+          - generic [ref=e103]: "02"
+          - generic [ref=e104]:
+            - strong [ref=e105]: Pampa · moonlit grassland
+            - generic [ref=e106]: Pampa
+          - generic [aria-hidden] [ref=e107]: ↗
+        - radio "03 Neon City · electric blue hour Custom · dark · expressive wallpaper colors" [ref=e108]
+        - generic [ref=e109] [cursor=pointer]:
+          - generic [ref=e110]: "03"
+          - generic [ref=e111]:
+            - strong [ref=e112]: Neon City · electric blue hour
+            - generic [ref=e113]: Custom · dark · expressive wallpaper colors
+          - generic [aria-hidden] [ref=e114]: ↗
+        - radio "04 Vapor Dreams · the long way home Custom · dark · expressive wallpaper colors" [ref=e115]
+        - generic [ref=e116] [cursor=pointer]:
+          - generic [ref=e117]: "04"
+          - generic [ref=e118]:
+            - strong [ref=e119]: Vapor Dreams · the long way home
+            - generic [ref=e120]: Custom · dark · expressive wallpaper colors
+          - generic [aria-hidden] [ref=e121]: ↗
+        - radio "05 Soft Morning · above the cloud line Custom · dark · expressive wallpaper colors" [ref=e122]
+        - generic [ref=e123] [cursor=pointer]:
+          - generic [ref=e124]: "05"
+          - generic [ref=e125]:
+            - strong [ref=e126]: Soft Morning · above the cloud line
+            - generic [ref=e127]: Custom · dark · expressive wallpaper colors
+          - generic [aria-hidden] [ref=e128]: ↗
+        - generic [ref=e129]:
+          - article "Hornero Light · a softer daylight palette" [ref=e130]:
+            - figure "Hornero QA ·Package-only flagship theme transition; the screenshot includes the Shell notification confirming the applied look. ·shell 98a5de2 ·config 96b6870 ·horneroctl 9c15172 ·Hornero Light ·1280×800 ·2026-10-03" [ref=e131]:
+              - img "Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied." [ref=e134]
+              - paragraph [ref=e136]:
+                - generic [ref=e137]: Hornero QA
+                - generic [ref=e138]: ·Package-only flagship theme transition; the screenshot includes the Shell notification confirming the applied look.
+                - generic [ref=e139]: ·shell 98a5de2
+                - generic [ref=e140]: ·config 96b6870
+                - generic [ref=e141]: ·horneroctl 9c15172
+                - generic [ref=e142]: ·Hornero Light
+                - generic [ref=e143]: ·1280×800
+                - generic [ref=e144]: ·2026-10-03
+            - generic [ref=e145]:
+              - heading "Hornero Light · a softer daylight palette" [level=3] [ref=e146]
+              - paragraph [aria-hidden] [ref=e147]: Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied.
+          - text: · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+      - paragraph [ref=e148]:
+        - text: Keyboard users can move between captures with the arrow keys.
+        - link "Browse the complete desktop showcase" [ref=e149] [cursor=pointer]:
+          - /url: /showroom
+        - text: .
+    - region [ref=e150]:
+      - generic [ref=e151]:
+        - paragraph [ref=e152]: A palette, in context
+        - heading "See the colors work together." [level=2] [ref=e153]
+        - paragraph [ref=e154]: Switch between Hornero’s catalogued semantic palettes. This small web color study uses the same published background, surface, text and accent roles; it is not a desktop screenshot.
+        - paragraph [ref=e155]: The page’s System, Light and Dark setting remains independent.
+      - group "Choose a Hornero color palette" [ref=e156]:
+        - button "Hornero Dark dark palette" [pressed] [ref=e157] [cursor=pointer]:
+          - generic [ref=e162]:
+            - strong [ref=e163]: Hornero Dark
+            - generic [ref=e164]: dark palette
+          - generic [aria-hidden] [ref=e165]: ✓
+        - button "Hornero Light light palette" [ref=e166] [cursor=pointer]:
+          - generic [ref=e171]:
+            - strong [ref=e172]: Hornero Light
+            - generic [ref=e173]: light palette
+          - generic [aria-hidden] [ref=e174]: ✓
+        - button "Pampa dark palette" [ref=e175] [cursor=pointer]:
+          - generic [ref=e180]:
+            - strong [ref=e181]: Pampa
+            - generic [ref=e182]: dark palette
+          - generic [aria-hidden] [ref=e183]: ✓
+        - button "Hornero 199X dark palette" [ref=e184] [cursor=pointer]:
+          - generic [ref=e189]:
+            - strong [ref=e190]: Hornero 199X
+            - generic [ref=e191]: dark palette
+          - generic [aria-hidden] [ref=e192]: ✓
+      - article [ref=e193]:
+        - generic [ref=e194]:
+          - generic [ref=e195]: HorneroOS / Appearance
+          - generic [ref=e196]: dark palette
+        - generic [ref=e197]:
+          - paragraph [ref=e198]: Color roles · hornero-dark
+          - heading "Hornero Dark" [level=3] [ref=e199]
+          - paragraph [ref=e200]: "Flagship Hornero dark theme: ember terracotta, warm clay and sunset amber on a toasted-adobe night surface"
+          - link "Explore this look" [ref=e201] [cursor=pointer]:
+            - /url: /themes#hornero-dark
+            - text: Explore this look
+            - generic [aria-hidden] [ref=e202]: ↗
+        - generic "Palette color roles" [ref=e203]:
+          - generic [ref=e204]:
+            - generic [ref=e206]: Canvas
+            - code [ref=e207]: "#1D1410"
+          - generic [ref=e208]:
+            - generic [ref=e210]: Surface
+            - code [ref=e211]: "#2B1F18"
+          - generic [ref=e212]:
+            - generic [ref=e214]: Primary
+            - code [ref=e215]: "#E07856"
+          - generic [ref=e216]:
+            - generic [ref=e218]: Accent
+            - code [ref=e219]: "#F2B749"
+      - paragraph [ref=e220]
+    - region [ref=e221]:
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - paragraph [ref=e224]: One desktop, many visual worlds
+          - heading "A look for the way you work." [level=2] [ref=e225]
+        - paragraph [ref=e226]: Hornero Originals sit alongside classic, natural, minimal, cyberpunk and synthwave directions. Every card is a complete appearance choice; each image is the scene associated with a look, not a desktop screenshot. Nine Hornero Originals use attributed photography covering every Argentine region.
+      - generic [ref=e227]:
+        - generic [ref=e228]:
+          - generic [ref=e229]: "01"
+          - heading "Hornero Originals" [level=3] [ref=e230]
+        - paragraph [ref=e231]: First-party looks shaped by Hornero’s visual identity and the places, materials and light that inspire it.
+      - list [ref=e232]:
+        - listitem [ref=e233]:
+          - generic [ref=e234]:
+            - 'img "Hornero Dark color palette: background #1D1410, primary #E07856, secondary #D9A05F, accent #F2B749" [ref=e235]':
+              - generic [aria-hidden] [ref=e243]: Color study · dark
+            - generic [ref=e244]: Dark
+            - generic [ref=e245]: Hornero Original
+          - generic [ref=e246]:
+            - heading "Hornero Dark" [level=4] [ref=e247]
+            - paragraph [ref=e248]: "Flagship Hornero dark theme: ember terracotta, warm clay and sunset amber on a toasted-adobe night surface"
+            - paragraph [ref=e249]: Color palette from Hornero Config · pair with any wallpaper
+        - listitem [ref=e250]:
+          - generic [ref=e251]:
+            - link "View Patagonia photograph and credits" [ref=e252] [cursor=pointer]:
+              - /url: /wallpapers#patagonia
+              - img "Perito Moreno Glacier panorama, a photograph of Los Glaciares National Park, Santa Cruz, Argentina." [ref=e253]
+            - generic [ref=e254]: Dark
+            - generic [ref=e255]: Hornero Original
+          - generic [ref=e256]:
+            - heading "Patagonia" [level=4] [ref=e257]
+            - paragraph [ref=e258]: The Perito Moreno Glacier and the wide Patagonian sky, rendered in ice blue, stone and cloud
+            - paragraph [ref=e259]:
+              - text: ThartmannWiki ·
+              - link "CC BY-SA 4.0" [ref=e260] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+        - listitem [ref=e261]:
+          - generic [ref=e262]:
+            - link "View Quebrada photograph and credits" [ref=e263] [cursor=pointer]:
+              - /url: /wallpapers#quebrada
+              - img "Hornocal mineral ridges, a photograph of Serranía de Hornocal, Jujuy, Argentina." [ref=e264]
+            - generic [ref=e265]: Light
+            - generic [ref=e266]: Hornero Original
+          - generic [ref=e267]:
+            - heading "Quebrada" [level=4] [ref=e268]
+            - paragraph [ref=e269]: "The mineral folds of Hornocal in Jujuy: rose, ochre and violet strata under clear Andean light"
+            - paragraph [ref=e270]:
+              - text: Bernard Gagnon ·
+              - link "CC BY-SA 4.0" [ref=e271] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+        - listitem [ref=e272]:
+          - generic [ref=e273]:
+            - 'img "Hornero Light color palette: background #F2F2F2, primary #1A73E8, secondary #546E7A, accent #B85C00" [ref=e274]':
+              - generic [aria-hidden] [ref=e282]: Color study · light
+            - generic [ref=e283]: Light
+            - generic [ref=e284]: Hornero Original
+          - generic [ref=e285]:
+            - heading "Hornero Light" [level=4] [ref=e286]
+            - paragraph [ref=e287]: "Flagship Hornero light theme: clean Orchis-style neutrals with a varied accent family - blue primary, hornero orange badges, green, red and amber semantics - a first-class light ramp, not an inverted dark"
+            - paragraph [ref=e288]: Color palette from Hornero Config · pair with any wallpaper
+        - listitem [ref=e289]:
+          - generic [ref=e290]:
+            - link "View Iberá photograph and credits" [ref=e291] [cursor=pointer]:
+              - /url: /wallpapers#ibera
+              - img "Lagoon in the Esteros del Iberá, a photograph of Esteros del Iberá, Corrientes, Argentina." [ref=e292]
+            - generic [ref=e293]: Dark
+            - generic [ref=e294]: Hornero Original
+          - generic [ref=e295]:
+            - heading "Iberá" [level=4] [ref=e296]
+            - paragraph [ref=e297]: A still lagoon among the Esteros del Iberá wetlands, where dark water meets dense green growth
+            - paragraph [ref=e298]:
+              - text: Phillip Capper ·
+              - link "CC BY 2.0" [ref=e299] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+        - listitem [ref=e300]:
+          - generic [ref=e301]:
+            - link "View Fin del Mundo photograph and credits" [ref=e302] [cursor=pointer]:
+              - /url: /wallpapers#fin-del-mundo
+              - img "Blue hour on the Beagle Channel, a photograph of Beagle Channel, Tierra del Fuego, Argentina." [ref=e303]
+            - generic [ref=e304]: Dark
+            - generic [ref=e305]: Hornero Original
+          - generic [ref=e306]:
+            - heading "Fin del Mundo" [level=4] [ref=e307]
+            - paragraph [ref=e308]: A quiet blue-hour view across the Beagle Channel, with cold water and the last light over Tierra del Fuego
+            - paragraph [ref=e309]:
+              - text: RAYANDBEE ·
+              - link "CC BY 2.0" [ref=e310] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+        - listitem [ref=e311]:
+          - generic [ref=e312]:
+            - link "View Buenos Aires Nocturno photograph and credits" [ref=e313] [cursor=pointer]:
+              - /url: /wallpapers#buenos-aires-nocturno
+              - img "Buenos Aires after dark, a photograph of Puerto Madero, Buenos Aires, Argentina." [ref=e314]
+            - generic [ref=e315]: Dark
+            - generic [ref=e316]: Hornero Original
+          - generic [ref=e317]:
+            - heading "Buenos Aires Nocturno" [level=4] [ref=e318]
+            - paragraph [ref=e319]: "A night view of Buenos Aires: layered city lights, deep riverfront shadows and a measured amber glow"
+            - paragraph [ref=e320]:
+              - text: Luis Argerich ·
+              - link "CC BY 2.0" [ref=e321] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+        - listitem [ref=e322]:
+          - generic [ref=e323]:
+            - link "View Pampa photograph and credits" [ref=e324] [cursor=pointer]:
+              - /url: /wallpapers#pampa
+              - img "Caldén silhouette at sunset, a photograph of Caldén forest, La Pampa, Argentina." [ref=e325]
+            - generic [ref=e326]: Dark
+            - generic [ref=e327]: Hornero Original
+          - generic [ref=e328]:
+            - heading "Pampa" [level=4] [ref=e329]
+            - paragraph [ref=e330]: "A caldén tree silhouetted against a saturated pampas sunset: grassland green, earth and gold over a warm dark surface"
+            - paragraph [ref=e331]:
+              - text: Juanedc ·
+              - link "CC BY 2.0" [ref=e332] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+        - listitem [ref=e333]:
+          - generic [ref=e334]:
+            - 'img "Hornero 199X color palette: background #0B1018, primary #F08B43, secondary #7FB0E6, accent #91C8A2" [ref=e335]':
+              - generic [aria-hidden] [ref=e343]: Color study · dark
+            - generic [ref=e344]: Dark
+            - generic [ref=e345]: Hornero Original
+          - generic [ref=e346]:
+            - heading "Hornero 199X" [level=4] [ref=e347]
+            - paragraph [ref=e348]: "Optional Argentine retrofuturism: midnight broadcast blue, signal orange and phosphor green over deep CRT ink — a future imagined in Argentina in the 1990s"
+            - paragraph [ref=e349]: Color palette from Hornero Config · pair with any wallpaper
+        - listitem [ref=e350]:
+          - generic [ref=e351]:
+            - link "View Cuyo photograph and credits" [ref=e352] [cursor=pointer]:
+              - /url: /wallpapers#cuyo
+              - img "Aconcagua over the Horcones valley, a photograph of Aconcagua Provincial Park, Mendoza, Argentina." [ref=e353]
+            - generic [ref=e354]: Light
+            - generic [ref=e355]: Hornero Original
+          - generic [ref=e356]:
+            - heading "Cuyo" [level=4] [ref=e357]
+            - paragraph [ref=e358]: "The Aconcagua and the high Cuyo desert: snow, stone and thin Andean light over Mendoza"
+            - paragraph [ref=e359]:
+              - text: Mauricio V. Genta ·
+              - link "CC BY-SA 4.0" [ref=e360] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+        - listitem [ref=e361]:
+          - generic [ref=e362]:
+            - link "View Iguazú photograph and credits" [ref=e363] [cursor=pointer]:
+              - /url: /wallpapers#iguazu
+              - img "Iguazú Falls, close view, a photograph of Iguazú National Park, Misiones, Argentina." [ref=e364]
+            - generic [ref=e365]: Dark
+            - generic [ref=e366]: Hornero Original
+          - generic [ref=e367]:
+            - heading "Iguazú" [level=4] [ref=e368]
+            - paragraph [ref=e369]: "The Iguazú Falls in close view: white water, basalt and dense subtropical green in Misiones"
+            - paragraph [ref=e370]:
+              - text: Güldem Üstün ·
+              - link "CC BY 2.0" [ref=e371] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+        - listitem [ref=e372]:
+          - generic [ref=e373]:
+            - link "View Sierras photograph and credits" [ref=e374] [cursor=pointer]:
+              - /url: /wallpapers#sierras
+              - img "Golden hour over Quebrada del Condorito, a photograph of Quebrada del Condorito National Park, Córdoba, Argentina." [ref=e375]
+            - generic [ref=e376]: Light
+            - generic [ref=e377]: Hornero Original
+          - generic [ref=e378]:
+            - heading "Sierras" [level=4] [ref=e379]
+            - paragraph [ref=e380]: "Golden highlands of the Sierras de Córdoba at Quebrada del Condorito: dry grass, rock and long light"
+            - paragraph [ref=e381]:
+              - text: Kevin Jones ·
+              - link "CC BY 2.0" [ref=e382] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+      - generic [ref=e383]:
+        - generic [ref=e384]:
+          - generic [ref=e385]: "02"
+          - heading "The wider collection" [level=3] [ref=e386]
+        - paragraph [ref=e387]: Distinct directions, chosen for how they feel across the Shell—not ranked by how they are implemented.
+      - list [ref=e388]:
+        - listitem [ref=e389]:
+          - generic [ref=e390]:
+            - generic [ref=e391]:
+              - generic [aria-hidden] [ref=e392]: ◌
+              - generic [ref=e393]: Pair with your wallpaper
+            - generic [ref=e394]: Light
+            - generic [ref=e395]: Wallpaper-led
+          - generic [ref=e396]:
+            - heading "Catppuccin Latte" [level=4] [ref=e397]
+            - paragraph [ref=e398]: Light Catppuccin mauve for soft daytime sessions
+        - listitem [ref=e399]:
+          - generic [ref=e400]:
+            - generic [ref=e401]:
+              - generic [aria-hidden] [ref=e402]: ◌
+              - generic [ref=e403]: Pair with your wallpaper
+            - generic [ref=e404]: Dark
+            - generic [ref=e405]: Wallpaper-led
+          - generic [ref=e406]:
+            - heading "Catppuccin Mocha" [level=4] [ref=e407]
+            - paragraph [ref=e408]: Cozy dark Catppuccin with soft pastels
+        - listitem [ref=e409]:
+          - generic [ref=e410]:
+            - generic [ref=e411]:
+              - generic [aria-hidden] [ref=e412]: ◌
+              - generic [ref=e413]: Pair with your wallpaper
+            - generic [ref=e414]: Dark
+            - generic [ref=e415]: Wallpaper-led
+          - generic [ref=e416]:
+            - heading "Everforest" [level=4] [ref=e417]
+            - paragraph [ref=e418]: Soft green forest fidelity theme
+        - listitem [ref=e419]:
+          - generic [ref=e420]:
+            - img "Wallpaper preview for Gruvbox." [ref=e422]
+            - generic [ref=e423]: Dark
+            - generic [ref=e424]: Wallpaper look
+          - generic [ref=e425]:
+            - heading "Gruvbox" [level=4] [ref=e426]
+            - paragraph [ref=e427]: Warm retro palette with anime and pixel art
+        - listitem [ref=e428]:
+          - generic [ref=e429]:
+            - img "Wallpaper preview for Landscape." [ref=e431]
+            - generic [ref=e432]: Dark
+            - generic [ref=e433]: Wallpaper look
+          - generic [ref=e434]:
+            - heading "Landscape" [level=4] [ref=e435]
+            - paragraph [ref=e436]: Cinematic nature vistas and fantasy scenery
+        - listitem [ref=e437]:
+          - generic [ref=e438]:
+            - img "Wallpaper preview for Monochrome." [ref=e440]
+            - generic [ref=e441]: Dark
+            - generic [ref=e442]: Wallpaper look
+          - generic [ref=e443]:
+            - heading "Monochrome" [level=4] [ref=e444]
+            - paragraph [ref=e445]: High-contrast black and white focus aesthetic
+        - listitem [ref=e446]:
+          - generic [ref=e447]:
+            - img "Wallpaper preview for Neon City." [ref=e449]
+            - generic [ref=e450]: Dark
+            - generic [ref=e451]: Wallpaper look
+          - generic [ref=e452]:
+            - heading "Neon City" [level=4] [ref=e453]
+            - paragraph [ref=e454]: Cyberpunk neon nights and futuristic streets
+        - listitem [ref=e455]:
+          - generic [ref=e456]:
+            - generic [ref=e457]:
+              - generic [aria-hidden] [ref=e458]: ◌
+              - generic [ref=e459]: Pair with your wallpaper
+            - generic [ref=e460]: Dark
+            - generic [ref=e461]: Wallpaper-led
+          - generic [ref=e462]:
+            - heading "Nord Dreams" [level=4] [ref=e463]
+            - paragraph [ref=e464]: Cool arctic Nord tones and frosty calm
+        - listitem [ref=e465]:
+          - generic [ref=e466]:
+            - generic [ref=e467]:
+              - generic [aria-hidden] [ref=e468]: ◌
+              - generic [ref=e469]: Pair with your wallpaper
+            - generic [ref=e470]: Dark
+            - generic [ref=e471]: Wallpaper-led
+          - generic [ref=e472]:
+            - heading "Rosé Pine" [level=4] [ref=e473]
+            - paragraph [ref=e474]: Elegant muted rose and pine dark palette
+        - listitem [ref=e475]:
+          - generic [ref=e476]:
+            - img "Wallpaper preview for Soft Morning." [ref=e478]
+            - generic [ref=e479]: Light
+            - generic [ref=e480]: Wallpaper look
+          - generic [ref=e481]:
+            - heading "Soft Morning" [level=4] [ref=e482]
+            - paragraph [ref=e483]: Calm mist, florals, and soft natural light
+        - listitem [ref=e484]:
+          - generic [ref=e485]:
+            - img "Wallpaper preview for Vapor Dreams." [ref=e487]
+            - generic [ref=e488]: Dark
+            - generic [ref=e489]: Wallpaper look
+          - generic [ref=e490]:
+            - heading "Vapor Dreams" [level=4] [ref=e491]
+            - paragraph [ref=e492]: Nostalgic 80s/90s vaporwave with retro gradients
+        - listitem [ref=e493]:
+          - generic [ref=e494]:
+            - img "Wallpaper preview for Warm Sunset." [ref=e496]
+            - generic [ref=e497]: Light
+            - generic [ref=e498]: Wallpaper look
+          - generic [ref=e499]:
+            - heading "Warm Sunset" [level=4] [ref=e500]
+            - paragraph [ref=e501]: Golden-hour landscapes with warm cinematic tones
+      - paragraph [ref=e502]:
+        - text: These cards show the scene associated with a look, not a photograph of the running desktop. The nine Argentina-inspired Hornero Originals use verified, attributed photography; other optional media remains a separate user collection. Browse the
+        - link "photographic wallpaper collection" [ref=e503] [cursor=pointer]:
+          - /url: /wallpapers
+        - text: for locations, photographers and licenses.
+        - link "See verified desktop captures in the Showroom" [ref=e504] [cursor=pointer]:
+          - /url: /showroom
+        - text: .
+    - region [ref=e505]:
+      - generic [ref=e506]:
+        - generic [ref=e507]:
+          - paragraph [ref=e508]: Color is part of the look
+          - heading "Seven palette-generation styles." [level=2] [ref=e509]
+        - paragraph [ref=e510]: Choose a style to change how Hornero reads the wallpaper and shapes Shell colors. Keep the same scene while moving from restrained tones to a more expressive palette.
+      - list [ref=e511]:
+        - listitem [ref=e512]:
+          - strong [ref=e517]: Vibrant
+          - generic [ref=e518]: Clear, energetic accents
+        - listitem [ref=e519]:
+          - strong [ref=e524]: Tonal spot
+          - generic [ref=e525]: Balanced and softly tinted
+        - listitem [ref=e526]:
+          - strong [ref=e531]: Expressive
+          - generic [ref=e532]: A broader mix of related hues
+        - listitem [ref=e533]:
+          - strong [ref=e538]: Fidelity
+          - generic [ref=e539]: Stays close to the source color
+        - listitem [ref=e540]:
+          - strong [ref=e545]: Content
+          - generic [ref=e546]: Lets the image lead key colors
+        - listitem [ref=e547]:
+          - strong [ref=e552]: Neutral
+          - generic [ref=e553]: Quiet, restrained color
+        - listitem [ref=e554]:
+          - strong [ref=e559]: Monochrome
+          - generic [ref=e560]: Near-grayscale and focused
+      - paragraph [ref=e561]:
+        - text: All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s Material 3 generator. They are real outputs for that image; another wallpaper or light mode produces different colors.
+        - link "Read how wallpaper colors work" [ref=e562] [cursor=pointer]:
+          - /url: /docs/desktop/appearance/
+        - text: .
+    - region [ref=e563]:
+      - generic [ref=e564]:
+        - generic [ref=e565]:
+          - paragraph [ref=e566]: One palette, in your tools
+          - heading "Your terminal keeps the same color story." [level=2] [ref=e567]
+        - paragraph [ref=e568]: Hornero writes the active wallpaper palette in each terminal's native format. Kitty is the included default; Alacritty and Ghostty are optional alternatives.
+      - generic [ref=e569]:
+        - article [ref=e570]:
+          - generic [ref=e571]:
+            - heading "Kitty" [level=3] [ref=e573]
+            - generic [ref=e574]: Included default
+          - paragraph [ref=e575]: The packaged config includes the palette generated for your current appearance.
+          - code [ref=e577]: include ~/.cache/hornero/smart-colors/colors-kitty.conf
+        - article [ref=e578]:
+          - generic [ref=e579]:
+            - heading "Alacritty" [level=3] [ref=e581]
+            - generic [ref=e582]: Optional
+          - paragraph [ref=e583]: A native TOML import keeps the static Hornero colors as a fallback.
+          - code [ref=e585]: import = ["hornero-dark.toml", "hornero-colors.toml"]
+        - article [ref=e586]:
+          - generic [ref=e587]:
+            - heading "Ghostty" [level=3] [ref=e589]
+            - generic [ref=e590]: Optional
+          - paragraph [ref=e591]: The stable theme name points to a generated palette, with a packaged fallback.
+          - code [ref=e593]: theme = Hornero Dynamic
+      - paragraph [ref=e594]:
+        - text: Choose an installed terminal in
+        - strong [ref=e595]: Settings → Terminal
+        - text: or with
+        - code [ref=e596]: horneroctl config default-apps set terminal ghostty --yes
+        - text: .
+        - link "Read the terminal guide" [ref=e597] [cursor=pointer]:
+          - /url: /docs/applications/terminal
+        - text: for setup and appearance details.
+      - complementary "Other applications with native Hornero color themes" [ref=e598]:
+        - generic [ref=e599]: Beyond the prompt
+        - generic [ref=e600]:
+          - paragraph [ref=e601]:
+            - text: Hornero Config can generate native wallpaper-derived themes for these tools. Their curated configurations select
+            - code [ref=e602]: Hornero Dynamic
+            - text: ; these applications remain optional Arch packages.
+          - list [ref=e603]:
+            - listitem [ref=e604]:
+              - generic [ref=e605]:
+                - strong [ref=e606]: btop
+                - generic [ref=e607]: System monitor
+            - listitem [ref=e608]:
+              - generic [ref=e615]:
+                - strong [ref=e616]: Cava
+                - generic [ref=e617]: Audio visualizer
+    - generic [ref=e618]:
+      - generic [ref=e619]:
+        - paragraph [ref=e620]: The useful details
+        - heading "Everything in step." [level=2] [ref=e621]
+        - paragraph [ref=e622]: A look brings the Shell, GTK policy, icons and wallpaper together. Some packs reference optional GTK or icon styles; Hornero checks availability and never downloads them silently. Palette-generation style and light/dark mode can be refined in Appearance.
+      - generic [ref=e623]:
+        - generic [ref=e624]: From the desktop
+        - strong [ref=e625]: Settings → Appearance
+        - generic [ref=e626]: Preview a look, apply it, then refine mode, wallpaper and colors.
+        - link "See the desktop" [ref=e627] [cursor=pointer]:
+          - /url: /showroom
+  - contentinfo [ref=e628]:
+    - navigation "Project" [ref=e629]:
+      - list [ref=e630]:
+        - listitem [ref=e631]:
+          - link "GitHub" [ref=e632] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e633]:
+          - link "Project map" [ref=e634] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e635]:
+          - link "Design language" [ref=e636] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e637]:
+          - link "Contribute" [ref=e638] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e639]:
+          - link "Search" [ref=e640] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e641]:
+          - link "Report a site issue" [ref=e642] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e643]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.

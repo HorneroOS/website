@@ -1,0 +1,509 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS ARG / 199X · La Plata — Buenos Aires" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e16]:
+        - generic [ref=e17]: Hornero OS
+        - generic [ref=e18]: ARG / 199X · La Plata — Buenos Aires
+    - navigation "Main" [ref=e19]:
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "Editions" [ref=e22] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e23]:
+          - link "Layouts" [ref=e24] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e25]:
+          - link "Themes" [ref=e26] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e27]:
+          - link "Greeter" [ref=e28] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e29]:
+          - link "Companion" [ref=e30] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e31]:
+          - link "Showroom" [ref=e32] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e33]:
+          - link "Wallpapers" [ref=e34] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e35]:
+          - group [ref=e36]:
+            - generic "More pages" [ref=e37] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e38]: ⌄
+        - listitem [ref=e39]:
+          - link "Install" [ref=e40] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e41]:
+      - generic [ref=e43] [cursor=pointer]:
+        - radio "System" [ref=e44]
+        - generic [ref=e45]: System
+      - generic [ref=e49] [cursor=pointer]:
+        - radio "Light" [ref=e50]
+        - generic [ref=e51]: Light
+      - generic [ref=e55] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e56]
+        - generic [ref=e57]: Dark
+  - main [ref=e61]:
+    - region [ref=e62]:
+      - generic [ref=e63]:
+        - paragraph [ref=e64]:
+          - strong [ref=e65]: Transmisión 001
+          - generic [ref=e66]: ARG / 199X
+          - generic [ref=e67]: HorneroOS · Señal abierta
+        - heading [level=1] [ref=e69]:
+          - text: El futuro se
+          - emphasis [ref=e70]: construye acá.
+        - paragraph [ref=e71]: The future is built here.
+        - paragraph [ref=e72]: HorneroOS is an Arch-based, Wayland-first desktop grown from the environment Ulises Jeremías has used, tested and refined every day since 2018 — an Argentine vision of the future, made real with modern open-source technology.
+        - paragraph [ref=e73]:
+          - text: Built by
+          - link "Ulises Jeremías" [ref=e74] [cursor=pointer]:
+            - /url: https://github.com/ulises-jeremias
+          - text: ", with contributions from"
+          - link "Panda Foss" [ref=e75] [cursor=pointer]:
+            - /url: https://github.com/PandaFoss
+          - text: ", one of the maintainers of"
+          - link "Anarchy Linux" [ref=e76] [cursor=pointer]:
+            - /url: https://gitlab.com/anarchyinstaller/installer
+          - text: . Shaped in the open with the
+          - link "HorneroOS community" [ref=e77] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+          - text: .
+        - generic [ref=e78]:
+          - link "Explore the desktop" [ref=e79] [cursor=pointer]:
+            - /url: /showroom
+            - text: Explore the desktop
+            - generic [aria-hidden] [ref=e80]: ↗
+          - link "See what you can install" [ref=e81] [cursor=pointer]:
+            - /url: /install
+      - generic [ref=e82]:
+        - generic "Hornero at a glance" [ref=e83]:
+          - generic [ref=e84]:
+            - strong [ref=e85]: "15"
+            - text: layouts
+          - generic [ref=e86]:
+            - strong [ref=e87]: "24"
+            - text: coordinated looks
+          - generic [ref=e88]:
+            - strong [ref=e89]: "2"
+            - text: compositor backends
+        - paragraph [ref=e90]:
+          - text: Development preview · no ISO is published. Calamares remains provisional while Panda Foss develops the custom installer. Hyprland Supported · Niri Experimental.
+          - link "Desktop support status" [ref=e91] [cursor=pointer]:
+            - /url: /editions#desktop
+          - text: ·
+          - link "Install status" [ref=e92] [cursor=pointer]:
+            - /url: /install
+      - figure "Corrientes Avenue after dark Avenida Corrientes and Avenida 9 de Julio, Buenos Aires · Ciudad Autónoma de Buenos Aires Photograph by ProtoplasmaKid · CC-BY-SA-4.0" [ref=e93]:
+        - img "A night view traces the illuminated avenues between Buenos Aires rooftops and high-rises." [ref=e94]
+        - generic [ref=e95]:
+          - generic [ref=e96]: Corrientes Avenue after dark
+          - generic [ref=e97]: Avenida Corrientes and Avenida 9 de Julio, Buenos Aires · Ciudad Autónoma de Buenos Aires
+          - generic [ref=e98]:
+            - text: Photograph by
+            - link "ProtoplasmaKid" [ref=e99] [cursor=pointer]:
+              - /url: https://commons.wikimedia.org/wiki/File:Vista_a%C3%A9rea_nocturna_de_Avenida_9_de_julio_y_Avenida_Corrientes_02.jpg
+            - text: ·
+            - link "CC-BY-SA-4.0" [ref=e100] [cursor=pointer]:
+              - /url: https://creativecommons.org/licenses/by-sa/4.0
+        - generic [aria-hidden] [ref=e101]: ARG / 199X · TRANSMISIÓN 001
+    - paragraph [ref=e102]:
+      - generic [ref=e103]: "02"
+      - generic [ref=e104]: El sistema — The system, on real captures
+    - region [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - paragraph [ref=e108]: Real Hornero sessions · choose a view
+          - heading "See the Shell at work." [level=2] [ref=e109]
+        - paragraph [ref=e110]: Each frame comes from a Hornero QA or visual review capture. Pick a surface to inspect the desktop, its layout controls and Settings.
+      - generic [ref=e111]:
+        - tabpanel "Dashboard Workspace" [ref=e112]:
+          - generic [aria-hidden] [ref=e113]:
+            - generic [ref=e114]: HORNERO / DESKTOP
+            - generic [ref=e115]: Workspace
+          - img "The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper." [ref=e117]
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: Workspace
+              - heading "Dashboard · the desktop at a glance" [level=3] [ref=e121]
+              - paragraph [ref=e122]: QA run 20261003T160310Z · Preview 14 package base with the tested Companion fix candidate
+            - paragraph [ref=e124]:
+              - generic [ref=e125]: Hornero QA
+              - generic [ref=e126]: ·QA run 20261003T160310Z · Preview 14 package base with the tested Companion fix candidate
+              - generic [ref=e127]: ·shell base b2f27e6
+              - generic [ref=e128]: ·tested candidate 4ebf3df
+              - generic [ref=e129]: ·merged as d600cd7
+              - generic [ref=e130]: ·config 8bdbcc3
+              - generic [ref=e131]: ·horneroctl 2b0dcb9
+              - generic [ref=e132]: ·Hornero Dark
+              - generic [ref=e133]: ·1920×1080
+              - generic [ref=e134]: ·2026-10-03
+        - generic "Choose a real Hornero capture" [ref=e135]:
+          - paragraph [ref=e136]: Explore a surface
+          - tablist "Choose a real Hornero capture" [ref=e137]:
+            - tab "Dashboard Workspace" [selected] [ref=e138] [cursor=pointer]:
+              - generic [ref=e139]: Dashboard
+              - generic [ref=e140]: Workspace
+              - generic [aria-hidden] [ref=e141]: ↗
+            - tab "Hornero Left Layout" [ref=e142] [cursor=pointer]:
+              - generic [ref=e143]: Hornero Left
+              - generic [ref=e144]: Layout
+              - generic [aria-hidden] [ref=e145]: ↗
+            - tab "Appearance search Settings" [ref=e146] [cursor=pointer]:
+              - generic [ref=e147]: Appearance search
+              - generic [ref=e148]: Settings
+              - generic [aria-hidden] [ref=e149]: ↗
+            - tab "Layout Picker Layout" [ref=e150] [cursor=pointer]:
+              - generic [ref=e151]: Layout Picker
+              - generic [ref=e152]: Layout
+              - generic [aria-hidden] [ref=e153]: ↗
+            - tab "Cockpit Clear Bars" [ref=e154] [cursor=pointer]:
+              - generic [ref=e155]: Cockpit Clear
+              - generic [ref=e156]: Bars
+              - generic [aria-hidden] [ref=e157]: ↗
+          - paragraph [ref=e158]: The controls change the image and its source record. The desktop itself is not simulated.
+          - link "Explore all 15 layouts" [ref=e159] [cursor=pointer]:
+            - /url: /layouts
+            - text: Explore all 15 layouts
+            - generic [aria-hidden] [ref=e160]: →
+          - link "Browse the full capture archive" [ref=e161] [cursor=pointer]:
+            - /url: /showroom
+            - text: Browse the full capture archive
+            - generic [aria-hidden] [ref=e162]: →
+        - paragraph [ref=e163]
+    - paragraph [ref=e164]:
+      - generic [ref=e165]: "03"
+      - generic [ref=e166]: El futuro — What is next, honestly labelled
+    - region [ref=e167]:
+      - generic [ref=e168]:
+        - generic [ref=e169]:
+          - paragraph [ref=e170]: One foundation, composed by role
+          - heading "One operating system family. Different ways to use it." [level=2] [ref=e171]
+        - link "Explore the editions" [ref=e172] [cursor=pointer]:
+          - /url: /editions
+          - text: Explore the editions →
+      - generic [ref=e173]:
+        - link "Desktop Preview Wayland · Hyprland Niri" [ref=e174] [cursor=pointer]:
+          - /url: /editions#desktop
+          - generic [ref=e175]:
+            - strong [ref=e176]: Desktop
+            - generic [ref=e177]: Preview
+          - generic [ref=e178]:
+            - text: Wayland ·
+            - generic [ref=e179]: Hyprland
+            - generic [ref=e180]: Niri
+        - link "Server Planned Headless · homelab and services" [ref=e181] [cursor=pointer]:
+          - /url: /editions#server
+          - generic [ref=e182]:
+            - strong [ref=e183]: Server
+            - generic [ref=e184]: Planned
+          - generic [ref=e185]: Headless · homelab and services
+        - link "Agents Planned Headless · agent infrastructure Builds on Server" [ref=e186] [cursor=pointer]:
+          - /url: /editions#agents
+          - generic [ref=e187]:
+            - strong [ref=e188]: Agents
+            - generic [ref=e189]: Planned
+          - generic [ref=e190]: Headless · agent infrastructure
+          - generic [ref=e191]: Builds on Server
+        - link "Studio Planned Desktop · creative production Builds on Desktop" [ref=e192] [cursor=pointer]:
+          - /url: /editions#studio
+          - generic [ref=e193]:
+            - strong [ref=e194]: Studio
+            - generic [ref=e195]: Planned
+          - generic [ref=e196]: Desktop · creative production
+          - generic [ref=e197]: Builds on Desktop
+      - paragraph [ref=e198]: Desktop is the current preview. Server, Agents and Studio remain planned; none has an installable image yet.
+    - paragraph [ref=e199]:
+      - generic [ref=e200]: "04"
+      - generic [ref=e201]: Elegí tu mundo — Make it yours
+    - region [ref=e202]:
+      - generic [ref=e203]:
+        - paragraph [ref=e204]: Personalization that stays coherent
+        - heading "Choose a look. Keep the details in sync." [level=2] [ref=e205]: Choose a look.Keep the details in sync.
+        - paragraph [ref=e206]: The shell, GTK apps, icons and wallpaper can move together. Fine-tune each part when you want to.
+        - link "Find your starting point" [ref=e207] [cursor=pointer]:
+          - /url: /themes
+          - text: Find your starting point →
+      - generic [ref=e208]:
+        - link "01 Hornero Originals Twelve first-party looks; nine grounded in attributed Argentine photography." [ref=e209] [cursor=pointer]:
+          - /url: /themes#hornero-originals
+          - generic [ref=e210]: "01"
+          - generic [ref=e211]:
+            - strong [ref=e212]: Hornero Originals
+            - generic [ref=e213]: Twelve first-party looks; nine grounded in attributed Argentine photography.
+          - generic [aria-hidden] [ref=e214]: ↗
+        - link "02 Find a different atmosphere Natural, classic, minimal, cyberpunk and synthwave directions." [ref=e215] [cursor=pointer]:
+          - /url: /themes#more-looks
+          - generic [ref=e216]: "02"
+          - generic [ref=e217]:
+            - strong [ref=e218]: Find a different atmosphere
+            - generic [ref=e219]: Natural, classic, minimal, cyberpunk and synthwave directions.
+          - generic [aria-hidden] [ref=e220]: ↗
+        - link "03 Shape color from the wallpaper Choose among seven generation styles while keeping the same scene." [ref=e221] [cursor=pointer]:
+          - /url: /themes#palette-variants
+          - generic [ref=e222]: "03"
+          - generic [ref=e223]:
+            - strong [ref=e224]: Shape color from the wallpaper
+            - generic [ref=e225]: Choose among seven generation styles while keeping the same scene.
+          - generic [aria-hidden] [ref=e226]: ↗
+    - paragraph [ref=e227]:
+      - generic [ref=e228]: "05"
+      - generic [ref=e229]: Bajo el capó — Under the hood
+    - region [ref=e230]:
+      - generic [ref=e231]:
+        - paragraph [ref=e232]: The rest of the workspace, in step
+        - heading [level=2] [ref=e233]:
+          - text: One palette.
+          - emphasis [ref=e234]: Across your workspace.
+        - paragraph [ref=e235]: Hornero translates the selected appearance into native color files for Kitty, Alacritty and Ghostty. Its shared configuration also provides wallpaper-derived themes for btop and Cava; both apps remain optional.
+        - link "See how the terminal integration works" [ref=e236] [cursor=pointer]:
+          - /url: /terminals
+          - text: See how the terminal integration works
+          - generic [aria-hidden] [ref=e237]: →
+      - generic [ref=e238]:
+        - generic "Supported terminal emulators and their native color formats" [ref=e239]:
+          - generic [ref=e240]:
+            - strong [ref=e241]: Kitty
+            - code [ref=e242]: conf
+          - generic [ref=e243]:
+            - strong [ref=e244]: Alacritty
+            - code [ref=e245]: TOML
+          - generic [ref=e246]:
+            - strong [ref=e247]: Ghostty
+            - code [ref=e248]: theme
+        - generic "Additional optional applications with native Hornero themes" [ref=e249]:
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - strong [ref=e252]: btop
+              - generic [ref=e253]: System monitor
+            - generic [ref=e254]: optional
+          - generic [ref=e255]:
+            - generic [ref=e262]:
+              - strong [ref=e263]: Cava
+              - generic [ref=e264]: Audio visualizer
+            - generic [ref=e265]: optional
+    - region [ref=e266]:
+      - generic [ref=e267]:
+        - generic [ref=e268]:
+          - paragraph [ref=e269]: Hornero Originals · Argentina
+          - heading [level=2] [ref=e270]:
+            - text: The place is real.
+            - emphasis [ref=e271]: The interpretation is Hornero’s.
+        - paragraph [ref=e272]: Licensed photographs ground nine first-party looks in the places and light that shaped them — every Argentine region, from the caldén pampas to the Aconcagua. The source, photographer and license travel with every image.
+      - list [ref=e273]:
+        - listitem [ref=e274]:
+          - 'link "View scene: open full photograph: Buenos Aires after dark" [ref=e275] [cursor=pointer]':
+            - /url: /wallpapers/argentina/buenos-aires-nocturno-1280.webp
+            - img "Buenos Aires after dark, a photograph of Puerto Madero, Buenos Aires, Argentina." [ref=e276]
+            - generic [aria-hidden] [ref=e277]: View scene ↗
+          - generic [ref=e278]:
+            - text: Puerto Madero, Buenos Aires, Argentina
+            - heading "Buenos Aires after dark" [level=3] [ref=e279]
+            - paragraph [ref=e280]:
+              - text: Photograph by Luis Argerich ·
+              - link "CC BY 2.0" [ref=e281] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Buenos Aires Nocturno" [ref=e282] [cursor=pointer]:
+              - /url: /themes#buenos-aires-nocturno
+              - text: Explore Buenos Aires Nocturno →
+        - listitem [ref=e283]:
+          - 'link "View scene: open full photograph: Blue hour on the Beagle Channel" [ref=e284] [cursor=pointer]':
+            - /url: /wallpapers/argentina/fin-del-mundo-1280.webp
+            - img "Blue hour on the Beagle Channel, a photograph of Beagle Channel, Tierra del Fuego, Argentina." [ref=e285]
+            - generic [aria-hidden] [ref=e286]: View scene ↗
+          - generic [ref=e287]:
+            - text: Beagle Channel, Tierra del Fuego, Argentina
+            - heading "Blue hour on the Beagle Channel" [level=3] [ref=e288]
+            - paragraph [ref=e289]:
+              - text: Photograph by RAYANDBEE ·
+              - link "CC BY 2.0" [ref=e290] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Fin del Mundo" [ref=e291] [cursor=pointer]:
+              - /url: /themes#fin-del-mundo
+              - text: Explore Fin del Mundo →
+        - listitem [ref=e292]:
+          - 'link "View scene: open full photograph: Lagoon in the Esteros del Iberá" [ref=e293] [cursor=pointer]':
+            - /url: /wallpapers/argentina/ibera-1280.webp
+            - img "Lagoon in the Esteros del Iberá, a photograph of Esteros del Iberá, Corrientes, Argentina." [ref=e294]
+            - generic [aria-hidden] [ref=e295]: View scene ↗
+          - generic [ref=e296]:
+            - text: Esteros del Iberá, Corrientes, Argentina
+            - heading "Lagoon in the Esteros del Iberá" [level=3] [ref=e297]
+            - paragraph [ref=e298]:
+              - text: Photograph by Phillip Capper ·
+              - link "CC BY 2.0" [ref=e299] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Iberá" [ref=e300] [cursor=pointer]:
+              - /url: /themes#ibera
+              - text: Explore Iberá →
+        - listitem [ref=e301]:
+          - 'link "View scene: open full photograph: Caldén silhouette at sunset" [ref=e302] [cursor=pointer]':
+            - /url: /wallpapers/argentina/pampa-1280.webp
+            - img "Caldén silhouette at sunset, a photograph of Caldén forest, La Pampa, Argentina." [ref=e303]
+            - generic [aria-hidden] [ref=e304]: View scene ↗
+          - generic [ref=e305]:
+            - text: Caldén forest, La Pampa, Argentina
+            - heading "Caldén silhouette at sunset" [level=3] [ref=e306]
+            - paragraph [ref=e307]:
+              - text: Photograph by Juanedc ·
+              - link "CC BY 2.0" [ref=e308] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Pampa" [ref=e309] [cursor=pointer]:
+              - /url: /themes#pampa
+              - text: Explore Pampa →
+        - listitem [ref=e310]:
+          - 'link "View scene: open full photograph: Perito Moreno Glacier panorama" [ref=e311] [cursor=pointer]':
+            - /url: /wallpapers/argentina/patagonia-1280.webp
+            - img "Perito Moreno Glacier panorama, a photograph of Los Glaciares National Park, Santa Cruz, Argentina." [ref=e312]
+            - generic [aria-hidden] [ref=e313]: View scene ↗
+          - generic [ref=e314]:
+            - text: Los Glaciares National Park, Santa Cruz, Argentina
+            - heading "Perito Moreno Glacier panorama" [level=3] [ref=e315]
+            - paragraph [ref=e316]:
+              - text: Photograph by ThartmannWiki ·
+              - link "CC BY-SA 4.0" [ref=e317] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+            - link "Explore Patagonia" [ref=e318] [cursor=pointer]:
+              - /url: /themes#patagonia
+              - text: Explore Patagonia →
+        - listitem [ref=e319]:
+          - 'link "View scene: open full photograph: Hornocal mineral ridges" [ref=e320] [cursor=pointer]':
+            - /url: /wallpapers/argentina/quebrada-1280.webp
+            - img "Hornocal mineral ridges, a photograph of Serranía de Hornocal, Jujuy, Argentina." [ref=e321]
+            - generic [aria-hidden] [ref=e322]: View scene ↗
+          - generic [ref=e323]:
+            - text: Serranía de Hornocal, Jujuy, Argentina
+            - heading "Hornocal mineral ridges" [level=3] [ref=e324]
+            - paragraph [ref=e325]:
+              - text: Photograph by Bernard Gagnon ·
+              - link "CC BY-SA 4.0" [ref=e326] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+            - link "Explore Quebrada" [ref=e327] [cursor=pointer]:
+              - /url: /themes#quebrada
+              - text: Explore Quebrada →
+        - listitem [ref=e328]:
+          - 'link "View scene: open full photograph: Aconcagua over the Horcones valley" [ref=e329] [cursor=pointer]':
+            - /url: /wallpapers/argentina/cuyo-1280.webp
+            - img "Aconcagua over the Horcones valley, a photograph of Aconcagua Provincial Park, Mendoza, Argentina." [ref=e330]
+            - generic [aria-hidden] [ref=e331]: View scene ↗
+          - generic [ref=e332]:
+            - text: Aconcagua Provincial Park, Mendoza, Argentina
+            - heading "Aconcagua over the Horcones valley" [level=3] [ref=e333]
+            - paragraph [ref=e334]:
+              - text: Photograph by Mauricio V. Genta ·
+              - link "CC BY-SA 4.0" [ref=e335] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by-sa/4.0/
+            - link "Explore Cuyo" [ref=e336] [cursor=pointer]:
+              - /url: /themes#cuyo
+              - text: Explore Cuyo →
+        - listitem [ref=e337]:
+          - 'link "View scene: open full photograph: Iguazú Falls, close view" [ref=e338] [cursor=pointer]':
+            - /url: /wallpapers/argentina/iguazu-1280.webp
+            - img "Iguazú Falls, close view, a photograph of Iguazú National Park, Misiones, Argentina." [ref=e339]
+            - generic [aria-hidden] [ref=e340]: View scene ↗
+          - generic [ref=e341]:
+            - text: Iguazú National Park, Misiones, Argentina
+            - heading "Iguazú Falls, close view" [level=3] [ref=e342]
+            - paragraph [ref=e343]:
+              - text: Photograph by Güldem Üstün ·
+              - link "CC BY 2.0" [ref=e344] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Iguazú" [ref=e345] [cursor=pointer]:
+              - /url: /themes#iguazu
+              - text: Explore Iguazú →
+        - listitem [ref=e346]:
+          - 'link "View scene: open full photograph: Golden hour over Quebrada del Condorito" [ref=e347] [cursor=pointer]':
+            - /url: /wallpapers/argentina/sierras-1280.webp
+            - img "Golden hour over Quebrada del Condorito, a photograph of Quebrada del Condorito National Park, Córdoba, Argentina." [ref=e348]
+            - generic [aria-hidden] [ref=e349]: View scene ↗
+          - generic [ref=e350]:
+            - text: Quebrada del Condorito National Park, Córdoba, Argentina
+            - heading "Golden hour over Quebrada del Condorito" [level=3] [ref=e351]
+            - paragraph [ref=e352]:
+              - text: Photograph by Kevin Jones ·
+              - link "CC BY 2.0" [ref=e353] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/2.0/
+            - link "Explore Sierras" [ref=e354] [cursor=pointer]:
+              - /url: /themes#sierras
+              - text: Explore Sierras →
+      - link "Browse all photographs and source credits" [ref=e355] [cursor=pointer]:
+        - /url: /wallpapers
+        - text: Browse all photographs and source credits →
+    - region [ref=e356]:
+      - link "Explore the interactive HorneroOS greeter preview" [ref=e357] [cursor=pointer]:
+        - /url: /greeter
+        - img "Browser recreation of the HorneroOS greeter over a golden-hour view of El Palmar; this is not a desktop screenshot." [ref=e358]
+        - generic [ref=e359]: BROWSER RECREATION
+        - generic [aria-hidden] [ref=e360]: 17:42
+        - generic [aria-hidden] [ref=e361]: HORNERO OS
+      - generic [ref=e362]:
+        - paragraph [ref=e363]: The first moment of the desktop
+        - heading "Argentina, before the desktop." [level=2] [ref=e364]
+        - paragraph [ref=e365]: The HorneroOS greeter pairs a calm login screen with landscapes and city lights from Argentina. Explore its local-time moods in an interactive browser recreation.
+        - link "Experience the greeter" [ref=e366] [cursor=pointer]:
+          - /url: /greeter
+          - text: Experience the greeter
+          - generic [aria-hidden] [ref=e367]: →
+    - region [ref=e368]:
+      - figure "Hornero 199X Original artwork Not a screenshot" [ref=e369]:
+        - 'img "Original Hornero 199X illustration: a hornero bird and its arched mud nest over the midnight-blue La Plata street grid cut by a diagonal avenue, under a signal-orange sun with phosphor registration marks. This is artwork, not a desktop screenshot." [ref=e370]'
+        - generic [ref=e372]:
+          - strong [ref=e373]: Hornero 199X
+          - generic [ref=e374]: Original artwork
+          - generic [ref=e375]: Not a screenshot
+      - generic [ref=e376]:
+        - paragraph [ref=e377]:
+          - generic [ref=e378]: "06"
+          - generic [ref=e379]: Las raíces — The roots, reimagined
+        - heading [level=2] [ref=e380]:
+          - text: A future imagined here,
+          - emphasis [ref=e381]: printed like 1992.
+        - paragraph [ref=e382]: "Hornero 199X is the design language of this site: Argentine editorial and broadcast graphics, La Plata's diagonal grid, and the hornero's own architecture. An optional desktop theme in the same palette ships in HorneroOS/config; Hornero Dark remains the factory default."
+        - link "Read the roots story" [ref=e383] [cursor=pointer]:
+          - /url: /roots
+          - text: Read the roots story
+          - generic [aria-hidden] [ref=e384]: →
+    - paragraph [ref=e385]:
+      - generic [ref=e386]: "07"
+      - generic [ref=e387]: Sumate — Join the project
+    - region [ref=e388]:
+      - generic [ref=e389]:
+        - paragraph [ref=e390]: Built in the open
+        - heading "Follow the work. Try the desktop." [level=2] [ref=e391]: Follow the work.Try the desktop.
+        - paragraph [ref=e392]: "HorneroOS is a development preview: individual components are available as Arch packages, while the installable image is still in development."
+      - generic [ref=e393]:
+        - link "See how to try Hornero" [ref=e394] [cursor=pointer]:
+          - /url: /install
+        - link "Read the documentation" [ref=e395] [cursor=pointer]:
+          - /url: /docs/
+          - text: Read the documentation →
+        - link "Browse the source" [ref=e396] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS
+          - text: Browse the source ↗
+  - contentinfo [ref=e397]:
+    - navigation "Project" [ref=e398]:
+      - list [ref=e399]:
+        - listitem [ref=e400]:
+          - link "GitHub" [ref=e401] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e402]:
+          - link "Project map" [ref=e403] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e404]:
+          - link "Design language" [ref=e405] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e406]:
+          - link "Contribute" [ref=e407] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e408]:
+          - link "Search" [ref=e409] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e410]:
+          - link "Report a site issue" [ref=e411] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e412]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.

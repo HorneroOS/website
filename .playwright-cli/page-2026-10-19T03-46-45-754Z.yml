@@ -1,0 +1,155 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS ARG / 199X · La Plata — Buenos Aires" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e16]:
+        - generic [ref=e17]: Hornero OS
+        - generic [ref=e18]: ARG / 199X · La Plata — Buenos Aires
+    - navigation "Main" [ref=e19]:
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - link "Editions" [ref=e22] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e23]:
+          - link "Layouts" [ref=e24] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e25]:
+          - link "Themes" [ref=e26] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e27]:
+          - link "Greeter" [ref=e28] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e29]:
+          - link "Companion" [ref=e30] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e31]:
+          - link "Showroom" [ref=e32] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e33]:
+          - link "Wallpapers" [ref=e34] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e35]:
+          - group [ref=e36]:
+            - generic "More pages" [ref=e37] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e38]: ⌄
+        - listitem [ref=e39]:
+          - link "Install" [ref=e40] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e41]:
+      - generic [ref=e43] [cursor=pointer]:
+        - radio "System" [ref=e44]
+        - generic [ref=e45]: System
+      - generic [ref=e49] [cursor=pointer]:
+        - radio "Light" [ref=e50]
+        - generic [ref=e51]: Light
+      - generic [ref=e55] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e56]
+        - generic [ref=e57]: Dark
+  - main [ref=e61]:
+    - generic [ref=e62]:
+      - paragraph [ref=e63]:
+        - strong [ref=e64]: Ficha técnica · Familia HorneroOS
+        - generic [ref=e65]: ARG / 199X
+        - generic [ref=e66]: Madurez verificada por edición
+      - paragraph [ref=e67]: One foundation · distinct roles
+      - heading [level=1] [ref=e68]:
+        - text: One system.
+        - emphasis [ref=e69]: Four ways to use it.
+      - paragraph [ref=e70]: HorneroOS is composed from a shared base and focused capabilities. Desktop, Server, Agents and Studio are connected profiles, not separate distributions maintained in parallel.
+      - paragraph [ref=e71]:
+        - text: The product model is defined; maturity varies by profile. A provisional Calamares installer is in development, but its install flow has not passed virtual-machine acceptance and no ISO is published.
+        - link "See what can be installed today." [ref=e72] [cursor=pointer]:
+          - /url: /install
+    - region [ref=e73]:
+      - heading "HorneroOS edition composition" [level=2] [ref=e74]
+      - generic [ref=e75]:
+        - generic [aria-hidden] [ref=e76]: H
+        - generic [ref=e77]:
+          - strong [ref=e78]: HorneroOS Base
+          - generic [ref=e79]: Common system foundation
+        - generic [ref=e80]: Shared across editions
+      - generic [ref=e82]:
+        - article [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]: Wayland desktop
+            - generic [ref=e86]: Desktop preview
+          - heading "Desktop" [level=2] [ref=e87]
+          - heading "A complete Wayland desktop" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Hornero Shell brings layouts, themes, settings, launcher, dashboard and session controls into one desktop experience.
+          - generic "Desktop compositor options" [ref=e90]:
+            - generic [ref=e91]: Wayland compositor
+            - generic [ref=e93]:
+              - strong [ref=e94]: Hyprland
+              - generic [ref=e95]: Supported
+            - generic [ref=e97]:
+              - strong [ref=e98]: Niri
+              - generic [ref=e99]: Experimental
+          - link "Explore the desktop" [ref=e100] [cursor=pointer]:
+            - /url: /showroom
+            - text: Explore the desktop
+            - generic [aria-hidden] [ref=e101]: ↗
+        - article [ref=e102]:
+          - generic [ref=e103]:
+            - generic [ref=e104]: Headless systems
+            - generic [ref=e105]: Planned
+          - heading "Server" [level=2] [ref=e106]
+          - heading "A lean headless foundation" [level=3] [ref=e107]
+          - paragraph [ref=e108]: A remotely operated system for homelabs, virtual machines and self-hosted services, without a graphical session.
+          - link "Read the composition model" [ref=e109] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e110]: ↗
+        - article [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e113]: Secure agent hosting
+            - generic [ref=e114]: Planned
+          - heading "Agents" [level=2] [ref=e115]
+          - heading "Infrastructure for agent workloads" [level=3] [ref=e116]
+          - paragraph [ref=e117]: A server-derived environment designed around isolated identities, constrained services and inspectable agent lifecycles.
+          - paragraph [ref=e118]: Builds on Server
+          - link "Read the composition model" [ref=e119] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e120]: ↗
+        - article [ref=e121]:
+          - generic [ref=e122]:
+            - generic [ref=e123]: Creative production
+            - generic [ref=e124]: Planned
+          - heading "Studio" [level=2] [ref=e125]
+          - heading "A considered creative workstation" [level=3] [ref=e126]
+          - paragraph [ref=e127]: Desktop foundations for audio, video and visual work, with hardware-aware workflows rather than a package bundle.
+          - paragraph [ref=e128]: Builds on Desktop
+          - link "Read the composition model" [ref=e129] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e130]: ↗
+    - generic [ref=e131]:
+      - paragraph [ref=e132]: Shared architecture
+      - heading "Capabilities compose. Product truth stays together." [level=2] [ref=e133]
+      - paragraph [ref=e134]: Studio builds on Desktop; Agents builds on Server. The compositor belongs to Desktop as a backend choice. Hyprland is the validated default, while Niri is experimental and retains clearly documented capability gaps.
+      - paragraph [ref=e135]: The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model is designed for CLI introspection, installation and acceptance tooling; those image and installer paths are not yet released.
+  - contentinfo [ref=e136]:
+    - navigation "Project" [ref=e137]:
+      - list [ref=e138]:
+        - listitem [ref=e139]:
+          - link "GitHub" [ref=e140] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e141]:
+          - link "Project map" [ref=e142] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e143]:
+          - link "Design language" [ref=e144] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e145]:
+          - link "Contribute" [ref=e146] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e147]:
+          - link "Search" [ref=e148] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e149]:
+          - link "Report a site issue" [ref=e150] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e151]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.
