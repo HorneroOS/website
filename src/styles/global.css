@@ -638,6 +638,33 @@ hr {
   max-width: var(--measure);
 }
 
+/* Between the hamburger breakpoint and full desktop width, compact the
+   bar instead of letting the color switch wrap to a second row. */
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .site-nav {
+    gap: 0.4rem 0.9rem;
+    padding-block: 0.55rem;
+  }
+  .brand {
+    font-size: 1.02rem;
+    gap: 0.5rem;
+  }
+  .brand-copy small {
+    display: none;
+  }
+  .brand-mark {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  .site-nav > nav > ul {
+    gap: 0.2rem 0.6rem;
+    font-size: 0.92rem;
+  }
+  .color-switch {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 1200px) {
   .site-nav {
     position: sticky;
@@ -707,6 +734,9 @@ hr {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .mobile-menu nav li {
@@ -743,6 +773,25 @@ hr {
 }
 
 @media (max-width: 600px) {
+  .site-nav {
+    gap: 0.3rem 0.6rem;
+    padding-block: 0.45rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+    gap: 0.5rem;
+  }
+
+  .brand-mark {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .brand-copy small {
+    display: none;
+  }
+
   .mobile-menu {
     order: 1;
   }

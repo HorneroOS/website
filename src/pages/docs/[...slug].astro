@@ -1,7 +1,9 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import AppLogo from '../../components/AppLogo.astro';
 import { docsAreas } from '../../data/docs-nav';
+import { docsApps } from '../../data/docs-apps';
 import { pins, short } from '../../data/product';
 
 export async function getStaticPaths() {
@@ -37,6 +39,7 @@ const description = firstLine
   .replace(/[`*_]/g, '')
   .slice(0, 180);
 
+const featuredApps = docsApps[entry.id] ?? [];
 const sourcePath = (entry.filePath ?? '').replace(/^\.?\/?\.cache\/product-src\/docs\//, '');
 const docsPin = pins.docs;
 const toc = headings.filter((h) => h.depth === 2);
@@ -83,6 +86,19 @@ const current = entry.id;
     </nav>
 
     <article class="prose">
+      {featuredApps.length > 0 && (
+        <div class="doc-tools" aria-label="Featured tools on this page">
+          <span class="doc-tools-label">Featured tools</span>
+          <ul role="list">
+            {featuredApps.map((app) => (
+              <li>
+                <AppLogo id={app.id} />
+                <span>{app.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <Content />
       <footer class="doc-foot">
         <p>
@@ -115,6 +131,39 @@ const current = entry.id;
 </SiteLayout>
 
 <style>
+  .doc-tools {
+    --app-logo-size: 1.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    margin-bottom: 1.4rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--surface) 58%, transparent);
+  }
+  .doc-tools-label {
+    color: var(--secondary);
+    font: 0.62rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .doc-tools ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .doc-tools li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
   .docs {
     display: grid;
     /* One shrinkable column on phones: wide code blocks scroll inside their
