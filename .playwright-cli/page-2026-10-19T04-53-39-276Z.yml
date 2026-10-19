@@ -1,0 +1,322 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS" [ref=e4] [cursor=pointer]:
+      - /url: /
+    - navigation "Main" [ref=e18]:
+      - list [ref=e19]:
+        - listitem [ref=e20]:
+          - link "Editions" [ref=e21] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e22]:
+          - link "Layouts" [ref=e23] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e24]:
+          - link "Themes" [ref=e25] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e26]:
+          - link "Greeter" [ref=e27] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e28]:
+          - link "Companion" [ref=e29] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e30]:
+          - link "Showroom" [ref=e31] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e32]:
+          - link "Wallpapers" [ref=e33] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e34]:
+          - group [ref=e35]:
+            - generic "More pages" [ref=e36] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e37]: ⌄
+        - listitem [ref=e38]:
+          - link "Install" [ref=e39] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e40]:
+      - generic [ref=e42] [cursor=pointer]:
+        - radio "System" [ref=e43]
+        - generic [ref=e44]: System
+      - generic [ref=e48] [cursor=pointer]:
+        - radio "Light" [ref=e49]
+        - generic [ref=e50]: Light
+      - generic [ref=e54] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e55]
+        - generic [ref=e56]: Dark
+  - main [ref=e60]:
+    - generic [ref=e61]:
+      - navigation "Documentation" [ref=e62]:
+        - link "Overview" [ref=e63] [cursor=pointer]:
+          - /url: /docs/
+        - link "Getting started" [ref=e65] [cursor=pointer]:
+          - /url: /docs/getting-started/
+        - generic [ref=e66]:
+          - link "Desktop" [ref=e67] [cursor=pointer]:
+            - /url: /docs/desktop/
+          - list [ref=e68]:
+            - listitem [ref=e69]:
+              - 'link "Appearance: themes, mode, and color" [ref=e70] [cursor=pointer]':
+                - /url: /docs/desktop/appearance/
+            - listitem [ref=e71]:
+              - link "Bar layouts" [ref=e72] [cursor=pointer]:
+                - /url: /docs/desktop/layouts/
+            - listitem [ref=e73]:
+              - link "horneroctl" [ref=e74] [cursor=pointer]:
+                - /url: /docs/desktop/horneroctl/
+            - listitem [ref=e75]:
+              - link "Keyboard shortcuts" [ref=e76] [cursor=pointer]:
+                - /url: /docs/desktop/shortcuts/
+            - listitem [ref=e77]:
+              - link "Open an app or file" [ref=e78] [cursor=pointer]:
+                - /url: /docs/desktop/everyday-apps/
+            - listitem [ref=e79]:
+              - link "Session menu" [ref=e80] [cursor=pointer]:
+                - /url: /docs/desktop/session-menu/
+            - listitem [ref=e81]:
+              - link "Wallpapers and color" [ref=e82] [cursor=pointer]:
+                - /url: /docs/desktop/wallpapers/
+            - listitem [ref=e83]:
+              - link "Wayland compositors" [ref=e84] [cursor=pointer]:
+                - /url: /docs/desktop/compositors/
+        - generic [ref=e85]:
+          - link "Apps & workflows" [ref=e86] [cursor=pointer]:
+            - /url: /docs/applications/
+          - list [ref=e87]:
+            - listitem [ref=e88]:
+              - link "Application catalogue" [ref=e89] [cursor=pointer]:
+                - /url: /docs/applications/catalogue/
+            - listitem [ref=e90]:
+              - link "Browsing, editing, and documents" [ref=e91] [cursor=pointer]:
+                - /url: /docs/applications/browsing-documents/
+            - listitem [ref=e92]:
+              - link "Clipboard" [ref=e93] [cursor=pointer]:
+                - /url: /docs/applications/clipboard/
+            - listitem [ref=e94]:
+              - link "Default applications" [ref=e95] [cursor=pointer]:
+                - /url: /docs/applications/default-apps/
+            - listitem [ref=e96]:
+              - link "Files and folders" [ref=e97] [cursor=pointer]:
+                - /url: /docs/applications/files/
+            - listitem [ref=e98]:
+              - link "Lock screen and login" [ref=e99] [cursor=pointer]:
+                - /url: /docs/applications/login-lock/
+            - listitem [ref=e100]:
+              - link "Media and audio" [ref=e101] [cursor=pointer]:
+                - /url: /docs/applications/media-audio/
+            - listitem [ref=e102]:
+              - link "Networking and Bluetooth" [ref=e103] [cursor=pointer]:
+                - /url: /docs/applications/connectivity/
+            - listitem [ref=e104]:
+              - link "Screenshots and recording" [ref=e105] [cursor=pointer]:
+                - /url: /docs/applications/capture/
+            - listitem [ref=e106]:
+              - link "System and command-line utilities" [ref=e107] [cursor=pointer]:
+                - /url: /docs/applications/system-utilities/
+            - listitem [ref=e108]:
+              - link "Terminal and shell" [ref=e109] [cursor=pointer]:
+                - /url: /docs/applications/terminal/
+        - link "Hardware" [ref=e111] [cursor=pointer]:
+          - /url: /docs/hardware/
+        - link "Troubleshooting" [ref=e113] [cursor=pointer]:
+          - /url: /docs/troubleshooting/
+        - link "Security & privacy" [ref=e115] [cursor=pointer]:
+          - /url: /docs/security/
+        - generic [ref=e116]:
+          - link "Architecture" [ref=e117] [cursor=pointer]:
+            - /url: /docs/architecture/
+          - list [ref=e118]:
+            - listitem [ref=e119]:
+              - link "Appearance architecture" [ref=e120] [cursor=pointer]:
+                - /url: /docs/architecture/appearance-system/
+            - listitem [ref=e121]:
+              - link "Editions and package composition" [ref=e122] [cursor=pointer]:
+                - /url: /docs/architecture/editions/
+            - listitem [ref=e123]:
+              - link "Packaging and delivery" [ref=e124] [cursor=pointer]:
+                - /url: /docs/architecture/updates-delivery/
+            - listitem [ref=e125]:
+              - link "Power and performance" [ref=e126] [cursor=pointer]:
+                - /url: /docs/architecture/power-performance/
+        - generic [ref=e127]:
+          - link "Development" [ref=e128] [cursor=pointer]:
+            - /url: /docs/development/
+          - list [ref=e129]:
+            - listitem [ref=e130]:
+              - link "Contributing" [ref=e131] [cursor=pointer]:
+                - /url: /docs/development/contributing/
+            - listitem [ref=e132]:
+              - link "Desktop experience reference study" [ref=e133] [cursor=pointer]:
+                - /url: /docs/development/experience-reference-study/
+            - listitem [ref=e134]:
+              - link "Historical dotfiles wiki review" [ref=e135] [cursor=pointer]:
+                - /url: /docs/development/dotfiles-wiki-disposition/
+            - listitem [ref=e136]:
+              - link "HorneroOS design language" [ref=e137] [cursor=pointer]:
+                - /url: /docs/development/design-language/
+            - listitem [ref=e138]:
+              - link "Internationalization (English-first)" [ref=e139] [cursor=pointer]:
+                - /url: /docs/development/i18n/
+            - listitem [ref=e140]:
+              - link "Testing HorneroOS changes" [ref=e141] [cursor=pointer]:
+                - /url: /docs/development/testing/
+        - link "Search the site" [ref=e142] [cursor=pointer]:
+          - /url: /search/
+      - article [ref=e143]:
+        - generic "Featured tools on this page" [ref=e144]:
+          - generic [ref=e145]: Featured tools
+          - list [ref=e146]:
+            - listitem [ref=e147]:
+              - generic [ref=e148]: Yazi
+            - listitem [ref=e149]:
+              - generic [ref=e150]: Thunar
+        - heading "Files and folders" [level=1] [ref=e151]
+        - paragraph [ref=e152]: Hornero supports a graphical file manager and a terminal file browser. They serve different tasks and share the same files on disk.
+        - heading "Thunar for visual file management" [level=2] [ref=e153]
+        - paragraph [ref=e154]:
+          - text: Press
+          - strong [ref=e155]: Super + F
+          - text: to open the host’s XDG
+          - code [ref=e156]: FileManager
+          - text: association through
+          - code [ref=e157]: exo-open
+          - text: . Thunar is the curated graphical file manager in Hornero Config and has defaults for accelerators, bulk rename, and two useful custom actions. User configuration lives under
+          - code [ref=e158]: ~/.config/Thunar/
+          - text: ; package-wide defaults are under
+          - code [ref=e159]: /etc/xdg/Thunar/
+          - text: . The
+          - code [ref=e160]: hornero-config
+          - text: package does not install
+          - code [ref=e161]: uca.xml
+          - text: to the system path because Thunar owns that file; a user materialization can still supply the actions in the user’s config.
+        - paragraph [ref=e162]:
+          - text: When the configured session starts, it asks Thunar’s daemon to stay ready so later windows open faster. The context menu actions
+          - strong [ref=e163]: Open in Yazi
+          - text: and
+          - strong [ref=e164]: Open Terminal Here
+          - text: use the selected terminal association;
+          - strong [ref=e165]: Open in Yazi
+          - text: also needs Yazi installed. These are integrated workflows, not bundled archive or terminal programs.
+        - paragraph [ref=e166]:
+          - text: "Upstream:"
+          - link "Thunar documentation" [ref=e167] [cursor=pointer]:
+            - /url: https://docs.xfce.org/xfce/thunar/start
+          - text: .
+        - paragraph [ref=e168]:
+          - text: The sample below shows several distinct Hornero wallpaper directions, including Patagonia, Fin del Mundo, Neon City, Vapor Dreams, and Soft Morning. The sample files are public wallpaper assets from the
+          - link "dotfiles repository" [ref=e169] [cursor=pointer]:
+            - /url: https://github.com/ulises-jeremias/dotfiles
+          - text: ", not a claim that Thunar or these wallpapers are part of the Hornero base package."
+        - paragraph [ref=e170]:
+          - img "Thunar shows a mixed-color Hornero wallpaper folder with Patagonia, Beagle Channel, Neon City, Vapor Dreams, and Morning Lake thumbnails." [ref=e171]
+        - heading "Yazi for keyboard-driven browsing" [level=2] [ref=e172]
+        - paragraph [ref=e173]:
+          - text: Press
+          - strong [ref=e174]: Super + E
+          - text: to open Yazi in a window from the configured terminal and restore its last directory. The initial Hornero default is Kitty. Choose Alacritty or Ghostty as the terminal and the same workflow follows that selection. From inside an existing terminal,
+          - code [ref=e175]: horneroctl apps terminal-file
+          - text: opens Yazi in the current window; use
+          - code [ref=e176]: "--new-window"
+          - text: "for a separate terminal window. The CLI can also open a directory or select a file:"
+        - code [ref=e178]:
+          - generic [ref=e179]: horneroctl apps terminal-file --help
+          - generic [ref=e180]: horneroctl apps terminal-file --cheatsheet
+          - generic [ref=e181]: horneroctl apps terminal-file --path ~/Downloads
+          - generic [ref=e182]: horneroctl apps terminal-file --new-window --path ~/Downloads
+        - paragraph [ref=e183]:
+          - text: Hornero Config does not declare Yazi as a dependency. The configured terminal and Yazi must both be installed for this workflow. Change the terminal with
+          - link [ref=e184] [cursor=pointer]:
+            - /url: /docs/applications/default-apps/
+            - code [ref=e185]: horneroctl config default-apps
+          - text: . The public
+          - link "dotfiles repository" [ref=e186] [cursor=pointer]:
+            - /url: https://github.com/ulises-jeremias/dotfiles
+          - text: can install Yazi and preview helpers for a personal Arch workstation; these are not dependencies of the Hornero release composition.
+        - paragraph [ref=e187]:
+          - text: Yazi keybindings can be queried from the Hornero CLI cheatsheet. In the personal configuration,
+          - code [ref=e188]: ~/.config/yazi/yazi.toml
+          - text: ","
+          - code [ref=e189]: keymap.toml
+          - text: ", and"
+          - code [ref=e190]: theme.toml
+          - text: set file openers, extra key bindings, and terminal colors. That profile adds
+          - code [ref=e191]: g
+          - text: directory shortcuts,
+          - code [ref=e192]: D D
+          - text: to move items to trash, and
+          - code [ref=e193]: Alt + T
+          - text: to open a selection in Thunar. Preview support depends on optional host tools such as
+          - code [ref=e194]: ffmpegthumbnailer
+          - text: ","
+          - code [ref=e195]: poppler
+          - text: ", and ImageMagick; a missing preview does not mean the file is missing. Yazi upstream:"
+          - link "documentation" [ref=e196] [cursor=pointer]:
+            - /url: https://yazi-rs.github.io/docs/
+          - text: .
+        - paragraph [ref=e197]:
+          - img "Yazi previews a Beagle Channel dusk wallpaper beside a keyboard-driven file list that includes Patagonia, Neon City, Vapor Dreams, and Morning Lake." [ref=e198]
+        - heading "File opening and archives" [level=2] [ref=e199]
+        - paragraph [ref=e200]:
+          - code [ref=e201]: exo-open
+          - text: launches the default file manager and terminal.
+          - code [ref=e202]: handlr
+          - text: and
+          - code [ref=e203]: xdg-mime
+          - text: resolve MIME associations, such as which app opens a PDF or image. Thunar delegates archive operations to compatible utilities and plugins installed on the host; Xarchiver is one optional personal workstation choice. Yazi can list and extract archives when the relevant preview and archive tools are available. Hornero Config does not download missing helpers.
+        - paragraph [ref=e204]: "Inspect the current directory handler with:"
+        - code [ref=e206]:
+          - generic [ref=e207]: horneroctl apps files --info
+          - generic [ref=e208]: horneroctl config default-apps list
+        - paragraph [ref=e209]:
+          - text: Change a file association using the instructions in
+          - link "Default applications" [ref=e210] [cursor=pointer]:
+            - /url: /docs/applications/default-apps/
+          - text: . Hornero does not install or silently download archive or preview dependencies.
+        - paragraph [ref=e212]:
+          - text: From
+          - link [ref=e213] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/blob/71a03191b6e1d4d82796ea24fdff18af87ec519a/applications/files.md
+            - code [ref=e214]: HorneroOS/docs/applications/files.md
+          - text: at commit
+          - link [ref=e215] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/commit/71a03191b6e1d4d82796ea24fdff18af87ec519a
+            - code [ref=e216]: 71a0319
+          - text: .
+          - link "Suggest a change on GitHub" [ref=e217] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/edit/main/applications/files.md
+          - text: .
+      - navigation "On this page" [ref=e218]:
+        - paragraph [ref=e219]: On this page
+        - list [ref=e220]:
+          - listitem [ref=e221]:
+            - link "Thunar for visual file management" [ref=e222] [cursor=pointer]:
+              - /url: "#thunar-for-visual-file-management"
+          - listitem [ref=e223]:
+            - link "Yazi for keyboard-driven browsing" [ref=e224] [cursor=pointer]:
+              - /url: "#yazi-for-keyboard-driven-browsing"
+          - listitem [ref=e225]:
+            - link "File opening and archives" [ref=e226] [cursor=pointer]:
+              - /url: "#file-opening-and-archives"
+  - contentinfo [ref=e227]:
+    - navigation "Project" [ref=e228]:
+      - list [ref=e229]:
+        - listitem [ref=e230]:
+          - link "GitHub" [ref=e231] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e232]:
+          - link "Project map" [ref=e233] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e234]:
+          - link "Design language" [ref=e235] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e236]:
+          - link "Contribute" [ref=e237] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e238]:
+          - link "Search" [ref=e239] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e240]:
+          - link "Report a site issue" [ref=e241] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e242]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.

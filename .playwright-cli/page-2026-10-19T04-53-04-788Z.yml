@@ -1,0 +1,152 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS" [ref=e4] [cursor=pointer]:
+      - /url: /
+    - navigation "Main" [ref=e18]:
+      - list [ref=e19]:
+        - listitem [ref=e20]:
+          - link "Editions" [ref=e21] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e22]:
+          - link "Layouts" [ref=e23] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e24]:
+          - link "Themes" [ref=e25] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e26]:
+          - link "Greeter" [ref=e27] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e28]:
+          - link "Companion" [ref=e29] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e30]:
+          - link "Showroom" [ref=e31] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e32]:
+          - link "Wallpapers" [ref=e33] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e34]:
+          - group [ref=e35]:
+            - generic "More pages" [ref=e36] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e37]: ⌄
+        - listitem [ref=e38]:
+          - link "Install" [ref=e39] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e40]:
+      - generic [ref=e42] [cursor=pointer]:
+        - radio "System" [ref=e43]
+        - generic [ref=e44]: System
+      - generic [ref=e48] [cursor=pointer]:
+        - radio "Light" [ref=e49]
+        - generic [ref=e50]: Light
+      - generic [ref=e54] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e55]
+        - generic [ref=e56]: Dark
+  - main [ref=e60]:
+    - generic [ref=e61]:
+      - paragraph [ref=e62]:
+        - strong [ref=e63]: Ficha técnica · Familia HorneroOS
+        - generic [ref=e64]: ARG / 199X
+        - generic [ref=e65]: Madurez verificada por edición
+      - paragraph [ref=e66]: One foundation · distinct roles
+      - heading [level=1] [ref=e67]:
+        - text: One system.
+        - emphasis [ref=e68]: Four ways to use it.
+      - paragraph [ref=e69]: HorneroOS is composed from a shared base and focused capabilities. Desktop, Server, Agents and Studio are connected profiles, not separate distributions maintained in parallel.
+      - paragraph [ref=e70]:
+        - text: The product model is defined; maturity varies by profile. A provisional Calamares installer is in development, but its install flow has not passed virtual-machine acceptance and no ISO is published.
+        - link "See what can be installed today." [ref=e71] [cursor=pointer]:
+          - /url: /install
+    - region [ref=e72]:
+      - heading "HorneroOS edition composition" [level=2] [ref=e73]
+      - generic [ref=e74]:
+        - generic [aria-hidden] [ref=e75]: H
+        - generic [ref=e76]:
+          - strong [ref=e77]: HorneroOS Base
+          - generic [ref=e78]: Common system foundation
+        - generic [ref=e79]: Shared across editions
+      - generic [ref=e81]:
+        - article [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Wayland desktop
+            - generic [ref=e85]: Desktop preview
+          - heading "Desktop" [level=2] [ref=e86]
+          - heading "A complete Wayland desktop" [level=3] [ref=e87]
+          - paragraph [ref=e88]: Hornero Shell brings layouts, themes, settings, launcher, dashboard and session controls into one desktop experience.
+          - generic "Desktop compositor options" [ref=e89]:
+            - generic [ref=e90]: Wayland compositor
+            - generic [ref=e92]:
+              - strong [ref=e93]: Hyprland
+              - generic [ref=e94]: Supported
+            - generic [ref=e96]:
+              - strong [ref=e97]: Niri
+              - generic [ref=e98]: Experimental
+          - link "Explore the desktop" [ref=e99] [cursor=pointer]:
+            - /url: /showroom
+            - text: Explore the desktop
+            - generic [aria-hidden] [ref=e100]: ↗
+        - article [ref=e101]:
+          - generic [ref=e102]:
+            - generic [ref=e103]: Headless systems
+            - generic [ref=e104]: Planned
+          - heading "Server" [level=2] [ref=e105]
+          - heading "A lean headless foundation" [level=3] [ref=e106]
+          - paragraph [ref=e107]: A remotely operated system for homelabs, virtual machines and self-hosted services, without a graphical session.
+          - link "Read the composition model" [ref=e108] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e109]: ↗
+        - article [ref=e110]:
+          - generic [ref=e111]:
+            - generic [ref=e112]: Secure agent hosting
+            - generic [ref=e113]: Planned
+          - heading "Agents" [level=2] [ref=e114]
+          - heading "Infrastructure for agent workloads" [level=3] [ref=e115]
+          - paragraph [ref=e116]: A server-derived environment designed around isolated identities, constrained services and inspectable agent lifecycles.
+          - paragraph [ref=e117]: Builds on Server
+          - link "Read the composition model" [ref=e118] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e119]: ↗
+        - article [ref=e120]:
+          - generic [ref=e121]:
+            - generic [ref=e122]: Creative production
+            - generic [ref=e123]: Planned
+          - heading "Studio" [level=2] [ref=e124]
+          - heading "A considered creative workstation" [level=3] [ref=e125]
+          - paragraph [ref=e126]: Desktop foundations for audio, video and visual work, with hardware-aware workflows rather than a package bundle.
+          - paragraph [ref=e127]: Builds on Desktop
+          - link "Read the composition model" [ref=e128] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/tree/main/editions
+            - text: Read the composition model
+            - generic [aria-hidden] [ref=e129]: ↗
+    - generic [ref=e130]:
+      - paragraph [ref=e131]: Shared architecture
+      - heading "Capabilities compose. Product truth stays together." [level=2] [ref=e132]
+      - paragraph [ref=e133]: Studio builds on Desktop; Agents builds on Server. The compositor belongs to Desktop as a backend choice. Hyprland is the validated default, while Niri is experimental and retains clearly documented capability gaps.
+      - paragraph [ref=e134]: The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model is designed for CLI introspection, installation and acceptance tooling; those image and installer paths are not yet released.
+  - contentinfo [ref=e135]:
+    - navigation "Project" [ref=e136]:
+      - list [ref=e137]:
+        - listitem [ref=e138]:
+          - link "GitHub" [ref=e139] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e140]:
+          - link "Project map" [ref=e141] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e142]:
+          - link "Design language" [ref=e143] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e144]:
+          - link "Contribute" [ref=e145] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e146]:
+          - link "Search" [ref=e147] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e148]:
+          - link "Report a site issue" [ref=e149] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e150]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.

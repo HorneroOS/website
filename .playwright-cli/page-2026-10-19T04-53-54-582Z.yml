@@ -1,0 +1,472 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - link "Hornero OS" [ref=e4] [cursor=pointer]:
+      - /url: /
+    - navigation "Main" [ref=e18]:
+      - list [ref=e19]:
+        - listitem [ref=e20]:
+          - link "Editions" [ref=e21] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=e22]:
+          - link "Layouts" [ref=e23] [cursor=pointer]:
+            - /url: /layouts
+        - listitem [ref=e24]:
+          - link "Themes" [ref=e25] [cursor=pointer]:
+            - /url: /themes
+        - listitem [ref=e26]:
+          - link "Greeter" [ref=e27] [cursor=pointer]:
+            - /url: /greeter
+        - listitem [ref=e28]:
+          - link "Companion" [ref=e29] [cursor=pointer]:
+            - /url: /companion
+        - listitem [ref=e30]:
+          - link "Showroom" [ref=e31] [cursor=pointer]:
+            - /url: /showroom
+        - listitem [ref=e32]:
+          - link "Wallpapers" [ref=e33] [cursor=pointer]:
+            - /url: /wallpapers
+        - listitem [ref=e34]:
+          - group [ref=e35]:
+            - generic "More pages" [ref=e36] [cursor=pointer]:
+              - text: More
+              - generic [aria-hidden] [ref=e37]: ⌄
+        - listitem [ref=e38]:
+          - link "Install" [ref=e39] [cursor=pointer]:
+            - /url: /install
+    - group "Color mode" [ref=e40]:
+      - generic [ref=e42] [cursor=pointer]:
+        - radio "System" [ref=e43]
+        - generic [ref=e44]: System
+      - generic [ref=e48] [cursor=pointer]:
+        - radio "Light" [ref=e49]
+        - generic [ref=e50]: Light
+      - generic [ref=e54] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=e55]
+        - generic [ref=e56]: Dark
+  - main [ref=e60]:
+    - generic [ref=e61]:
+      - navigation "Documentation" [ref=e62]:
+        - link "Overview" [ref=e63] [cursor=pointer]:
+          - /url: /docs/
+        - link "Getting started" [ref=e65] [cursor=pointer]:
+          - /url: /docs/getting-started/
+        - generic [ref=e66]:
+          - link "Desktop" [ref=e67] [cursor=pointer]:
+            - /url: /docs/desktop/
+          - list [ref=e68]:
+            - listitem [ref=e69]:
+              - 'link "Appearance: themes, mode, and color" [ref=e70] [cursor=pointer]':
+                - /url: /docs/desktop/appearance/
+            - listitem [ref=e71]:
+              - link "Bar layouts" [ref=e72] [cursor=pointer]:
+                - /url: /docs/desktop/layouts/
+            - listitem [ref=e73]:
+              - link "horneroctl" [ref=e74] [cursor=pointer]:
+                - /url: /docs/desktop/horneroctl/
+            - listitem [ref=e75]:
+              - link "Keyboard shortcuts" [ref=e76] [cursor=pointer]:
+                - /url: /docs/desktop/shortcuts/
+            - listitem [ref=e77]:
+              - link "Open an app or file" [ref=e78] [cursor=pointer]:
+                - /url: /docs/desktop/everyday-apps/
+            - listitem [ref=e79]:
+              - link "Session menu" [ref=e80] [cursor=pointer]:
+                - /url: /docs/desktop/session-menu/
+            - listitem [ref=e81]:
+              - link "Wallpapers and color" [ref=e82] [cursor=pointer]:
+                - /url: /docs/desktop/wallpapers/
+            - listitem [ref=e83]:
+              - link "Wayland compositors" [ref=e84] [cursor=pointer]:
+                - /url: /docs/desktop/compositors/
+        - generic [ref=e85]:
+          - link "Apps & workflows" [ref=e86] [cursor=pointer]:
+            - /url: /docs/applications/
+          - list [ref=e87]:
+            - listitem [ref=e88]:
+              - link "Application catalogue" [ref=e89] [cursor=pointer]:
+                - /url: /docs/applications/catalogue/
+            - listitem [ref=e90]:
+              - link "Browsing, editing, and documents" [ref=e91] [cursor=pointer]:
+                - /url: /docs/applications/browsing-documents/
+            - listitem [ref=e92]:
+              - link "Clipboard" [ref=e93] [cursor=pointer]:
+                - /url: /docs/applications/clipboard/
+            - listitem [ref=e94]:
+              - link "Default applications" [ref=e95] [cursor=pointer]:
+                - /url: /docs/applications/default-apps/
+            - listitem [ref=e96]:
+              - link "Files and folders" [ref=e97] [cursor=pointer]:
+                - /url: /docs/applications/files/
+            - listitem [ref=e98]:
+              - link "Lock screen and login" [ref=e99] [cursor=pointer]:
+                - /url: /docs/applications/login-lock/
+            - listitem [ref=e100]:
+              - link "Media and audio" [ref=e101] [cursor=pointer]:
+                - /url: /docs/applications/media-audio/
+            - listitem [ref=e102]:
+              - link "Networking and Bluetooth" [ref=e103] [cursor=pointer]:
+                - /url: /docs/applications/connectivity/
+            - listitem [ref=e104]:
+              - link "Screenshots and recording" [ref=e105] [cursor=pointer]:
+                - /url: /docs/applications/capture/
+            - listitem [ref=e106]:
+              - link "System and command-line utilities" [ref=e107] [cursor=pointer]:
+                - /url: /docs/applications/system-utilities/
+            - listitem [ref=e108]:
+              - link "Terminal and shell" [ref=e109] [cursor=pointer]:
+                - /url: /docs/applications/terminal/
+        - link "Hardware" [ref=e111] [cursor=pointer]:
+          - /url: /docs/hardware/
+        - link "Troubleshooting" [ref=e113] [cursor=pointer]:
+          - /url: /docs/troubleshooting/
+        - link "Security & privacy" [ref=e115] [cursor=pointer]:
+          - /url: /docs/security/
+        - generic [ref=e116]:
+          - link "Architecture" [ref=e117] [cursor=pointer]:
+            - /url: /docs/architecture/
+          - list [ref=e118]:
+            - listitem [ref=e119]:
+              - link "Appearance architecture" [ref=e120] [cursor=pointer]:
+                - /url: /docs/architecture/appearance-system/
+            - listitem [ref=e121]:
+              - link "Editions and package composition" [ref=e122] [cursor=pointer]:
+                - /url: /docs/architecture/editions/
+            - listitem [ref=e123]:
+              - link "Packaging and delivery" [ref=e124] [cursor=pointer]:
+                - /url: /docs/architecture/updates-delivery/
+            - listitem [ref=e125]:
+              - link "Power and performance" [ref=e126] [cursor=pointer]:
+                - /url: /docs/architecture/power-performance/
+        - generic [ref=e127]:
+          - link "Development" [ref=e128] [cursor=pointer]:
+            - /url: /docs/development/
+          - list [ref=e129]:
+            - listitem [ref=e130]:
+              - link "Contributing" [ref=e131] [cursor=pointer]:
+                - /url: /docs/development/contributing/
+            - listitem [ref=e132]:
+              - link "Desktop experience reference study" [ref=e133] [cursor=pointer]:
+                - /url: /docs/development/experience-reference-study/
+            - listitem [ref=e134]:
+              - link "Historical dotfiles wiki review" [ref=e135] [cursor=pointer]:
+                - /url: /docs/development/dotfiles-wiki-disposition/
+            - listitem [ref=e136]:
+              - link "HorneroOS design language" [ref=e137] [cursor=pointer]:
+                - /url: /docs/development/design-language/
+            - listitem [ref=e138]:
+              - link "Internationalization (English-first)" [ref=e139] [cursor=pointer]:
+                - /url: /docs/development/i18n/
+            - listitem [ref=e140]:
+              - link "Testing HorneroOS changes" [ref=e141] [cursor=pointer]:
+                - /url: /docs/development/testing/
+        - link "Search the site" [ref=e142] [cursor=pointer]:
+          - /url: /search/
+      - article [ref=e143]:
+        - generic "Featured tools on this page" [ref=e144]:
+          - generic [ref=e145]: Featured tools
+          - list [ref=e146]:
+            - listitem [ref=e147]:
+              - generic [ref=e148]: Kitty
+            - listitem [ref=e149]:
+              - generic [ref=e150]: Alacritty
+            - listitem [ref=e151]:
+              - generic [ref=e152]: Ghostty
+        - heading "Terminal and shell" [level=1] [ref=e153]
+        - paragraph [ref=e154]:
+          - text: Hornero separates the terminal window, the interactive shell inside it, and the command-line tools that manage the desktop. Kitty is the selected default terminal when installed; Alacritty and Ghostty are optional alternatives with their own Hornero defaults. The terminal applications are separate host packages, not dependencies of the Shell.
+          - strong [ref=e155]: Super + E
+          - text: opens Yazi in the host’s configured terminal, while regular terminal launches follow that same association.
+        - heading "Open a terminal" [level=2] [ref=e156]
+        - list [ref=e157]:
+          - listitem [ref=e158]:
+            - text: Press
+            - strong [ref=e159]: Super + T
+            - text: or
+            - strong [ref=e160]: Super + Enter
+            - text: to open the host’s XDG
+            - code [ref=e161]: TerminalEmulator
+            - text: association through
+            - code [ref=e162]: exo-open
+            - text: .
+          - listitem [ref=e163]:
+            - text: Open the Launcher with
+            - strong [ref=e164]: Ctrl + Space
+            - text: and search for an installed terminal.
+          - listitem [ref=e165]:
+            - text: Press
+            - strong [ref=e166]: Super + E
+            - text: for Yazi in a separate window from the configured terminal. Hornero selects Kitty by default; Alacritty and Ghostty are also supported. This workflow needs the selected terminal and Yazi.
+        - paragraph [ref=e167]:
+          - text: Choose an installed terminal in
+          - strong [ref=e168]: Settings → Terminal
+          - text: . Hornero keeps the selection aligned across the host’s Xfce helper, XDG preference, and Shell launch actions. You can inspect it with
+          - code [ref=e169]: horneroctl config default-apps list
+          - text: "or change it from the CLI. Preview the change first:"
+        - code [ref=e171]:
+          - generic [ref=e172]: horneroctl config default-apps set terminal ghostty --dry-run
+          - generic [ref=e173]: horneroctl config default-apps set terminal ghostty --yes
+        - paragraph [ref=e174]:
+          - text: Supported targets are Kitty, Alacritty, and Ghostty. The command updates the user’s
+          - code [ref=e175]: $XDG_CONFIG_HOME/xfce4/helpers.rc
+          - text: and generic
+          - code [ref=e176]: $XDG_CONFIG_HOME/xdg-terminals.list
+          - text: (or the equivalent paths under
+          - code [ref=e177]: ~/.config
+          - text: ), while leaving MIME defaults and other helper entries alone. It also removes a fallback exclusion for the selected terminal. When installed,
+          - code [ref=e178]: xdg-terminal-exec
+          - text: reads the generic list; a desktop-specific preference file can take precedence. See
+          - link "Default applications" [ref=e179] [cursor=pointer]:
+            - /url: /docs/applications/default-apps/
+          - text: and
+          - link "keyboard shortcuts" [ref=e180] [cursor=pointer]:
+            - /url: /docs/desktop/shortcuts/
+          - text: .
+        - heading "Kitty" [level=2] [ref=e181]
+        - paragraph [ref=e182]:
+          - text: Kitty is a GPU-accelerated terminal emulator. Hornero Config provides its system defaults under
+          - code [ref=e183]: /etc/xdg/kitty
+          - text: ; your user configuration at
+          - code [ref=e184]: ~/.config/kitty/kitty.conf
+          - text: "can override them. The defaults include a Hornero Dark palette, font and window spacing, scrollback, and copy/paste bindings:"
+        - table [ref=e185]:
+          - rowgroup [ref=e186]:
+            - row [ref=e187]:
+              - columnheader "Key" [ref=e188]
+              - columnheader "Action" [ref=e189]
+          - rowgroup [ref=e190]:
+            - row [ref=e191]:
+              - cell [ref=e192]:
+                - code [ref=e193]: Ctrl + Shift + C
+              - cell "Copy selection" [ref=e194]
+            - row [ref=e195]:
+              - cell [ref=e196]:
+                - code [ref=e197]: Ctrl + Shift + V
+              - cell "Paste" [ref=e198]
+            - row [ref=e199]:
+              - cell [ref=e200]:
+                - code [ref=e201]: Ctrl + Shift + Page Up/Down
+              - cell "Scroll one line" [ref=e202]
+            - row [ref=e203]:
+              - cell [ref=e204]:
+                - code [ref=e205]: Ctrl + Shift + Home/End
+              - cell "Scroll to top / bottom" [ref=e206]
+            - row [ref=e207]:
+              - cell [ref=e208]:
+                - code [ref=e209]: Ctrl + L
+              - cell "Clear the visible screen" [ref=e210]
+        - paragraph [ref=e211]:
+          - text: The screenshot shows Kitty running
+          - code [ref=e212]: horneroctl
+          - text: appearance commands with the current host configuration. Theme IDs shown by a specific machine can differ from a later catalogue pin.
+        - paragraph [ref=e213]:
+          - img "Kitty displays Hornero theme IDs and wallpaper-derived color information in a styled terminal window." [ref=e214]
+        - paragraph [ref=e215]:
+          - text: Theme packs provide Hornero Dark, Light, and Pampa palettes. Wallpaper-derived colors can also write a user overlay under
+          - code [ref=e216]: ~/.cache/hornero/smart-colors/colors-kitty.conf
+          - text: . If Kitty reports that the optional overlay is absent, the packaged palette still works; generate colors from Appearance or remove only the stale include in a user override.
+        - paragraph [ref=e217]:
+          - text: The public
+          - link "dotfiles repository" [ref=e218] [cursor=pointer]:
+            - /url: https://github.com/ulises-jeremias/dotfiles
+          - text: adds a personal Kitty setup with an 80×24 initial window, 12-point font, and 80% background opacity. Those are workstation preferences, not a Hornero release requirement. Edit the active
+          - code [ref=e219]: kitty.conf
+          - text: to customize Kitty. See the
+          - link "Kitty manual" [ref=e220] [cursor=pointer]:
+            - /url: https://sw.kovidgoyal.net/kitty/
+          - text: .
+        - heading "Alacritty" [level=2] [ref=e221]
+        - paragraph [ref=e222]:
+          - text: Alacritty is an optional terminal for users who prefer a compact TOML configuration. When Alacritty is installed, Hornero Config supplies a system fallback at
+          - code [ref=e223]: /etc/alacritty/alacritty.toml
+          - text: . It imports the static Hornero Dark palette and an optional generated palette, and enables live config reload. Hornero writes the active wallpaper-derived colors to
+          - code [ref=e224]: ~/.config/alacritty/hornero-colors.toml
+          - text: ; applying an appearance updates this file. If you maintain a user config at
+          - code [ref=e225]: ~/.config/alacritty/alacritty.toml
+          - text: ", include the Hornero palette imports there to keep generated colors active."
+        - paragraph [ref=e226]:
+          - text: The installed default uses 12-pixel window padding, 88% opacity, a 2,500-line scrollback, and a non-blinking block cursor. The
+          - link "Alacritty configuration reference" [ref=e227] [cursor=pointer]:
+            - /url: https://alacritty.org/config-alacritty.html
+          - text: documents TOML imports and other settings.
+        - heading "Ghostty" [level=2] [ref=e228]
+        - paragraph [ref=e229]:
+          - text: Ghostty is another optional terminal. Hornero Config provides a
+          - code [ref=e230]: Hornero Dynamic
+          - text: fallback theme under
+          - code [ref=e231]: /usr/share/ghostty/themes/
+          - text: and seeds
+          - code [ref=e232]: /etc/skel/.config/ghostty/config.ghostty
+          - text: for newly created accounts. That config selects the Hornero theme and sets 88% background opacity. Existing accounts are not overwritten by the skeleton; add
+          - code [ref=e233]: theme = Hornero Dynamic
+          - text: to your own
+          - code [ref=e234]: ~/.config/ghostty/config.ghostty
+          - text: to opt in.
+        - paragraph [ref=e235]:
+          - text: When an appearance is applied, Hornero writes the wallpaper-derived theme to
+          - code [ref=e236]: ~/.config/ghostty/themes/Hornero Dynamic
+          - text: ", which takes precedence over the system fallback, and signals a running Ghostty instance to reload. Keep the theme name stable in your config so subsequent appearances update it. See Ghostty’s"
+          - link "configuration guide" [ref=e237] [cursor=pointer]:
+            - /url: https://ghostty.org/docs/config
+          - text: and
+          - link "color-theme guide" [ref=e238] [cursor=pointer]:
+            - /url: https://ghostty.org/docs/features/theme
+          - text: .
+        - heading "Shared appearance behavior" [level=2] [ref=e239]
+        - paragraph [ref=e240]:
+          - text: Applying an appearance in Hornero updates the generated palette files for Kitty, Alacritty, and Ghostty from the active wallpaper. Each emulator reads its native format. Kitty and Alacritty have static Hornero Dark / Light fallbacks; Ghostty has a static
+          - code [ref=e241]: Hornero Dynamic
+          - text: theme fallback. These keep the terminals usable before palette generation, while user-level files remain yours to customize. To inspect the generated scheme, run
+          - code [ref=e242]: horneroctl appearance colors status
+          - text: . See
+          - link "Appearance" [ref=e243] [cursor=pointer]:
+            - /url: /docs/desktop/appearance/
+          - text: for theme and palette controls.
+        - heading "Shell and command workflow" [level=2] [ref=e244]
+        - paragraph [ref=e245]:
+          - text: Your account’s configured shell runs inside the terminal. Hornero Config does not make Zsh, a prompt, shell plugins, or aliases a system dependency. The public dotfiles configuration optionally installs Zsh and defines a personal profile in
+          - code [ref=e246]: ~/.zshrc
+          - text: ","
+          - code [ref=e247]: ~/.zsh/config.d/
+          - text: ", and related prompt files. It enables vi-style command-line editing, reverse history search with"
+          - code [ref=e248]: Ctrl + R
+          - text: ", and prompt/alias loading. These personal choices do not affect Hornero’s CLI contract."
+        - paragraph [ref=e249]:
+          - text: That profile also sets
+          - code [ref=e250]: $EDITOR
+          - text: and
+          - code [ref=e251]: $VISUAL
+          - text: to Neovim for command-line programs. Hornero itself has no universal graphical editor default; see
+          - link "Default applications" [ref=e252] [cursor=pointer]:
+            - /url: /docs/applications/default-apps/
+          - text: . To run desktop tasks from a shell, use
+          - link [ref=e253] [cursor=pointer]:
+            - /url: /docs/desktop/horneroctl/
+            - code [ref=e254]: horneroctl
+          - text: and its installed
+          - code [ref=e255]: "--help"
+          - text: output.
+        - heading "Optional tmux setup" [level=2] [ref=e256]
+        - paragraph [ref=e257]:
+          - text: The personal workstation configuration includes tmux and plugins; neither is required by Hornero. Its configuration uses
+          - code [ref=e258]: Ctrl + A
+          - text: as the primary prefix,
+          - code [ref=e259]: Ctrl + B
+          - text: as an alternate prefix, mouse support, vi-style copy-mode, and a large scrollback history. Plugin installation depends on the optional TPM checkout. See the
+          - link "tmux manual" [ref=e260] [cursor=pointer]:
+            - /url: https://github.com/tmux/tmux/wiki
+          - text: before copying those preferences to another machine.
+        - heading "When something does not open" [level=2] [ref=e261]
+        - list [ref=e262]:
+          - listitem [ref=e263]:
+            - text: Run
+            - code [ref=e264]: horneroctl apps launch --list
+            - text: to see which launch backends are available.
+          - listitem [ref=e265]:
+            - text: Run
+            - code [ref=e266]: horneroctl apps terminal-file --help
+            - text: to inspect the Yazi workflow.
+          - listitem [ref=e267]:
+            - text: Check that the selected terminal is installed and that the
+            - code [ref=e268]: TerminalEmulator
+            - text: helper in
+            - code [ref=e269]: ~/.config/xfce4/helpers.rc
+            - text: matches it.
+          - listitem [ref=e270]:
+            - text: If a terminal’s colors are stale, apply the desired appearance again in
+            - strong [ref=e271]: Settings → Appearance
+            - text: and check
+            - code [ref=e272]: horneroctl appearance colors status
+            - text: .
+          - listitem [ref=e273]:
+            - text: Check whether a user-level config overrides the Hornero system fallback. For Ghostty, confirm
+            - code [ref=e274]: theme = Hornero Dynamic
+            - text: is present in the active
+            - code [ref=e275]: config.ghostty
+            - text: file.
+        - paragraph [ref=e276]:
+          - text: "Useful references:"
+          - link "Kitty" [ref=e277] [cursor=pointer]:
+            - /url: https://sw.kovidgoyal.net/kitty/
+          - text: ","
+          - link "Alacritty" [ref=e278] [cursor=pointer]:
+            - /url: https://alacritty.org/config-alacritty.html
+          - text: ","
+          - link "Ghostty" [ref=e279] [cursor=pointer]:
+            - /url: https://ghostty.org/docs
+          - text: ","
+          - link "Zsh manual" [ref=e280] [cursor=pointer]:
+            - /url: https://zsh.sourceforge.io/Doc/Release/
+          - text: ","
+          - link "tmux wiki" [ref=e281] [cursor=pointer]:
+            - /url: https://github.com/tmux/tmux/wiki
+          - text: ","
+          - link "Appearance" [ref=e282] [cursor=pointer]:
+            - /url: /docs/desktop/appearance/
+          - text: ", and"
+          - link "shortcuts" [ref=e283] [cursor=pointer]:
+            - /url: /docs/desktop/shortcuts/
+          - text: .
+        - paragraph [ref=e285]:
+          - text: From
+          - link [ref=e286] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/blob/71a03191b6e1d4d82796ea24fdff18af87ec519a/applications/terminal.md
+            - code [ref=e287]: HorneroOS/docs/applications/terminal.md
+          - text: at commit
+          - link [ref=e288] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/commit/71a03191b6e1d4d82796ea24fdff18af87ec519a
+            - code [ref=e289]: 71a0319
+          - text: .
+          - link "Suggest a change on GitHub" [ref=e290] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/docs/edit/main/applications/terminal.md
+          - text: .
+      - navigation "On this page" [ref=e291]:
+        - paragraph [ref=e292]: On this page
+        - list [ref=e293]:
+          - listitem [ref=e294]:
+            - link "Open a terminal" [ref=e295] [cursor=pointer]:
+              - /url: "#open-a-terminal"
+          - listitem [ref=e296]:
+            - link "Kitty" [ref=e297] [cursor=pointer]:
+              - /url: "#kitty"
+          - listitem [ref=e298]:
+            - link "Alacritty" [ref=e299] [cursor=pointer]:
+              - /url: "#alacritty"
+          - listitem [ref=e300]:
+            - link "Ghostty" [ref=e301] [cursor=pointer]:
+              - /url: "#ghostty"
+          - listitem [ref=e302]:
+            - link "Shared appearance behavior" [ref=e303] [cursor=pointer]:
+              - /url: "#shared-appearance-behavior"
+          - listitem [ref=e304]:
+            - link "Shell and command workflow" [ref=e305] [cursor=pointer]:
+              - /url: "#shell-and-command-workflow"
+          - listitem [ref=e306]:
+            - link "Optional tmux setup" [ref=e307] [cursor=pointer]:
+              - /url: "#optional-tmux-setup"
+          - listitem [ref=e308]:
+            - link "When something does not open" [ref=e309] [cursor=pointer]:
+              - /url: "#when-something-does-not-open"
+  - contentinfo [ref=e310]:
+    - navigation "Project" [ref=e311]:
+      - list [ref=e312]:
+        - listitem [ref=e313]:
+          - link "GitHub" [ref=e314] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=e315]:
+          - link "Project map" [ref=e316] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=e317]:
+          - link "Design language" [ref=e318] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=e319]:
+          - link "Contribute" [ref=e320] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=e321]:
+          - link "Search" [ref=e322] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=e323]:
+          - link "Report a site issue" [ref=e324] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=e325]: Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses no cookies or analytics; your color choice stays in this browser, and the site loads no third-party resources. Every screenshot is a real capture labelled with its source.
