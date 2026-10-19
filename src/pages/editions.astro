@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import AppLogo from '../components/AppLogo.astro';
 import { editions, editionCatalogue } from '../data/product';
 
 const maturityLabels = {
@@ -109,10 +110,13 @@ const roleLabel = {
               <span class="backend-heading">Wayland compositor</span>
               {edition.compositors.map((backend) => (
                 <span class="backend">
-                  <strong>
-                    {backend.id === 'hyprland' ? 'Hyprland' : backend.id === 'niri' ? 'Niri' : backend.id}
-                  </strong>
-                  <small>{statusLabel(backend.maturity as keyof typeof maturityLabels)}</small>
+                  <AppLogo id={backend.id} />
+                  <span class="backend-name">
+                    <strong>
+                      {backend.id === 'hyprland' ? 'Hyprland' : backend.id === 'niri' ? 'Niri' : backend.id}
+                    </strong>
+                    <small>{statusLabel(backend.maturity as keyof typeof maturityLabels)}</small>
+                  </span>
                 </span>
               ))}
             </div>
@@ -303,13 +307,17 @@ const roleLabel = {
     font-size: 0.74rem;
   }
   .backend {
+    --app-logo-size: 1.9rem;
     display: flex;
     min-width: 0;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.55rem;
     padding: 0.45rem;
     border: 1px solid var(--line);
     border-radius: 8px;
   }
+  .backend-name { display: grid; gap: 0.1rem; min-width: 0; }
   .backend strong {
     font-size: 0.83rem;
   }

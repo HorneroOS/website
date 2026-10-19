@@ -1,0 +1,89 @@
+---
+/**
+ * Official upstream application logo, vendored unmodified in
+ * `src/assets/apps/` for nominative identification (see
+ * docs/DESIGN_SYSTEM_199X.md, "Artwork provenance"). The visible app name
+ * always sits next to the mark, so the image itself is decorative.
+ * Cava has no official logo upstream; it gets a generic audio-visualizer
+ * glyph drawn in-house instead — never presented as Cava's logo.
+ */
+import kittyLogo from '../assets/apps/kitty.png';
+import alacrittyLogo from '../assets/apps/alacritty.svg';
+import ghosttyLogo from '../assets/apps/ghostty.png';
+import btopLogo from '../assets/apps/btop.svg';
+import hyprlandLogo from '../assets/apps/hyprland.svg';
+import niriLogo from '../assets/apps/niri.svg';
+import yaziLogo from '../assets/apps/yazi.png';
+
+const logos: Record<string, { src: string; width: number; height: number }> = {
+  kitty: kittyLogo,
+  alacritty: alacrittyLogo,
+  ghostty: ghosttyLogo,
+  btop: btopLogo,
+  hyprland: hyprlandLogo,
+  niri: niriLogo,
+  yazi: yaziLogo,
+};
+
+interface Props {
+  id: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+const logo = logos[id];
+---
+
+{
+  logo ? (
+    <img
+      class:list={['app-logo', className]}
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  ) : id === 'cava' ? (
+    <span class:list={['app-logo', 'cava-glyph', className]} aria-hidden="true">
+      <i />
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
+  ) : null
+}
+
+<style>
+  .app-logo {
+    width: var(--app-logo-size, 2.5rem);
+    height: var(--app-logo-size, 2.5rem);
+    object-fit: contain;
+    flex: none;
+  }
+  .cava-glyph {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: calc(var(--app-logo-size, 2.5rem) * 0.09);
+    padding: calc(var(--app-logo-size, 2.5rem) * 0.16) calc(var(--app-logo-size, 2.5rem) * 0.13)
+      calc(var(--app-logo-size, 2.5rem) * 0.13);
+    box-sizing: border-box;
+    background: var(--night);
+    border: 1px solid color-mix(in srgb, var(--river) 45%, transparent);
+    border-radius: 24%;
+  }
+  .cava-glyph i {
+    flex: 1;
+    min-width: 0;
+    background: linear-gradient(0deg, var(--electric), var(--river) 55%, var(--signal));
+    border-radius: 1px;
+  }
+  .cava-glyph i:nth-child(1) { height: 45%; }
+  .cava-glyph i:nth-child(2) { height: 80%; }
+  .cava-glyph i:nth-child(3) { height: 100%; }
+  .cava-glyph i:nth-child(4) { height: 62%; }
+  .cava-glyph i:nth-child(5) { height: 88%; }
+</style>

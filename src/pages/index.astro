@@ -3,9 +3,7 @@ import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import DesktopCaptureExplorer from '../components/DesktopCaptureExplorer.astro';
 import poster199x from '../assets/brand/hornero-199x-poster.jpg';
-import kittyLogo from '../assets/apps/kitty.png';
-import alacrittyLogo from '../assets/apps/alacritty.svg';
-import ghosttyLogo from '../assets/apps/ghostty.png';
+import AppLogo from '../components/AppLogo.astro';
 import {
   editionCatalogue,
   editions,
@@ -122,7 +120,9 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
         <a class:list={['family-cell', `family-${edition.id}`, `maturity-${edition.maturity}`]} href={`/editions#${edition.id}`}>
           <span class="family-cell-top"><strong>{edition.name}</strong><small>{edition.status}</small></span>
           {edition.compositors.length > 0 ? (
-            <span class="family-detail">Wayland · {edition.compositors.map((backend) => (backend.id === 'hyprland' ? 'Hyprland' : 'Niri')).join(' / ')}</span>
+            <span class="family-detail">Wayland · {edition.compositors.map((backend) => (
+              <span class="family-backend"><AppLogo id={backend.id} />{backend.id === 'hyprland' ? 'Hyprland' : 'Niri'}</span>
+            ))}</span>
           ) : (
             <span class="family-detail">{edition.roleLabel}</span>
           )}
@@ -158,13 +158,17 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
     </div>
     <div class="palette-tools">
       <div class="terminal-strip" aria-label="Supported terminal emulators and their native color formats">
-        <div><img class="terminal-logo" src={kittyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Kitty</strong><code>conf</code></div>
-        <div><img class="terminal-logo" src={alacrittyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Alacritty</strong><code>TOML</code></div>
-        <div><img class="terminal-logo" src={ghosttyLogo.src} width="128" height="128" alt="" loading="lazy" decoding="async" /><strong>Ghostty</strong><code>theme</code></div>
+        <div><AppLogo id="kitty" /><strong>Kitty</strong><code>conf</code></div>
+        <div><AppLogo id="alacritty" /><strong>Alacritty</strong><code>TOML</code></div>
+        <div><AppLogo id="ghostty" /><strong>Ghostty</strong><code>theme</code></div>
       </div>
       <div class="palette-extensions" aria-label="Additional optional applications with native Hornero themes">
         {paletteApplications.map((application) => (
-          <div><strong>{application.name}</strong><span>{application.category}</span><small>optional</small></div>
+          <div>
+            <AppLogo id={application.id} />
+            <span class="palette-ext-name"><strong>{application.name}</strong><span>{application.category}</span></span>
+            <small>optional</small>
+          </div>
         ))}
       </div>
     </div>
@@ -323,16 +327,18 @@ const description = `HorneroOS is an Arch-based, Wayland-first desktop imagined 
   .terminal-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .terminal-strip > div { display: grid; justify-items: start; gap: 0.55rem; min-width: 0; padding: 1rem 0.6rem; border-right: 1px solid var(--line); }
   .terminal-strip > div:last-child { border: 0; }
-  .terminal-logo { width: 2.5rem; height: 2.5rem; object-fit: contain; }
   .terminal-strip strong { font-family: var(--font-display); font-size: 0.9rem; }
   .terminal-strip code { color: var(--secondary); font-size: 0.65rem; }
   .palette-tools { min-width: 0; }
   .palette-extensions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
-  .palette-extensions > div { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 0.5rem; min-width: 0; padding: 0.7rem 0.6rem; border-right: 1px solid var(--line); }
+  .palette-extensions > div { --app-logo-size: 2rem; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.15rem 0.6rem; min-width: 0; padding: 0.7rem 0.6rem; border-right: 1px solid var(--line); }
   .palette-extensions > div:last-child { border: 0; }
+  .palette-ext-name { display: grid; gap: 0.15rem; min-width: 0; }
   .palette-extensions strong { font-family: var(--font-display); font-size: 0.84rem; }
-  .palette-extensions span { color: var(--text-muted); font-size: 0.72rem; }
-  .palette-extensions small { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--secondary); font: 0.58rem var(--font-data); text-transform: uppercase; }
+  .palette-ext-name span { color: var(--text-muted); font-size: 0.72rem; }
+  .palette-extensions small { align-self: center; color: var(--secondary); font: 0.58rem var(--font-data); text-transform: uppercase; }
+  .family-detail { --app-logo-size: 0.95rem; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.55rem; }
+  .family-backend { display: inline-flex; align-items: center; gap: 0.3rem; }
   .photo-atlas { margin-block: clamp(4rem, 8vw, 8rem); }
   .photo-heading > p { max-width: 39ch; color: var(--text-muted); }
   .photo-heading h2 em { color: var(--accent); font-weight: 500; }

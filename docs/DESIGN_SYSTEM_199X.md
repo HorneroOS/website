@@ -86,14 +86,25 @@ for this project (AI-assisted illustration, directed and reviewed by the
 project): a hornero and its nest over the La Plata grid. It contains no
 third-party imagery, no copied broadcaster artwork and no text. On the
 homepage it is explicitly captioned as artwork, never as a screenshot.
-The config wallpaper (`assets/brand/wallpaper/hornero-199x.svg` in
-HorneroOS/config) is hand-authored original vector artwork.
+The config wallpaper (`assets/brand/wallpaper/hornero-199x.png` in
+HorneroOS/config) is generated original artwork in the same scene; the
+simple SVG wallpapers were retired in HorneroOS/config#84.
 
-The terminal logos in `src/assets/apps/` (`kitty.png`, `alacritty.svg`,
-`ghostty.png`) are the official upstream application icons, vendored
-unmodified from the Kitty, Alacritty and Ghostty projects for nominative
-identification only. They remain the trademarks of their respective
-projects and are not HorneroOS artwork.
+The application logos in `src/assets/apps/` are the official upstream
+icons, vendored unmodified from their projects for nominative
+identification only: `kitty.png`, `alacritty.svg` and `ghostty.png` from
+the Kitty, Alacritty and Ghostty projects; `btop.svg` from btop;
+`yazi.png` from Yazi (downscaled from the 1254 px upstream original);
+`niri.svg` from Niri (CC BY-SA 4.0, per the project's Name-and-Logo
+page); and `hyprland.svg`, the Hyprland droplet mark extracted from the
+official Hyprland logo lockup (`assets/header.svg` in hyprwm/Hyprland).
+They remain the trademarks of their respective projects and are not
+HorneroOS artwork. They render through `src/components/AppLogo.astro`,
+always beside the visible application name. Cava ships no official logo
+upstream, so `AppLogo` draws a generic audio-visualizer glyph for it
+in-house; that glyph is site iconography, never presented as Cava's
+logo. Prose-only mentions (Polybar, Waybar, Calamares, SDDM and similar
+lineage or status references) intentionally carry no logo.
 
 ## Desktop counterpart
 
