@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import ArchFrame from '../components/ArchFrame.astro';
 import ThemePaletteStudy from '../components/ThemePaletteStudy.astro';
+import AppLogo from '../components/AppLogo.astro';
 import { paletteApplications, themes, wallpapers } from '../data/product';
 import variantSample from '../data/product/palette-variants.json';
 
@@ -308,7 +309,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     <div class="terminal-grid">
       <article class="terminal-card">
         <div class="terminal-card-heading">
-          <h3>Kitty</h3>
+          <span class="terminal-card-name"><AppLogo id="kitty" /><h3>Kitty</h3></span>
           <span>Included default</span>
         </div>
         <p>The packaged config includes the palette generated for your current appearance.</p>
@@ -316,7 +317,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </article>
       <article class="terminal-card">
         <div class="terminal-card-heading">
-          <h3>Alacritty</h3>
+          <span class="terminal-card-name"><AppLogo id="alacritty" /><h3>Alacritty</h3></span>
           <span>Optional</span>
         </div>
         <p>A native TOML import keeps the static Hornero colors as a fallback.</p>
@@ -324,7 +325,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       </article>
       <article class="terminal-card">
         <div class="terminal-card-heading">
-          <h3>Ghostty</h3>
+          <span class="terminal-card-name"><AppLogo id="ghostty" /><h3>Ghostty</h3></span>
           <span>Optional</span>
         </div>
         <p>The stable theme name points to a generated palette, with a packaged fallback.</p>
@@ -338,7 +339,14 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </p>
     <aside class="native-tool-note" aria-label="Other applications with native Hornero color themes">
       <span class="native-tool-label">Beyond the prompt</span>
-      <p>Hornero Config can generate native wallpaper-derived themes for <strong>{paletteApplications.map((application) => application.name).join(' and ')}</strong>. Their curated configurations select <code>Hornero Dynamic</code>; these applications remain optional Arch packages.</p>
+      <div class="native-tool-body">
+        <p>Hornero Config can generate native wallpaper-derived themes for these tools. Their curated configurations select <code>Hornero Dynamic</code>; these applications remain optional Arch packages.</p>
+        <ul class="native-tool-list" role="list">
+          {paletteApplications.map((application) => (
+            <li><AppLogo id={application.id} /><span><strong>{application.name}</strong><small>{application.category}</small></span></li>
+          ))}
+        </ul>
+      </div>
     </aside>
   </section>
 
@@ -864,10 +872,16 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   .terminal-card-heading {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 0.4rem 0.8rem;
   }
+  .terminal-card-name { --app-logo-size: 2.2rem; display: inline-flex; align-items: center; gap: 0.6rem; }
+  .native-tool-list { --app-logo-size: 2.4rem; display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin-top: 0.8rem; padding: 0; list-style: none; }
+  .native-tool-list li { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .native-tool-list li span { display: grid; gap: 0.1rem; }
+  .native-tool-list strong { color: var(--text); font-family: var(--font-display); font-size: 0.9rem; }
+  .native-tool-list small { color: var(--text-muted); font-size: 0.7rem; }
   .terminal-card-heading h3 {
     font-size: 1.15rem;
   }
