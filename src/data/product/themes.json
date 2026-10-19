@@ -52,7 +52,7 @@
     "id": "hornero-light",
     "name": "Hornero Light",
     "mode": "light",
-    "description": "Flagship Hornero light theme: deep terracotta, fired clay and sunset amber on warm morning paper — a first-class light ramp, not an inverted dark",
+    "description": "Flagship Hornero light theme: clean Orchis-style neutrals with a varied accent family - blue primary, hornero orange badges, green, red and amber semantics - a first-class light ramp, not an inverted dark",
     "official": true,
     "collection": "hornero-originals",
     "collectionOrder": 4,
@@ -61,12 +61,12 @@
     "iconTheme": "Papirus",
     "schemeType": "vibrant",
     "palette": {
-      "background": "#FAF1E3",
-      "surface": "#FFFDF7",
-      "text": "#2B1A11",
-      "primary": "#B24827",
-      "secondary": "#7C4A2C",
-      "accent": "#96590A"
+      "background": "#F2F2F2",
+      "surface": "#FFFFFF",
+      "text": "#212121",
+      "primary": "#1A73E8",
+      "secondary": "#546E7A",
+      "accent": "#B85C00"
     }
   },
   {

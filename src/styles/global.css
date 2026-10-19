@@ -2,9 +2,12 @@
  * Hornero OS site design system — Hornero 199X.
  *
  * Argentine retrofuturism, 1985-1995: broadcast identification plates,
- * editorial print on warm paper, La Plata's diagonal grid, and restrained
+ * newsprint editorial print, La Plata's diagonal grid, and restrained
  * phosphor/orange signal color. Night mode is the broadcast studio;
- * light mode is the printed daytime edition. See docs/DESIGN_SYSTEM_199X.md.
+ * light mode is the midday newsprint edition: cool grey paper, black
+ * ink and the same signal inks at print strength. The earlier warm
+ * cream ramp read as generic beige and was retired. See
+ * docs/DESIGN_SYSTEM_199X.md.
  * Type is Bricolage Grotesque for display, Rubik for UI, and Martian Mono
  * for technical identification. All are self-hosted.
  */
@@ -24,7 +27,7 @@
   --sodium: #f5a76c;
   --mint: #91c8a2;
   --phosphor: #91c8a2;
-  --paper: #ede5d2;
+  --paper: #eff0ee;
 
   /* Roles */
   --bg: var(--night);
@@ -72,19 +75,22 @@
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  /* Daytime / Editorial: warm printed paper, midnight type, burnt signal. */
-  --bg: #ede5d2;
-  --surface: #e3d8bf;
-  --surface-raised: #fff6e6;
-  --line: #b3a888;
-  --text: #142745;
-  --text-muted: #3d4e6b;
-  --accent: #9a4a12;
-  --accent-ink: #fff6e6;
-  --highlight: #1f4e79;
-  --secondary: #7c4d0f;
-  --focus: #1f4e79;
-  --browser-theme-color: #ede5d2;
+  /* Daytime / Newsprint: cool Orchis-style neutrals, black ink, and the
+   * Hornero inks at print strength — blue primary, blue-grey secondary,
+   * burnt signal orange. Same family as the Hornero Light GTK ramp in
+   * HorneroOS/config so site and desktop read as one system. */
+  --bg: #eff0ee;
+  --surface: #e5e8e3;
+  --surface-raised: #ffffff;
+  --line: #aeb5ac;
+  --text: #212121;
+  --text-muted: #47525e;
+  --accent: #9e4f00;
+  --accent-ink: #ffffff;
+  --highlight: #155cb8;
+  --secondary: #48616f;
+  --focus: #155cb8;
+  --browser-theme-color: #eff0ee;
   --signal-grid: color-mix(in srgb, var(--highlight) 3%, transparent);
   --diag-grid: color-mix(in srgb, var(--accent) 4%, transparent);
   --sign-haze: 5%;

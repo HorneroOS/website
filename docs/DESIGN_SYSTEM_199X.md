@@ -26,17 +26,24 @@ no synthwave sunsets, no copied broadcaster logos, no fabricated screenshots.
 
 ## Dual modes
 
-| Role | Nighttime / Broadcast (dark) | Daytime / Editorial (light) |
+| Role | Nighttime / Broadcast (dark) | Daytime / Newsprint (light) |
 | --- | --- | --- |
-| Background | Deep CRT ink `#0B1018` | Warm printed paper `#EDE5D2` |
-| Surface | Midnight broadcast blue `#142745` | Printed card `#E3D8BF` |
-| Raised | `#1B335C` | Warm white `#FFF6E6` |
-| Text | Warm white `#FFF6E6` | Midnight `#142745` |
-| Muted text | `#B9C6DE` | `#3D4E6B` |
-| Accent (signal orange) | `#F08B43` | Burnt signal `#9A4A12` |
-| Highlight (broadcast blue) | `#7FB0E6` (electric `#427CCD` decorative) | `#1F4E79` |
-| Secondary (phosphor) | `#91C8A2` | `#7C4D0F` |
-| Focus | `#91C8A2` | `#1F4E79` |
+| Background | Deep CRT ink `#0B1018` | Newsprint grey `#EFF0EE` |
+| Surface | Midnight broadcast blue `#142745` | Printed card `#E5E8E3` |
+| Raised | `#1B335C` | Paper white `#FFFFFF` |
+| Text | Warm white `#FFF6E6` | Print ink `#212121` |
+| Muted text | `#B9C6DE` | Blue-grey ink `#47525E` |
+| Accent (signal orange) | `#F08B43` | Burnt signal `#9E4F00` |
+| Highlight (broadcast blue) | `#7FB0E6` (electric `#427CCD` decorative) | Print blue `#155CB8` |
+| Secondary (blue grey) | `#91C8A2` (phosphor) | Blue grey `#48616F` |
+| Focus | `#91C8A2` | `#155CB8` |
+
+Light mode is the midday newsprint edition: cool neutral paper and black
+ink instead of the retired warm cream ramp, which read as generic beige.
+Its neutrals and blue follow the same Orchis-style direction as the
+Hornero Light GTK ramp in HorneroOS/config (PR #85), so the site and the
+desktop read as one system in light mode; the signal orange stays the
+Hornero ink in both.
 
 All text pairs above are ≥ 4.5:1 (WCAG AA) on their backgrounds; verified
 when the tokens changed. Electric `#427CCD` is decorative in dark mode —
