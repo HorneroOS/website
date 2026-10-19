@@ -29,10 +29,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 2,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-Patagonia",
     "iconTheme": "Papirus-Dark",
     "schemeType": "fidelity",
-    "palette": {}
+    "palette": {
+      "background": "#0E1720",
+      "surface": "#16222E",
+      "text": "#EAF3F8",
+      "primary": "#8FD0E8",
+      "secondary": "#35648F",
+      "accent": "#E8A33D"
+    }
   },
   {
     "id": "quebrada",
@@ -43,10 +50,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 3,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Light",
+    "gtkTheme": "Hornero-Quebrada",
     "iconTheme": "Papirus",
     "schemeType": "fidelity",
-    "palette": {}
+    "palette": {
+      "background": "#F0E9E2",
+      "surface": "#FFFDF8",
+      "text": "#2E2118",
+      "primary": "#AE4028",
+      "secondary": "#6553A3",
+      "accent": "#96690E"
+    }
   },
   {
     "id": "hornero-light",
@@ -78,10 +92,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 5,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-Ibera",
     "iconTheme": "Papirus-Dark",
     "schemeType": "expressive",
-    "palette": {}
+    "palette": {
+      "background": "#0D1712",
+      "surface": "#14231B",
+      "text": "#EBF3E6",
+      "primary": "#8FC97A",
+      "secondary": "#2E5F43",
+      "accent": "#E8B54A"
+    }
   },
   {
     "id": "fin-del-mundo",
@@ -92,10 +113,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 6,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-FinDelMundo",
     "iconTheme": "Papirus-Dark",
     "schemeType": "expressive",
-    "palette": {}
+    "palette": {
+      "background": "#0B1620",
+      "surface": "#12222F",
+      "text": "#E8F1F5",
+      "primary": "#7FC4C9",
+      "secondary": "#31586E",
+      "accent": "#E8875B"
+    }
   },
   {
     "id": "buenos-aires-nocturno",
@@ -106,10 +134,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 7,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-Nocturno",
     "iconTheme": "Papirus-Dark",
     "schemeType": "vibrant",
-    "palette": {}
+    "palette": {
+      "background": "#0C1322",
+      "surface": "#141F36",
+      "text": "#EDF2FA",
+      "primary": "#F0A832",
+      "secondary": "#3E6FB0",
+      "accent": "#E4572E"
+    }
   },
   {
     "id": "pampa",
@@ -141,7 +176,7 @@
     "collection": "hornero-originals",
     "collectionOrder": 9,
     "paletteModel": "semantic",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-199X",
     "iconTheme": "Papirus-Dark",
     "schemeType": "vibrant",
     "palette": {
@@ -162,10 +197,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 10,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Light",
+    "gtkTheme": "Hornero-Cuyo",
     "iconTheme": "Papirus",
     "schemeType": "fidelity",
-    "palette": {}
+    "palette": {
+      "background": "#ECEAE6",
+      "surface": "#FFFFFF",
+      "text": "#26232A",
+      "primary": "#7A2E4A",
+      "secondary": "#486581",
+      "accent": "#9C5A10"
+    }
   },
   {
     "id": "iguazu",
@@ -176,10 +218,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 11,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Dark",
+    "gtkTheme": "Hornero-Iguazu",
     "iconTheme": "Papirus-Dark",
     "schemeType": "expressive",
-    "palette": {}
+    "palette": {
+      "background": "#101614",
+      "surface": "#18201C",
+      "text": "#EFF5F0",
+      "primary": "#5EC8B4",
+      "secondary": "#2E6B8F",
+      "accent": "#E86A4E"
+    }
   },
   {
     "id": "sierras",
@@ -190,10 +239,17 @@
     "collection": "hornero-originals",
     "collectionOrder": 12,
     "paletteModel": "wallpaper",
-    "gtkTheme": "Hornero-Light",
+    "gtkTheme": "Hornero-Sierras",
     "iconTheme": "Papirus",
     "schemeType": "fidelity",
-    "palette": {}
+    "palette": {
+      "background": "#EFEDE4",
+      "surface": "#FFFFFF",
+      "text": "#262A1E",
+      "primary": "#5F7A2E",
+      "secondary": "#4E6E7E",
+      "accent": "#A85E0C"
+    }
   },
   {
     "id": "catppuccin-latte",

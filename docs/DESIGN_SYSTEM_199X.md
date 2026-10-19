@@ -106,8 +106,12 @@ the Kitty, Alacritty and Ghostty projects; `btop.svg` from btop;
 page); and `hyprland.svg`, the Hyprland droplet mark extracted from the
 official Hyprland logo lockup (`assets/header.svg` in hyprwm/Hyprland).
 They remain the trademarks of their respective projects and are not
-HorneroOS artwork. They render through `src/components/AppLogo.astro`,
-always beside the visible application name. Cava ships no official logo
+HorneroOS artwork. `thunar.svg` (XFCE Thunar) and `copyq.svg` (CopyQ)
+follow the same rule for the docs featured-tools chips. They render
+through `src/components/AppLogo.astro`, always beside the visible
+application name. Docs pages show at most three chips, mapped per slug
+in `src/data/docs-apps.ts`, only for tools Hornero actually configures
+or integrates on that page. Cava ships no official logo
 upstream, so `AppLogo` draws a generic audio-visualizer glyph for it
 in-house; that glyph is site iconography, never presented as Cava's
 logo. Prose-only mentions (Polybar, Waybar, Calamares, SDDM and similar

@@ -307,7 +307,7 @@ const roleLabel = {
     font-size: 0.74rem;
   }
   .backend {
-    --app-logo-size: 1.9rem;
+    --app-logo-size: 1.55rem;
     display: flex;
     min-width: 0;
     flex-direction: row;
@@ -320,10 +320,17 @@ const roleLabel = {
   .backend-name { display: grid; gap: 0.1rem; min-width: 0; }
   .backend strong {
     font-size: 0.83rem;
+    overflow-wrap: anywhere;
   }
   .backend small {
     color: var(--text-muted);
     font-size: 0.68rem;
+    overflow-wrap: anywhere;
+  }
+  /* Four-across edition cards are too narrow for two chips per row:
+     stack the compositor chips until the grid itself collapses. */
+  @media (max-width: 1340px) {
+    .backend-list { grid-template-columns: 1fr; }
   }
   .edition-link {
     display: flex;
