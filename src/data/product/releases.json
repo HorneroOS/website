@@ -1,13 +1,31 @@
 [
   {
+    "name": "v0.2.0-preview20",
+    "version": "0.2.0-preview20",
+    "date": "2026-10-19",
+    "status": "candidate",
+    "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
+    "manifest": "hornero-0.2.0-preview20",
+    "shell": {
+      "sha": "843aee9440ceea57f24da5121473e13fe78ce61a",
+      "subject": "feat(plugins): dashboard placement - Extensions tab cards (M2 slice 3) (#217)"
+    },
+    "config": {
+      "sha": "76a552f7ec56f00ed52e122150f27639a3a8d70a",
+      "subject": "feat(themes): unique GTK theme for every Hornero Original region (#86)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview19",
     "version": "0.2.0-preview19",
     "date": "2026-10-13",
-    "status": "candidate",
+    "status": "untagged",
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview19",
     "shell": {
-      "sha": "2c78e9fc279fa1dc956c839b547318e9980ca63b",
+      "sha": "843aee9440ceea57f24da5121473e13fe78ce61a",
       "subject": "feat(plugins): dashboard placement - Extensions tab cards (M2 slice 3) (#217)"
     },
     "config": {
