@@ -20,6 +20,10 @@
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",
       "sha": "179a99bc637f0c9bc615c30bee3f926975da77ba"
+    },
+    "plugins": {
+      "repo": "https://github.com/HorneroOS/plugins",
+      "sha": "f4f20e2c3c51435908709e3f84ba379713c78c2a"
     }
   },
   "releaseTags": [

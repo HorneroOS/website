@@ -499,6 +499,29 @@ if (!CHECK) {
   writeFileSync(pinsPath, `${JSON.stringify(pins, null, 2)}\n`);
 }
 
+
+function extensions(pluginsDir) {
+  const catalog = readJson(join(pluginsDir, 'catalog.json'));
+  if (!Array.isArray(catalog.plugins)) fail('plugins catalog.json has no plugins array');
+  return {
+    generatedFrom: catalog.generatedFrom ?? '',
+    plugins: catalog.plugins.map((e) => ({
+      id: e.id,
+      name: e.name,
+      version: e.version,
+      description: e.description,
+      author: e.author,
+      license: e.license,
+      placement: e.placement ?? 'background',
+      category: e.category ?? 'utilities',
+      trust: e.trust ?? 'community',
+      sha256: e.sha256 ?? '',
+      processCommands: e.capabilities?.processCommands ?? [],
+      networkHosts: e.capabilities?.networkHosts ?? [],
+    })),
+  };
+}
+
 const generated = {
   'layouts.json': layouts(dirs.shell),
   'themes.json': themes(dirs.config, officialThemes(dirs.hornero)),
@@ -508,6 +531,7 @@ const generated = {
   'greeter-scenes.json': greeterScenes(dirs.greeter),
   'terminals.json': terminalIntegrations(dirs.config),
   'palette-applications.json': paletteApplications(dirs.config),
+  'extensions.json': extensions(dirs.plugins),
 };
 
 let drift = 0;

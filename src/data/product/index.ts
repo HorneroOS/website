@@ -10,6 +10,7 @@ import greeterScenesJson from './greeter-scenes.json';
 import wallpapersJson from './wallpapers.json';
 import terminalsJson from './terminals.json';
 import paletteApplicationsJson from './palette-applications.json';
+import extensionsJson from './extensions.json';
 
 export interface LayoutBar {
   edge: 'top' | 'bottom' | 'left' | 'right';
@@ -168,9 +169,29 @@ export const terminalCatalogue = terminalsJson as TerminalCatalogue;
 export const paletteApplications = paletteApplicationsJson as PaletteApplication[];
 export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
-export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter', { repo: string; sha: string }>;
+export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter' | 'plugins', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);
 export const commitUrl = (repo: string, sha: string) => `${repo}/commit/${sha}`;
 export const latestTagged = releases.find((r) => r.status === 'tagged');
 export const candidate = releases.find((r) => r.status === 'candidate');
+
+export interface ExtensionEntry {
+  id: string;
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  license: string;
+  placement: string;
+  category: string;
+  trust: string;
+  sha256: string;
+  processCommands: string[];
+  networkHosts: string[];
+}
+
+export const extensionCatalogue = extensionsJson as {
+  generatedFrom: string;
+  plugins: ExtensionEntry[];
+};
