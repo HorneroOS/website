@@ -1,0 +1,47 @@
+{
+  "generatedFrom": "4a17b450dbd01d15ecf16fc06608c69af704aaa5",
+  "plugins": [
+    {
+      "id": "hornero-dual-clock",
+      "name": "Hornero Dual Clock",
+      "version": "1.0.0",
+      "description": "Local time next to UTC in the bar, for coordinating with people in other time zones. Pure QML, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "placement": "bar",
+      "category": "utilities",
+      "trust": "official",
+      "sha256": "d6c2f9deb740290088e348aa531d4286476556c32082219e18613cd9678dc2b2",
+      "processCommands": [],
+      "networkHosts": []
+    },
+    {
+      "id": "hornero-focus-card",
+      "name": "Hornero Focus Card",
+      "version": "1.0.0",
+      "description": "A dashboard card with a rotating original one-line focus reminder and the date. Pure QML, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "placement": "dashboard",
+      "category": "utilities",
+      "trust": "official",
+      "sha256": "c1d1597662887127b7464897b22abea8e336c54820e73438e6a09ea9ab162249",
+      "processCommands": [],
+      "networkHosts": []
+    },
+    {
+      "id": "hornero-pomodoro",
+      "name": "Hornero Pomodoro",
+      "version": "1.0.0",
+      "description": "A 25-minute focus timer for the bar. Click to start or pause; it rings (visually) at zero and resets. No processes, no network, just time and discipline.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "placement": "bar",
+      "category": "productivity",
+      "trust": "official",
+      "sha256": "6bf8a1aff082cb4a00e529de0ca2be588ea7b162965a3eee54e6ce697119a736",
+      "processCommands": [],
+      "networkHosts": []
+    }
+  ]
+}
