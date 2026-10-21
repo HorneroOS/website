@@ -66,7 +66,12 @@ jobs:
           else
             git push origin "$branch"
           fi
-          if ! gh pr view "$branch" > /dev/null 2>&1; then
+          # Only an OPEN PR counts: `gh pr view <branch>` also resolves
+          # merged/closed PRs that once used this head, which made every
+          # later refresh silently skip PR creation and gate dispatch.
+          open_pr=$(gh pr list --head "$branch" --state open \
+            --json number -q '.[0].number // empty')
+          if [ -z "$open_pr" ]; then
             pr_body='Automated source and product data refresh; '
             pr_body+='review before merging.'
             if ! gh pr create --head "$branch" --base main \
