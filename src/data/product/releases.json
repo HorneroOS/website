@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "501e24134d1adefdf8a17f900be53f5faccc8e55",
-      "subject": "feat(controlcenter): keybind rebind editor (shell#236 slice 2)"
+      "sha": "514860b51bc606e78059f71447e2fa504d1c1ddd",
+      "subject": "feat(controlcenter): Input layout list/set editor (shell#226)"
     },
     "config": {
       "sha": "b7a8040d1b415cf61117e1b38a9d5fd09d157d9c",
