@@ -12,6 +12,9 @@ name: PR governance
 "on":
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, edited]
+  # Dispatched by the product-data workflow onto its bot branch so
+  # the required governance context reports there too.
+  workflow_dispatch:
 
 jobs:
   governance:

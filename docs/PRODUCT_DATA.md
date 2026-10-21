@@ -60,6 +60,12 @@ embedded.
 ## Updating
 
 The `product-data` workflow runs daily (and on demand), bumps the pins and
-opens a pull request; nothing reaches the site unreviewed. To update by
+opens a pull request; nothing reaches the site unreviewed. Because a
+bot-created PR does not trigger `pull_request` workflows, the workflow
+then dispatches the `build`, `lint` and PR-governance workflows onto its
+branch, so the data PR carries the same status contexts as a human PR:
+`build` (including `data:check`, lint, type-check, site build and the
+accessibility gate), `markdownlint` and `governance / danger` — the last
+two are the contexts required by branch protection. To update by
 hand, run `npm run data:bump`, review the diff and open a PR. Never edit the
 generated JSON: `data:check` fails the build when it drifts from the pins.
