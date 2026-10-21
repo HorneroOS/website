@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "bf24f6ac5e856bff7a92f4d31bcd13560c3c5d63",
-      "subject": "feat(controlcenter): Night Light temperature slider (shell#225 slice 2)"
+      "sha": "d1ba3d550f5ef3aba1b70e62ffcaed1d6ef594f1",
+      "subject": "feat(controlcenter): Night Light schedule controls (shell#225)"
     },
     "config": {
       "sha": "76a552f7ec56f00ed52e122150f27639a3a8d70a",
