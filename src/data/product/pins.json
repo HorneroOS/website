@@ -11,11 +11,11 @@
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "dbccaeab1b294f761fb6ade1d00a836da28af3f7"
+      "sha": "bf9558ca6b4bec37142290354c6a021429e6b7b0"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
-      "sha": "022eeb2a402b58f76b006cbb2a2a166b162c41fc"
+      "sha": "19d17061fd30a64adfac01369f5bea55e9a2dcc0"
     },
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",
