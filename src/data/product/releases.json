@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "3032e3757b90b6cfca80309b6c806dbd9c7598cc",
-      "subject": "feat(a11y): Accessible names for MouseArea-driven controls (shell#221)"
+      "sha": "2fcc59de53fa7761b6958fc87e65123a7296af6d",
+      "subject": "feat(notifs): promote critical battery/VPN conditions to notifications (shell#224)"
     },
     "config": {
       "sha": "f95b1f51aefc4e42f642a3fc84759822c6c0f74d",
