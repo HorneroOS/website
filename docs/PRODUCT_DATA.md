@@ -69,3 +69,15 @@ accessibility gate), `markdownlint` and `governance / danger` — the last
 two are the contexts required by branch protection. To update by
 hand, run `npm run data:bump`, review the diff and open a PR. Never edit the
 generated JSON: `data:check` fails the build when it drifts from the pins.
+
+Two operational notes, learned from the first end-to-end run
+([PR #134](https://github.com/HorneroOS/website/pull/134)):
+
+- Creating that PR requires the organisation/repo Actions setting that
+  allows GitHub Actions to create pull requests; without it the refresh
+  only pushes the branch and warns.
+- The bot PR's own `pull_request` runs wait in `action_required` until a
+  maintainer approves them ("Approve and run" on the run page). The
+  dispatched contexts report first, but branch protection stays blocked
+  until the approved `pull_request` runs also pass — approving them is
+  part of reviewing the data PR, not an extra gate.
