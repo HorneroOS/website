@@ -106,7 +106,7 @@ const roleLabel = {
           <p>{edition.body}</p>
           {edition.extends && <p class="extends">Builds on {byId[edition.extends]?.title.replace('HorneroOS ', '')}</p>}
           {edition.compositors.length > 0 && (
-            <div class="backend-list" aria-label="Desktop compositor options">
+            <div class="backend-list" role="group" aria-label="Desktop compositor options">
               <span class="backend-heading">Wayland compositor</span>
               {edition.compositors.map((backend) => (
                 <span class="backend">

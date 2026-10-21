@@ -86,7 +86,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       </div>
     </div>
 
-    <div class="capture-navigation" aria-label="Choose a real Hornero capture">
+    <div class="capture-navigation" role="group" aria-label="Choose a real Hornero capture">
       <p class="navigation-label">Explore a surface</p>
       <ul aria-label="Choose a real Hornero capture">
         {views.map((view, index) => (

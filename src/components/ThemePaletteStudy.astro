@@ -113,7 +113,7 @@ const colorRoles = [
         Explore this look <span aria-hidden="true">↗</span>
       </a>
     </div>
-    <div class="specimen-roles" aria-label="Palette color roles">
+    <div class="specimen-roles" role="group" aria-label="Palette color roles">
       {colorRoles.map((role) => (
         <div class="role-swatch" data-role={role.key}>
           <span aria-hidden="true"></span>
