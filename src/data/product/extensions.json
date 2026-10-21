@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "4a17b450dbd01d15ecf16fc06608c69af704aaa5",
+  "generatedFrom": "de052268c5ee2773ea7696c2549c148097b49c71",
   "plugins": [
     {
       "id": "hornero-dual-clock",
@@ -40,6 +40,20 @@
       "category": "productivity",
       "trust": "official",
       "sha256": "6bf8a1aff082cb4a00e529de0ca2be588ea7b162965a3eee54e6ce697119a736",
+      "processCommands": [],
+      "networkHosts": []
+    },
+    {
+      "id": "hornero-quiet-notes",
+      "name": "Hornero Quiet Notes",
+      "version": "1.0.0",
+      "description": "A calm dashboard card for one short intention for this session. It keeps no history and writes nowhere; when the shell closes, the note is gone.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "placement": "dashboard",
+      "category": "productivity",
+      "trust": "official",
+      "sha256": "b6f7a8fd127ba280f4ebdf35832ba8a80dd19a9be3c52d30f3bf61d4f6f1ba8f",
       "processCommands": [],
       "networkHosts": []
     }
