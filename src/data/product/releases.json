@@ -11,8 +11,8 @@
       "subject": "feat(controlcenter): Input pointer & keyboard section (shell#226 slice 2)"
     },
     "config": {
-      "sha": "76a552f7ec56f00ed52e122150f27639a3a8d70a",
-      "subject": "feat(themes): unique GTK theme for every Hornero Original region (#86)"
+      "sha": "b7a8040d1b415cf61117e1b38a9d5fd09d157d9c",
+      "subject": "feat(hypr): source user keybinding overrides after defaults"
     },
     "installer": "future",
     "iso": "future"
