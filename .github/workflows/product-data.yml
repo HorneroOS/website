@@ -4,8 +4,10 @@ name: product-data
 # shell/config/hornero mains, regenerates the data and opens a pull request.
 # Nothing reaches the site without review.
 #
-# Note: a pull request created with GITHUB_TOKEN does not trigger other
-# workflows; push an empty commit (or close and reopen) to run the checks.
+# A pull request created with GITHUB_TOKEN does not trigger other
+# workflows, so after opening/updating the PR this workflow dispatches
+# the build, lint and governance workflows onto the bot branch; their
+# status contexts report on the PR head commit like any human PR.
 
 "on":
   schedule:
@@ -13,6 +15,7 @@ name: product-data
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -72,5 +75,12 @@ jobs:
               warning="Updated $branch, but repository policy blocks Actions "
               warning+="from opening PRs; open the branch for review manually."
               echo "::warning::$warning"
+              exit 0
             fi
           fi
+          # Bot-created PRs do not trigger pull_request workflows;
+          # dispatch the gate workflows onto the branch so their
+          # required contexts report on the PR head commit.
+          for wf in build.yml lint.yml pr-governance.yml; do
+            gh workflow run "$wf" --ref "$branch"
+          done
