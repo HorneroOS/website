@@ -7,8 +7,8 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "843aee9440ceea57f24da5121473e13fe78ce61a",
-      "subject": "feat(plugins): dashboard placement - Extensions tab cards (M2 slice 3) (#217)"
+      "sha": "dab0b3a1ec70130e6d186e3ac89d98ded550a7d4",
+      "subject": "docs(perf): lock content frame-cost bound (171/180 slots)"
     },
     "config": {
       "sha": "76a552f7ec56f00ed52e122150f27639a3a8d70a",
