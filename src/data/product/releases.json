@@ -7,12 +7,12 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "36cc158be609bfa81b221e2d695d80c37ca2ff60",
-      "subject": "feat(controlcenter): Windows focus + window rules (shell#235)"
+      "sha": "3032e3757b90b6cfca80309b6c806dbd9c7598cc",
+      "subject": "feat(a11y): Accessible names for MouseArea-driven controls (shell#221)"
     },
     "config": {
-      "sha": "1952d60d43226d117332ac4ffca8c58e81f4fecc",
-      "subject": "feat(hypr): restore persisted window geometry at login"
+      "sha": "f95b1f51aefc4e42f642a3fc84759822c6c0f74d",
+      "subject": "feat(hypr): restore persisted cursor size at login"
     },
     "installer": "future",
     "iso": "future"
