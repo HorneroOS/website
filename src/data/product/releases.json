@@ -11,8 +11,8 @@
       "subject": "feat(controlcenter): Input layout list/set editor (shell#226)"
     },
     "config": {
-      "sha": "b7a8040d1b415cf61117e1b38a9d5fd09d157d9c",
-      "subject": "feat(hypr): source user keybinding overrides after defaults"
+      "sha": "0394738ab821ebff2760951cc78c31751bb92455",
+      "subject": "feat(hypr): source user window-rules overlay after factory rules"
     },
     "installer": "future",
     "iso": "future"
