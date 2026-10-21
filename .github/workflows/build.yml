@@ -26,3 +26,7 @@ jobs:
         run: node --input-type=module -e "await import('@astrojs/check')"
       - run: npm run type-check
       - run: npm run build
+      # WCAG 2.2 AA gate over the built site (website#126). Fails on
+      # violations not triaged in a11y-baseline.json.
+      - name: Accessibility gate (axe via pa11y)
+        run: npm run a11y

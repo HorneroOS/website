@@ -87,7 +87,7 @@ const current = entry.id;
 
     <article class="prose">
       {featuredApps.length > 0 && (
-        <div class="doc-tools" aria-label="Featured tools on this page">
+        <div class="doc-tools" role="group" aria-label="Featured tools on this page">
           <span class="doc-tools-label">Featured tools</span>
           <ul role="list">
             {featuredApps.map((app) => (
