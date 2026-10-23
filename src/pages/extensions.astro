@@ -6,6 +6,7 @@ const plugins = extensionCatalogue.plugins;
 const repo = pins.plugins.repo;
 const catalogueUrl = commitUrl(repo, extensionCatalogue.generatedFrom);
 const sourcePinUrl = commitUrl(repo, pins.plugins.sha);
+const cliSourceUrl = commitUrl(pins.hornero.repo, pins.hornero.sha);
 const categories = [...new Set(plugins.map((plugin) => plugin.category))].sort();
 const processSummary = (commands: string[]) => (commands.length ? commands.join(', ') : 'None declared');
 const networkSummary = (hosts: string[]) => (hosts.length ? hosts.join(', ') : 'None declared');
@@ -157,6 +158,10 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
               <div class="card-actions">
                 <a class="text-link" href={sourceUrl}>Pinned source <span aria-hidden="true">↗</span></a>
                 <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
+                <small class="install-requirement">
+                  Requires <a href={cliSourceUrl}>horneroctl at this revision</a> or later; Preview29 does not support
+                  <code>--revision</code>.
+                </small>
               </div>
             </article>
           </li>
