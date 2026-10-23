@@ -156,7 +156,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
               </div>
               <div class="card-actions">
                 <a class="text-link" href={sourceUrl}>Pinned source <span aria-hidden="true">↗</span></a>
-                <code class="install-command">horneroctl plugin catalog install {plugin.id} --yes</code>
+                <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
               </div>
             </article>
           </li>
