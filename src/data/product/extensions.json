@@ -8,12 +8,15 @@
       "description": "Local time next to UTC in the bar, for coordinating with people in other time zones. Pure QML, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "category": "utilities",
       "trust": "official",
+      "path": "plugins/hornero-dual-clock",
       "sha256": "d6c2f9deb740290088e348aa531d4286476556c32082219e18613cd9678dc2b2",
       "processCommands": [],
-      "networkHosts": []
+      "networkHosts": [],
+      "settings": {}
     },
     {
       "id": "hornero-focus-card",
@@ -22,12 +25,15 @@
       "description": "A dashboard card with a rotating original one-line focus reminder and the date. Pure QML, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "category": "utilities",
       "trust": "official",
+      "path": "plugins/hornero-focus-card",
       "sha256": "c1d1597662887127b7464897b22abea8e336c54820e73438e6a09ea9ab162249",
       "processCommands": [],
-      "networkHosts": []
+      "networkHosts": [],
+      "settings": {}
     },
     {
       "id": "hornero-pomodoro",
@@ -36,12 +42,15 @@
       "description": "A 25-minute focus timer for the bar. Click to start or pause; it rings (visually) at zero and resets. No processes, no network, just time and discipline.",
       "author": "HorneroOS contributors",
       "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "category": "productivity",
       "trust": "official",
+      "path": "plugins/hornero-pomodoro",
       "sha256": "6bf8a1aff082cb4a00e529de0ca2be588ea7b162965a3eee54e6ce697119a736",
       "processCommands": [],
-      "networkHosts": []
+      "networkHosts": [],
+      "settings": {}
     },
     {
       "id": "hornero-quiet-notes",
@@ -50,12 +59,15 @@
       "description": "A calm dashboard card for one short intention for this session. It keeps no history and writes nowhere; when the shell closes, the note is gone.",
       "author": "HorneroOS contributors",
       "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "category": "productivity",
       "trust": "official",
+      "path": "plugins/hornero-quiet-notes",
       "sha256": "b6f7a8fd127ba280f4ebdf35832ba8a80dd19a9be3c52d30f3bf61d4f6f1ba8f",
       "processCommands": [],
-      "networkHosts": []
+      "networkHosts": [],
+      "settings": {}
     }
   ]
 }
