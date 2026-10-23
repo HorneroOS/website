@@ -6,6 +6,7 @@ const plugins = extensionCatalogue.plugins;
 const repo = pins.plugins.repo;
 const catalogueUrl = commitUrl(repo, extensionCatalogue.generatedFrom);
 const sourcePinUrl = commitUrl(repo, pins.plugins.sha);
+const categories = [...new Set(plugins.map((plugin) => plugin.category))].sort();
 const processSummary = (commands: string[]) => (commands.length ? commands.join(', ') : 'None declared');
 const networkSummary = (hosts: string[]) => (hosts.length ? hosts.join(', ') : 'None declared');
 const settingsSummary = (settings: typeof plugins[number]['settings']) =>
@@ -77,13 +78,38 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
       </p>
     </div>
 
+    <div class="catalogue-controls" data-catalogue-controls hidden>
+      <label class="catalogue-search">
+        <span>Search extensions</span>
+        <input type="search" data-catalogue-search placeholder="Name, feature, or placement" autocomplete="off" />
+      </label>
+      <label class="catalogue-category">
+        <span>Category</span>
+        <select data-catalogue-category>
+          <option value="all">All categories</option>
+          {categories.map((category) => <option value={category}>{category}</option>)}
+        </select>
+      </label>
+      <p class="catalogue-result-count" data-catalogue-count aria-live="polite" aria-atomic="true">
+        {plugins.length} official extensions
+      </p>
+    </div>
+
     <ul class="extension-grid" role="list">
       {plugins.map((plugin) => {
         const sourceUrl = `${repo}/tree/${pins.plugins.sha}/${plugin.path}`;
         const licenseUrl = `${repo}/blob/${pins.plugins.sha}/${plugin.path}/LICENSE`;
         const settings = settingsSummary(plugin.settings);
+        const searchText = [plugin.id, plugin.name, plugin.description, plugin.author, plugin.category, plugin.placement]
+          .join(' ')
+          .toLocaleLowerCase();
         return (
-          <li class="extension-card">
+          <li
+            class="extension-card"
+            data-extension-card
+            data-category={plugin.category}
+            data-search={searchText}
+          >
             <article aria-labelledby={`${plugin.id}-title`}>
               <header class="card-heading">
                 <div>
@@ -137,6 +163,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         );
       })}
     </ul>
+    <p class="catalogue-empty" data-catalogue-empty hidden>No extensions match. Try another search or category.</p>
   </section>
 
   <section class="developer-section section" aria-labelledby="developer-title">
@@ -158,6 +185,42 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     </div>
   </section>
 </SiteLayout>
+
+<script>
+  const controls = document.querySelector<HTMLElement>('[data-catalogue-controls]');
+  const search = document.querySelector<HTMLInputElement>('[data-catalogue-search]');
+  const category = document.querySelector<HTMLSelectElement>('[data-catalogue-category]');
+  const count = document.querySelector<HTMLElement>('[data-catalogue-count]');
+  const empty = document.querySelector<HTMLElement>('[data-catalogue-empty]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-extension-card]'));
+  let announcementTimer: number | undefined;
+
+  if (controls && search && category && count && empty && cards.length > 0) {
+    const updateCatalogue = () => {
+      const query = search.value.trim().toLocaleLowerCase();
+      const selectedCategory = category.value;
+      let visible = 0;
+
+      for (const card of cards) {
+        const matchesQuery = (card.dataset.search ?? '').includes(query);
+        const matchesCategory = selectedCategory === 'all' || card.dataset.category === selectedCategory;
+        const matches = matchesQuery && matchesCategory;
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      }
+
+      window.clearTimeout(announcementTimer);
+      announcementTimer = window.setTimeout(() => {
+        count.textContent = `${visible} ${visible === 1 ? 'extension' : 'extensions'} found`;
+      }, 300);
+      empty.hidden = visible !== 0;
+    };
+
+    search.addEventListener('input', updateCatalogue);
+    category.addEventListener('change', updateCatalogue);
+    controls.hidden = false;
+  }
+</script>
 
 <style>
   .extension-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.7fr); gap: clamp(2rem, 7vw, 7rem); align-items: end; padding-block: clamp(1.5rem, 4vw, 3rem); }
@@ -184,6 +247,14 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-catalogue .section-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.7fr); align-items: end; gap: 2rem; margin-bottom: 1.7rem; }
   .extension-catalogue .section-heading h2, .developer-section h2 { margin-top: 0.45rem; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.055em; }
   .extension-catalogue .section-heading > p { max-width: 50ch; color: var(--text-muted); line-height: 1.6; }
+  .catalogue-controls { display: grid; grid-template-columns: minmax(16rem, 1fr) minmax(12rem, 0.45fr) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--line); background: var(--surface); }
+  .catalogue-controls[hidden], .extension-card[hidden], .catalogue-empty[hidden] { display: none; }
+  .catalogue-controls label { display: grid; gap: 0.35rem; }
+  .catalogue-controls label > span { color: var(--secondary); font: 0.65rem var(--font-data); text-transform: uppercase; }
+  .catalogue-controls input, .catalogue-controls select { min-height: 2.8rem; padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text); font: inherit; }
+  .catalogue-controls input::placeholder { color: var(--text-muted); opacity: 1; }
+  .catalogue-result-count { align-self: center; color: var(--text-muted); font: 0.68rem var(--font-data); white-space: nowrap; }
+  .catalogue-empty { padding: 2rem 1rem; border: 1px dashed var(--line); color: var(--text-muted); text-align: center; }
   .extension-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; padding: 1px; background: var(--line); list-style: none; }
   .extension-card { min-width: 0; background: var(--bg); }
   .extension-card article { height: 100%; padding: clamp(1.1rem, 2.3vw, 1.8rem); }
@@ -213,9 +284,13 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     .extension-intro, .extension-catalogue .section-heading, .developer-section { grid-template-columns: 1fr; }
     .trust-strip { grid-template-columns: auto minmax(0, 1fr); }
     .trust-strip > a { grid-column: 2; }
+    .catalogue-controls { grid-template-columns: 1fr 1fr; }
+    .catalogue-result-count { grid-column: 1 / -1; }
     .extension-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 440px) {
+    .catalogue-controls { grid-template-columns: 1fr; }
+    .catalogue-result-count { grid-column: auto; }
     .extension-facts { grid-template-columns: 1fr; }
     .extension-facts .wide-fact { grid-column: auto; }
     .stamp-count strong { font-size: 4.7rem; }
