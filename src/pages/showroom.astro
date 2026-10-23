@@ -17,6 +17,7 @@ const atmospheres = [
   shot('hornero-light'),
 ];
 const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon'), shot('islands'), shot('dock-bottom')];
+const liveWorkstation = shot('live-workstation');
 ---
 
 <SiteLayout
@@ -187,6 +188,27 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
       not a claim that every shot comes from the same build.
     </p>
   </section>
+
+  <section class="section work-session-section" aria-labelledby="work-session-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A real development session</p>
+        <h2 id="work-session-title">The desktop at work.</h2>
+      </div>
+      <p>
+        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
+        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
+        acceptance evidence.
+      </p>
+    </div>
+    <ArchFrame
+      src={liveWorkstation.data.image}
+      alt={liveWorkstation.data.alt}
+      provenance={liveWorkstation.data.provenance}
+      sizes="(min-width: 1180px) 76vw, 100vw"
+      widths={[640, 960, 1280, 1918]}
+    />
+  </section>
 </SiteLayout>
 
 <style>
@@ -345,7 +367,8 @@ const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon')
     color: var(--ink);
   }
   .topology-section,
-  .controls-section {
+  .controls-section,
+  .work-session-section {
     padding-block: clamp(4rem, 8vw, 7rem);
   }
   .section-heading {
