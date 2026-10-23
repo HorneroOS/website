@@ -1,0 +1,12 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "live-workstation-2026-10-23.png",
+  "sha256": "16e89e2358fb4009b2039b5e8c50d2c6746133d4fee6fabf297eb0487875aaef",
+  "captured": "2026-10-23",
+  "capture": {
+    "source": "contributor-provided live desktop screenshot",
+    "resolution": "1918x1078",
+    "visible_surfaces": ["system monitor", "agent workspace sidebar", "quick toggles"]
+  },
+  "note": "Live development-host capture; not an installer image, ISO acceptance result, or release certification."
+}
