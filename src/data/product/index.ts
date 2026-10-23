@@ -183,12 +183,15 @@ export interface ExtensionEntry {
   description: string;
   author: string;
   license: string;
+  homepage: string;
   placement: string;
   category: string;
   trust: string;
+  path: string;
   sha256: string;
   processCommands: string[];
   networkHosts: string[];
+  settings: Record<string, { type: string; default: boolean | number | string; description?: string }>;
 }
 
 export const extensionCatalogue = extensionsJson as {

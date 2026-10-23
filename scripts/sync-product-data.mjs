@@ -512,12 +512,15 @@ function extensions(pluginsDir) {
       description: e.description,
       author: e.author,
       license: e.license,
+      homepage: e.homepage ?? '',
       placement: e.placement ?? 'background',
       category: e.category ?? 'utilities',
       trust: e.trust ?? 'community',
+      path: e.path ?? '',
       sha256: e.sha256 ?? '',
       processCommands: e.capabilities?.processCommands ?? [],
       networkHosts: e.capabilities?.networkHosts ?? [],
+      settings: e.capabilities?.settings ?? {},
     })),
   };
 }
