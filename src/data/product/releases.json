@@ -11,8 +11,8 @@
       "subject": "test: Add scoped Appearance AT-SPI probe (shell#311)"
     },
     "config": {
-      "sha": "f95b1f51aefc4e42f642a3fc84759822c6c0f74d",
-      "subject": "feat(hypr): restore persisted cursor size at login"
+      "sha": "64557c05ecf368fb3d5ed6ced69bc5e05901edbe",
+      "subject": "fix(hypr): resolve modules relative to config file (#96)"
     },
     "installer": "future",
     "iso": "future"
