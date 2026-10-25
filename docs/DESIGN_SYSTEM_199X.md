@@ -109,6 +109,18 @@ the Kitty, Alacritty and Ghostty projects; `btop.svg` from btop;
 `niri.svg` from Niri (CC BY-SA 4.0, per the project's Name-and-Logo
 page); and `hyprland.svg`, the Hyprland droplet mark extracted from the
 official Hyprland logo lockup (`assets/header.svg` in hyprwm/Hyprland).
+The Studio application icons (`ardour.png`, `guitarix.png`, `carla.png`,
+`audacity.png`, `obs-studio.png`, `kdenlive.png`, `blender.png`,
+`krita.png`, `gimp.png`, `inkscape.png`, `darktable.png`,
+`rawtherapee.png`, `scribus.png`, `freecad.png`, `godot.png`) are the
+official upstream app icons as published by Flathub's appstream
+(metadata extracted from each project's own packaging), vendored
+unmodified at 128 px for the Studio page and its docs chips.
+`reaper.png` is the 32 px frame of the official favicon from
+reaper.fm; REAPER is proprietary and its mark is shown for
+identification only. yabridge, Graphite and Penpot have no official
+icon vendored, so they render name-only — never a substitute glyph
+presented as their logo.
 They remain the trademarks of their respective projects and are not
 HorneroOS artwork. `thunar.svg` (XFCE Thunar) and `copyq.svg` (CopyQ)
 follow the same rule for the docs featured-tools chips. They render

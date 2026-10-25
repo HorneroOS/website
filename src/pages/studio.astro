@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import AppLogo from '../components/AppLogo.astro';
 import { studioCatalogue, editions, pins, short } from '../data/product';
 
 const studio = editions.find((edition) => edition.id === 'studio');
@@ -7,12 +8,25 @@ if (!studio) throw new Error('Studio edition is missing from the pinned catalogu
 
 const appById = Object.fromEntries(studioCatalogue.applications.map((app) => [app.id, app]));
 const appTitle = (id: string) => appById[id]?.title ?? id;
-const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
-  if (app.availability === 'reference-only') return 'Reference only — not installed';
-  if (app.licenseClass === 'proprietary') return `Proprietary (${app.licenses.join(', ') || 'vendor license'})`;
+type StudioApp = (typeof studioCatalogue.applications)[number];
+const statusTag = (app: StudioApp) => {
+  if (app.availability === 'reference-only') return 'Reference only';
+  if (app.licenseClass === 'proprietary') return 'Proprietary · opt-in';
   if (app.experimental) return 'Experimental';
-  return app.licenses.join(', ') || 'See package';
+  if (app.licenseClass === 'open-source') return 'Open source';
+  if (app.optional) return 'Optional';
+  return 'Catalogued';
 };
+// The hero lineup is editorial: the flagship tool of each creative field,
+// always rendered from the generated catalogue, never hand-listed twice.
+const heroLineup = ['ardour', 'obs-studio', 'blender', 'krita', 'godot']
+  .map((id) => appById[id])
+  .filter((app): app is StudioApp => Boolean(app));
+const stats = [
+  { value: String(studioCatalogue.specializations.length), label: 'specializations in the catalogue' },
+  { value: String(studioCatalogue.applications.length), label: 'applications in the catalogue' },
+  { value: String(studioCatalogue.audioModes.length), label: 'audio modes, all reversible' },
+];
 ---
 
 <SiteLayout
@@ -29,7 +43,30 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
       streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for
       them.
     </p>
-    <p class="availability">
+
+    <div class="lineup" aria-label="Flagship Studio applications">
+      {
+        heroLineup.map((app) => (
+          <span class="lineup-item">
+            <AppLogo id={app.id} />
+            <span>{app.title}</span>
+          </span>
+        ))
+      }
+    </div>
+
+    <dl class="stats">
+      {
+        stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <p class="availability" role="note">
       <strong>Studio is planned and not yet installable.</strong> There is no Studio ISO and no installer flow for it
       today. The composition model, the <code>horneroctl studio</code> controls and the Control Center surfaces exist in
       the repositories and are linked below; an installable image and hardware validation are still pending.
@@ -39,64 +76,70 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
   <section class="section" aria-labelledby="workloads-title">
     <h2 id="workloads-title">Specializations</h2>
     <p class="section-copy">
-      Specializations and individual applications are selected from one canonical catalogue, the same model used by the
-      installer design, by <code>horneroctl studio selection</code> and by the Control Center. Selections can change
-      after installation; recording a selection never deletes projects, settings or files.
+      Specializations and individual applications are selected from one canonical catalogue, the same model used by
+      the installer design, by <code>horneroctl studio selection</code> and by the Control Center. Selections can
+      change after installation; recording a selection never deletes projects, settings or files.
     </p>
-    <div class="spec-grid">
+    <ol class="tracks" role="list">
       {
         studioCatalogue.specializations.map((spec) => (
-          <article class="spec-card">
+          <li class="track">
             <h3>{spec.title}</h3>
             {spec.applications.length > 0 ? (
-              <ul>
+              <ul class="chips" role="list">
                 {spec.applications.map((id) => (
-                  <li>{appTitle(id)}</li>
+                  <li class="chip">
+                    <AppLogo id={id} />
+                    <span>{appTitle(id)}</span>
+                  </li>
                 ))}
               </ul>
             ) : (
               <p class="muted">Start empty and add individual applications.</p>
             )}
-          </article>
+          </li>
         ))
       }
-    </div>
+    </ol>
   </section>
 
   <section class="section" aria-labelledby="apps-title">
     <h2 id="apps-title">Applications, sources and licenses</h2>
     <p class="section-copy">
-      This table is generated from the pinned Hornero catalogue (HorneroOS/hornero at {short(pins.hornero.sha)}).
-      Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is
-      reference-only (browser tool, no package), and experimental entries are marked.
+      This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at {short(pins.hornero.sha)});
+      logos are the official upstream icons, shown for identification. Proprietary software is never installed
+      silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no
+      package), and experimental entries are marked. yabridge, Graphite and Penpot have no official icon vendored, so
+      they appear name-only.
     </p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Application</th>
-            <th scope="col">Packages</th>
-            <th scope="col">Source</th>
-            <th scope="col">License / status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            studioCatalogue.applications.map((app) => (
-              <tr>
-                <th scope="row">{app.title}</th>
-                <td>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</td>
-                <td>{app.source ?? '—'}</td>
-                <td>
-                  {licenseLabel(app)}
-                  {app.notes ? <span class="note">{app.notes}</span> : null}
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
+    <ul class="app-grid" role="list">
+      {
+        studioCatalogue.applications.map((app) => (
+          <li class="app-tile">
+            <div class="app-head">
+              <AppLogo id={app.id} />
+              <h3>{app.title}</h3>
+              <span class="tag">{statusTag(app)}</span>
+            </div>
+            <dl class="app-meta">
+              <div>
+                <dt>Packages</dt>
+                <dd>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</dd>
+              </div>
+              <div>
+                <dt>Source</dt>
+                <dd>{app.source ?? '—'}</dd>
+              </div>
+              <div>
+                <dt>License</dt>
+                <dd>{app.licenses.length > 0 ? app.licenses.join(', ') : 'See package'}</dd>
+              </div>
+            </dl>
+            {app.notes ? <p class="note">{app.notes}</p> : null}
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <section class="section" aria-labelledby="audio-title">
@@ -104,23 +147,25 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
     <p class="section-copy">
       Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are
       explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling
-      period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning
-      or privilege changes.
+      period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning or privilege
+      changes.
     </p>
-    <ul class="mode-list">
+    <ul class="modes" role="list">
       {
         studioCatalogue.audioModes.map((mode) => (
-          <li>
+          <li class="mode">
             <strong>{mode.title}</strong>
             <span>{mode.isDefault ? 'Default — device rate and quantum.' : 'Explicit opt-in, reversible.'}</span>
+            <span class="tag">{mode.isDefault ? 'Default' : 'Opt-in'}</span>
           </li>
         ))
       }
       {
         studioCatalogue.performanceMode && (
-          <li>
+          <li class="mode">
             <strong>{studioCatalogue.performanceMode.title}</strong>
             <span>Explicit opt-in via power-profiles-daemon; the previous profile is restored on demand.</span>
+            <span class="tag">Opt-in</span>
           </li>
         )
       }
@@ -164,93 +209,182 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
 
 <style>
   .intro h1 {
-    max-width: 16ch;
     margin-block: 0.55rem 1rem;
-    font-size: clamp(2.6rem, 2rem + 5vw, 5.2rem);
-  }
-  .intro h1 em {
-    color: var(--accent);
-    font-style: normal;
   }
   .lede {
     max-width: 54ch;
     font-size: var(--step-1);
   }
-  .availability {
-    max-width: 66ch;
-    margin-top: 1rem;
+  .lineup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.6rem;
+    margin-top: 1.8rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--line);
+  }
+  .lineup-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    --app-logo-size: 2rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin: 1.4rem 0 0;
+  }
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+  }
+  .stats dt {
     color: var(--text-muted);
     font-size: var(--step--1);
+  }
+  .stats dd {
+    margin: 0;
+    font-family: var(--font-mono, monospace);
+    font-size: var(--step-2, 1.6rem);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .availability {
+    max-width: 66ch;
+    margin-top: 1.6rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--secondary);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .availability strong {
+    color: var(--text);
   }
   .section-copy {
     max-width: 66ch;
     color: var(--text-muted);
   }
-  .spec-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.9rem;
-    margin-top: 1.2rem;
+  .tracks {
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
   }
-  .spec-card {
+  .track {
+    display: grid;
+    grid-template-columns: minmax(12rem, 18rem) 1fr;
+    gap: 0.5rem 1.5rem;
+    align-items: start;
+    padding-block: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .track:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .track h3 {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    --app-logo-size: 1.35rem;
+  }
+  .muted {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .app-tile {
     padding: 1rem 1.1rem;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
   }
-  .spec-card h3 {
-    margin-top: 0;
-    font-size: var(--step-0);
+  .app-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    --app-logo-size: 2.6rem;
   }
-  .spec-card ul {
+  .app-head h3 {
     margin: 0;
-    padding-left: 1.1rem;
-    color: var(--text-muted);
+    font-size: var(--step-0);
+    flex: 1;
   }
-  .muted {
-    color: var(--text-muted);
+  .tag {
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--secondary);
+    border-radius: 999px;
+    color: var(--secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
   }
-  .table-wrap {
-    overflow-x: auto;
-    margin-top: 1.2rem;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .app-meta {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.9rem 0 0;
     font-size: var(--step--1);
   }
-  th,
-  td {
-    padding: 0.55rem 0.7rem;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
+  .app-meta div {
+    display: grid;
+    grid-template-columns: 5.2rem 1fr;
+    gap: 0.5rem;
   }
-  thead th {
-    border-bottom: 2px solid var(--secondary);
-  }
-  .note {
-    display: block;
+  .app-meta dt {
     color: var(--text-muted);
   }
-  .mode-list {
+  .app-meta dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .note {
+    margin: 0.7rem 0 0;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .modes {
     display: grid;
     gap: 0.6rem;
-    margin-top: 1.2rem;
+    margin: 1.4rem 0 0;
     padding: 0;
     list-style: none;
   }
-  .mode-list li {
+  .mode {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.4rem 0.9rem;
-    padding: 0.8rem 1rem;
+    padding: 0.85rem 1rem;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
   }
-  .mode-list span {
+  .mode span:not(.tag) {
     color: var(--text-muted);
+    flex: 1;
   }
   .status-grid {
     display: grid;
@@ -270,5 +404,10 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
   .status-grid ul {
     padding-left: 1.1rem;
     color: var(--text-muted);
+  }
+  @media (max-width: 40rem) {
+    .track {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
