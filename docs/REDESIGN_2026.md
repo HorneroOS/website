@@ -14,12 +14,22 @@ on the site, but far below the first screen.
 ## Decisions
 
 - **The desktop is the first thing on the page.** The homepage cover pairs the
-  headline with the real `dashboard` QA capture at its native 16:9, loaded
-  eagerly with high priority. On phones the capture sits directly under the
-  headline.
+  headline with a real, contributor-provided capture of the Dashboard
+  (`dashboard-extensions`, 25 October 2026) at its native 16:9, loaded eagerly
+  with high priority. Its wallpaper is a licensed photograph of the Beagle
+  Channel (RAYANDBEE, CC BY 2.0), credited under the image, so the first frame
+  is a real Argentine photograph on a real desktop. On phones the capture sits
+  directly under the headline. The QA-run captures stay in the layout explorer,
+  the dark/light comparison and the showroom.
 - **The headline states something checkable.** "A Linux desktop, lived in since
   2018." refers to the maintainer's daily workstation. "El futuro se construye
   acá" stays as the broadcast ident in the identification plate.
+- **Contributor captures are labelled as such.** The four captures of the
+  25 October session carry `HorneroOS contributor-provided workstation capture`
+  provenance, a "not an installer or release acceptance image" note and a JSON
+  sidecar in `assets/screenshots/curated/`. The wallpaper-picker capture notes
+  that its thumbnails come from the contributor's own folder and are not
+  shipped.
 - **Proof before claims.** Each homepage section is a capability shown on a real
   capture (layouts, theme change, a working session) or a source-backed record
   (timeline, ledger). The wallpaper atlas, greeter feature and poster moved to

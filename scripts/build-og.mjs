@@ -31,12 +31,12 @@ const cards = {
   default: {
     title: 'A Linux desktop, lived in since 2018.',
     line: 'Arch-based, Wayland-first, built in the open from Argentina.',
-    panel: shot('assets/screenshots/certified/dashboard.png', 660, 371, 'Dashboard · Hornero Dark · QA 2026-10-03'),
+    panel: shot('assets/screenshots/curated/dashboard-extensions-2026-10-25.webp', 660, 371, 'Dashboard · live desktop · 2026-10-25'),
   },
   showroom: {
     title: 'Real captures from real runs.',
     line: 'Every screenshot keeps its source, date and theme.',
-    panel: shot('assets/screenshots/curated/live-workstation-2026-10-23.png', 660, 371, 'Live development desktop · 2026-10-23'),
+    panel: shot('assets/screenshots/curated/terminal-tools-2026-10-25.webp', 660, 371, 'btop and yazi · live desktop · 2026-10-25'),
   },
   editions: {
     title: 'One foundation, four roles.',

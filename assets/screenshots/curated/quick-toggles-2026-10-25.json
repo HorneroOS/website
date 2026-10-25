@@ -1,0 +1,18 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "quick-toggles-2026-10-25.webp",
+  "sha256": "c4dbcf22fe9eaaa8d4204d42ab7048f9cd0a67aa2b261a0d77d89bee1c36cec1",
+  "captured": "2026-10-25",
+  "capture": {
+    "source": "contributor-provided live desktop screenshot",
+    "resolution": "1918x1077",
+    "visible_surfaces": [
+      "quick toggles",
+      "keep awake",
+      "screen recorder",
+      "workspace rail"
+    ]
+  },
+  "original_png_sha256": "19b2c9ef42d9e97a14c2c97a410c60995d081499ad63b7abc17f553ca98b3892",
+  "note": "Live development-host capture; lossless PNG converted to WebP (quality 92). Not an installer image, ISO acceptance result, or release certification."
+}

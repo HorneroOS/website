@@ -1,0 +1,19 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "dashboard-extensions-2026-10-25.webp",
+  "sha256": "f8b77d96ccefb46bab80b402b0bb8b8667da015110c90a7253e9ff034da9ce07",
+  "captured": "2026-10-25",
+  "capture": {
+    "source": "contributor-provided live desktop screenshot",
+    "resolution": "1918x1077",
+    "visible_surfaces": [
+      "dashboard",
+      "extensions tab",
+      "weather",
+      "calendar",
+      "companion"
+    ]
+  },
+  "original_png_sha256": "28031bed4972e1d10c3b3eae1a4bbf76a1802df1d8093534606fe6b7a64c5989",
+  "note": "Live development-host capture; lossless PNG converted to WebP (quality 92). Not an installer image, ISO acceptance result, or release certification."
+}

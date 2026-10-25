@@ -1,7 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import ArchFrame from '../components/ArchFrame.astro';
 import { extensionCatalogue, pins, commitUrl } from '../data/product';
 
+const shots = await getCollection('showroom');
+const dashboardShot = shots.find((item) => item.id === 'dashboard-extensions');
+if (!dashboardShot) throw new Error('Showroom capture is missing: dashboard-extensions');
 const plugins = extensionCatalogue.plugins;
 const repo = pins.plugins.repo;
 const catalogueUrl = commitUrl(repo, extensionCatalogue.generatedFrom);
@@ -67,6 +72,24 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
       </p>
     </div>
     <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/SECURITY.md`}>Read the security model <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="where-section section" aria-labelledby="where-title">
+    <div class="where-copy">
+      <h2 id="where-title">Extensions have their own<br />tab in the Dashboard.</h2>
+      <p>
+        Extensions with a dashboard placement get a card in the Extensions tab, beside Media, Performance, Weather and
+        Workspaces. Bar extensions sit in the bar. The capture shows the Dashboard’s tab bar on a live desktop, not the
+        Extensions tab itself, so it shows where extensions live, not what they look like.
+      </p>
+    </div>
+    <ArchFrame
+      src={dashboardShot.data.image}
+      alt={dashboardShot.data.alt}
+      provenance={dashboardShot.data.provenance}
+      sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
+      widths={[640, 960, 1280, 1600]}
+    />
   </section>
 
   <section class="extension-catalogue section" id="catalogue" aria-labelledby="catalogue-title">
@@ -145,9 +168,9 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
               </div>
 
               <ul class="declared" role="list" aria-label="Declared by the plugin, not enforced by the shell">
-                <li>{plugin.processCommands.length ? `Runs ${plugin.processCommands.join(', ')}` : 'Runs no processes'}</li>
-                <li>{plugin.networkHosts.length ? `Contacts ${plugin.networkHosts.join(', ')}` : 'Uses no network'}</li>
-                <li>{settings.length ? `${settings.length} ${settings.length === 1 ? 'setting' : 'settings'}` : 'No settings'}</li>
+                <li>{plugin.processCommands.length ? `Declares commands: ${plugin.processCommands.join(', ')}` : 'No process commands declared'}</li>
+                <li>{plugin.networkHosts.length ? `Declares hosts: ${plugin.networkHosts.join(', ')}` : 'No network hosts declared'}</li>
+                <li>{settings.length ? `${settings.length} ${settings.length === 1 ? 'setting' : 'settings'} declared` : 'No settings declared'}</li>
               </ul>
 
               <details class="evidence">
@@ -344,4 +367,9 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     .stamp-count strong { font-size: 4.7rem; }
     .trust-strip { align-items: start; }
   }
+  .where-section { display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
+  .where-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); }
+  .where-copy h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .where-copy p { max-width: 54ch; color: var(--text-muted); }
+  @media (max-width: 760px) { .where-copy { grid-template-columns: minmax(0, 1fr); } }
 </style>

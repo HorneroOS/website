@@ -17,6 +17,7 @@ import {
   pins,
   short,
   themes,
+  wallpapers,
 } from '../data/product';
 
 const captures = await getCollection('showroom');
@@ -25,8 +26,10 @@ const capture = (id: string) => {
   if (!entry) throw new Error(`Showroom capture is missing: ${id}`);
   return entry;
 };
-const hero = capture('dashboard');
-const live = capture('live-workstation');
+const hero = capture('dashboard-extensions');
+const live = capture('terminal-tools');
+const beagle = wallpapers.find((wallpaper) => wallpaper.id === 'fin-del-mundo');
+if (!beagle) throw new Error('The Beagle Channel photograph is missing from the pinned wallpaper catalogue');
 
 const editionOrder = ['desktop', 'server', 'agents', 'studio'];
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
@@ -52,7 +55,15 @@ const compositorMaturity = (id: string) =>
 
 const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.trust === 'official');
 const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0] ?? text;
-const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1];
+const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1] ?? version;
+const readiness = [
+  latestTagged
+    ? `Development Preview ${previewNumber(latestTagged.version)} is the latest tagged composition`
+    : 'HorneroOS is a development preview',
+  candidate ? `Preview ${previewNumber(candidate.version)} is being prepared` : undefined,
+]
+  .filter(Boolean)
+  .join('; ');
 
 const title = 'HorneroOS | A Linux desktop, lived in since 2018';
 const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that records every screenshot. Development preview; no ISO yet.`;
@@ -69,7 +80,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
       <div class="cover-aside">
         <p class="lede">
           HorneroOS is an Arch-based, Wayland-first desktop from Argentina, with a Quickshell desktop shell, a native
-          system CLI and a QA lab that recorded the capture below.
+          system CLI and a QA lab that records its test captures.
         </p>
         <div class="cta-row">
           <a href="/showroom" class="cta primary">Explore the desktop</a>
@@ -95,9 +106,13 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
       <figcaption>
         <span class="shot-kind">Real capture</span>
         <span class="shot-detail">
-          {[hero.data.title, hero.data.provenance.theme, hero.data.provenance.resolution, hero.data.provenance.date].join(' · ')}
+          {[hero.data.title, hero.data.provenance.resolution].filter(Boolean).join(' · ')}
         </span>
-        <a href="/showroom#dashboard">Provenance</a>
+        <a href="/showroom#dashboard-extensions">Provenance</a>
+        <span class="shot-credit">
+          Wallpaper: <a href={beagle.sourcePage}>{beagle.title}</a>, {beagle.place}. Photograph by {beagle.photographer},{' '}
+          <a href={beagle.licenseUrl}>{beagle.license}</a>.
+        </span>
       </figcaption>
     </figure>
 
@@ -132,8 +147,8 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
     <div class="daily-copy">
       <h2 id="daily-title">A working day,<br />not a demo.</h2>
       <p>
-        This is a Hornero development desktop mid-session: a system monitor across the screen, an agent workspace
-        sidebar and the quick toggles open together.
+        btop watches the machine in one window while yazi browses a wallpapers folder in another, over a photograph
+        of the Beagle Channel. Both are ordinary terminal programs; nothing in this frame is staged.
       </p>
       <p class="caveat">
         Contributor-provided capture from {live.data.provenance.date}. It is a live Hyprland development setup, not an
@@ -147,7 +162,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
         formats={['avif', 'webp']}
         fallbackFormat="png"
         widths={[640, 960, 1280, 1600]}
-        sizes="(min-width: 1100px) 760px, calc(100vw - 2rem)"
+        sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
         loading="lazy"
         decoding="async"
       />
@@ -257,9 +272,10 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
       <div>
         <dt>Evidence</dt>
         <dd>
-          Every screenshot here comes from <a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a> with its hash and
-          pinned revisions. Shell <a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>
-          and config <a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>
+          Captures come from <a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a> runs, with a hash and pinned
+          revisions, or are labelled as contributor-provided live sessions; the <a href="/showroom#capture-ledger">showroom
+          ledger</a> lists the source of each. Shell <a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
+          and config <a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>{' '}
           are the commits this site’s data is built from.
         </dd>
       </div>
@@ -277,12 +293,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
     <div>
       <h2 id="get-title">Get HorneroOS</h2>
       <p>
-        {
-          latestTagged
-            ? `Development Preview ${previewNumber(latestTagged.version)} is the latest tagged composition`
-            : 'HorneroOS is a development preview'
-        }
-        {candidate && `; Preview ${previewNumber(candidate.version)} is being prepared`}. The desktop installs today as
+        {readiness}. The desktop installs today as
         Arch packages. A public ISO does not exist yet, and this page will say so until one passes acceptance.
       </p>
     </div>
@@ -318,6 +329,8 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
   .cover-shot figcaption { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.25rem 1rem; align-items: baseline; padding: 0.55rem 0.2rem 0; color: var(--text-muted); font: 0.68rem/1.35 var(--font-data); font-stretch: 87.5%; }
   .shot-detail { min-width: 0; }
   .shot-kind { color: var(--accent); font-weight: 700; }
+  .shot-credit { grid-column: 1 / -1; font: 0.7rem/1.4 var(--font-ui); letter-spacing: 0; }
+  .shot-credit a { color: var(--text); text-decoration-color: var(--accent); }
   .cover-shot figcaption a { color: var(--text); text-decoration-color: var(--accent); }
   @keyframes tube-on { from { clip-path: inset(46% 0 46% 0); filter: brightness(1.7); } to { clip-path: inset(0); filter: none; } }
 
@@ -335,10 +348,12 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
   .section { margin-block: clamp(3.5rem, 2rem + 6vw, 7rem); }
   .section > * + * { margin-top: 0; }
 
-  .daily { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: center; gap: clamp(1.5rem, 5vw, 4.5rem); }
+  .daily { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); }
   .daily h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
-  .daily-copy { display: grid; gap: 1rem; }
-  .daily-copy p { color: var(--text-muted); max-width: 40ch; }
+  .daily-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 0.9rem clamp(1.5rem, 5vw, 5rem); }
+  .daily-copy h2 { grid-row: 1 / span 2; }
+  .daily-copy > p { grid-column: 2; }
+  .daily-copy p { color: var(--text-muted); max-width: 52ch; }
   .daily .caveat { padding-left: 0.85rem; border-left: 2px solid var(--secondary); font-size: 0.85rem; }
   .daily-shot { margin: 0; }
   .daily-shot :global(img) { width: 100%; height: auto; aspect-ratio: 1918 / 1078; border: 1px solid var(--line); background: var(--surface); }
@@ -375,7 +390,9 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
   .get-links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-end; }
 
   @media (max-width: 900px) {
-    .cover-head, .band-head, .daily { grid-template-columns: 1fr; }
+    .cover-head, .band-head, .daily-copy { grid-template-columns: 1fr; }
+    .daily-copy h2 { grid-row: auto; }
+    .daily-copy > p { grid-column: 1; }
     .family-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .family-cell:nth-child(odd) { border-left: 0; }
     .family-cell:nth-child(n + 3) { border-top: 1px solid var(--line); }

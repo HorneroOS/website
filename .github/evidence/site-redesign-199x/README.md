@@ -14,6 +14,8 @@ come from the live site at <https://horneroos.com>.
 - `after-home-desktop-1920.png`, `after-home-tablet-768.png`,
   `after-home-light-1440.png`, `after-home-light-mobile-390.png`: other sizes
   and Light mode.
+- `after-showroom-session-1440.png`: the new "One morning on the Beagle Channel"
+  section with four contributor-provided captures from one live session.
 - `before-home-full-1440.png` / `after-home-full-1440.png`: full pages, scaled to
   720 px wide. The page is shorter and every section has one job.
 - `after-nav-keyboard-open-1440.png`, `after-nav-mobile-open-390.png`: the
@@ -28,12 +30,12 @@ from the same machine.
 
 | Profile | Metric | Before | After |
 | --- | --- | --- | --- |
-| Mobile 390 × 844 | Largest Contentful Paint | 784 ms (a text paragraph) | 1156 ms (the real desktop capture) |
+| Mobile 390 × 844 | Largest Contentful Paint | 784 ms (a text paragraph) | 856 ms (the real desktop capture) |
 | Mobile 390 × 844 | Cumulative Layout Shift | 0.0007 | 0.0001 |
-| Mobile 390 × 844 | Transferred | 253 KB | 183 KB |
-| Desktop 1440 × 900 | Largest Contentful Paint | 2100 ms (a photograph) | 1472 ms (the real desktop capture) |
+| Mobile 390 × 844 | Transferred | 253 KB | 172 KB |
+| Desktop 1440 × 900 | Largest Contentful Paint | 2100 ms (a photograph) | 1272 ms (the real desktop capture) |
 | Desktop 1440 × 900 | Cumulative Layout Shift | 0.0011 | 0.0006 |
-| Desktop 1440 × 900 | Transferred | 288 KB | 249 KB |
+| Desktop 1440 × 900 | Transferred | 288 KB | 229 KB |
 
 On a phone the LCP element is now the product image instead of text, so the
 number is higher by design: the first screen paints the thing a visitor came to

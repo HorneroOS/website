@@ -95,7 +95,8 @@ the pinned product data; the 199X framing never upgrades a claim.
 for this project (AI-assisted illustration, directed and reviewed by the
 project): a hornero and its nest over the La Plata grid. It contains no
 third-party imagery, no copied broadcaster artwork and no text. On the
-homepage it is explicitly captioned as artwork, never as a screenshot.
+Roots page (identity section) it is captioned as an AI-assisted illustration,
+never as a screenshot; the homepage leads with a real capture instead.
 The config wallpaper (`assets/brand/wallpaper/hornero-199x.png` in
 HorneroOS/config) is generated original artwork in the same scene; the
 simple SVG wallpapers were retired in HorneroOS/config#84.
