@@ -1,5 +1,5 @@
 ---
-title: 'Settings search · jump straight to Appearance'
+title: 'Settings search for “wallpaper”'
 image: '../../../assets/screenshots/reviews/settings-search.png'
 alt: 'Hornero Control Center search overlay finds wallpaper controls inside the Appearance settings pane.'
 order: 12

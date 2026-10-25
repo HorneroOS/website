@@ -1,5 +1,5 @@
 ---
-title: 'The Dashboard, with its Extensions tab · 25 October 2026'
+title: 'The Dashboard · 25 October 2026'
 image: '../../../assets/screenshots/curated/dashboard-extensions-2026-10-25.webp'
 alt: 'The Hornero Dashboard over a photograph of the Beagle Channel at dusk: weather at 11 degrees and overcast, system details, calendar and clock, resource bars, a media panel with the Companion, and tabs for Dashboard, Media, Performance, Weather, Workspaces and Extensions.'
 order: 13

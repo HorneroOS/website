@@ -14,6 +14,7 @@ and is sourced from the HorneroOS repositories.
   Node version and deployment.
 - [Performance](./PERFORMANCE.md) — static delivery and loading guidance.
 - [Internationalization](./I18N.md) — language and translation policy.
+- [Writing style](./COPY_STYLE.md) — how the site copy is written.
 - [October 2026 redesign](./REDESIGN_2026.md) — the first-impression rewrite and its
   truth guarantees.
 

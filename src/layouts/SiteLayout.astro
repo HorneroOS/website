@@ -8,6 +8,9 @@ import BaseHead from '../components/BaseHead.astro';
 import LogoDark from '../assets/brand/logo-dark.svg';
 import LogoLight from '../assets/brand/logo-light.svg';
 import '../styles/global.css';
+import { story } from '../data/story';
+
+const firstPublicCommit = story.find((entry) => entry.id === 'dotfiles')?.source?.href;
 
 interface Props {
   title: string;
@@ -225,10 +228,11 @@ const repos = [
         </ul>
       </nav>
       <p class="fine">
-        Hornero OS is built in the open since 2018. Hornero 199X is an artistic direction — a future imagined in
-        Argentina in the 1990s, built with today's open-source technology — not a historical product. This site uses
-        no cookies or analytics; your color choice stays in this browser, and the site loads no third-party
-        resources. Every screenshot is a real capture labelled with its source.
+        The desktop behind HorneroOS has been in daily use since 2018, by the maintainer’s account
+        (<a href="/roots#timeline">history</a>), and its configuration has been public since 2019
+        ({firstPublicCommit ? <a href={firstPublicCommit}>first commit</a> : 'first commit'}). Hornero 199X is an art
+        direction: a future imagined in Argentina in the 1990s, drawn with today’s open-source tools. It is not a historical product. This site sets no cookies, runs no analytics and loads no
+        third-party resources. Your color choice stays in this browser. Every screenshot is labelled with its source.
       </p>
     </footer>
     <script is:inline>

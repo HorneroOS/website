@@ -1,5 +1,5 @@
 ---
-title: 'Horizon · a wide, low profile'
+title: 'Horizon layout'
 image: '../../../assets/screenshots/certified/horizon.png'
 alt: 'Horizon layout in a real Hornero session, with controls arranged as a wide low-profile composition.'
 order: 10

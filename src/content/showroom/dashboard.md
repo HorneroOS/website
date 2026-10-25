@@ -1,5 +1,5 @@
 ---
-title: 'Dashboard · the desktop at a glance'
+title: 'Dashboard'
 image: '../../../assets/screenshots/certified/dashboard.png'
 alt: 'The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper.'
 order: 0

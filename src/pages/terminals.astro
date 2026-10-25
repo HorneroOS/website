@@ -14,25 +14,23 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
 
 <SiteLayout
   title={`Terminals — ${terminalNames} | HorneroOS`}
-  description={`Choose among ${terminalNames} in Hornero Settings. One Hornero appearance is rendered in each terminal's native palette format.`}
+  description={`Choose among ${terminalNames} in Hornero Settings. Each terminal receives the Hornero palette in its own native format.`}
 >
   <section class="terminal-intro section" aria-labelledby="terminal-title">
     <div class="terminal-heading">
-      <p class="eyebrow">One appearance · native terminal configs</p>
-      <h1 id="terminal-title">Your terminal.<br /><em>Still in tune.</em></h1>
+      <h1 id="terminal-title">Terminals</h1>
       <p class="lede">
-        {terminalNames} can follow the same Hornero appearance. The desktop renders colors in each terminal’s native
-        format. Install the emulators you want, then choose which one Hornero opens.
+        {terminalNames} can follow the Hornero appearance. Hornero writes the colors in each terminal’s native format.
+        Install the emulators you want, then choose which one Hornero opens.
       </p>
       <div class="terminal-actions">
         <a class="cta primary" href="/docs/applications/terminal/">Read the terminal guide <span aria-hidden="true">↗</span></a>
-        <a class="text-link" href="/themes">Explore Hornero appearances <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="/themes">Explore Hornero appearances</a>
       </div>
     </div>
     <aside class="terminal-note" aria-label="How terminal selection works">
-      <span class="note-index">SYSTEM / DEFAULT APPS</span>
-      <strong>Choose from what is installed.</strong>
-      <p>Settings shows the supported emulators, marks which are installed, and only enables available choices. {defaultTerminal?.name ?? 'The default terminal'} is the factory choice.</p>
+      <strong>Default terminal</strong>
+      <p>Settings lists the supported emulators, marks which are installed and lets you pick only an installed one. {defaultTerminal?.name ?? 'The default terminal'} is the factory choice.</p>
       {exampleTerminal && <code class="command">horneroctl config default-apps set terminal {exampleTerminal.id} --yes</code>}
       {exampleTerminal && alternativeTerminalIds.length > 0 && <small>Replace <code>{exampleTerminal.id}</code> with {alternativeTerminalIds.map((id, index) => <>{index > 0 && ' or '}<code>{id}</code></>)}.</small>}
     </aside>
@@ -61,40 +59,37 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
       </figcaption>
     </figure>
     <div class="proof-copy">
-      <p class="eyebrow">A real session, not a theme mockup</p>
-      <h2 id="terminal-proof-title">The palette reaches the prompt.</h2>
+      <h2 id="terminal-proof-title">Kitty with the Hornero palette</h2>
       <p>
         Kitty keeps its native configuration and receives Hornero’s generated colors in Kitty’s own format. The same
         appearance engine writes the matching output for Alacritty and Ghostty when they are installed.
       </p>
-      <a class="text-link" href="/themes">See how appearances carry across the desktop <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="/themes">See how appearances carry across the desktop</a>
     </div>
   </section>
 
   <section class="terminal-field section" aria-labelledby="terminal-field-title">
     <div class="field-heading">
       <div>
-        <p class="eyebrow">{terminals.length} emulators, one color source</p>
-        <h2 id="terminal-field-title">Native where it matters.</h2>
+        <h2 id="terminal-field-title">{terminals.length} supported terminals</h2>
       </div>
-      <p>Hornero keeps each terminal’s conventions intact. Your selected wallpaper palette is translated to the native format rather than forcing every emulator through one generic theme file.</p>
+      <p>Hornero keeps each terminal’s own conventions. The palette from your wallpaper is translated into each native format instead of one generic theme file.</p>
     </div>
     <div class="terminal-list">
-      {terminals.map((terminal, index) => (
+      {terminals.map((terminal) => (
         <article class="terminal-entry" id={terminal.id}>
           <div class="terminal-entry-heading">
-            <span class="terminal-number">0{index + 1}</span>
             <AppLogo id={terminal.id} />
             <div><h3>{terminal.name}</h3><span class="terminal-role">{terminal.role === 'default' ? 'Factory choice' : 'Supported alternative'}</span></div>
           </div>
           <p>{terminal.detail}</p>
           <div class="terminal-config" role="group" aria-label={`${terminal.name} configuration example`}>
             <div class="terminal-package">
-              <span class="config-label">INSTALL FROM ARCH REPOSITORIES</span>
+              <span class="config-label">Install from the Arch repositories</span>
               <code>sudo pacman -S --needed {terminal.package}</code>
             </div>
             <div class="terminal-factory-config">
-              <span class="config-label">FACTORY CONFIG</span>
+              <span class="config-label">Factory config</span>
               <code>{terminal.configExample}</code>
             </div>
           </div>
@@ -110,8 +105,8 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
     <aside class="preview-strip" aria-label="Image previews with Yazi">
       <AppLogo id="yazi" />
       <p>
-        <strong>Previews ride along.</strong> Yazi shows image previews inside your terminal — through Kitty's graphics
-        protocol, or the Wayland adapter through Überzug++ under Alacritty where configured.
+        <strong>Image previews.</strong> Yazi shows images inside the terminal, through Kitty’s graphics protocol or, under
+        Alacritty where configured, the Wayland adapter through Überzug++.
       </p>
     </aside>
   </section>
@@ -119,14 +114,13 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
   <section class="terminal-flow section" aria-labelledby="terminal-flow-title">
     <div class="flow-mark" aria-hidden="true"><span>01</span><i></i><span>02</span><i></i><span>03</span></div>
     <div>
-      <p class="eyebrow">A practical workflow</p>
-      <h2 id="terminal-flow-title">Install. Choose. Apply a look.</h2>
+      <h2 id="terminal-flow-title">Setup</h2>
       <ol class="flow-steps">
-        <li><strong>Install a terminal</strong><span>{defaultTerminal?.name ?? 'The default terminal'} is the factory choice. The other listed emulators remain optional packages.</span></li>
-        <li><strong>Select it in Settings</strong><span>Control Center marks installed choices and prevents selecting a terminal that is not present.</span></li>
+        <li><strong>Install a terminal</strong><span>{defaultTerminal?.name ?? 'The default terminal'} is the factory choice. The other listed emulators are optional packages.</span></li>
+        <li><strong>Select it in Settings</strong><span>Control Center marks installed choices and does not let you select a terminal that is not installed.</span></li>
         <li><strong>Change appearance</strong><span>Hornero writes fresh native palettes for all {terminals.length} integrations; the active terminal reads its own file.</span></li>
       </ol>
-      <p class="terminal-caveat">This page describes the current Arch package integration. Terminal packages are separate from Hornero Shell; installing Hornero does not require installing every emulator.</p>
+      <p class="terminal-caveat">This page describes the current Arch package integration. Terminal packages are separate from Hornero Shell, so installing Hornero does not require every emulator.</p>
     </div>
   </section>
 </SiteLayout>
@@ -138,7 +132,7 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
   .terminal-heading .lede { max-width: 56ch; margin-top: 1.2rem; }
   .terminal-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1.5rem; }
   .terminal-note { display: grid; gap: 0.85rem; padding: 1.2rem 0 0 1.2rem; border-top: 2px solid var(--highlight); border-left: 1px solid var(--line); }
-  .note-index, .config-label { color: var(--secondary); font: 0.65rem var(--font-data); letter-spacing: 0.08em; }
+  .config-label { color: var(--secondary); font: 0.65rem var(--font-data); letter-spacing: 0.08em; }
   .terminal-note strong { font-family: var(--font-display); font-size: 1.3rem; }
   .terminal-note p, .terminal-note small { color: var(--text-muted); line-height: 1.55; }
   .command { padding: 0.7rem; overflow-wrap: anywhere; border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: 0.78rem; }
@@ -160,7 +154,6 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
   .preview-strip { --app-logo-size: 3rem; display: flex; align-items: center; gap: 1rem; margin-top: 1.4rem; padding: 1rem 0.2rem; border-top: 1px solid var(--line); }
   .preview-strip p { max-width: 75ch; color: var(--text-muted); font-size: 0.88rem; line-height: 1.55; }
   .preview-strip strong { color: var(--text); font-family: var(--font-display); }
-  .terminal-number { padding-top: 0.25rem; color: var(--highlight); font: 0.72rem var(--font-data); }
   .terminal-entry h3 { font-size: 1.6rem; }
   .terminal-role { display: block; margin-top: 0.1rem; color: var(--text-muted); font: 0.64rem var(--font-data); text-transform: uppercase; }
   .terminal-entry > p { max-width: 38ch; color: var(--text-muted); font-size: 0.9rem; }

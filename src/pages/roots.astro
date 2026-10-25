@@ -14,30 +14,25 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
 <SiteLayout
   socialImage="/og/roots.png"
   socialImageAlt="The HorneroOS timeline from 2018 to 2026, with the 2018 stage dashed because it rests on the maintainer's account."
-  title="Roots — Hornero OS"
-  description="How Hornero grew from a personal desktop configuration into an open operating-system project, with its sources and credits intact."
+  title="Roots | HorneroOS"
+  description="How Hornero went from a personal desktop configuration to separate open projects, with a source for each step and credit to its upstream."
 >
   <section class="intro section">
     <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>ARG / 199X</span><span>Las raíces del proyecto</span></p>
-    <h1>
-      Built from a desktop.
-      <br />
-      <em>Grown into a system.</em>
-    </h1>
+    <h1>Roots</h1>
     <p>
-      Hornero began as a personal configuration, then grew into a set of maintained projects for the shell, themes,
-      operating-system tools, testing and documentation.
+      Hornero began as a personal configuration and grew into maintained projects for the shell, themes, system tools,
+      testing and documentation.
     </p>
   </section>
 
   <section class="section timeline-section" id="timeline" aria-labelledby="timeline-title">
     <div class="timeline-head">
-      <h2 id="timeline-title">From a workstation to an operating system.</h2>
+      <h2 id="timeline-title">Timeline</h2>
       <p>
         Two histories run through this page: a personal desktop that has been in daily use since 2018, and a set of
-        standalone HorneroOS projects that began in September 2026. A dashed rule marks the stage git cannot confirm;
-        every other row links to the commit or tag that dates it. The current Quickshell shell is not the 2018 setup
-        unchanged.
+        standalone HorneroOS projects that began in September 2026. A dashed rule marks the stage git cannot confirm.
+        Every other row links to the commit or tag that dates it. The current Quickshell shell is not the 2018 setup.
       </p>
     </div>
     <StoryTimeline entries={story} variant="ledger" label="HorneroOS timeline, 2018 to 2026" />
@@ -53,13 +48,13 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
         decoding="async"
         alt="Illustration of a hornero bird and its arched mud nest over a midnight-blue street grid cut by a diagonal avenue, under a signal-orange sun. It is artwork, not a desktop screenshot."
       />
-      <figcaption>Hornero 199X artwork · AI-assisted illustration, directed and reviewed by the project · not a screenshot</figcaption>
+      <figcaption>Hornero 199X artwork. AI-assisted illustration, directed and reviewed by the project. Not a screenshot.</figcaption>
     </figure>
     <div class="identity-copy">
-      <h2 id="identity-title">Where the look comes from.</h2>
+      <h2 id="identity-title">The 199X look</h2>
       <p>
         Hornero 199X borrows from Argentine broadcast graphics, home-computer magazines and arcades, from La Plata’s
-        street grid cut by diagonals, and from the hornero’s clay nest. It is an artistic direction, not a historical
+        street grid cut by diagonals, and from the hornero’s clay nest. It is an art direction, not a historical
         product. The photographs behind the Hornero Originals themes are licensed and credited on the{' '}
         <a href="/wallpapers">wallpapers page</a>.
       </p>
@@ -69,11 +64,10 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
 
   <section class="section map-section" id="repositories" aria-labelledby="repositories-title">
     <div>
-      <p class="eyebrow">Maintained in clear pieces</p>
-      <h2 id="repositories-title">Core repositories, clear boundaries.</h2>
+      <h2 id="repositories-title">Core repositories</h2>
       <p>
-        The product components are maintained separately so each layer can be reviewed, packaged and tested at the right
-        boundary. The{' '}
+        The product components live in separate repositories, so each layer can be reviewed, packaged and tested on its
+        own. The{' '}
         <a href="https://github.com/HorneroOS/.github/blob/main/governance/docs/repository-map.md">
           full organization map
         </a>{' '}
@@ -134,11 +128,10 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
 
   <section class="section contributor-guide" id="contribute" aria-labelledby="contributor-guide-title">
     <div>
-      <p class="eyebrow">For contributors</p>
-      <h2 id="contributor-guide-title">Start with the shared design language.</h2>
+      <h2 id="contributor-guide-title">Contributor references</h2>
       <p>
-        It sets cross-project identity and interaction principles. Each repository remains the source for its own
-        implementation rules and tested capabilities.
+        The design language sets the identity and interaction principles shared across projects. Each repository is the
+        source for its own implementation rules.
       </p>
     </div>
     <nav aria-label="Contributor references">
@@ -164,8 +157,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   </section>
 
   <section class="section lineage" id="community">
-    <p class="eyebrow">Influence, credit and direction</p>
-    <h2>Learn from good work. Keep our own shape.</h2>
+    <h2>Credits</h2>
     <div class="lineage-grid">
       <article>
         <h3>Code ancestry</h3>
@@ -179,15 +171,15 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
         <p>
           <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a>,{' '}
           <a href="https://github.com/AvengeMedia/DankMaterialShell">DankMaterialShell</a> and{' '}
-          <a href="https://github.com/omacom/omarchy">Omarchy</a> help us study how other teams make settings
-          discoverable, themes coherent and Linux desktops approachable.
+          <a href="https://github.com/omacom/omarchy">Omarchy</a> are projects we studied for discoverable
+          settings, coherent themes and approachable Linux desktops.
         </p>
       </article>
       <article>
         <h3>Hornero’s direction</h3>
         <p>
-          Those references inform the questions we ask, not the answers we copy. Hornero keeps its own visual range,
-          open development and product decisions.
+          We took questions from those projects, not answers. Hornero makes its own visual and product decisions in the
+          open.
         </p>
       </article>
       <article>

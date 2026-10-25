@@ -42,11 +42,11 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 <section class="section desktop-capture-explorer" aria-labelledby="capture-explorer-title" data-capture-explorer>
   <header class="explorer-heading">
     <div>
-      <h2 id="capture-explorer-title">One shell, {layoutCount} arrangements.</h2>
+      <h2 id="capture-explorer-title">{layoutCount} layouts, one shell</h2>
     </div>
     <p>
-      Layouts move the bar, the dock and the controls without changing the desktop underneath. Each frame is a real
-      capture from a Hornero QA run or visual review; pick one to compare.
+      A layout moves the bar, the dock and the controls; the desktop underneath stays the same. Each frame is a capture
+      from a Hornero QA run or visual review. Pick one to compare.
     </p>
   </header>
 
@@ -86,7 +86,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     </div>
 
     <div class="capture-navigation" role="group" aria-label="Choose a real Hornero capture">
-      <p class="navigation-label">Explore a surface</p>
+      <p class="navigation-label">Choose a capture</p>
       <ul aria-label="Choose a real Hornero capture">
         {views.map((view, index) => (
           <li>
@@ -123,13 +123,13 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
         ))}
       </ul>
       <p class="navigation-note">
-        The controls change the image and its source record. The desktop itself is not simulated.
+        Selecting a layout swaps the capture and its source record.
       </p>
       <a class="text-link" href="/layouts">
-        Explore all {layoutCount} layouts <span aria-hidden="true">→</span>
+        Explore all {layoutCount} layouts
       </a>
       <a class="text-link archive-link" href="/showroom">
-        Browse the full capture archive <span aria-hidden="true">→</span>
+        Browse the full capture archive
       </a>
     </div>
     <p class="capture-announcement" aria-live="polite" data-capture-announcement></p>

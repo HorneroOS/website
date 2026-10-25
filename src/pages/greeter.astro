@@ -10,32 +10,25 @@ const moods = [
   { id: 'golden-hour', label: 'Golden hour' },
   { id: 'night', label: 'Night' },
 ];
-const title = 'HorneroOS Greeter | Argentina, before the desktop';
+const title = 'Greeter | HorneroOS';
 const description =
-  'Explore HorneroOS’s offline SDDM greeter: a cinematic welcome shaped by Argentine landscapes and the light of the hour.';
+  'The HorneroOS login screen: an offline SDDM greeter whose background follows the time of day. This page is an interactive recreation in your browser.';
 ---
 
 <SiteLayout
   title={title}
   description={description}
   socialImage="/og/greeter.png"
-  socialImageAlt="HorneroOS greeter recreation over a golden-hour view of El Palmar National Park, labelled as not a screenshot, beside the line 'Argentina, before the desktop'."
+  socialImageAlt="HorneroOS greeter recreation over a golden-hour view of El Palmar National Park, labelled as not a screenshot, beside the line 'The HorneroOS greeter'."
 >
   <div class="greeter-page">
     <div class="greeter-hero">
       <header class="greeter-intro">
         <p class="plate-id"><strong>Antes del escritorio</strong><span>ARG / 199X</span><span>Recreación en navegador · no es una captura</span></p>
-        <p class="eyebrow">
-          <span aria-hidden="true">01 / 04</span> HORNEROS GREETER
-        </p>
-        <h1>
-          A little of Argentina
-          <br />
-          <em>before the desktop.</em>
-        </h1>
+        <h1>The HorneroOS greeter</h1>
         <p class="intro-copy">
-          A quiet welcome, carried by the landscapes and city lights of Argentina. The real greeter changes its local
-          background with the hour and keeps every frame on your computer.
+          The login screen is an SDDM theme. Its background changes with the hour and shows Argentine landscapes and
+          city scenes stored on your computer.
         </p>
       </header>
 
@@ -139,7 +132,7 @@ const description =
           <div class="scene-control">
             <div class="scene-copy">
               <span class="control-kicker" id="mood-status">
-                FOLLOWING YOUR LOCAL TIME
+                Following your local time
               </span>
               <strong id="scene-title">{firstScene.title}</strong>
               <small id="scene-credit">
@@ -162,19 +155,17 @@ const description =
           </div>
         </div>
         <p class="experience-caption">
-          <span>HORNEROOS SDDM GREETER</span>
-          <span>SCENE SELECTED FROM {videoScenes.length} LOCAL VIDEO CLIPS + STILL FALLBACKS</span>
+          <span>HorneroOS SDDM greeter</span>
+          <span>Daytime: {videoScenes.length} local video clips. Other moods: licensed stills</span>
         </p>
       </section>
     </div>
 
     <section class="mood-story" aria-labelledby="moods-heading">
       <div class="section-head">
-        <p class="eyebrow">THE LIGHT CHANGES</p>
-        <h2 id="moods-heading">Argentina, hour by hour.</h2>
+        <h2 id="moods-heading">By time of day</h2>
         <p>
-          Use the time controls above to move between the moods. Auto follows your clock; no location permission is
-          needed.
+          Use the time controls above to switch moods. Auto follows your clock and needs no location permission.
         </p>
       </div>
       <div class="mood-rail">
@@ -224,12 +215,12 @@ const description =
     <section class="scene-section" aria-labelledby="scenes-heading">
       <div class="scene-section-head">
         <div>
-          <p class="eyebrow">A SMALL, EDITED COLLECTION</p>
-          <h2 id="scenes-heading">Places with room to breathe.</h2>
+          <h2 id="scenes-heading">Scenes</h2>
         </div>
         <p>
           Each clip is checked for composition, readability behind the login panel, playback and redistribution rights.
-          The daytime videos are local; the other moods use licensed stills until suitable video clears the same bar.
+          The daytime scenes are local videos. The other moods use licensed stills until suitable video passes the
+          same checks.
         </p>
       </div>
       <div class="scene-grid">
@@ -282,36 +273,31 @@ const description =
     </section>
 
     <section class="quiet-design" aria-labelledby="quiet-heading">
-      <div class="quiet-number" aria-hidden="true">
-        02
-      </div>
       <div>
-        <p class="eyebrow">BUILT FOR THE MOMENT BEFORE</p>
-        <h2 id="quiet-heading">Atmosphere, with the login still in focus.</h2>
+        <h2 id="quiet-heading">How the greeter behaves</h2>
       </div>
       <ul>
         <li>
-          <strong>Readable first.</strong>
-          <span>Stable dark overlays keep the clock and login controls clear as scenes change.</span>
+          <strong>Readability.</strong>
+          <span>Stable dark overlays keep the clock and login controls legible as scenes change.</span>
         </li>
         <li>
-          <strong>Offline at login.</strong>
+          <strong>Offline.</strong>
           <span>
-            Video and still backgrounds are installed locally. Authentication never waits for a network stream.
+            Video and still backgrounds are installed locally. Login never waits for a network stream.
           </span>
         </li>
         <li>
-          <strong>Calm transitions.</strong>
+          <strong>Transitions.</strong>
           <span>
-            Randomized clips avoid immediate repeats, preload the next scene and crossfade; a local still remains
-            underneath.
+            Randomized clips avoid immediate repeats, preload the next scene and crossfade over a local still.
           </span>
         </li>
         <li>
-          <strong>Useful if media fails.</strong>
+          <strong>Fallback.</strong>
           <span>
-            Missing or undecodable videos leave the static background in place. The greeter remains a login screen, not
-            a player.
+            If a video is missing or cannot be decoded, the static background stays in place. The greeter is a login
+            screen, not a media player.
           </span>
         </li>
       </ul>
@@ -319,29 +305,28 @@ const description =
 
     <section class="technical" aria-labelledby="technical-heading">
       <div>
-        <p class="eyebrow">UNDER THE SURFACE</p>
-        <h2 id="technical-heading">Local media. Qt6. SDDM.</h2>
+        <h2 id="technical-heading">Technical details</h2>
         <p>
-          The real Hornero greeter is a Qt6/QML SDDM theme. A separately installed media pack contains H.264 clips; the
+          The Hornero greeter is a Qt6/QML SDDM theme. A separately installed media pack contains H.264 clips; the
           theme includes its fallback stills. A generated local catalog drives randomized, day-aware playback without
           login-time network access.
         </p>
       </div>
       <div class="tech-facts">
         <p>
-          <span>LOGIN MANAGER</span>
+          <span>Login manager</span>
           <strong>SDDM · Qt6</strong>
         </p>
         <p>
-          <span>PLAYBACK</span>
+          <span>Playback</span>
           <strong>Local H.264, muted</strong>
         </p>
         <p>
-          <span>DAYPART WINDOWS</span>
+          <span>Daypart windows</span>
           <strong>07:00–19:00 · 17:00–20:00 golden</strong>
         </p>
         <p>
-          <span>PROJECT STATUS</span>
+          <span>Project status</span>
           <strong>HorneroOS development preview</strong>
         </p>
       </div>
@@ -349,19 +334,18 @@ const description =
 
     <section class="get-greeter">
       <div>
-        <p class="eyebrow">PART OF THE HORNEROS DESKTOP</p>
-        <h2>See where the desktop begins.</h2>
+        <h2>Source and status</h2>
         <p>
-          This page recreates the greeter in your browser; it does not authenticate and never collects credentials. The
-          real theme and media pack are open source. HorneroOS remains a development preview.
+          This page recreates the greeter in your browser. It does not authenticate or collect credentials. The real
+          theme and media pack are open source. HorneroOS is a development preview.
         </p>
       </div>
       <div class="get-links">
         <a class="cta primary" href="https://github.com/HorneroOS/greeter">
-          Explore the greeter source <span aria-hidden="true">↗</span>
+          Greeter source <span aria-hidden="true">↗</span>
         </a>
         <a href="/install">
-          Check installation status <span aria-hidden="true">→</span>
+          Check installation status
         </a>
         <a href="https://github.com/HorneroOS/greeter/tree/main/media">
           Media provenance and manifests <span aria-hidden="true">↗</span>
@@ -464,8 +448,8 @@ const description =
       if (status)
         status.textContent =
           mode === 'auto'
-            ? `FOLLOWING LOCAL TIME · ${activeMood.toUpperCase().replace('-', ' ')}`
-            : `MANUAL MOOD · ${activeMood.toUpperCase().replace('-', ' ')}`;
+            ? `Following local time (${activeMood.replace('-', ' ')})`
+            : `Manual choice (${activeMood.replace('-', ' ')})`;
       if (video) {
         video.pause();
         video.classList.remove('is-ready');
@@ -1125,7 +1109,7 @@ const description =
   }
   .quiet-design {
     display: grid;
-    grid-template-columns: auto minmax(15rem, 0.9fr) minmax(21rem, 1.1fr);
+    grid-template-columns: minmax(15rem, 0.9fr) minmax(21rem, 1.1fr);
     gap: clamp(1.5rem, 4vw, 4rem);
     align-items: start;
     width: min(100%, 1280px);
@@ -1286,10 +1270,7 @@ const description =
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .quiet-design {
-      grid-template-columns: auto 1fr;
-    }
-    .quiet-design ul {
-      grid-column: 2;
+      grid-template-columns: 1fr;
     }
   }
   @media (max-width: 620px) {
@@ -1391,9 +1372,6 @@ const description =
     .quiet-design {
       grid-template-columns: 1fr;
       padding: 1.3rem;
-    }
-    .quiet-design ul {
-      grid-column: auto;
     }
     .technical {
       grid-template-columns: 1fr;

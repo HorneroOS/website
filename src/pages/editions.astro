@@ -32,7 +32,7 @@ const copy = {
     headline: 'A considered creative workstation',
     body: 'Desktop foundations for audio, video and visual work, with hardware-aware workflows rather than a package bundle.',
     href: '/studio',
-    link: 'Explore Studio (planned)',
+    link: 'About Studio (planned)',
   },
 } as const;
 const familyOrder = ['desktop', 'server', 'agents', 'studio'];
@@ -58,25 +58,20 @@ const roleLabel = {
 
 <SiteLayout
   socialImage="/og/editions.png"
-  socialImageAlt="The Hornero Left layout in Hornero Dark from a QA run, beside the line 'One foundation, four roles'."
-  title="Editions — one HorneroOS, composed for different work"
-  description="HorneroOS shares one foundation across Desktop, Server, Agents and Studio. Each profile has a distinct role and an explicit development state."
+  socialImageAlt="The Hornero Left layout in Hornero Dark from a QA run, beside the line 'Desktop now, three profiles planned'."
+  title="Editions | HorneroOS"
+  description="HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Only Desktop has packages; the catalogue states each profile’s maturity."
 >
   <section class="intro section">
     <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>ARG / 199X</span><span>Madurez verificada por edición</span></p>
-    <p class="eyebrow">One foundation · distinct roles</p>
-    <h1>
-      One system.
-      <br />
-      <em>Four ways to use it.</em>
-    </h1>
+    <h1>Editions</h1>
     <p class="lede">
-      HorneroOS is composed from a shared base and focused capabilities. Desktop, Server, Agents and Studio are
-      connected profiles, not separate distributions maintained in parallel.
+      HorneroOS is built from a shared base plus capabilities for each role. Desktop, Server, Agents and Studio are
+      profiles of that one system, not separate distributions.
     </p>
     <p class="availability">
-      The product model is defined; maturity varies by profile. A provisional Calamares installer is in development, but
-      its install flow has not passed virtual-machine acceptance and no ISO is published.{' '}
+      Maturity differs by profile. A provisional Calamares installer is in development; its install flow has not passed
+      virtual-machine acceptance and no ISO is published.{' '}
       <a href="/install">See what can be installed today.</a>
     </p>
   </section>
@@ -133,16 +128,15 @@ const roleLabel = {
   </section>
 
   <section class="section composition-note">
-    <p class="eyebrow">Shared architecture</p>
-    <h2>Capabilities compose. Product truth stays together.</h2>
+    <h2>How the editions relate</h2>
     <p>
-      Studio builds on Desktop; Agents builds on Server. The compositor belongs to Desktop as a backend choice. Hyprland
-      is the validated default, while Niri is experimental and retains clearly documented capability gaps.
+      Studio builds on Desktop and Agents builds on Server. The compositor is a Desktop backend choice. Hyprland is the
+      validated default. Niri is experimental and has documented capability gaps.
     </p>
     <p>
       The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model
-      is designed for CLI introspection, installation and acceptance tooling; those image and installer paths are not
-      yet released.
+      is meant for CLI introspection, installation and acceptance tooling; the image and installer paths are not
+      released yet.
     </p>
   </section>
 </SiteLayout>

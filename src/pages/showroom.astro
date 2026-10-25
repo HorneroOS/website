@@ -30,36 +30,32 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
 
 <SiteLayout
   socialImage="/og/showroom.png"
-  socialImageAlt="btop and the yazi file manager on a live Hornero desktop over a photograph of the Beagle Channel, beside the line 'Real captures from real runs'."
-  title="Showroom — Hornero OS"
-  description="Explore real Hornero desktop captures: visual worlds, layouts, Settings and the surfaces that make up a complete desktop."
+  socialImageAlt="btop and the yazi file manager on a live Hornero desktop over a photograph of the Beagle Channel, beside the line 'Hornero desktop captures'."
+  title="Showroom | HorneroOS"
+  description="Hornero desktop captures with their source, resolution, date and, when recorded, theme: layouts, themes, Settings and a working session."
 >
   <section class="showcase-hero section">
     <div class="hero-copy">
       <p class="plate-id"><strong>Archivo de capturas reales</strong><span>ARG / 199X</span><span>QA · procedencia en cada ficha</span></p>
-      <h1>
-        See Hornero
-        <br />
-        <em>in its element.</em>
-      </h1>
+      <h1>Hornero desktop captures</h1>
       <p>
-        Real captures of one Shell: different landscapes, different layouts, and the Settings that change them. Each
-        carries its source, theme, resolution and date.
+        One shell on different wallpapers and layouts, plus the Settings that change them. Each capture lists its
+        source, resolution, date and, when recorded, theme.
       </p>
       <p class="capture-era-note">
-        The captures on this page come from the 3 October 2026 review. Their layout and control surfaces are real; their
-        wallpaper artwork predates the current photo-backed Hornero Originals. Browse{' '}
-        <a href="/wallpapers">the current licensed Argentina collection</a> for today’s scenes.
+        The captures from 3 October 2026 use wallpaper artwork that predates the current photographic Hornero
+        Originals; their layouts and controls are as of that date. See{' '}
+        <a href="/wallpapers">the licensed Argentina collection</a> for the current wallpapers.
       </p>
       <nav class="hero-links" aria-label="Explore the showcase">
         <a href="#visual-worlds">
-          Visual worlds <span aria-hidden="true">↓</span>
+          Visual worlds
         </a>
         <a href="#layouts">
-          Layouts <span aria-hidden="true">↓</span>
+          Layouts
         </a>
         <a href="#control-center">
-          Settings <span aria-hidden="true">↓</span>
+          Settings
         </a>
       </nav>
     </div>
@@ -73,7 +69,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         widths={[640, 960, 1280, 1600]}
       />
       <p class="image-note">
-        <span>01 / THE DESKTOP AT A GLANCE</span> Dashboard, Companion and the wallpaper share one space.
+        <span>Dashboard</span> Five tabs, the Companion and the wallpaper on one desktop.
       </p>
     </div>
   </section>
@@ -81,13 +77,13 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
   <section class="section session-section" id="live-session" aria-labelledby="session-title">
     <div class="section-heading">
       <div>
-        <h2 id="session-title">One morning on the<br />Beagle Channel.</h2>
+        <h2 id="session-title">Four captures, one morning</h2>
       </div>
       <p>
-        Four captures from a single live session on 25 October 2026, between 04:28 and 04:35. The wallpaper is a
-        photograph of the Beagle Channel in Tierra del Fuego by{' '}
-        <a href={beagle.sourcePage}>{beagle.photographer}</a>, <a href={beagle.licenseUrl}>{beagle.license}</a>. These
-        are live development-host captures, not installer or release acceptance images.
+        Taken in one live session on 25 October 2026, between 04:28 and 04:35. The wallpaper is a photograph of the
+        Beagle Channel in Tierra del Fuego by{' '}
+        <a href={beagle.sourcePage}>{beagle.photographer}</a>, <a href={beagle.licenseUrl}>{beagle.license}</a>. They
+        are development-host captures, not installer or release acceptance images.
       </p>
     </div>
     <div class="session-grid">
@@ -100,8 +96,8 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           widths={[640, 960, 1280, 1600, 1918]}
         />
         <div class="story-caption">
-          <h3>The Dashboard keeps its tools in tabs.</h3>
-          <p>Media, Performance, Weather, Workspaces and Extensions sit beside the overview. Weather and the clock are live.</p>
+          <h3>The Dashboard</h3>
+          <p>Media, Performance, Weather, Workspaces and Extensions have their own tabs beside the overview.</p>
         </div>
       </article>
       <article id="terminal-tools" tabindex="-1" class="session-wide">
@@ -113,8 +109,8 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           widths={[640, 960, 1280, 1600]}
         />
         <div class="story-caption">
-          <h3>Terminal tools on the same desktop.</h3>
-          <p>btop and yazi are ordinary terminal programs, here previewing a wallpaper folder.</p>
+          <h3>btop and yazi</h3>
+          <p>Ordinary terminal programs. yazi is previewing a wallpaper folder.</p>
         </div>
       </article>
       <article id="quick-toggles" tabindex="-1" class="session-narrow">
@@ -126,7 +122,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           widths={[640, 960, 1280]}
         />
         <div class="story-caption">
-          <h3>Quick toggles, nothing else.</h3>
+          <h3>Quick settings</h3>
           <p>Wi-Fi, Bluetooth, microphone, settings and notifications, with Keep Awake and the screen recorder.</p>
         </div>
       </article>
@@ -141,8 +137,8 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         <div class="story-caption">
           <h3>Type <code>&gt;wallpaper</code> in the launcher.</h3>
           <p>
-            Thumbnails preview across the whole desktop before you commit. The wallpapers in this capture come from the
-            contributor’s own folder; they are not shipped with HorneroOS and their licences are not part of it.
+            Thumbnails preview across the whole desktop before you apply one. The wallpapers in this capture come from the
+            contributor’s own folder. They are not shipped with HorneroOS.
           </p>
         </div>
       </article>
@@ -152,13 +148,11 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
   <section class="section work-session-section" aria-labelledby="work-session-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">A real development session</p>
-        <h2 id="work-session-title">The desktop at work.</h2>
+        <h2 id="work-session-title">A development session on 23 October</h2>
       </div>
       <p>
-        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
-        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
-        acceptance evidence.
+        A contributor-provided capture of a live workstation with the system monitor and quick settings open. It is
+        not an installer screenshot or release acceptance evidence.
       </p>
     </div>
     <ArchFrame
@@ -171,19 +165,14 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
   </section>
   <section class="section atmosphere-section" id="visual-worlds" aria-labelledby="worlds-title">
     <div class="section-intro">
-      <p class="eyebrow">One Shell, many atmospheres</p>
-      <h2 id="worlds-title">
-        The wallpaper changes.
-        <br />
-        <em>The desktop comes along.</em>
-      </h2>
+      <h2 id="worlds-title">Same shell, different wallpapers</h2>
       <p>
-        These dated development captures keep Hornero’s vertical rail in view while the wallpaper changes. Palette
-        generation can draw a coordinated color system from the scene you choose. The current Argentina Originals use
-        the attributed photographs in the wallpaper collection.
+        Dated development captures with the vertical rail in view while the wallpaper changes. Palette generation can
+        derive a color scheme from the wallpaper you choose. The current Argentina Originals use the attributed
+        photographs in the wallpaper collection.
       </p>
       <a class="text-link" href="/themes">
-        Explore all looks <span aria-hidden="true">→</span>
+        Browse all themes
       </a>
     </div>
     <div class="atmosphere-grid">
@@ -197,9 +186,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
             widths={[480, 720, 960, 1280]}
           />
           <div class="story-caption">
-            <span>
-              0{i + 2} / {s.data.provenance.theme ?? 'WALLPAPER COLOR'}
-            </span>
+            <span>{s.data.provenance.theme ?? 'Wallpaper colors'}</span>
             <h3>{s.data.title}</h3>
             <p>{s.data.provenance.context}</p>
           </div>
@@ -214,12 +201,11 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
   <section class="section topology-section" id="layouts" aria-labelledby="layouts-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Space, not skin</p>
-        <h2 id="layouts-title">The Shell takes different shapes.</h2>
+        <h2 id="layouts-title">Layouts</h2>
       </div>
       <p>
-        A side rail, paired bars, a horizon-wide composition, separate islands or a bottom dock: layouts change the
-        desktop’s rhythm while shared controls and visual language stay familiar.
+        A side rail, paired bars, a wide top bar, separate islands or a bottom dock. Layouts change where things sit;
+        the shared controls and visual language stay the same.
       </p>
     </div>
     <div class="topology-grid">
@@ -237,19 +223,18 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       ))}
     </div>
     <a class="text-link section-cta" href="/layouts">
-      See the layout collection <span aria-hidden="true">→</span>
+      See the layout collection
     </a>
   </section>
 
   <section class="section controls-section" id="control-center" aria-labelledby="controls-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Your desktop, within reach</p>
-        <h2 id="controls-title">Settings is part of the experience.</h2>
+        <h2 id="controls-title">Settings</h2>
       </div>
       <p>
-        Search across destinations and land on the control you need. Appearance brings looks, wallpaper, colors and
-        previews together; the rest of Control Center gives the desktop a clear home for everyday choices.
+        Control Center search jumps to the setting you type. Appearance groups looks, wallpaper, colors and previews in
+        one pane.
       </p>
     </div>
     <div class="controls-grid">
@@ -262,9 +247,8 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           widths={[520, 800, 1080, 1280]}
         />
         <div class="story-caption">
-          <span>SETTINGS SEARCH · KEYBOARD FLOW</span>
-          <h3>Ask for what you need.</h3>
-          <p>Searching “wallpaper” surfaces the exact Appearance controls and their destination.</p>
+          <h3>Settings search</h3>
+          <p>Searching “wallpaper” lands on the Appearance controls for it.</p>
         </div>
       </article>
       <article class="control-secondary" id="layout-picker" tabindex="-1">
@@ -276,32 +260,31 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           widths={[480, 720, 960]}
         />
         <div class="story-caption">
-          <span>LAYOUT PICKER · SPATIAL PREVIEW</span>
-          <h3>Choose the shape of your workspace.</h3>
-          <p>Topology previews make a structural change visible before it becomes your desktop.</p>
+          <h3>Layout Picker</h3>
+          <p>Each layout is previewed as a topology map before you apply it.</p>
         </div>
       </article>
     </div>
     <p class="capture-note">
-      Captures are shown with their date and source. QA sidecars identify the exact scenario and package revisions; the
-      Settings-search image is a visual review capture from the merged search implementation. These are product views,
-      not a claim that every shot comes from the same build.
+      Each capture is shown with its date and source. QA sidecars record the scenario and package revisions; the
+      Settings search image is a visual review capture of the merged search implementation. The captures do not all
+      come from the same build.
     </p>
   </section>
 
   <section class="section ledger-section" id="capture-ledger" aria-labelledby="ledger-title">
     <div class="section-heading">
       <div>
-        <h2 id="ledger-title">Every capture, with its record.</h2>
+        <h2 id="ledger-title">Capture ledger</h2>
       </div>
       <p>
-        What produced each picture, which theme it shows and when it was taken. Captures are product views, not a claim
-        that they all come from one build.
+        What produced each picture, the theme it shows and when it was taken. The captures do not all come from the
+        same build.
       </p>
     </div>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Capture ledger">
       <table>
-        <caption>{ledger.length} real captures on this site</caption>
+        <caption>{ledger.length} captures on this site</caption>
         <thead>
           <tr><th scope="col">Capture</th><th scope="col">Source</th><th scope="col">Theme</th><th scope="col">Resolution</th><th scope="col">Date</th></tr>
         </thead>
@@ -391,8 +374,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
   .story-caption > span {
     color: var(--muted);
     font: 0.72rem/1.45 var(--font-data);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
   .image-note {
     display: flex;

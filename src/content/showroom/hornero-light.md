@@ -1,5 +1,5 @@
 ---
-title: 'Hornero Light · a softer daylight palette'
+title: 'Hornero Light theme'
 image: '../../../assets/screenshots/certified/hornero-light.png'
 alt: 'Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied.'
 order: 1

@@ -1,5 +1,5 @@
 ---
-title: 'Vapor Dreams · the long way home'
+title: 'Vapor Dreams wallpaper'
 image: '../../../assets/screenshots/curated/vapor-roadtrip.webp'
 alt: 'Hornero desktop with a synthwave desert road, coral cliffs and a dusk-purple sky behind the vertical shell rail.'
 order: 7
