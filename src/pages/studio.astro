@@ -16,33 +16,30 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
 ---
 
 <SiteLayout
-  title="Studio — a creative workstation, in preparation"
-  description="HorneroOS Studio composes selectable creative workloads — audio, video, streaming, design, photo and 3D — over the Desktop. It is planned: no installable Studio image exists yet."
+  title="Studio | HorneroOS"
+  description="HorneroOS Studio is a planned edition for creative work: audio, video, streaming, design, photo and 3D, built on the Desktop. No installable Studio image exists yet."
 >
   <section class="section intro">
     <p class="plate-id">
       <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: planificada</span>
     </p>
-    <p class="eyebrow">Edition · Planned</p>
-    <h1>Built for <em>making things.</em></h1>
+    <h1>Studio</h1>
     <p class="lede">
-      HorneroOS Studio is a creative workstation composed over the Desktop: you pick specializations — audio, video,
-      streaming, design, photography, 3D — and the system composes the applications, audio policy and workspace around
-      them. It is a considered workstation, not a bundle of everything.
+      HorneroOS Studio is a planned creative edition built on the Desktop. You pick specializations (audio, video,
+      streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for
+      them.
     </p>
     <p class="availability">
       <strong>Studio is planned and not yet installable.</strong> There is no Studio ISO and no installer flow for it
       today. The composition model, the <code>horneroctl studio</code> controls and the Control Center surfaces exist in
-      the repositories and are linked below; an installable image and hardware validation are still pending. Nothing on
-      this page claims support that QA has not evidenced.
+      the repositories and are linked below; an installable image and hardware validation are still pending.
     </p>
   </section>
 
   <section class="section" aria-labelledby="workloads-title">
-    <p class="eyebrow">Selectable specializations</p>
-    <h2 id="workloads-title">Choose the work. The system composes the rest.</h2>
+    <h2 id="workloads-title">Specializations</h2>
     <p class="section-copy">
-      Specializations and individual applications are selected from one canonical catalogue — the same model used by the
+      Specializations and individual applications are selected from one canonical catalogue, the same model used by the
       installer design, by <code>horneroctl studio selection</code> and by the Control Center. Selections can change
       after installation; recording a selection never deletes projects, settings or files.
     </p>
@@ -67,8 +64,7 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
   </section>
 
   <section class="section" aria-labelledby="apps-title">
-    <p class="eyebrow">Applications · source &amp; license</p>
-    <h2 id="apps-title">Every application, with its provenance.</h2>
+    <h2 id="apps-title">Applications, sources and licenses</h2>
     <p class="section-copy">
       This table is generated from the pinned Hornero catalogue (HorneroOS/hornero at {short(pins.hornero.sha)}).
       Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is
@@ -104,12 +100,11 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
   </section>
 
   <section class="section" aria-labelledby="audio-title">
-    <p class="eyebrow">Audio &amp; performance</p>
-    <h2 id="audio-title">Honest audio modes. No invented latency.</h2>
+    <h2 id="audio-title">Audio and performance modes</h2>
     <p class="section-copy">
       Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are
       explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling
-      period — it is never presented as measured round-trip latency, and no mode forces realtime kernels, IRQ tuning
+      period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning
       or privilege changes.
     </p>
     <ul class="mode-list">
@@ -133,8 +128,7 @@ const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
   </section>
 
   <section class="section" aria-labelledby="today-title">
-    <p class="eyebrow">Status</p>
-    <h2 id="today-title">What exists today, and what does not.</h2>
+    <h2 id="today-title">Status</h2>
     <div class="status-grid">
       <article>
         <h3>In the repositories</h3>
