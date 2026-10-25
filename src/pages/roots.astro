@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { layouts, pins, releases, themes, short } from '../data/product';
+import StoryTimeline from '../components/StoryTimeline.astro';
+import poster199x from '../assets/brand/hornero-199x-poster.jpg';
+import { story } from '../data/story';
+import { pins, releases, themes, short } from '../data/product';
 
 const shell = pins.shell;
 const config = pins.config;
@@ -9,12 +12,13 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
 ---
 
 <SiteLayout
+  socialImage="/og/roots.png"
+  socialImageAlt="The HorneroOS timeline from 2018 to 2026, with the 2018 stage dashed because it rests on the maintainer's account."
   title="Roots — Hornero OS"
   description="How Hornero grew from a personal desktop configuration into an open operating-system project, with its sources and credits intact."
 >
   <section class="intro section">
     <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>ARG / 199X</span><span>Las raíces del proyecto</span></p>
-    <p class="eyebrow">An open project, with its history intact</p>
     <h1>
       Built from a desktop.
       <br />
@@ -26,66 +30,41 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     </p>
   </section>
 
-  <section class="section timeline-section">
-    <p class="chapter"><b>2018</b><span>Cómo creció — How it grew</span></p>
-    <p class="eyebrow">How it grew</p>
-    <h2>From dotfiles to HorneroOS</h2>
-    <ol class="timeline">
-      <li>
-        <span class="timeline-mark">01</span>
-        <div>
-          <h3>A desktop takes shape in dotfiles</h3>
-          <p>
-            The personal Linux environment behind Hornero has been developed, used, refined and tested for more than
-            eight years. Its public configuration continues in{' '}
-            <a href="https://github.com/ulises-jeremias/dotfiles">ulises-jeremias/dotfiles</a>, alongside the broader
-            Arch Linux setup it grew from.
-          </p>
-        </div>
-      </li>
-      <li>
-        <span class="timeline-mark">02</span>
-        <div>
-          <h3>The shell becomes its own project</h3>
-          <p>
-            Hornero copied the shell into its own repository while preserving the original source and license. The
-            migration replaced workstation-only paths with XDG-based configuration so installed packages can stand on
-            their own.
-          </p>
-          <a href={`${shell.repo}/blob/${shell.sha}/NOTICE`}>
-            Read the shell attribution and migration record <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </li>
-      <li>
-        <span class="timeline-mark">03</span>
-        <div>
-          <h3>One shell, many arrangements</h3>
-          <p>
-            Earlier Polybar and Waybar configurations informed several familiar topologies. <em>Cockpit Clear</em> and{' '}
-            <em>Islands</em> cite Polybar; <em>Cozy Minimal</em> and <em>Dock Bottom</em> cite Waybar. Today,{' '}
-            <strong>{layouts.length} layouts</strong> arrange bars and islands through one Quickshell system and one
-            shared preset format.
-          </p>
-          <a href="/layouts">
-            Explore the current layouts <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </li>
-      <li>
-        <span class="timeline-mark">04</span>
-        <div>
-          <h3>The operating system grows around it</h3>
-          <p>
-            Theme packs, <code>horneroctl</code>, the greeter, an installer contract and a dedicated QA repository give
-            the desktop a path from source code to a tested system.
-          </p>
-          <a href="/releases">
-            See the release history <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </li>
-    </ol>
+  <section class="section timeline-section" id="timeline" aria-labelledby="timeline-title">
+    <div class="timeline-head">
+      <h2 id="timeline-title">From a workstation to an operating system.</h2>
+      <p>
+        Two histories run through this page: a personal desktop that has been in daily use since 2018, and a set of
+        standalone HorneroOS projects that began in September 2026. A dashed rule marks the stage git cannot confirm;
+        every other row links to the commit or tag that dates it. The current Quickshell shell is not the 2018 setup
+        unchanged.
+      </p>
+    </div>
+    <StoryTimeline entries={story} variant="ledger" label="HorneroOS timeline, 2018 to 2026" />
+  </section>
+
+  <section class="section identity" aria-labelledby="identity-title">
+    <figure class="poster">
+      <img
+        src={poster199x.src}
+        width={poster199x.width}
+        height={poster199x.height}
+        loading="lazy"
+        decoding="async"
+        alt="Illustration of a hornero bird and its arched mud nest over a midnight-blue street grid cut by a diagonal avenue, under a signal-orange sun. It is artwork, not a desktop screenshot."
+      />
+      <figcaption>Hornero 199X artwork · AI-assisted illustration, directed and reviewed by the project · not a screenshot</figcaption>
+    </figure>
+    <div class="identity-copy">
+      <h2 id="identity-title">Where the look comes from.</h2>
+      <p>
+        Hornero 199X borrows from Argentine broadcast graphics, home-computer magazines and arcades, from La Plata’s
+        street grid cut by diagonals, and from the hornero’s clay nest. It is an artistic direction, not a historical
+        product. The photographs behind the Hornero Originals themes are licensed and credited on the{' '}
+        <a href="/wallpapers">wallpapers page</a>.
+      </p>
+      <p><a href="/docs/development/design-language/">Read the design language</a></p>
+    </div>
   </section>
 
   <section class="section map-section" id="repositories" aria-labelledby="repositories-title">
@@ -274,38 +253,9 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   .lineage > h2 {
     margin-top: 0.4rem;
   }
-  .timeline {
-    display: grid;
-    gap: 0;
-    max-width: 850px;
-    margin-top: 1.5rem;
-    padding: 0;
-    list-style: none;
-  }
-  .timeline li {
-    display: grid;
-    grid-template-columns: 3.2rem minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1.35rem 0;
-    border-top: 1px solid var(--line);
-  }
-  .timeline-mark,
   .repo-mark {
     color: var(--secondary);
     font: 0.75rem var(--font-data);
-  }
-  .timeline h3 {
-    font-size: var(--step-1);
-  }
-  .timeline p {
-    margin-top: 0.35rem;
-    color: var(--text-muted);
-  }
-  .timeline a {
-    display: inline-block;
-    margin-top: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
   }
   .map-section {
     display: grid;
@@ -416,12 +366,24 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  .timeline-head { display: grid; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: 1.5rem; }
+  .timeline-head h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .timeline-head p { max-width: 58ch; color: var(--text-muted); }
+  .identity { display: grid; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .poster { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+  .poster img { width: 100%; height: auto; }
+  .poster figcaption { padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); color: var(--text-muted); font: 0.68rem var(--font-data); font-stretch: 87.5%; }
+  .identity-copy { display: grid; gap: 1rem; }
+  .identity-copy h2 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; }
+  .identity-copy p { max-width: 50ch; color: var(--text-muted); }
+  @media (min-width: 900px) {
+    .timeline-head { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; }
+    .identity { grid-template-columns: 1.1fr 0.9fr; }
+  }
 </style>
 
 <style>
   /* 199X per-page direction: roots as an archival timeline. */
-  .timeline { border-left: 3px solid var(--accent); }
-  .timeline-mark { font-family: var(--font-data); color: var(--accent); }
   .repo-mark { font-family: var(--font-data); }
   .lineage-grid > * { border-radius: 2px; }
 </style>

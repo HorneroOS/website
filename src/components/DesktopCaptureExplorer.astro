@@ -10,11 +10,11 @@ interface Props {
 
 const { captures, layoutCount } = Astro.props;
 const selections = [
-  { id: 'dashboard', label: 'Dashboard', group: 'Workspace' },
-  { id: 'hornero-left', label: 'Hornero Left', group: 'Layout' },
-  { id: 'appearance-search', label: 'Appearance search', group: 'Settings' },
-  { id: 'layout-picker', label: 'Layout Picker', group: 'Layout' },
-  { id: 'cockpit-clear', label: 'Cockpit Clear', group: 'Bars' },
+  { id: 'cockpit-clear', label: 'Cockpit Clear', group: 'Layout' },
+  { id: 'islands', label: 'Islands', group: 'Layout' },
+  { id: 'dock-bottom', label: 'Dock Bottom', group: 'Layout' },
+  { id: 'layout-picker', label: 'Layout Picker', group: 'Control Center' },
+  { id: 'appearance-search', label: 'Settings search', group: 'Control Center' },
 ];
 
 const views = await Promise.all(
@@ -42,12 +42,11 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 <section class="section desktop-capture-explorer" aria-labelledby="capture-explorer-title" data-capture-explorer>
   <header class="explorer-heading">
     <div>
-      <p class="eyebrow">Real Hornero sessions · choose a view</p>
-      <h2 id="capture-explorer-title">See the Shell at work.</h2>
+      <h2 id="capture-explorer-title">One shell, {layoutCount} arrangements.</h2>
     </div>
     <p>
-      Each frame comes from a Hornero QA or visual review capture. Pick a surface to inspect the desktop, its layout
-      controls and Settings.
+      Layouts move the bar, the dock and the controls without changing the desktop underneath. Each frame is a real
+      capture from a Hornero QA run or visual review; pick one to compare.
     </p>
   </header>
 

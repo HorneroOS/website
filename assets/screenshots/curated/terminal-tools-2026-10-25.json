@@ -1,0 +1,17 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "terminal-tools-2026-10-25.webp",
+  "sha256": "fae74a25789bc2b4ca0e40850be9a7a464d342ffc989d1db8083d41b89655fc4",
+  "captured": "2026-10-25",
+  "capture": {
+    "source": "contributor-provided live desktop screenshot",
+    "resolution": "1918x1078",
+    "visible_surfaces": [
+      "system monitor",
+      "file manager with wallpaper preview",
+      "workspace rail"
+    ]
+  },
+  "original_png_sha256": "0b3661d7a9af4ddc67ea85087250eeb83ecda20926ee4a713bd67b9f60c22019",
+  "note": "Live development-host capture; lossless PNG converted to WebP (quality 92). Not an installer image, ISO acceptance result, or release certification."
+}

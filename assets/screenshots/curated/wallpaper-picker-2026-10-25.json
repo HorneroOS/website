@@ -1,0 +1,16 @@
+{
+  "schema": "hornero.website.capture/1",
+  "file": "wallpaper-picker-2026-10-25.webp",
+  "sha256": "5eb7e8920b74221ef1c1525293c255b1a5ba15aa746d62813c120169c1019931",
+  "captured": "2026-10-25",
+  "capture": {
+    "source": "contributor-provided live desktop screenshot",
+    "resolution": "1918x1078",
+    "visible_surfaces": [
+      "launcher wallpaper picker (>wallpaper)",
+      "workspace rail"
+    ]
+  },
+  "original_png_sha256": "c3b7e5db52605933d8e07632aa3cb4e5d67f851a49ac989333f25c0fcf361028",
+  "note": "Live development-host capture; lossless PNG converted to WebP (quality 92). Not an installer image, ISO acceptance result, or release certification."
+}

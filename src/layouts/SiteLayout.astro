@@ -20,34 +20,52 @@ interface Props {
 interface NavLink {
   href: string;
   label: string;
-  className?: string;
 }
 
+interface NavGroup {
+  label: string;
+  links: NavLink[];
+}
+
+type NavItem = ({ kind: 'link' } & NavLink) | ({ kind: 'group' } & NavGroup);
+
 const { title, description, noindex, socialImage, socialImageAlt } = Astro.props;
-const primaryNav: NavLink[] = [
-  { href: '/editions', label: 'Editions' },
-  { href: '/layouts', label: 'Layouts' },
-  { href: '/themes', label: 'Themes' },
-  { href: '/greeter', label: 'Greeter' },
-  { href: '/companion', label: 'Companion' },
-  { href: '/extensions', label: 'Extensions' },
-  { href: '/showroom', label: 'Showroom' },
-  { href: '/wallpapers', label: 'Wallpapers' },
+// Grouped by what a visitor is trying to do: see it, compare editions, extend it,
+// learn the story, read the docs, get it.
+const nav: NavItem[] = [
+  {
+    kind: 'group',
+    label: 'Desktop',
+    links: [
+      { href: '/showroom', label: 'Showroom' },
+      { href: '/layouts', label: 'Layouts' },
+      { href: '/themes', label: 'Themes' },
+      { href: '/wallpapers', label: 'Wallpapers' },
+      { href: '/greeter', label: 'Greeter' },
+      { href: '/terminals', label: 'Terminals' },
+      { href: '/companion', label: 'Companion' },
+    ],
+  },
+  { kind: 'link', href: '/editions', label: 'Editions' },
+  { kind: 'link', href: '/extensions', label: 'Extensions' },
+  {
+    kind: 'group',
+    label: 'Story',
+    links: [
+      { href: '/roots', label: 'Roots' },
+      { href: '/releases', label: 'Releases' },
+      { href: '/docs/development/design-language/', label: 'Design language' },
+    ],
+  },
+  { kind: 'link', href: '/docs/', label: 'Docs' },
+  { kind: 'link', href: '/search/', label: 'Search' },
 ];
-const utilityNav: NavLink[] = [
-  { href: '/releases', label: 'Releases' },
-  { href: '/terminals', label: 'Terminals' },
-  { href: '/docs/development/design-language/', label: 'Design language' },
-  { href: '/docs/', label: 'Docs' },
-  { href: '/search/', label: 'Search' },
-  { href: '/roots', label: 'Roots' },
-];
-const nav = [...primaryNav, ...utilityNav, { href: '/install', label: 'Install', className: 'nav-install' }];
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => {
   const h = href.replace(/\/$/, '') || '/';
   return current === h || (h !== '/' && current.startsWith(`${h}/`));
 };
+const groupCurrent = (group: NavGroup) => group.links.some((l) => isCurrent(l.href));
 const repos = [
   { href: 'https://github.com/HorneroOS', label: 'GitHub' },
   { href: '/roots#repositories', label: 'Project map' },
@@ -86,35 +104,35 @@ const repos = [
       </a>
       <nav aria-label="Main">
         <ul>
-          {primaryNav.map((l) => (
-            <li>
-              <a href={l.href} class={l.className} aria-current={isCurrent(l.href) ? 'page' : undefined}>
-                {l.label}
-              </a>
-            </li>
-          ))}
-          <li class="nav-more-item">
-            <details class="nav-more">
-              <summary
-                class={utilityNav.some((l) => isCurrent(l.href)) ? 'more-current' : undefined}
-                aria-label="More pages"
-              >
-                More <span aria-hidden="true">⌄</span>
-              </summary>
-              <ul aria-label="More pages">
-                {utilityNav.map((l) => (
-                  <li>
-                    <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          </li>
+          {nav.map((item) =>
+            item.kind === 'link' ? (
+              <li>
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ) : (
+              <li class="nav-more-item">
+                <details class="nav-menu nav-more">
+                  <summary class={groupCurrent(item) ? 'more-current' : undefined}>
+                    {item.label} <span aria-hidden="true">⌄</span>
+                  </summary>
+                  <ul aria-label={item.label}>
+                    {item.links.map((l) => (
+                      <li>
+                        <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                          {l.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ),
+          )}
           <li>
             <a href="/install" class="nav-install" aria-current={isCurrent('/install') ? 'page' : undefined}>
-              Install
+              Get HorneroOS
             </a>
           </li>
         </ul>
@@ -128,13 +146,33 @@ const repos = [
         </summary>
         <nav aria-label="Mobile main">
           <ul>
-            {nav.map((l) => (
-              <li>
-                <a href={l.href} class={l.className} aria-current={isCurrent(l.href) ? 'page' : undefined}>
-                  {l.label}
-                </a>
-              </li>
-            ))}
+            {nav.map((item) =>
+              item.kind === 'link' ? (
+                <li>
+                  <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ) : (
+                <li class="mobile-group">
+                  <p>{item.label}</p>
+                  <ul aria-label={item.label}>
+                    {item.links.map((l) => (
+                      <li>
+                        <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                          {l.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ),
+            )}
+            <li>
+              <a href="/install" class="nav-install" aria-current={isCurrent('/install') ? 'page' : undefined}>
+                Get HorneroOS
+              </a>
+            </li>
           </ul>
         </nav>
       </details>
@@ -147,7 +185,7 @@ const repos = [
               <rect x="1.5" y="2" width="13" height="9" rx="1.5" />
               <path d="M5.5 14h5M8 11v3M8 3v7" />
             </svg>
-            System
+            <b class="mode-name">System</b>
           </span>
         </label>
         <label>
@@ -157,7 +195,7 @@ const repos = [
               <circle cx="8" cy="8" r="3" />
               <path d="M8 1v1.5M8 13.5V15M1 8h1.5m11 0H15M3.05 3.05l1.06 1.06m7.78 7.78 1.06 1.06m0-9.9-1.06 1.06m-7.78 7.78-1.06 1.06" />
             </svg>
-            Light
+            <b class="mode-name">Light</b>
           </span>
         </label>
         <label>
@@ -167,7 +205,7 @@ const repos = [
               <path d="M12.8 10.3A5.7 5.7 0 0 1 5.7 3.2a5.8 5.8 0 1 0 7.1 7.1Z" />
               <path d="m11.8 2 .35 1.05L13.2 3.4l-1.05.35L11.8 4.8l-.35-1.05L10.4 3.4l1.05-.35L11.8 2Z" />
             </svg>
-            Dark
+            <b class="mode-name">Dark</b>
           </span>
         </label>
       </fieldset>
@@ -194,24 +232,22 @@ const repos = [
     </footer>
     <script is:inline>
       (() => {
-        const moreMenu = document.querySelector('.nav-more');
-        const moreSummary = moreMenu?.querySelector('summary');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileSummary = mobileMenu?.querySelector('summary');
+        const menus = [...document.querySelectorAll('.nav-menu, .mobile-menu')];
+        const closeAll = (except) => menus.forEach((menu) => {
+          if (menu !== except && menu.open) menu.open = false;
+        });
+        menus.forEach((menu) => menu.addEventListener('toggle', () => menu.open && closeAll(menu)));
         document.addEventListener('pointerdown', (event) => {
-          if (moreMenu?.open && !moreMenu.contains(event.target)) moreMenu.open = false;
-          if (mobileMenu?.open && !mobileMenu.contains(event.target)) mobileMenu.open = false;
+          menus.forEach((menu) => {
+            if (menu.open && !menu.contains(event.target)) menu.open = false;
+          });
         });
         document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape' && moreMenu?.open) {
-            moreMenu.open = false;
-            moreSummary?.focus();
-            return;
-          }
-          if (event.key === 'Escape' && mobileMenu?.open) {
-            mobileMenu.open = false;
-            mobileSummary?.focus();
-          }
+          if (event.key !== 'Escape') return;
+          const open = menus.find((menu) => menu.open);
+          if (!open) return;
+          open.open = false;
+          open.querySelector('summary')?.focus();
         });
 
         const key = 'hornero-color-mode';

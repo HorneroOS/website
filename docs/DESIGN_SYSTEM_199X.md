@@ -62,8 +62,11 @@ Scale: `--step--1` to `--step-4` in `src/styles/global.css`.
 
 ## Grammar
 
-- `.chapter` — numbered editorial chapter head (`01 / LA SEÑAL`). Numbers
-  encode the homepage narrative order; they are not decoration elsewhere.
+- `.chapter` — numbered editorial chapter head, kept for pages whose content is
+  a real sequence. The homepage no longer numbers its sections.
+- `StoryTimeline` — dated, source-linked history. A dashed rule means "not
+  confirmable from public git history"; a solid rule means a linked commit or
+  tag.
 - `.broadcast-plate` / `.plate-id` — mechanical identification frame with
   registration corners and a mono ID line (`TRANSMISIÓN 001 · ARG / 199X`).
 - `.signal-bars` — one brief signal-acquisition settle on load (electric,
@@ -92,7 +95,8 @@ the pinned product data; the 199X framing never upgrades a claim.
 for this project (AI-assisted illustration, directed and reviewed by the
 project): a hornero and its nest over the La Plata grid. It contains no
 third-party imagery, no copied broadcaster artwork and no text. On the
-homepage it is explicitly captioned as artwork, never as a screenshot.
+Roots page (identity section) it is captioned as an AI-assisted illustration,
+never as a screenshot; the homepage leads with a real capture instead.
 The config wallpaper (`assets/brand/wallpaper/hornero-199x.png` in
 HorneroOS/config) is generated original artwork in the same scene; the
 simple SVG wallpapers were retired in HorneroOS/config#84.

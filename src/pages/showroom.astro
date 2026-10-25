@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ArchFrame from '../components/ArchFrame.astro';
+import { wallpapers } from '../data/product';
 
 const shots = await getCollection('showroom');
 const shot = (id: string) => {
@@ -18,24 +19,32 @@ const atmospheres = [
 ];
 const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon'), shot('islands'), shot('dock-bottom')];
 const liveWorkstation = shot('live-workstation');
+const dashboardExtensions = shot('dashboard-extensions');
+const terminalTools = shot('terminal-tools');
+const quickToggles = shot('quick-toggles');
+const wallpaperPicker = shot('wallpaper-picker');
+const beagle = wallpapers.find((wallpaper) => wallpaper.id === 'fin-del-mundo');
+if (!beagle) throw new Error('The Beagle Channel photograph is missing from the pinned wallpaper catalogue');
+const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
 ---
 
 <SiteLayout
+  socialImage="/og/showroom.png"
+  socialImageAlt="btop and the yazi file manager on a live Hornero desktop over a photograph of the Beagle Channel, beside the line 'Real captures from real runs'."
   title="Showroom — Hornero OS"
   description="Explore real Hornero desktop captures: visual worlds, layouts, Settings and the surfaces that make up a complete desktop."
 >
   <section class="showcase-hero section">
     <div class="hero-copy">
       <p class="plate-id"><strong>Archivo de capturas reales</strong><span>ARG / 199X</span><span>QA · procedencia en cada ficha</span></p>
-      <p class="eyebrow">A desktop with room to become yours</p>
       <h1>
         See Hornero
         <br />
         <em>in its element.</em>
       </h1>
       <p>
-        A working desktop is more than a wallpaper. Follow the same Shell through different landscapes, change how it
-        occupies the screen, then step into the tools that shape it.
+        Real captures of one Shell: different landscapes, different layouts, and the Settings that change them. Each
+        carries its source, theme, resolution and date.
       </p>
       <p class="capture-era-note">
         The captures on this page come from the 3 October 2026 review. Their layout and control surfaces are real; their
@@ -69,6 +78,97 @@ const liveWorkstation = shot('live-workstation');
     </div>
   </section>
 
+  <section class="section session-section" id="live-session" aria-labelledby="session-title">
+    <div class="section-heading">
+      <div>
+        <h2 id="session-title">One morning on the<br />Beagle Channel.</h2>
+      </div>
+      <p>
+        Four captures from a single live session on 25 October 2026, between 04:28 and 04:35. The wallpaper is a
+        photograph of the Beagle Channel in Tierra del Fuego by{' '}
+        <a href={beagle.sourcePage}>{beagle.photographer}</a>, <a href={beagle.licenseUrl}>{beagle.license}</a>. These
+        are live development-host captures, not installer or release acceptance images.
+      </p>
+    </div>
+    <div class="session-grid">
+      <article id="dashboard-extensions" tabindex="-1" class="session-lead">
+        <ArchFrame
+          src={dashboardExtensions.data.image}
+          alt={dashboardExtensions.data.alt}
+          provenance={dashboardExtensions.data.provenance}
+          sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
+          widths={[640, 960, 1280, 1600, 1918]}
+        />
+        <div class="story-caption">
+          <h3>The Dashboard keeps its tools in tabs.</h3>
+          <p>Media, Performance, Weather, Workspaces and Extensions sit beside the overview. Weather and the clock are live.</p>
+        </div>
+      </article>
+      <article id="terminal-tools" tabindex="-1" class="session-wide">
+        <ArchFrame
+          src={terminalTools.data.image}
+          alt={terminalTools.data.alt}
+          provenance={terminalTools.data.provenance}
+          sizes="(min-width: 1100px) 62vw, calc(100vw - 2rem)"
+          widths={[640, 960, 1280, 1600]}
+        />
+        <div class="story-caption">
+          <h3>Terminal tools on the same desktop.</h3>
+          <p>btop and yazi are ordinary terminal programs, here previewing a wallpaper folder.</p>
+        </div>
+      </article>
+      <article id="quick-toggles" tabindex="-1" class="session-narrow">
+        <ArchFrame
+          src={quickToggles.data.image}
+          alt={quickToggles.data.alt}
+          provenance={quickToggles.data.provenance}
+          sizes="(min-width: 1100px) 34vw, calc(100vw - 2rem)"
+          widths={[640, 960, 1280]}
+        />
+        <div class="story-caption">
+          <h3>Quick toggles, nothing else.</h3>
+          <p>Wi-Fi, Bluetooth, microphone, settings and notifications, with Keep Awake and the screen recorder.</p>
+        </div>
+      </article>
+      <article id="wallpaper-picker" tabindex="-1" class="session-lead">
+        <ArchFrame
+          src={wallpaperPicker.data.image}
+          alt={wallpaperPicker.data.alt}
+          provenance={wallpaperPicker.data.provenance}
+          sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
+          widths={[640, 960, 1280, 1600, 1918]}
+        />
+        <div class="story-caption">
+          <h3>Type <code>&gt;wallpaper</code> in the launcher.</h3>
+          <p>
+            Thumbnails preview across the whole desktop before you commit. The wallpapers in this capture come from the
+            contributor’s own folder; they are not shipped with HorneroOS and their licences are not part of it.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section work-session-section" aria-labelledby="work-session-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A real development session</p>
+        <h2 id="work-session-title">The desktop at work.</h2>
+      </div>
+      <p>
+        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
+        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
+        acceptance evidence.
+      </p>
+    </div>
+    <ArchFrame
+      src={liveWorkstation.data.image}
+      alt={liveWorkstation.data.alt}
+      provenance={liveWorkstation.data.provenance}
+      sizes="(min-width: 1180px) 76vw, 100vw"
+      widths={[640, 960, 1280, 1918]}
+    />
+  </section>
   <section class="section atmosphere-section" id="visual-worlds" aria-labelledby="worlds-title">
     <div class="section-intro">
       <p class="eyebrow">One Shell, many atmospheres</p>
@@ -189,25 +289,35 @@ const liveWorkstation = shot('live-workstation');
     </p>
   </section>
 
-  <section class="section work-session-section" aria-labelledby="work-session-title">
+  <section class="section ledger-section" id="capture-ledger" aria-labelledby="ledger-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">A real development session</p>
-        <h2 id="work-session-title">The desktop at work.</h2>
+        <h2 id="ledger-title">Every capture, with its record.</h2>
       </div>
       <p>
-        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
-        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
-        acceptance evidence.
+        What produced each picture, which theme it shows and when it was taken. Captures are product views, not a claim
+        that they all come from one build.
       </p>
     </div>
-    <ArchFrame
-      src={liveWorkstation.data.image}
-      alt={liveWorkstation.data.alt}
-      provenance={liveWorkstation.data.provenance}
-      sizes="(min-width: 1180px) 76vw, 100vw"
-      widths={[640, 960, 1280, 1918]}
-    />
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Capture ledger">
+      <table>
+        <caption>{ledger.length} real captures on this site</caption>
+        <thead>
+          <tr><th scope="col">Capture</th><th scope="col">Source</th><th scope="col">Theme</th><th scope="col">Resolution</th><th scope="col">Date</th></tr>
+        </thead>
+        <tbody>
+          {ledger.map((s) => (
+            <tr>
+              <th scope="row">{s.data.title}</th>
+              <td>{s.data.provenance.source}</td>
+              <td>{s.data.provenance.theme ?? 'Not recorded'}</td>
+              <td>{s.data.provenance.resolution ?? 'Not recorded'}</td>
+              <td><time datetime={s.data.provenance.date}>{s.data.provenance.date}</time></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </section>
 </SiteLayout>
 
@@ -519,6 +629,38 @@ const liveWorkstation = shot('live-workstation');
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }
+  }
+  .session-section .section-heading { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: 1.5rem; }
+  .session-section h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .session-section .section-heading > p { max-width: 54ch; color: var(--text-muted); }
+  .session-section .section-heading a { color: var(--text); text-decoration-color: var(--accent); }
+  .session-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem) 1.25rem; }
+  .session-lead { grid-column: 1 / -1; }
+  .session-wide { grid-column: span 7; }
+  .session-narrow { grid-column: span 5; }
+  .session-grid article { min-width: 0; }
+  .session-grid .story-caption { margin-top: 0.8rem; }
+  .session-grid .story-caption p { max-width: 62ch; color: var(--text-muted); }
+  @media (max-width: 800px) {
+    .session-section .section-heading { grid-template-columns: minmax(0, 1fr); }
+    .session-wide, .session-narrow { grid-column: 1 / -1; }
+  }
+  .ledger-section .section-heading { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+  .ledger-section h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.04em; }
+  .ledger-section .section-heading > p { max-width: 58ch; color: var(--text-muted); }
+  .ledger-section td, .ledger-section tbody th { font-size: 0.86rem; }
+  .ledger-section tbody th { font-weight: 600; }
+  /* The capture leads: copy sits in a headline row above a full-width frame. */
+  .showcase-hero { grid-template-columns: minmax(0, 1fr); align-items: start; padding-block: clamp(0.5rem, 2vw, 1.5rem) clamp(2rem, 5vw, 4rem); }
+  .hero-copy { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: end; gap: 0.9rem clamp(1.5rem, 5vw, 5rem); max-width: none; }
+  .hero-copy > h1 { grid-row: 2 / span 3; font-size: clamp(2.6rem, 1rem + 4.4vw, 4.8rem); }
+  .hero-copy > p:not(.eyebrow) { grid-column: 2; max-width: 52ch; font-size: var(--step-0); }
+  .hero-copy > p.plate-id { grid-column: 1 / -1; max-width: none; }
+  .hero-copy > p.capture-era-note { font-size: 0.8rem; }
+  .hero-copy > .hero-links { grid-column: 2; }
+  @media (max-width: 760px) {
+    .hero-copy { grid-template-columns: minmax(0, 1fr); }
+    .hero-copy > h1, .hero-copy > p:not(.eyebrow), .hero-copy > .hero-links { grid-column: 1; grid-row: auto; }
   }
 </style>
 
