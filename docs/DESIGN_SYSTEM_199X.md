@@ -62,8 +62,11 @@ Scale: `--step--1` to `--step-4` in `src/styles/global.css`.
 
 ## Grammar
 
-- `.chapter` — numbered editorial chapter head (`01 / LA SEÑAL`). Numbers
-  encode the homepage narrative order; they are not decoration elsewhere.
+- `.chapter` — numbered editorial chapter head, kept for pages whose content is
+  a real sequence. The homepage no longer numbers its sections.
+- `StoryTimeline` — dated, source-linked history. A dashed rule means "not
+  confirmable from public git history"; a solid rule means a linked commit or
+  tag.
 - `.broadcast-plate` / `.plate-id` — mechanical identification frame with
   registration corners and a mono ID line (`TRANSMISIÓN 001 · ARG / 199X`).
 - `.signal-bars` — one brief signal-acquisition settle on load (electric,

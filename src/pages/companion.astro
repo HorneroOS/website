@@ -101,8 +101,9 @@ qs ipc call companion setSkin gaucho
 qs ipc call companion say "Back in five minutes" 5000</code></pre>
   </section>
 
-  <section class="section">
-    <h2>An assistant, if you switch it on</h2>
+  <section class="section optional-band" aria-labelledby="assistant-title">
+    <p class="eyebrow">Optional · experimental · off by default</p>
+    <h2 id="assistant-title">An assistant, if you switch it on</h2>
     <p>
       The companion is still presentation only, and it is nobody's chatbot by default. Behind it there is now an
       optional, experimental assistant path: <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>
@@ -222,6 +223,7 @@ horneroctl assistant ask "what updates are available?"</code></pre>
       font-size: 0.72rem;
     }
   }
+  .optional-band { padding: clamp(1.1rem, 3vw, 2rem); border: 1px dashed var(--secondary); }
 </style>
 
 <style>

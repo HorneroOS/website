@@ -1156,3 +1156,116 @@ thead th {
     scroll-behavior: auto !important;
   }
 }
+
+/* ------------------------------------------- navigation by visitor task --- */
+
+.mode-name {
+  font-weight: inherit;
+}
+
+.mobile-group > p {
+  padding: 0.5rem 0.65rem 0.15rem;
+  color: var(--secondary);
+  font: 0.68rem var(--font-data);
+  font-stretch: 87.5%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mobile-menu nav ul a:not(.nav-install) {
+  color: var(--text);
+}
+
+.mobile-group,
+.mobile-menu nav ul > li:last-child {
+  grid-column: 1 / -1;
+}
+
+.mobile-group > ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+@media (max-width: 900px) {
+  /* A single header row on phones: the desktop capture should come into view fast. */
+  .mode-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .color-switch label span {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  .color-switch label svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-nav {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+  }
+
+  .brand {
+    margin-right: auto;
+    min-width: 0;
+  }
+
+  .mobile-menu {
+    order: 3;
+    margin-left: 0;
+  }
+
+  .mobile-menu summary {
+    min-width: 2.75rem;
+    padding-inline: 0.7rem;
+  }
+
+  .mobile-menu summary > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .color-switch {
+    order: 2;
+    flex-basis: auto;
+    margin: 0;
+  }
+
+  .mobile-menu nav {
+    top: calc(100% + 0.5rem);
+  }
+}
+
+/* Cross-page transitions: a short mechanical dissolve, the header stays put.
+   Browsers without support, and reduced-motion visitors, navigate normally. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  .site-nav {
+    view-transition-name: site-nav;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+}

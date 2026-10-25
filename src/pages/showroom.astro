@@ -18,24 +18,26 @@ const atmospheres = [
 ];
 const topologies = [shot('hornero-left'), shot('cockpit-clear'), shot('horizon'), shot('islands'), shot('dock-bottom')];
 const liveWorkstation = shot('live-workstation');
+const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
 ---
 
 <SiteLayout
+  socialImage="/og/showroom.png"
+  socialImageAlt="A live Hornero development desktop with a system monitor, agent workspace sidebar and quick toggles, beside the line 'Real captures from real runs'."
   title="Showroom — Hornero OS"
   description="Explore real Hornero desktop captures: visual worlds, layouts, Settings and the surfaces that make up a complete desktop."
 >
   <section class="showcase-hero section">
     <div class="hero-copy">
       <p class="plate-id"><strong>Archivo de capturas reales</strong><span>ARG / 199X</span><span>QA · procedencia en cada ficha</span></p>
-      <p class="eyebrow">A desktop with room to become yours</p>
       <h1>
         See Hornero
         <br />
         <em>in its element.</em>
       </h1>
       <p>
-        A working desktop is more than a wallpaper. Follow the same Shell through different landscapes, change how it
-        occupies the screen, then step into the tools that shape it.
+        Real captures of one Shell: different landscapes, different layouts, and the Settings that change them. Each
+        carries its source, theme, resolution and date.
       </p>
       <p class="capture-era-note">
         The captures on this page come from the 3 October 2026 review. Their layout and control surfaces are real; their
@@ -69,6 +71,26 @@ const liveWorkstation = shot('live-workstation');
     </div>
   </section>
 
+  <section class="section work-session-section" aria-labelledby="work-session-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A real development session</p>
+        <h2 id="work-session-title">The desktop at work.</h2>
+      </div>
+      <p>
+        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
+        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
+        acceptance evidence.
+      </p>
+    </div>
+    <ArchFrame
+      src={liveWorkstation.data.image}
+      alt={liveWorkstation.data.alt}
+      provenance={liveWorkstation.data.provenance}
+      sizes="(min-width: 1180px) 76vw, 100vw"
+      widths={[640, 960, 1280, 1918]}
+    />
+  </section>
   <section class="section atmosphere-section" id="visual-worlds" aria-labelledby="worlds-title">
     <div class="section-intro">
       <p class="eyebrow">One Shell, many atmospheres</p>
@@ -189,25 +211,35 @@ const liveWorkstation = shot('live-workstation');
     </p>
   </section>
 
-  <section class="section work-session-section" aria-labelledby="work-session-title">
+  <section class="section ledger-section" id="capture-ledger" aria-labelledby="ledger-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">A real development session</p>
-        <h2 id="work-session-title">The desktop at work.</h2>
+        <h2 id="ledger-title">Every capture, with its record.</h2>
       </div>
       <p>
-        This contributor-provided capture shows a live Hornero workstation with system monitoring and quick settings
-        open. It records the working desktop on 23 October 2026; it is not an installer screenshot or release
-        acceptance evidence.
+        What produced each picture, which theme it shows and when it was taken. Captures are product views, not a claim
+        that they all come from one build.
       </p>
     </div>
-    <ArchFrame
-      src={liveWorkstation.data.image}
-      alt={liveWorkstation.data.alt}
-      provenance={liveWorkstation.data.provenance}
-      sizes="(min-width: 1180px) 76vw, 100vw"
-      widths={[640, 960, 1280, 1918]}
-    />
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Capture ledger">
+      <table>
+        <caption>{ledger.length} real captures on this site</caption>
+        <thead>
+          <tr><th scope="col">Capture</th><th scope="col">Source</th><th scope="col">Theme</th><th scope="col">Resolution</th><th scope="col">Date</th></tr>
+        </thead>
+        <tbody>
+          {ledger.map((s) => (
+            <tr>
+              <th scope="row">{s.data.title}</th>
+              <td>{s.data.provenance.source}</td>
+              <td>{s.data.provenance.theme ?? 'Not recorded'}</td>
+              <td>{s.data.provenance.resolution ?? 'Not recorded'}</td>
+              <td><time datetime={s.data.provenance.date}>{s.data.provenance.date}</time></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </section>
 </SiteLayout>
 
@@ -519,6 +551,23 @@ const liveWorkstation = shot('live-workstation');
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }
+  }
+  .ledger-section .section-heading { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+  .ledger-section h2 { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.04em; }
+  .ledger-section .section-heading > p { max-width: 58ch; color: var(--text-muted); }
+  .ledger-section td, .ledger-section tbody th { font-size: 0.86rem; }
+  .ledger-section tbody th { font-weight: 600; }
+  /* The capture leads: copy sits in a headline row above a full-width frame. */
+  .showcase-hero { grid-template-columns: minmax(0, 1fr); align-items: start; padding-block: clamp(0.5rem, 2vw, 1.5rem) clamp(2rem, 5vw, 4rem); }
+  .hero-copy { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: end; gap: 0.9rem clamp(1.5rem, 5vw, 5rem); max-width: none; }
+  .hero-copy > p.plate-id { grid-column: 1 / -1; }
+  .hero-copy > h1 { grid-row: 2 / span 3; font-size: clamp(2.6rem, 1rem + 4.4vw, 4.8rem); }
+  .hero-copy > p:not(.eyebrow) { grid-column: 2; max-width: 52ch; font-size: var(--step-0); }
+  .hero-copy > p.capture-era-note { font-size: 0.8rem; }
+  .hero-copy > .hero-links { grid-column: 2; }
+  @media (max-width: 760px) {
+    .hero-copy { grid-template-columns: minmax(0, 1fr); }
+    .hero-copy > h1, .hero-copy > p:not(.eyebrow), .hero-copy > .hero-links { grid-column: 1; grid-row: auto; }
   }
 </style>
 

@@ -10,24 +10,28 @@ interface Props {
 
 import bricolageWoff2 from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2';
 import rubikWoff2 from '@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2';
+import martianWoff2 from '@fontsource-variable/martian-mono/files/martian-mono-latin-wdth-normal.woff2';
 
 const { title, description, noindex = false, socialImage, socialImageAlt } = Astro.props;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, site);
 
-// Use licensed Buenos Aires photography as the default social preview. The
-// dated desktop captures remain in the showcase with their own provenance.
-const socialUrl = new URL('/media/greeter/ar-ba-nocturno.webp', site);
-const socialAlt = 'Avenida Corrientes and Avenida 9 de Julio at night in Buenos Aires, photographed by ProtoplasmaKid.';
-const socialUrlValue = socialImage ? new URL(socialImage, site).toString() : socialUrl.toString();
-const socialAltValue = socialImageAlt ?? socialAlt;
+// Social previews are a first impression, so every page gets a designed
+// 1200x630 card (scripts/build-og.mjs) built from real captures. A page can pass
+// its own card from /og/. The licensed Buenos Aires photographs stay in the
+// greeter and wallpaper galleries, where their credits live next to them.
+const defaultAlt =
+  "HorneroOS on a real Hornero Dark desktop: the Dashboard over a Patagonian night sky, with the line 'A Linux desktop, lived in since 2018'.";
+const socialUrlValue = new URL(socialImage ?? '/og/default.png', site).toString();
+const socialAltValue = socialImageAlt ?? defaultAlt;
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- Preload the two latin display/UI faces so hero text paints without waiting on CSS discovery. -->
+<!-- Preload the three latin faces (display, UI, and the mono used in captions) so hero text paints without waiting on CSS discovery and captions never reflow when the mono face swaps in. -->
 <link rel="preload" href={bricolageWoff2} as="font" type="font/woff2" crossorigin />
 <link rel="preload" href={rubikWoff2} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={martianWoff2} as="font" type="font/woff2" crossorigin />
 <!-- Favicon: HorneroOS/config@5df8300 assets/brand/favicon.svg (MIT) -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -64,8 +68,9 @@ const socialAltValue = socialImageAlt ?? socialAlt;
 {description && <meta property="og:description" content={description} />}
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={socialUrlValue} />
-{!socialImage && <meta property="og:image:width" content="1280" />}
-{!socialImage && <meta property="og:image:height" content="720" />}
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content={socialAltValue} />
 <meta property="og:locale" content="en_US" />
 

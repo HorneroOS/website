@@ -15,6 +15,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
 ---
 
 <SiteLayout
+  socialImage="/og/extensions.png"
+  socialImageAlt="The official HorneroOS extensions listed by name and placement, beside the line 'Extend the shell. Read the code first'."
   title="Extensions — the HorneroOS marketplace | HorneroOS"
   description="Browse the official Hornero Shell extension catalogue with source revisions, full payload hashes, declared capabilities and install instructions."
 >
@@ -74,8 +76,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         <h2 id="catalogue-title">A few useful things.</h2>
       </div>
       <p>
-        These entries are generated from the pinned catalogue snapshot. No screenshots or live previews are published for
-        this set yet, so each card shows package facts and source provenance instead.
+        Each card shows where the extension lives and what it declares. Open one for its checksum, source and install
+        command. No screenshots are published for this set yet, so the schematics show placement, not the interface.
       </p>
     </div>
 
@@ -121,48 +123,77 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
               </header>
               <p class="card-description">{plugin.description}</p>
 
-              <dl class="extension-facts">
-                <div><dt>Version</dt><dd>{plugin.version}</dd></div>
-                <div><dt>Category</dt><dd>{plugin.category}</dd></div>
-                <div><dt>Author</dt><dd>{plugin.author}</dd></div>
-                <div><dt>License</dt><dd><a href={licenseUrl}>{plugin.license}</a></dd></div>
-                <div class="wide-fact">
-                  <dt>Process commands declared</dt>
-                  <dd><code>{processSummary(plugin.processCommands)}</code></dd>
-                </div>
-                <div class="wide-fact">
-                  <dt>Network hosts declared</dt>
-                  <dd><code>{networkSummary(plugin.networkHosts)}</code></dd>
-                </div>
-                <div class="wide-fact">
-                  <dt>Settings declared</dt>
-                  <dd>
-                    {settings.length ? (
-                      <ul class="settings-list" role="list">
-                        {settings.map((setting) => (
-                          <li>
-                            <code>{setting.name}</code> · {setting.type}, default <code>{String(setting.default)}</code>
-                            {setting.description ? <span> — {setting.description}</span> : null}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : <span>None declared</span>}
-                  </dd>
-                </div>
-              </dl>
+              <div class="placement" aria-label={plugin.placement === 'bar' ? 'Lives in the bar' : 'Lives on the dashboard'}>
+                <svg viewBox="0 0 160 52" role="presentation" aria-hidden="true" focusable="false">
+                  {plugin.placement === 'bar' ? (
+                    <>
+                      <rect x="1" y="1" width="158" height="50" rx="3" class="slot-screen" />
+                      <rect x="6" y="6" width="148" height="9" rx="2" class="slot-bar" />
+                      <rect x="112" y="7.5" width="22" height="6" rx="1.5" class="slot-plugin" />
+                    </>
+                  ) : (
+                    <>
+                      <rect x="1" y="1" width="158" height="50" rx="3" class="slot-screen" />
+                      <rect x="36" y="8" width="88" height="38" rx="3" class="slot-bar" />
+                      <rect x="42" y="14" width="34" height="12" rx="2" class="slot-tile" />
+                      <rect x="80" y="14" width="38" height="12" rx="2" class="slot-plugin" />
+                      <rect x="42" y="30" width="76" height="10" rx="2" class="slot-tile" />
+                    </>
+                  )}
+                </svg>
+                <span>{plugin.placement === 'bar' ? 'Lives in the bar' : 'Lives on the dashboard'}</span>
+              </div>
 
-              <div class="integrity-fact">
-                <span>Payload SHA-256</span>
-                <code>{plugin.sha256}</code>
-              </div>
-              <div class="card-actions">
-                <a class="text-link" href={sourceUrl}>Pinned source <span aria-hidden="true">↗</span></a>
-                <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
-                <small class="install-requirement">
-                  Requires <a href={cliSourceUrl}>horneroctl at this revision</a> or later; Preview29 does not support
-                  <code>--revision</code>.
-                </small>
-              </div>
+              <ul class="declared" role="list" aria-label="Declared by the plugin, not enforced by the shell">
+                <li>{plugin.processCommands.length ? `Runs ${plugin.processCommands.join(', ')}` : 'Runs no processes'}</li>
+                <li>{plugin.networkHosts.length ? `Contacts ${plugin.networkHosts.join(', ')}` : 'Uses no network'}</li>
+                <li>{settings.length ? `${settings.length} ${settings.length === 1 ? 'setting' : 'settings'}` : 'No settings'}</li>
+              </ul>
+
+              <details class="evidence">
+                <summary>Install, checksum and source</summary>
+                <dl class="extension-facts">
+                  <div><dt>Version</dt><dd>{plugin.version}</dd></div>
+                  <div><dt>Category</dt><dd>{plugin.category}</dd></div>
+                  <div><dt>Author</dt><dd>{plugin.author}</dd></div>
+                  <div><dt>License</dt><dd><a href={licenseUrl}>{plugin.license}</a></dd></div>
+                  <div class="wide-fact">
+                    <dt>Process commands declared</dt>
+                    <dd><code>{processSummary(plugin.processCommands)}</code></dd>
+                  </div>
+                  <div class="wide-fact">
+                    <dt>Network hosts declared</dt>
+                    <dd><code>{networkSummary(plugin.networkHosts)}</code></dd>
+                  </div>
+                  <div class="wide-fact">
+                    <dt>Settings declared</dt>
+                    <dd>
+                      {settings.length ? (
+                        <ul class="settings-list" role="list">
+                          {settings.map((setting) => (
+                            <li>
+                              <code>{setting.name}</code> · {setting.type}, default <code>{String(setting.default)}</code>
+                              {setting.description ? <span> — {setting.description}</span> : null}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : <span>None declared</span>}
+                    </dd>
+                  </div>
+                </dl>
+                <div class="integrity-fact">
+                  <span>Payload SHA-256</span>
+                  <code>{plugin.sha256}</code>
+                </div>
+                <div class="card-actions">
+                  <a class="text-link" href={sourceUrl}>Pinned source <span aria-hidden="true">↗</span></a>
+                  <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
+                  <small class="install-requirement">
+                    Requires <a href={cliSourceUrl}>horneroctl at this revision</a> or later; Preview29 does not support
+                    <code>--revision</code>.
+                  </small>
+                </div>
+              </details>
             </article>
           </li>
         );
@@ -269,8 +300,20 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-id code { overflow-wrap: anywhere; }
   .card-heading h3 { margin-top: 0.65rem; font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
   .placement-tag { flex: 0 0 auto; padding: 0.35rem 0.5rem; border: 1px solid var(--highlight); color: var(--highlight); font: 0.62rem var(--font-data); text-transform: uppercase; }
-  .card-description { min-height: 3.2em; margin-top: 0.85rem; color: var(--text-muted); line-height: 1.55; }
-  .extension-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+  .card-description { margin-top: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+  .placement { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.2rem; color: var(--text-muted); font: 0.7rem var(--font-data); font-stretch: 87.5%; }
+  .placement svg { width: 8.5rem; height: auto; flex: none; }
+  .slot-screen { fill: none; stroke: var(--line); stroke-width: 1.5; }
+  .slot-bar { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
+  .slot-tile { fill: var(--surface-raised); }
+  .slot-plugin { fill: var(--accent); }
+  .declared { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; list-style: none; }
+  .declared li { padding: 0.2rem 0.55rem; border: 1px solid var(--line); color: var(--text); font-size: 0.78rem; }
+  .evidence { margin-top: 1.2rem; border-top: 1px solid var(--line); }
+  .evidence > summary { padding-block: 0.8rem; color: var(--text); font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+  .evidence > summary:hover { color: var(--accent); }
+  .evidence[open] > summary { margin-bottom: 0.4rem; }
+  .extension-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .extension-facts > div { display: grid; align-content: start; gap: 0.35rem; min-width: 0; }
   .extension-facts dd { min-width: 0; margin: 0; overflow-wrap: anywhere; font-size: 0.82rem; }
   .extension-facts code { font-size: 0.74rem; }

@@ -57,6 +57,8 @@ const roleLabel = {
 ---
 
 <SiteLayout
+  socialImage="/og/editions.png"
+  socialImageAlt="The Hornero Left layout in Hornero Dark from a QA run, beside the line 'One foundation, four roles'."
   title="Editions — one HorneroOS, composed for different work"
   description="HorneroOS shares one foundation across Desktop, Server, Agents and Studio. Each profile has a distinct role and an explicit development state."
 >
@@ -297,7 +299,7 @@ const roleLabel = {
   }
   .backend-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0.4rem;
     margin-top: 1rem;
   }
@@ -327,11 +329,8 @@ const roleLabel = {
     font-size: 0.68rem;
     overflow-wrap: anywhere;
   }
-  /* Four-across edition cards are too narrow for two chips per row:
-     stack the compositor chips until the grid itself collapses. */
-  @media (max-width: 1340px) {
-    .backend-list { grid-template-columns: 1fr; }
-  }
+  /* Four-across edition cards are too narrow for two chips per row, so the
+     compositor chips always stack. */
   .edition-link {
     display: flex;
     justify-content: space-between;

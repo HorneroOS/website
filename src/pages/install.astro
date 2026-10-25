@@ -18,6 +18,8 @@ const statusName = {
 ---
 
 <SiteLayout
+  socialImage="/og/install.png"
+  socialImageAlt="The four HorneroOS Arch packages, beside the line 'Try it on Arch today. No ISO yet'."
   title="Install — Hornero OS"
   description="HorneroOS Desktop is available as Arch packages. The provisional Calamares installer has not completed VM acceptance, and no install image is published."
 >
@@ -45,6 +47,24 @@ const statusName = {
         </>
       )}
     </p>
+  </section>
+
+  <section class="section readiness" aria-labelledby="readiness-title">
+    <h2 id="readiness-title">Where installation stands</h2>
+    <dl class="readiness-ledger">
+      <div class="state-none">
+        <dt>Install image</dt>
+        <dd><span class="state">Not published</span> No ISO exists to download or verify yet.</dd>
+      </div>
+      <div class="state-provisional">
+        <dt>Installer</dt>
+        <dd><span class="state">Provisional</span> A Calamares build is under test; it has not passed VM acceptance.</dd>
+      </div>
+      <div class="state-available">
+        <dt>Desktop packages</dt>
+        <dd><span class="state">Available</span> Four AUR packages, for people who already run Arch Linux.</dd>
+      </div>
+    </dl>
   </section>
 
   <section class="section">
@@ -104,7 +124,7 @@ const statusName = {
       and BIOS installs pass in a disposable virtual machine. No ISO download is available from this page.
     </p>
     <p>
-      Contributors can follow the shared <a href="/docs/development/design-language/">HorneroOS design language</a>
+      Contributors can follow the shared <a href="/docs/development/design-language/">HorneroOS design language</a>{' '}
       for product identity, accessible interaction, and the authoritative design sources across the desktop, website,
       greeter, and installer.
     </p>
@@ -186,6 +206,16 @@ const statusName = {
       grid-template-columns: 1fr;
     }
   }
+  .readiness-ledger { max-width: 58rem; border-top: 1px solid var(--line); }
+  .readiness-ledger > div { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); gap: 0.4rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .readiness-ledger dt { font: 700 1.1rem var(--font-display); }
+  .readiness-ledger dd { color: var(--text-muted); }
+  .state { display: inline-block; margin-right: 0.7rem; padding: 0.1rem 0.5rem; border: 1px solid var(--line); color: var(--text); font: 600 0.7rem var(--font-data); font-stretch: 87.5%; text-transform: uppercase; }
+  .state-none { border-bottom-style: dashed; }
+  .state-none .state { border-style: dashed; color: var(--text-muted); }
+  .state-provisional .state { border-color: var(--highlight); color: var(--highlight); }
+  .state-available .state { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 560px) { .readiness-ledger > div { grid-template-columns: 1fr; } }
 </style>
 
 <style>
