@@ -43,6 +43,21 @@ export const docsApps: Record<string, { id: string; name: string }[]> = {
     { id: 'btop', name: 'btop' },
     { id: 'cava', name: 'Cava' },
   ],
+  'applications/studio': [
+    { id: 'ardour', name: 'Ardour' },
+    { id: 'obs-studio', name: 'OBS Studio' },
+    { id: 'blender', name: 'Blender' },
+  ],
+  'applications/studio-audio': [
+    { id: 'ardour', name: 'Ardour' },
+    { id: 'carla', name: 'Carla' },
+    { id: 'guitarix', name: 'Guitarix' },
+  ],
+  'applications/studio-getting-started': [
+    { id: 'krita', name: 'Krita' },
+    { id: 'kdenlive', name: 'Kdenlive' },
+    { id: 'blender', name: 'Blender' },
+  ],
   'applications/catalogue': [
     { id: 'kitty', name: 'Kitty' },
     { id: 'btop', name: 'btop' },
