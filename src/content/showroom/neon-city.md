@@ -1,5 +1,5 @@
 ---
-title: 'Neon City · electric blue hour'
+title: 'Neon City wallpaper'
 image: '../../../assets/screenshots/curated/neon-city.webp'
 alt: 'Hornero desktop with the Neon City cyberpunk skyline, bright cyan signs and amber transit behind the vertical shell rail.'
 order: 6

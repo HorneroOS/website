@@ -26,23 +26,17 @@ const filters = [
 ---
 
 <SiteLayout
-  title="Wallpapers — Hornero OS"
-  description="Photographic Hornero Originals from Argentina, with verified locations, photographers, source links, and Creative Commons licenses."
+  title="Wallpapers | HorneroOS"
+  description="Nine photographs made in Argentina, used as the default scenes of the Hornero Originals themes, with location, photographer, source and Creative Commons license."
 >
   <main class="wallpapers-page">
     <header class="wallpaper-intro">
       <div class="wallpaper-intro-copy">
         <p class="plate-id"><strong>Fotografía argentina</strong><span>ARG / 199X</span><span>Autor y licencia en cada obra</span></p>
-        <p class="eyebrow">Hornero Originals · Argentina</p>
-        <h1>
-          Places, seen
-          <br />
-          <em>in their own light.</em>
-        </h1>
+        <h1>Wallpapers</h1>
         <p>
-          A wallpaper can set the whole desktop’s atmosphere. This collection pairs Hornero’s regional themes with
-          photographs made in Argentina: the southern channel at blue hour, wetlands under open sky, a city in amber
-          light.
+          Photographs made in Argentina, paired with the regional Hornero Originals themes: the Beagle Channel at blue
+          hour, the Iberá wetlands, Buenos Aires at night.
         </p>
         <p class="collection-facts">
           <span>{wallpapers.length} photographs</span>
@@ -99,10 +93,9 @@ const filters = [
     <section class="gallery" aria-labelledby="gallery-heading">
       <div class="gallery-heading">
         <div>
-          <p class="eyebrow">The scene shapes the palette</p>
-          <h2 id="gallery-heading">A visual atlas</h2>
+          <h2 id="gallery-heading">All photographs</h2>
         </div>
-        <p>Each photograph is also the real default scene for its matching Hornero theme.</p>
+        <p>Each photograph is the default scene of its matching Hornero theme.</p>
       </div>
       <div class="filters" role="group" aria-label="Filter wallpapers by atmosphere">
         {filters.map((filter, index) => (
@@ -220,15 +213,10 @@ const filters = [
     </section>
 
     <section class="photo-note" aria-labelledby="photo-note-title">
-      <p class="eyebrow">Photographs, not generated landscapes</p>
-      <h2 id="photo-note-title">
-        The geography is real.
-        <br />
-        <em>The interpretation is Hornero’s.</em>
-      </h2>
+      <h2 id="photo-note-title">About the photographs</h2>
       <p>
-        These are licensed, location-verified photographs, cropped and resized for desktop use. The source image,
-        photographer, license, and modification are recorded in the product package. No buildings, skies, lights, or
+        These are licensed photographs with verified locations, cropped and resized for desktop use. The source image,
+        photographer, license and modification are recorded in the product package. No buildings, skies, lights or
         landscape details were generated or reconstructed.
       </p>
       <div class="note-links">
@@ -238,7 +226,7 @@ const filters = [
         <a href="https://github.com/HorneroOS/config/blob/main/profiles/themes/WALLPAPER-CREDITS.md">
           All photo credits and licenses
         </a>
-        <a href="/themes">Explore every Hornero look</a>
+        <a href="/themes">Browse all themes</a>
       </div>
     </section>
   </main>

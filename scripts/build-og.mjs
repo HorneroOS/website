@@ -30,42 +30,42 @@ const shot = (path, w, h, label) => `
 const cards = {
   default: {
     title: 'A Linux desktop, lived in since 2018.',
-    line: 'Arch-based, Wayland-first, built in the open from Argentina.',
+    line: 'Arch-based and Wayland-first, from Argentina. Development preview.',
     panel: shot('assets/screenshots/curated/dashboard-extensions-2026-10-25.webp', 660, 371, 'Dashboard · live desktop · 2026-10-25'),
   },
   showroom: {
-    title: 'Real captures from real runs.',
-    line: 'Every screenshot keeps its source, date and theme.',
+    title: 'Hornero desktop captures.',
+    line: 'Each one lists its source, date and theme.',
     panel: shot('assets/screenshots/curated/terminal-tools-2026-10-25.webp', 660, 371, 'btop and yazi · live desktop · 2026-10-25'),
   },
   editions: {
-    title: 'One foundation, four roles.',
-    line: 'Desktop is the preview. Server, Agents and Studio are planned.',
+    title: 'Desktop now, three profiles planned.',
+    line: 'Server, Agents and Studio are defined but have no image.',
     panel: shot('assets/screenshots/certified/hornero-left.png', 594, 371, 'Hornero Left · Hornero Dark · QA 2026-10-03'),
   },
   extensions: {
-    title: 'Extend the shell. Read the code first.',
-    line: 'Official plugins with checksums and declared permissions.',
+    title: 'Official extensions.',
+    line: 'Each plugin lists its checksum and declared permissions.',
     panel: `<ul class="ledger">${plugins
       .filter((p) => p.trust === 'official')
       .slice(0, 5)
       .map((p) => `<li><b>${p.name}</b><span>${p.placement}</span></li>`)
-      .join('')}</ul><p class="cap"><b>Official catalogue</b> QML runs as you; it is not sandboxed</p>`,
+      .join('')}</ul><p class="cap"><b>Official catalogue</b> Extensions are not sandboxed</p>`,
   },
   roots: {
-    title: 'Dated, linked, and credited.',
-    line: 'From one workstation to its own projects, with every source.',
+    title: 'History, with sources.',
+    line: 'From one workstation to separate projects.',
     panel: `<ol class="ledger dates">
       <li class="dash"><b>2018</b><span>Personal Arch workstation</span></li>
       <li><b>2019.11</b><span>Dotfiles go public</span></li>
       <li><b>2026.02</b><span>Quickshell, from Caelestia</span></li>
       <li><b>2026.09</b><span>Own repos and horneroctl</span></li>
       <li><b>2026.10</b><span>QA lab and extensions</span></li>
-    </ol><p class="cap"><b>Timeline</b> every date after 2018 links to a commit</p>`,
+    </ol><p class="cap"><b>Timeline</b> each date after 2018 links to a commit</p>`,
   },
   install: {
-    title: 'Try it on Arch today. No ISO yet.',
-    line: 'Desktop preview packages; the installer is still in development.',
+    title: 'Install on Arch. No ISO yet.',
+    line: 'Desktop preview packages. The installer is in development.',
     panel: `<ul class="ledger mono">
       <li><b>horneroctl-bin</b><span>system CLI</span></li>
       <li><b>hornero-shell</b><span>Quickshell shell</span></li>
@@ -74,8 +74,8 @@ const cards = {
     </ul><p class="cap"><b>AUR packages</b> development preview</p>`,
   },
   greeter: {
-    title: 'Argentina, before the desktop.',
-    line: 'An interactive recreation of the HorneroOS login screen.',
+    title: 'The HorneroOS greeter.',
+    line: 'An interactive recreation of the login screen.',
     panel: shot('public/media/greeter/ar-er-el-palmar-golden-hour.webp', 660, 371, 'Browser recreation · El Palmar, Entre Ríos').replace('Real capture', 'Not a screenshot'),
   },
 };

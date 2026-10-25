@@ -1,5 +1,5 @@
 ---
-title: 'Hornero Left · the vertical rail'
+title: 'Hornero Left layout'
 image: '../../../assets/screenshots/certified/hornero-left.png'
 alt: 'Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session.'
 order: 9

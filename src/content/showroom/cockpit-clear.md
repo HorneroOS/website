@@ -1,5 +1,5 @@
 ---
-title: 'Cockpit Clear · a quieter line'
+title: 'Cockpit Clear layout'
 image: '../../../assets/screenshots/certified/cockpit-clear.png'
 alt: 'Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper.'
 order: 2

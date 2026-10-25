@@ -1,5 +1,5 @@
 ---
-title: 'Pampa · moonlit grassland'
+title: 'Pampa theme'
 image: '../../../assets/screenshots/certified/pampa.png'
 alt: 'Pampa appearance preview in Hornero, with a deep green grassland scene, warm moon and slim shell rail.'
 order: 3

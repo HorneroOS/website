@@ -19,13 +19,12 @@ const statusName = {
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt="The four HorneroOS Arch packages, beside the line 'Try it on Arch today. No ISO yet'."
-  title="Install — Hornero OS"
+  socialImageAlt="The four HorneroOS Arch packages, beside the line 'Install on Arch. No ISO yet'."
+  title="Install | HorneroOS"
   description="HorneroOS Desktop is available as Arch packages. The provisional Calamares installer has not completed VM acceptance, and no install image is published."
 >
   <section class="section">
     <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Sin imagen publicada</span></p>
-    <p class="eyebrow">Status</p>
     <h1>No published install image</h1>
     <p class="lede">
       HorneroOS has no published ISO. A provisional Calamares installer is in development, but it has not completed
@@ -70,10 +69,9 @@ const statusName = {
   <section class="section">
     <h2>What exists today</h2>
     <p>
-      The Desktop preview is distributed as Arch User Repository packages for people who already run Arch Linux. Those
-      packages are components of a Wayland-first desktop, not a turnkey HorneroOS installation. Hyprland is its
-      supported default compositor; Niri is experimental. Quickshell is the current shell runtime, not the identity of
-      the operating system.
+      The Desktop preview ships as Arch User Repository packages for people who already run Arch Linux. They are the
+      components of a Wayland-first desktop, not a turnkey HorneroOS installation. Hyprland is the supported
+      compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.
     </p>
     <ul role="list" class="packages">
       {packages.map((p) => (
@@ -86,16 +84,16 @@ const statusName = {
       ))}
     </ul>
     <p>
-      The greeter package is optional and requires SDDM with Qt 6 Multimedia. Other compositors are not advertised as
-      supported unless the edition catalogue and acceptance evidence say so.
+      The greeter package is optional and needs SDDM with Qt 6 Multimedia. Other compositors are not supported unless
+      the edition catalogue and acceptance evidence say so.
     </p>
   </section>
 
   <section class="section">
-    <h2>One family, distinct readiness</h2>
+    <h2>Edition readiness</h2>
     <p>
-      Profiles share one composition model. Their names and maturity levels reflect what has been tested, not a promise
-      that each profile can already be installed.
+      Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every
+      edition can be installed.
     </p>
     <ul class="edition-status" role="list">
       {editions.map((edition) => (
@@ -107,30 +105,29 @@ const statusName = {
     </ul>
     <p>
       Desktop is the current preview. Server, Agents and Studio have composition definitions but no bootable image or
-      acceptance-complete runtime yet. Niri remains experimental within Desktop.{' '}
-      <a href="/editions">Read about how the profiles fit together.</a>
+      tested runtime yet. Niri remains experimental within Desktop.{' '}
+      <a href="/editions">How the editions fit together.</a>
     </p>
   </section>
 
   <section class="section">
-    <h2>Install work follows product truth</h2>
+    <h2>The installer</h2>
     <p>
       The Calamares build in <a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a> is a provisional
-      bridge for testing product compositions and installation flows. <a href="https://github.com/PandaFoss">Panda
-      Foss</a> is developing and will own the custom HorneroOS installer intended to become the official path. The
-      implementation in this repository is provisional; it is not Panda's installer, and it remains that way until
-      his version is ready to publish and passes acceptance. The provisional build consumes the edition and compositor
-      contract rather than defining a separate package model. Its ISO and install flow remain uncertified until UEFI
-      and BIOS installs pass in a disposable virtual machine. No ISO download is available from this page.
+      bridge for testing compositions and install flows. <a href="https://github.com/PandaFoss">Panda Foss</a> is
+      developing the custom HorneroOS installer that is meant to become the official path, and will own it. The
+      Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes
+      acceptance. It uses the edition and compositor contract instead of defining its own package model. Its ISO and
+      install flow stay uncertified until UEFI and BIOS installs pass in a disposable virtual machine. This page
+      offers no ISO download.
     </p>
     <p>
-      Contributors can follow the shared <a href="/docs/development/design-language/">HorneroOS design language</a>{' '}
-      for product identity, accessible interaction, and the authoritative design sources across the desktop, website,
-      greeter, and installer.
+      Contributors can follow the <a href="/docs/development/design-language/">HorneroOS design language</a>, which
+      points to the authoritative design sources for the desktop, website, greeter and installer.
     </p>
     <p>
       To follow tagged compositions, see <a href="/releases">Releases</a> or the{' '}
-      <a href="https://github.com/HorneroOS">HorneroOS organisation</a> on GitHub.
+      <a href="https://github.com/HorneroOS">HorneroOS organization</a> on GitHub.
     </p>
   </section>
 </SiteLayout>

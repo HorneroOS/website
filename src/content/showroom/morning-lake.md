@@ -1,5 +1,5 @@
 ---
-title: 'Soft Morning · above the cloud line'
+title: 'Soft Morning wallpaper'
 image: '../../../assets/screenshots/curated/morning-lake.webp'
 alt: 'Hornero desktop with a pale sunrise over a snow-covered alpine ridge and clouds, paired with a cool mint-accented shell rail.'
 order: 8

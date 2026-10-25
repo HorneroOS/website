@@ -25,32 +25,27 @@ const selected = [
   {
     id: 'hornero-left',
     shot: horneroLeftShot,
-    descriptor: 'A vertical rhythm',
-    text: 'A side rail that keeps the useful controls within reach and the workspace open.',
+    text: 'A side rail with the main controls close by and the workspace left open.',
   },
   {
     id: 'cockpit-clear',
     shot: cockpitShot,
-    descriptor: 'A clear horizon',
-    text: 'A restrained full-width line for a desktop that lets the wallpaper breathe.',
+    text: 'A full-width line with no backdrop, so the wallpaper shows through.',
   },
   {
     id: 'horizon',
     shot: horizonShot,
-    descriptor: 'A balanced overview',
-    text: 'A top bar with room for status, context and a centered clock.',
+    text: 'A top bar with status, context and a centered clock.',
   },
   {
     id: 'islands',
     shot: islandsShot,
-    descriptor: 'Independent surfaces',
-    text: 'Separate islands make groups feel light and intentional.',
+    text: 'Separate floating islands group the controls.',
   },
   {
     id: 'dock-bottom',
     shot: dockShot,
-    descriptor: 'A grounded workspace',
-    text: 'A bottom dock gives the desktop a familiar anchor.',
+    text: 'A dock along the bottom edge.',
   },
 ];
 const proof = {
@@ -64,20 +59,15 @@ const proof = {
 ---
 
 <SiteLayout
-  title={`Layouts — ${layouts.length} ways to arrange the Hornero shell`}
-  description={`Real Hornero desktop captures across ${layouts.length} layouts: side rails, paired bars, clear surfaces, islands and docks.`}
+  title="Layouts | HorneroOS"
+  description={`${layouts.length} Hornero shell layouts, each shown in a real capture: side rails, paired bars, clear bars, islands and docks.`}
 >
   <section class="intro section">
     <p class="plate-id"><strong>Catálogo de formas</strong><span>ARG / 199X</span><span>{layouts.length} layouts · capturas reales</span></p>
-    <p class="eyebrow">The shell, in different shapes</p>
-    <h1>
-      Same desktop.
-      <br />
-      <em>Different rhythm.</em>
-    </h1>
+    <h1>Layouts</h1>
     <p>
-      Choose where the shell lives: along an edge, in a pair of bars, as floating islands or at the bottom of the
-      screen. Your launcher, notifications and settings remain part of the same system.
+      Put the shell along an edge, in a pair of bars, as floating islands or at the bottom of the screen. The
+      launcher, notifications and settings are shared by all of them.
     </p>
     <div class="intro-actions">
       <a class="cta primary" href="/showroom">
@@ -103,11 +93,10 @@ const proof = {
             provenance={proof}
           />
           <div class="showcase-copy">
-            <p class="eyebrow">{entry.descriptor}</p>
             <h2>{layout?.name}</h2>
             <p>{entry.text}</p>
             <a href={`#catalog-${entry.id}`} class="text-link">
-              Layout details <span aria-hidden="true">↓</span>
+              Layout details
             </a>
           </div>
         </article>
@@ -118,12 +107,10 @@ const proof = {
   <section class="section catalog" id="all-layouts">
     <div class="catalog-heading">
       <div>
-        <p class="chapter"><b>B</b><span>La grilla completa — The full set</span></p>
-        <p class="eyebrow">The full set</p>
         <h2>All {layouts.length} layouts</h2>
       </div>
       <p>
-        Every option comes from the same shell. The small maps show bar placement; each layout page has its topology and
+        Every layout comes from the same shell. The small maps show bar placement; each layout page has its topology and
         scriptable preset name.
       </p>
     </div>

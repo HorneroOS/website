@@ -34,16 +34,15 @@ const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
 ---
 
 <SiteLayout
-  title="Companion — the Hornero sidekick"
-  description="The Companion is a small hornero that lives on the Hornero OS desktop: it rests, greets and flies in, stays out of your way, and never takes input."
+  title="Companion | HorneroOS"
+  description="The Companion is a small hornero that lives on the HorneroOS desktop. It rests, greets you and flies in when called, and takes no input."
 >
   <section class="section">
     <p class="plate-id"><strong>Compañero Hornero</strong><span>ARG / 199X</span><span>Parte del shell</span></p>
-    <p class="eyebrow">Part of the shell</p>
     <h1>Companion</h1>
     <p class="lede">
-      A small hornero lives on your desktop. It rests, greets you and flies in when you call it. It never wanders off on
-      its own and never takes a click meant for something else.
+      A small hornero that lives on your desktop. It rests, greets you and flies in when you call it. It does not take
+      focus or clicks away from the windows you are using.
     </p>
     <ul class="poses" role="list">
       {poses.map((p) => (
@@ -63,7 +62,7 @@ const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
   </section>
 
   <section class="section">
-    <h2>How it behaves</h2>
+    <h2>Behavior</h2>
     <ul>
       <li>It sleeps after ten minutes of quiet; any interaction wakes it.</li>
       <li>Drag it anywhere. It remembers the spot on each monitor.</li>
@@ -71,14 +70,14 @@ const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
         It hides by itself on the lock screen, over fullscreen windows, in game mode and while Settings is open, and
         comes back afterwards.
       </li>
-      <li>It sits on its own layer with no keyboard focus, so it never steals clicks or typing.</li>
+      <li>It sits on its own layer without keyboard focus, so it does not take clicks or typing from other windows.</li>
       <li>With reduced motion turned on, its hops and flights become simple cuts.</li>
-      <li>Switched off, it costs nothing: every timer and surface is unloaded.</li>
+      <li>When switched off, every timer and surface is unloaded.</li>
     </ul>
   </section>
 
   <section class="section">
-    <h2>Five characters</h2>
+    <h2>Characters</h2>
     <ul class="skins" role="list">
       {skinOrder.map((s) => (
         <li>
@@ -102,43 +101,41 @@ qs ipc call companion say "Back in five minutes" 5000</code></pre>
   </section>
 
   <section class="section optional-band" aria-labelledby="assistant-title">
-    <p class="eyebrow">Optional · experimental · off by default</p>
-    <h2 id="assistant-title">An assistant, if you switch it on</h2>
+    <h2 id="assistant-title">Optional assistant (experimental, off by default)</h2>
     <p>
-      The companion is still presentation only, and it is nobody's chatbot by default. Behind it there is now an
-      optional, experimental assistant path: <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>
-      by Nous Research, reached through <code>horneroctl assistant</code>. It is <strong>disabled by default</strong>,
-      never runs as root, and the desktop works exactly the same with it off or not installed at all.
+      The companion is presentation only. An optional, experimental assistant can sit behind it:{' '}
+      <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> by Nous Research, reached through{' '}
+      <code>horneroctl assistant</code>. It is <strong>disabled by default</strong> and never runs as root. The desktop
+      works the same with it off or not installed.
     </p>
-    <p>Turning it on is a deliberate step, from a terminal:</p>
+    <p>Enable it from a terminal:</p>
     <pre><code>horneroctl assistant enable
 horneroctl assistant status
 horneroctl assistant ask "what updates are available?"</code></pre>
     <p>
-      Ask from the desktop with <code>qs ipc call companion ask "…"</code> or from the launcher by typing
-      <code>&gt;ai</code> followed by your question. While a run is in flight the companion shows its
-      <em>thinking</em> state; the answer, or an honest failure line, lands in its speech bubble.
+      Ask from the desktop with <code>qs ipc call companion ask "…"</code>, or from the launcher by typing{' '}
+      <code>&gt;ai</code> followed by your question. While a run is in progress the companion shows its
+      <em>thinking</em> state. The answer, or an error line if the run fails, appears in its speech bubble.
     </p>
     <ul>
-      <li>System information comes from a read-only tool allowlist; there is no arbitrary command execution.</li>
+      <li>System information comes from a read-only tool allowlist. The assistant cannot run arbitrary commands.</li>
       <li>
-        When a run needs approval or an answer, the companion surfaces it and waits. You decide with
-        <code>qs ipc call companion approve &lt;run-id&gt; approve|deny</code> — approvals are never auto-answered.
+        When a run needs approval or an answer, the companion shows the request and waits. You answer with
+        <code>qs ipc call companion approve &lt;run-id&gt; approve|deny</code>. Nothing is approved automatically.
       </li>
-      <li>The gateway listens on loopback only, behind a per-user key the shell never sees.</li>
+      <li>The gateway listens on loopback only, behind a per-user key the shell cannot read.</li>
     </ul>
     <p>
-      This is an early slice, not a finished chat product: answers arrive in the companion's bubble, and a full
-      conversation window, sessions and voice are still future work.
+      This is an early version. Answers arrive in the companion’s speech bubble; a conversation window, sessions and
+      voice are not built yet.
     </p>
   </section>
 
   <section class="section">
-    <h2>What it is not</h2>
+    <h2>Limits</h2>
     <p>
-      The companion itself takes no input and makes no decisions. Its <em>listening</em> and <em>thinking</em>
-      states are presentation, driven over IPC; the assistant behind them is optional, experimental, and off
-      until you enable it.
+      The companion takes no input and makes no decisions. Its <em>listening</em> and <em>thinking</em> states are
+      animations driven over IPC. The assistant behind them is optional, experimental and off until you enable it.
     </p>
     <p class="source">
       Frames from{' '}
@@ -149,7 +146,7 @@ horneroctl assistant ask "what updates are available?"</code></pre>
       <a href={`${shell.repo}/commit/${shell.sha}`}>
         <code>{short(shell.sha)}</code>
       </a>
-      , the production assets the shell draws, not illustrations.
+      , the assets the shell draws.
     </p>
   </section>
 </SiteLayout>

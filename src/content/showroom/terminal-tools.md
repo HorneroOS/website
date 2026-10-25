@@ -1,5 +1,5 @@
 ---
-title: 'A working desktop: btop and yazi · 25 October 2026'
+title: 'btop and yazi · 25 October 2026'
 image: '../../../assets/screenshots/curated/terminal-tools-2026-10-25.webp'
 alt: 'Two terminal windows on a Hornero desktop over a photograph of the Beagle Channel: btop showing processor, memory, disk, network and process panels, and the yazi file manager browsing a wallpapers folder with a mountain sunrise preview.'
 order: 14

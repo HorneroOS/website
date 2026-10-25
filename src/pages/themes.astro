@@ -37,24 +37,19 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
 ---
 
 <SiteLayout
-  title={`Themes — ${themes.length} coordinated looks for Hornero OS`}
-  description="Explore Hornero Originals and a broad collection of natural, minimal, cyberpunk, synthwave and classic looks. Each appearance coordinates the desktop and can be shaped with wallpaper color variants."
+  title="Themes | HorneroOS"
+  description={`${themes.length} themes: the Hornero Originals plus natural, minimal, cyberpunk, synthwave and classic looks. Each look coordinates the desktop and can be adjusted with wallpaper color variants.`}
 >
   <section class="intro section">
     <div class="intro-copy-column">
       <p class="plate-id"><strong>Catálogo de apariencias</strong><span>ARG / 199X</span><span>Temas · paletas · fondos</span></p>
-      <p class="eyebrow">Personalize the whole desktop</p>
-      <h1>
-        Choose a feeling.
-        <br />
-        <em>Make it yours.</em>
-      </h1>
+      <h1>Themes</h1>
       <p class="intro-copy">
-        A look is more than a wallpaper. Hornero coordinates shell colors, GTK apps and icons, then lets you fine-tune
-        the pieces when you want to.
+        A look sets more than the wallpaper. Hornero coordinates the colors of the shell, GTK apps and icons, and lets
+        you adjust each piece.
       </p>
       <div class="intro-meta">
-        <span>{themes.length} coordinated looks</span>
+        <span>{themes.length} looks</span>
         <span>{originals.length} Hornero Originals</span>
         <span>7 palette-generation styles</span>
       </div>
@@ -81,13 +76,11 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   <section class="section desktop-gallery" aria-labelledby="desktop-gallery-title">
     <div class="section-heading">
       <div>
-        <p class="chapter"><b>A</b><span>Del papel al escritorio — Looks on a running desktop</span></p>
-        <p class="eyebrow">Looks on a running desktop</p>
-        <h2 id="desktop-gallery-title">From scene to whole system.</h2>
+        <h2 id="desktop-gallery-title">Looks on a running desktop</h2>
       </div>
       <p>
-        Choose a real capture to see how each look carries into the Shell. Each frame keeps its source and capture
-        details; these are separate product captures, not a simulated live desktop.
+        Choose a capture to see a look in the Shell. Each frame keeps its source and capture details. They are
+        separate captures, not one live desktop.
       </p>
     </div>
     <fieldset class="capture-switcher">
@@ -146,21 +139,19 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   <section class="section collection-section" aria-labelledby="looks-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">One desktop, many visual worlds</p>
-        <h2 id="looks-title">A look for the way you work.</h2>
+        <h2 id="looks-title">All looks</h2>
       </div>
       <p>
-        Hornero Originals sit alongside classic, natural, minimal, cyberpunk and synthwave directions. Every card is a
-        complete appearance choice; each image is the scene associated with a look, not a desktop screenshot. Nine
-        Hornero Originals use attributed photography covering every Argentine region.
+        The Hornero Originals come first, followed by classic, natural, minimal, cyberpunk and synthwave looks. Each
+        card is a complete appearance. Its image is the scene associated with the look, not a desktop screenshot. Nine
+        Hornero Originals use attributed photographs from across Argentina.
       </p>
     </div>
     <div class="collection-label" id="hornero-originals">
       <div>
-        <span class="collection-index">01</span>
         <h3>Hornero Originals</h3>
       </div>
-      <p>First-party looks shaped by Hornero’s visual identity and the places, materials and light that inspire it.</p>
+      <p>First-party looks based on Hornero’s visual identity and on places in Argentina.</p>
     </div>
     <ul class="look-grid" role="list">
       {originals.map((theme) => (
@@ -215,10 +206,9 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </ul>
     <div class="collection-label other-label" id="more-looks">
       <div>
-        <span class="collection-index">02</span>
-        <h3>The wider collection</h3>
+        <h3>Other looks</h3>
       </div>
-      <p>Distinct directions, chosen for how they feel across the Shell—not ranked by how they are implemented.</p>
+      <p>Other directions, chosen for how they look across the Shell.</p>
     </div>
     <ul class="look-grid" role="list">
       {otherLooks.map((theme) => (
@@ -254,21 +244,20 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       ))}
     </ul>
     <p class="artwork-note">
-      These cards show the scene associated with a look, not a photograph of the running desktop. The nine Argentina-inspired Hornero Originals use verified, attributed photography; other optional media remains a separate user collection. Browse the{' '}
+      These cards show the scene associated with a look, not the running desktop. The nine Hornero Originals use verified, attributed photographs; other optional media is a separate user collection. Browse the{' '}
       <a href="/wallpapers">photographic wallpaper collection</a> for locations, photographers and licenses.{' '}
-      <a href="/showroom">See verified desktop captures in the Showroom</a>.
+      <a href="/showroom">See desktop captures in the Showroom</a>.
     </p>
   </section>
 
   <section class="section variants-section" id="palette-variants" aria-labelledby="palette-variants-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Color is part of the look</p>
-        <h2 id="palette-variants-title">Seven palette-generation styles.</h2>
+        <h2 id="palette-variants-title">Seven palette-generation styles</h2>
       </div>
       <p>
-        Choose a style to change how Hornero reads the wallpaper and shapes Shell colors. Keep the same scene while
-        moving from restrained tones to a more expressive palette.
+        The style sets how Hornero reads the wallpaper and derives the Shell colors, from restrained tones to a more
+        expressive palette. The wallpaper stays the same.
       </p>
     </div>
     <ul class="variant-grid" role="list">
@@ -290,19 +279,17 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </ul>
     <p class="variant-footnote">
       All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s
-      Material 3 generator. They are real outputs for that image; another wallpaper or light mode produces different
-      colors. <a href="/docs/desktop/appearance/">Read how wallpaper colors work</a>.
+      Material 3 generator. They are real outputs for that image. Another wallpaper or light mode gives different colors. <a href="/docs/desktop/appearance/">Read how wallpaper colors work</a>.
     </p>
   </section>
 
   <section class="section terminals-section" aria-labelledby="terminals-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">One palette, in your tools</p>
-        <h2 id="terminals-title">Your terminal keeps the same color story.</h2>
+        <h2 id="terminals-title">Terminals</h2>
       </div>
       <p>
-        Hornero writes the active wallpaper palette in each terminal's native format. Kitty is the included default;
+        Hornero writes the active wallpaper palette in each terminal’s native format. Kitty is the included default;
         Alacritty and Ghostty are optional alternatives.
       </p>
     </div>
@@ -338,7 +325,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       <a href="/docs/applications/terminal">Read the terminal guide</a> for setup and appearance details.
     </p>
     <aside class="native-tool-note" aria-label="Other applications with native Hornero color themes">
-      <span class="native-tool-label">Beyond the prompt</span>
+      <span class="native-tool-label">Other tools</span>
       <div class="native-tool-body">
         <p>Hornero Config can generate native wallpaper-derived themes for these tools. Their curated configurations select <code>Hornero Dynamic</code>; these applications remain optional Arch packages.</p>
         <ul class="native-tool-list" role="list">
@@ -352,12 +339,11 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
 
   <section class="section practical">
     <div>
-      <p class="eyebrow">The useful details</p>
-      <h2>Everything in step.</h2>
+      <h2>What a look includes</h2>
       <p>
-        A look brings the Shell, GTK policy, icons and wallpaper together. Some packs reference optional GTK or icon
-        styles; Hornero checks availability and never downloads them silently. Palette-generation style and light/dark
-        mode can be refined in Appearance.
+        A look covers the Shell, GTK policy, icons and wallpaper. Some packs reference optional GTK or icon styles;
+        Hornero checks whether they are installed and never downloads them silently. You can change the
+        palette-generation style and light or dark mode in Appearance.
       </p>
     </div>
     <div class="try-panel">
