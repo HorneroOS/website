@@ -83,11 +83,52 @@ export interface Compositor {
   capabilities: string[];
 }
 
+export interface StudioApplication {
+  id: string;
+  title: string;
+  packages: string[];
+  experimental: boolean;
+  availability: string | null;
+  notes: string | null;
+  source: string | null;
+  licenses: string[];
+  licenseClass: string | null;
+  optional: boolean | null;
+  support: string | null;
+}
+
+export interface StudioSpecialization {
+  id: string;
+  title: string;
+  applications: string[];
+}
+
+export interface StudioAudioMode {
+  id: string;
+  title: string;
+  isDefault: boolean;
+  explicitOptIn: boolean;
+}
+
+export interface StudioCatalogue {
+  specializations: StudioSpecialization[];
+  applications: StudioApplication[];
+  audioModes: StudioAudioMode[];
+  performanceMode: {
+    title: string;
+    explicitOptIn: boolean;
+    temporary: boolean;
+    usesPowerProfilesDaemon: boolean;
+  } | null;
+}
+
 export interface EditionCatalogue {
   version: number;
   editions: Edition[];
   compositors: Compositor[];
+  studio: StudioCatalogue;
 }
+
 
 export interface GreeterScene {
   id: string;
@@ -169,6 +210,7 @@ export const terminalCatalogue = terminalsJson as TerminalCatalogue;
 export const paletteApplications = paletteApplicationsJson as PaletteApplication[];
 export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
+export const studioCatalogue = editionCatalogue.studio;
 export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter' | 'plugins', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);

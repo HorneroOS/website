@@ -459,5 +459,35 @@
         }
       }
     ]
+  },
+  {
+    "id": "studio",
+    "name": "Studio",
+    "description": "Top bar for creative work — media and audio at hand, stable reserved canvas",
+    "icon": "movie_creation",
+    "bars": [
+      {
+        "edge": "top",
+        "style": "attached",
+        "clear": false,
+        "groups": {
+          "start": [
+            "Logo",
+            "Workspaces",
+            "Active window"
+          ],
+          "center": [
+            "Media",
+            "Clock"
+          ],
+          "end": [
+            "Volume",
+            "Resources",
+            "Status icons",
+            "Power"
+          ]
+        }
+      }
+    ]
   }
 ]

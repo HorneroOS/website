@@ -7,12 +7,12 @@
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "248f0c9dd020f5b83bad71503ecc488a6d0d6857",
-      "subject": "test: Add scoped Appearance AT-SPI probe (shell#311)"
+      "sha": "02c61e400e17a6fbb0a9ea71e67a4adcce98cd34",
+      "subject": "feat(controlcenter): add gated Studio render jobs surface (#328)"
     },
     "config": {
-      "sha": "64557c05ecf368fb3d5ed6ced69bc5e05901edbe",
-      "subject": "fix(hypr): resolve modules relative to config file (#96)"
+      "sha": "10c9477cb770c986908d64a58e95dac8c2870e69",
+      "subject": "feat(config): mirror Studio creator workspace preset from shell (#106)"
     },
     "installer": "future",
     "iso": "future"
