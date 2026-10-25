@@ -66,7 +66,7 @@ const readiness = [
   .join('; ');
 
 const title = 'HorneroOS | A Linux desktop, lived in since 2018';
-const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that records every screenshot. Development preview; no ISO yet.`;
+const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that keeps its screenshots with hashes and pinned revisions. Development preview; no ISO yet.`;
 ---
 
 <SiteLayout
@@ -272,9 +272,9 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
       <div>
         <dt>Evidence</dt>
         <dd>
-          Captures come from <a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a> runs, with a hash and pinned
-          revisions, or are labelled as contributor-provided live sessions; the <a href="/showroom#capture-ledger">showroom
-          ledger</a> lists the source of each. Shell <a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
+          QA screenshots are tracked in <a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a> with their hashes and
+          pinned revisions. Other captures are labelled as contributor-provided live sessions; the
+          <a href="/showroom#capture-ledger">showroom ledger</a> lists the source of each. Shell <a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
           and config <a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>{' '}
           are the commits this site’s data is built from.
         </dd>

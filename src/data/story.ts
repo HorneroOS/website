@@ -88,7 +88,7 @@ export const story: StoryEntry[] = [
     date: '2026-10-01',
     title: 'A QA repository records evidence',
     summary:
-      'HorneroOS/qa boots virtual machines, drives scenarios and keeps screenshots with hashes and the pinned product revisions. Most captures on this site come from it; live-session captures are labelled as contributor-provided.',
+      'HorneroOS/qa boots virtual machines, drives scenarios and keeps screenshots with hashes and the pinned product revisions.',
     evidence: 'git',
     source: { label: 'Bootstrap of HorneroOS/qa', href: `${org}/qa/commit/447f5b4e367dcb153215630e6669e4983da39473` },
     featured: true,
