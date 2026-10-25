@@ -84,5 +84,478 @@
       "maturity": "planned",
       "capabilities": []
     }
-  ]
+  ],
+  "studio": {
+    "specializations": [
+      {
+        "id": "audio-music-production",
+        "title": "Audio & Music Production",
+        "applications": [
+          "ardour",
+          "guitarix",
+          "carla",
+          "audacity",
+          "reaper",
+          "yabridge"
+        ]
+      },
+      {
+        "id": "video-editing-post-production",
+        "title": "Video Editing & Post-Production",
+        "applications": [
+          "kdenlive",
+          "blender"
+        ]
+      },
+      {
+        "id": "streaming-content-creation",
+        "title": "Streaming & Content Creation",
+        "applications": [
+          "obs-studio"
+        ]
+      },
+      {
+        "id": "graphic-design-illustration",
+        "title": "Graphic Design & Illustration",
+        "applications": [
+          "krita",
+          "gimp",
+          "inkscape",
+          "scribus",
+          "graphite"
+        ]
+      },
+      {
+        "id": "photography-raw-processing",
+        "title": "Photography & RAW Processing",
+        "applications": [
+          "darktable",
+          "rawtherapee",
+          "gimp"
+        ]
+      },
+      {
+        "id": "3d-animation-vfx",
+        "title": "3D, Animation & VFX",
+        "applications": [
+          "blender",
+          "krita"
+        ]
+      },
+      {
+        "id": "game-development",
+        "title": "Game Development",
+        "applications": [
+          "godot",
+          "blender",
+          "krita",
+          "inkscape"
+        ]
+      },
+      {
+        "id": "maker-cad",
+        "title": "Maker & CAD",
+        "applications": [
+          "freecad",
+          "blender",
+          "inkscape"
+        ]
+      },
+      {
+        "id": "complete-creative-workstation",
+        "title": "Complete Creative Workstation",
+        "applications": [
+          "ardour",
+          "guitarix",
+          "carla",
+          "audacity",
+          "reaper",
+          "yabridge",
+          "kdenlive",
+          "blender",
+          "obs-studio",
+          "krita",
+          "gimp",
+          "inkscape",
+          "scribus",
+          "graphite",
+          "darktable",
+          "rawtherapee",
+          "godot",
+          "freecad"
+        ]
+      },
+      {
+        "id": "custom-selection",
+        "title": "Custom Selection",
+        "applications": []
+      }
+    ],
+    "applications": [
+      {
+        "id": "ardour",
+        "title": "Ardour",
+        "packages": [
+          "ardour"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "CC0-1.0",
+          "GPL-2.0-or-later",
+          "GPL-3.0-or-later",
+          "MIT"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "guitarix",
+        "title": "Guitarix",
+        "packages": [
+          "guitarix"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-or-later",
+          "GPL-3.0-or-later",
+          "LGPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "carla",
+        "title": "Carla",
+        "packages": [
+          "carla"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "audacity",
+        "title": "Audacity",
+        "packages": [
+          "audacity"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "reaper",
+        "title": "REAPER",
+        "packages": [
+          "reaper"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "LicenseRef-EULA"
+        ],
+        "licenseClass": "proprietary",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "yabridge",
+        "title": "yabridge (Windows VST bridge)",
+        "packages": [
+          "yabridge",
+          "yabridgectl"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "obs-studio",
+        "title": "OBS Studio",
+        "packages": [
+          "obs-studio",
+          "ffmpeg"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-only"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "kdenlive",
+        "title": "Kdenlive",
+        "packages": [
+          "kdenlive",
+          "ffmpeg"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "blender",
+        "title": "Blender",
+        "packages": [
+          "blender"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "Apache-2.0",
+          "BSD-2-Clause",
+          "BSD-3-Clause",
+          "GPL-2.0-or-later",
+          "GPL-3.0-or-later",
+          "LGPL-2.1-or-later",
+          "MIT",
+          "MPL-2.0",
+          "Zlib"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "krita",
+        "title": "Krita",
+        "packages": [
+          "krita"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL3"
+        ],
+        "licenseClass": "open-source",
+        "optional": false,
+        "support": "planned"
+      },
+      {
+        "id": "gimp",
+        "title": "GIMP",
+        "packages": [
+          "gimp"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "inkscape",
+        "title": "Inkscape",
+        "packages": [
+          "inkscape"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL",
+          "LGPL"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "darktable",
+        "title": "darktable",
+        "packages": [
+          "darktable"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "rawtherapee",
+        "title": "RawTherapee",
+        "packages": [
+          "rawtherapee"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "graphite",
+        "title": "Graphite",
+        "packages": [
+          "graphite"
+        ],
+        "experimental": true,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "LGPL-2.1-or-later",
+          "MPL-2.0",
+          "GPL-2.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "penpot",
+        "title": "Penpot",
+        "packages": [],
+        "experimental": false,
+        "availability": "reference-only",
+        "notes": "Browser-based design tool; use the hosted service or a self-hosted instance. No Arch package is installed.",
+        "source": null,
+        "licenses": [],
+        "licenseClass": null,
+        "optional": null,
+        "support": null
+      },
+      {
+        "id": "scribus",
+        "title": "Scribus",
+        "packages": [
+          "scribus"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "freecad",
+        "title": "FreeCAD",
+        "packages": [
+          "freecad"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "LGPL-2.0-only"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "godot",
+        "title": "Godot",
+        "packages": [
+          "godot"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "MIT"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      }
+    ],
+    "audioModes": [
+      {
+        "id": "balanced",
+        "title": "Balanced",
+        "isDefault": true,
+        "explicitOptIn": false
+      },
+      {
+        "id": "low-latency",
+        "title": "Low Latency",
+        "isDefault": false,
+        "explicitOptIn": true
+      },
+      {
+        "id": "advanced",
+        "title": "Advanced",
+        "isDefault": false,
+        "explicitOptIn": true
+      }
+    ],
+    "performanceMode": {
+      "title": "Temporary Performance",
+      "explicitOptIn": true,
+      "temporary": true,
+      "usesPowerProfilesDaemon": true
+    }
+  }
 }

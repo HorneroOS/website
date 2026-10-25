@@ -1,0 +1,280 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { studioCatalogue, editions, pins, short } from '../data/product';
+
+const studio = editions.find((edition) => edition.id === 'studio');
+if (!studio) throw new Error('Studio edition is missing from the pinned catalogue');
+
+const appById = Object.fromEntries(studioCatalogue.applications.map((app) => [app.id, app]));
+const appTitle = (id: string) => appById[id]?.title ?? id;
+const licenseLabel = (app: (typeof studioCatalogue.applications)[number]) => {
+  if (app.availability === 'reference-only') return 'Reference only — not installed';
+  if (app.licenseClass === 'proprietary') return `Proprietary (${app.licenses.join(', ') || 'vendor license'})`;
+  if (app.experimental) return 'Experimental';
+  return app.licenses.join(', ') || 'See package';
+};
+---
+
+<SiteLayout
+  title="Studio — a creative workstation, in preparation"
+  description="HorneroOS Studio composes selectable creative workloads — audio, video, streaming, design, photo and 3D — over the Desktop. It is planned: no installable Studio image exists yet."
+>
+  <section class="section intro">
+    <p class="plate-id">
+      <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: planificada</span>
+    </p>
+    <p class="eyebrow">Edition · Planned</p>
+    <h1>Built for <em>making things.</em></h1>
+    <p class="lede">
+      HorneroOS Studio is a creative workstation composed over the Desktop: you pick specializations — audio, video,
+      streaming, design, photography, 3D — and the system composes the applications, audio policy and workspace around
+      them. It is a considered workstation, not a bundle of everything.
+    </p>
+    <p class="availability">
+      <strong>Studio is planned and not yet installable.</strong> There is no Studio ISO and no installer flow for it
+      today. The composition model, the <code>horneroctl studio</code> controls and the Control Center surfaces exist in
+      the repositories and are linked below; an installable image and hardware validation are still pending. Nothing on
+      this page claims support that QA has not evidenced.
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="workloads-title">
+    <p class="eyebrow">Selectable specializations</p>
+    <h2 id="workloads-title">Choose the work. The system composes the rest.</h2>
+    <p class="section-copy">
+      Specializations and individual applications are selected from one canonical catalogue — the same model used by the
+      installer design, by <code>horneroctl studio selection</code> and by the Control Center. Selections can change
+      after installation; recording a selection never deletes projects, settings or files.
+    </p>
+    <div class="spec-grid">
+      {
+        studioCatalogue.specializations.map((spec) => (
+          <article class="spec-card">
+            <h3>{spec.title}</h3>
+            {spec.applications.length > 0 ? (
+              <ul>
+                {spec.applications.map((id) => (
+                  <li>{appTitle(id)}</li>
+                ))}
+              </ul>
+            ) : (
+              <p class="muted">Start empty and add individual applications.</p>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="apps-title">
+    <p class="eyebrow">Applications · source &amp; license</p>
+    <h2 id="apps-title">Every application, with its provenance.</h2>
+    <p class="section-copy">
+      This table is generated from the pinned Hornero catalogue (HorneroOS/hornero at {short(pins.hornero.sha)}).
+      Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is
+      reference-only (browser tool, no package), and experimental entries are marked.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Application</th>
+            <th scope="col">Packages</th>
+            <th scope="col">Source</th>
+            <th scope="col">License / status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            studioCatalogue.applications.map((app) => (
+              <tr>
+                <th scope="row">{app.title}</th>
+                <td>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</td>
+                <td>{app.source ?? '—'}</td>
+                <td>
+                  {licenseLabel(app)}
+                  {app.notes ? <span class="note">{app.notes}</span> : null}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="audio-title">
+    <p class="eyebrow">Audio &amp; performance</p>
+    <h2 id="audio-title">Honest audio modes. No invented latency.</h2>
+    <p class="section-copy">
+      Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are
+      explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling
+      period — it is never presented as measured round-trip latency, and no mode forces realtime kernels, IRQ tuning
+      or privilege changes.
+    </p>
+    <ul class="mode-list">
+      {
+        studioCatalogue.audioModes.map((mode) => (
+          <li>
+            <strong>{mode.title}</strong>
+            <span>{mode.isDefault ? 'Default — device rate and quantum.' : 'Explicit opt-in, reversible.'}</span>
+          </li>
+        ))
+      }
+      {
+        studioCatalogue.performanceMode && (
+          <li>
+            <strong>{studioCatalogue.performanceMode.title}</strong>
+            <span>Explicit opt-in via power-profiles-daemon; the previous profile is restored on demand.</span>
+          </li>
+        )
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="today-title">
+    <p class="eyebrow">Status</p>
+    <h2 id="today-title">What exists today, and what does not.</h2>
+    <div class="status-grid">
+      <article>
+        <h3>In the repositories</h3>
+        <ul>
+          <li>Canonical edition catalogue, resolver and application/license matrix.</li>
+          <li>
+            <code>horneroctl studio</code> selection, mode, render jobs and doctor contracts, with tests.
+          </li>
+          <li>Control Center Studio pane: workloads, audio, performance and render jobs.</li>
+          <li>Config-owned PipeWire, preset and storage policies; QA scenario definitions.</li>
+        </ul>
+        <p>
+          <a href="/docs/applications/studio/">Studio documentation</a> ·{' '}
+          <a href="/docs/applications/studio-audio/">Audio setup &amp; recovery</a> ·{' '}
+          <a href="/docs/applications/studio-getting-started/">Getting started guide</a>
+        </p>
+      </article>
+      <article>
+        <h3>Not available yet</h3>
+        <ul>
+          <li>An installable Studio image or ISO — there is none.</li>
+          <li>Installer-time workload selection (owner-reviewed installer work).</li>
+          <li>Hardware validation: audio interfaces, MIDI, GPU encode and displays await QA fixtures.</li>
+          <li>Any support claim: Studio stays Planned until install and QA gates pass.</li>
+        </ul>
+        <p>
+          <a href="https://github.com/HorneroOS/hornero/issues/283">Follow the Studio readiness roadmap</a>
+        </p>
+      </article>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro h1 {
+    max-width: 16ch;
+    margin-block: 0.55rem 1rem;
+    font-size: clamp(2.6rem, 2rem + 5vw, 5.2rem);
+  }
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .lede {
+    max-width: 54ch;
+    font-size: var(--step-1);
+  }
+  .availability {
+    max-width: 66ch;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .section-copy {
+    max-width: 66ch;
+    color: var(--text-muted);
+  }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+  }
+  .spec-card {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .spec-card h3 {
+    margin-top: 0;
+    font-size: var(--step-0);
+  }
+  .spec-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+  .muted {
+    color: var(--text-muted);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 1.2rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--step--1);
+  }
+  th,
+  td {
+    padding: 0.55rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom: 2px solid var(--secondary);
+  }
+  .note {
+    display: block;
+    color: var(--text-muted);
+  }
+  .mode-list {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+    padding: 0;
+    list-style: none;
+  }
+  .mode-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .mode-list span {
+    color: var(--text-muted);
+  }
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+  }
+  .status-grid article {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .status-grid h3 {
+    margin-top: 0;
+  }
+  .status-grid ul {
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+</style>

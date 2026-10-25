@@ -170,7 +170,74 @@ function editionCatalogue(horneroDir) {
     maturity: compositor.maturity,
     capabilities: compositor.capabilities ?? [],
   }));
-  return { version: source.version, editions, compositors };
+  return { version: source.version, editions, compositors, studio: studioProjection(source) };
+}
+
+/**
+ * Project the canonical Studio composition from the pinned Hornero
+ * catalogue (HorneroOS/hornero editions/catalogue.yaml). The site never
+ * duplicates product truth: titles, package names, provenance, license
+ * class and maturity come only from this projection. Fails closed when
+ * the catalogue shape drifts.
+ * @param {object} source Parsed editions/catalogue.yaml.
+ * @returns {{specializations: object[], applications: object[], audioModes: object[], performanceMode: object|null}}
+ */
+function studioProjection(source) {
+  const applications = source.studioApplications ?? {};
+  const provenance = source.studioProvenance ?? {};
+  const apps = Object.entries(applications).map(([id, app]) => {
+    if (!app || typeof app.title !== 'string' || !app.title.trim()) {
+      fail(`studio application ${id} is missing a title`);
+    }
+    const prov = provenance[id] ?? {};
+    return {
+      id,
+      title: app.title,
+      packages: app.packages ?? [],
+      experimental: app.experimental === true,
+      availability: app.availability ?? null,
+      notes: app.notes ?? null,
+      source: prov.source ?? null,
+      licenses: prov.licenses ?? [],
+      licenseClass: prov.licenseClass ?? null,
+      optional: typeof prov.optional === 'boolean' ? prov.optional : null,
+      support: prov.support ?? null,
+    };
+  });
+  const appIds = new Set(apps.map((app) => app.id));
+  const specializations = Object.entries(source.studioSpecializations ?? {}).map(([id, spec]) => {
+    if (!spec || typeof spec.title !== 'string' || !spec.title.trim()) {
+      fail(`studio specialization ${id} is missing a title`);
+    }
+    const members = spec.applications ?? [];
+    for (const member of members) {
+      if (!appIds.has(member)) fail(`studio specialization ${id} references unknown application ${member}`);
+    }
+    return { id, title: spec.title, applications: members };
+  });
+  if (apps.length === 0 || specializations.length === 0) {
+    fail('studio catalogue projection is empty: studioApplications/studioSpecializations missing');
+  }
+  const audioModes = Object.entries(source.studioAudioModes ?? {}).map(([id, mode]) => ({
+    id,
+    title: mode.title ?? id,
+    isDefault: mode.default === true,
+    explicitOptIn: mode.explicitOptIn === true,
+  }));
+  const perf = source.studioPerformanceMode ?? null;
+  return {
+    specializations,
+    applications: apps,
+    audioModes,
+    performanceMode: perf
+      ? {
+          title: perf.title ?? 'Temporary Performance',
+          explicitOptIn: perf.explicitOptIn === true,
+          temporary: perf.temporary === true,
+          usesPowerProfilesDaemon: perf.usesPowerProfilesDaemon === true,
+        }
+      : null,
+  };
 }
 
 // Terminal integrations and their package roles are owned by the pinned
