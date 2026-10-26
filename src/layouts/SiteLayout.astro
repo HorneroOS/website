@@ -78,6 +78,14 @@ const repos = [
   { href: '/search/', label: 'Search' },
   { href: 'https://github.com/HorneroOS/website/issues', label: 'Report a site issue' },
 ];
+// Community links. The star count is not fetched at runtime: this site loads no
+// third-party resources, so the star link is a plain link.
+const community = {
+  org: 'https://github.com/HorneroOS',
+  star: 'https://github.com/HorneroOS/hornero',
+  bug: 'https://github.com/HorneroOS/hornero/issues/new',
+  siteIssue: 'https://github.com/HorneroOS/website/issues/new',
+};
 ---
 
 <!doctype html>
@@ -178,8 +186,37 @@ const repos = [
               </a>
             </li>
           </ul>
+          <ul class="mobile-community" aria-label="HorneroOS on GitHub">
+            <li><a href={community.star}>Star on GitHub</a></li>
+            <li><a href={community.org}>HorneroOS organization</a></li>
+            <li><a href={community.bug}>Report a bug</a></li>
+            <li><a href={community.siteIssue}>Report a site issue</a></li>
+          </ul>
         </nav>
       </details>
+      <ul class="community" aria-label="HorneroOS on GitHub">
+        <li>
+          <a href={community.org} class="community-org" aria-label="HorneroOS organization on GitHub">
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18" focusable="false">
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.96 0-.87.31-1.59.83-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.52.56.83 1.27.83 2.15 0 3.08-1.87 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href={community.star} class="community-star" aria-label="Star HorneroOS on GitHub">
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" focusable="false">
+              <path
+                fill="currentColor"
+                d="M8 .25a.75.75 0 0 1 .67.42l1.88 3.8 4.2.61a.75.75 0 0 1 .41 1.28l-3.04 2.96.72 4.18a.75.75 0 0 1-1.09.79L8 12.35l-3.75 1.97a.75.75 0 0 1-1.09-.79l.72-4.18L1.84 6.36a.75.75 0 0 1 .41-1.28l4.2-.61 1.88-3.8A.75.75 0 0 1 8 .25Z"
+              />
+            </svg>
+            <span>Star</span>
+          </a>
+        </li>
+      </ul>
       <fieldset class="color-switch" data-color-switch>
         <legend>Color mode</legend>
         <label>
@@ -218,6 +255,35 @@ const repos = [
       <slot />
     </main>
     <footer class="site-footer">
+      <section class="involved" aria-labelledby="involved-title">
+        <h2 id="involved-title">Get involved</h2>
+        <ul>
+          <li>
+            <a href={community.star}>
+              <strong>Star HorneroOS</strong>
+              <span>Follow the desktop repository. Stars show the project to other people looking for it.</span>
+            </a>
+          </li>
+          <li>
+            <a href={community.org}>
+              <strong>Browse the organization</strong>
+              <span>Shell, configuration, installer, plugins, docs, QA and this website.</span>
+            </a>
+          </li>
+          <li>
+            <a href={community.bug}>
+              <strong>Report a bug</strong>
+              <span>Name the ISO (preview22), your firmware (UEFI or BIOS) and the step where it failed.</span>
+            </a>
+          </li>
+          <li>
+            <a href={community.siteIssue}>
+              <strong>Report a site issue</strong>
+              <span>Something wrong on this website: a broken link, a wrong date, a layout problem.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
       <nav aria-label="Project">
         <ul>
           {repos.map((r) => (
