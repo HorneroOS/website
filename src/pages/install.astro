@@ -19,15 +19,15 @@ const statusName = {
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt="HorneroOS Preview ISO: one image with Desktop and Studio candidate editions."
+  socialImageAlt="HorneroOS Preview ISO: one image with Desktop and Studio Preview editions."
   title="Install | HorneroOS"
-  description="The first HorneroOS Preview ISO is published: one x86_64 image with Desktop and Studio candidate editions, signed and checksum-verified. Arch packages remain available."
+  description="The first HorneroOS Preview ISO is published: one x86_64 image with Desktop and Studio Preview editions, signed and checksum-verified. Arch packages remain available."
 >
   <section class="section">
     <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
     <h1>The first HorneroOS Preview ISO is here</h1>
     <p class="lede">
-      One x86_64 ISO installs HorneroOS Desktop or a Studio candidate edition with selectable creative
+      One x86_64 ISO installs HorneroOS Desktop or the Studio Preview edition with selectable creative
       specializations. It passed the disposable-VM installation matrix (UEFI and BIOS, encrypted and unencrypted)
       and is published as a signed GitHub pre-release. This is a preview, not a stable release.
     </p>
@@ -43,7 +43,7 @@ const statusName = {
       <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview22-x86_64.iso.sig">detached GPG signature</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>horneroos-2026.10-preview22-x86_64.iso</code><span>the install image (Desktop + Studio candidate)</span></li>
+      <li><code>horneroos-2026.10-preview22-x86_64.iso</code><span>the install image (Desktop + Studio Preview)</span></li>
       <li><code>SHA-256</code><span>38ec76d7c9c10ea3e956b2c9f2d8d420e3d09b61899dc453a2858622d7e90bd2</span></li>
       <li><code>Signature</code><span>HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository (<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
     </ul>
@@ -122,8 +122,9 @@ const statusName = {
     </ul>
     <p>
       Desktop is the current preview. Studio installs from the same Preview ISO as a candidate edition with
-      selectable specializations and passed its VM install matrix, but it remains <strong>Planned</strong> until the{' '}
-      <code>hornero-qa studio-gate</code> evidence gate passes; VM results are not physical-hardware proof. Server and
+      selectable specializations and passed its VM install matrix; it is a <strong>Preview</strong> edition. The{' '}
+      <code>hornero-qa studio-gate</code> hardware evidence is still pending, so VM results are not
+      physical-hardware proof and Studio is not Supported yet. Server and
       Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.{' '}
       <a href="/editions">How the editions fit together.</a>
     </p>

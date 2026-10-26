@@ -43,7 +43,7 @@
     {
       "id": "studio",
       "title": "HorneroOS Studio",
-      "maturity": "planned",
+      "maturity": "preview",
       "role": "creative-workstation",
       "extends": "desktop",
       "packageSets": [
