@@ -1,0 +1,415 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import AppLogo from '../../components/AppLogo.astro';
+import { studioCatalogue, editions, pins, short } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+const studio = editions.find((edition) => edition.id === 'studio');
+if (!studio) throw new Error('Studio edition is missing from the pinned catalogue');
+
+const appById = Object.fromEntries(studioCatalogue.applications.map((app) => [app.id, app]));
+const appTitle = (id: string) => appById[id]?.title ?? id;
+type StudioApp = (typeof studioCatalogue.applications)[number];
+const statusTag = (app: StudioApp) => {
+  if (app.availability === 'reference-only') return isEs ? 'Solo de referencia' : 'Reference only';
+  if (app.licenseClass === 'proprietary') return isEs ? 'Propietario · a elección' : 'Proprietary · opt-in';
+  if (app.experimental) return 'Experimental';
+  if (app.licenseClass === 'open-source') return isEs ? 'Código abierto' : 'Open source';
+  if (app.optional) return isEs ? 'Opcional' : 'Optional';
+  return isEs ? 'Catalogado' : 'Catalogued';
+};
+// The hero lineup is editorial: the flagship tool of each creative field,
+// always rendered from the generated catalogue, never hand-listed twice.
+const heroLineup = ['ardour', 'obs-studio', 'blender', 'krita', 'godot']
+  .map((id) => appById[id])
+  .filter((app): app is StudioApp => Boolean(app));
+const stats = isEs
+  ? [
+      { value: String(studioCatalogue.specializations.length), label: 'especializaciones en el catálogo' },
+      { value: String(studioCatalogue.applications.length), label: 'aplicaciones en el catálogo' },
+      { value: String(studioCatalogue.audioModes.length), label: 'modos de audio, todos reversibles' },
+    ]
+  : [
+      { value: String(studioCatalogue.specializations.length), label: 'specializations in the catalogue' },
+      { value: String(studioCatalogue.applications.length), label: 'applications in the catalogue' },
+      { value: String(studioCatalogue.audioModes.length), label: 'audio modes, all reversible' },
+    ];
+---
+
+<SiteLayout
+  title="Studio | HorneroOS"
+  description={isEs ? 'HorneroOS Studio es una edición Preview para trabajo creativo: audio, video, streaming, diseño, foto y 3D. Se instala desde la ISO Preview de HorneroOS con especializaciones a elección.' : 'HorneroOS Studio is a Preview edition for creative work: audio, video, streaming, design, photo and 3D. It installs from the HorneroOS Preview ISO with selectable specializations.'}
+>
+  <section class="section intro">
+    <p class="plate-id">
+      <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: Preview</span>
+    </p>
+    <h1>Studio</h1>
+    <p class="lede">
+      {isEs ? 'HorneroOS Studio es una edición creativa Preview construida sobre Desktop, y hoy se instala desde la ISO Preview de HorneroOS. Elegís especializaciones (audio, video, streaming, diseño, fotografía, 3D) y el sistema configura las aplicaciones, la política de audio y el espacio de trabajo para ellas.' : 'HorneroOS Studio is a Preview creative edition built on the Desktop, and it installs today from the HorneroOS Preview ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for them.'}
+    </p>
+
+    <div class="lineup" aria-label={isEs ? 'Aplicaciones insignia de Studio' : 'Flagship Studio applications'}>
+      {
+        heroLineup.map((app) => (
+          <span class="lineup-item">
+            <AppLogo id={app.id} />
+            <span>{app.title}</span>
+          </span>
+        ))
+      }
+    </div>
+
+    <dl class="stats">
+      {
+        stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <p class="availability" role="note">
+      <strong>{isEs ? 'Studio ya está disponible como Preview.' : 'Studio is available now as a Preview.'}</strong> {isEs ? 'Se instala desde la misma ISO Preview firmada que Desktop, con selección de especializaciones al instalar, y su matriz de instalación (UEFI/BIOS, con cifrado y sin cifrado) se ejecutó en máquinas virtuales desechables con ' : 'It installs from the same signed Preview ISO as Desktop, with installer-time specialization selection, and its install matrix (UEFI/BIOS, encrypted and unencrypted) was executed in disposable virtual machines with '}<code>horneroctl studio doctor</code>{isEs ? ' en verde. Eso es evidencia de VM solamente: los registros de primer login y de paridad de paquetes siguen parciales en el registro R11 del instalador. Mirá ' : ' green. That is VM evidence only: first-login and package-parity records remain partial in the installer\'s R11 record. See '}
+      <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a>{isEs ? ' para descargarla. La validación en hardware físico (interfaces de audio, MIDI, codificación por GPU) todavía está pendiente, así que Studio es Preview, no Supported.' : ' to download it. Physical-hardware validation (audio interfaces, MIDI, GPU encode) is still pending, so Studio is Preview, not Supported.'}
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="workloads-title">
+    <h2 id="workloads-title">{isEs ? 'Especializaciones' : 'Specializations'}</h2>
+    <p class="section-copy">
+      {isEs ? 'Las especializaciones y las aplicaciones individuales se eligen desde un único catálogo canónico, el mismo modelo que usan el diseño del instalador, ' : 'Specializations and individual applications are selected from one canonical catalogue, the same model used by the installer design, by '}<code>horneroctl studio selection</code>{isEs ? ' y el Centro de Control. Las selecciones pueden cambiar después de la instalación; registrar una selección nunca borra proyectos, configuraciones ni archivos.' : ' and by the Control Center. Selections can change after installation; recording a selection never deletes projects, settings or files.'}
+    </p>
+    <ol class="tracks" role="list">
+      {
+        studioCatalogue.specializations.map((spec) => (
+          <li class="track">
+            <h3>{spec.title}</h3>
+            {spec.applications.length > 0 ? (
+              <ul class="chips" role="list">
+                {spec.applications.map((id) => (
+                  <li class="chip">
+                    <AppLogo id={id} />
+                    <span>{appTitle(id)}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="muted">{isEs ? 'Empezá vacío y agregá aplicaciones individuales.' : 'Start empty and add individual applications.'}</p>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="apps-title">
+    <h2 id="apps-title">{isEs ? 'Aplicaciones, fuentes y licencias' : 'Applications, sources and licenses'}</h2>
+    <p class="section-copy">
+      {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. El software propietario nunca se instala en silencio: REAPER es una opción explícita bajo la EULA de su proveedor, Penpot es solo de referencia (herramienta de navegador, sin paquete), y las entradas experimentales están marcadas. yabridge, Graphite y Penpot no tienen un ícono oficial incorporado, así que aparecen solo con el nombre.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no package), and experimental entries are marked. yabridge, Graphite and Penpot have no official icon vendored, so they appear name-only.`}
+    </p>
+    <ul class="app-grid" role="list">
+      {
+        studioCatalogue.applications.map((app) => (
+          <li class="app-tile">
+            <div class="app-head">
+              <AppLogo id={app.id} />
+              <h3>{app.title}</h3>
+              <span class="tag">{statusTag(app)}</span>
+            </div>
+            <dl class="app-meta">
+              <div>
+                <dt>{isEs ? 'Paquetes' : 'Packages'}</dt>
+                <dd>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</dd>
+              </div>
+              <div>
+                <dt>{isEs ? 'Fuente' : 'Source'}</dt>
+                <dd>{app.source ?? '—'}</dd>
+              </div>
+              <div>
+                <dt>{isEs ? 'Licencia' : 'License'}</dt>
+                <dd>{app.licenses.length > 0 ? app.licenses.join(', ') : (isEs ? 'Ver el paquete' : 'See package')}</dd>
+              </div>
+            </dl>
+            {app.notes ? <p class="note">{app.notes}</p> : null}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="audio-title">
+    <h2 id="audio-title">{isEs ? 'Modos de audio y rendimiento' : 'Audio and performance modes'}</h2>
+    <p class="section-copy">
+      {isEs ? 'Los modos de audio de Studio son reversibles y responden a un solo contrato: Balanced mantiene los valores por defecto del dispositivo; los demás son opciones explícitas, y el estado anterior queda registrado para poder restaurarlo exactamente. Quantum es un período de planificación, no una latencia de ida y vuelta medida, y ningún modo fuerza kernels de tiempo real, ajustes de IRQ ni cambios de privilegios.' : 'Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning or privilege changes.'}
+    </p>
+    <ul class="modes" role="list">
+      {
+        studioCatalogue.audioModes.map((mode) => (
+          <li class="mode">
+            <strong>{mode.title}</strong>
+            <span>{mode.isDefault ? (isEs ? 'Predeterminado — tasa y quantum del dispositivo.' : 'Default — device rate and quantum.') : (isEs ? 'Opt-in explícito, reversible.' : 'Explicit opt-in, reversible.')}</span>
+            <span class="tag">{mode.isDefault ? (isEs ? 'Predeterminado' : 'Default') : (isEs ? 'A elección' : 'Opt-in')}</span>
+          </li>
+        ))
+      }
+      {
+        studioCatalogue.performanceMode && (
+          <li class="mode">
+            <strong>{studioCatalogue.performanceMode.title}</strong>
+            <span>{isEs ? 'Opt-in explícito vía power-profiles-daemon; el perfil anterior se restaura cuando lo pedís.' : 'Explicit opt-in via power-profiles-daemon; the previous profile is restored on demand.'}</span>
+            <span class="tag">{isEs ? 'A elección' : 'Opt-in'}</span>
+          </li>
+        )
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="today-title">
+    <h2 id="today-title">{isEs ? 'Estado' : 'Status'}</h2>
+    <div class="status-grid">
+      <article>
+        <h3>{isEs ? 'En los repositorios' : 'In the repositories'}</h3>
+        <ul>
+          <li>{isEs ? 'Catálogo canónico de ediciones, resolver y matriz de aplicaciones y licencias.' : 'Canonical edition catalogue, resolver and application/license matrix.'}</li>
+          <li>
+            <code>horneroctl studio</code> {isEs ? 'contratos de selección, modo, trabajos de render y doctor, con tests.' : 'selection, mode, render jobs and doctor contracts, with tests.'}
+          </li>
+          <li>{isEs ? 'Panel Studio del Centro de Control: cargas de trabajo, audio, rendimiento y trabajos de render.' : 'Control Center Studio pane: workloads, audio, performance and render jobs.'}</li>
+          <li>{isEs ? 'Políticas de PipeWire, presets y almacenamiento a cargo de la configuración; definiciones de escenarios de QA.' : 'Config-owned PipeWire, preset and storage policies; QA scenario definitions.'}</li>
+        </ul>
+        <p>
+          <a href={L('/docs/applications/studio/')}>{isEs ? 'Documentación de Studio' : 'Studio documentation'}</a> ·{' '}
+          <a href={L('/docs/applications/studio-audio/')}>{isEs ? 'Configuración y recuperación de audio' : 'Audio setup & recovery'}</a> ·{' '}
+          <a href={L('/docs/applications/studio-getting-started/')}>{isEs ? 'Guía de inicio' : 'Getting started guide'}</a>
+        </p>
+      </article>
+      <article>
+        <h3>{isEs ? 'Todavía no disponible' : 'Not available yet'}</h3>
+        <ul>
+          <li>{isEs ? 'Validación de hardware: las interfaces de audio, MIDI, la codificación por GPU y las pantallas esperan fixtures físicos de QA.' : 'Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.'}</li>
+          <li>{isEs ? 'Cualquier afirmación de soporte: Studio es Preview, no Supported, hasta que la evidencia de hardware pase la puerta de QA.' : 'Any support claim: Studio is Preview, not Supported, until hardware evidence passes the QA gate.'}</li>
+        </ul>
+        <p>
+          <a href="https://github.com/HorneroOS/hornero/issues/283">{isEs ? 'Seguí la hoja de ruta de preparación de Studio' : 'Follow the Studio readiness roadmap'}</a>
+        </p>
+      </article>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro h1 {
+    margin-block: 0.55rem 1rem;
+  }
+  .lede {
+    max-width: 54ch;
+    font-size: var(--step-1);
+  }
+  .lineup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.6rem;
+    margin-top: 1.8rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--line);
+  }
+  .lineup-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    --app-logo-size: 2rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin: 1.4rem 0 0;
+  }
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+  }
+  .stats dt {
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .stats dd {
+    margin: 0;
+    font-family: var(--font-mono, monospace);
+    font-size: var(--step-2, 1.6rem);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .availability {
+    max-width: 66ch;
+    margin-top: 1.6rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--secondary);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .availability strong {
+    color: var(--text);
+  }
+  .section-copy {
+    max-width: 66ch;
+    color: var(--text-muted);
+  }
+  .tracks {
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .track {
+    display: grid;
+    grid-template-columns: minmax(12rem, 18rem) 1fr;
+    gap: 0.5rem 1.5rem;
+    align-items: start;
+    padding-block: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .track:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .track h3 {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    --app-logo-size: 1.35rem;
+  }
+  .muted {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .app-tile {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .app-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.7rem;
+    --app-logo-size: 2.6rem;
+  }
+  .app-head h3 {
+    margin: 0;
+    font-size: var(--step-0);
+    flex: 1 1 8rem;
+    min-width: 0;
+  }
+  .tag {
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--secondary);
+    border-radius: 999px;
+    color: var(--secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .app-meta {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.9rem 0 0;
+    font-size: var(--step--1);
+  }
+  .app-meta div {
+    display: grid;
+    grid-template-columns: 5.2rem 1fr;
+    gap: 0.5rem;
+  }
+  .app-meta dt {
+    color: var(--text-muted);
+  }
+  .app-meta dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .note {
+    margin: 0.7rem 0 0;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .modes {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mode {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .mode span:not(.tag) {
+    color: var(--text-muted);
+    flex: 1;
+  }
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+  }
+  .status-grid article {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .status-grid h3 {
+    margin-top: 0;
+  }
+  .status-grid ul {
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+  @media (max-width: 40rem) {
+    .track {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

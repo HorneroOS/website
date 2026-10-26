@@ -13,6 +13,13 @@ const pins = JSON.parse(readFileSync(new URL('./src/data/product/pins.json', imp
 export default defineConfig({
   site: 'https://www.horneroos.com',
   output: 'static',
+  // Spanish is the default and priority locale (served at the root). English
+  // keeps its own tree under /en/. Every page exists in both locales.
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false },
+  },
   // The single global stylesheet is small; inline it to avoid a render-blocking request.
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],

@@ -1,0 +1,34 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+---
+
+<SiteLayout title={isEs ? 'Página no encontrada | HorneroOS' : 'Page not found | HorneroOS'} description={isEs ? 'Esta página no existe.' : 'This page does not exist.'} noindex>
+  <section class="section lost">
+    <div class="broadcast-plate">
+      <p class="plate-id"><strong>Señal no encontrada</strong><span>ARG / 199X</span><span>Error 404</span></p>
+      <div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1>{isEs ? 'Página no encontrada' : 'Page not found'}</h1>
+      <p>{isEs ? 'No hay ninguna página en esta dirección. Probá con una de estas:' : 'There is no page at this address. Try one of these:'}</p>
+      <ul>
+        <li><a href={L('/')}>{isEs ? 'Inicio' : 'Home'}</a></li>
+        <li><a href={L('/showroom')}>Showroom</a></li>
+        <li><a href={L('/roots')}>{isEs ? 'Raíces' : 'Roots'}</a></li>
+        <li><a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a></li>
+      </ul>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .lost h1 { margin-block: 0.8rem 0.5rem; }
+  .lost ul { margin-top: 0.8rem; padding-left: 1.25rem; }
+  .lost li + li { margin-top: 0.35rem; }
+</style>

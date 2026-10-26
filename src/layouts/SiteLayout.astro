@@ -9,6 +9,7 @@ import LogoDark from '../assets/brand/logo-dark.svg';
 import LogoLight from '../assets/brand/logo-light.svg';
 import '../styles/global.css';
 import { story } from '../data/story';
+import { localeFromPath, localizePath, t, type Locale } from '../i18n/ui';
 
 const firstPublicCommit = story.find((entry) => entry.id === 'dotfiles')?.source?.href;
 
@@ -33,36 +34,42 @@ interface NavGroup {
 type NavItem = ({ kind: 'link' } & NavLink) | ({ kind: 'group' } & NavGroup);
 
 const { title, description, noindex, socialImage, socialImageAlt } = Astro.props;
+const locale: Locale = Astro.currentLocale === 'en' ? 'en' : localeFromPath(Astro.url.pathname);
+const L = (path: string) => localizePath(path, locale);
+const pathForSwitch = Astro.url.pathname.includes('404') ? '/' : Astro.url.pathname;
+const esHref = localizePath(pathForSwitch, 'es');
+const enHref = localizePath(pathForSwitch, 'en');
 // Grouped by what a visitor is trying to do: see it, compare editions, extend it,
-// learn the story, read the docs, get it.
+// learn the story, read the docs, get it. Hrefs are localized for the
+// current locale; labels come from the shared chrome dictionary.
 const nav: NavItem[] = [
   {
     kind: 'group',
-    label: 'Desktop',
+    label: t(locale, 'navDesktop'),
     links: [
-      { href: '/showroom', label: 'Showroom' },
-      { href: '/layouts', label: 'Layouts' },
-      { href: '/themes', label: 'Themes' },
-      { href: '/wallpapers', label: 'Wallpapers' },
-      { href: '/greeter', label: 'Greeter' },
-      { href: '/terminals', label: 'Terminals' },
-      { href: '/companion', label: 'Companion' },
+      { href: L('/showroom'), label: t(locale, 'navShowroom') },
+      { href: L('/layouts'), label: t(locale, 'navLayouts') },
+      { href: L('/themes'), label: t(locale, 'navThemes') },
+      { href: L('/wallpapers'), label: t(locale, 'navWallpapers') },
+      { href: L('/greeter'), label: t(locale, 'navGreeter') },
+      { href: L('/terminals'), label: t(locale, 'navTerminals') },
+      { href: L('/companion'), label: t(locale, 'navCompanion') },
     ],
   },
-  { kind: 'link', href: '/editions', label: 'Editions' },
-  { kind: 'link', href: '/studio', label: 'Studio' },
-  { kind: 'link', href: '/extensions', label: 'Extensions' },
+  { kind: 'link', href: L('/editions'), label: t(locale, 'navEditions') },
+  { kind: 'link', href: L('/studio'), label: t(locale, 'navStudio') },
+  { kind: 'link', href: L('/extensions'), label: t(locale, 'navExtensions') },
   {
     kind: 'group',
-    label: 'Story',
+    label: t(locale, 'navStory'),
     links: [
-      { href: '/roots', label: 'Roots' },
-      { href: '/releases', label: 'Releases' },
-      { href: '/docs/development/design-language/', label: 'Design language' },
+      { href: L('/roots'), label: t(locale, 'navRoots') },
+      { href: L('/releases'), label: t(locale, 'navReleases') },
+      { href: L('/docs/development/design-language/'), label: t(locale, 'navDesignLanguage') },
     ],
   },
-  { kind: 'link', href: '/docs/', label: 'Docs' },
-  { kind: 'link', href: '/search/', label: 'Search' },
+  { kind: 'link', href: L('/docs/'), label: t(locale, 'navDocs') },
+  { kind: 'link', href: L('/search/'), label: t(locale, 'navSearch') },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (href: string) => {
@@ -72,11 +79,11 @@ const isCurrent = (href: string) => {
 const groupCurrent = (group: NavGroup) => group.links.some((l) => isCurrent(l.href));
 const repos = [
   { href: 'https://github.com/HorneroOS', label: 'GitHub' },
-  { href: '/roots#repositories', label: 'Project map' },
-  { href: '/docs/development/design-language/', label: 'Design language' },
-  { href: 'https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md', label: 'Contribute' },
-  { href: '/search/', label: 'Search' },
-  { href: 'https://github.com/HorneroOS/website/issues', label: 'Report a site issue' },
+  { href: L('/roots#repositories'), label: t(locale, 'footerProjectMap') },
+  { href: L('/docs/development/design-language/'), label: t(locale, 'navDesignLanguage') },
+  { href: 'https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md', label: t(locale, 'footerContribute') },
+  { href: L('/search/'), label: t(locale, 'navSearch') },
+  { href: 'https://github.com/HorneroOS/website/issues', label: t(locale, 'reportSiteIssue') },
 ];
 // Community links. The star count is not fetched at runtime: this site loads no
 // third-party resources, so the star link is a plain link.
@@ -89,7 +96,7 @@ const community = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <BaseHead
       title={title}
@@ -101,10 +108,10 @@ const community = {
   </head>
   <body>
     <a class="skip-link" href="#main">
-      Skip to content
+      {t(locale, 'skipToContent')}
     </a>
     <header class="site-nav">
-      <a href="/" class="brand">
+      <a href={L('/')} class="brand">
         <LogoDark class="brand-mark mark-on-dark" width="32" height="32" aria-hidden="true" focusable="false" />
         <LogoLight class="brand-mark mark-on-light" width="32" height="32" aria-hidden="true" focusable="false" />
         <span class="brand-copy">
@@ -114,7 +121,7 @@ const community = {
           <small>ARG / 199X · La Plata — Buenos Aires</small>
         </span>
       </a>
-      <nav aria-label="Main">
+      <nav aria-label={t(locale, 'mainNavLabel')}>
         <ul>
           {nav.map((item) =>
             item.kind === 'link' ? (
@@ -143,20 +150,20 @@ const community = {
             ),
           )}
           <li>
-            <a href="/install" class="nav-install" aria-current={isCurrent('/install') ? 'page' : undefined}>
-              Get HorneroOS
+            <a href={L('/install')} class="nav-install" aria-current={isCurrent(L('/install')) ? 'page' : undefined}>
+              {t(locale, 'getHorneroOS')}
             </a>
           </li>
         </ul>
       </nav>
       <details class="mobile-menu">
         <summary>
-          <span>Menu</span>
+          <span>{t(locale, 'menu')}</span>
           <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18" fill="none">
             <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
           </svg>
         </summary>
-        <nav aria-label="Mobile main">
+        <nav aria-label={t(locale, 'mobileNavLabel')}>
           <ul>
             {nav.map((item) =>
               item.kind === 'link' ? (
@@ -186,17 +193,17 @@ const community = {
               </a>
             </li>
           </ul>
-          <ul class="mobile-community" aria-label="HorneroOS on GitHub">
-            <li><a href={community.star}>Star on GitHub</a></li>
-            <li><a href={community.org}>HorneroOS organization</a></li>
-            <li><a href={community.bug}>Report a bug</a></li>
-            <li><a href={community.siteIssue}>Report a site issue</a></li>
+          <ul class="mobile-community" aria-label={t(locale, 'githubCommunityLabel')}>
+            <li><a href={community.star}>{t(locale, 'starOnGitHub')}</a></li>
+            <li><a href={community.org}>{t(locale, 'orgOnGitHub')}</a></li>
+            <li><a href={community.bug}>{t(locale, 'reportBug')}</a></li>
+            <li><a href={community.siteIssue}>{t(locale, 'reportSiteIssue')}</a></li>
           </ul>
         </nav>
       </details>
-      <ul class="community" aria-label="HorneroOS on GitHub">
+      <ul class="community" aria-label={t(locale, 'githubCommunityLabel')}>
         <li>
-          <a href={community.org} class="community-org" aria-label="HorneroOS organization on GitHub">
+          <a href={community.org} class="community-org" aria-label={t(locale, 'orgAria')}>
             <svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18" focusable="false">
               <path
                 fill="currentColor"
@@ -206,7 +213,7 @@ const community = {
           </a>
         </li>
         <li>
-          <a href={community.star} class="community-star" aria-label="Star HorneroOS on GitHub">
+          <a href={community.star} class="community-star" aria-label={t(locale, 'starAria')}>
             <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" focusable="false">
               <path
                 fill="currentColor"
@@ -217,8 +224,22 @@ const community = {
           </a>
         </li>
       </ul>
+      <nav class="lang-switch" aria-label={t(locale, 'language')}>
+        <a href={esHref} hreflang="es" aria-current={locale === 'es' ? 'true' : undefined} data-lang="es" class={locale === 'es' ? 'lang-current' : undefined}>
+          <svg aria-hidden="true" viewBox="0 0 24 16" width="20" height="14" focusable="false" class="flag-ar">
+            <rect width="24" height="16" fill="#f7f7f7" />
+            <rect width="24" height="5.34" fill="#74acdf" />
+            <rect y="10.66" width="24" height="5.34" fill="#74acdf" />
+            <circle cx="12" cy="8" r="1.7" fill="#f6b40e" stroke="#d48806" stroke-width="0.4" />
+          </svg>
+          <span>ES</span>
+        </a>
+        <a href={enHref} hreflang="en" aria-current={locale === 'en' ? 'true' : undefined} data-lang="en" class={locale === 'en' ? 'lang-current' : undefined}>
+          <span>EN</span>
+        </a>
+      </nav>
       <fieldset class="color-switch" data-color-switch>
-        <legend>Color mode</legend>
+        <legend>{t(locale, 'colorMode')}</legend>
         <label>
           <input type="radio" name="color-theme" value="system" />
           <span>
@@ -226,7 +247,7 @@ const community = {
               <rect x="1.5" y="2" width="13" height="9" rx="1.5" />
               <path d="M5.5 14h5M8 11v3M8 3v7" />
             </svg>
-            <b class="mode-name">System</b>
+            <b class="mode-name">{t(locale, 'colorSystem')}</b>
           </span>
         </label>
         <label>
@@ -236,7 +257,7 @@ const community = {
               <circle cx="8" cy="8" r="3" />
               <path d="M8 1v1.5M8 13.5V15M1 8h1.5m11 0H15M3.05 3.05l1.06 1.06m7.78 7.78 1.06 1.06m0-9.9-1.06 1.06m-7.78 7.78-1.06 1.06" />
             </svg>
-            <b class="mode-name">Light</b>
+            <b class="mode-name">{t(locale, 'colorLight')}</b>
           </span>
         </label>
         <label>
@@ -246,7 +267,7 @@ const community = {
               <path d="M12.8 10.3A5.7 5.7 0 0 1 5.7 3.2a5.8 5.8 0 1 0 7.1 7.1Z" />
               <path d="m11.8 2 .35 1.05L13.2 3.4l-1.05.35L11.8 4.8l-.35-1.05L10.4 3.4l1.05-.35L11.8 2Z" />
             </svg>
-            <b class="mode-name">Dark</b>
+            <b class="mode-name">{t(locale, 'colorDark')}</b>
           </span>
         </label>
       </fieldset>
@@ -256,35 +277,35 @@ const community = {
     </main>
     <footer class="site-footer">
       <section class="involved" aria-labelledby="involved-title">
-        <h2 id="involved-title">Get involved</h2>
+        <h2 id="involved-title">{t(locale, 'getInvolved')}</h2>
         <ul>
           <li>
             <a href={community.star}>
-              <strong>Star HorneroOS</strong>
-              <span>Follow the desktop repository. Stars show the project to other people looking for it.</span>
+              <strong>{t(locale, 'starTitle')}</strong>
+              <span>{t(locale, 'starText')}</span>
             </a>
           </li>
           <li>
             <a href={community.org}>
-              <strong>Browse the organization</strong>
-              <span>Shell, configuration, installer, plugins, docs, QA and this website.</span>
+              <strong>{t(locale, 'browseOrgTitle')}</strong>
+              <span>{t(locale, 'browseOrgText')}</span>
             </a>
           </li>
           <li>
             <a href={community.bug}>
-              <strong>Report a bug</strong>
-              <span>Name the ISO (preview22), your firmware (UEFI or BIOS) and the step where it failed.</span>
+              <strong>{t(locale, 'reportBugTitle')}</strong>
+              <span>{t(locale, 'reportBugText')}</span>
             </a>
           </li>
           <li>
             <a href={community.siteIssue}>
-              <strong>Report a site issue</strong>
-              <span>Something wrong on this website: a broken link, a wrong date, a layout problem.</span>
+              <strong>{t(locale, 'reportSiteTitle')}</strong>
+              <span>{t(locale, 'reportSiteText')}</span>
             </a>
           </li>
         </ul>
       </section>
-      <nav aria-label="Project">
+      <nav aria-label={t(locale, 'projectNavLabel')}>
         <ul>
           {repos.map((r) => (
             <li>
@@ -294,15 +315,24 @@ const community = {
         </ul>
       </nav>
       <p class="fine">
-        The desktop behind HorneroOS has been in daily use since 2018, by the maintainer’s account
-        (<a href="/roots#timeline">history</a>), and its configuration has been public since 2019
-        ({firstPublicCommit ? <a href={firstPublicCommit}>first commit</a> : 'first commit'}). Hornero 199X is an art
-        direction: a future imagined in Argentina in the 1990s, drawn with today’s open-source tools. It is not a historical product. This site sets no cookies, runs no analytics and loads no
-        third-party resources. Your color choice stays in this browser. Every screenshot is labelled with its source.
+        {t(locale, 'footerFineA')}
+        <a href={L('/roots#timeline')}>{t(locale, 'footerHistory')}</a>
+        {t(locale, 'footerFineB')}
+        {firstPublicCommit ? <a href={firstPublicCommit}>{t(locale, 'footerFirstCommit')}</a> : t(locale, 'footerFirstCommit')}
+        {t(locale, 'footerFineC')}
       </p>
     </footer>
     <script is:inline>
       (() => {
+        document.querySelectorAll('[data-lang]').forEach((link) => {
+          link.addEventListener('click', () => {
+            try {
+              localStorage.setItem('hornero-lang', link.dataset.lang);
+            } catch {
+              // The URL alone still carries the language.
+            }
+          });
+        });
         const menus = [...document.querySelectorAll('.nav-menu, .mobile-menu')];
         const closeAll = (except) => menus.forEach((menu) => {
           if (menu !== except && menu.open) menu.open = false;

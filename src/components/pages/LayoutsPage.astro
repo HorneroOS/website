@@ -1,0 +1,352 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { localizePath, type Locale } from '../../i18n/ui';
+import LayoutDiagram from '../../components/LayoutDiagram.astro';
+import ArchFrame from '../../components/ArchFrame.astro';
+import { layouts } from '../../data/product';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+import horneroLeftShot from '../../../assets/screenshots/certified/hornero-left.png';
+import cockpitShot from '../../../assets/screenshots/certified/cockpit-clear.png';
+import horizonShot from '../../../assets/screenshots/certified/horizon.png';
+import islandsShot from '../../../assets/screenshots/certified/islands.png';
+import dockShot from '../../../assets/screenshots/certified/dock-bottom.png';
+
+const styleNames: Record<string, string> = isEs
+  ? { attached: 'barra al borde', floating: 'barra flotante', dock: 'dock', islands: 'islas', inset: 'barra encajada' }
+  : { attached: 'edge bar', floating: 'floating bar', dock: 'dock', islands: 'islands', inset: 'inset bar' };
+const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
+  [g.start, g.center, g.end]
+    .filter((x) => x.length)
+    .map((x) => x.join(', '))
+    .join(' · ');
+const selectedEn = [
+  {
+    id: 'hornero-left',
+    shot: horneroLeftShot,
+    text: 'A side rail with the main controls close by and the workspace left open.',
+  },
+  {
+    id: 'cockpit-clear',
+    shot: cockpitShot,
+    text: 'A full-width line with no backdrop, so the wallpaper shows through.',
+  },
+  {
+    id: 'horizon',
+    shot: horizonShot,
+    text: 'A top bar with status, context and a centered clock.',
+  },
+  {
+    id: 'islands',
+    shot: islandsShot,
+    text: 'Separate floating islands group the controls.',
+  },
+  {
+    id: 'dock-bottom',
+    shot: dockShot,
+    text: 'A dock along the bottom edge.',
+  },
+];
+const selectedEs = [
+  { id: 'hornero-left', shot: horneroLeftShot, text: 'Un riel lateral con los controles principales a mano y el área de trabajo libre.' },
+  { id: 'cockpit-clear', shot: cockpitShot, text: 'Una línea de borde a borde sin fondo, para que se vea el fondo de pantalla.' },
+  { id: 'horizon', shot: horizonShot, text: 'Una barra superior con estado, contexto y un reloj centrado.' },
+  { id: 'islands', shot: islandsShot, text: 'Islas flotantes separadas que agrupan los controles.' },
+  { id: 'dock-bottom', shot: dockShot, text: 'Un dock sobre el borde inferior.' },
+];
+const selected = isEs ? selectedEs : selectedEn;
+const proof = {
+  source: 'Hornero QA',
+  context: isEs ? 'Aceptación de layouts · revisión visual' : 'Layout acceptance · visual review',
+  pins: { shell: '98a5de2', config: '96b6870', horneroctl: '9c15172' },
+  resolution: '1280×800',
+  theme: 'Hornero Dark',
+  date: '2026-10-03',
+};
+---
+
+<SiteLayout
+  title={isEs ? 'Layouts | HorneroOS' : 'Layouts | HorneroOS'}
+  description={isEs ? `${layouts.length} layouts de la shell de Hornero, cada uno en una captura real: rieles laterales, barras de a dos, barras transparentes, islas y docks.` : `${layouts.length} Hornero shell layouts, each shown in a real capture: side rails, paired bars, clear bars, islands and docks.`}
+>
+  <section class="intro section">
+    <p class="plate-id"><strong>Catálogo de formas</strong><span>ARG / 199X</span><span>{layouts.length} layouts · {isEs ? 'capturas reales' : 'real captures'}</span></p>
+    <h1>Layouts</h1>
+    <p>
+      {isEs ? 'Poné la shell sobre un borde, en un par de barras, como islas flotantes o abajo de todo en la pantalla. El lanzador, las notificaciones y los ajustes son los mismos en todos.' : 'Put the shell along an edge, in a pair of bars, as floating islands or at the bottom of the screen. The launcher, notifications and settings are shared by all of them.'}
+    </p>
+    <div class="intro-actions">
+      <a class="cta primary" href={L('/showroom')}>
+        {isEs ? 'Mirá cómo anda' : 'See it running'}
+      </a>
+      <span>
+        {isEs ? 'Cambiá desde el selector de layouts con ' : 'Switch from the Layout Picker with '}<kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+      </span>
+    </div>
+  </section>
+
+  <section class="section gallery" aria-label={isEs ? 'Layouts destacados en el escritorio en uso' : 'Selected layouts in the running desktop'}>
+    {selected.map((entry, index) => {
+      const layout = layouts.find((item) => item.id === entry.id);
+      return (
+        <article class:list={['layout-showcase', `showcase-${index + 1}`]} id={entry.id}>
+          <ArchFrame
+            src={entry.shot}
+            alt={isEs ? `${layout?.name ?? entry.id} andando en un escritorio Hornero real, capturado durante la aceptación de layouts.` : `${layout?.name ?? entry.id} running in a real Hornero desktop, captured during layout acceptance.`}
+            eager={index < 2}
+            sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)"
+            widths={[480, 720, 1080, 1280]}
+            provenance={proof}
+          />
+          <div class="showcase-copy">
+            <h2>{layout?.name}</h2>
+            <p>{entry.text}</p>
+            <a href={`#catalog-${entry.id}`} class="text-link">
+              {isEs ? 'Detalles del layout' : 'Layout details'}
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </section>
+
+  <section class="section catalog" id="all-layouts">
+    <div class="catalog-heading">
+      <div>
+        <h2>{isEs ? `Los ${layouts.length} layouts` : `All ${layouts.length} layouts`}</h2>
+      </div>
+      <p>
+        {isEs ? 'Todos los layouts salen de la misma shell. Los mapitas muestran dónde van las barras; cada layout tiene su topología y el nombre de preset que podés usar en scripts.' : 'Every layout comes from the same shell. The small maps show bar placement; each layout page has its topology and scriptable preset name.'}
+      </p>
+    </div>
+    <ul class="layout-grid" role="list">
+      {layouts.map((layout) => (
+        <li class="layout-card" id={`catalog-${layout.id}`}>
+          <LayoutDiagram bars={layout.bars} name={layout.name} />
+          <div class="layout-title">
+            <h3>{layout.name}</h3>
+            <span>
+              {layout.bars.length} {layout.bars.length === 1 ? (isEs ? 'superficie' : 'surface') : (isEs ? 'superficies' : 'surfaces')}
+            </span>
+          </div>
+          <p>{layout.description}</p>
+          <details>
+            <summary>{isEs ? 'Ver cómo se ordena' : 'See arrangement'}</summary>
+            <dl class="bars">
+              {layout.bars.map((bar) => (
+                <>
+                  <dt>
+                    {bar.edge} · {styleNames[bar.style] ?? bar.style}
+                    {bar.clear && (isEs ? ' · transparente' : ' · transparent')}
+                  </dt>
+                  <dd>{groupLine(bar.groups) || (isEs ? 'Sin módulos' : 'No modules')}</dd>
+                </>
+              ))}
+            </dl>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro {
+    padding-block: clamp(1rem, 4vw, 4rem) 2rem;
+  }
+  .intro h1 {
+    margin-top: 0.65rem;
+    font-size: clamp(3rem, 2rem + 5vw, 6.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .intro > p:not(.eyebrow) {
+    max-width: 57ch;
+    margin-top: 1.1rem;
+    font-size: var(--step-1);
+    color: var(--text-muted);
+  }
+  .intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.4rem;
+  }
+  .intro-actions > span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  kbd {
+    padding: 0.05em 0.4em;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+  }
+  .gallery {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  .layout-showcase {
+    display: grid;
+    align-items: center;
+    gap: 1.3rem;
+  }
+  .layout-showcase :global(.frame) {
+    width: 100%;
+    min-width: 0;
+  }
+  .layout-showcase :global(.frame-shot) :global(img) {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+  .showcase-copy {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 0.55rem;
+  }
+  .showcase-copy h2 {
+    font-size: var(--step-2);
+  }
+  .showcase-copy > p:not(.eyebrow) {
+    max-width: 37ch;
+    color: var(--text-muted);
+  }
+  .text-link {
+    margin-top: 0.5rem;
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .text-link:hover {
+    color: var(--accent);
+  }
+  .catalog {
+    padding-top: clamp(2rem, 4vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+  .catalog-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .catalog-heading h2 {
+    margin-top: 0.35rem;
+  }
+  .catalog-heading > p {
+    max-width: 48ch;
+    color: var(--text-muted);
+  }
+  .layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1rem;
+    list-style: none;
+  }
+  .layout-card {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    scroll-margin-top: 7rem;
+  }
+  .layout-card:target {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .layout-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .layout-title h3 {
+    font-size: 1.15rem;
+  }
+  .layout-title span {
+    color: var(--text-muted);
+    font: 0.67rem var(--font-data);
+    white-space: nowrap;
+  }
+  .layout-card > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .layout-card details {
+    border-top: 1px solid var(--line);
+    padding-top: 0.55rem;
+    color: var(--text-muted);
+    font-size: 0.83rem;
+  }
+  .layout-card summary {
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .layout-card summary::marker {
+    color: var(--secondary);
+  }
+  .bars {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 0.7rem;
+  }
+  .bars dt {
+    margin-top: 0.35rem;
+    color: var(--secondary);
+    font: 0.69rem var(--font-data);
+    text-transform: uppercase;
+  }
+  .bars dd {
+    overflow-wrap: anywhere;
+  }
+  @media (min-width: 900px) {
+    .layout-showcase {
+      grid-template-columns: minmax(0, 1.35fr) minmax(230px, 0.65fr);
+    }
+    .layout-showcase:nth-child(even) {
+      grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1.35fr);
+    }
+    .layout-showcase:nth-child(even) :global(.frame) {
+      grid-column: 2;
+    }
+    .layout-showcase:nth-child(even) .showcase-copy {
+      grid-column: 1;
+      grid-row: 1;
+      padding-left: clamp(0rem, 3vw, 3rem);
+    }
+  }
+  @media (max-width: 640px) {
+    .catalog-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .intro-actions {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<style>
+  /* 199X per-page direction: layouts as mechanical shape specimens. */
+  .layout-card { border-radius: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--highlight) 14%, transparent); }
+  .layout-title { font-family: var(--font-display); }
+  .catalog-heading { border-bottom: 3px solid var(--accent); padding-bottom: 0.6rem; }
+</style>
