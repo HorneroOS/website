@@ -68,8 +68,10 @@ const stats = [
 
     <p class="availability" role="note">
       <strong>Studio is available now as a Preview.</strong> It installs from the same signed Preview ISO as
-      Desktop, with installer-time specialization selection, and passed its disposable-VM install matrix
-      (UEFI/BIOS, encrypted/unencrypted) with <code>horneroctl studio doctor</code> green. See{' '}
+      Desktop, with installer-time specialization selection, and its install matrix (UEFI/BIOS, encrypted and
+      unencrypted) was executed in disposable virtual machines with <code>horneroctl studio doctor</code> green.
+      That is VM evidence only: first-login and package-parity records remain partial in the installer's R11
+      record. See{' '}
       <a href="/install">Install</a> to download it. Physical-hardware validation (audio interfaces, MIDI, GPU
       encode) is still pending, so Studio is Preview, not Supported.
     </p>

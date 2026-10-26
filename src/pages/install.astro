@@ -138,7 +138,7 @@ const statusName = {
       the disk is encrypted, and the step where it failed.
     </p>
     <p>
-      <a href="https://github.com/HorneroOS/hornero/issues/new/choose">Report an install problem</a> ·{' '}
+      <a href="https://github.com/HorneroOS/installer/issues/new/choose">Report an install problem</a> ·{' '}
       <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview22">Release notes and checksums</a>
     </p>
   </section>
@@ -150,8 +150,11 @@ const statusName = {
       bridge for testing compositions and install flows. <a href="https://github.com/PandaFoss">Panda Foss</a> is
       developing the custom HorneroOS installer that is meant to become the official path, and will own it. The
       Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes
-      acceptance. It uses the edition and compositor contract instead of defining its own package model. Its ISO and
-      install flow passed UEFI and BIOS acceptance in disposable virtual machines for the Preview ISO above.
+      acceptance. It uses the edition and compositor contract instead of defining its own package model. For the
+      Preview ISO above, the Desktop and Studio install matrix (UEFI/BIOS, encrypted and unencrypted) was executed
+      in disposable virtual machines. That is VM evidence, not full acceptance: the installer's own R11 record
+      still lists UEFI first login as pending and package parity as unverified, and nothing here is validated on
+      physical hardware.
     </p>
     <p>
       Contributors can follow the <a href="/docs/development/design-language/">HorneroOS design language</a>, which
