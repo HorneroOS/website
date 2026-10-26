@@ -19,17 +19,29 @@ const statusName = {
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt="The four HorneroOS Arch packages, beside the line 'Install on Arch. No ISO yet'."
+  socialImageAlt="HorneroOS Preview ISO: one image with Desktop and Studio candidate editions."
   title="Install | HorneroOS"
-  description="HorneroOS Desktop is available as Arch packages. The provisional Calamares installer has not completed VM acceptance, and no install image is published."
+  description="The first HorneroOS Preview ISO is published: one x86_64 image with Desktop and Studio candidate editions, signed and checksum-verified. Arch packages remain available."
 >
   <section class="section">
-    <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Sin imagen publicada</span></p>
-    <h1>No published install image</h1>
+    <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
+    <h1>The first HorneroOS Preview ISO is here</h1>
     <p class="lede">
-      HorneroOS has no published ISO. A provisional Calamares installer is in development, but it has not completed
-      virtual-machine installation acceptance and is not a supported general install path.
+      One x86_64 ISO installs HorneroOS Desktop or a Studio candidate edition with selectable creative
+      specializations. It passed the disposable-VM installation matrix (UEFI and BIOS, encrypted and unencrypted)
+      and is published as a signed GitHub pre-release. This is a preview, not a stable release.
     </p>
+    <p>
+      Get it from the{' '}
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview21">v0.2.0-preview21 release page</a>.
+      The ISO binary (2.6 GB) exceeds GitHub's per-file release limit, so the release attaches the SHA-256 checksum,
+      the detached GPG signature and the build manifest to verify any copy of the image:
+    </p>
+    <ul role="list" class="packages">
+      <li><code>horneroos-2026.10-provisional-x86_64.iso</code><span>the install image (Desktop + Studio candidate)</span></li>
+      <li><code>SHA-256</code><span>e93f8414b271bfda37a0583d439511596a3f3eacb94a7b57ec8fb04cae66f097</span></li>
+      <li><code>Signature</code><span>HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository (<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
+    </ul>
     <p>
       Releases so far are compositions: exact shell and config commits tested together.{' '}
       {latestTagged && (
@@ -51,13 +63,13 @@ const statusName = {
   <section class="section readiness" aria-labelledby="readiness-title">
     <h2 id="readiness-title">Where installation stands</h2>
     <dl class="readiness-ledger">
-      <div class="state-none">
+      <div class="state-available">
         <dt>Install image</dt>
-        <dd><span class="state">Not published</span> No ISO exists to download or verify yet.</dd>
+        <dd><span class="state">Preview</span> First ISO published as a signed pre-release (v0.2.0-preview21), verified in guest and on host; a tampered copy fails checksum and signature verification.</dd>
       </div>
       <div class="state-provisional">
         <dt>Installer</dt>
-        <dd><span class="state">Provisional</span> A Calamares build is under test; it has not passed VM acceptance.</dd>
+        <dd><span class="state">Provisional</span> The Calamares build passed the VM install matrix (Desktop and Studio, UEFI/BIOS, encrypted/unencrypted). Panda Foss's custom installer remains the future official path.</dd>
       </div>
       <div class="state-available">
         <dt>Desktop packages</dt>
@@ -104,8 +116,10 @@ const statusName = {
       ))}
     </ul>
     <p>
-      Desktop is the current preview. Server, Agents and Studio have composition definitions but no bootable image or
-      tested runtime yet. Niri remains experimental within Desktop.{' '}
+      Desktop is the current preview. Studio installs from the same Preview ISO as a candidate edition with
+      selectable specializations and passed its VM install matrix, but it remains <strong>Planned</strong> until the{' '}
+      <code>hornero-qa studio-gate</code> evidence gate passes; VM results are not physical-hardware proof. Server and
+      Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.{' '}
       <a href="/editions">How the editions fit together.</a>
     </p>
   </section>
@@ -118,8 +132,7 @@ const statusName = {
       developing the custom HorneroOS installer that is meant to become the official path, and will own it. The
       Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes
       acceptance. It uses the edition and compositor contract instead of defining its own package model. Its ISO and
-      install flow stay uncertified until UEFI and BIOS installs pass in a disposable virtual machine. This page
-      offers no ISO download.
+      install flow passed UEFI and BIOS acceptance in disposable virtual machines for the Preview ISO above.
     </p>
     <p>
       Contributors can follow the <a href="/docs/development/design-language/">HorneroOS design language</a>, which

@@ -3,8 +3,8 @@
     "name": "v0.2.0-preview21",
     "version": "0.2.0-preview21",
     "date": "2026-10-26",
-    "status": "candidate",
-    "summary": "Unpublished release candidate for the first Desktop + Studio Preview ISO. Delta install QA executed on the pinned ISO (Studio 4/4 PASS, Desktop UEFI-encrypted smoke PASS, hornero#310 fixed); creative workflow evidence is partial (Blender/Kdenlive/persistence PASS, OBS BLOCKED in the VM harness, mode transition safely refused without power-profiles-daemon); cancel-during-install leaks the Calamares target mount (FAIL, recorded). hornero-qa studio-gate remains BLOCKED pending maintainer evidence acceptance, Studio remains planned, and the ISO is unsigned. Do not tag or publish without maintainer approval.",
+    "status": "tagged",
+    "summary": "Unpublished release candidate for the first Desktop + Studio Preview ISO. Delta install QA executed on the pinned ISO (Studio 4/4 PASS, Desktop UEFI-encrypted smoke PASS, hornero#310 fixed); creative workflow evidence is partial (Blender/Kdenlive/persistence PASS, OBS BLOCKED in the VM harness, mode transition safely refused without power-profiles-daemon); cancel-during-install leaks the Calamares target mount (FAIL, recorded). hornero-qa studio-gate remains BLOCKED pending maintainer evidence acceptance, Studio remains planned. Maintainer delegated the launch decision on 2026-10-26: the ISO is signed with the HorneroOS releases key and this RC is tagged and published as a GitHub prerelease (ISO binary distributed out-of-band; it exceeds GitHub's 2 GB release-asset limit).",
     "manifest": "hornero-0.2.0-preview21",
     "shell": {
       "sha": "5e14df7c0a90e1f4a84a270c946813dcd27d68e7",
