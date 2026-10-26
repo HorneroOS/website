@@ -32,7 +32,7 @@ const copy = {
     headline: 'Creative workstation',
     body: 'Desktop plus applications for audio, video and visual work, with hardware-aware workflows.',
     href: '/studio',
-    link: 'About Studio (planned)',
+    link: 'About Studio (preview)',
   },
 } as const;
 const familyOrder = ['desktop', 'server', 'agents', 'studio'];
@@ -58,7 +58,7 @@ const roleLabel = {
 
 <SiteLayout
   socialImage="/og/editions.png"
-  socialImageAlt="The Hornero Left layout in Hornero Dark from a QA run, beside the line 'Desktop now, three profiles planned'."
+  socialImageAlt="The Hornero Left layout in Hornero Dark from a QA run, beside the line 'Desktop and Studio in preview, two profiles planned'."
   title="Editions | HorneroOS"
   description="HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Only Desktop has packages; the catalogue states each profile’s maturity."
 >
@@ -70,9 +70,9 @@ const roleLabel = {
       profiles of that one system, not separate distributions.
     </p>
     <p class="availability">
-      Maturity differs by profile. The first Preview ISO is published: it installs Desktop or a Studio candidate
-      edition and passed virtual-machine acceptance (UEFI/BIOS, encrypted/unencrypted). Studio itself remains
-      Planned until its evidence gate passes.{' '}
+      Maturity differs by profile. The first Preview ISO is published: it installs Desktop or the Studio
+      Preview edition and passed virtual-machine acceptance (UEFI/BIOS, encrypted/unencrypted). Studio is
+      Preview, not Supported, until its hardware evidence gate passes.{' '}
       <a href="/install">See what can be installed today.</a>
     </p>
   </section>

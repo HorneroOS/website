@@ -31,17 +31,17 @@ const stats = [
 
 <SiteLayout
   title="Studio | HorneroOS"
-  description="HorneroOS Studio is a planned edition for creative work: audio, video, streaming, design, photo and 3D, built on the Desktop. No installable Studio image exists yet."
+  description="HorneroOS Studio is a Preview edition for creative work: audio, video, streaming, design, photo and 3D. It installs from the HorneroOS Preview ISO with selectable specializations."
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: planificada</span>
+      <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: Preview</span>
     </p>
     <h1>Studio</h1>
     <p class="lede">
-      HorneroOS Studio is a planned creative edition built on the Desktop. You pick specializations (audio, video,
-      streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for
-      them.
+      HorneroOS Studio is a Preview creative edition built on the Desktop, and it installs today from the
+      HorneroOS Preview ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the
+      system sets up the applications, audio policy and workspace for them.
     </p>
 
     <div class="lineup" aria-label="Flagship Studio applications">
@@ -67,9 +67,11 @@ const stats = [
     </dl>
 
     <p class="availability" role="note">
-      <strong>Studio is planned and not yet installable.</strong> There is no Studio ISO and no installer flow for it
-      today. The composition model, the <code>horneroctl studio</code> controls and the Control Center surfaces exist in
-      the repositories and are linked below; an installable image and hardware validation are still pending.
+      <strong>Studio is available now as a Preview.</strong> It installs from the same signed Preview ISO as
+      Desktop, with installer-time specialization selection, and passed its disposable-VM install matrix
+      (UEFI/BIOS, encrypted/unencrypted) with <code>horneroctl studio doctor</code> green. See{' '}
+      <a href="/install">Install</a> to download it. Physical-hardware validation (audio interfaces, MIDI, GPU
+      encode) is still pending, so Studio is Preview, not Supported.
     </p>
   </section>
 
@@ -194,10 +196,8 @@ const stats = [
       <article>
         <h3>Not available yet</h3>
         <ul>
-          <li>An installable Studio image or ISO — there is none.</li>
-          <li>Installer-time workload selection (owner-reviewed installer work).</li>
-          <li>Hardware validation: audio interfaces, MIDI, GPU encode and displays await QA fixtures.</li>
-          <li>Any support claim: Studio stays Planned until install and QA gates pass.</li>
+          <li>Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.</li>
+          <li>Any support claim: Studio is Preview, not Supported, until hardware evidence passes the QA gate.</li>
         </ul>
         <p>
           <a href="https://github.com/HorneroOS/hornero/issues/283">Follow the Studio readiness roadmap</a>
