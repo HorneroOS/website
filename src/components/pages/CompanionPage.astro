@@ -1,0 +1,238 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { pins, short } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+// Real companion frames from HorneroOS/shell assets/companion at the shell
+// pin (checked out by the build); labels come from its manifest.json.
+const frames = import.meta.glob<ImageMetadata>('../../../.cache/product-src/shell/assets/companion/frames/*.png', {
+  eager: true,
+  import: 'default',
+});
+const frame = (name: string) => {
+  const hit = Object.entries(frames).find(([path]) => path.endsWith(`/${name}.png`));
+  if (!hit) throw new Error(`companion frame ${name} missing at the shell pin`);
+  return hit[1];
+};
+const manifest = Object.values(
+  import.meta.glob<{ skins: Record<string, { label: string }> }>(
+    '../../../.cache/product-src/shell/assets/companion/manifest.json',
+    { eager: true, import: 'default' },
+  ),
+)[0];
+if (!manifest) throw new Error('companion manifest missing at the shell pin');
+
+const poses = isEs
+  ? [
+      { id: 'idle', text: 'Descansando: alas plegadas, un balanceo lento.' },
+      { id: 'walk', text: 'Saludando: un ala levantada, el pico abierto.' },
+      { id: 'fly', text: 'Volando hacia vos cuando lo llamás o lo movés.' },
+    ]
+  : [
+      { id: 'idle', text: 'Resting: wings folded, a slow bob.' },
+      { id: 'walk', text: 'Greeting: a wing raised, beak open.' },
+      { id: 'fly', text: 'Flying in when summoned or moved.' },
+    ];
+const skinOrder = ['default', 'argentina', 'blue-gold', 'red', 'gaucho'].filter((s) => manifest.skins[s]);
+const shell = pins.shell;
+const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
+---
+
+<SiteLayout
+  title={isEs ? 'Companion | HorneroOS' : 'Companion | HorneroOS'}
+  description={isEs ? 'El Companion es un hornero chiquito que vive en el escritorio de HorneroOS. Descansa, te saluda y vuela hacia vos cuando lo llamás.' : 'The Companion is a small hornero that lives on the HorneroOS desktop. It rests, greets you and flies in when called.'}
+>
+  <section class="section">
+    <p class="plate-id"><strong>Compañero Hornero</strong><span>ARG / 199X</span><span>Parte del shell</span></p>
+    <h1>Companion</h1>
+    <p class="lede">
+      {isEs ? 'Un hornero chiquito que vive en tu escritorio. Descansa, te saluda y vuela hacia vos cuando lo llamás. No te saca el foco ni los clics de las ventanas que estás usando.' : 'A small hornero that lives on your desktop. It rests, greets you and flies in when you call it. It does not take focus or clicks away from the windows you are using.'}
+    </p>
+    <ul class="poses" role="list">
+      {poses.map((p) => (
+        <li>
+          <Image
+            src={frame(`default-${p.id}`)}
+            alt={isEs ? `El companion hornero, pose ${p.id}` : `The hornero companion, ${p.id} pose`}
+            height={200}
+            densities={[1, 2]}
+          />
+          <p>
+            <strong>{p.id}</strong> {p.text}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Comportamiento' : 'Behavior'}</h2>
+    <ul>
+      <li>{isEs ? 'Se duerme después de diez minutos de quietud; cualquier interacción lo despierta.' : 'It sleeps after ten minutes of quiet; any interaction wakes it.'}</li>
+      <li>{isEs ? 'Arrastralo a cualquier lado. Recuerda el lugar en cada monitor.' : 'Drag it anywhere. It remembers the spot on each monitor.'}</li>
+      <li>
+        {isEs ? 'Se oculta solo en la pantalla de bloqueo, sobre ventanas a pantalla completa, en modo juego y mientras Ajustes está abierto, y vuelve después.' : 'It hides by itself on the lock screen, over fullscreen windows, in game mode and while Settings is open, and comes back afterwards.'}
+      </li>
+      <li>{isEs ? 'Vive en su propia capa sin foco de teclado, así que no saca clics ni escritura de otras ventanas.' : 'It sits on its own layer without keyboard focus, so it does not take clicks or typing from other windows.'}</li>
+      <li>{isEs ? 'Con el movimiento reducido activado, sus saltos y vuelos se convierten en cortes simples.' : 'With reduced motion turned on, its hops and flights become simple cuts.'}</li>
+      <li>{isEs ? 'Cuando lo apagás, se descargan todos sus temporizadores y superficies.' : 'When switched off, every timer and surface is unloaded.'}</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Personajes' : 'Characters'}</h2>
+    <ul class="skins" role="list">
+      {skinOrder.map((s) => (
+        <li>
+          <Image
+            src={frame(`${s}-idle`)}
+            alt={isEs ? `El companion ${manifest.skins[s].label}` : `The ${manifest.skins[s].label} companion`}
+            height={140}
+            densities={[1, 2]}
+          />
+          <span>{manifest.skins[s].label}</span>
+        </li>
+      ))}
+    </ul>
+    <p>
+      {isEs ? 'Elegí uno en Centro de control › Companion, junto con su tamaño, el borde desde el que se asoma, los consejos y el tema del globo de diálogo. Los mismos controles funcionan desde una terminal:' : 'Pick one in Control Center › Companion, along with its size, the edge it peeks from, tips and the speech-bubble theme. The same controls work from a terminal:'}
+    </p>
+    <pre><code>qs ipc call companion summon
+qs ipc call companion setSkin gaucho
+qs ipc call companion say "Back in five minutes" 5000</code></pre>
+  </section>
+
+  <section class="section optional-band" aria-labelledby="assistant-title">
+    <h2 id="assistant-title">{isEs ? 'Asistente opcional (experimental, desactivado por defecto)' : 'Optional assistant (experimental, off by default)'}</h2>
+    <p>
+      {isEs ? 'El companion es solo presentación. Detrás puede haber un asistente opcional y experimental:' : 'The companion is presentation only. An optional, experimental assistant can sit behind it:'}{' '}
+      <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> by Nous Research, reached through{' '}
+      <code>horneroctl assistant</code>. {isEs ? 'Está' : 'It is'} <strong>{isEs ? 'desactivado por defecto' : 'disabled by default'}</strong> {isEs ? 'y nunca corre como root. El escritorio funciona igual con el asistente apagado o sin instalar.' : 'and never runs as root. The desktop works the same with it off or not installed.'}
+    </p>
+    <p>{isEs ? 'Activalo desde una terminal:' : 'Enable it from a terminal:'}</p>
+    <pre><code>horneroctl assistant enable
+horneroctl assistant status
+horneroctl assistant ask "what updates are available?"</code></pre>
+    <p>
+      {isEs ? 'Preguntá desde el escritorio con' : 'Ask from the desktop with'} <code>qs ipc call companion ask "…"</code>{isEs ? ', o desde el lanzador escribiendo' : ', or from the launcher by typing'}{' '}
+      <code>&gt;ai</code> {isEs ? 'seguido de tu pregunta. Mientras una ejecución está en curso, el companion muestra su estado' : 'followed by your question. While a run is in progress the companion shows its'}
+      <em>{isEs ? 'pensando' : 'thinking'}</em>{isEs ? '. La respuesta, o una línea de error si la ejecución falla, aparece en su globo de diálogo.' : ' state. The answer, or an error line if the run fails, appears in its speech bubble.'}
+    </p>
+    <ul>
+      <li>{isEs ? 'La información del sistema viene de una lista de herramientas de solo lectura permitidas. El asistente no puede correr comandos arbitrarios.' : 'System information comes from a read-only tool allowlist. The assistant cannot run arbitrary commands.'}</li>
+      <li>
+        {isEs ? 'Cuando una ejecución necesita aprobación o una respuesta, el companion muestra el pedido y espera. Respondés con' : 'When a run needs approval or an answer, the companion shows the request and waits. You answer with'}
+        <code>qs ipc call companion approve &lt;run-id&gt; approve|deny</code>{isEs ? '. Nada se aprueba automáticamente.' : '. Nothing is approved automatically.'}
+      </li>
+      <li>{isEs ? 'El gateway escucha solo en loopback, detrás de una clave por usuario que la shell no puede leer.' : 'The gateway listens on loopback only, behind a per-user key the shell cannot read.'}</li>
+    </ul>
+    <p>
+      {isEs ? 'Es una versión temprana. Las respuestas llegan en el globo de diálogo del companion; todavía no hay ventana de conversación, sesiones ni voz.' : 'This is an early version. Answers arrive in the companion’s speech bubble; a conversation window, sessions and voice are not built yet.'}
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Límites' : 'Limits'}</h2>
+    <p>
+      {isEs ? 'El companion no lee lo que escribís y no toma decisiones. Sus estados' : 'The companion does not read what you type and makes no decisions. Its'} <em>{isEs ? 'escuchando' : 'listening'}</em> {isEs ? 'y' : 'and'} <em>{isEs ? 'pensando' : 'thinking'}</em> {isEs ? 'son animaciones accionadas por IPC. El asistente detrás de ellos es opcional, experimental y está apagado hasta que lo activás.' : 'states are animations driven over IPC. The assistant behind them is optional, experimental and off until you enable it.'}
+    </p>
+    <p class="source">
+      {isEs ? 'Frames de' : 'Frames from'}{' '}
+      <a href={assets}>
+        <code>HorneroOS/shell/assets/companion</code>
+      </a>{' '}
+      {isEs ? 'en el commit' : 'at commit'}{' '}
+      <a href={`${shell.repo}/commit/${shell.sha}`}>
+        <code>{short(shell.sha)}</code>
+      </a>
+      {isEs ? ', los assets que dibuja la shell.' : ', the assets the shell draws.'}
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .poses,
+  .skins {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .poses {
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    margin-top: 2rem;
+  }
+
+  .skins {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .poses li,
+  .skins li {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at 50% 70%, var(--surface), transparent 70%);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .poses img {
+    height: 260px;
+    width: auto;
+  }
+
+  .skins img {
+    height: 170px;
+    width: auto;
+  }
+
+  .poses p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .poses strong {
+    display: block;
+    color: var(--text);
+    font-family: var(--font-data);
+    font-stretch: 87.5%;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.8rem;
+  }
+
+  .source {
+    font-size: var(--step--1);
+  }
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  @media (max-width: 600px) {
+    pre {
+      font-size: 0.72rem;
+    }
+  }
+  .optional-band { padding: clamp(1.1rem, 3vw, 2rem); border: 1px dashed var(--secondary); }
+</style>
+
+<style>
+  /* 199X per-page direction: the companion as a character specimen plate. */
+  .poses > *, .skins > * { border-radius: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--secondary) 16%, transparent); }
+  .source { border-top: 3px solid var(--accent); padding-top: 0.6rem; }
+</style>

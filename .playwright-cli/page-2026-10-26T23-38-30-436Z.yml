@@ -1,0 +1,588 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f1e3]:
+    - link "Hornero OS" [ref=f1e4] [cursor=pointer]:
+      - /url: /en/
+    - navigation "Main" [ref=f1e18]:
+      - list [ref=f1e19]:
+        - listitem [ref=f1e20]:
+          - group [ref=f1e21]:
+            - generic "Desktop" [ref=f1e22] [cursor=pointer]:
+              - text: Desktop
+              - generic [aria-hidden] [ref=f1e23]: ⌄
+        - listitem [ref=f1e24]:
+          - link "Editions" [ref=f1e25] [cursor=pointer]:
+            - /url: /en/editions
+        - listitem [ref=f1e26]:
+          - link "Studio" [ref=f1e27] [cursor=pointer]:
+            - /url: /en/studio
+        - listitem [ref=f1e28]:
+          - link "Extensions" [ref=f1e29] [cursor=pointer]:
+            - /url: /en/extensions
+        - listitem [ref=f1e30]:
+          - group [ref=f1e31]:
+            - generic "Story" [ref=f1e32] [cursor=pointer]:
+              - text: Story
+              - generic [aria-hidden] [ref=f1e33]: ⌄
+        - listitem [ref=f1e34]:
+          - link "Docs" [ref=f1e35] [cursor=pointer]:
+            - /url: /en/docs/
+        - listitem [ref=f1e36]:
+          - link "Search" [ref=f1e37] [cursor=pointer]:
+            - /url: /en/search/
+        - listitem [ref=f1e38]:
+          - link "Get HorneroOS" [ref=f1e39] [cursor=pointer]:
+            - /url: /en/install
+    - list "HorneroOS on GitHub" [ref=f1e40]:
+      - listitem [ref=f1e41]:
+        - link "HorneroOS organization on GitHub" [ref=f1e42] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS
+      - listitem [ref=f1e45]:
+        - link "Star HorneroOS on GitHub" [ref=f1e46] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS/hornero
+          - generic [ref=f1e49]: Star
+    - navigation "Language" [ref=f1e50]:
+      - link "ES" [ref=f1e51] [cursor=pointer]:
+        - /url: /studio/
+      - link "EN" [ref=f1e58] [cursor=pointer]:
+        - /url: /en/studio/
+    - group "Color mode" [ref=f1e60]:
+      - generic [ref=f1e62] [cursor=pointer]:
+        - radio "System" [ref=f1e63]
+        - generic [ref=f1e64]: System
+      - generic [ref=f1e69] [cursor=pointer]:
+        - radio "Light" [ref=f1e70]
+        - generic [ref=f1e71]: Light
+      - generic [ref=f1e76] [cursor=pointer]:
+        - radio "Dark" [checked] [ref=f1e77]
+        - generic [ref=f1e78]: Dark
+  - main [ref=f1e83]:
+    - generic [ref=f1e84]:
+      - paragraph [ref=f1e85]:
+        - strong [ref=f1e86]: Ficha técnica · Edición Studio
+        - generic [ref=f1e87]: ARG / 199X
+        - generic [ref=f1e88]: "Estado: Preview"
+      - heading "Studio" [level=1] [ref=f1e89]
+      - paragraph [ref=f1e90]: HorneroOS Studio is a Preview creative edition built on the Desktop, and it installs today from the HorneroOS Preview ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for them.
+      - generic "Flagship Studio applications" [ref=f1e91]:
+        - generic [ref=f1e92]: Ardour
+        - generic [ref=f1e94]: OBS Studio
+        - generic [ref=f1e96]: Blender
+        - generic [ref=f1e98]: Krita
+        - generic [ref=f1e100]: Godot
+      - generic [ref=f1e102]:
+        - generic [ref=f1e103]:
+          - term [ref=f1e104]: specializations in the catalogue
+          - definition [ref=f1e105]: "10"
+        - generic [ref=f1e106]:
+          - term [ref=f1e107]: applications in the catalogue
+          - definition [ref=f1e108]: "19"
+        - generic [ref=f1e109]:
+          - term [ref=f1e110]: audio modes, all reversible
+          - definition [ref=f1e111]: "3"
+      - note [ref=f1e112]:
+        - strong [ref=f1e113]: Studio is available now as a Preview.
+        - text: It installs from the same signed Preview ISO as Desktop, with installer-time specialization selection, and its install matrix (UEFI/BIOS, encrypted and unencrypted) was executed in disposable virtual machines with
+        - code [ref=f1e114]: horneroctl studio doctor
+        - text: "green. That is VM evidence only: first-login and package-parity records remain partial in the installer's R11 record. See"
+        - link "Install" [ref=f1e115] [cursor=pointer]:
+          - /url: /en/install
+        - text: to download it. Physical-hardware validation (audio interfaces, MIDI, GPU encode) is still pending, so Studio is Preview, not Supported.
+    - region [ref=f1e116]:
+      - heading "Specializations" [level=2] [ref=f1e117]
+      - paragraph [ref=f1e118]:
+        - text: Specializations and individual applications are selected from one canonical catalogue, the same model used by the installer design, by
+        - code [ref=f1e119]: horneroctl studio selection
+        - text: and by the Control Center. Selections can change after installation; recording a selection never deletes projects, settings or files.
+      - list [ref=f1e120]:
+        - listitem [ref=f1e121]:
+          - heading "Audio & Music Production" [level=3] [ref=f1e122]
+          - list [ref=f1e123]:
+            - listitem [ref=f1e124]:
+              - generic [ref=f1e125]: Ardour
+            - listitem [ref=f1e126]:
+              - generic [ref=f1e127]: Guitarix
+            - listitem [ref=f1e128]:
+              - generic [ref=f1e129]: Carla
+            - listitem [ref=f1e130]:
+              - generic [ref=f1e131]: Audacity
+            - listitem [ref=f1e132]:
+              - generic [ref=f1e133]: REAPER
+            - listitem [ref=f1e134]:
+              - generic [ref=f1e135]: yabridge (Windows VST bridge)
+        - listitem [ref=f1e136]:
+          - heading "Video Editing & Post-Production" [level=3] [ref=f1e137]
+          - list [ref=f1e138]:
+            - listitem [ref=f1e139]:
+              - generic [ref=f1e140]: Kdenlive
+            - listitem [ref=f1e141]:
+              - generic [ref=f1e142]: Blender
+        - listitem [ref=f1e143]:
+          - heading "Streaming & Content Creation" [level=3] [ref=f1e144]
+          - list [ref=f1e145]:
+            - listitem [ref=f1e146]:
+              - generic [ref=f1e147]: OBS Studio
+        - listitem [ref=f1e148]:
+          - heading "Graphic Design & Illustration" [level=3] [ref=f1e149]
+          - list [ref=f1e150]:
+            - listitem [ref=f1e151]:
+              - generic [ref=f1e152]: Krita
+            - listitem [ref=f1e153]:
+              - generic [ref=f1e154]: GIMP
+            - listitem [ref=f1e155]:
+              - generic [ref=f1e156]: Inkscape
+            - listitem [ref=f1e157]:
+              - generic [ref=f1e158]: Scribus
+            - listitem [ref=f1e159]:
+              - generic [ref=f1e160]: Graphite
+        - listitem [ref=f1e161]:
+          - heading "Photography & RAW Processing" [level=3] [ref=f1e162]
+          - list [ref=f1e163]:
+            - listitem [ref=f1e164]:
+              - generic [ref=f1e165]: darktable
+            - listitem [ref=f1e166]:
+              - generic [ref=f1e167]: RawTherapee
+            - listitem [ref=f1e168]:
+              - generic [ref=f1e169]: GIMP
+        - listitem [ref=f1e170]:
+          - heading "3D, Animation & VFX" [level=3] [ref=f1e171]
+          - list [ref=f1e172]:
+            - listitem [ref=f1e173]:
+              - generic [ref=f1e174]: Blender
+            - listitem [ref=f1e175]:
+              - generic [ref=f1e176]: Krita
+        - listitem [ref=f1e177]:
+          - heading "Game Development" [level=3] [ref=f1e178]
+          - list [ref=f1e179]:
+            - listitem [ref=f1e180]:
+              - generic [ref=f1e181]: Godot
+            - listitem [ref=f1e182]:
+              - generic [ref=f1e183]: Blender
+            - listitem [ref=f1e184]:
+              - generic [ref=f1e185]: Krita
+            - listitem [ref=f1e186]:
+              - generic [ref=f1e187]: Inkscape
+        - listitem [ref=f1e188]:
+          - heading "Maker & CAD" [level=3] [ref=f1e189]
+          - list [ref=f1e190]:
+            - listitem [ref=f1e191]:
+              - generic [ref=f1e192]: FreeCAD
+            - listitem [ref=f1e193]:
+              - generic [ref=f1e194]: Blender
+            - listitem [ref=f1e195]:
+              - generic [ref=f1e196]: Inkscape
+        - listitem [ref=f1e197]:
+          - heading "Complete Creative Workstation" [level=3] [ref=f1e198]
+          - list [ref=f1e199]:
+            - listitem [ref=f1e200]:
+              - generic [ref=f1e201]: Ardour
+            - listitem [ref=f1e202]:
+              - generic [ref=f1e203]: Guitarix
+            - listitem [ref=f1e204]:
+              - generic [ref=f1e205]: Carla
+            - listitem [ref=f1e206]:
+              - generic [ref=f1e207]: Audacity
+            - listitem [ref=f1e208]:
+              - generic [ref=f1e209]: REAPER
+            - listitem [ref=f1e210]:
+              - generic [ref=f1e211]: yabridge (Windows VST bridge)
+            - listitem [ref=f1e212]:
+              - generic [ref=f1e213]: Kdenlive
+            - listitem [ref=f1e214]:
+              - generic [ref=f1e215]: Blender
+            - listitem [ref=f1e216]:
+              - generic [ref=f1e217]: OBS Studio
+            - listitem [ref=f1e218]:
+              - generic [ref=f1e219]: Krita
+            - listitem [ref=f1e220]:
+              - generic [ref=f1e221]: GIMP
+            - listitem [ref=f1e222]:
+              - generic [ref=f1e223]: Inkscape
+            - listitem [ref=f1e224]:
+              - generic [ref=f1e225]: Scribus
+            - listitem [ref=f1e226]:
+              - generic [ref=f1e227]: Graphite
+            - listitem [ref=f1e228]:
+              - generic [ref=f1e229]: darktable
+            - listitem [ref=f1e230]:
+              - generic [ref=f1e231]: RawTherapee
+            - listitem [ref=f1e232]:
+              - generic [ref=f1e233]: Godot
+            - listitem [ref=f1e234]:
+              - generic [ref=f1e235]: FreeCAD
+        - listitem [ref=f1e236]:
+          - heading "Custom Selection" [level=3] [ref=f1e237]
+          - paragraph [ref=f1e238]: Start empty and add individual applications.
+    - region [ref=f1e239]:
+      - heading "Applications, sources and licenses" [level=2] [ref=f1e240]
+      - paragraph [ref=f1e241]: "This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at 429175f); logos are the official upstream icons, shown for identification. Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no package), and experimental entries are marked. yabridge, Graphite and Penpot have no official icon vendored, so they appear name-only."
+      - list [ref=f1e242]:
+        - listitem [ref=f1e243]:
+          - generic [ref=f1e244]:
+            - heading "Ardour" [level=3] [ref=f1e245]
+            - generic [ref=f1e246]: Open source
+          - generic [ref=f1e247]:
+            - generic [ref=f1e248]:
+              - term [ref=f1e249]: Packages
+              - definition [ref=f1e250]: ardour
+            - generic [ref=f1e251]:
+              - term [ref=f1e252]: Source
+              - definition [ref=f1e253]: arch-extra
+            - generic [ref=f1e254]:
+              - term [ref=f1e255]: License
+              - definition [ref=f1e256]: CC0-1.0, GPL-2.0-or-later, GPL-3.0-or-later, MIT
+        - listitem [ref=f1e257]:
+          - generic [ref=f1e258]:
+            - heading "Guitarix" [level=3] [ref=f1e259]
+            - generic [ref=f1e260]: Open source
+          - generic [ref=f1e261]:
+            - generic [ref=f1e262]:
+              - term [ref=f1e263]: Packages
+              - definition [ref=f1e264]: guitarix
+            - generic [ref=f1e265]:
+              - term [ref=f1e266]: Source
+              - definition [ref=f1e267]: arch-extra
+            - generic [ref=f1e268]:
+              - term [ref=f1e269]: License
+              - definition [ref=f1e270]: GPL-2.0-or-later, GPL-3.0-or-later, LGPL-3.0-or-later
+        - listitem [ref=f1e271]:
+          - generic [ref=f1e272]:
+            - heading "Carla" [level=3] [ref=f1e273]
+            - generic [ref=f1e274]: Open source
+          - generic [ref=f1e275]:
+            - generic [ref=f1e276]:
+              - term [ref=f1e277]: Packages
+              - definition [ref=f1e278]: carla
+            - generic [ref=f1e279]:
+              - term [ref=f1e280]: Source
+              - definition [ref=f1e281]: arch-extra
+            - generic [ref=f1e282]:
+              - term [ref=f1e283]: License
+              - definition [ref=f1e284]: GPL-2.0-or-later
+        - listitem [ref=f1e285]:
+          - generic [ref=f1e286]:
+            - heading "Audacity" [level=3] [ref=f1e287]
+            - generic [ref=f1e288]: Open source
+          - generic [ref=f1e289]:
+            - generic [ref=f1e290]:
+              - term [ref=f1e291]: Packages
+              - definition [ref=f1e292]: audacity
+            - generic [ref=f1e293]:
+              - term [ref=f1e294]: Source
+              - definition [ref=f1e295]: arch-extra
+            - generic [ref=f1e296]:
+              - term [ref=f1e297]: License
+              - definition [ref=f1e298]: GPL-3.0-or-later
+        - listitem [ref=f1e299]:
+          - generic [ref=f1e300]:
+            - heading "REAPER" [level=3] [ref=f1e301]
+            - generic [ref=f1e302]: Proprietary · opt-in
+          - generic [ref=f1e303]:
+            - generic [ref=f1e304]:
+              - term [ref=f1e305]: Packages
+              - definition [ref=f1e306]: reaper
+            - generic [ref=f1e307]:
+              - term [ref=f1e308]: Source
+              - definition [ref=f1e309]: arch-extra
+            - generic [ref=f1e310]:
+              - term [ref=f1e311]: License
+              - definition [ref=f1e312]: LicenseRef-EULA
+        - listitem [ref=f1e313]:
+          - generic [ref=f1e314]:
+            - heading "yabridge (Windows VST bridge)" [level=3] [ref=f1e315]
+            - generic [ref=f1e316]: Open source
+          - generic [ref=f1e317]:
+            - generic [ref=f1e318]:
+              - term [ref=f1e319]: Packages
+              - definition [ref=f1e320]: yabridge, yabridgectl
+            - generic [ref=f1e321]:
+              - term [ref=f1e322]: Source
+              - definition [ref=f1e323]: arch-extra
+            - generic [ref=f1e324]:
+              - term [ref=f1e325]: License
+              - definition [ref=f1e326]: GPL-3.0-or-later
+        - listitem [ref=f1e327]:
+          - generic [ref=f1e328]:
+            - heading "OBS Studio" [level=3] [ref=f1e329]
+            - generic [ref=f1e330]: Open source
+          - generic [ref=f1e331]:
+            - generic [ref=f1e332]:
+              - term [ref=f1e333]: Packages
+              - definition [ref=f1e334]: obs-studio, ffmpeg
+            - generic [ref=f1e335]:
+              - term [ref=f1e336]: Source
+              - definition [ref=f1e337]: arch-extra
+            - generic [ref=f1e338]:
+              - term [ref=f1e339]: License
+              - definition [ref=f1e340]: GPL-2.0-only
+        - listitem [ref=f1e341]:
+          - generic [ref=f1e342]:
+            - heading "Kdenlive" [level=3] [ref=f1e343]
+            - generic [ref=f1e344]: Open source
+          - generic [ref=f1e345]:
+            - generic [ref=f1e346]:
+              - term [ref=f1e347]: Packages
+              - definition [ref=f1e348]: kdenlive, ffmpeg
+            - generic [ref=f1e349]:
+              - term [ref=f1e350]: Source
+              - definition [ref=f1e351]: arch-extra
+            - generic [ref=f1e352]:
+              - term [ref=f1e353]: License
+              - definition [ref=f1e354]: GPL-2.0-or-later
+        - listitem [ref=f1e355]:
+          - generic [ref=f1e356]:
+            - heading "Blender" [level=3] [ref=f1e357]
+            - generic [ref=f1e358]: Open source
+          - generic [ref=f1e359]:
+            - generic [ref=f1e360]:
+              - term [ref=f1e361]: Packages
+              - definition [ref=f1e362]: blender
+            - generic [ref=f1e363]:
+              - term [ref=f1e364]: Source
+              - definition [ref=f1e365]: arch-extra
+            - generic [ref=f1e366]:
+              - term [ref=f1e367]: License
+              - definition [ref=f1e368]: Apache-2.0, BSD-2-Clause, BSD-3-Clause, GPL-2.0-or-later, GPL-3.0-or-later, LGPL-2.1-or-later, MIT, MPL-2.0, Zlib
+        - listitem [ref=f1e369]:
+          - generic [ref=f1e370]:
+            - heading "Krita" [level=3] [ref=f1e371]
+            - generic [ref=f1e372]: Open source
+          - generic [ref=f1e373]:
+            - generic [ref=f1e374]:
+              - term [ref=f1e375]: Packages
+              - definition [ref=f1e376]: krita
+            - generic [ref=f1e377]:
+              - term [ref=f1e378]: Source
+              - definition [ref=f1e379]: arch-extra
+            - generic [ref=f1e380]:
+              - term [ref=f1e381]: License
+              - definition [ref=f1e382]: GPL3
+        - listitem [ref=f1e383]:
+          - generic [ref=f1e384]:
+            - heading "GIMP" [level=3] [ref=f1e385]
+            - generic [ref=f1e386]: Open source
+          - generic [ref=f1e387]:
+            - generic [ref=f1e388]:
+              - term [ref=f1e389]: Packages
+              - definition [ref=f1e390]: gimp
+            - generic [ref=f1e391]:
+              - term [ref=f1e392]: Source
+              - definition [ref=f1e393]: arch-extra
+            - generic [ref=f1e394]:
+              - term [ref=f1e395]: License
+              - definition [ref=f1e396]: GPL-3.0-or-later
+        - listitem [ref=f1e397]:
+          - generic [ref=f1e398]:
+            - heading "Inkscape" [level=3] [ref=f1e399]
+            - generic [ref=f1e400]: Open source
+          - generic [ref=f1e401]:
+            - generic [ref=f1e402]:
+              - term [ref=f1e403]: Packages
+              - definition [ref=f1e404]: inkscape
+            - generic [ref=f1e405]:
+              - term [ref=f1e406]: Source
+              - definition [ref=f1e407]: arch-extra
+            - generic [ref=f1e408]:
+              - term [ref=f1e409]: License
+              - definition [ref=f1e410]: GPL, LGPL
+        - listitem [ref=f1e411]:
+          - generic [ref=f1e412]:
+            - heading "darktable" [level=3] [ref=f1e413]
+            - generic [ref=f1e414]: Open source
+          - generic [ref=f1e415]:
+            - generic [ref=f1e416]:
+              - term [ref=f1e417]: Packages
+              - definition [ref=f1e418]: darktable
+            - generic [ref=f1e419]:
+              - term [ref=f1e420]: Source
+              - definition [ref=f1e421]: arch-extra
+            - generic [ref=f1e422]:
+              - term [ref=f1e423]: License
+              - definition [ref=f1e424]: GPL-3.0-or-later
+        - listitem [ref=f1e425]:
+          - generic [ref=f1e426]:
+            - heading "RawTherapee" [level=3] [ref=f1e427]
+            - generic [ref=f1e428]: Open source
+          - generic [ref=f1e429]:
+            - generic [ref=f1e430]:
+              - term [ref=f1e431]: Packages
+              - definition [ref=f1e432]: rawtherapee
+            - generic [ref=f1e433]:
+              - term [ref=f1e434]: Source
+              - definition [ref=f1e435]: arch-extra
+            - generic [ref=f1e436]:
+              - term [ref=f1e437]: License
+              - definition [ref=f1e438]: GPL-3.0-or-later
+        - listitem [ref=f1e439]:
+          - generic [ref=f1e440]:
+            - heading "Graphite" [level=3] [ref=f1e441]
+            - generic [ref=f1e442]: Experimental
+          - generic [ref=f1e443]:
+            - generic [ref=f1e444]:
+              - term [ref=f1e445]: Packages
+              - definition [ref=f1e446]: graphite
+            - generic [ref=f1e447]:
+              - term [ref=f1e448]: Source
+              - definition [ref=f1e449]: arch-extra
+            - generic [ref=f1e450]:
+              - term [ref=f1e451]: License
+              - definition [ref=f1e452]: LGPL-2.1-or-later, MPL-2.0, GPL-2.0-or-later
+        - listitem [ref=f1e453]:
+          - generic [ref=f1e454]:
+            - heading "Penpot" [level=3] [ref=f1e455]
+            - generic [ref=f1e456]: Reference only
+          - generic [ref=f1e457]:
+            - generic [ref=f1e458]:
+              - term [ref=f1e459]: Packages
+              - definition [ref=f1e460]: —
+            - generic [ref=f1e461]:
+              - term [ref=f1e462]: Source
+              - definition [ref=f1e463]: —
+            - generic [ref=f1e464]:
+              - term [ref=f1e465]: License
+              - definition [ref=f1e466]: See package
+          - paragraph [ref=f1e467]: Browser-based design tool; use the hosted service or a self-hosted instance. No Arch package is installed.
+        - listitem [ref=f1e468]:
+          - generic [ref=f1e469]:
+            - heading "Scribus" [level=3] [ref=f1e470]
+            - generic [ref=f1e471]: Open source
+          - generic [ref=f1e472]:
+            - generic [ref=f1e473]:
+              - term [ref=f1e474]: Packages
+              - definition [ref=f1e475]: scribus
+            - generic [ref=f1e476]:
+              - term [ref=f1e477]: Source
+              - definition [ref=f1e478]: arch-extra
+            - generic [ref=f1e479]:
+              - term [ref=f1e480]: License
+              - definition [ref=f1e481]: GPL-2.0-or-later
+        - listitem [ref=f1e482]:
+          - generic [ref=f1e483]:
+            - heading "FreeCAD" [level=3] [ref=f1e484]
+            - generic [ref=f1e485]: Open source
+          - generic [ref=f1e486]:
+            - generic [ref=f1e487]:
+              - term [ref=f1e488]: Packages
+              - definition [ref=f1e489]: freecad
+            - generic [ref=f1e490]:
+              - term [ref=f1e491]: Source
+              - definition [ref=f1e492]: arch-extra
+            - generic [ref=f1e493]:
+              - term [ref=f1e494]: License
+              - definition [ref=f1e495]: LGPL-2.0-only
+        - listitem [ref=f1e496]:
+          - generic [ref=f1e497]:
+            - heading "Godot" [level=3] [ref=f1e498]
+            - generic [ref=f1e499]: Open source
+          - generic [ref=f1e500]:
+            - generic [ref=f1e501]:
+              - term [ref=f1e502]: Packages
+              - definition [ref=f1e503]: godot
+            - generic [ref=f1e504]:
+              - term [ref=f1e505]: Source
+              - definition [ref=f1e506]: arch-extra
+            - generic [ref=f1e507]:
+              - term [ref=f1e508]: License
+              - definition [ref=f1e509]: MIT
+    - region [ref=f1e510]:
+      - heading "Audio and performance modes" [level=2] [ref=f1e511]
+      - paragraph [ref=f1e512]: "Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning or privilege changes."
+      - list [ref=f1e513]:
+        - listitem [ref=f1e514]:
+          - strong [ref=f1e515]: Balanced
+          - generic [ref=f1e516]: Default — device rate and quantum.
+          - generic [ref=f1e517]: Default
+        - listitem [ref=f1e518]:
+          - strong [ref=f1e519]: Low Latency
+          - generic [ref=f1e520]: Explicit opt-in, reversible.
+          - generic [ref=f1e521]: Opt-in
+        - listitem [ref=f1e522]:
+          - strong [ref=f1e523]: Advanced
+          - generic [ref=f1e524]: Explicit opt-in, reversible.
+          - generic [ref=f1e525]: Opt-in
+        - listitem [ref=f1e526]:
+          - strong [ref=f1e527]: Temporary Performance
+          - generic [ref=f1e528]: Explicit opt-in via power-profiles-daemon; the previous profile is restored on demand.
+          - generic [ref=f1e529]: Opt-in
+    - region [ref=f1e530]:
+      - heading "Status" [level=2] [ref=f1e531]
+      - generic [ref=f1e532]:
+        - article [ref=f1e533]:
+          - heading "In the repositories" [level=3] [ref=f1e534]
+          - list [ref=f1e535]:
+            - listitem [ref=f1e536]: Canonical edition catalogue, resolver and application/license matrix.
+            - listitem [ref=f1e537]:
+              - code [ref=f1e538]: horneroctl studio
+              - text: selection, mode, render jobs and doctor contracts, with tests.
+            - listitem [ref=f1e539]: "Control Center Studio pane: workloads, audio, performance and render jobs."
+            - listitem [ref=f1e540]: Config-owned PipeWire, preset and storage policies; QA scenario definitions.
+          - paragraph [ref=f1e541]:
+            - link "Studio documentation" [ref=f1e542] [cursor=pointer]:
+              - /url: /en/docs/applications/studio/
+            - text: ·
+            - link "Audio setup & recovery" [ref=f1e543] [cursor=pointer]:
+              - /url: /en/docs/applications/studio-audio/
+            - text: ·
+            - link "Getting started guide" [ref=f1e544] [cursor=pointer]:
+              - /url: /en/docs/applications/studio-getting-started/
+        - article [ref=f1e545]:
+          - heading "Not available yet" [level=3] [ref=f1e546]
+          - list [ref=f1e547]:
+            - listitem [ref=f1e548]: "Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures."
+            - listitem [ref=f1e549]: "Any support claim: Studio is Preview, not Supported, until hardware evidence passes the QA gate."
+          - paragraph [ref=f1e550]:
+            - link "Follow the Studio readiness roadmap" [ref=f1e551] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/hornero/issues/283
+  - contentinfo [ref=f1e552]:
+    - region [ref=f1e553]:
+      - heading "Get involved" [level=2] [ref=f1e554]
+      - list [ref=f1e555]:
+        - listitem [ref=f1e556]:
+          - link "Star HorneroOS Follow the desktop repository. Stars show the project to other people looking for it." [ref=f1e557] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero
+            - strong [ref=f1e558]: Star HorneroOS
+            - generic [ref=f1e559]: Follow the desktop repository. Stars show the project to other people looking for it.
+        - listitem [ref=f1e560]:
+          - link "Browse the organization Shell, configuration, installer, plugins, docs, QA and this website." [ref=f1e561] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+            - strong [ref=f1e562]: Browse the organization
+            - generic [ref=f1e563]: Shell, configuration, installer, plugins, docs, QA and this website.
+        - listitem [ref=f1e564]:
+          - link "Report a bug Name the ISO (preview22), your firmware (UEFI or BIOS) and the step where it failed." [ref=f1e565] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/issues/new/choose
+            - strong [ref=f1e566]: Report a bug
+            - generic [ref=f1e567]: Name the ISO (preview22), your firmware (UEFI or BIOS) and the step where it failed.
+        - listitem [ref=f1e568]:
+          - 'link "Report a site issue Something wrong on this website: a broken link, a wrong date, a layout problem." [ref=f1e569] [cursor=pointer]':
+            - /url: https://github.com/HorneroOS/website/issues/new/choose
+            - strong [ref=f1e570]: Report a site issue
+            - generic [ref=f1e571]: "Something wrong on this website: a broken link, a wrong date, a layout problem."
+    - navigation "Project" [ref=f1e572]:
+      - list [ref=f1e573]:
+        - listitem [ref=f1e574]:
+          - link "GitHub" [ref=f1e575] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=f1e576]:
+          - link "Project map" [ref=f1e577] [cursor=pointer]:
+            - /url: /en/roots#repositories
+        - listitem [ref=f1e578]:
+          - link "Design language" [ref=f1e579] [cursor=pointer]:
+            - /url: /en/docs/development/design-language/
+        - listitem [ref=f1e580]:
+          - link "Contribute" [ref=f1e581] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=f1e582]:
+          - link "Search" [ref=f1e583] [cursor=pointer]:
+            - /url: /en/search/
+        - listitem [ref=f1e584]:
+          - link "Report a site issue" [ref=f1e585] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=f1e586]:
+      - text: The desktop behind HorneroOS has been in daily use since 2018, by the maintainer’s account (
+      - link "history" [ref=f1e587] [cursor=pointer]:
+        - /url: /en/roots#timeline
+      - text: ), and its configuration has been public since 2019 (
+      - link "first commit" [ref=f1e588] [cursor=pointer]:
+        - /url: https://github.com/ulises-jeremias/dotfiles/commit/40480e3419b62fedd2f41fcb649fd3df30ac1ab7
+      - text: "). Hornero 199X is an art direction: a future imagined in Argentina in the 1990s, drawn with today’s open-source tools. It is not a historical product. This site sets no cookies, runs no analytics and loads no third-party resources. Your color choice stays in this browser. So does your language choice. Every screenshot is labelled with its source."

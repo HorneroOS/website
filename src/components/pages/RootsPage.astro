@@ -1,0 +1,376 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import StoryTimeline from '../../components/StoryTimeline.astro';
+import poster199x from '../../assets/brand/hornero-199x-poster.jpg';
+import { story } from '../../data/story';
+import { pins, releases, themes, short } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+const shell = pins.shell;
+const config = pins.config;
+const hornero = pins.hornero;
+const currentRelease = releases.find((release) => release.status === 'tagged');
+---
+
+<SiteLayout
+  socialImage="/og/roots.png"
+  socialImageAlt={isEs ? 'La línea de tiempo de HorneroOS de 2018 a 2026, con la etapa de 2018 en trazo discontinuo porque se apoya en el relato del maintainer.' : "The HorneroOS timeline from 2018 to 2026, with the 2018 stage dashed because it rests on the maintainer's account."}
+  title={isEs ? 'Raíces | HorneroOS' : 'Roots | HorneroOS'}
+  description={isEs ? 'Cómo Hornero pasó de una configuración personal de escritorio a proyectos abiertos separados, con una fuente para cada paso y crédito a su upstream.' : 'How Hornero went from a personal desktop configuration to separate open projects, with a source for each step and credit to its upstream.'}
+>
+  <section class="intro section">
+    <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>ARG / 199X</span><span>Las raíces del proyecto</span></p>
+    <h1>{isEs ? 'Raíces' : 'Roots'}</h1>
+    <p>
+      {isEs ? 'Hornero empezó como una configuración personal y creció hasta convertirse en proyectos mantenidos para la shell, los temas, las herramientas del sistema, el testing y la documentación.' : 'Hornero began as a personal configuration and grew into maintained projects for the shell, themes, system tools, testing and documentation.'}
+    </p>
+  </section>
+
+  <section class="section timeline-section" id="timeline" aria-labelledby="timeline-title">
+    <div class="timeline-head">
+      <h2 id="timeline-title">{isEs ? 'Línea de tiempo' : 'Timeline'}</h2>
+      <p>
+        {isEs ? 'Dos historias recorren esta página: un escritorio personal en uso diario desde 2018, y un conjunto de proyectos independientes de HorneroOS que empezaron en septiembre de 2026. Una línea discontinua marca la etapa que git no puede confirmar. Cada otra fila enlaza al commit o tag que la fecha. La shell Quickshell actual no es el setup de 2018.' : 'Two histories run through this page: a personal desktop that has been in daily use since 2018, and a set of standalone HorneroOS projects that began in September 2026. A dashed rule marks the stage git cannot confirm. Every other row links to the commit or tag that dates it. The current Quickshell shell is not the 2018 setup.'}
+      </p>
+    </div>
+    <StoryTimeline entries={story} variant="ledger" label={isEs ? 'Línea de tiempo de HorneroOS, 2018 a 2026' : 'HorneroOS timeline, 2018 to 2026'} locale={locale} />
+  </section>
+
+  <section class="section identity" aria-labelledby="identity-title">
+    <figure class="poster">
+      <img
+        src={poster199x.src}
+        width={poster199x.width}
+        height={poster199x.height}
+        loading="lazy"
+        decoding="async"
+        alt={isEs ? 'Ilustración de un hornero y su nido de barro arqueado sobre una cuadrícula de calles azul medianoche cortada por una avenida diagonal, bajo un sol naranja señal. Es una obra de arte, no una captura de escritorio.' : 'Illustration of a hornero bird and its arched mud nest over a midnight-blue street grid cut by a diagonal avenue, under a signal-orange sun. It is artwork, not a desktop screenshot.'}
+      />
+      <figcaption>{isEs ? 'Arte de Hornero 199X. Ilustración asistida por IA, dirigida y revisada por el proyecto. No es una captura.' : 'Hornero 199X artwork. AI-assisted illustration, directed and reviewed by the project. Not a screenshot.'}</figcaption>
+    </figure>
+    <div class="identity-copy">
+      <h2 id="identity-title">{isEs ? 'La estética 199X' : 'The 199X look'}</h2>
+      <p>
+        {isEs ? 'Hornero 199X toma elementos de la gráfica de la televisión argentina, las revistas de home-computers y los arcades, de la cuadrícula de calles de La Plata cortada por diagonales, y del nido de barro del hornero. Es una dirección de arte, no un producto histórico. Las fotografías detrás de los temas Hornero Originals están licenciadas y acreditadas en la ' : 'Hornero 199X borrows from Argentine broadcast graphics, home-computer magazines and arcades, from La Plata’s street grid cut by diagonals, and from the hornero’s clay nest. It is an art direction, not a historical product. The photographs behind the Hornero Originals themes are licensed and credited on the '}
+        <a href={L('/wallpapers')}>{isEs ? 'página de fondos' : 'wallpapers page'}</a>.
+      </p>
+      <p><a href={L('/docs/development/design-language/')}>{isEs ? 'Leé el lenguaje de diseño' : 'Read the design language'}</a></p>
+    </div>
+  </section>
+
+  <section class="section map-section" id="repositories" aria-labelledby="repositories-title">
+    <div>
+      <h2 id="repositories-title">{isEs ? 'Repositorios principales' : 'Core repositories'}</h2>
+      <p>
+        {isEs ? 'Los componentes del producto viven en repositorios separados, así cada capa se puede revisar, empaquetar y probar por su cuenta. El ' : 'The product components live in separate repositories, so each layer can be reviewed, packaged and tested on its own. The '}
+        <a href="https://github.com/HorneroOS/.github/blob/main/governance/docs/repository-map.md">
+          {isEs ? 'mapa completo de la organización' : 'full organization map'}
+        </a>{' '}
+        {isEs ? 'también cubre Docs, Website, QA y la gobernanza compartida.' : 'also covers Docs, Website, QA and shared governance.'}
+      </p>
+    </div>
+    <div class="repo-list">
+      <a href={`${shell.repo}/tree/${shell.sha}`}>
+        <span class="repo-mark">01</span>
+        <span>
+          <strong>Shell</strong>
+          <small>{isEs ? 'Runtime Quickshell, presets de layout, Companion y servicios de la shell' : 'Quickshell runtime, layout presets, Companion and shell services'}</small>
+        </span>
+        <code>{short(shell.sha)}</code>
+      </a>
+      <a href={`${config.repo}/tree/${config.sha}`}>
+        <span class="repo-mark">02</span>
+        <span>
+          <strong>Config</strong>
+          <small>{isEs ? 'Packs de apariencia, defaults, assets de marca y datos de paquetes' : 'Appearance packs, defaults, brand assets and package data'}</small>
+        </span>
+        <code>{short(config.sha)}</code>
+      </a>
+      <a href={`${hornero.repo}/tree/${hornero.sha}`}>
+        <span class="repo-mark">03</span>
+        <span>
+          <strong>Hornero</strong>
+          <small>{isEs ? 'CLI nativa, composiciones de releases y capacidades del sistema' : 'Native CLI, release compositions and system capabilities'}</small>
+        </span>
+        <code>{short(hornero.sha)}</code>
+      </a>
+      <a href="https://github.com/HorneroOS/greeter">
+        <span class="repo-mark">04</span>
+        <span>
+          <strong>Greeter</strong>
+          <small>{isEs ? 'La pantalla de login SDDM de Hornero y su runtime Qt 6' : 'Hornero’s SDDM login screen and its Qt 6 runtime'}</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href="https://github.com/HorneroOS/installer">
+        <span class="repo-mark">05</span>
+        <span>
+          <strong>Installer</strong>
+          <small>{isEs ? 'Contrato de instalación por etapas; todavía no hay una ISO pública' : 'Staged installation contract; a public ISO is not available yet'}</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a href="https://github.com/HorneroOS/qa">
+        <span class="repo-mark">06</span>
+        <span>
+          <strong>QA</strong>
+          <small>{isEs ? 'Recorridos en máquinas virtuales y evidencia para builds completas del producto' : 'Virtual-machine journeys and evidence for complete product builds'}</small>
+        </span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section contributor-guide" id="contribute" aria-labelledby="contributor-guide-title">
+    <div>
+      <h2 id="contributor-guide-title">{isEs ? 'Referencias para contribuir' : 'Contributor references'}</h2>
+      <p>
+        {isEs ? 'El lenguaje de diseño define los principios de identidad e interacción compartidos entre proyectos. Cada repositorio es la fuente de sus propias reglas de implementación.' : 'The design language sets the identity and interaction principles shared across projects. Each repository is the source for its own implementation rules.'}
+      </p>
+    </div>
+    <nav aria-label={isEs ? 'Referencias para contribuir' : 'Contributor references'}>
+      <a href={L('/docs/development/design-language/')}>
+        <span>{isEs ? 'Política de producto' : 'Product policy'}</span>
+        <strong>
+          {isEs ? 'Lenguaje de diseño de HorneroOS' : 'HorneroOS design language'} <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/governance/docs/repository-map.md">
+        <span>{isEs ? 'Responsables' : 'Ownership'}</span>
+        <strong>
+          {isEs ? 'Mapa de repositorios' : 'Repository map'} <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">
+        <span>{isEs ? 'Flujo de trabajo' : 'Workflow'}</span>
+        <strong>
+          {isEs ? 'Guía de contribución' : 'Contribution guide'} <span aria-hidden="true">↗</span>
+        </strong>
+      </a>
+    </nav>
+  </section>
+
+  <section class="section lineage" id="community">
+    <h2>{isEs ? 'Créditos' : 'Credits'}</h2>
+    <div class="lineage-grid">
+      <article>
+        <h3>{isEs ? 'Linaje del código' : 'Code ancestry'}</h3>
+        <p>
+          {isEs ? 'La shell Quickshell está adaptada de ' : 'The Quickshell shell is adapted from '}<a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>.
+          {isEs ? ' El autor upstream, la licencia y el commit importado siguen documentados en el repositorio.' : ' The upstream author, license and imported commit remain documented in the repository.'}
+        </p>
+      </article>
+      <article>
+        <h3>{isEs ? 'Referencias de diseño' : 'Design references'}</h3>
+        <p>
+          <a href="https://github.com/Ryoku-dev/ryoku">Ryoku</a>,{' '}
+          <a href="https://github.com/AvengeMedia/DankMaterialShell">DankMaterialShell</a> {isEs ? ' y ' : ' and '}
+          <a href="https://github.com/omacom/omarchy">Omarchy</a> {isEs ? 'son proyectos que estudiamos por sus ajustes descubribles, temas coherentes y escritorios Linux accesibles.' : 'are projects we studied for discoverable settings, coherent themes and approachable Linux desktops.'}
+        </p>
+      </article>
+      <article>
+        <h3>{isEs ? 'La dirección de Hornero' : 'Hornero’s direction'}</h3>
+        <p>
+          {isEs ? 'Tomamos preguntas de esos proyectos, no respuestas. Hornero toma sus propias decisiones visuales y de producto en abierto.' : 'We took questions from those projects, not answers. Hornero makes its own visual and product decisions in the open.'}
+        </p>
+      </article>
+      <article>
+        <h3>{isEs ? 'Las personas detrás de HorneroOS' : 'People behind HorneroOS'}</h3>
+        <p>
+          <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a> {isEs ? 'es el maintainer principal de HorneroOS.' : 'is HorneroOS’s principal maintainer.'}{' '}
+          <a href="https://github.com/PandaFoss">Panda Foss</a> {isEs ? 'contribuye a HorneroOS y es uno de los maintainers de ' : 'contributes to HorneroOS and is one of the maintainers of '}<a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>. {isEs ? 'Panda va a liderar el desarrollo del futuro instalador a medida de HorneroOS. El camino actual con ' : 'Panda will lead development of HorneroOS’s future custom installer. The current '}<a href={L('/install')}>{isEs ? 'Calamares' : 'Calamares path'}</a> {isEs ? 'sigue siendo provisorio hasta que ese instalador esté listo. Ambos forman parte de la ' : ' remains provisional until that installer is ready. Both are part of the '}
+          <a href="https://github.com/HorneroOS">{isEs ? 'organización HorneroOS' : 'HorneroOS organization'}</a>.
+        </p>
+      </article>
+    </div>
+    <p class="source-line">
+      {isEs ? 'Fuentes verificadas en Shell' : 'Sources checked at Shell'}{' '}
+      <a href={`${shell.repo}/commit/${shell.sha}`}>
+        <code>{short(shell.sha)}</code>
+      </a>
+      , Config{' '}
+      <a href={`${config.repo}/commit/${config.sha}`}>
+        <code>{short(config.sha)}</code>
+      </a>{' '}
+      {isEs ? 'y Hornero' : 'and Hornero'}{' '}
+      <a href={`${hornero.repo}/commit/${hornero.sha}`}>
+        <code>{short(hornero.sha)}</code>
+      </a>
+      . {isEs ? 'Las fuentes fijadas definen' : 'The pinned sources define'} {themes.length} {isEs ? 'packs de temas' : 'theme packs'}
+      {currentRelease && (
+        <>
+          {' '}
+          {isEs ? 'e incluyen la composición etiquetada' : 'and include the tagged composition'} <a href={L(`/releases#${currentRelease.name}`)}>{currentRelease.name}</a>
+        </>
+      )}
+      .
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro {
+    padding-block: clamp(1rem, 4vw, 4rem) 1.5rem;
+  }
+  .intro h1 {
+    margin-top: 0.7rem;
+    font-size: clamp(3rem, 2rem + 5vw, 6.2rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .intro > p:last-child {
+    max-width: 59ch;
+    margin-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: var(--step-1);
+  }
+  .timeline-section > h2,
+  .map-section h2,
+  .contributor-guide h2,
+  .lineage > h2 {
+    margin-top: 0.4rem;
+  }
+  .repo-mark {
+    color: var(--secondary);
+    font: 0.75rem var(--font-data);
+  }
+  .map-section {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.3rem, 4vw, 2.6rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .map-section > div:first-child > p:last-child {
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+  }
+  .repo-list {
+    display: grid;
+  }
+  .repo-list > a {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    padding: 0.9rem 0.1rem;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .repo-list strong,
+  .repo-list small {
+    display: block;
+  }
+  .repo-list small {
+    margin-top: 0.12rem;
+    color: var(--text-muted);
+  }
+  .repo-list code {
+    color: var(--secondary);
+  }
+  .repo-list a:hover strong {
+    color: var(--accent);
+  }
+  .contributor-guide {
+    display: grid;
+    gap: 1.5rem;
+    padding-inline-start: clamp(1rem, 3vw, 2rem);
+    border-inline-start: 2px solid var(--highlight);
+  }
+  .contributor-guide > div > p:last-child {
+    max-width: 58ch;
+    margin-top: 0.55rem;
+    color: var(--text-muted);
+  }
+  .contributor-guide nav {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+  .contributor-guide nav a {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.1rem;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .contributor-guide nav a > span {
+    color: var(--secondary);
+    font: 0.68rem var(--font-data);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .contributor-guide nav a strong {
+    color: var(--text);
+  }
+  .contributor-guide nav a:hover strong {
+    color: var(--accent);
+  }
+  .lineage-grid {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  .lineage-grid article {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .lineage-grid p {
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+  }
+  .source-line {
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  @media (min-width: 900px) {
+    .map-section {
+      grid-template-columns: 0.7fr 1.3fr;
+      align-items: start;
+    }
+    .contributor-guide {
+      grid-template-columns: 0.7fr 1.3fr;
+      align-items: start;
+    }
+    .lineage-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .timeline-head { display: grid; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: 1.5rem; }
+  .timeline-head h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .timeline-head p { max-width: 58ch; color: var(--text-muted); }
+  .identity { display: grid; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .poster { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+  .poster img { width: 100%; height: auto; }
+  .poster figcaption { padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); color: var(--text-muted); font: 0.68rem var(--font-data); font-stretch: 87.5%; }
+  .identity-copy { display: grid; gap: 1rem; }
+  .identity-copy h2 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; }
+  .identity-copy p { max-width: 50ch; color: var(--text-muted); }
+  @media (min-width: 900px) {
+    .timeline-head { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; }
+    .identity { grid-template-columns: 1.1fr 0.9fr; }
+  }
+</style>
+
+<style>
+  /* 199X per-page direction: roots as an archival timeline. */
+  .repo-mark { font-family: var(--font-data); }
+  .lineage-grid > * { border-radius: 2px; }
+</style>

@@ -3,12 +3,16 @@ import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import KilnStamp from './KilnStamp.astro';
 
+import { localizePath, type Locale } from '../i18n/ui';
+
 interface Props {
   captures: CollectionEntry<'showroom'>[];
   layoutCount: number;
+  locale?: Locale;
 }
 
-const { captures, layoutCount } = Astro.props;
+const { captures, layoutCount, locale = 'es' } = Astro.props;
+const isEs = locale === 'es';
 const selections = [
   { id: 'cockpit-clear', label: 'Cockpit Clear', group: 'Layout' },
   { id: 'islands', label: 'Islands', group: 'Layout' },
@@ -42,11 +46,10 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 <section class="section desktop-capture-explorer" aria-labelledby="capture-explorer-title" data-capture-explorer>
   <header class="explorer-heading">
     <div>
-      <h2 id="capture-explorer-title">{layoutCount} layouts, one shell</h2>
+      <h2 id="capture-explorer-title">{isEs ? `${layoutCount} layouts, una sola shell` : `${layoutCount} layouts, one shell`}</h2>
     </div>
     <p>
-      A layout moves the bar, the dock and the controls; the desktop underneath stays the same. Each frame is a capture
-      from a Hornero QA run or visual review. Pick one to compare.
+      {isEs ? 'Un layout mueve la barra, el dock y los controles; el escritorio de abajo queda igual. Cada cuadro es una captura de una corrida de QA o de una revisión visual de Hornero. Elegí una para comparar.' : 'A layout moves the bar, the dock and the controls; the desktop underneath stays the same. Each frame is a capture from a Hornero QA run or visual review. Pick one to compare.'}
     </p>
   </header>
 
@@ -85,9 +88,9 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       </div>
     </div>
 
-    <div class="capture-navigation" role="group" aria-label="Choose a real Hornero capture">
-      <p class="navigation-label">Choose a capture</p>
-      <ul aria-label="Choose a real Hornero capture">
+    <div class="capture-navigation" role="group" aria-label={isEs ? 'Elegí una captura real de Hornero' : 'Choose a real Hornero capture'}>
+      <p class="navigation-label">{isEs ? 'Elegí una captura' : 'Choose a capture'}</p>
+      <ul aria-label={isEs ? 'Elegí una captura real de Hornero' : 'Choose a real Hornero capture'}>
         {views.map((view, index) => (
           <li>
             <button
@@ -113,8 +116,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
                 ↗
               </span>
             </button>
-            <a class="capture-fallback-link" href={`/showroom#${view.id}`}>
-              Open {view.label} in the capture archive <span aria-hidden="true">↗</span>
+            <a class="capture-fallback-link" href={`${localizePath('/showroom', locale)}#${view.id}`}>
+              {isEs ? `Abrir ${view.label} en el archivo de capturas` : `Open ${view.label} in the capture archive`} <span aria-hidden="true">↗</span>
             </a>
             <template data-capture-provenance-template={view.id}>
               <KilnStamp {...view.provenance} />
@@ -123,10 +126,10 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
         ))}
       </ul>
       <p class="navigation-note">
-        Selecting a layout swaps the capture and its source record.
+        {isEs ? 'Al elegir un layout se cambian la captura y su registro de fuente.' : 'Selecting a layout swaps the capture and its source record.'}
       </p>
-      <a class="text-link" href="/layouts">
-        Explore all {layoutCount} layouts
+      <a class="text-link" href={localizePath('/layouts', locale)}>
+        {isEs ? `Explorá los ${layoutCount} layouts` : `Explore all ${layoutCount} layouts`}
       </a>
       <a class="text-link archive-link" href="/showroom">
         Browse the full capture archive

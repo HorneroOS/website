@@ -1,0 +1,254 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { candidate, editions, latestTagged } from '../../data/product';
+
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+const packages = isEs
+  ? [
+      { name: 'horneroctl-bin', what: 'la CLI del sistema (binario nativo)' },
+      { name: 'hornero-shell', what: 'la shell de escritorio Quickshell y sus presets de layout' },
+      { name: 'hornero-config', what: 'los defaults del escritorio y los packs de temas' },
+      { name: 'hornero-greeter', what: 'la pantalla de login de SDDM' },
+    ]
+  : [
+      { name: 'horneroctl-bin', what: 'the system CLI (native binary)' },
+      { name: 'hornero-shell', what: 'the Quickshell desktop shell and its layout presets' },
+      { name: 'hornero-config', what: 'the desktop defaults and theme packs' },
+      { name: 'hornero-greeter', what: 'the SDDM login screen' },
+    ];
+const preview = (v: string) => /preview(\d+)$/.exec(v)?.[1];
+const statusName = (
+  isEs
+    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' }
+) as Record<'planned' | 'experimental' | 'preview' | 'supported', string>;
+---
+
+<SiteLayout
+  socialImage="/og/install.png"
+  socialImageAlt={isEs ? 'ISO Preview de HorneroOS: una imagen con las ediciones Desktop y Studio Preview.' : 'HorneroOS Preview ISO: one image with Desktop and Studio Preview editions.'}
+  title={isEs ? 'Instalar | HorneroOS' : 'Install | HorneroOS'}
+  description={isEs ? 'La primera ISO Preview de HorneroOS ya está publicada: una imagen x86_64 con las ediciones Desktop y Studio Preview, firmada y verificada por checksum. Los paquetes de Arch siguen disponibles.' : 'The first HorneroOS Preview ISO is published: one x86_64 image with Desktop and Studio Preview editions, signed and checksum-verified. Arch packages remain available.'}
+>
+  <section class="section">
+    <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
+    <h1>{isEs ? 'La primera ISO Preview de HorneroOS ya está acá' : 'The first HorneroOS Preview ISO is here'}</h1>
+    <p class="lede">
+      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop o la edición Studio Preview con especializaciones creativas a elección. Pasó la matriz de instalación en VMs desechables (UEFI y BIOS, con cifrado y sin cifrado) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop or the Studio Preview edition with selectable creative specializations. It passed the disposable-VM installation matrix (UEFI and BIOS, encrypted and unencrypted) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
+    </p>
+    <p>
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview22-x86_64.iso">
+        {isEs ? 'Descargar la ISO Preview (2.6 GB)' : 'Download the Preview ISO (2.6 GB)'}
+      </a>{' '}
+      {isEs ? ' — también anunciada en la ' : ' — also announced on the '}
+      {' '}
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview22">{isEs ? 'página de la release v0.2.0-preview22' : 'v0.2.0-preview22 release page'}</a>.
+      {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
+      {' '}
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview22-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
+      {isEs ? 'y la ' : 'and the '}
+      {' '}
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview22-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+    </p>
+    <ul role="list" class="packages">
+      <li><code>horneroos-2026.10-preview22-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio Preview)' : 'the install image (Desktop + Studio Preview)'}</span></li>
+      <li><code>SHA-256</code><span>38ec76d7c9c10ea3e956b2c9f2d8d420e3d09b61899dc453a2858622d7e90bd2</span></li>
+      <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS FCFBEE43925AB5429362278AE59EAB44AA2498DC; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository ('}<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
+    </ul>
+    <p>
+      {isEs ? 'Las releases hasta ahora son composiciones: commits exactos de shell y config probados en conjunto.' : 'Releases so far are compositions: exact shell and config commits tested together.'}{' '}
+      {latestTagged && (
+        <>
+          {isEs ? 'La última etiquetada es ' : 'The latest tagged one is '}
+          {' '}
+          <a href={L(`/releases#${latestTagged.name}`)}>Development Preview {preview(latestTagged.version)}</a>
+          {candidate && (
+            <>
+              {isEs ? ', y ' : ', and '}<a href={L(`/releases#${candidate.name}`)}>Development Preview {preview(candidate.version)}</a> {isEs ? 'se está preparando' : 'is being prepared'}
+            </>
+          )}
+          .
+        </>
+      )}
+    </p>
+  </section>
+
+  <section class="section readiness" aria-labelledby="readiness-title">
+    <h2 id="readiness-title">{isEs ? 'Cómo está la instalación' : 'Where installation stands'}</h2>
+    <dl class="readiness-ledger">
+      <div class="state-available">
+        <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
+        <dd><span class="state">Preview</span> {isEs ? 'Primera ISO publicada como pre-release firmada (v0.2.0-preview22), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'First ISO published as a signed pre-release (v0.2.0-preview22), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+      </div>
+      <div class="state-provisional">
+        <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
+        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la matriz de instalación en VM (Desktop y Studio, UEFI/BIOS, cifrado y sin cifrado). El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed the VM install matrix (Desktop and Studio, UEFI/BIOS, encrypted/unencrypted). Panda Foss's custom installer remains the future official path."}</dd>
+      </div>
+      <div class="state-available">
+        <dt>{isEs ? 'Paquetes de escritorio' : 'Desktop packages'}</dt>
+        <dd><span class="state">{isEs ? 'Disponible' : 'Available'}</span> {isEs ? 'Cuatro paquetes de AUR, para quienes ya corren Arch Linux.' : 'Four AUR packages, for people who already run Arch Linux.'}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Qué existe hoy' : 'What exists today'}</h2>
+    <p>
+      {isEs ? 'La preview de Desktop llega como paquetes del Arch User Repository para quienes ya corren Arch Linux. Son los componentes de un escritorio Wayland-first, no una instalación llave en mano de HorneroOS. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'The Desktop preview ships as Arch User Repository packages for people who already run Arch Linux. They are the components of a Wayland-first desktop, not a turnkey HorneroOS installation. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
+    </p>
+    <ul role="list" class="packages">
+      {packages.map((p) => (
+        <li>
+          <a href={`https://aur.archlinux.org/packages/${p.name}`}>
+            <code>{p.name}</code>
+          </a>
+          <span>{p.what}</span>
+        </li>
+      ))}
+    </ul>
+    <p>
+      {isEs ? 'El paquete del greeter es opcional y necesita SDDM con Qt 6 Multimedia. Otros compositores no están soportados salvo que el catálogo de ediciones y la evidencia de aceptación digan lo contrario.' : 'The greeter package is optional and needs SDDM with Qt 6 Multimedia. Other compositors are not supported unless the edition catalogue and acceptance evidence say so.'}
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Estado de las ediciones' : 'Edition readiness'}</h2>
+    <p>
+      {isEs ? 'Las ediciones comparten un solo modelo de composición. Los niveles de madurez reflejan lo que se probó; no significan que toda edición se pueda instalar.' : 'Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every edition can be installed.'}
+    </p>
+    <ul class="edition-status" role="list">
+      {editions.map((edition) => (
+        <li>
+          <strong>{edition.title}</strong>
+          <span class:list={['status-pill', `status-${edition.maturity}`]}>{statusName[edition.maturity]}</span>
+        </li>
+      ))}
+    </ul>
+    <p>
+      {isEs ? 'Desktop es la preview actual. Studio se instala desde la misma ISO Preview como edición candidata con especializaciones a elección y pasó su matriz de instalación en VM; es una edición ' : 'Desktop is the current preview. Studio installs from the same Preview ISO as a candidate edition with selectable specializations and passed its VM install matrix; it is a '}<strong>Preview</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
+      <code>hornero-qa studio-gate</code> {isEs ? ' todavía está pendiente, así que los resultados en VM no son prueba en hardware físico y Studio todavía no es Supported. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Niri sigue siendo experimental dentro de Desktop.' : ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.'}{' '}
+      <a href={L('/editions')}>{isEs ? 'Cómo encajan las ediciones.' : 'How the editions fit together.'}</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'Pruebas y reportes' : 'Testing and reports'}</h2>
+    <p>
+      {isEs ? 'La ISO Preview se probó en máquinas virtuales, con firmware UEFI y BIOS. Los reportes desde hardware físico son el próximo paso, y son lo más útil que podés enviar. Incluí el nombre de la ISO, tu tipo de firmware, si el disco está cifrado y el paso donde falló.' : 'The Preview ISO was tested in virtual machines, with UEFI and BIOS firmware. Reports from physical hardware are the next step, and they are the most useful thing you can send. Include the ISO name, your firmware type, whether the disk is encrypted, and the step where it failed.'}
+    </p>
+    <p>
+      <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview22">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>{isEs ? 'El instalador' : 'The installer'}</h2>
+    <p>
+      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. Para la ISO Preview de arriba, la matriz de instalación Desktop y Studio (UEFI/BIOS, cifrado y sin cifrado) se ejecutó en máquinas virtuales desechables. Eso es evidencia de VM, no aceptación completa: el registro R11 del propio instalador todavía lista el primer login UEFI como pendiente y la paridad de paquetes como no verificada, y nada de esto está validado en hardware físico.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. For the Preview ISO above, the Desktop and Studio install matrix (UEFI/BIOS, encrypted and unencrypted) was executed in disposable virtual machines. That is VM evidence, not full acceptance: the installer's own R11 record still lists UEFI first login as pending and package parity as unverified, and nothing here is validated on physical hardware."}
+    </p>
+    <p>
+      {isEs ? 'Quienes contribuyen pueden seguir el ' : 'Contributors can follow the '}<a href={L('/docs/development/design-language/')}>{isEs ? 'lenguaje de diseño de HorneroOS' : 'HorneroOS design language'}</a>{isEs ? ', que apunta a las fuentes de diseño autoritativas para el escritorio, el sitio web, el greeter y el instalador.' : ', which points to the authoritative design sources for the desktop, website, greeter and installer.'}
+    </p>
+    <p>
+      {isEs ? 'Para seguir las composiciones etiquetadas, mirá ' : 'To follow tagged compositions, see '}<a href={L('/releases')}>Releases</a>{isEs ? ' o la ' : ' or the '}
+      <a href="https://github.com/HorneroOS">{isEs ? 'organización HorneroOS' : 'HorneroOS organization'}</a>{isEs ? ' en GitHub.' : ' on GitHub.'}
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .packages {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    max-width: var(--measure);
+  }
+
+  .packages li {
+    display: grid;
+    grid-template-columns: minmax(10rem, max-content) 1fr;
+    gap: 0.25rem 1rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+
+  .packages span {
+    color: var(--text-muted);
+  }
+
+  .edition-status {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    max-width: 58rem;
+    margin-block: 1rem;
+    list-style: none;
+  }
+
+  .edition-status li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  .status-pill {
+    flex: none;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font: 0.66rem var(--font-data);
+    text-transform: uppercase;
+  }
+
+  .status-preview {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .status-experimental {
+    border-color: var(--highlight);
+    color: var(--highlight);
+  }
+
+  @media (max-width: 520px) {
+    .packages li {
+      grid-template-columns: 1fr;
+    }
+
+    .edition-status {
+      grid-template-columns: 1fr;
+    }
+  }
+  .readiness-ledger { max-width: 58rem; border-top: 1px solid var(--line); }
+  .readiness-ledger > div { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); gap: 0.4rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .readiness-ledger dt { font: 700 1.1rem var(--font-display); }
+  .readiness-ledger dd { color: var(--text-muted); }
+  .state { display: inline-block; margin-right: 0.7rem; padding: 0.1rem 0.5rem; border: 1px solid var(--line); color: var(--text); font: 600 0.7rem var(--font-data); font-stretch: 87.5%; text-transform: uppercase; }
+  .state-none { border-bottom-style: dashed; }
+  .state-none .state { border-style: dashed; color: var(--text-muted); }
+  .state-provisional .state { border-color: var(--highlight); color: var(--highlight); }
+  .state-available .state { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 560px) { .readiness-ledger > div { grid-template-columns: 1fr; } }
+</style>
+
+<style>
+  /* 199X per-page direction: install as an honest status board. */
+  .edition-status { border: 1px solid var(--line); box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent) 16%, transparent); }
+  .packages > * { border-radius: 2px; }
+</style>

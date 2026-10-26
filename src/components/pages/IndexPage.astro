@@ -1,0 +1,433 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import DesktopCaptureExplorer from '../../components/DesktopCaptureExplorer.astro';
+import LookCompare from '../../components/LookCompare.astro';
+import StoryTimeline from '../../components/StoryTimeline.astro';
+import AppLogo from '../../components/AppLogo.astro';
+import { featuredStory } from '../../data/story';
+import {
+  candidate,
+  editionCatalogue,
+  editions,
+  extensionCatalogue,
+  latestTagged,
+  layouts,
+  pins,
+  short,
+  themes,
+  wallpapers,
+} from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+const captures = await getCollection('showroom');
+const capture = (id: string) => {
+  const entry = captures.find((item) => item.id === id);
+  if (!entry) throw new Error(`Showroom capture is missing: ${id}`);
+  return entry;
+};
+const hero = capture('dashboard-extensions');
+const live = capture('terminal-tools');
+const beagle = wallpapers.find((wallpaper) => wallpaper.id === 'fin-del-mundo');
+if (!beagle) throw new Error('The Beagle Channel photograph is missing from the pinned wallpaper catalogue');
+
+const editionOrder = ['desktop', 'server', 'agents', 'studio'];
+const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
+const maturityNames = isEs
+  ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
+  : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+const familyRoleLabels: Record<string, string> = isEs
+  ? {
+      server: 'Sin pantalla, para homelabs y servicios',
+      'agent-host': 'Sin pantalla, para infraestructura de agentes',
+      'creative-workstation': 'Escritorio, para producción creativa',
+    }
+  : {
+      server: 'Headless, for homelabs and services',
+      'agent-host': 'Headless, for agent infrastructure',
+      'creative-workstation': 'Desktop, for creative production',
+    };
+const family = editionOrder.map((id) => {
+  const edition = editionById[id];
+  if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
+  return {
+    ...edition,
+    name: edition.title.replace('HorneroOS ', ''),
+    status: maturityNames[edition.maturity],
+    roleLabel: familyRoleLabels[edition.role] ?? edition.role,
+    compositors: edition.compositor?.supported ?? [],
+  };
+});
+const compositorMaturity = (id: string) =>
+  maturityNames[editionCatalogue.compositors.find((item) => item.id === id)?.maturity ?? 'planned'];
+
+const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.trust === 'official');
+const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0] ?? text;
+const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1] ?? version;
+const readiness = [
+  latestTagged
+    ? isEs
+      ? `Development Preview ${previewNumber(latestTagged.version)} es la última composición etiquetada`
+      : `Development Preview ${previewNumber(latestTagged.version)} is the latest tagged composition`
+    : isEs
+      ? 'HorneroOS es una preview en desarrollo'
+      : 'HorneroOS is a development preview',
+  candidate
+    ? isEs
+      ? `Preview ${previewNumber(candidate.version)} se está preparando`
+      : `Preview ${previewNumber(candidate.version)} is being prepared`
+    : undefined,
+]
+  .filter(Boolean)
+  .join('; ');
+
+const title = isEs ? 'HorneroOS | Un escritorio Linux, habitado desde 2018' : 'HorneroOS | A Linux desktop, lived in since 2018';
+const description = isEs
+  ? `HorneroOS es un escritorio Linux basado en Arch, Wayland-first, desde Argentina, construido en abierto. ${layouts.length} layouts, ${themes.length} temas, una CLI de sistema nativa y un laboratorio de QA que guarda sus capturas con hashes y revisiones pineadas. Preview en desarrollo; primera ISO Preview firmada publicada.`
+  : `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that keeps its screenshots with hashes and pinned revisions. Development preview; first signed Preview ISO published.`;
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+>
+  <section class="cover" aria-labelledby="hero-title">
+    <div class="cover-head">
+      <p class="plate-id"><strong>Transmisión 001</strong><span>ARG / 199X</span><span lang="es">El futuro se construye acá</span></p>
+      <h1 id="hero-title">{isEs ? <>Un escritorio Linux,<br />habitado desde 2018.</> : <>A Linux desktop,<br />lived in since 2018.</>}</h1>
+      <div class="cover-aside">
+        <p class="lede">
+          {isEs ? 'HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina, con una shell de escritorio Quickshell, una CLI de sistema nativa y un laboratorio de QA que registra sus capturas de prueba.' : 'HorneroOS is an Arch-based, Wayland-first desktop from Argentina, with a Quickshell desktop shell, a native system CLI and a QA lab that records its test captures.'}
+        </p>
+        <div class="cta-row">
+          <a href={L('/showroom')} class="cta primary">{isEs ? 'Explorá el escritorio' : 'Explore the desktop'}</a>
+          <a href={L('/install')} class="cta secondary">{isEs ? 'Probalo en Arch' : 'Try it on Arch'}</a>
+        </div>
+      </div>
+    </div>
+
+    <figure class="cover-shot">
+      <div class="shot-frame">
+        <Picture
+          src={hero.data.image}
+          alt={hero.data.alt}
+          formats={['avif', 'webp']}
+          fallbackFormat="png"
+          widths={[640, 960, 1280, 1600, 1920]}
+          sizes="(min-width: 1400px) 1320px, calc(100vw - 2rem)"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <figcaption>
+        <span class="shot-kind">{isEs ? 'Captura real' : 'Real capture'}</span>
+        <span class="shot-detail">
+          {[hero.data.title, hero.data.provenance.resolution].filter(Boolean).join(' · ')}
+        </span>
+        <a href={L('/showroom#dashboard-extensions')}>{isEs ? 'Procedencia' : 'Provenance'}</a>
+        <span class="shot-credit">
+          {isEs ? 'Fondo: ' : 'Wallpaper: '}<a href={beagle.sourcePage}>{beagle.title}</a>, {beagle.place}. {isEs ? 'Fotografía de ' : 'Photograph by '}{beagle.photographer},{' '}
+          <a href={beagle.licenseUrl}>{beagle.license}</a>.
+        </span>
+      </figcaption>
+    </figure>
+
+    <ul class="cover-facts" role="list" aria-label={isEs ? 'Qué es HorneroOS, en breve' : 'What HorneroOS is, in brief'}>
+      <li>{isEs ? 'Base Arch Linux' : 'Arch Linux base'}</li>
+      <li>{isEs ? 'Hyprland soportado, Niri experimental' : 'Hyprland supported, Niri experimental'}</li>
+      <li>{layouts.length} layouts, {themes.length} {isEs ? 'temas' : 'themes'}</li>
+      <li><a href={L('/roots#community')}>{isEs ? 'Shell adaptada de Caelestia, GPL-3.0' : 'Shell adapted from Caelestia, GPL-3.0'}</a></li>
+      <li><a href={L('/install')}>{isEs ? 'Primera ISO Preview publicada' : 'First Preview ISO published'}</a></li>
+    </ul>
+  </section>
+
+  <DesktopCaptureExplorer captures={captures} layoutCount={layouts.length} locale={locale} />
+
+  <section class="section looks" aria-labelledby="looks-title">
+    <div class="band-head">
+      <h2 id="looks-title">{isEs ? 'Oscuro y claro, mismo layout' : 'Dark and light, same layout'}</h2>
+      <p>
+        {isEs ? 'Ambas capturas muestran Hornero Left, desde la misma imagen de QA y las mismas revisiones pineadas. Solo cambia el tema.' : 'Both captures show Hornero Left, from the same QA image and the same pinned revisions. Only the theme changes.'}
+      </p>
+    </div>
+    <LookCompare dark={capture('hornero-left')} light={capture('hornero-light')} locale={locale} />
+    <p class="band-foot">
+      <a href={L('/themes')}>{isEs ? `Explorá ${themes.length} temas` : `Browse ${themes.length} themes`}</a>
+      <a href={L('/wallpapers')}>{isEs ? 'Mirá las fotografías argentinas detrás de ellos' : 'See the Argentine photographs behind them'}</a>
+      <a href={L('/terminals')}>{isEs ? 'Llevá la paleta a tu terminal' : 'Carry the palette into your terminal'}</a>
+    </p>
+  </section>
+
+  <section class="section daily" aria-labelledby="daily-title">
+    <div class="daily-copy">
+      <h2 id="daily-title">{isEs ? 'Una sesión de trabajo' : 'A working session'}</h2>
+      <p>
+        {isEs ? 'btop monitorea la máquina en una ventana y yazi explora una carpeta de fondos en otra, sobre una fotografía del Canal Beagle. Ambos son programas de terminal comunes.' : 'btop monitors the machine in one window and yazi browses a wallpapers folder in another, over a photograph of the Beagle Channel. Both are ordinary terminal programs.'}
+      </p>
+      <p class="caveat">
+        {isEs ? `Captura aportada por un colaborador el ${live.data.provenance.date}, tomada en un setup de desarrollo Hyprland en vivo. No es una imagen de aceptación del instalador ni de una release.` : `Contributor-provided capture from ${live.data.provenance.date}, taken on a live Hyprland development setup. It is not an installer or release acceptance image.`}
+      </p>
+    </div>
+    <figure class="daily-shot">
+      <Picture
+        src={live.data.image}
+        alt={live.data.alt}
+        formats={['avif', 'webp']}
+        fallbackFormat="png"
+        widths={[640, 960, 1280, 1600]}
+        sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>{live.data.provenance.source} · {live.data.provenance.resolution} · {live.data.provenance.date}</figcaption>
+    </figure>
+  </section>
+
+  <section class="section family" aria-labelledby="family-title">
+    <div class="band-head">
+      <h2 id="family-title">{isEs ? 'Desktop y Studio en preview, dos perfiles planificados' : 'Desktop and Studio in preview, two profiles planned'}</h2>
+      <p>
+        {isEs ? 'Las ediciones comparten un solo modelo de composición. Solo Desktop tiene paquetes. Server, Agents y Studio están definidos en el catálogo, y ninguno tiene una imagen instalable.' : 'Editions share one composition model. Only Desktop has packages. Server, Agents and Studio are defined in the catalogue, and none has an installable image.'}
+      </p>
+    </div>
+    <ol class="family-rail" role="list">
+      {
+        family.map((edition) => (
+          <li class:list={['family-cell', `maturity-${edition.maturity}`]}>
+            <a href={L(`/editions#${edition.id}`)}>
+              <span class="family-name">{edition.name}</span>
+              <span class="family-status">{edition.status}</span>
+              {edition.compositors.length > 0 ? (
+                <span class="family-detail">
+                  {edition.compositors.map((id) => (
+                    <span class="family-backend">
+                      <AppLogo id={id} />
+                      {id === 'hyprland' ? 'Hyprland' : id === 'niri' ? 'Niri' : id}, {compositorMaturity(id).toLowerCase()}
+                    </span>
+                  ))}
+                </span>
+              ) : (
+                <span class="family-detail">{edition.roleLabel}</span>
+              )}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section ecosystem" aria-labelledby="ecosystem-title">
+    <div class="band-head">
+      <h2 id="ecosystem-title">{isEs ? 'Extensiones oficiales' : 'Official extensions'}</h2>
+      <p>
+        {isEs ? 'Pequeños plugins QML con un checksum publicado y permisos declarados. La shell no los aísla en un sandbox, así que el catálogo lista lo que declara cada uno antes de instalarlo.' : 'Small QML plugins with a published checksum and declared permissions. The shell does not sandbox them, so the catalogue lists what each one declares before you install it.'}
+      </p>
+    </div>
+    <ul class="plugin-list" role="list">
+      {
+        officialPlugins.map((plugin) => (
+          <li>
+            <a href={L(`/extensions#${plugin.id}-title`)}>
+              <strong>{plugin.name}</strong>
+              <span class="plugin-where">{plugin.placement === 'bar' ? (isEs ? 'En la barra' : 'In the bar') : (isEs ? 'En el dashboard' : 'On the dashboard')}</span>
+              <span class="plugin-what">{firstSentence(plugin.description)}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="band-foot">
+      <a href={L('/extensions')}>{isEs ? 'Abrí el catálogo de extensiones' : 'Open the extensions catalogue'}</a>
+      <a href="https://github.com/HorneroOS/plugins">{isEs ? 'Creá una para la comunidad' : 'Write one for the community'}</a>
+    </p>
+  </section>
+
+  <section class="section roots" aria-labelledby="roots-title">
+    <div class="band-head">
+      <h2 id="roots-title">{isEs ? 'Historia, con fuentes' : 'History, with sources'}</h2>
+      <p>
+        {isEs ? 'Hornero empezó como el escritorio diario de una persona y después se convirtió en proyectos separados. Cada paso posterior al primero enlaza al commit o tag que lo fecha. El primer paso es anterior a la historia pública y se basa en el relato de su maintainer.' : 'Hornero started as one person’s daily desktop and later became separate projects. Each step after the first links to the commit or tag that dates it. The first step predates public history and rests on the maintainer’s account.'}
+      </p>
+    </div>
+    <StoryTimeline entries={featuredStory} label={isEs ? 'Línea de tiempo de HorneroOS, 2018 a 2026' : 'HorneroOS timeline, 2018 to 2026'} locale={locale} />
+    <p class="band-foot">
+      <a href={L('/roots')}>{isEs ? 'Leé la historia completa' : 'Read the whole story'}</a>
+      <a href={`${pins.shell.repo}/blob/${pins.shell.sha}/NOTICE`}>{isEs ? 'El crédito y la licencia de Caelestia' : 'The Caelestia credit and license'}</a>
+    </p>
+  </section>
+
+  <section class="section open" aria-labelledby="open-title">
+    <div class="band-head">
+      <h2 id="open-title">{isEs ? 'Quiénes trabajan en esto' : 'Who works on it'}</h2>
+    </div>
+    <dl class="ledger">
+      <div>
+        <dt>{isEs ? 'Mantenedor' : 'Maintainer'}</dt>
+        <dd><a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>{isEs ? ', que usa este escritorio a diario desde 2018.' : ', who has used this desktop daily since 2018.'}</dd>
+      </div>
+      <div>
+        <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
+        <dd>
+          <a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ', mantenedor de ' : ', a maintainer of '}<a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>{isEs ? ', está desarrollando el instalador a medida.' : ', is developing the custom installer.'}
+        </dd>
+      </div>
+      <div>
+        <dt>Upstream</dt>
+        <dd>
+          {isEs ? 'La shell está adaptada de ' : 'The shell is adapted from '}<a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>{isEs ? '; su autor, su licencia y el commit importado quedan documentados en el repositorio.' : '; its author, license and imported commit stay documented in the repository.'}
+        </dd>
+      </div>
+      <div>
+        <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
+        <dd>
+          {isEs ? 'Las capturas de QA se siguen en ' : 'QA screenshots are tracked in '}<a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a>{isEs ? ' con sus hashes y revisiones pineadas. Otras capturas están etiquetadas como sesiones en vivo aportadas por colaboradores; el ' : ' with their hashes and pinned revisions. Other captures are labelled as contributor-provided live sessions; the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? ' lista la fuente de cada una. Shell ' : ' lists the source of each. Shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
+          {isEs ? 'y config ' : 'and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>{' '}
+          {isEs ? 'son los commits desde los que se construyen los datos de este sitio.' : 'are the commits this site’s data is built from.'}
+        </dd>
+      </div>
+      <div>
+        <dt>{isEs ? 'Contribuir' : 'Contribute'}</dt>
+        <dd>
+          {isEs ? 'Empezá con la ' : 'Start with the '}<a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{isEs ? 'guía de contribución' : 'contribution guide'}</a>
+          {isEs ? ' o el ' : ' or the '}<a href={L('/roots#repositories')}>{isEs ? 'mapa del proyecto' : 'project map'}</a>.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section get" aria-labelledby="get-title">
+    <div>
+      <h2 id="get-title">{isEs ? 'Conseguí HorneroOS' : 'Get HorneroOS'}</h2>
+      <p>
+        {readiness}. {isEs ? 'El escritorio se instala hoy como paquetes de Arch. Todavía no existe una ISO pública, y esta página lo va a seguir diciendo hasta que una pase la aceptación.' : 'The desktop installs today as Arch packages. A public ISO does not exist yet, and this page will say so until one passes acceptance.'}
+      </p>
+    </div>
+    <div class="get-links">
+      <a href={L('/install')} class="cta primary">{isEs ? 'Instalá en Arch' : 'Install on Arch'}</a>
+      <a href={L('/docs/')} class="cta secondary">{isEs ? 'Leé la documentación' : 'Read the docs'}</a>
+      <a href="https://github.com/HorneroOS" class="cta secondary">{isEs ? 'Explorá el código fuente' : 'Browse the source'}</a>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  /* ----------------------------------------------------------- cover --- */
+  .cover { position: relative; isolation: isolate; display: grid; gap: clamp(1rem, 2vw, 1.75rem); padding-block: 0 clamp(1.5rem, 3vw, 2.5rem); overflow-x: clip; }
+  /* La Plata's diagonal avenue cuts behind the capture, once. */
+  .cover-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: clamp(1rem, 3vw, 3rem); }
+  .cover-head .plate-id { grid-column: 1 / -1; margin-bottom: 0; }
+  .cover h1 { font-size: clamp(2.4rem, 0.8rem + 3.8vw, 4.4rem); line-height: 0.96; letter-spacing: -0.045em; text-wrap: balance; }
+  .cover-aside { display: grid; gap: 1rem; justify-items: start; padding-bottom: 0.3rem; }
+  .cover .lede { max-width: 40ch; font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.2rem); line-height: 1.5; }
+
+  .cover-shot { position: relative; justify-self: center; width: min(100%, calc((100svh - 19rem) * 1.7778)); min-width: min(100%, 38rem); margin: 0; }
+  .shot-frame { position: relative; padding: clamp(0.4rem, 1vw, 0.8rem); border: 1px solid color-mix(in srgb, var(--highlight) 40%, var(--line)); background: color-mix(in srgb, var(--surface) 60%, transparent); box-shadow: 0 2rem 4.5rem color-mix(in srgb, var(--bg) 55%, transparent); }
+  /* Registration marks at the four corners of the tube. */
+  .shot-frame::before, .shot-frame::after { position: absolute; width: 1.1rem; height: 1.1rem; content: ''; pointer-events: none; }
+  .shot-frame::before { top: -0.45rem; left: -0.45rem; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .shot-frame::after { right: -0.45rem; bottom: -0.45rem; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+  .shot-frame :global(img) { width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--surface); animation: tube-on 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  @media (min-width: 1240px) {
+    .cover-shot::before { position: absolute; z-index: -1; top: 0; left: calc(100% + 0.45rem); width: 9rem; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); content: ''; opacity: 0.7; transform: rotate(-35deg); transform-origin: left center; }
+  }
+  /* A fixed grid, so the caption's height does not depend on which face is loaded. */
+  .cover-shot figcaption { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.25rem 1rem; align-items: baseline; padding: 0.55rem 0.2rem 0; color: var(--text-muted); font: 0.68rem/1.35 var(--font-data); font-stretch: 87.5%; }
+  .shot-detail { min-width: 0; }
+  .shot-kind { color: var(--accent); font-weight: 700; }
+  .shot-credit { grid-column: 1 / -1; font: 0.7rem/1.4 var(--font-ui); letter-spacing: 0; }
+  .shot-credit a { color: var(--text); text-decoration-color: var(--accent); }
+  .cover-shot figcaption a { color: var(--text); text-decoration-color: var(--accent); }
+  @keyframes tube-on { from { clip-path: inset(46% 0 46% 0); filter: brightness(1.7); } to { clip-path: inset(0); filter: none; } }
+
+  .cover-facts { display: flex; flex-wrap: wrap; gap: 0.35rem 0; padding-top: 0.9rem; border-top: 1px solid var(--line); list-style: none; color: var(--text-muted); font-size: 0.86rem; }
+  .cover-facts li + li::before { margin-inline: 0.8rem; color: var(--accent); content: '/'; }
+  .cover-facts a { color: var(--text); text-decoration-color: var(--accent); }
+
+  /* ------------------------------------------------------------ bands --- */
+  .band-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
+  .band-head h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .band-head p { max-width: 52ch; color: var(--text-muted); }
+  .band-foot { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin-top: 1.25rem; }
+  .band-foot a { color: var(--text); text-decoration-color: var(--accent); }
+  .band-foot a:hover { color: var(--accent); }
+  .section { margin-block: clamp(3.5rem, 2rem + 6vw, 7rem); }
+  .section > * + * { margin-top: 0; }
+
+  .daily { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); }
+  .daily h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .daily-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 0.9rem clamp(1.5rem, 5vw, 5rem); }
+  .daily-copy h2 { grid-row: 1 / span 2; }
+  .daily-copy > p { grid-column: 2; }
+  .daily-copy p { color: var(--text-muted); max-width: 52ch; }
+  .daily .caveat { padding-left: 0.85rem; border-left: 2px solid var(--secondary); font-size: 0.85rem; }
+  .daily-shot { margin: 0; }
+  .daily-shot :global(img) { width: 100%; height: auto; aspect-ratio: 1918 / 1078; border: 1px solid var(--line); background: var(--surface); }
+  .daily-shot figcaption { padding-top: 0.5rem; color: var(--text-muted); font: 0.68rem var(--font-data); font-stretch: 87.5%; }
+
+  .family-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); list-style: none; }
+  .family-cell + .family-cell { border-left: 1px solid var(--line); }
+  .family-cell a { display: grid; align-content: start; gap: 0.4rem; height: 100%; padding: 1.1rem 1rem 1.25rem; color: var(--text); text-decoration: none; }
+  .family-cell a:hover .family-name { color: var(--accent); }
+  .family-name { font: 700 1.5rem var(--font-display); letter-spacing: -0.03em; }
+  .family-status { width: fit-content; padding: 0.1rem 0.45rem; border: 1px solid var(--secondary); color: var(--secondary); font: 0.64rem var(--font-data); font-stretch: 87.5%; text-transform: uppercase; }
+  .maturity-planned .family-status { border-style: dashed; color: var(--text-muted); border-color: var(--line); }
+  .maturity-preview .family-status, .maturity-supported .family-status { border-color: var(--accent); color: var(--accent); }
+  .family-detail { --app-logo-size: 0.95rem; display: grid; gap: 0.25rem; color: var(--text-muted); font-size: 0.82rem; }
+  .family-backend { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+  .plugin-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 5vw, 4rem); list-style: none; border-top: 1px solid var(--line); }
+  .plugin-list li { border-bottom: 1px solid var(--line); }
+  .plugin-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.2rem 1rem; padding-block: 1rem; color: var(--text); text-decoration: none; }
+  .plugin-list a:hover strong { color: var(--accent); }
+  .plugin-list strong { font-family: var(--font-display); font-size: 1.1rem; }
+  .plugin-where { color: var(--secondary); font: 0.68rem var(--font-data); font-stretch: 87.5%; }
+  .plugin-what { grid-column: 1 / -1; color: var(--text-muted); font-size: 0.9rem; }
+
+  .ledger { display: grid; border-top: 1px solid var(--line); }
+  .ledger > div { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 5fr); gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .ledger dt { color: var(--accent); font: 600 0.78rem var(--font-data); font-stretch: 87.5%; }
+  .ledger dd { max-width: 70ch; color: var(--text-muted); }
+  .ledger dd a { color: var(--text); text-decoration-color: var(--accent); }
+
+  .get { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); background: linear-gradient(115deg, color-mix(in srgb, var(--accent) 9%, var(--surface)), var(--surface) 60%); }
+  .get h2 { margin-bottom: 0.5rem; font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem); letter-spacing: -0.04em; }
+  .get p { max-width: 54ch; color: var(--text-muted); }
+  .get-links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-end; }
+
+  @media (max-width: 900px) {
+    .cover-head, .band-head, .daily-copy { grid-template-columns: 1fr; }
+    .daily-copy h2 { grid-row: auto; }
+    .daily-copy > p { grid-column: 1; }
+    .family-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .family-cell:nth-child(odd) { border-left: 0; }
+    .family-cell:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .plugin-list { grid-template-columns: 1fr; }
+    .get { align-items: start; flex-direction: column; }
+    .get-links { justify-content: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .cover { gap: 1rem; }
+    /* On a phone the desktop comes right after the headline; the copy follows. */
+    .cover-head { display: contents; }
+    .cover-head .plate-id { order: 1; }
+    .cover h1 { order: 2; }
+    .cover-shot { order: 3; min-width: 100%; }
+    .cover-shot figcaption { grid-template-columns: 1fr auto; }
+    .shot-detail { grid-column: 1 / -1; grid-row: 2; min-height: 2.7em; }
+    .cover-aside { order: 4; }
+    .cover-facts { order: 5; }
+    .ledger > div { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shot-frame :global(img) { animation: none; }
+  }
+</style>

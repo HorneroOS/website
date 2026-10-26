@@ -1,0 +1,390 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import AppLogo from '../../components/AppLogo.astro';
+import { editions, editionCatalogue } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+const maturityLabels = (
+  isEs
+    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview de Desktop', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Experimental', preview: 'Desktop preview', supported: 'Supported' }
+) as Record<'planned' | 'experimental' | 'preview' | 'supported', string>;
+const copy = (
+  isEs
+    ? {
+        desktop: { headline: 'Escritorio Wayland', body: 'Hornero Shell ofrece layouts, temas, configuración, un lanzador, un dashboard y controles de sesión.', href: '/showroom', link: 'Explorá el escritorio' },
+        server: { headline: 'Sistema sin pantalla', body: 'Un sistema para homelabs, máquinas virtuales y servicios autoalojados. Se opera de forma remota y no tiene sesión gráfica.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
+        agents: { headline: 'Alojamiento de agentes', body: 'Un entorno basado en Server con identidades aisladas, servicios restringidos y ciclos de vida de agentes inspeccionables.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
+        studio: { headline: 'Estación de trabajo creativa', body: 'Desktop más aplicaciones para trabajo de audio, video y visual, con flujos atentos al hardware.', href: '/studio', link: 'Sobre Studio (preview)' },
+      }
+    : {
+        desktop: { headline: 'Wayland desktop', body: 'Hornero Shell provides layouts, themes, settings, a launcher, a dashboard and session controls.', href: '/showroom', link: 'Explore the desktop' },
+        server: { headline: 'Headless system', body: 'A system for homelabs, virtual machines and self-hosted services. It is operated remotely and has no graphical session.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
+        agents: { headline: 'Agent hosting', body: 'A Server-based environment with isolated identities, constrained services and inspectable agent lifecycles.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
+        studio: { headline: 'Creative workstation', body: 'Desktop plus applications for audio, video and visual work, with hardware-aware workflows.', href: '/studio', link: 'About Studio (preview)' },
+      }
+) as Record<'desktop' | 'server' | 'agents' | 'studio', { headline: string; body: string; href: string; link: string }>;
+const familyOrder = ['desktop', 'server', 'agents', 'studio'];
+const byId = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
+const cards = familyOrder.map((id) => {
+  const edition = byId[id];
+  if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
+  const compositorIds = edition.compositor?.supported ?? [];
+  const compositors = compositorIds.map((backend) => {
+    const details = editionCatalogue.compositors.find((item) => item.id === backend);
+    return { id: backend, maturity: details?.maturity ?? 'planned' };
+  });
+  return { ...edition, ...copy[id as keyof typeof copy], compositors };
+});
+const statusLabel = (maturity: keyof typeof maturityLabels) => maturityLabels[maturity];
+const roleLabel = (
+  isEs
+    ? { desktop: 'Escritorio Wayland', server: 'Sistemas sin pantalla', 'agent-host': 'Alojamiento seguro de agentes', 'creative-workstation': 'Producción creativa' }
+    : { desktop: 'Wayland desktop', server: 'Headless systems', 'agent-host': 'Secure agent hosting', 'creative-workstation': 'Creative production' }
+) as Record<'desktop' | 'server' | 'agent-host' | 'creative-workstation', string>;
+---
+
+<SiteLayout
+  socialImage="/og/editions.png"
+  socialImageAlt={isEs ? "El layout Hornero Left en Hornero Dark de una corrida de QA, junto a la frase 'Desktop y Studio en preview, dos perfiles planificados'." : "The Hornero Left layout in Hornero Dark from a QA run, beside the line 'Desktop and Studio in preview, two profiles planned'."}
+  title={isEs ? 'Ediciones | HorneroOS' : 'Editions | HorneroOS'}
+  description={isEs ? 'HorneroOS tiene cuatro perfiles sobre una misma base: Desktop, Server, Agents y Studio. Solo Desktop tiene paquetes; el catálogo indica la madurez de cada perfil.' : 'HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Only Desktop has packages; the catalogue states each profile’s maturity.'}
+>
+  <section class="intro section">
+    <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>ARG / 199X</span><span>Madurez verificada por edición</span></p>
+    <h1>{isEs ? 'Ediciones' : 'Editions'}</h1>
+    <p class="lede">
+      {isEs ? 'HorneroOS se construye desde una base compartida más capacidades para cada rol. Desktop, Server, Agents y Studio son perfiles de ese único sistema, no distribuciones separadas.' : 'HorneroOS is built from a shared base plus capabilities for each role. Desktop, Server, Agents and Studio are profiles of that one system, not separate distributions.'}
+    </p>
+    <p class="availability">
+      {isEs ? 'La madurez difiere según el perfil. La primera ISO Preview ya está publicada: instala Desktop o la edición Studio Preview, y su matriz de instalación (UEFI/BIOS, con cifrado y sin cifrado) se ejecutó en máquinas virtuales desechables — evidencia de VM solamente, con el primer login UEFI todavía pendiente en el registro R11 del instalador y sin validación en hardware físico. Studio es Preview, no Supported, hasta que pase su puerta de evidencia de hardware.' : "Maturity differs by profile. The first Preview ISO is published: it installs Desktop or the Studio Preview edition, and its install matrix (UEFI/BIOS, encrypted/unencrypted) was executed in disposable virtual machines — VM evidence only, with UEFI first login still pending in the installer's R11 record and no physical-hardware validation. Studio is Preview, not Supported, until its hardware evidence gate passes."}{' '}
+      <a href={L('/install')}>{isEs ? 'Mirá qué se puede instalar hoy.' : 'See what can be installed today.'}</a>
+    </p>
+  </section>
+
+  <section class="family section" aria-labelledby="family-title">
+    <h2 id="family-title" class="sr-only">
+      {isEs ? 'Composición de las ediciones de HorneroOS' : 'HorneroOS edition composition'}
+    </h2>
+    <div class="foundation">
+      <span class="foundation-mark" aria-hidden="true">
+        H
+      </span>
+      <div>
+        <strong>{isEs ? 'Base HorneroOS' : 'HorneroOS Base'}</strong>
+        <span>{isEs ? 'Fundación común del sistema' : 'Common system foundation'}</span>
+      </div>
+      <span class="foundation-note">{isEs ? 'Compartida entre ediciones' : 'Shared across editions'}</span>
+    </div>
+    <div class="branch-line" aria-hidden="true"></div>
+    <div class="edition-grid">
+      {cards.map((edition) => (
+        <article class:list={['edition-card', `edition-${edition.id}`, `maturity-${edition.maturity}`]}>
+          <div class="edition-meta">
+            <span class="edition-role">{roleLabel[edition.role as keyof typeof roleLabel] ?? edition.role}</span>
+            <span class="maturity">{statusLabel(edition.maturity)}</span>
+          </div>
+          <h2>{edition.title.replace('HorneroOS ', '')}</h2>
+          <h3>{edition.headline}</h3>
+          <p>{edition.body}</p>
+          {edition.extends && <p class="extends">{isEs ? 'Se basa en ' : 'Builds on '}{byId[edition.extends]?.title.replace('HorneroOS ', '')}</p>}
+          {edition.compositors.length > 0 && (
+            <div class="backend-list" role="group" aria-label={isEs ? 'Opciones de compositor de escritorio' : 'Desktop compositor options'}>
+              <span class="backend-heading">{isEs ? 'Compositor Wayland' : 'Wayland compositor'}</span>
+              {edition.compositors.map((backend) => (
+                <span class="backend">
+                  <AppLogo id={backend.id} />
+                  <span class="backend-name">
+                    <strong>
+                      {backend.id === 'hyprland' ? 'Hyprland' : backend.id === 'niri' ? 'Niri' : backend.id}
+                    </strong>
+                    <small>{statusLabel(backend.maturity as keyof typeof maturityLabels)}</small>
+                  </span>
+                </span>
+              ))}
+            </div>
+          )}
+          <a class="edition-link" href={L(edition.href)}>
+            {edition.link}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section composition-note">
+    <h2>{isEs ? 'Cómo se relacionan las ediciones' : 'How the editions relate'}</h2>
+    <p>
+      {isEs ? 'Studio se basa en Desktop y Agents se basa en Server. El compositor es una elección de backend de Desktop. Hyprland es el predeterminado validado. Niri es experimental y tiene brechas de capacidad documentadas.' : 'Studio builds on Desktop and Agents builds on Server. The compositor is a Desktop backend choice. Hyprland is the validated default. Niri is experimental and has documented capability gaps.'}
+    </p>
+    <p>
+      {isEs ? 'Los estados de ediciones y compositores de esta página vienen del catálogo de composición pineado de Hornero. El mismo modelo está pensado para la introspección por CLI, la instalación y las herramientas de aceptación; los caminos de imagen e instalador todavía no están publicados.' : 'The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model is meant for CLI introspection, installation and acceptance tooling; the image and installer paths are not released yet.'}
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro.section {
+    margin-top: 0;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    padding-block: clamp(1rem, 3vw, 2.5rem);
+  }
+  .intro h1 {
+    max-width: 15ch;
+    margin-block: 0.55rem 1rem;
+    font-size: clamp(2.8rem, 2.1rem + 5vw, 5.7rem);
+  }
+  .intro h1 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .lede {
+    max-width: 52ch;
+    font-size: var(--step-1);
+  }
+  .availability {
+    max-width: 64ch;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .family {
+    padding-top: 0;
+  }
+  .foundation {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 0.9rem 1.15rem;
+    border: 1px solid var(--secondary);
+    border-radius: var(--arch);
+    background: var(--surface);
+  }
+  .foundation-mark {
+    display: grid;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 800;
+  }
+  .foundation strong,
+  .foundation div span {
+    display: block;
+  }
+  .foundation div span,
+  .foundation-note {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+  }
+  .foundation-note {
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--line);
+    font-size: 0.7rem;
+  }
+  .branch-line {
+    width: 1px;
+    height: 2.2rem;
+    margin: auto;
+    background: var(--secondary);
+  }
+  .edition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .edition-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: clamp(1rem, 1.8vw, 1.5rem);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--secondary);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .edition-card::before {
+    position: absolute;
+    top: -2.25rem;
+    left: 50%;
+    width: 1px;
+    height: 2.1rem;
+    background: var(--secondary);
+    content: '';
+  }
+  .edition-desktop {
+    border-top-color: var(--accent);
+  }
+  .edition-server {
+    border-top-color: var(--highlight);
+  }
+  .edition-agents {
+    border-top-color: var(--accent);
+  }
+  .edition-studio {
+    border-top-color: var(--mint);
+  }
+  .edition-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .edition-role,
+  .maturity {
+    font: 0.67rem var(--font-data);
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+  .edition-role {
+    color: var(--text-muted);
+  }
+  .maturity {
+    padding: 0.2rem 0.45rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text);
+  }
+  .maturity-preview {
+    border-color: var(--accent);
+  }
+  .edition-card > h2 {
+    margin-block: 1rem 0.3rem;
+    font-size: clamp(1.25rem, 1.15rem + 0.6vw, 1.8rem);
+  }
+  .edition-card > h3 {
+    color: var(--secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .edition-card > p {
+    margin-top: 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .edition-card .extends {
+    margin-top: 0.45rem;
+    color: var(--text);
+    font-size: 0.77rem;
+  }
+  .backend-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .backend-heading {
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+    font-size: 0.74rem;
+  }
+  .backend {
+    --app-logo-size: 1.55rem;
+    display: flex;
+    min-width: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .backend-name { display: grid; gap: 0.1rem; min-width: 0; }
+  .backend strong {
+    font-size: 0.83rem;
+    overflow-wrap: anywhere;
+  }
+  .backend small {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    overflow-wrap: anywhere;
+  }
+  /* Four-across edition cards are too narrow for two chips per row, so the
+     compositor chips always stack. */
+  .edition-link {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1.2rem;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .edition-link:hover {
+    color: var(--accent);
+  }
+  .composition-note {
+    max-width: 82ch;
+    margin-inline: auto;
+  }
+  .composition-note h2 {
+    margin-block: 0.5rem 1rem;
+  }
+  .composition-note p:not(.eyebrow) {
+    margin-top: 0.7rem;
+    color: var(--text-muted);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  @media (max-width: 980px) {
+    .edition-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 580px) {
+    .foundation {
+      width: 100%;
+    }
+    .foundation-note {
+      margin-left: auto;
+      font-size: 0.62rem;
+    }
+    .edition-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .edition-card {
+      padding: 1.2rem;
+    }
+    .edition-card::before {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .edition-link {
+      transition: none;
+    }
+  }
+</style>
+
+<style>
+  /* 199X per-page direction: editions as a technical composition diagram. */
+  .foundation { border: 1px solid var(--line); box-shadow: 10px 10px 0 color-mix(in srgb, var(--highlight) 18%, transparent); }
+  .maturity { font-family: var(--font-data); letter-spacing: 0.08em; text-transform: uppercase; }
+  .branch-line { background: linear-gradient(90deg, var(--accent), var(--highlight)); }
+</style>

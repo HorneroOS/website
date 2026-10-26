@@ -1,0 +1,375 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ArchFrame from '../../components/ArchFrame.astro';
+import { extensionCatalogue, pins, commitUrl } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+const shots = await getCollection('showroom');
+const dashboardShot = shots.find((item) => item.id === 'dashboard-extensions');
+if (!dashboardShot) throw new Error('Showroom capture is missing: dashboard-extensions');
+const plugins = extensionCatalogue.plugins;
+const repo = pins.plugins.repo;
+const catalogueUrl = commitUrl(repo, extensionCatalogue.generatedFrom);
+const sourcePinUrl = commitUrl(repo, pins.plugins.sha);
+const cliSourceUrl = commitUrl(pins.hornero.repo, pins.hornero.sha);
+const categories = [...new Set(plugins.map((plugin) => plugin.category))].sort();
+const processSummary = (commands: string[]) => (commands.length ? commands.join(', ') : isEs ? 'Ninguno declarado' : 'None declared');
+const networkSummary = (hosts: string[]) => (hosts.length ? hosts.join(', ') : isEs ? 'Ninguno declarado' : 'None declared');
+const settingsSummary = (settings: typeof plugins[number]['settings']) =>
+  Object.entries(settings).map(([name, setting]) => ({ name, ...setting }));
+---
+
+<SiteLayout
+  socialImage="/og/extensions.png"
+  socialImageAlt={isEs ? "Las extensiones oficiales de HorneroOS listadas por nombre y ubicación, junto a la línea 'Official extensions'." : "The official HorneroOS extensions listed by name and placement, beside the line 'Official extensions'."}
+  title={isEs ? 'Extensiones | HorneroOS' : 'Extensions | HorneroOS'}
+  description={isEs ? 'El catálogo oficial de extensiones de Hornero Shell, con revisiones de código, hashes de payload, capacidades declaradas y comandos de instalación.' : 'The official Hornero Shell extension catalogue, with source revisions, payload hashes, declared capabilities and install commands.'}
+>
+  <section class="extension-intro section" aria-labelledby="extensions-title">
+    <div class="intro-copy">
+      <p class="plate-id"><strong>Extensiones Hornero</strong><span>ARG / 199X</span><span>{isEs ? 'Catálogo oficial' : 'Official catalogue'}</span></p>
+      <h1 id="extensions-title">{isEs ? 'Extensiones' : 'Extensions'}</h1>
+      <p class="lede">
+        {isEs ? 'Extensiones propias para Hornero Shell, publicadas en ' : 'First-party extensions for Hornero Shell, published in '}<a href={repo}>HorneroOS/plugins</a>. {isEs ? 'El Centro de control y ' : 'Control Center and '}<code>horneroctl</code> {isEs ? 'las instalan como datos de paquete inertes. Activar una es un paso aparte.' : ' install them as inert package data. Enabling one is a separate step.'}
+      </p>
+      <div class="intro-links">
+        <a class="cta primary" href="#catalogue">{isEs ? `Explorá las ${plugins.length} extensiones oficiales` : `Browse ${plugins.length} official extensions`}</a>
+        <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/CONTRIBUTING.md`}>{isEs ? 'Leé la guía para contribuir' : 'Read contributor guide'}</a>
+      </div>
+    </div>
+
+    <aside class="catalogue-stamp" aria-label={isEs ? 'Procedencia del catálogo' : 'Catalogue provenance'}>
+      <p class="stamp-heading"><span>{isEs ? 'Hornero / mesa de plugins' : 'Hornero / plugin desk'}</span><span>{isEs ? 'Oficial' : 'Official'}</span></p>
+      <p class="stamp-count"><strong>{String(plugins.length).padStart(2, '0')}</strong><span>{isEs ? 'extensiones' : 'extensions'}<br />{isEs ? 'en el catálogo' : 'in catalogue'}</span></p>
+      <dl>
+        <div>
+          <dt>{isEs ? 'Snapshot del catálogo' : 'Catalogue snapshot'}</dt>
+          <dd><a href={catalogueUrl}><code>{extensionCatalogue.generatedFrom}</code></a></dd>
+        </div>
+        <div>
+          <dt>{isEs ? 'Pin de código del sitio' : 'Website source pin'}</dt>
+          <dd><a href={sourcePinUrl}><code>{pins.plugins.sha}</code></a></dd>
+        </div>
+        <div>
+          <dt>{isEs ? 'Integridad' : 'Integrity'}</dt>
+          <dd>{isEs ? 'SHA-256 verificado por ' : 'SHA-256 checked by '}<code>horneroctl</code></dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="trust-strip section" aria-labelledby="trust-title">
+    <div class="trust-mark" aria-hidden="true">!</div>
+    <div>
+      <h2 id="trust-title">{isEs ? 'Las extensiones corren con tus permisos' : 'Extensions run with your permissions'}</h2>
+      <p>
+        {isEs ? 'Hornero Shell no aísla las extensiones en un sandbox. Los comandos, hosts de red y ajustes de abajo son lo que cada plugin declara; nada los hace cumplir. Leé el código fijado antes de activar una. La Shell te pide confirmación.' : 'Hornero Shell does not sandbox extensions. The commands, network hosts and settings below are what each plugin declares; nothing enforces them. Read the pinned source before enabling one. The Shell asks you to confirm.'}
+      </p>
+    </div>
+    <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/SECURITY.md`}>{isEs ? 'Leé el modelo de seguridad' : 'Read the security model'}</a>
+  </section>
+
+  <section class="where-section section" aria-labelledby="where-title">
+    <div class="where-copy">
+      <h2 id="where-title">{isEs ? 'Dónde aparecen las extensiones' : 'Where extensions appear'}</h2>
+      <p>
+        {isEs ? 'Una extensión con ubicación en el dashboard obtiene una tarjeta en la pestaña Extensiones del Dashboard, junto a Media, Performance, Weather y Workspaces. Una extensión de barra queda en la barra. La captura muestra la barra de pestañas del Dashboard en un escritorio activo; no muestra la pestaña Extensiones en sí.' : 'An extension with a dashboard placement gets a card in the Dashboard’s Extensions tab, next to Media, Performance, Weather and Workspaces. A bar extension sits in the bar. The capture shows the Dashboard’s tab bar on a live desktop; it does not show the Extensions tab itself.'}
+      </p>
+    </div>
+    <ArchFrame
+      src={dashboardShot.data.image}
+      alt={dashboardShot.data.alt}
+      provenance={dashboardShot.data.provenance}
+      sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
+      widths={[640, 960, 1280, 1600]}
+    />
+  </section>
+
+  <section class="extension-catalogue section" id="catalogue" aria-labelledby="catalogue-title">
+    <div class="section-heading">
+      <div>
+        <h2 id="catalogue-title">{isEs ? `Catálogo oficial, ${plugins.length} paquetes` : `Official catalogue, ${plugins.length} packages`}</h2>
+      </div>
+      <p>
+        {isEs ? 'Cada tarjeta muestra dónde aparece la extensión y qué declara. Abrí una para ver su checksum, código y comando de instalación. Todavía no hay capturas de estas extensiones, así que los esquemas muestran solo la ubicación.' : 'Each card shows where the extension appears and what it declares. Open one for its checksum, source and install command. There are no screenshots of these extensions yet, so the schematics show placement only.'}
+      </p>
+    </div>
+
+    <div class="catalogue-controls" data-catalogue-controls data-locale={locale} hidden>
+      <label class="catalogue-search">
+        <span>{isEs ? 'Buscar extensiones' : 'Search extensions'}</span>
+        <input type="search" data-catalogue-search placeholder={isEs ? 'Nombre, función o ubicación' : 'Name, feature, or placement'} autocomplete="off" />
+      </label>
+      <label class="catalogue-category">
+        <span>{isEs ? 'Categoría' : 'Category'}</span>
+        <select data-catalogue-category>
+          <option value="all">{isEs ? 'Todas las categorías' : 'All categories'}</option>
+          {categories.map((category) => <option value={category}>{category}</option>)}
+        </select>
+      </label>
+      <p class="catalogue-result-count" data-catalogue-count aria-live="polite" aria-atomic="true">
+        {plugins.length} {isEs ? 'extensiones oficiales' : 'official extensions'}
+      </p>
+    </div>
+
+    <ul class="extension-grid" role="list">
+      {plugins.map((plugin) => {
+        const sourceUrl = `${repo}/tree/${pins.plugins.sha}/${plugin.path}`;
+        const licenseUrl = `${repo}/blob/${pins.plugins.sha}/${plugin.path}/LICENSE`;
+        const settings = settingsSummary(plugin.settings);
+        const searchText = [plugin.id, plugin.name, plugin.description, plugin.author, plugin.category, plugin.placement]
+          .join(' ')
+          .toLocaleLowerCase();
+        return (
+          <li
+            class="extension-card"
+            data-extension-card
+            data-category={plugin.category}
+            data-search={searchText}
+          >
+            <article aria-labelledby={`${plugin.id}-title`}>
+              <header class="card-heading">
+                <div>
+                  <p class="extension-id"><span>{plugin.trust}</span><code>{plugin.id}</code></p>
+                  <h3 id={`${plugin.id}-title`}>{plugin.name}</h3>
+                </div>
+                <span class="placement-tag">{plugin.placement}</span>
+              </header>
+              <p class="card-description">{plugin.description}</p>
+
+              <div class="placement" aria-label={plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}>
+                <svg viewBox="0 0 160 52" role="presentation" aria-hidden="true" focusable="false">
+                  {plugin.placement === 'bar' ? (
+                    <>
+                      <rect x="1" y="1" width="158" height="50" rx="3" class="slot-screen" />
+                      <rect x="6" y="6" width="148" height="9" rx="2" class="slot-bar" />
+                      <rect x="112" y="7.5" width="22" height="6" rx="1.5" class="slot-plugin" />
+                    </>
+                  ) : (
+                    <>
+                      <rect x="1" y="1" width="158" height="50" rx="3" class="slot-screen" />
+                      <rect x="36" y="8" width="88" height="38" rx="3" class="slot-bar" />
+                      <rect x="42" y="14" width="34" height="12" rx="2" class="slot-tile" />
+                      <rect x="80" y="14" width="38" height="12" rx="2" class="slot-plugin" />
+                      <rect x="42" y="30" width="76" height="10" rx="2" class="slot-tile" />
+                    </>
+                  )}
+                </svg>
+                <span>{plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}</span>
+              </div>
+
+              <ul class="declared" role="list" aria-label={isEs ? 'Declarado por el plugin, no impuesto por la shell' : 'Declared by the plugin, not enforced by the shell'}>
+                <li>{plugin.processCommands.length ? `${isEs ? 'Declara comandos' : 'Declares commands'}: ${plugin.processCommands.join(', ')}` : isEs ? 'Sin comandos de proceso declarados' : 'No process commands declared'}</li>
+                <li>{plugin.networkHosts.length ? `${isEs ? 'Declara hosts' : 'Declares hosts'}: ${plugin.networkHosts.join(', ')}` : isEs ? 'Sin hosts de red declarados' : 'No network hosts declared'}</li>
+                <li>{settings.length ? `${settings.length} ${settings.length === 1 ? (isEs ? 'ajuste declarado' : 'setting') : (isEs ? 'ajustes declarados' : 'settings')} ${isEs ? '' : 'declared'}`.trim() : isEs ? 'Sin ajustes declarados' : 'No settings declared'}</li>
+              </ul>
+
+              <details class="evidence">
+                <summary>{isEs ? 'Instalación, checksum y código' : 'Install, checksum and source'}</summary>
+                <dl class="extension-facts">
+                  <div><dt>{isEs ? 'Versión' : 'Version'}</dt><dd>{plugin.version}</dd></div>
+                  <div><dt>{isEs ? 'Categoría' : 'Category'}</dt><dd>{plugin.category}</dd></div>
+                  <div><dt>{isEs ? 'Autor' : 'Author'}</dt><dd>{plugin.author}</dd></div>
+                  <div><dt>{isEs ? 'Licencia' : 'License'}</dt><dd><a href={licenseUrl}>{plugin.license}</a></dd></div>
+                  <div class="wide-fact">
+                    <dt>{isEs ? 'Comandos de proceso declarados' : 'Process commands declared'}</dt>
+                    <dd><code>{processSummary(plugin.processCommands)}</code></dd>
+                  </div>
+                  <div class="wide-fact">
+                    <dt>{isEs ? 'Hosts de red declarados' : 'Network hosts declared'}</dt>
+                    <dd><code>{networkSummary(plugin.networkHosts)}</code></dd>
+                  </div>
+                  <div class="wide-fact">
+                    <dt>{isEs ? 'Ajustes declarados' : 'Settings declared'}</dt>
+                    <dd>
+                      {settings.length ? (
+                        <ul class="settings-list" role="list">
+                          {settings.map((setting) => (
+                            <li>
+                              <code>{setting.name}</code> · {setting.type}, {isEs ? 'default' : 'default'} <code>{String(setting.default)}</code>
+                              {setting.description ? <span> — {setting.description}</span> : null}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : <span>{isEs ? 'Ninguno declarado' : 'None declared'}</span>}
+                    </dd>
+                  </div>
+                </dl>
+                <div class="integrity-fact">
+                  <span>{isEs ? 'SHA-256 del payload' : 'Payload SHA-256'}</span>
+                  <code>{plugin.sha256}</code>
+                </div>
+                <div class="card-actions">
+                  <a class="text-link" href={sourceUrl}>{isEs ? 'Código fijado' : 'Pinned source'} <span aria-hidden="true">↗</span></a>
+                  <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
+                  <small class="install-requirement">
+                    {isEs ? 'Requiere ' : 'Requires '}<a href={cliSourceUrl}>{isEs ? 'horneroctl en esta revisión' : 'horneroctl at this revision'}</a> {isEs ? 'o posterior; Preview29 no soporta ' : 'or later; Preview29 does not support '}
+                    <code>--revision</code>.
+                  </small>
+                </div>
+              </details>
+            </article>
+          </li>
+        );
+      })}
+    </ul>
+    <p class="catalogue-empty" data-catalogue-empty hidden>{isEs ? 'Ninguna extensión coincide. Probá con otra búsqueda o categoría.' : 'No extensions match. Try another search or category.'}</p>
+  </section>
+
+  <section class="developer-section section" aria-labelledby="developer-title">
+    <div>
+      <h2 id="developer-title">{isEs ? 'Escribí una extensión' : 'Write an extension'}</h2>
+    </div>
+    <div class="developer-copy">
+      <p>
+        {isEs ? 'El esquema del catálogo no tiene campos para compatibilidad con la API de la Shell ni dependencias. Revisá el contrato fijado de la Shell y el validador de plugins antes de confiar en cualquiera de los dos. Las entradas oficiales se revisan y se guardan en ' : 'The catalogue schema has no fields for Shell API compatibility or dependencies. Check the pinned Shell contract and the plugin validator before relying on either. Official entries are reviewed and kept in '}
+        <code>HorneroOS/plugins</code>. {isEs ? 'Todavía no hay un catálogo público de la comunidad.' : 'There is no public community catalogue yet.'}
+      </p>
+      <div class="developer-links">
+        <a class="text-link" href={`${repo}/tree/${pins.plugins.sha}/templates/starter-plugin`}>{isEs ? 'Plantilla inicial' : 'Starter template'}</a>
+        <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/CONTRIBUTING.md`}>{isEs ? 'Guía de contribución' : 'Contribution guide'}</a>
+        <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/SECURITY.md`}>{isEs ? 'Modelo de seguridad' : 'Security model'}</a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<script>
+  const controls = document.querySelector<HTMLElement>('[data-catalogue-controls]');
+  const search = document.querySelector<HTMLInputElement>('[data-catalogue-search]');
+  const category = document.querySelector<HTMLSelectElement>('[data-catalogue-category]');
+  const count = document.querySelector<HTMLElement>('[data-catalogue-count]');
+  const empty = document.querySelector<HTMLElement>('[data-catalogue-empty]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-extension-card]'));
+  let announcementTimer: number | undefined;
+
+  if (controls && search && category && count && empty && cards.length > 0) {
+    const updateCatalogue = () => {
+      const query = search.value.trim().toLocaleLowerCase();
+      const selectedCategory = category.value;
+      let visible = 0;
+
+      for (const card of cards) {
+        const matchesQuery = (card.dataset.search ?? '').includes(query);
+        const matchesCategory = selectedCategory === 'all' || card.dataset.category === selectedCategory;
+        const matches = matchesQuery && matchesCategory;
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      }
+
+      window.clearTimeout(announcementTimer);
+      announcementTimer = window.setTimeout(() => {
+        count.textContent =
+          controls.dataset.locale === 'es'
+            ? `${visible} ${visible === 1 ? 'extensión encontrada' : 'extensiones encontradas'}`
+            : `${visible} ${visible === 1 ? 'extension' : 'extensions'} found`;
+      }, 300);
+      empty.hidden = visible !== 0;
+    };
+
+    search.addEventListener('input', updateCatalogue);
+    category.addEventListener('change', updateCatalogue);
+    controls.hidden = false;
+  }
+</script>
+
+<style>
+  .extension-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.7fr); gap: clamp(2rem, 7vw, 7rem); align-items: end; padding-block: clamp(1.5rem, 4vw, 3rem); }
+  .intro-copy h1 { max-width: 13ch; margin-top: 1rem; font-size: clamp(3.4rem, 7vw, 6.4rem); line-height: 0.88; letter-spacing: -0.08em; }
+  .intro-copy h1 em { color: var(--accent); font-style: normal; }
+  .intro-copy .lede { max-width: 62ch; margin-top: 1.25rem; }
+  .intro-links, .developer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1.5rem; }
+  .catalogue-stamp { padding: 1.25rem; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: var(--surface); }
+  .stamp-heading { display: flex; justify-content: space-between; gap: 1rem; color: var(--secondary); font: 0.67rem var(--font-data); text-transform: uppercase; }
+  .stamp-count { display: flex; align-items: center; gap: 1rem; margin-block: 1.2rem; }
+  .stamp-count strong { color: var(--accent); font: 5.5rem/0.85 var(--font-display); letter-spacing: -0.1em; }
+  .stamp-count span { color: var(--text-muted); font: 0.72rem var(--font-data); line-height: 1.5; text-transform: uppercase; }
+  .catalogue-stamp dl { display: grid; gap: 0.85rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .catalogue-stamp dl div { display: grid; gap: 0.3rem; }
+  .catalogue-stamp dt, .extension-facts dt, .integrity-fact > span { color: var(--secondary); font: 0.64rem var(--font-data); text-transform: uppercase; }
+  .catalogue-stamp dd { margin: 0; overflow-wrap: anywhere; font-size: 0.78rem; }
+  .catalogue-stamp code { font-size: 0.7rem; }
+  .trust-strip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.25rem; padding-block: clamp(1.5rem, 4vw, 2.5rem); border-block: 1px solid var(--line); }
+  .trust-mark { display: grid; width: 2.4rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--accent); color: var(--accent); font: 1.4rem var(--font-data); }
+  .trust-strip h2 { margin-top: 0.2rem; font-size: clamp(1.45rem, 2.2vw, 2rem); }
+  .trust-strip p:not(.eyebrow) { max-width: 78ch; margin-top: 0.45rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  .trust-strip > a { max-width: 14rem; }
+  .extension-catalogue { padding-block: clamp(3rem, 7vw, 6rem); }
+  .extension-catalogue .section-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.7fr); align-items: end; gap: 2rem; margin-bottom: 1.7rem; }
+  .extension-catalogue .section-heading h2, .developer-section h2 { margin-top: 0.45rem; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.055em; }
+  .extension-catalogue .section-heading > p { max-width: 50ch; color: var(--text-muted); line-height: 1.6; }
+  .catalogue-controls { display: grid; grid-template-columns: minmax(16rem, 1fr) minmax(12rem, 0.45fr) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--line); background: var(--surface); }
+  .catalogue-controls[hidden], .extension-card[hidden], .catalogue-empty[hidden] { display: none; }
+  .catalogue-controls label { display: grid; gap: 0.35rem; }
+  .catalogue-controls label > span { color: var(--secondary); font: 0.65rem var(--font-data); text-transform: uppercase; }
+  .catalogue-controls input, .catalogue-controls select { min-height: 2.8rem; padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text); font: inherit; }
+  .catalogue-controls input::placeholder { color: var(--text-muted); opacity: 1; }
+  .catalogue-result-count { align-self: center; color: var(--text-muted); font: 0.68rem var(--font-data); white-space: nowrap; }
+  .catalogue-empty { padding: 2rem 1rem; border: 1px dashed var(--line); color: var(--text-muted); text-align: center; }
+  .extension-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; padding: 1px; background: var(--line); list-style: none; }
+  .extension-card { min-width: 0; background: var(--bg); }
+  .extension-card article { height: 100%; padding: clamp(1.1rem, 2.3vw, 1.8rem); }
+  .card-heading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+  .extension-id { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; color: var(--secondary); font: 0.63rem var(--font-data); text-transform: uppercase; }
+  .extension-id span { padding: 0.18rem 0.35rem; border: 1px solid var(--secondary); }
+  .extension-id code { overflow-wrap: anywhere; }
+  .card-heading h3 { margin-top: 0.65rem; font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
+  .placement-tag { flex: 0 0 auto; padding: 0.35rem 0.5rem; border: 1px solid var(--highlight); color: var(--highlight); font: 0.62rem var(--font-data); text-transform: uppercase; }
+  .card-description { margin-top: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+  .placement { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.2rem; color: var(--text-muted); font: 0.7rem var(--font-data); font-stretch: 87.5%; }
+  .placement svg { width: 8.5rem; height: auto; flex: none; }
+  .slot-screen { fill: none; stroke: var(--line); stroke-width: 1.5; }
+  .slot-bar { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
+  .slot-tile { fill: var(--surface-raised); }
+  .slot-plugin { fill: var(--accent); }
+  .declared { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; list-style: none; }
+  .declared li { padding: 0.2rem 0.55rem; border: 1px solid var(--line); color: var(--text); font-size: 0.78rem; }
+  .evidence { margin-top: 1.2rem; border-top: 1px solid var(--line); }
+  .evidence > summary { padding-block: 0.8rem; color: var(--text); font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+  .evidence > summary:hover { color: var(--accent); }
+  .evidence[open] > summary { margin-bottom: 0.4rem; }
+  .extension-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .extension-facts > div { display: grid; align-content: start; gap: 0.35rem; min-width: 0; }
+  .extension-facts dd { min-width: 0; margin: 0; overflow-wrap: anywhere; font-size: 0.82rem; }
+  .extension-facts code { font-size: 0.74rem; }
+  .extension-facts .wide-fact { grid-column: 1 / -1; }
+  .settings-list { display: grid; gap: 0.4rem; padding: 0; list-style: none; }
+  .integrity-fact { display: grid; gap: 0.4rem; margin-top: 1rem; padding: 0.85rem; border-left: 2px solid var(--accent); background: var(--surface); }
+  .integrity-fact code { overflow-wrap: anywhere; font-size: 0.68rem; }
+  .card-actions { display: grid; gap: 0.9rem; margin-top: 1.1rem; }
+  .card-actions .text-link { justify-self: start; }
+  .install-command { display: block; padding: 0.65rem; overflow-wrap: anywhere; border: 1px solid var(--line); color: var(--text); font-size: 0.69rem; }
+  .developer-section { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1fr); gap: clamp(2rem, 8vw, 8rem); padding-block: clamp(3rem, 8vw, 7rem); border-top: 1px solid var(--line); }
+  .developer-copy > p { max-width: 72ch; color: var(--text-muted); line-height: 1.7; }
+  .developer-copy code { color: var(--text); }
+  .developer-links { margin-top: 1.25rem; }
+  @media (max-width: 760px) {
+    .extension-intro, .extension-catalogue .section-heading, .developer-section { grid-template-columns: 1fr; }
+    .trust-strip { grid-template-columns: auto minmax(0, 1fr); }
+    .trust-strip > a { grid-column: 2; }
+    .catalogue-controls { grid-template-columns: 1fr 1fr; }
+    .catalogue-result-count { grid-column: 1 / -1; }
+    .extension-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 440px) {
+    .catalogue-controls { grid-template-columns: 1fr; }
+    .catalogue-result-count { grid-column: auto; }
+    .extension-facts { grid-template-columns: 1fr; }
+    .extension-facts .wide-fact { grid-column: auto; }
+    .stamp-count strong { font-size: 4.7rem; }
+    .trust-strip { align-items: start; }
+  }
+  .where-section { display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
+  .where-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); }
+  .where-copy h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+  .where-copy p { max-width: 54ch; color: var(--text-muted); }
+  @media (max-width: 760px) { .where-copy { grid-template-columns: minmax(0, 1fr); } }
+</style>

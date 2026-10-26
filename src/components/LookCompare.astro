@@ -7,12 +7,16 @@
 import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
+import type { Locale } from '../i18n/ui';
+
 interface Props {
   dark: CollectionEntry<'showroom'>;
   light: CollectionEntry<'showroom'>;
+  locale?: Locale;
 }
 
-const { dark, light } = Astro.props;
+const { dark, light, locale = 'es' } = Astro.props;
+const isEs = locale === 'es';
 const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
 ---
 
@@ -27,7 +31,7 @@ const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
       loading="lazy"
       decoding="async"
     />
-    <figcaption>Hornero Dark</figcaption>
+    <figcaption>{isEs ? 'Hornero Oscuro' : 'Hornero Dark'}</figcaption>
   </figure>
   <figure class="look look-light">
     <Picture
@@ -39,10 +43,10 @@ const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
       loading="lazy"
       decoding="async"
     />
-    <figcaption>Hornero Light</figcaption>
+    <figcaption>{isEs ? 'Hornero Claro' : 'Hornero Light'}</figcaption>
   </figure>
   <label class="look-range" hidden>
-    <span class="visually-hidden">Reveal Hornero Light over Hornero Dark</span>
+    <span class="visually-hidden">{isEs ? 'Revelá Hornero Claro sobre Hornero Oscuro' : 'Reveal Hornero Light over Hornero Dark'}</span>
     <input type="range" min="0" max="100" value="50" step="1" />
   </label>
 </div>
