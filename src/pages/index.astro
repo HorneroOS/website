@@ -306,7 +306,7 @@ const description = `HorneroOS is an Arch-based, Wayland-first Linux desktop fro
 
 <style>
   /* ----------------------------------------------------------- cover --- */
-  .cover { position: relative; isolation: isolate; display: grid; gap: clamp(1rem, 2vw, 1.75rem); padding-block: 0 clamp(1.5rem, 3vw, 2.5rem); }
+  .cover { position: relative; isolation: isolate; display: grid; gap: clamp(1rem, 2vw, 1.75rem); padding-block: 0 clamp(1.5rem, 3vw, 2.5rem); overflow-x: clip; }
   /* La Plata's diagonal avenue cuts behind the capture, once. */
   .cover-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: clamp(1rem, 3vw, 3rem); }
   .cover-head .plate-id { grid-column: 1 / -1; margin-bottom: 0; }
