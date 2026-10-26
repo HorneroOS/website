@@ -1,14 +1,32 @@
 [
   {
+    "name": "v0.2.0-preview21",
+    "version": "0.2.0-preview21",
+    "date": "2026-10-26",
+    "status": "candidate",
+    "summary": "Unpublished release candidate for the first Desktop + Studio Preview ISO. Delta install QA executed on the pinned ISO (Studio 4/4 PASS, Desktop UEFI-encrypted smoke PASS, hornero#310 fixed); creative workflow evidence is partial (Blender/Kdenlive/persistence PASS, OBS BLOCKED in the VM harness, mode transition safely refused without power-profiles-daemon); cancel-during-install leaks the Calamares target mount (FAIL, recorded). hornero-qa studio-gate remains BLOCKED pending maintainer evidence acceptance, Studio remains planned, and the ISO is unsigned. Do not tag or publish without maintainer approval.",
+    "manifest": "hornero-0.2.0-preview21",
+    "shell": {
+      "sha": "5e14df7c0a90e1f4a84a270c946813dcd27d68e7",
+      "subject": "Merge pull request #331 from HorneroOS/feat/shell-ux-pass-2"
+    },
+    "config": {
+      "sha": "75c196f58b5c4237461c9885b4cb7ed7c5c61ac9",
+      "subject": "feat(hypr): migrate Hyprland config and helpers to Lua-only (#107)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview20",
     "version": "0.2.0-preview20",
     "date": "2026-10-19",
-    "status": "candidate",
+    "status": "untagged",
     "summary": "Unpublished composition candidate for the Shell-owned community plugin validator, reliable terminal selection, accessible Control Center navigation, and receipt-owned Hornero CLI package manager. Community package data remains inert and is not loaded by the Shell. Exact-pin VM and Hornero QA acceptance are still required before this can be tagged or presented as an installable release. Installer and ISO remain future slots.",
     "manifest": "hornero-0.2.0-preview20",
     "shell": {
-      "sha": "02c61e400e17a6fbb0a9ea71e67a4adcce98cd34",
-      "subject": "feat(controlcenter): add gated Studio render jobs surface (#328)"
+      "sha": "5e14df7c0a90e1f4a84a270c946813dcd27d68e7",
+      "subject": "Merge pull request #331 from HorneroOS/feat/shell-ux-pass-2"
     },
     "config": {
       "sha": "10c9477cb770c986908d64a58e95dac8c2870e69",
