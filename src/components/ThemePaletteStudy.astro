@@ -119,7 +119,7 @@ const colorRoles = [
       {colorRoles.map((role) => (
         <div class="role-swatch" data-role={role.key}>
           <span aria-hidden="true"></span>
-          <small>{isEs ? ({ Primary: 'Primario', Accent: 'Acento' }[role.label] ?? role.label) : role.label}</small>
+          <small>{isEs ? (({ Primary: 'Primario', Accent: 'Acento', Surface: 'Superficie', Canvas: 'Lienzo', Text: 'Texto', Muted: 'Apagado' }) as Record<string, string>)[role.label] ?? role.label : role.label}</small>
           <code data-role-value>{paletteFor(initialTheme)[role.key]}</code>
         </div>
       ))}
