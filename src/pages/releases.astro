@@ -19,15 +19,16 @@ const config = pins.config.repo;
 
 <SiteLayout
   title="Releases | HorneroOS"
-  description="Every HorneroOS composition: the shell and config commits it pins, whether it was tagged and what changed. No install image has shipped."
+  description="Every HorneroOS composition: the shell and config commits it pins, whether it was tagged and what changed. Development Preview 21 ships the first signed Preview ISO."
 >
   <section class="section">
     <p class="plate-id"><strong>Archivo de transmisiones</strong><span>ARG / 199X</span><span>Pre-release history</span></p>
     <h1>Releases</h1>
     <p>
       A Hornero release is a composition manifest: it pins the exact shell and config commits that ship together, and
-      <code>horneroctl</code> is built from the same tree. No release has shipped an ISO or an installer. A provisional
-      Calamares implementation remains under development and awaits virtual-machine acceptance.
+      <code>horneroctl</code> is built from the same tree. Development Preview 21 is the first release with an install
+      image: a signed x86_64 Preview ISO (Desktop + Studio candidate) that passed the VM installation matrix. See{' '}
+      <a href="/install">Install</a> for the checksum, signature and verification instructions.
     </p>
     <dl class="now">
       {latestTagged && (
