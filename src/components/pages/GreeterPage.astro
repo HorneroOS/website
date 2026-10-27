@@ -191,7 +191,7 @@ const description = isEs
               type="button"
               class="mood-card"
               data-mood-card={scene.daypart}
-              aria-label={isEs ? `Previsualizá ${scene.daypart}: ${scene.place}` : `Preview ${scene.daypart}: ${scene.place}`}
+              aria-label={isEs ? `Previsualizá ${{ day: 'de día', 'golden-hour': 'en la hora dorada', night: 'de noche' }[scene.daypart] ?? scene.daypart}: ${scene.place}` : `Preview ${scene.daypart}: ${scene.place}`}
             >
               <img src={scene.poster} alt="" loading="lazy" width="1280" height="720" />
               <span class="mood-card-copy">

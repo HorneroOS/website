@@ -101,7 +101,7 @@ const statusName = (
   <section class="section">
     <h2>{isEs ? 'Qué existe hoy' : 'What exists today'}</h2>
     <p>
-      {isEs ? 'La preview de Desktop llega como paquetes del Arch User Repository para quienes ya corren Arch Linux. Son los componentes de un escritorio Wayland-first, no una instalación llave en mano de HorneroOS. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'The Desktop preview ships as Arch User Repository packages for people who already run Arch Linux. They are the components of a Wayland-first desktop, not a turnkey HorneroOS installation. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
+      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO Preview firmada de arriba (Desktop o Studio Preview), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed Preview ISO above (Desktop or Studio Preview), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
     </p>
     <ul role="list" class="packages">
       {packages.map((p) => (
