@@ -121,7 +121,7 @@ const community = {
           <small>ARG / 199X · La Plata — Buenos Aires</small>
         </span>
       </a>
-      <nav aria-label={t(locale, 'mainNavLabel')}>
+      <nav class="main-nav" aria-label={t(locale, 'mainNavLabel')}>
         <ul>
           {nav.map((item) =>
             item.kind === 'link' ? (
@@ -188,8 +188,8 @@ const community = {
               ),
             )}
             <li>
-              <a href="/install" class="nav-install" aria-current={isCurrent('/install') ? 'page' : undefined}>
-                Get HorneroOS
+              <a href={L('/install')} class="nav-install" aria-current={isCurrent(L('/install')) ? 'page' : undefined}>
+                {t(locale, 'getHorneroOS')}
               </a>
             </li>
           </ul>

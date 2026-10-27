@@ -1,0 +1,431 @@
+- generic [active] [ref=f2e1]:
+  - link "Saltar al contenido" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f2e3]:
+    - link "Hornero OS" [ref=f2e4] [cursor=pointer]:
+      - /url: /
+    - navigation "Principal" [ref=f2e18]:
+      - list [ref=f2e19]:
+        - listitem [ref=f2e20]:
+          - group [ref=f2e21]:
+            - generic "Escritorio" [ref=f2e22] [cursor=pointer]:
+              - text: Escritorio
+              - generic [aria-hidden] [ref=f2e23]: ⌄
+        - listitem [ref=f2e24]:
+          - link "Ediciones" [ref=f2e25] [cursor=pointer]:
+            - /url: /editions
+        - listitem [ref=f2e26]:
+          - link "Studio" [ref=f2e27] [cursor=pointer]:
+            - /url: /studio
+        - listitem [ref=f2e28]:
+          - link "Extensiones" [ref=f2e29] [cursor=pointer]:
+            - /url: /extensions
+        - listitem [ref=f2e30]:
+          - group [ref=f2e31]:
+            - generic "Historia" [ref=f2e32] [cursor=pointer]:
+              - text: Historia
+              - generic [aria-hidden] [ref=f2e33]: ⌄
+        - listitem [ref=f2e34]:
+          - link "Docs" [ref=f2e35] [cursor=pointer]:
+            - /url: /docs/
+        - listitem [ref=f2e36]:
+          - link "Buscar" [ref=f2e37] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=f2e38]:
+          - link "Conseguir HorneroOS" [ref=f2e39] [cursor=pointer]:
+            - /url: /install
+    - list "HorneroOS en GitHub" [ref=f2e40]:
+      - listitem [ref=f2e41]:
+        - link "Organización HorneroOS en GitHub" [ref=f2e42] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS
+      - listitem [ref=f2e45]:
+        - link "Dar una estrella a HorneroOS en GitHub" [ref=f2e46] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS/hornero
+          - generic [ref=f2e49]: Star
+    - navigation "Idioma" [ref=f2e50]:
+      - link "ES" [ref=f2e51] [cursor=pointer]:
+        - /url: /
+      - link "EN" [ref=f2e58] [cursor=pointer]:
+        - /url: /en/
+    - group "Modo de color" [ref=f2e60]:
+      - generic [ref=f2e62] [cursor=pointer]:
+        - radio "Sistema" [ref=f2e63]
+        - generic [ref=f2e64]: Sistema
+      - generic [ref=f2e69] [cursor=pointer]:
+        - radio "Claro" [ref=f2e70]
+        - generic [ref=f2e71]: Claro
+      - generic [ref=f2e76] [cursor=pointer]:
+        - radio "Oscuro" [checked] [ref=f2e77]
+        - generic [ref=f2e78]: Oscuro
+  - main [ref=f2e83]:
+    - region [ref=f2e84]:
+      - generic [ref=f2e85]:
+        - paragraph [ref=f2e86]:
+          - strong [ref=f2e87]: Transmisión 001
+          - generic [ref=f2e88]: ARG / 199X
+          - generic [ref=f2e89]: El futuro se construye acá
+        - heading "Un escritorio Linux, habitado desde 2018." [level=1] [ref=f2e90]: Un escritorio Linux,habitado desde 2018.
+        - generic [ref=f2e91]:
+          - paragraph [ref=f2e92]: HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina, con una shell de escritorio Quickshell, una CLI de sistema nativa y un laboratorio de QA que registra sus capturas de prueba.
+          - generic [ref=f2e93]:
+            - link "Explorá el escritorio" [ref=f2e94] [cursor=pointer]:
+              - /url: /showroom
+            - link "Descargá la ISO Preview" [ref=f2e95] [cursor=pointer]:
+              - /url: /install
+      - 'figure "Captura real The Dashboard · 25 October 2026 · 1918×1077 Procedencia Fondo: Blue hour on the Beagle Channel, Beagle Channel, Tierra del Fuego, Argentina. Fotografía de RAYANDBEE, CC BY 2.0." [ref=f2e96]':
+        - 'img "The Hornero Dashboard over a photograph of the Beagle Channel at dusk: weather at 11 degrees and overcast, system details, calendar and clock, resource bars, a media panel with the Companion, and tabs for Dashboard, Media, Performance, Weather, Workspaces and Extensions." [ref=f2e99]'
+        - generic [ref=f2e100]:
+          - generic [ref=f2e101]: Captura real
+          - generic [ref=f2e102]: The Dashboard · 25 October 2026 · 1918×1077
+          - link "Procedencia" [ref=f2e103] [cursor=pointer]:
+            - /url: /showroom#dashboard-extensions
+          - generic [ref=f2e104]:
+            - text: "Fondo:"
+            - link "Blue hour on the Beagle Channel" [ref=f2e105] [cursor=pointer]:
+              - /url: https://commons.wikimedia.org/wiki/File:Beagle_Channel_-m.jpg
+            - text: ", Beagle Channel, Tierra del Fuego, Argentina. Fotografía de RAYANDBEE,"
+            - link "CC BY 2.0" [ref=f2e106] [cursor=pointer]:
+              - /url: https://creativecommons.org/licenses/by/2.0/
+            - text: .
+      - list "Qué es HorneroOS, en breve" [ref=f2e107]:
+        - listitem [ref=f2e108]: Base Arch Linux
+        - listitem [ref=f2e109]: /Hyprland soportado, Niri experimental
+        - listitem [ref=f2e110]: /16 layouts, 24 temas
+        - listitem [ref=f2e111]:
+          - text: /
+          - link "Shell adaptada de Caelestia, GPL-3.0" [ref=f2e112] [cursor=pointer]:
+            - /url: /roots#community
+        - listitem [ref=f2e113]:
+          - text: /
+          - link "Primera ISO Preview publicada" [ref=f2e114] [cursor=pointer]:
+            - /url: /install
+    - region [ref=f2e115]:
+      - generic [ref=f2e116]:
+        - heading "16 layouts, una sola shell" [level=2] [ref=f2e118]
+        - paragraph [ref=f2e119]: Un layout mueve la barra, el dock y los controles; el escritorio de abajo queda igual. Cada cuadro es una captura de una corrida de QA o de una revisión visual de Hornero. Elegí una para comparar.
+      - generic [ref=f2e120]:
+        - tabpanel "Cockpit Clear Layout" [ref=f2e121]:
+          - generic [aria-hidden] [ref=f2e122]:
+            - generic [ref=f2e123]: HORNERO / DESKTOP
+            - generic [ref=f2e124]: Layout
+          - img "Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper." [ref=f2e126]
+          - generic [ref=f2e127]:
+            - generic [ref=f2e128]:
+              - paragraph [ref=f2e129]: Layout
+              - heading "Cockpit Clear layout" [level=3] [ref=f2e130]
+              - paragraph [ref=f2e131]: Layout acceptance · visual review
+            - paragraph [ref=f2e133]:
+              - generic [ref=f2e134]: Hornero QA
+              - generic [ref=f2e135]: ·Layout acceptance · visual review
+              - generic [ref=f2e136]: ·shell 98a5de2
+              - generic [ref=f2e137]: ·config 96b6870
+              - generic [ref=f2e138]: ·horneroctl 9c15172
+              - generic [ref=f2e139]: ·Hornero Dark
+              - generic [ref=f2e140]: ·1280×800
+              - generic [ref=f2e141]: ·2026-10-03
+        - group "Elegí una captura real de Hornero" [ref=f2e142]:
+          - paragraph [ref=f2e143]: Elegí una captura
+          - tablist "Elegí una captura real de Hornero" [ref=f2e144]:
+            - tab "Cockpit Clear Layout" [selected] [ref=f2e145] [cursor=pointer]:
+              - generic [ref=f2e146]: Cockpit Clear
+              - generic [ref=f2e147]: Layout
+              - generic [aria-hidden] [ref=f2e148]: ↗
+            - tab "Islands Layout" [ref=f2e149] [cursor=pointer]:
+              - generic [ref=f2e150]: Islands
+              - generic [ref=f2e151]: Layout
+              - generic [aria-hidden] [ref=f2e152]: ↗
+            - tab "Dock Bottom Layout" [ref=f2e153] [cursor=pointer]:
+              - generic [ref=f2e154]: Dock Bottom
+              - generic [ref=f2e155]: Layout
+              - generic [aria-hidden] [ref=f2e156]: ↗
+            - tab "Layout Picker Control Center" [ref=f2e157] [cursor=pointer]:
+              - generic [ref=f2e158]: Layout Picker
+              - generic [ref=f2e159]: Control Center
+              - generic [aria-hidden] [ref=f2e160]: ↗
+            - tab "Settings search Control Center" [ref=f2e161] [cursor=pointer]:
+              - generic [ref=f2e162]: Settings search
+              - generic [ref=f2e163]: Control Center
+              - generic [aria-hidden] [ref=f2e164]: ↗
+          - paragraph [ref=f2e165]: Al elegir un layout se cambian la captura y su registro de fuente.
+          - link "Explorá los 16 layouts" [ref=f2e166] [cursor=pointer]:
+            - /url: /layouts
+          - link "Browse the full capture archive" [ref=f2e167] [cursor=pointer]:
+            - /url: /showroom
+        - paragraph [ref=f2e168]
+    - region [ref=f2e169]:
+      - generic [ref=f2e170]:
+        - heading "Oscuro y claro, mismo layout" [level=2] [ref=f2e171]
+        - paragraph [ref=f2e172]: Ambas capturas muestran Hornero Left, desde la misma imagen de QA y las mismas revisiones pineadas. Solo cambia el tema.
+      - generic [ref=f2e173]:
+        - figure "Hornero Oscuro" [ref=f2e174]:
+          - img "Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session." [ref=f2e176]
+        - figure "Hornero Claro" [ref=f2e178]:
+          - img "Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied." [ref=f2e180]
+        - generic [ref=f2e182]:
+          - generic [ref=f2e183]: Revelá Hornero Claro sobre Hornero Oscuro
+          - slider "Revelá Hornero Claro sobre Hornero Oscuro" [ref=f2e184]: "50"
+      - paragraph [ref=f2e185]:
+        - link "Explorá 24 temas" [ref=f2e186] [cursor=pointer]:
+          - /url: /themes
+        - link "Mirá las fotografías argentinas detrás de ellos" [ref=f2e187] [cursor=pointer]:
+          - /url: /wallpapers
+        - link "Llevá la paleta a tu terminal" [ref=f2e188] [cursor=pointer]:
+          - /url: /terminals
+    - region [ref=f2e189]:
+      - generic [ref=f2e190]:
+        - heading "Una sesión de trabajo" [level=2] [ref=f2e191]
+        - paragraph [ref=f2e192]: btop monitorea la máquina en una ventana y yazi explora una carpeta de fondos en otra, sobre una fotografía del Canal Beagle. Ambos son programas de terminal comunes.
+        - paragraph [ref=f2e193]: Captura aportada por un colaborador el 2026-10-25, tomada en un setup de desarrollo Hyprland en vivo. No es una imagen de aceptación del instalador ni de una release.
+      - figure "HorneroOS contributor-provided workstation capture · 1918×1078 · 2026-10-25" [ref=f2e194]:
+        - 'img "Two terminal windows on a Hornero desktop over a photograph of the Beagle Channel: btop showing processor, memory, disk, network and process panels, and the yazi file manager browsing a wallpapers folder with a mountain sunrise preview." [ref=f2e196]'
+    - region [ref=f2e198]:
+      - generic [ref=f2e199]:
+        - heading "Desktop y Studio en preview, dos perfiles planificados" [level=2] [ref=f2e200]
+        - paragraph [ref=f2e201]: Las ediciones comparten un solo modelo de composición. Desktop y Studio Preview se instalan desde la ISO firmada preview22 (probada en VM, todavía sin validación en hardware físico). Solo Server y Agents son definiciones del catálogo sin imagen instalable.
+      - list [ref=f2e202]:
+        - listitem [ref=f2e203]:
+          - link "Desktop Preview Hyprland, soportado Niri, experimental" [ref=f2e204] [cursor=pointer]:
+            - /url: /editions#desktop
+            - generic [ref=f2e205]: Desktop
+            - generic [ref=f2e206]: Preview
+            - generic [ref=f2e207]:
+              - generic [ref=f2e208]: Hyprland, soportado
+              - generic [ref=f2e209]: Niri, experimental
+        - listitem [ref=f2e210]:
+          - link "Server Planificado Sin pantalla, para homelabs y servicios" [ref=f2e211] [cursor=pointer]:
+            - /url: /editions#server
+            - generic [ref=f2e212]: Server
+            - generic [ref=f2e213]: Planificado
+            - generic [ref=f2e214]: Sin pantalla, para homelabs y servicios
+        - listitem [ref=f2e215]:
+          - link "Agents Planificado Sin pantalla, para infraestructura de agentes" [ref=f2e216] [cursor=pointer]:
+            - /url: /editions#agents
+            - generic [ref=f2e217]: Agents
+            - generic [ref=f2e218]: Planificado
+            - generic [ref=f2e219]: Sin pantalla, para infraestructura de agentes
+        - listitem [ref=f2e220]:
+          - link "Studio Preview Escritorio, para producción creativa" [ref=f2e221] [cursor=pointer]:
+            - /url: /editions#studio
+            - generic [ref=f2e222]: Studio
+            - generic [ref=f2e223]: Preview
+            - generic [ref=f2e224]: Escritorio, para producción creativa
+    - region [ref=f2e225]:
+      - generic [ref=f2e226]:
+        - heading "Extensiones oficiales" [level=2] [ref=f2e227]
+        - paragraph [ref=f2e228]: Pequeños plugins QML con un checksum publicado y permisos declarados. La shell no los aísla en un sandbox, así que el catálogo lista lo que declara cada uno antes de instalarlo.
+      - list [ref=f2e229]:
+        - listitem [ref=f2e230]:
+          - link "Hornero Dual Clock En la barra Local time next to UTC in the bar, for coordinating with people in other time zones." [ref=f2e231] [cursor=pointer]:
+            - /url: /extensions#hornero-dual-clock-title
+            - strong [ref=f2e232]: Hornero Dual Clock
+            - generic [ref=f2e233]: En la barra
+            - generic [ref=f2e234]: Local time next to UTC in the bar, for coordinating with people in other time zones.
+        - listitem [ref=f2e235]:
+          - link "Hornero Focus Card En el dashboard A dashboard card with a rotating original one-line focus reminder and the date." [ref=f2e236] [cursor=pointer]:
+            - /url: /extensions#hornero-focus-card-title
+            - strong [ref=f2e237]: Hornero Focus Card
+            - generic [ref=f2e238]: En el dashboard
+            - generic [ref=f2e239]: A dashboard card with a rotating original one-line focus reminder and the date.
+        - listitem [ref=f2e240]:
+          - link "Hornero Pomodoro En la barra A 25-minute focus timer for the bar." [ref=f2e241] [cursor=pointer]:
+            - /url: /extensions#hornero-pomodoro-title
+            - strong [ref=f2e242]: Hornero Pomodoro
+            - generic [ref=f2e243]: En la barra
+            - generic [ref=f2e244]: A 25-minute focus timer for the bar.
+        - listitem [ref=f2e245]:
+          - link "Hornero Quiet Notes En el dashboard A calm dashboard card for one short intention for this session." [ref=f2e246] [cursor=pointer]:
+            - /url: /extensions#hornero-quiet-notes-title
+            - strong [ref=f2e247]: Hornero Quiet Notes
+            - generic [ref=f2e248]: En el dashboard
+            - generic [ref=f2e249]: A calm dashboard card for one short intention for this session.
+        - listitem [ref=f2e250]:
+          - link "Hornero Studio Audio En la barra Bar indicator for the HorneroOS Studio audio mode (Balanced, Low Latency, Advanced) and Temporary Performance state, read from the typed horneroctl studio mode contract." [ref=f2e251] [cursor=pointer]:
+            - /url: /extensions#hornero-studio-audio-title
+            - strong [ref=f2e252]: Hornero Studio Audio
+            - generic [ref=f2e253]: En la barra
+            - generic [ref=f2e254]: Bar indicator for the HorneroOS Studio audio mode (Balanced, Low Latency, Advanced) and Temporary Performance state, read from the typed horneroctl studio mode contract.
+        - listitem [ref=f2e255]:
+          - 'link "Hornero Studio Jobs En el dashboard Render and export job monitor for HorneroOS Studio: shows queued, running, finished and interrupted jobs from the typed horneroctl studio jobs contract." [ref=f2e256] [cursor=pointer]':
+            - /url: /extensions#hornero-studio-jobs-title
+            - strong [ref=f2e257]: Hornero Studio Jobs
+            - generic [ref=f2e258]: En el dashboard
+            - generic [ref=f2e259]: "Render and export job monitor for HorneroOS Studio: shows queued, running, finished and interrupted jobs from the typed horneroctl studio jobs contract."
+      - paragraph [ref=f2e260]:
+        - link "Abrí el catálogo de extensiones" [ref=f2e261] [cursor=pointer]:
+          - /url: /extensions
+        - link "Creá una para la comunidad" [ref=f2e262] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS/plugins
+    - region [ref=f2e263]:
+      - generic [ref=f2e264]:
+        - heading "Historia, con fuentes" [level=2] [ref=f2e265]
+        - paragraph [ref=f2e266]: Hornero empezó como el escritorio diario de una persona y después se convirtió en proyectos separados. Cada paso posterior al primero enlaza al commit o tag que lo fecha. El primer paso es anterior a la historia pública y se basa en el relato de su maintainer.
+      - region "Línea de tiempo de HorneroOS, 2018 a 2026" [ref=f2e267]:
+        - list [ref=f2e268]:
+          - listitem [ref=f2e269]:
+            - time [ref=f2e270]: "2018"
+            - heading "A personal Arch Linux workstation" [level=3] [ref=f2e271]
+            - paragraph [ref=f2e272]: Hornero starts as one developer’s daily desktop in Argentina. This stage predates the public repository history below, so it rests on the maintainer’s account.
+            - generic [ref=f2e273]: Relato del maintainer · ningún commit público es anterior a 2019
+          - listitem [ref=f2e274]:
+            - time [ref=f2e275]: 2019.11.02
+            - heading "The configuration goes public" [level=3] [ref=f2e276]
+            - paragraph [ref=f2e277]: "The first public commit of the dotfiles that became HorneroConfig: an i3 setup, followed the same day by Polybar."
+            - link "First commit in ulises-jeremias/dotfiles" [ref=f2e278] [cursor=pointer]:
+              - /url: https://github.com/ulises-jeremias/dotfiles/commit/40480e3419b62fedd2f41fcb649fd3df30ac1ab7
+              - text: First commit in ulises-jeremias/dotfiles ↗
+          - listitem [ref=f2e279]:
+            - time [ref=f2e280]: 2026.02.27
+            - heading "The shell becomes Quickshell" [level=3] [ref=f2e281]
+            - paragraph [ref=f2e282]: The workstation switches its bars and panels to a Quickshell shell adapted from Caelestia Shell. That is a new chapter, not the 2018 setup unchanged.
+            - link "Transition to Quickshell in dotfiles" [ref=f2e283] [cursor=pointer]:
+              - /url: https://github.com/ulises-jeremias/dotfiles/commit/4f53f3e41cd47aeeb3235224ab922c092c856a22
+              - text: Transition to Quickshell in dotfiles ↗
+          - listitem [ref=f2e284]:
+            - time [ref=f2e285]: 2026.09.10
+            - heading "HorneroOS gets its own repositories" [level=3] [ref=f2e286]
+            - paragraph [ref=f2e287]: The shell is imported from dotfiles into HorneroOS/shell with the upstream author, license and every header intact, then stripped of workstation-only paths.
+            - link "Shell import, with the Caelestia NOTICE" [ref=f2e288] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/shell/commit/5830eab60f913668b07e6314f5051b8957a2cd71
+              - text: Shell import, with the Caelestia NOTICE ↗
+          - listitem [ref=f2e289]:
+            - time [ref=f2e290]: 2026.09.10
+            - heading "horneroctl, the native system CLI" [level=3] [ref=f2e291]
+            - paragraph [ref=f2e292]: A command-line core written in V becomes the operating-system contract. The shell calls its verbs instead of workstation scripts from 2026-09-29.
+            - link "horneroctl core in HorneroOS/hornero" [ref=f2e293] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/hornero/commit/45876631e2abb3180aa648ab1d425b4594b4deb9
+              - text: horneroctl core in HorneroOS/hornero ↗
+          - listitem [ref=f2e294]:
+            - time [ref=f2e295]: 2026.10.01
+            - heading "A QA repository records evidence" [level=3] [ref=f2e296]
+            - paragraph [ref=f2e297]: HorneroOS/qa boots virtual machines, drives scenarios and keeps screenshots with hashes and the pinned product revisions.
+            - link "Bootstrap of HorneroOS/qa" [ref=f2e298] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/qa/commit/447f5b4e367dcb153215630e6669e4983da39473
+              - text: Bootstrap of HorneroOS/qa ↗
+          - listitem [ref=f2e299]:
+            - time [ref=f2e300]: 2026.10.20
+            - heading "An official extensions catalogue" [level=3] [ref=f2e301]
+            - paragraph [ref=f2e302]: Official plugins get a catalogue with checksums and declared permissions. Community packages stay inert.
+            - link "Marketplace foundation in HorneroOS/plugins" [ref=f2e303] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/plugins/commit/4a17b450dbd01d15ecf16fc06608c69af704aaa5
+              - text: Marketplace foundation in HorneroOS/plugins ↗
+      - paragraph [ref=f2e304]:
+        - link "Leé la historia completa" [ref=f2e305] [cursor=pointer]:
+          - /url: /roots
+        - link "El crédito y la licencia de Caelestia" [ref=f2e306] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS/shell/blob/5e14df7c0a90e1f4a84a270c946813dcd27d68e7/NOTICE
+    - region [ref=f2e307]:
+      - heading "Quiénes trabajan en esto" [level=2] [ref=f2e309]
+      - generic [ref=f2e310]:
+        - generic [ref=f2e311]:
+          - term [ref=f2e312]: Mantenedor
+          - definition [ref=f2e313]:
+            - link "Ulises Jeremías" [ref=f2e314] [cursor=pointer]:
+              - /url: https://github.com/ulises-jeremias
+            - text: ", que usa este escritorio a diario desde 2018."
+        - generic [ref=f2e315]:
+          - term [ref=f2e316]: Instalador
+          - definition [ref=f2e317]:
+            - link "Panda Foss" [ref=f2e318] [cursor=pointer]:
+              - /url: https://github.com/PandaFoss
+            - text: ", mantenedor de"
+            - link "Anarchy Linux" [ref=f2e319] [cursor=pointer]:
+              - /url: https://gitlab.com/anarchyinstaller/installer
+            - text: ", está desarrollando el instalador a medida."
+        - generic [ref=f2e320]:
+          - term [ref=f2e321]: Upstream
+          - definition [ref=f2e322]:
+            - text: La shell está adaptada de
+            - link "Caelestia Shell" [ref=f2e323] [cursor=pointer]:
+              - /url: https://github.com/caelestia-dots/shell
+            - text: ; su autor, su licencia y el commit importado quedan documentados en el repositorio.
+        - generic [ref=f2e324]:
+          - term [ref=f2e325]: Evidencia
+          - definition [ref=f2e326]:
+            - text: Las capturas de QA se siguen en
+            - link "HorneroOS/qa" [ref=f2e327] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/qa
+            - text: con sus hashes y revisiones pineadas. Otras capturas están etiquetadas como sesiones en vivo aportadas por colaboradores; el
+            - link "registro del showroom" [ref=f2e328] [cursor=pointer]:
+              - /url: /showroom#capture-ledger
+            - text: lista la fuente de cada una. Shell
+            - link [ref=f2e329] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/shell/commit/5e14df7c0a90e1f4a84a270c946813dcd27d68e7
+              - code [ref=f2e330]: 5e14df7
+            - text: y config
+            - link [ref=f2e331] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/config/commit/528c67abb40e6b73213b5acdff43bcd0ef51f827
+              - code [ref=f2e332]: 528c67a
+            - text: son los commits desde los que se construyen los datos de este sitio.
+        - generic [ref=f2e333]:
+          - term [ref=f2e334]: Contribuir
+          - definition [ref=f2e335]:
+            - text: Empezá con la
+            - link "guía de contribución" [ref=f2e336] [cursor=pointer]:
+              - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+            - text: o el
+            - link "mapa del proyecto" [ref=f2e337] [cursor=pointer]:
+              - /url: /roots#repositories
+            - text: .
+    - region [ref=f2e338]:
+      - generic [ref=f2e339]:
+        - heading "Conseguí HorneroOS" [level=2] [ref=f2e340]
+        - paragraph [ref=f2e341]: "Development Preview 22 es la última composición etiquetada. La primera ISO pública ya está publicada: v0.2.0-preview22, firmada, con Desktop y Studio Preview en una sola imagen x86_64. El escritorio también se instala como paquetes de Arch."
+      - generic [ref=f2e342]:
+        - link "Descargá la ISO Preview" [ref=f2e343] [cursor=pointer]:
+          - /url: /install
+        - link "Leé la documentación" [ref=f2e344] [cursor=pointer]:
+          - /url: /docs/
+        - link "Explorá el código fuente" [ref=f2e345] [cursor=pointer]:
+          - /url: https://github.com/HorneroOS
+  - contentinfo [ref=f2e346]:
+    - region [ref=f2e347]:
+      - heading "Sumate" [level=2] [ref=f2e348]
+      - list [ref=f2e349]:
+        - listitem [ref=f2e350]:
+          - link "Dale una estrella a HorneroOS Seguí el repositorio del escritorio. Las estrellas muestran el proyecto a otra gente que lo está buscando." [ref=f2e351] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero
+            - strong [ref=f2e352]: Dale una estrella a HorneroOS
+            - generic [ref=f2e353]: Seguí el repositorio del escritorio. Las estrellas muestran el proyecto a otra gente que lo está buscando.
+        - listitem [ref=f2e354]:
+          - link "Explorá la organización Shell, configuración, instalador, plugins, docs, QA y este sitio web." [ref=f2e355] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+            - strong [ref=f2e356]: Explorá la organización
+            - generic [ref=f2e357]: Shell, configuración, instalador, plugins, docs, QA y este sitio web.
+        - listitem [ref=f2e358]:
+          - link "Reportar un error Nombrá la ISO (preview22), tu firmware (UEFI o BIOS) y el paso donde falló." [ref=f2e359] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/hornero/issues/new/choose
+            - strong [ref=f2e360]: Reportar un error
+            - generic [ref=f2e361]: Nombrá la ISO (preview22), tu firmware (UEFI o BIOS) y el paso donde falló.
+        - listitem [ref=f2e362]:
+          - 'link "Reportar un problema del sitio Algo mal en este sitio web: un link roto, una fecha equivocada, un problema de diseño." [ref=f2e363] [cursor=pointer]':
+            - /url: https://github.com/HorneroOS/website/issues/new/choose
+            - strong [ref=f2e364]: Reportar un problema del sitio
+            - generic [ref=f2e365]: "Algo mal en este sitio web: un link roto, una fecha equivocada, un problema de diseño."
+    - navigation "Proyecto" [ref=f2e366]:
+      - list [ref=f2e367]:
+        - listitem [ref=f2e368]:
+          - link "GitHub" [ref=f2e369] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS
+        - listitem [ref=f2e370]:
+          - link "Mapa del proyecto" [ref=f2e371] [cursor=pointer]:
+            - /url: /roots#repositories
+        - listitem [ref=f2e372]:
+          - link "Lenguaje de diseño" [ref=f2e373] [cursor=pointer]:
+            - /url: /docs/development/design-language/
+        - listitem [ref=f2e374]:
+          - link "Contribuir" [ref=f2e375] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md
+        - listitem [ref=f2e376]:
+          - link "Buscar" [ref=f2e377] [cursor=pointer]:
+            - /url: /search/
+        - listitem [ref=f2e378]:
+          - link "Reportar un problema del sitio" [ref=f2e379] [cursor=pointer]:
+            - /url: https://github.com/HorneroOS/website/issues
+    - paragraph [ref=f2e380]:
+      - text: El escritorio detrás de HorneroOS está en uso diario desde 2018, según cuenta su maintainer (
+      - link "historia" [ref=f2e381] [cursor=pointer]:
+        - /url: /roots#timeline
+      - text: ), y su configuración es pública desde 2019 (
+      - link "primer commit" [ref=f2e382] [cursor=pointer]:
+        - /url: https://github.com/ulises-jeremias/dotfiles/commit/40480e3419b62fedd2f41fcb649fd3df30ac1ab7
+      - text: "). Hornero 199X es una dirección de arte: un futuro imaginado en Argentina en los años 90, dibujado con las herramientas abiertas de hoy. No es un producto histórico. Este sitio no pone cookies, no corre analíticas y no carga recursos de terceros. Tu elección de color queda en este navegador. Tu elección de idioma también. Cada captura está etiquetada con su fuente."
