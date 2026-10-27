@@ -115,7 +115,7 @@ qs ipc call companion say "Back in five minutes" 5000</code></pre>
     <h2 id="assistant-title">{isEs ? 'Asistente opcional (experimental, desactivado por defecto)' : 'Optional assistant (experimental, off by default)'}</h2>
     <p>
       {isEs ? 'El companion es solo presentación. Detrás puede haber un asistente opcional y experimental:' : 'The companion is presentation only. An optional, experimental assistant can sit behind it:'}{' '}
-      <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> by Nous Research, reached through{' '}
+      <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> {isEs ? 'de Nous Research, al que se accede con' : 'by Nous Research, reached through'}{' '}
       <code>horneroctl assistant</code>. {isEs ? 'Está' : 'It is'} <strong>{isEs ? 'desactivado por defecto' : 'disabled by default'}</strong> {isEs ? 'y nunca corre como root. El escritorio funciona igual con el asistente apagado o sin instalar.' : 'and never runs as root. The desktop works the same with it off or not installed.'}
     </p>
     <p>{isEs ? 'Activalo desde una terminal:' : 'Enable it from a terminal:'}</p>

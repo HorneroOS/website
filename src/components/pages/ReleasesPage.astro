@@ -32,14 +32,14 @@ const config = pins.config.repo;
 
 <SiteLayout
   title={isEs ? 'Releases | HorneroOS' : 'Releases | HorneroOS'}
-  description={isEs ? 'Cada composición de HorneroOS: los commits de shell y config que fija, si fue etiquetada y qué cambió. Development Preview 21 trae la primera ISO Preview firmada.' : 'Every HorneroOS composition: the shell and config commits it pins, whether it was tagged and what changed. Development Preview 21 ships the first signed Preview ISO.'}
+  description={isEs ? 'Cada composición de HorneroOS: los commits de shell y config que fija, si fue etiquetada y qué cambió. Development Preview 22 trae la primera ISO Preview firmada publicada.' : 'Every HorneroOS composition: the shell and config commits it pins, whether it was tagged and what changed. Development Preview 22 ships the first published signed Preview ISO.'}
 >
   <section class="section">
     <p class="plate-id"><strong>Archivo de transmisiones</strong><span>ARG / 199X</span><span>{isEs ? 'Historial de pre-releases' : 'Pre-release history'}</span></p>
     <h1>Releases</h1>
     <p>
       {isEs ? 'Una release de Hornero es un manifiesto de composición: fija los commits exactos de shell y config que salen juntos, y ' : 'A Hornero release is a composition manifest: it pins the exact shell and config commits that ship together, and '}
-      <code>horneroctl</code> {isEs ? 'se compila desde el mismo árbol. Development Preview 21 es la primera release con imagen de instalación: una ISO Preview x86_64 firmada (Desktop + Studio Preview) que pasó la matriz de instalación en VM. Mirá ' : ' is built from the same tree. Development Preview 21 is the first release with an install image: a signed x86_64 Preview ISO (Desktop + Studio Preview) that passed the VM installation matrix. See '}
+      <code>horneroctl</code> {isEs ? 'se compila desde el mismo árbol. Development Preview 22 es la primera release publicada con imagen de instalación: una ISO Preview x86_64 firmada (Desktop + Studio Preview) que pasó la matriz de instalación en VM. Preview 21 fue el primer candidato de ISO. Mirá ' : ' is built from the same tree. Development Preview 22 is the first published release with an install image: a signed x86_64 Preview ISO (Desktop + Studio Preview) that passed the VM installation matrix. Preview 21 was the first ISO candidate. See '}
       <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a> {isEs ? 'para el checksum, la firma y las instrucciones de verificación.' : 'for the checksum, signature and verification instructions.'}
     </p>
     <dl class="now">

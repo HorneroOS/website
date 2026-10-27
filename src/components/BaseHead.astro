@@ -65,9 +65,7 @@ const socialAltValue = socialImageAlt ?? defaultAlt;
       if (saved === current) return;
       const base = inEn ? (path === '/en' ? '/' : path.slice(3)) : path;
       const target = saved === 'en' ? (base === '/' ? '/en/' : `/en${base}`) : base;
-      const guard = `hornero-lang-redirect:${target}`;
-      if (sessionStorage.getItem(guard)) return;
-      sessionStorage.setItem(guard, '1');
+      if (target === path) return;
       location.replace(target + location.search + location.hash);
     } catch {
       // Storage unavailable; the URL locale stands.

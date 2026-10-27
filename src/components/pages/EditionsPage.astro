@@ -55,7 +55,7 @@ const roleLabel = (
   socialImage="/og/editions.png"
   socialImageAlt={isEs ? "El layout Hornero Left en Hornero Dark de una corrida de QA, junto a la frase 'Desktop y Studio en preview, dos perfiles planificados'." : "The Hornero Left layout in Hornero Dark from a QA run, beside the line 'Desktop and Studio in preview, two profiles planned'."}
   title={isEs ? 'Ediciones | HorneroOS' : 'Editions | HorneroOS'}
-  description={isEs ? 'HorneroOS tiene cuatro perfiles sobre una misma base: Desktop, Server, Agents y Studio. Solo Desktop tiene paquetes; el catálogo indica la madurez de cada perfil.' : 'HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Only Desktop has packages; the catalogue states each profile’s maturity.'}
+  description={isEs ? 'HorneroOS tiene cuatro perfiles sobre una misma base: Desktop, Server, Agents y Studio. Desktop y Studio Preview se instalan desde la ISO Preview firmada; Server y Agents siguen planificados.' : 'HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Desktop and Studio Preview install from the signed Preview ISO; Server and Agents remain planned.'}
 >
   <section class="intro section">
     <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>ARG / 199X</span><span>Madurez verificada por edición</span></p>
@@ -126,7 +126,7 @@ const roleLabel = (
       {isEs ? 'Studio se basa en Desktop y Agents se basa en Server. El compositor es una elección de backend de Desktop. Hyprland es el predeterminado validado. Niri es experimental y tiene brechas de capacidad documentadas.' : 'Studio builds on Desktop and Agents builds on Server. The compositor is a Desktop backend choice. Hyprland is the validated default. Niri is experimental and has documented capability gaps.'}
     </p>
     <p>
-      {isEs ? 'Los estados de ediciones y compositores de esta página vienen del catálogo de composición pineado de Hornero. El mismo modelo está pensado para la introspección por CLI, la instalación y las herramientas de aceptación; los caminos de imagen e instalador todavía no están publicados.' : 'The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model is meant for CLI introspection, installation and acceptance tooling; the image and installer paths are not released yet.'}
+      {isEs ? 'Los estados de ediciones y compositores de esta página vienen del catálogo de composición pineado de Hornero. El mismo modelo está pensado para la introspección por CLI, la instalación y las herramientas de aceptación. La ISO Preview se instala mediante el camino provisorio con Calamares; el instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : 'The edition and compositor states on this page come from the pinned Hornero composition catalogue. The same model is meant for CLI introspection, installation and acceptance tooling. The Preview ISO installs via the provisional Calamares path; Panda Foss’s custom installer remains the future official path.'}
     </p>
   </section>
 </SiteLayout>
