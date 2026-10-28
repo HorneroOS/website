@@ -1,5 +1,23 @@
 [
   {
+    "name": "v0.2.0-preview23",
+    "version": "0.2.0-preview23",
+    "date": "2026-10-28",
+    "status": "tagged",
+    "summary": "Desktop + Studio Preview ISO whose only delta from preview22 is the Calamares installer branding refresh (HorneroOS/installer#37, main 5c1c0cc): canonical HorneroOS brand banner, logo and sidebar palette, flagship wallpapers in the slideshow, and a brand-coloured Niri information card. Product composition, package lock and catalogue are identical to preview22 (product bcc53ed, horneroctl-bin 0.2.0_preview33-1), so the preview21/preview22 install-matrix evidence carries over per the delta justification in the checklist. Studio remains preview (maintainer decision #318), not supported. Signed with the HorneroOS releases key; SHA-256 recorded in the checklist.",
+    "manifest": "hornero-0.2.0-preview23",
+    "shell": {
+      "sha": "ca8f5ca735ffbb8581537ac5b5f1a1d74082fcb0",
+      "subject": "fix(appearance): regenerate Hyprland border colours before reload (#332)"
+    },
+    "config": {
+      "sha": "811ecd73fd201de30cf333af53ccfa7cdb966740",
+      "subject": "docs(hypr): fix duplicated words in hyprland.lua header (#110)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview22",
     "version": "0.2.0-preview22",
     "date": "2026-10-26",
