@@ -12,6 +12,11 @@
  * of the official favicon from reaper.fm. REAPER is proprietary and
  * shown for identification only. yabridge, Graphite and Penpot have no
  * official icon vendored, so they render name-only.
+ * Gaming application icons (steam, lutris, bottles, wine,
+ * heroic-games-launcher) are the official upstream app icons as
+ * published by Flathub's appstream, unmodified. Steam is proprietary
+ * and shown for identification only. vkBasalt and SteamVR have no
+ * official icon vendored, so they render name-only.
  */
 import kittyLogo from '../assets/apps/kitty.png';
 import alacrittyLogo from '../assets/apps/alacritty.svg';
@@ -38,6 +43,11 @@ import rawtherapeeLogo from '../assets/apps/rawtherapee.png';
 import scribusLogo from '../assets/apps/scribus.png';
 import freecadLogo from '../assets/apps/freecad.png';
 import godotLogo from '../assets/apps/godot.png';
+import steamLogo from '../assets/apps/steam.png';
+import lutrisLogo from '../assets/apps/lutris.png';
+import bottlesLogo from '../assets/apps/bottles.png';
+import wineLogo from '../assets/apps/wine.png';
+import heroicLogo from '../assets/apps/heroic-games-launcher.png';
 
 const logos: Record<string, { src: string; width: number; height: number }> = {
   kitty: kittyLogo,
@@ -65,6 +75,11 @@ const logos: Record<string, { src: string; width: number; height: number }> = {
   scribus: scribusLogo,
   freecad: freecadLogo,
   godot: godotLogo,
+  steam: steamLogo,
+  lutris: lutrisLogo,
+  bottles: bottlesLogo,
+  wine: wineLogo,
+  'heroic-games-launcher': heroicLogo,
 };
 
 interface Props {
