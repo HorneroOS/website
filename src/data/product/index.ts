@@ -122,11 +122,38 @@ export interface StudioCatalogue {
   } | null;
 }
 
+export interface GamingApplication {
+  id: string;
+  title: string;
+  packages: string[];
+  experimental: boolean;
+  availability: string | null;
+  notes: string | null;
+  source: string | null;
+  licenses: string[];
+  licenseClass: string | null;
+  optional: boolean | null;
+  support: string | null;
+}
+
+export interface GamingSpecialization {
+  id: string;
+  title: string;
+  applications: string[];
+  isDefault: boolean;
+}
+
+export interface GamingCatalogue {
+  specializations: GamingSpecialization[];
+  applications: GamingApplication[];
+}
+
 export interface EditionCatalogue {
   version: number;
   editions: Edition[];
   compositors: Compositor[];
   studio: StudioCatalogue;
+  gaming: GamingCatalogue | null;
 }
 
 
@@ -211,6 +238,7 @@ export const paletteApplications = paletteApplicationsJson as PaletteApplication
 export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
 export const studioCatalogue = editionCatalogue.studio;
+export const gamingCatalogue = editionCatalogue.gaming;
 export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 'docs' | 'greeter' | 'plugins', { repo: string; sha: string }>;
 
 export const short = (sha: string) => sha.slice(0, 7);
