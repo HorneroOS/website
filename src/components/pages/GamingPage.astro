@@ -1,0 +1,362 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import AppLogo from '../../components/AppLogo.astro';
+import { gamingCatalogue, editions, pins, short } from '../../data/product';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+
+const catalogue = gamingCatalogue;
+const specializations = catalogue?.specializations ?? [];
+const applications = catalogue?.applications ?? [];
+const appTitle = (id: string) => applications.find((a) => a.id === id)?.title ?? id;
+type GamingApp = NonNullable<typeof gamingCatalogue>['applications'][number];
+const statusTag = (app: GamingApp) => {
+  if (app.availability === 'reference-only') return isEs ? 'Solo de referencia' : 'Reference only';
+  if (app.licenseClass === 'proprietary') return isEs ? 'Propietario · a elección' : 'Proprietary · opt-in';
+  if (app.experimental) return 'Experimental';
+  if (app.licenseClass === 'open-source') return isEs ? 'Código abierto' : 'Open source';
+  if (app.optional) return isEs ? 'Opcional' : 'Optional';
+  return isEs ? 'Catalogado' : 'Catalogued';
+};
+const stats = gamingCatalogue
+  ? isEs
+    ? [
+        { value: String(gamingCatalogue.specializations.length), label: 'perfiles en el catálogo' },
+        { value: String(gamingCatalogue.applications.length), label: 'aplicaciones en el catálogo' },
+        { value: '0', label: 'promesas de compatibilidad de juegos' },
+      ]
+    : [
+        { value: String(gamingCatalogue.specializations.length), label: 'profiles in the catalogue' },
+        { value: String(gamingCatalogue.applications.length), label: 'applications in the catalogue' },
+        { value: '0', label: 'game-compatibility promises' },
+      ]
+  : [];
+---
+
+<SiteLayout
+  title="Gaming | HorneroOS"
+  description={isEs ? 'HorneroOS Gaming es una edición en planificación construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Todavía no tiene imagen instalable.' : 'HorneroOS Gaming is a planned edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It has no installable image yet.'}
+>
+  <section class="section intro">
+    <p class="plate-id">
+      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>ARG / 199X</span><span>{isEs ? 'Estado: En planificación' : 'Status: Planned'}</span>
+    </p>
+    <h1>Gaming</h1>
+    <p class="lede">
+      {isEs ? 'HorneroOS Gaming es la edición para jugar que estamos construyendo sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Todavía está en planificación: no hay ISO de Gaming, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition we are building on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is still planned: there is no Gaming ISO, nothing installs silently, and we promise no game runs on any hardware.'}
+    </p>
+
+    {
+      stats.length > 0 ? (
+        <dl class="stats">
+          {stats.map((stat) => (
+            <div>
+              <dt>{stat.label}</dt>
+              <dd>{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null
+    }
+
+    <p class="availability">
+      <strong>{isEs ? 'Hoy:' : 'Today:'}</strong>
+      {isEs ? ' el catálogo canónico y ' : ' the canonical catalogue and '}
+      <code>horneroctl gaming doctor</code>
+      {isEs ? ' ya existen en HorneroOS/hornero. La instalación sigue el camino candidate de una sola ISO compartida (Desktop, Studio y Gaming) y solo se ofrecerá cuando el gate de QA de Gaming tenga evidencia real. El hardware físico sigue BLOCKED: una VM no es evidencia de hardware.' : ' already exist in HorneroOS/hornero. Installation follows the candidate path of one shared ISO (Desktop, Studio and Gaming) and will only be offered once the Gaming QA gate has real evidence. Physical hardware stays BLOCKED: a VM is not hardware evidence.'}
+    </p>
+  </section>
+
+  {
+    gamingCatalogue ? (
+      <section class="section" aria-labelledby="profiles-title">
+        <h2 id="profiles-title">{isEs ? 'Perfiles combinables' : 'Composable profiles'}</h2>
+        <p class="section-copy">
+          {isEs ? 'Elegís perfiles y aplicaciones; el resolvedor canónico arma el plan y Steam solo entra si lo elegís explícitamente por nombre. Los perfiles no instalan software propietario por la puerta de atrás.' : 'You pick profiles and applications; the canonical resolver builds the plan, and Steam only enters when you select it explicitly by name. Profiles never smuggle proprietary software in.'}
+        </p>
+        <ol class="tracks" role="list">
+          {specializations.map((spec) => (
+            <li class="track">
+              <h3>{spec.title}</h3>
+              {spec.applications.length > 0 ? (
+                <ul class="chips" role="list">
+                  {spec.applications.map((id) => (
+                    <li class="chip">
+                      <AppLogo id={id} />
+                      <span>{appTitle(id)}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="muted">{isEs ? 'Sin aplicaciones por defecto: sumás solo lo que querés.' : 'No default applications: you add only what you want.'}</p>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ) : null
+  }
+
+  {
+    gamingCatalogue ? (
+      <section class="section" aria-labelledby="apps-title">
+        <h2 id="apps-title">{isEs ? 'Aplicaciones, fuentes y licencias' : 'Applications, sources and licenses'}</h2>
+        <p class="section-copy">
+          {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. Steam es propietario y siempre a elección explícita; Heroic y SteamVR son solo de referencia; las entradas de AUR son manuales y opcionales, y ninguna herramienta de HorneroOS ejecuta recetas de AUR.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Steam is proprietary and always an explicit opt-in; Heroic and SteamVR are reference-only; AUR entries are manual and optional, and no HorneroOS tool ever executes AUR recipes.`}
+        </p>
+        <ul class="app-grid" role="list">
+          {applications.map((app) => (
+            <li class="app-tile">
+              <div class="app-head">
+                <AppLogo id={app.id} />
+                <h3>{app.title}</h3>
+                <span class="tag">{statusTag(app)}</span>
+              </div>
+              <dl class="app-meta">
+                <div>
+                  <dt>{isEs ? 'Paquetes' : 'Packages'}</dt>
+                  <dd>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</dd>
+                </div>
+                <div>
+                  <dt>{isEs ? 'Fuente' : 'Source'}</dt>
+                  <dd>{app.source ?? '—'}</dd>
+                </div>
+                <div>
+                  <dt>{isEs ? 'Licencia' : 'License'}</dt>
+                  <dd>{app.licenses.length > 0 ? app.licenses.join(', ') : isEs ? 'Ver el paquete' : 'See package'}</dd>
+                </div>
+              </dl>
+              {app.notes ? <p class="note">{app.notes}</p> : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+  }
+
+  <section class="section" aria-labelledby="honest-title">
+    <h2 id="honest-title">{isEs ? 'Límites honestos' : 'Honest limits'}</h2>
+    <div class="status-grid">
+      <p>{isEs ? 'El anti-cheat a nivel kernel no funciona en Linux: Easy Anti-Cheat y BattlEye dependen de que cada editor habilite Proton. No hay lista de compatibilidad de juegos porque todavía no hay evidencia en hardware real.' : 'Kernel-level anti-cheat does not work on Linux: Easy Anti-Cheat and BattlEye depend on each publisher enabling Proton. There is no game compatibility list because there is no physical-hardware evidence yet.'}</p>
+      <p>{isEs ? 'Los drivers de GPU son una decisión de hardware del instalador y del primer arranque, nunca una promesa derivada de un PCI ID. VRR y HDR son experimentales; las handhelds necesitan calificación por dispositivo (Steam Deck es la referencia, no una garantía para ROG Ally o Legion Go).' : 'GPU drivers are a hardware decision made by the installer and first boot, never a promise derived from a PCI ID. VRR and HDR are experimental; handhelds need per-device qualification (Steam Deck is the reference, not a guarantee for ROG Ally or Legion Go).'}</p>
+      <p>{isEs ? 'El diagnóstico ' : 'Diagnostics: '}<code>horneroctl gaming doctor</code>{isEs ? ' informa capacidad y registro (Vulkan, loader de 32 bits, Steam, GameMode, Gamescope, MangoHud, audio, controles y recuperación). Nunca afirma compatibilidad, rendimiento ni latencia.' : ' reports capability and registration (Vulkan, 32-bit loader, Steam, GameMode, Gamescope, MangoHud, audio, controllers and recovery). It never claims compatibility, performance or latency.'}</p>
+    </div>
+    <p class="section-copy">
+      {isEs ? 'Mientras tanto, HorneroOS Desktop y Studio ya se pueden descargar desde ' : 'Meanwhile, HorneroOS Desktop and Studio are already downloadable from '}
+      <a href={L('/install')}>{isEs ? 'la página de instalación' : 'the install page'}</a>.
+    </p>
+  </section>
+</SiteLayout>
+
+<style>
+  .intro h1 {
+    margin-block: 0.55rem 1rem;
+  }
+  .lede {
+    max-width: 54ch;
+    font-size: var(--step-1);
+  }
+  .lineup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.6rem;
+    margin-top: 1.8rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--line);
+  }
+  .lineup-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    --app-logo-size: 2rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin: 1.4rem 0 0;
+  }
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+  }
+  .stats dt {
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .stats dd {
+    margin: 0;
+    font-family: var(--font-mono, monospace);
+    font-size: var(--step-2, 1.6rem);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .availability {
+    max-width: 66ch;
+    margin-top: 1.6rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--secondary);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .availability strong {
+    color: var(--text);
+  }
+  .section-copy {
+    max-width: 66ch;
+    color: var(--text-muted);
+  }
+  .tracks {
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .track {
+    display: grid;
+    grid-template-columns: minmax(12rem, 18rem) 1fr;
+    gap: 0.5rem 1.5rem;
+    align-items: start;
+    padding-block: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .track:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .track h3 {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    --app-logo-size: 1.35rem;
+  }
+  .muted {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .app-tile {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .app-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.7rem;
+    --app-logo-size: 2.6rem;
+  }
+  .app-head h3 {
+    margin: 0;
+    font-size: var(--step-0);
+    flex: 1 1 8rem;
+    min-width: 0;
+  }
+  .tag {
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--secondary);
+    border-radius: 999px;
+    color: var(--secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .app-meta {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0.9rem 0 0;
+    font-size: var(--step--1);
+  }
+  .app-meta div {
+    display: grid;
+    grid-template-columns: 5.2rem 1fr;
+    gap: 0.5rem;
+  }
+  .app-meta dt {
+    color: var(--text-muted);
+  }
+  .app-meta dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .note {
+    margin: 0.7rem 0 0;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+  .modes {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mode {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .mode span:not(.tag) {
+    color: var(--text-muted);
+    flex: 1;
+  }
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.2rem;
+  }
+  .status-grid article {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .status-grid h3 {
+    margin-top: 0;
+  }
+  .status-grid ul {
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+  }
+  @media (max-width: 40rem) {
+    .track {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

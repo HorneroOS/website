@@ -52,6 +52,19 @@
       "compositor": {
         "inherit": "desktop"
       }
+    },
+    {
+      "id": "gaming",
+      "title": "HorneroOS Gaming",
+      "maturity": "planned",
+      "role": "gaming-workstation",
+      "extends": "desktop",
+      "packageSets": [
+        "gaming"
+      ],
+      "compositor": {
+        "inherit": "desktop"
+      }
     }
   ],
   "compositors": [
@@ -557,5 +570,192 @@
       "temporary": true,
       "usesPowerProfilesDaemon": true
     }
+  },
+  "gaming": {
+    "specializations": [
+      {
+        "id": "desktop-gaming",
+        "title": "Desktop Gaming",
+        "applications": [
+          "steam"
+        ],
+        "isDefault": true
+      },
+      {
+        "id": "handheld",
+        "title": "Handheld Gaming",
+        "applications": [
+          "steam"
+        ],
+        "isDefault": false
+      },
+      {
+        "id": "streaming",
+        "title": "Streaming",
+        "applications": [
+          "steam",
+          "obs-studio"
+        ],
+        "isDefault": false
+      },
+      {
+        "id": "multi-launcher",
+        "title": "Multi-launcher",
+        "applications": [
+          "steam",
+          "lutris",
+          "bottles"
+        ],
+        "isDefault": false
+      },
+      {
+        "id": "vr",
+        "title": "VR",
+        "applications": [
+          "steam"
+        ],
+        "isDefault": false
+      },
+      {
+        "id": "advanced-compat",
+        "title": "Advanced Compatibility",
+        "applications": [
+          "wine",
+          "vkbasalt"
+        ],
+        "isDefault": false
+      }
+    ],
+    "applications": [
+      {
+        "id": "steam",
+        "title": "Steam",
+        "packages": [
+          "steam"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-multilib",
+        "licenses": [
+          "LicenseRef-steam-subscriber-agreement"
+        ],
+        "licenseClass": "proprietary",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "lutris",
+        "title": "Lutris",
+        "packages": [
+          "lutris"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-3.0-only"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "bottles",
+        "title": "Bottles",
+        "packages": [
+          "bottles"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "aur",
+        "licenses": [
+          "GPL-3.0-only"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "wine",
+        "title": "Wine",
+        "packages": [
+          "wine"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "LGPL-2.1-or-later"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "vkbasalt",
+        "title": "vkBasalt",
+        "packages": [
+          "vkbasalt",
+          "lib32-vkbasalt"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "aur",
+        "licenses": [
+          "zlib"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "obs-studio",
+        "title": "OBS Studio",
+        "packages": [
+          "obs-studio"
+        ],
+        "experimental": false,
+        "availability": null,
+        "notes": null,
+        "source": "arch-extra",
+        "licenses": [
+          "GPL-2.0-only"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "planned"
+      },
+      {
+        "id": "heroic-games-launcher",
+        "title": "Heroic Games Launcher",
+        "packages": [],
+        "experimental": false,
+        "availability": "reference-only",
+        "notes": null,
+        "source": null,
+        "licenses": [],
+        "licenseClass": null,
+        "optional": null,
+        "support": null
+      },
+      {
+        "id": "steamvr",
+        "title": "SteamVR",
+        "packages": [],
+        "experimental": true,
+        "availability": "reference-only",
+        "notes": null,
+        "source": null,
+        "licenses": [],
+        "licenseClass": null,
+        "optional": null,
+        "support": null
+      }
+    ]
   }
 }

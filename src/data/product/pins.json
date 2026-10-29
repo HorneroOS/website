@@ -3,19 +3,19 @@
   "sources": {
     "shell": {
       "repo": "https://github.com/HorneroOS/shell",
-      "sha": "ca8f5ca735ffbb8581537ac5b5f1a1d74082fcb0"
+      "sha": "8915661d05eaf5d65e86261d617a8a65d021aefe"
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "811ecd73fd201de30cf333af53ccfa7cdb966740"
+      "sha": "24f587b4da03b31093244185445cdcd8137f8ae9"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "d66adb2dd7b14ba1a410cad555c339d5e0365970"
+      "sha": "2ea9e368d18d2ef8f78a5a18abed7127683ff551"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
-      "sha": "ed366b9849a97640c5b93e285d0632585806fb91"
+      "sha": "08ded845ae7afda239c053f7730c0eb10f7a83a2"
     },
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",

@@ -170,7 +170,7 @@ function editionCatalogue(horneroDir) {
     maturity: compositor.maturity,
     capabilities: compositor.capabilities ?? [],
   }));
-  return { version: source.version, editions, compositors, studio: studioProjection(source) };
+  return { version: source.version, editions, compositors, studio: studioProjection(source), gaming: gamingProjection(source) };
 }
 
 /**
@@ -238,6 +238,55 @@ function studioProjection(source) {
         }
       : null,
   };
+}
+
+/**
+ * Project the canonical Gaming composition from the pinned Hornero
+ * catalogue. Same contract as the Studio projection: the site never
+ * duplicates product truth and fails closed on shape drift. Returns
+ * null while the pinned catalogue has no gaming section (Gaming is
+ * planned; the page must render its planned state without data).
+ * @param {object} source Parsed editions/catalogue.yaml.
+ * @returns {{specializations: object[], applications: object[]}|null}
+ */
+function gamingProjection(source) {
+  const applications = source.gamingApplications ?? {};
+  const provenance = source.gamingProvenance ?? {};
+  const apps = Object.entries(applications).map(([id, app]) => {
+    if (!app || typeof app.title !== 'string' || !app.title.trim()) {
+      fail(`gaming application ${id} is missing a title`);
+    }
+    const prov = provenance[id] ?? {};
+    return {
+      id,
+      title: app.title,
+      packages: app.packages ?? [],
+      experimental: app.experimental === true,
+      availability: app.availability ?? null,
+      notes: app.notes ?? null,
+      source: prov.source ?? null,
+      licenses: prov.licenses ?? [],
+      licenseClass: prov.licenseClass ?? null,
+      optional: typeof prov.optional === 'boolean' ? prov.optional : null,
+      support: prov.support ?? null,
+    };
+  });
+  const appIds = new Set(apps.map((app) => app.id));
+  const specializations = Object.entries(source.gamingSpecializations ?? {}).map(([id, spec]) => {
+    if (!spec || typeof spec.title !== 'string' || !spec.title.trim()) {
+      fail(`gaming specialization ${id} is missing a title`);
+    }
+    const members = spec.applications ?? [];
+    for (const member of members) {
+      if (!appIds.has(member)) fail(`gaming specialization ${id} references unknown application ${member}`);
+    }
+    return { id, title: spec.title, applications: members, isDefault: spec.default === true };
+  });
+  if (apps.length === 0 && specializations.length === 0) return null;
+  if (apps.length === 0 || specializations.length === 0) {
+    fail('gaming catalogue projection is partial: gamingApplications/gamingSpecializations missing');
+  }
+  return { specializations, applications: apps };
 }
 
 // Terminal integrations and their package roles are owned by the pinned
