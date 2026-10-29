@@ -15,7 +15,7 @@
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
-      "sha": "08ded845ae7afda239c053f7730c0eb10f7a83a2"
+      "sha": "d2460e93613603ab8260d544c9172ed62c4973af"
     },
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",
