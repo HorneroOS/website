@@ -1,5 +1,23 @@
 [
   {
+    "name": "v0.2.0-preview24",
+    "version": "0.2.0-preview24",
+    "date": "2026-10-29",
+    "status": "tagged",
+    "summary": "Fourth Desktop + Studio Preview ISO and the first ISO that also offers HorneroOS Gaming (Preview, maintainer-delegated promotion in #332) in the installer edition list: Desktop, Studio and Gaming, each with Hyprland and experimental Niri choices. Product 8436a8a ships signed horneroctl-bin 0.2.0_preview36-1 with `horneroctl gaming doctor`; installer 02b17a1 renders the Gaming base choices from the canonical catalogue. A clean Gaming (Hyprland) install from this ISO passed in a disposable QEMU/UEFI VM (edition gaming persisted, gamescope, gamemode and mangohud present, Steam absent by default as an explicit opt-in). Gaming remains a Preview edition: no Proton gameplay, controller or handheld, AMD/Intel/hybrid topology, VRR/HDR or suspend/resume qualification is claimed; a physical NVIDIA RTX 3060 capability fixture is recorded in HorneroOS/qa. Signed with the HorneroOS releases key; SHA-256 recorded in the checklist.",
+    "manifest": "hornero-0.2.0-preview24",
+    "shell": {
+      "sha": "ca8f5ca735ffbb8581537ac5b5f1a1d74082fcb0",
+      "subject": "shell pin shipped in the preview24 ISO lock (hornero-shell 1.2.56-1)"
+    },
+    "config": {
+      "sha": "811ecd73fd201de30cf333af53ccfa7cdb966740",
+      "subject": "config pin shipped in the preview24 ISO lock (hornero-config 0.3.11-1)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview23",
     "version": "0.2.0-preview23",
     "date": "2026-10-28",
