@@ -56,7 +56,7 @@
     {
       "id": "gaming",
       "title": "HorneroOS Gaming",
-      "maturity": "planned",
+      "maturity": "preview",
       "role": "gaming-workstation",
       "extends": "desktop",
       "packageSets": [

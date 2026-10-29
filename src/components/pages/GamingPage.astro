@@ -41,15 +41,15 @@ const stats = gamingCatalogue
 
 <SiteLayout
   title="Gaming | HorneroOS"
-  description={isEs ? 'HorneroOS Gaming es una edición en planificación construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Todavía no tiene imagen instalable.' : 'HorneroOS Gaming is a planned edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It has no installable image yet.'}
+  description={isEs ? 'HorneroOS Gaming es una edición Preview construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Se instala desde la misma ISO que Desktop y Studio.' : 'HorneroOS Gaming is a Preview edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It installs from the same ISO as Desktop and Studio.'}
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>ARG / 199X</span><span>{isEs ? 'Estado: En planificación' : 'Status: Planned'}</span>
+      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>ARG / 199X</span><span>{isEs ? 'Estado: Preview' : 'Status: Preview'}</span>
     </p>
     <h1>Gaming</h1>
     <p class="lede">
-      {isEs ? 'HorneroOS Gaming es la edición para jugar que estamos construyendo sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Todavía está en planificación: no hay ISO de Gaming, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition we are building on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is still planned: there is no Gaming ISO, nothing installs silently, and we promise no game runs on any hardware.'}
+      {isEs ? 'HorneroOS Gaming es la edición para jugar construida sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Es una edición Preview: se elige en el mismo instalador y la misma ISO que Desktop y Studio, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition built on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is a Preview edition: you pick it in the same installer and the same ISO as Desktop and Studio, nothing installs silently, and we promise no game runs on any hardware.'}
     </p>
 
     {
@@ -69,7 +69,7 @@ const stats = gamingCatalogue
       <strong>{isEs ? 'Hoy:' : 'Today:'}</strong>
       {isEs ? ' el catálogo canónico y ' : ' the canonical catalogue and '}
       <code>horneroctl gaming doctor</code>
-      {isEs ? ' ya existen en HorneroOS/hornero. La instalación sigue el camino candidate de una sola ISO compartida (Desktop, Studio y Gaming) y solo se ofrecerá cuando el gate de QA de Gaming tenga evidencia real. El hardware físico sigue BLOCKED: una VM no es evidencia de hardware.' : ' already exist in HorneroOS/hornero. Installation follows the candidate path of one shared ISO (Desktop, Studio and Gaming) and will only be offered once the Gaming QA gate has real evidence. Physical hardware stays BLOCKED: a VM is not hardware evidence.'}
+      {isEs ? ' ya existen en HorneroOS/hornero, y Gaming se ofrece como Preview en el instalador de la ISO compartida (Desktop, Studio y Gaming). La evidencia física es parcial: la topología NVIDIA de escritorio está ejercitada en hardware real (RTX 3060, doctor 11/13), mientras AMD, Intel, híbridas, handhelds y displays VRR/HDR siguen sin calificar. Una VM no es evidencia de hardware.' : ' already exist in HorneroOS/hornero, and Gaming is offered as Preview in the shared ISO installer (Desktop, Studio and Gaming). Physical evidence is partial: the NVIDIA desktop topology is exercised on real hardware (RTX 3060, doctor 11/13), while AMD, Intel, hybrid, handhelds and VRR/HDR displays remain unqualified. A VM is not hardware evidence.'}
     </p>
   </section>
 
@@ -148,7 +148,7 @@ const stats = gamingCatalogue
       <p>{isEs ? 'El diagnóstico ' : 'Diagnostics: '}<code>horneroctl gaming doctor</code>{isEs ? ' informa capacidad y registro (Vulkan, loader de 32 bits, Steam, GameMode, Gamescope, MangoHud, audio, controles y recuperación). Nunca afirma compatibilidad, rendimiento ni latencia.' : ' reports capability and registration (Vulkan, 32-bit loader, Steam, GameMode, Gamescope, MangoHud, audio, controllers and recovery). It never claims compatibility, performance or latency.'}</p>
     </div>
     <p class="section-copy">
-      {isEs ? 'Mientras tanto, HorneroOS Desktop y Studio ya se pueden descargar desde ' : 'Meanwhile, HorneroOS Desktop and Studio are already downloadable from '}
+      {isEs ? 'HorneroOS Desktop, Studio y Gaming Preview se descargan desde ' : 'HorneroOS Desktop, Studio and Gaming Preview are downloadable from '}
       <a href={L('/install')}>{isEs ? 'la página de instalación' : 'the install page'}</a>.
     </p>
   </section>
