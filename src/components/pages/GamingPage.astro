@@ -12,6 +12,7 @@ const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 
 const gaming = editions.find((edition) => edition.id === 'gaming');
+const catalogue = gamingCatalogue;
 type GamingApp = NonNullable<typeof gamingCatalogue>['applications'][number];
 const statusTag = (app: GamingApp) => {
   if (app.availability === 'reference-only') return isEs ? 'Solo de referencia' : 'Reference only';
@@ -78,7 +79,7 @@ const stats = gamingCatalogue
           {isEs ? 'Elegís perfiles y aplicaciones; el resolvedor canónico arma el plan y Steam solo entra si lo elegís explícitamente por nombre. Los perfiles no instalan software propietario por la puerta de atrás.' : 'You pick profiles and applications; the canonical resolver builds the plan, and Steam only enters when you select it explicitly by name. Profiles never smuggle proprietary software in.'}
         </p>
         <ol class="tracks" role="list">
-          {gamingCatalogue.specializations.map((spec) => (
+          {catalogue.specializations.map((spec) => (
             <li class="track">
               <h3>{spec.title}</h3>
               {spec.applications.length > 0 ? (
@@ -86,7 +87,7 @@ const stats = gamingCatalogue
                   {spec.applications.map((id) => (
                     <li class="chip">
                       <AppLogo id={id} />
-                      <span>{gamingCatalogue.applications.find((a) => a.id === id)?.title ?? id}</span>
+                      <span>{catalogue.applications.find((a) => a.id === id)?.title ?? id}</span>
                     </li>
                   ))}
                 </ul>
@@ -108,7 +109,7 @@ const stats = gamingCatalogue
           {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. Steam es propietario y siempre a elección explícita; Heroic y SteamVR son solo de referencia; las entradas de AUR son manuales y opcionales, y ninguna herramienta de HorneroOS ejecuta recetas de AUR.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Steam is proprietary and always an explicit opt-in; Heroic and SteamVR are reference-only; AUR entries are manual and optional, and no HorneroOS tool ever executes AUR recipes.`}
         </p>
         <ul class="app-grid" role="list">
-          {gamingCatalogue.applications.map((app) => (
+          {catalogue.applications.map((app) => (
             <li class="app-tile">
               <div class="app-head">
                 <AppLogo id={app.id} />
