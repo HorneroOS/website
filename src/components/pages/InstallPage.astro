@@ -44,22 +44,22 @@ const statusName = (
       {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la matriz de instalación en VMs desechables (UEFI y BIOS, con cifrado y sin cifrado) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed the disposable-VM installation matrix (UEFI and BIOS, encrypted and unencrypted) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
     </p>
     <p>
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview25-x86_64.iso">
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview28-x86_64.iso">
         {isEs ? 'Descargar la ISO Preview (2.6 GB)' : 'Download the Preview ISO (2.6 GB)'}
       </a>{' '}
       {isEs ? ' — también anunciada en la ' : ' — also announced on the '}
       {' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview25">{isEs ? 'página de la release v0.2.0-preview25' : 'v0.2.0-preview25 release page'}</a>.
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview28">{isEs ? 'página de la release v0.2.0-preview28' : 'v0.2.0-preview28 release page'}</a>.
       {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview25-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview28-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
       {isEs ? 'y la ' : 'and the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview25-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview28-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>horneroos-2026.10-preview25-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
-      <li><code>SHA-256</code><span>868e7d9ab09d1738e28aabeb47bb2e7d862b36d41bf061e9156ca51814f0e663</span></li>
+      <li><code>horneroos-2026.10-preview28-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
+      <li><code>SHA-256</code><span>aabc45350b1d02e06b5e66c7445de7f9cdff9d08b62e64692a07a475fb7d9883</span></li>
       <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS FCFBEE43925AB5429362278AE59EAB44AA2498DC; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository ('}<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
     </ul>
     <p>
@@ -85,7 +85,7 @@ const statusName = (
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">Preview</span> {isEs ? 'Primera ISO publicada como pre-release firmada (v0.2.0-preview25), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'First ISO published as a signed pre-release (v0.2.0-preview25), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">Preview</span> {isEs ? 'Primera ISO publicada como pre-release firmada (v0.2.0-preview28), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'First ISO published as a signed pre-release (v0.2.0-preview28), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
@@ -145,7 +145,7 @@ const statusName = (
     </p>
     <p>
       <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview25">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview28">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
     </p>
   </section>
 
