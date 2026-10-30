@@ -11,7 +11,7 @@
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "55c2fac8088a8a4f1cd2dfde11c831c3228e312f"
+      "sha": "829e5fbbbc88b74c3189e9da28e0108d3d94f36f"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
@@ -36,6 +36,7 @@
     "v0.2.0-preview22",
     "v0.2.0-preview23",
     "v0.2.0-preview24",
+    "v0.2.0-preview25",
     "v0.2.0-preview4"
   ]
 }
