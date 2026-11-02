@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import AppLogo from '../../components/AppLogo.astro';
-import { gamingCatalogue, editions, pins, short } from '../../data/product';
+import { gamingCatalogue, pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
 interface Props {
@@ -14,7 +14,28 @@ const L = (path: string) => localizePath(path, locale);
 const catalogue = gamingCatalogue;
 const specializations = catalogue?.specializations ?? [];
 const applications = catalogue?.applications ?? [];
-const appTitle = (id: string) => applications.find((a) => a.id === id)?.title ?? id;
+const appById = Object.fromEntries(applications.map((app) => [app.id, app]));
+const appTitle = (id: string) => appById[id]?.title ?? id;
+// Hero lineup mirrors Studio: flagship tool per play style, always rendered
+// from the generated catalogue, never hand-listed in markup.
+const heroLineup = ['steam', 'lutris', 'bottles', 'wine', 'obs-studio']
+  .map((id) => appById[id])
+  .filter((app): app is GamingApp => Boolean(app));
+// Runtime layer named in the lede but not catalogue applications: shown as
+// styled text badges only — no unverified logos are vendored for them.
+const runtimeLayer = isEs
+  ? [
+      { name: 'Proton', detail: 'Capa de compatibilidad de Valve, a través de Steam (a elección explícita).' },
+      { name: 'Gamescope', detail: 'Microcompositor de Valve para sesiones de juego; sin promesas de rendimiento.' },
+      { name: 'GameMode', detail: 'Optimizaciones temporales a pedido de Feral Interactive.' },
+      { name: 'MangoHud', detail: 'Overlay de métricas; las métricas no son evidencia de compatibilidad.' },
+    ]
+  : [
+      { name: 'Proton', detail: "Valve's compatibility layer, via Steam (explicit opt-in)." },
+      { name: 'Gamescope', detail: "Valve's game-session microcompositor; no performance promises." },
+      { name: 'GameMode', detail: "Feral Interactive's on-demand temporary optimizations." },
+      { name: 'MangoHud', detail: 'Metrics overlay; metrics are not compatibility evidence.' },
+    ];
 type GamingApp = NonNullable<typeof gamingCatalogue>['applications'][number];
 const statusTag = (app: GamingApp) => {
   if (app.availability === 'reference-only') return isEs ? 'Solo de referencia' : 'Reference only';
@@ -53,6 +74,21 @@ const stats = gamingCatalogue
     </p>
 
     {
+      heroLineup.length > 0 ? (
+        <div class="lineup" aria-label={isEs ? 'Aplicaciones insignia de Gaming' : 'Flagship Gaming applications'}>
+          {heroLineup.map((app) => (
+            <span class="lineup-item">
+              <AppLogo id={app.id} />
+              <span>{app.title}</span>
+              {app.licenseClass === 'proprietary' ? <span class="tag">{isEs ? 'Propietario · a elección' : 'Proprietary · opt-in'}</span> : null}
+              {app.source === 'aur' ? <span class="tag">{isEs ? 'AUR · manual' : 'AUR · manual'}</span> : null}
+            </span>
+          ))}
+        </div>
+      ) : null
+    }
+
+    {
       stats.length > 0 ? (
         <dl class="stats">
           {stats.map((stat) => (
@@ -65,7 +101,7 @@ const stats = gamingCatalogue
       ) : null
     }
 
-    <p class="availability">
+    <p class="availability" role="note">
       <strong>{isEs ? 'Hoy:' : 'Today:'}</strong>
       {isEs ? ' el catálogo canónico y ' : ' the canonical catalogue and '}
       <code>horneroctl gaming doctor</code>
@@ -83,7 +119,11 @@ const stats = gamingCatalogue
         <ol class="tracks" role="list">
           {specializations.map((spec) => (
             <li class="track">
-              <h3>{spec.title}</h3>
+              <h3>
+                {spec.title}{' '}
+                {spec.isDefault ? <span class="tag">{isEs ? 'Predeterminado' : 'Default'}</span> : null}
+                {spec.applications.includes('steam') ? <span class="tag">{isEs ? 'Steam a elección' : 'Steam opt-in'}</span> : null}
+              </h3>
               {spec.applications.length > 0 ? (
                 <ul class="chips" role="list">
                   {spec.applications.map((id) => (
@@ -117,6 +157,7 @@ const stats = gamingCatalogue
                 <AppLogo id={app.id} />
                 <h3>{app.title}</h3>
                 <span class="tag">{statusTag(app)}</span>
+                {app.source === 'aur' ? <span class="tag">{isEs ? 'AUR · manual y opcional' : 'AUR · manual & optional'}</span> : null}
               </div>
               <dl class="app-meta">
                 <div>
@@ -140,12 +181,48 @@ const stats = gamingCatalogue
     ) : null
   }
 
+  <section class="section" aria-labelledby="runtime-title">
+    <h2 id="runtime-title">{isEs ? 'Capa de ejecución' : 'Runtime layer'}</h2>
+    <p class="section-copy">
+      {isEs ? 'Estos componentes acompañan a las aplicaciones del catálogo, pero no son aplicaciones instalables por perfil: se muestran solo con el nombre, sin logos de procedencia no verificada.' : 'These components accompany the catalogue applications but are not per-profile installable applications: they are shown name-only, with no logos of unverified provenance.'}
+    </p>
+    <ul class="modes" role="list">
+      {runtimeLayer.map((tool) => (
+        <li class="mode">
+          <strong><span class="tool-badge">{tool.name}</span></strong>
+          <span>{tool.detail}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <section class="section" aria-labelledby="honest-title">
     <h2 id="honest-title">{isEs ? 'Límites honestos' : 'Honest limits'}</h2>
     <div class="status-grid">
-      <p>{isEs ? 'El anti-cheat a nivel kernel no funciona en Linux: Easy Anti-Cheat y BattlEye dependen de que cada editor habilite Proton. No hay lista de compatibilidad de juegos porque todavía no hay evidencia en hardware real.' : 'Kernel-level anti-cheat does not work on Linux: Easy Anti-Cheat and BattlEye depend on each publisher enabling Proton. There is no game compatibility list because there is no physical-hardware evidence yet.'}</p>
-      <p>{isEs ? 'Los drivers de GPU son una decisión de hardware del instalador y del primer arranque, nunca una promesa derivada de un PCI ID. VRR y HDR son experimentales; las handhelds necesitan calificación por dispositivo (Steam Deck es la referencia, no una garantía para ROG Ally o Legion Go).' : 'GPU drivers are a hardware decision made by the installer and first boot, never a promise derived from a PCI ID. VRR and HDR are experimental; handhelds need per-device qualification (Steam Deck is the reference, not a guarantee for ROG Ally or Legion Go).'}</p>
-      <p>{isEs ? 'El diagnóstico ' : 'Diagnostics: '}<code>horneroctl gaming doctor</code>{isEs ? ' informa capacidad y registro (Vulkan, loader de 32 bits, Steam, GameMode, Gamescope, MangoHud, audio, controles y recuperación). Nunca afirma compatibilidad, rendimiento ni latencia.' : ' reports capability and registration (Vulkan, 32-bit loader, Steam, GameMode, Gamescope, MangoHud, audio, controllers and recovery). It never claims compatibility, performance or latency.'}</p>
+      <article>
+        <h3>{isEs ? 'Anti-cheat y compatibilidad' : 'Anti-cheat & compatibility'}</h3>
+        <ul>
+          <li>{isEs ? 'El anti-cheat a nivel kernel no funciona en Linux: Easy Anti-Cheat y BattlEye dependen de que cada editor habilite Proton.' : 'Kernel-level anti-cheat does not work on Linux: Easy Anti-Cheat and BattlEye depend on each publisher enabling Proton.'}</li>
+          <li>{isEs ? 'No hay lista de compatibilidad de juegos porque todavía no hay evidencia en hardware real.' : 'There is no game compatibility list because there is no physical-hardware evidence yet.'}</li>
+        </ul>
+      </article>
+      <article>
+        <h3>{isEs ? 'GPU, pantallas y handhelds' : 'GPU, displays & handhelds'}</h3>
+        <ul>
+          <li>{isEs ? 'Los drivers de GPU son una decisión de hardware del instalador y del primer arranque, nunca una promesa derivada de un PCI ID.' : 'GPU drivers are a hardware decision made by the installer and first boot, never a promise derived from a PCI ID.'}</li>
+          <li>{isEs ? 'VRR y HDR son experimentales; las handhelds necesitan calificación por dispositivo (Steam Deck es la referencia, no una garantía para ROG Ally o Legion Go).' : 'VRR and HDR are experimental; handhelds need per-device qualification (Steam Deck is the reference, not a guarantee for ROG Ally or Legion Go).'}</li>
+        </ul>
+      </article>
+      <article>
+        <h3>{isEs ? 'Diagnóstico' : 'Diagnostics'}</h3>
+        <ul>
+          <li>
+            <code>horneroctl gaming doctor</code>
+            {isEs ? ' informa capacidad y registro (Vulkan, loader de 32 bits, Steam, GameMode, Gamescope, MangoHud, audio, controles y recuperación).' : ' reports capability and registration (Vulkan, 32-bit loader, Steam, GameMode, Gamescope, MangoHud, audio, controllers and recovery).'}
+          </li>
+          <li>{isEs ? 'Nunca afirma compatibilidad, rendimiento ni latencia.' : 'It never claims compatibility, performance or latency.'}</li>
+        </ul>
+      </article>
     </div>
     <p class="section-copy">
       {isEs ? 'HorneroOS Desktop, Studio y Gaming Preview se descargan desde ' : 'HorneroOS Desktop, Studio and Gaming Preview are downloadable from '}
@@ -334,6 +411,18 @@ const stats = gamingCatalogue
   .mode span:not(.tag) {
     color: var(--text-muted);
     flex: 1;
+  }
+  .tool-badge {
+    display: inline-block;
+    padding: 0.12rem 0.55rem;
+    border: 1px solid var(--secondary);
+    border-radius: 999px;
+    color: var(--secondary) !important;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex: none !important;
   }
   .status-grid {
     display: grid;
