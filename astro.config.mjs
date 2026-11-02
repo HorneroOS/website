@@ -24,6 +24,14 @@ export default defineConfig({
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],
   markdown: {
+    // Dual Shiki themes: token colors come from CSS variables so code
+    // meets WCAG AA contrast on both the night and newsprint surfaces
+    // (see the `pre` rules in src/styles/global.css). The inherited
+    // single theme rendered comments at 3.1:1 on the dark surface.
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark-high-contrast' },
+      defaultColor: false,
+    },
     processor: unified({
       remarkPlugins: [[
         remarkDocsLinks,
