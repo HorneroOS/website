@@ -121,6 +121,18 @@ reaper.fm; REAPER is proprietary and its mark is shown for
 identification only. yabridge, Graphite and Penpot have no official
 icon vendored, so they render name-only — never a substitute glyph
 presented as their logo.
+The Gaming application icons (`steam.png`, `lutris.png`,
+`bottles.png`, `wine.png`, `heroic-games-launcher.png`) are the
+official upstream app icons as published by Flathub's appstream
+(metadata extracted from each project's own packaging), vendored
+unmodified at 128 px for the Gaming page. Steam is proprietary
+(Valve Corporation) and its mark is shown for identification only,
+always beside explicit proprietary/opt-in labelling; it is never
+installed silently. vkBasalt and SteamVR have no official icon
+vendored, so they render name-only. Proton, Gamescope, GameMode
+and MangoHud likewise have no vendored logo on the Gaming page —
+they appear as styled text badges only, never as substitute glyphs
+presented as their logos.
 They remain the trademarks of their respective projects and are not
 HorneroOS artwork. `thunar.svg` (XFCE Thunar) and `copyq.svg` (CopyQ)
 follow the same rule for the docs featured-tools chips. They render
