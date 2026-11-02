@@ -10,6 +10,7 @@ import LogoLight from '../assets/brand/logo-light.svg';
 import '../styles/global.css';
 import { story } from '../data/story';
 import { localeFromPath, localizePath, t, type Locale } from '../i18n/ui';
+import { discordInvite } from '../data/community';
 
 const firstPublicCommit = story.find((entry) => entry.id === 'dotfiles')?.source?.href;
 
@@ -93,7 +94,7 @@ const community = {
   star: 'https://github.com/HorneroOS/hornero',
   bug: 'https://github.com/HorneroOS/hornero/issues/new/choose',
   siteIssue: 'https://github.com/HorneroOS/website/issues/new/choose',
-  discord: 'https://discord.gg/bR5VyATgka',
+  discord: discordInvite,
 };
 ---
 
@@ -198,6 +199,7 @@ const community = {
           <ul class="mobile-community" aria-label={t(locale, 'githubCommunityLabel')}>
             <li><a href={community.star}>{t(locale, 'starOnGitHub')}</a></li>
             <li><a href={community.org}>{t(locale, 'orgOnGitHub')}</a></li>
+            <li><a href={community.discord}>{t(locale, 'discordJoin')}</a></li>
             <li><a href={community.bug}>{t(locale, 'reportBug')}</a></li>
             <li><a href={community.siteIssue}>{t(locale, 'reportSiteIssue')}</a></li>
           </ul>
@@ -212,6 +214,17 @@ const community = {
                 d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.96 0-.87.31-1.59.83-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.52.56.83 1.27.83 2.15 0 3.08-1.87 3.75-3.66 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
               />
             </svg>
+          </a>
+        </li>
+        <li>
+          <a href={community.discord} class="community-discord" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" focusable="false">
+              <path
+                fill="currentColor"
+                d="M13.55 2.9A12.8 12.8 0 0 0 10.4 1.9a8.8 8.8 0 0 0-.4.83 11.9 11.9 0 0 0-3.99 0A8.3 8.3 0 0 0 5.6 1.9 12.7 12.7 0 0 0 2.45 2.9C.46 5.9-.08 8.8.19 11.66a12.9 12.9 0 0 0 3.87 1.96c.31-.43.59-.89.83-1.37-.46-.17-.9-.38-1.31-.63.11-.08.22-.17.32-.26a9.2 9.2 0 0 0 7.94 0c.1.09.21.18.32.26-.42.25-.86.46-1.32.63.24.48.52.94.83 1.37a12.8 12.8 0 0 0 3.87-1.96c.32-3.31-.55-6.18-2.82-8.76ZM5.35 9.9c-.76 0-1.38-.7-1.38-1.55s.61-1.55 1.38-1.55c.77 0 1.39.7 1.38 1.55 0 .86-.61 1.55-1.38 1.55Zm5.1 0c-.76 0-1.38-.7-1.38-1.55s.61-1.55 1.38-1.55c.77 0 1.39.7 1.38 1.55 0 .86-.61 1.55-1.38 1.55Z"
+              />
+            </svg>
+            <span>{t(locale, 'discordLabel')}</span>
           </a>
         </li>
         <li>
@@ -281,6 +294,12 @@ const community = {
       <section class="involved" aria-labelledby="involved-title">
         <h2 id="involved-title">{t(locale, 'getInvolved')}</h2>
         <ul>
+          <li>
+            <a href={community.discord} rel="noopener">
+              <strong>{t(locale, 'discordTitle')}</strong>
+              <span>{t(locale, 'discordText')}</span>
+            </a>
+          </li>
           <li>
             <a href={community.star}>
               <strong>{t(locale, 'starTitle')}</strong>
