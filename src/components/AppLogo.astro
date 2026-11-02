@@ -17,6 +17,9 @@
  * published by Flathub's appstream, unmodified. Steam is proprietary
  * and shown for identification only. vkBasalt and SteamVR have no
  * official icon vendored, so they render name-only.
+ * Callers may opt in with `name` to get an in-house styled text badge
+ * (initials) in the logo slot; it is site iconography, never presented
+ * as the application's own logo.
  */
 import kittyLogo from '../assets/apps/kitty.png';
 import alacrittyLogo from '../assets/apps/alacritty.svg';
@@ -85,10 +88,15 @@ const logos: Record<string, { src: string; width: number; height: number }> = {
 interface Props {
   id: string;
   class?: string;
+  /** Visible app name; enables an in-house initials badge when no official icon is vendored. */
+  name?: string;
 }
 
-const { id, class: className } = Astro.props;
+const { id, class: className, name } = Astro.props;
 const logo = logos[id];
+const initials = name
+  ? name.replace(/\(.*?\)/g, '').replace(/^The\s+/i, '').split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w.charAt(0))).slice(0, 2).map((w) => w.charAt(0).toUpperCase()).join('')
+  : '';
 ---
 
 {
@@ -102,6 +110,8 @@ const logo = logos[id];
       loading="lazy"
       decoding="async"
     />
+  ) : name ? (
+    <span class:list={['app-logo', 'app-badge', className]} aria-hidden="true" title={name}>{initials}</span>
   ) : id === 'cava' ? (
     <span class:list={['app-logo', 'cava-glyph', className]} aria-hidden="true">
       <i />
@@ -119,6 +129,20 @@ const logo = logos[id];
     height: var(--app-logo-size, 2.5rem);
     object-fit: contain;
     flex: none;
+  }
+  .app-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: var(--surface-raised, var(--night-raised));
+    border: 1px dashed color-mix(in srgb, var(--secondary) 55%, transparent);
+    border-radius: 24%;
+    color: var(--secondary);
+    font-family: var(--font-data, monospace);
+    font-weight: 700;
+    font-size: calc(var(--app-logo-size, 2.5rem) * 0.36);
+    letter-spacing: 0.04em;
   }
   .cava-glyph {
     display: inline-flex;
