@@ -22,6 +22,9 @@ const file = (path) => pathToFileURL(join(root, path)).href;
 const fonts = (name, f) => file(`node_modules/@fontsource-variable/${name}/files/${f}`);
 const logo = readFileSync(join(root, 'src/assets/brand/logo-dark.svg'), 'utf8').replace(/<svg /, '<svg width="54" height="54" ');
 const plugins = JSON.parse(readFileSync(join(root, 'src/data/product/extensions.json'), 'utf8')).plugins;
+const studioApps = new Map(
+  JSON.parse(readFileSync(join(root, 'src/data/product/editions.json'), 'utf8')).studio.applications.map((a) => [a.id, a.title]),
+);
 
 const shot = (path, w, h, label) => `
   <div class="shot" style="width:${w}px;height:${h}px"><img src="${file(path)}" alt="" /></div>
@@ -72,6 +75,13 @@ const cards = {
       <li><b>hornero-config</b><span>defaults, themes</span></li>
       <li><b>hornero-greeter</b><span>SDDM login</span></li>
     </ul><p class="cap"><b>AUR packages</b> development preview</p>`,
+  },
+  studio: {
+    title: 'Studio: create on HorneroOS.',
+    line: 'Preview creative edition: audio, video, streaming, design, photo and 3D. Not Supported yet.',
+    panel: `<ul class="ledger">${['ardour', 'obs-studio', 'blender', 'krita', 'godot']
+      .map((id) => `<li><b>${studioApps.get(id) ?? id}</b><span>Studio flagship</span></li>`)
+      .join('')}</ul><p class="cap"><b>Catalogue</b> generated from the pinned Hornero catalogue; logos are official upstream icons</p>`,
   },
   greeter: {
     title: 'The HorneroOS greeter.',

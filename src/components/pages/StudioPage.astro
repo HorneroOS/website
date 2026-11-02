@@ -25,6 +25,16 @@ const statusTag = (app: StudioApp) => {
   if (app.optional) return isEs ? 'Opcional' : 'Optional';
   return isEs ? 'Catalogado' : 'Catalogued';
 };
+type TagKind = 'reference' | 'proprietary' | 'experimental' | 'open' | 'optional' | 'catalogued';
+const tagKind = (app: StudioApp): TagKind => {
+  if (app.availability === 'reference-only') return 'reference';
+  if (app.licenseClass === 'proprietary') return 'proprietary';
+  if (app.experimental) return 'experimental';
+  if (app.licenseClass === 'open-source') return 'open';
+  if (app.optional) return 'optional';
+  return 'catalogued';
+};
+const maturityLabel = studio.maturity === 'preview' ? 'Preview' : studio.maturity;
 // The hero lineup is editorial: the flagship tool of each creative field,
 // always rendered from the generated catalogue, never hand-listed twice.
 const heroLineup = ['ardour', 'obs-studio', 'blender', 'krita', 'godot']
@@ -45,13 +55,18 @@ const stats = isEs
 
 <SiteLayout
   title="Studio | HorneroOS"
+  socialImage="/og/studio.png"
+  socialImageAlt={isEs ? 'Las aplicaciones insignia de HorneroOS Studio (Ardour, OBS Studio, Blender, Krita y Godot) listadas por nombre, junto a la frase sobre la edición creativa Preview.' : 'The flagship HorneroOS Studio applications (Ardour, OBS Studio, Blender, Krita and Godot) listed by name, beside the line about the Preview creative edition.'}
   description={isEs ? 'HorneroOS Studio es una edición Preview para trabajo creativo: audio, video, streaming, diseño, foto y 3D. Se instala desde la ISO Preview de HorneroOS con especializaciones a elección.' : 'HorneroOS Studio is a Preview edition for creative work: audio, video, streaming, design, photo and 3D. It installs from the HorneroOS Preview ISO with selectable specializations.'}
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>Ficha técnica · Edición Studio</strong><span>ARG / 199X</span><span>Estado: Preview</span>
+      <strong>{isEs ? 'Ficha técnica · Edición Studio' : 'Technical sheet · Studio Edition'}</strong><span>ARG / 199X</span><span>{isEs ? 'Estado' : 'Status'}: {maturityLabel}</span>
     </p>
-    <h1>Studio</h1>
+    <div class="hero-head">
+      <h1>Studio</h1>
+      <span class="preview-pill">{maturityLabel} · {isEs ? 'no Supported' : 'not Supported'}</span>
+    </div>
     <p class="lede">
       {isEs ? 'HorneroOS Studio es una edición creativa Preview construida sobre Desktop, y hoy se instala desde la ISO Preview de HorneroOS. Elegís especializaciones (audio, video, streaming, diseño, fotografía, 3D) y el sistema configura las aplicaciones, la política de audio y el espacio de trabajo para ellas.' : 'HorneroOS Studio is a Preview creative edition built on the Desktop, and it installs today from the HorneroOS Preview ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for them.'}
     </p>
@@ -60,12 +75,23 @@ const stats = isEs
       {
         heroLineup.map((app) => (
           <span class="lineup-item">
-            <AppLogo id={app.id} />
+            <AppLogo id={app.id} name={app.title} />
             <span>{app.title}</span>
           </span>
         ))
       }
     </div>
+
+    <p class="hero-ctas">
+      <a class="cta-primary" href={L('/install')}>{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+      <a class="cta-secondary" href="#apps-title">{isEs ? 'Ver aplicaciones' : 'Browse applications'}</a>
+    </p>
+    <nav class="section-nav" aria-label={isEs ? 'Secciones de Studio' : 'Studio sections'}>
+      <a href="#workloads-title">{isEs ? 'Especializaciones' : 'Specializations'}</a>
+      <a href="#apps-title">{isEs ? 'Aplicaciones' : 'Applications'}</a>
+      <a href="#audio-title">{isEs ? 'Audio y rendimiento' : 'Audio & performance'}</a>
+      <a href="#today-title">{isEs ? 'Estado' : 'Status'}</a>
+    </nav>
 
     <dl class="stats">
       {
@@ -91,14 +117,14 @@ const stats = isEs
     </p>
     <ol class="tracks" role="list">
       {
-        studioCatalogue.specializations.map((spec) => (
+        studioCatalogue.specializations.map((spec, index) => (
           <li class="track">
-            <h3>{spec.title}</h3>
+            <h3><span class="track-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{spec.title}</h3>
             {spec.applications.length > 0 ? (
               <ul class="chips" role="list">
                 {spec.applications.map((id) => (
                   <li class="chip">
-                    <AppLogo id={id} />
+                    <AppLogo id={id} name={appTitle(id)} />
                     <span>{appTitle(id)}</span>
                   </li>
                 ))}
@@ -115,16 +141,16 @@ const stats = isEs
   <section class="section" aria-labelledby="apps-title">
     <h2 id="apps-title">{isEs ? 'Aplicaciones, fuentes y licencias' : 'Applications, sources and licenses'}</h2>
     <p class="section-copy">
-      {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. El software propietario nunca se instala en silencio: REAPER es una opción explícita bajo la EULA de su proveedor, Penpot es solo de referencia (herramienta de navegador, sin paquete), y las entradas experimentales están marcadas. yabridge, Graphite y Penpot no tienen un ícono oficial incorporado, así que aparecen solo con el nombre.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no package), and experimental entries are marked. yabridge, Graphite and Penpot have no official icon vendored, so they appear name-only.`}
+      {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. El software propietario nunca se instala en silencio: REAPER es una opción explícita bajo la EULA de su proveedor, Penpot es solo de referencia (herramienta de navegador, sin paquete), y las entradas experimentales están marcadas. yabridge, Graphite y Penpot no tienen un ícono oficial incorporado, así que llevan una insignia de texto propia del sitio (iniciales), nunca presentada como su logo.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no package), and experimental entries are marked. yabridge, Graphite and Penpot have no official icon vendored, so they carry an in-house initials text badge, never presented as their logo.`}
     </p>
     <ul class="app-grid" role="list">
       {
         studioCatalogue.applications.map((app) => (
           <li class="app-tile">
             <div class="app-head">
-              <AppLogo id={app.id} />
+              <AppLogo id={app.id} name={app.title} />
               <h3>{app.title}</h3>
-              <span class="tag">{statusTag(app)}</span>
+              <span class:list={['tag', `tag-${tagKind(app)}`]}>{statusTag(app)}</span>
             </div>
             <dl class="app-meta">
               <div>
@@ -211,6 +237,60 @@ const stats = isEs
   .intro h1 {
     margin-block: 0.55rem 1rem;
   }
+  .hero-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+  }
+  .hero-head h1 { margin-block: 0.55rem 1rem; }
+  .preview-pill {
+    padding: 0.28rem 0.7rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-family: var(--font-data, monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+  }
+  .cta-primary, .cta-secondary {
+    padding: 0.65rem 1.1rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .cta-primary { background: var(--accent); color: var(--accent-ink); }
+  .cta-secondary { border: 1px solid var(--line); color: var(--text); }
+  .section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    margin-top: 1rem;
+    font-family: var(--font-data, monospace);
+    font-size: var(--step--1);
+  }
+  .track-index {
+    display: block;
+    color: var(--accent);
+    font-family: var(--font-data, monospace);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+  }
+  .tag-proprietary { border-color: var(--accent); color: var(--accent); }
+  .tag-reference { border-style: dashed; }
+  .tag-experimental { border-color: var(--highlight); color: var(--highlight); }
+  .app-tile { border-top: 3px solid var(--line); }
+  .app-tile:has(.tag-proprietary) { border-top-color: var(--accent); }
+  .app-tile:has(.tag-reference) { border-top-style: dashed; }
   .lede {
     max-width: 54ch;
     font-size: var(--step-1);
