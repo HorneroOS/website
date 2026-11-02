@@ -7,15 +7,15 @@
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "c376402043e35a4d86ff2049632de77f1944566c"
+      "sha": "5af94d8e1754848afa01f95655e09c1044483734"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "ecc8a65c3081ff61cf8212a170bb083c0693caa7"
+      "sha": "1655ea8b0823fcd0099e3039a5b3791df0c08cc0"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
-      "sha": "d0687270ac4b6486f657801d8abca8f4906472ef"
+      "sha": "4aa5aa409e8fe736786109fc3e6f9dcdee5c2e8b"
     },
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",
@@ -38,6 +38,7 @@
     "v0.2.0-preview24",
     "v0.2.0-preview25",
     "v0.2.0-preview28",
+    "v0.2.0-preview29",
     "v0.2.0-preview4"
   ]
 }
