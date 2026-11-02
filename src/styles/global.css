@@ -227,6 +227,20 @@ pre {
   box-shadow: inset 0 0 1.5rem color-mix(in srgb, var(--highlight) 3%, transparent);
 }
 
+/* Shiki dual themes (astro.config.mjs): night tokens by default,
+   newsprint tokens in light mode, both AA-checked against their bg. */
+pre,
+pre span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+:root[data-color-mode='light'] pre,
+:root[data-color-mode='light'] pre span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+
 hr {
   height: 1px;
   border: 0;
