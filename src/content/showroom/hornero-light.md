@@ -8,8 +8,12 @@ alt:
   en: 'Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied.'
 order: 1
 provenance:
-  source: Hornero QA
-  context: Package-only flagship theme transition; the screenshot includes the Shell notification confirming the applied look.
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Transición del tema insignia solo con paquetes; la captura incluye la notificación de la Shell que confirma el aspecto aplicado.'
+    en: 'Package-only flagship theme transition; the screenshot includes the Shell notification confirming the applied look.'
   pins:
     shell: 98a5de2
     config: 96b6870

@@ -4,8 +4,8 @@ import { z } from 'astro/zod';
 
 // Provenance travels with every capture (AGENTS.md "Website follows product").
 const provenance = z.object({
-  source: z.string(),
-  context: z.string().optional(),
+  source: z.object({ es: z.string(), en: z.string() }),
+  context: z.object({ es: z.string(), en: z.string() }).optional(),
   pins: z.record(z.string(), z.string()).optional(),
   resolution: z.string().optional(),
   theme: z.string().optional(),

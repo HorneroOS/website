@@ -8,8 +8,12 @@ alt:
   en: 'Hornero desktop with a pale sunrise over a snow-covered alpine ridge and clouds, paired with a cool mint-accented shell rail.'
 order: 8
 provenance:
-  source: Hornero host capture
-  context: 'Live Arch + Hyprland development host · empty workspace · wallpaper: soft-morning/morning-lake-2.jpg · not an installer image'
+  source:
+    es: 'Captura en host de Hornero'
+    en: 'Hornero host capture'
+  context:
+    es: 'Host de desarrollo Arch + Hyprland en vivo · espacio de trabajo vacío · fondo: soft-morning/morning-lake-2.jpg · no es una imagen del instalador'
+    en: 'Live Arch + Hyprland development host · empty workspace · wallpaper: soft-morning/morning-lake-2.jpg · not an installer image'
   pins:
     dotfiles: 9b6ea87
     config package: hornero-config 0.2.2-1

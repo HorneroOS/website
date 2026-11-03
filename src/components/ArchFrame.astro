@@ -16,6 +16,7 @@ interface Props {
   eager?: boolean;
   sizes?: string;
   widths?: number[];
+  locale?: 'es' | 'en';
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   eager = false,
   sizes = '(min-width: 1180px) 1100px, calc(100vw - 2rem)',
   widths = [480, 800, 1280],
+  locale = 'es',
 } = Astro.props;
 ---
 
@@ -44,7 +46,7 @@ const {
     />
   </div>
   <figcaption>
-    <KilnStamp {...provenance} />
+    <KilnStamp {...provenance} locale={locale} />
   </figcaption>
 </figure>
 

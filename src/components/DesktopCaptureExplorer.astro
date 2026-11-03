@@ -35,6 +35,11 @@ const views = await Promise.all(
       ...capture.data,
       title: capture.data.title[locale],
       alt: capture.data.alt[locale],
+      provenance: {
+        ...capture.data.provenance,
+        source: capture.data.provenance.source[locale],
+        context: capture.data.provenance.context?.[locale],
+      },
       src: variants[1]?.src ?? variants[0]?.src,
       srcset: variants.map((variant) => `${variant.src} ${variant.options.width}w`).join(', '),
     };

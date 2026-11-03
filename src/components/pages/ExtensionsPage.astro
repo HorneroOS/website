@@ -89,6 +89,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
       src={dashboardShot.data.image}
       alt={dashboardShot.data.alt[locale]}
       provenance={dashboardShot.data.provenance}
+      locale={locale}
       sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
       widths={[640, 960, 1280, 1600]}
     />

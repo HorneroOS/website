@@ -8,8 +8,12 @@ alt:
   en: 'Hornero desktop with a synthwave desert road, coral cliffs and a dusk-purple sky behind the vertical shell rail.'
 order: 7
 provenance:
-  source: Hornero host capture
-  context: 'Live Arch + Hyprland development host · empty workspace · wallpaper: vapor-dreams/vapor-roadtrip-02.jpg · not an installer image'
+  source:
+    es: 'Captura en host de Hornero'
+    en: 'Hornero host capture'
+  context:
+    es: 'Host de desarrollo Arch + Hyprland en vivo · espacio de trabajo vacío · fondo: vapor-dreams/vapor-roadtrip-02.jpg · no es una imagen del instalador'
+    en: 'Live Arch + Hyprland development host · empty workspace · wallpaper: vapor-dreams/vapor-roadtrip-02.jpg · not an installer image'
   pins:
     dotfiles: 9b6ea87
     config package: hornero-config 0.2.2-1

@@ -8,8 +8,12 @@ alt:
   en: 'Horizon layout in a real Hornero session, with controls arranged as a wide low-profile composition.'
 order: 10
 provenance:
-  source: Hornero QA
-  context: Layout acceptance · visual review
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Aceptación de layouts · revisión visual'
+    en: 'Layout acceptance · visual review'
   pins:
     shell: 98a5de2
     config: 96b6870

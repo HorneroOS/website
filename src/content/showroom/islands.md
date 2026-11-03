@@ -8,8 +8,12 @@ alt:
   en: 'Islands layout in Hornero, with independent floating control surfaces arranged across the desktop.'
 order: 11
 provenance:
-  source: Hornero QA
-  context: Layout acceptance · visual review
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Aceptación de layouts · revisión visual'
+    en: 'Layout acceptance · visual review'
   pins:
     shell: 98a5de2
     config: 96b6870

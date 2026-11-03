@@ -46,9 +46,11 @@ for (const m of story.matchAll(/(title|summary|label):\s*(?:\{\s*es:\s*'[^']*',\
 // --- showroom frontmatter ---
 for (const file of readdirSync(join(root, 'src/content/showroom')).filter((f) => f.endsWith('.md'))) {
   const text = read(`src/content/showroom/${file}`);
-  for (const field of ['title', 'alt']) {
-    const m = text.match(new RegExp(`^${field}:([\\s\\S]*?)(?=^\\w|^provenance:)`, 'm'));
-    if (!m || !m[1].includes('es:') || !m[1].includes('en:')) {
+  for (const field of ['title', 'alt', 'source', 'context']) {
+    const m = text.match(new RegExp(`^\\s*${field}:\\n\\s+es:[^\\n]*\\n\\s+en:`, 'm'));
+    const present = new RegExp(`^\\s*${field}:`, 'm').test(text);
+    if (field === 'context' && !present) continue; // provenance context is optional
+    if (!m) {
       failures.push(`src/content/showroom/${file}: ${field} lacks es/en`);
     }
   }

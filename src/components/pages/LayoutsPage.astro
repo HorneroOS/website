@@ -59,7 +59,7 @@ const selectedEs = [
 ];
 const selected = isEs ? selectedEs : selectedEn;
 const proof = {
-  source: 'Hornero QA',
+  source: isEs ? 'QA de Hornero' : 'Hornero QA',
   context: isEs ? 'Aceptación de layouts · revisión visual' : 'Layout acceptance · visual review',
   pins: { shell: '98a5de2', config: '96b6870', horneroctl: '9c15172' },
   resolution: '1280×800',
@@ -100,6 +100,7 @@ const proof = {
             sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)"
             widths={[480, 720, 1080, 1280]}
             provenance={proof}
+            locale={locale}
           />
           <div class="showcase-copy">
             <h2>{layout?.name}</h2>
