@@ -339,8 +339,9 @@ hr {
 
 .brand-mark {
   flex: none;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -0.25rem;
 }
 
 .mark-on-light {
@@ -1467,4 +1468,9 @@ thead th {
     animation-duration: 180ms;
     animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
+}
+
+/* The AR flag's white band needs a real ring on light surfaces. */
+:root[data-color-mode='light'] .lang-switch .flag-ar {
+  box-shadow: 0 0 0 1px var(--line);
 }

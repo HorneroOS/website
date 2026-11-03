@@ -80,7 +80,7 @@ const stats = gamingCatalogue
         <div class="lineup" aria-label={isEs ? 'Aplicaciones insignia de Gaming' : 'Flagship Gaming applications'}>
           {heroLineup.map((app) => (
             <span class="lineup-item">
-              <AppLogo id={app.id} />
+              <AppLogo id={app.id} name={app.title} />
               <span>{app.title}</span>
               {app.licenseClass === 'proprietary' ? <span class="tag">{isEs ? 'Propietario · a elección' : 'Proprietary · opt-in'}</span> : null}
               {app.source === 'aur' ? <span class="tag">{isEs ? 'AUR · manual' : 'AUR · manual'}</span> : null}
@@ -130,7 +130,7 @@ const stats = gamingCatalogue
                 <ul class="chips" role="list">
                   {spec.applications.map((id) => (
                     <li class="chip">
-                      <AppLogo id={id} />
+                      <AppLogo id={id} name={appTitle(id)} />
                       <span>{appTitle(id)}</span>
                     </li>
                   ))}
@@ -150,13 +150,13 @@ const stats = gamingCatalogue
       <section class="section" aria-labelledby="apps-title">
         <h2 id="apps-title">{isEs ? 'Aplicaciones, fuentes y licencias' : 'Applications, sources and licenses'}</h2>
         <p class="section-copy">
-          {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. Steam es propietario y siempre a elección explícita; Heroic y SteamVR son solo de referencia; las entradas de AUR son manuales y opcionales, y ninguna herramienta de HorneroOS ejecuta recetas de AUR. vkBasalt y SteamVR no tienen un ícono oficial incorporado, así que aparecen solo con el nombre.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Steam is proprietary and always an explicit opt-in; Heroic and SteamVR are reference-only; AUR entries are manual and optional, and no HorneroOS tool ever executes AUR recipes. vkBasalt and SteamVR have no official icon vendored, so they appear name-only.`}
+          {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. Steam es propietario y siempre a elección explícita; Heroic y SteamVR son solo de referencia; las entradas de AUR son manuales y opcionales, y ninguna herramienta de HorneroOS ejecuta recetas de AUR. vkBasalt y SteamVR no tienen un ícono oficial incorporado, así que llevan una insignia de texto propia del sitio (iniciales), nunca presentada como su logo.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Steam is proprietary and always an explicit opt-in; Heroic and SteamVR are reference-only; AUR entries are manual and optional, and no HorneroOS tool ever executes AUR recipes. vkBasalt and SteamVR have no official icon vendored, so they carry an in-house initials text badge, never presented as their logo.`}
         </p>
         <ul class="app-grid" role="list">
           {applications.map((app) => (
             <li class="app-tile">
               <div class="app-head">
-                <AppLogo id={app.id} />
+                <AppLogo id={app.id} name={app.title} />
                 <h3>{app.title}</h3>
                 <span class="tag">{statusTag(app)}</span>
                 {app.source === 'aur' ? <span class="tag">{isEs ? 'AUR · manual y opcional' : 'AUR · manual & optional'}</span> : null}

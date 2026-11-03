@@ -175,12 +175,18 @@ const statusName = (
 
   .packages li {
     display: grid;
-    grid-template-columns: minmax(10rem, max-content) 1fr;
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
     gap: 0.25rem 1rem;
     padding: 0.6rem 0.9rem;
     border-radius: 10px;
     background: var(--surface);
     border: 1px solid var(--line);
+  }
+
+  .packages code,
+  .packages span {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .packages span {
