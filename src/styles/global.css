@@ -591,7 +591,7 @@ hr {
   opacity: 0.78;
   transition:
     opacity 160ms ease,
-    box-shadow 160ms ease,
+    filter 160ms ease,
     transform 160ms ease;
 }
 
@@ -606,8 +606,8 @@ hr {
 
 .color-switch input:checked + span svg {
   opacity: 1;
-  transform: scale(1.18);
-  box-shadow: 0 0 0.7rem color-mix(in srgb, var(--choice-signal) 78%, transparent);
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 0.22rem color-mix(in srgb, var(--choice-signal) 55%, transparent));
 }
 
 .color-switch input:focus-visible + span {
@@ -995,13 +995,6 @@ hr {
     top: calc(100% + 3.2rem);
   }
 
-  .color-switch {
-    gap: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-  }
-
   .color-switch label span {
     min-width: 2.65rem;
     justify-content: center;
@@ -1387,8 +1380,8 @@ thead th {
   }
 
   .color-switch label span {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     justify-content: center;
     padding-inline: 0;
   }

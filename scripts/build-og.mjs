@@ -32,8 +32,8 @@ const shot = (path, w, h, label) => `
 
 const cards = {
   default: {
-    title: 'A Linux desktop, lived in since 2018.',
-    line: 'Arch-based and Wayland-first, from Argentina. Development preview.',
+    title: 'A Linux desktop with years of daily use behind it.',
+    line: 'Arch-based and Wayland-first, from Argentina. Preview 31 ISO available.',
     panel: shot('assets/screenshots/curated/dashboard-extensions-2026-10-25.webp', 660, 371, 'Dashboard · live desktop · 2026-10-25'),
   },
   showroom: {
@@ -42,8 +42,8 @@ const cards = {
     panel: shot('assets/screenshots/curated/terminal-tools-2026-10-25.webp', 660, 371, 'btop and yazi · live desktop · 2026-10-25'),
   },
   editions: {
-    title: 'Desktop now, three profiles planned.',
-    line: 'Server, Agents and Studio are defined but have no image.',
+    title: 'Three Preview editions.',
+    line: 'Desktop, Studio and Gaming on one signed ISO. Server and Agents are planned.',
     panel: shot('assets/screenshots/certified/hornero-left.png', 594, 371, 'Hornero Left · Hornero Dark · QA 2026-10-03'),
   },
   extensions: {
@@ -67,14 +67,14 @@ const cards = {
     </ol><p class="cap"><b>Timeline</b> each date after 2018 links to a commit</p>`,
   },
   install: {
-    title: 'Install on Arch. No ISO yet.',
-    line: 'Desktop preview packages. The installer is in development.',
+    title: 'Download the Preview 31 ISO.',
+    line: 'One signed x86_64 ISO: Desktop, Studio and Gaming Preview.',
     panel: `<ul class="ledger mono">
       <li><b>horneroctl-bin</b><span>system CLI</span></li>
       <li><b>hornero-shell</b><span>Quickshell shell</span></li>
       <li><b>hornero-config</b><span>defaults, themes</span></li>
       <li><b>hornero-greeter</b><span>SDDM login</span></li>
-    </ul><p class="cap"><b>AUR packages</b> development preview</p>`,
+    </ul><p class="cap"><b>Signed ISO</b> plus AUR packages for existing Arch systems</p>`,
   },
   studio: {
     title: 'Studio: create on HorneroOS.',
@@ -83,8 +83,13 @@ const cards = {
       .map((id) => `<li><b>${studioApps.get(id) ?? id}</b><span>Studio flagship</span></li>`)
       .join('')}</ul><p class="cap"><b>Catalogue</b> generated from the pinned Hornero catalogue; logos are official upstream icons</p>`,
   },
+  gaming: {
+    title: 'Gaming: play on HorneroOS.',
+    line: 'Preview gaming edition: Steam with Proton, Gamescope, GameMode and MangoHud, all opt-in.',
+    panel: shot('assets/screenshots/curated/dashboard-extensions-2026-10-25.webp', 660, 371, 'Dashboard · live desktop · 2026-10-25'),
+  },
   greeter: {
-    title: 'The HorneroOS greeter.',
+    title: 'The Hornero greeter.',
     line: 'An interactive recreation of the login screen.',
     panel: shot('public/media/greeter/ar-er-el-palmar-golden-hour.webp', 660, 371, 'Browser recreation · El Palmar, Entre Ríos').replace('Real capture', 'Not a screenshot'),
   },
