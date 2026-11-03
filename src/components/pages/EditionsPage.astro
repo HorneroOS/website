@@ -13,8 +13,8 @@ const L = (path: string) => localizePath(path, locale);
 
 const maturityLabels = (
   isEs
-    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview de Desktop', supported: 'Soportado' }
-    : { planned: 'Planned', experimental: 'Experimental', preview: 'Desktop preview', supported: 'Supported' }
+    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' }
 ) as Record<'planned' | 'experimental' | 'preview' | 'supported', string>;
 const copy = (
   isEs
@@ -23,15 +23,17 @@ const copy = (
         server: { headline: 'Sistema sin pantalla', body: 'Un sistema para homelabs, máquinas virtuales y servicios autoalojados. Se opera de forma remota y no tiene sesión gráfica.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
         agents: { headline: 'Alojamiento de agentes', body: 'Un entorno basado en Server con identidades aisladas, servicios restringidos y ciclos de vida de agentes inspeccionables.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
         studio: { headline: 'Estación de trabajo creativa', body: 'Desktop más aplicaciones para trabajo de audio, video y visual, con flujos atentos al hardware.', href: '/studio', link: 'Sobre Studio (preview)' },
+        gaming: { headline: 'Escritorio para jugar', body: 'Desktop más Steam con Proton, Gamescope, GameMode y MangoHud, todo a elección.', href: '/gaming', link: 'Sobre Gaming (preview)' },
       }
     : {
         desktop: { headline: 'Wayland desktop', body: 'Hornero Shell provides layouts, themes, settings, a launcher, a dashboard and session controls.', href: '/showroom', link: 'Explore the desktop' },
         server: { headline: 'Headless system', body: 'A system for homelabs, virtual machines and self-hosted services. It is operated remotely and has no graphical session.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
         agents: { headline: 'Agent hosting', body: 'A Server-based environment with isolated identities, constrained services and inspectable agent lifecycles.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
         studio: { headline: 'Creative workstation', body: 'Desktop plus applications for audio, video and visual work, with hardware-aware workflows.', href: '/studio', link: 'About Studio (preview)' },
+        gaming: { headline: 'Desktop for play', body: 'Desktop plus Steam with Proton, Gamescope, GameMode and MangoHud, all opt-in.', href: '/gaming', link: 'About Gaming (preview)' },
       }
-) as Record<'desktop' | 'server' | 'agents' | 'studio', { headline: string; body: string; href: string; link: string }>;
-const familyOrder = ['desktop', 'server', 'agents', 'studio'];
+) as Record<'desktop' | 'server' | 'agents' | 'studio' | 'gaming', { headline: string; body: string; href: string; link: string }>;
+const familyOrder = ['desktop', 'studio', 'gaming', 'server', 'agents'];
 const byId = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const cards = familyOrder.map((id) => {
   const edition = byId[id];
@@ -46,16 +48,16 @@ const cards = familyOrder.map((id) => {
 const statusLabel = (maturity: keyof typeof maturityLabels) => maturityLabels[maturity];
 const roleLabel = (
   isEs
-    ? { desktop: 'Escritorio Wayland', server: 'Sistemas sin pantalla', 'agent-host': 'Alojamiento seguro de agentes', 'creative-workstation': 'Producción creativa' }
-    : { desktop: 'Wayland desktop', server: 'Headless systems', 'agent-host': 'Secure agent hosting', 'creative-workstation': 'Creative production' }
-) as Record<'desktop' | 'server' | 'agent-host' | 'creative-workstation', string>;
+    ? { desktop: 'Escritorio Wayland', server: 'Sistemas sin pantalla', 'agent-host': 'Alojamiento seguro de agentes', 'creative-workstation': 'Producción creativa', 'gaming-workstation': 'Escritorio para jugar' }
+    : { desktop: 'Wayland desktop', server: 'Headless systems', 'agent-host': 'Secure agent hosting', 'creative-workstation': 'Creative production', 'gaming-workstation': 'Desktop for play' }
+) as Record<'desktop' | 'server' | 'agent-host' | 'creative-workstation' | 'gaming-workstation', string>;
 ---
 
 <SiteLayout
   socialImage="/og/editions.png"
   socialImageAlt={isEs ? "El layout Hornero Left en Hornero Dark, junto a la frase 'Three Preview editions'." : "The Hornero Left layout in Hornero Dark, beside the line 'Three Preview editions'."}
   title={isEs ? 'Ediciones | HorneroOS' : 'Editions | HorneroOS'}
-  description={isEs ? 'HorneroOS tiene cuatro perfiles sobre una misma base: Desktop, Server, Agents y Studio. Desktop y Studio Preview se instalan desde la ISO Preview firmada; Server y Agents siguen planificados.' : 'HorneroOS has four profiles on one base: Desktop, Server, Agents and Studio. Desktop and Studio Preview install from the signed Preview ISO; Server and Agents remain planned.'}
+  description={isEs ? 'HorneroOS tiene cinco perfiles sobre una misma base: Desktop, Studio y Gaming en Preview, más Server y Agents planificadas. Las tres ediciones Preview se instalan desde la misma ISO firmada.' : 'HorneroOS has five profiles on one base: Desktop, Studio and Gaming in Preview, plus Server and Agents planned. The three Preview editions install from the same signed ISO.'}
 >
   <section class="intro section">
     <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>ARG / 199X</span><span>Madurez verificada por edición</span></p>
@@ -64,7 +66,7 @@ const roleLabel = (
       {isEs ? 'HorneroOS se construye desde una base compartida más capacidades para cada rol. Desktop, Server, Agents y Studio son perfiles de ese único sistema, no distribuciones separadas.' : 'HorneroOS is built from a shared base plus capabilities for each role. Desktop, Server, Agents and Studio are profiles of that one system, not separate distributions.'}
     </p>
     <p class="availability">
-      {isEs ? 'La madurez difiere según el perfil. La primera ISO Preview ya está publicada: instala Desktop o la edición Studio Preview, y su matriz de instalación (UEFI/BIOS, con cifrado y sin cifrado) se ejecutó en máquinas virtuales desechables — evidencia de VM solamente, con el primer login UEFI todavía pendiente en el registro R11 del instalador y sin validación en hardware físico. Studio es Preview, no Supported, hasta que pase su puerta de evidencia de hardware.' : "Maturity differs by profile. The first Preview ISO is published: it installs Desktop or the Studio Preview edition, and its install matrix (UEFI/BIOS, encrypted/unencrypted) was executed in disposable virtual machines — VM evidence only, with UEFI first login still pending in the installer's R11 record and no physical-hardware validation. Studio is Preview, not Supported, until its hardware evidence gate passes."}{' '}
+      {isEs ? 'La madurez difiere según la edición. La ISO Preview actual instala Desktop, Studio o Gaming: elegís la edición y el compositor durante la instalación. Son ediciones Preview — usables hoy, todavía puliéndose — mientras que Server y Agents están planificadas y todavía no tienen imagen instalable.' : 'Maturity differs by edition. The current Preview ISO installs Desktop, Studio or Gaming: you pick the edition and compositor during installation. They are Preview editions — usable today, still being polished — while Server and Agents are planned and have no installable image yet.'}{' '}
       <a href={L('/install')}>{isEs ? 'Mirá qué se puede instalar hoy.' : 'See what can be installed today.'}</a>
     </p>
   </section>
