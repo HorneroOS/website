@@ -93,6 +93,7 @@ const community = {
   star: 'https://github.com/HorneroOS/hornero',
   bug: 'https://github.com/HorneroOS/hornero/issues/new/choose',
   siteIssue: 'https://github.com/HorneroOS/website/issues/new/choose',
+  discord: 'https://discord.gg/bR5VyATgka',
 };
 ---
 
@@ -241,7 +242,7 @@ const community = {
       </nav>
       <fieldset class="color-switch" data-color-switch>
         <legend>{t(locale, 'colorMode')}</legend>
-        <label>
+        <label title={t(locale, 'colorSystem')}>
           <input type="radio" name="color-theme" value="system" />
           <span>
             <svg aria-hidden="true" viewBox="0 0 16 16" focusable="false">
@@ -251,7 +252,7 @@ const community = {
             <b class="mode-name">{t(locale, 'colorSystem')}</b>
           </span>
         </label>
-        <label>
+        <label title={t(locale, 'colorLight')}>
           <input type="radio" name="color-theme" value="light" />
           <span>
             <svg aria-hidden="true" viewBox="0 0 16 16" focusable="false">
@@ -261,7 +262,7 @@ const community = {
             <b class="mode-name">{t(locale, 'colorLight')}</b>
           </span>
         </label>
-        <label>
+        <label title={t(locale, 'colorDark')}>
           <input type="radio" name="color-theme" value="dark" checked />
           <span>
             <svg aria-hidden="true" viewBox="0 0 16 16" focusable="false">
@@ -296,6 +297,12 @@ const community = {
             <a href={community.bug}>
               <strong>{t(locale, 'reportBugTitle')}</strong>
               <span>{t(locale, 'reportBugText')}</span>
+            </a>
+          </li>
+          <li>
+            <a href={community.discord}>
+              <strong>{t(locale, 'discordTitle')}</strong>
+              <span>{t(locale, 'discordText')}</span>
             </a>
           </li>
           <li>

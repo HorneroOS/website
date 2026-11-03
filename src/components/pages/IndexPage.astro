@@ -89,7 +89,7 @@ const readiness = [
   .filter(Boolean)
   .join('; ');
 
-const title = isEs ? 'HorneroOS | Un escritorio Linux, habitado desde 2018' : 'HorneroOS | A Linux desktop, lived in since 2018';
+const title = isEs ? 'HorneroOS | Un escritorio Linux con años de uso diario detrás' : 'HorneroOS | A Linux desktop with years of daily use behind it';
 const description = isEs
   ? `HorneroOS es un escritorio Linux basado en Arch, Wayland-first, desde Argentina, construido en abierto. ${layouts.length} layouts, ${themes.length} temas, una CLI de sistema nativa y un laboratorio de QA que guarda sus capturas con hashes y revisiones pineadas. Preview en desarrollo; primera ISO Preview firmada publicada.`
   : `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that keeps its screenshots with hashes and pinned revisions. Development preview; first signed Preview ISO published.`;
@@ -102,7 +102,7 @@ const description = isEs
   <section class="cover" aria-labelledby="hero-title">
     <div class="cover-head">
       <p class="plate-id"><strong>Transmisión 001</strong><span>ARG / 199X</span><span lang="es">El futuro se construye acá</span></p>
-      <h1 id="hero-title">{isEs ? <>Un escritorio Linux,<br />habitado desde 2018.</> : <>A Linux desktop,<br />lived in since 2018.</>}</h1>
+      <h1 id="hero-title">{isEs ? <>Un escritorio Linux,<br />con años de uso diario detrás.</> : <>A Linux desktop,<br />with years of daily use behind it.</>}</h1>
       <div class="cover-aside">
         <p class="lede">
           {isEs ? 'HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina, con una shell de escritorio Quickshell, una CLI de sistema nativa y un laboratorio de QA que registra sus capturas de prueba.' : 'HorneroOS is an Arch-based, Wayland-first desktop from Argentina, with a Quickshell desktop shell, a native system CLI and a QA lab that records its test captures.'}
