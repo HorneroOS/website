@@ -33,33 +33,33 @@ const statusName = (
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt={isEs ? 'ISO Preview de HorneroOS: una imagen con las ediciones Desktop y Studio Preview.' : 'HorneroOS Preview ISO: one image with Desktop and Studio Preview editions.'}
+  socialImageAlt={isEs ? 'ISO Preview de HorneroOS: una imagen con las ediciones Desktop, Studio y Gaming Preview.' : 'HorneroOS Preview ISO: one image with Desktop, Studio and Gaming Preview editions.'}
   title={isEs ? 'Instalar | HorneroOS' : 'Install | HorneroOS'}
-  description={isEs ? 'La primera ISO Preview de HorneroOS ya está publicada: una imagen x86_64 con las ediciones Desktop y Studio Preview, firmada y verificada por checksum. Los paquetes de Arch siguen disponibles.' : 'The first HorneroOS Preview ISO is published: one x86_64 image with Desktop and Studio Preview editions, signed and checksum-verified. Arch packages remain available.'}
+  description={isEs ? 'La primera ISO Preview de HorneroOS ya está publicada: una imagen x86_64 con las ediciones Desktop, Studio y Gaming Preview, firmada y verificada por checksum. Los paquetes de Arch siguen disponibles.' : 'The first HorneroOS Preview ISO is published: one x86_64 image with Desktop, Studio and Gaming Preview editions, signed and checksum-verified. Arch packages remain available.'}
 >
   <section class="section">
     <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
     <h1>{isEs ? 'La primera ISO Preview de HorneroOS ya está acá' : 'The first HorneroOS Preview ISO is here'}</h1>
     <p class="lede">
-      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la matriz de instalación en VMs desechables (UEFI y BIOS, con cifrado y sin cifrado) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed the disposable-VM installation matrix (UEFI and BIOS, encrypted and unencrypted) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
+      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; la matriz UEFI/BIOS con y sin cifrado se heredó de previews anteriores para las áreas sin cambios) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; the UEFI/BIOS encrypted/unencrypted matrix is carried forward from earlier previews for unchanged areas) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
     </p>
     <p>
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview29-x86_64.iso">
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview30-x86_64.iso">
         {isEs ? 'Descargar la ISO Preview (2.7 GB)' : 'Download the Preview ISO (2.7 GB)'}
       </a>{' '}
       {isEs ? ' — también anunciada en la ' : ' — also announced on the '}
       {' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview29">{isEs ? 'página de la release v0.2.0-preview29' : 'v0.2.0-preview29 release page'}</a>.
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview30">{isEs ? 'página de la release v0.2.0-preview30' : 'v0.2.0-preview30 release page'}</a>.
       {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview29-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview30-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
       {isEs ? 'y la ' : 'and the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview29-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview30-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>horneroos-2026.10-preview29-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
-      <li><code>SHA-256</code><span>c64a8e13e0b5ee2109df60882dccaaa688913cbd2cd74e65c5d164af6ef2b1db</span></li>
+      <li><code>horneroos-2026.10-preview30-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
+      <li><code>SHA-256</code><span>474a0405fdc7366848d110b730c65d6f29ac36e66d9b36a9cd1f61e7c6dd1356</span></li>
       <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS FCFBEE43925AB5429362278AE59EAB44AA2498DC; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository ('}<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
     </ul>
     <p>
@@ -85,11 +85,11 @@ const statusName = (
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">Preview</span> {isEs ? 'Primera ISO publicada como pre-release firmada (v0.2.0-preview29), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'First ISO published as a signed pre-release (v0.2.0-preview29), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (v0.2.0-preview30), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (v0.2.0-preview30), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
-        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la matriz de instalación en VM (Desktop y Studio, UEFI/BIOS, cifrado y sin cifrado). El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed the VM install matrix (Desktop and Studio, UEFI/BIOS, encrypted/unencrypted). Panda Foss's custom installer remains the future official path."}</dd>
+        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la validación en VM de esta ISO (Desktop, Studio y Gaming, UEFI, sin cifrado); la matriz UEFI/BIOS con y sin cifrado se ejecutó en previews anteriores y se hereda para las áreas sin cambios. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed this ISO's VM validation (Desktop, Studio and Gaming, UEFI, unencrypted); the UEFI/BIOS encrypted/unencrypted matrix ran on earlier previews and is carried forward for unchanged areas. Panda Foss's custom installer remains the future official path."}</dd>
       </div>
       <div class="state-available">
         <dt>{isEs ? 'Paquetes de escritorio' : 'Desktop packages'}</dt>
@@ -132,7 +132,7 @@ const statusName = (
       ))}
     </ul>
     <p>
-      {isEs ? 'Desktop es la preview actual. Studio se instala desde la misma ISO Preview como edición candidata con especializaciones a elección y pasó su matriz de instalación en VM; es una edición ' : 'Desktop is the current preview. Studio installs from the same Preview ISO as a candidate edition with selectable specializations and passed its VM install matrix; it is a '}<strong>Preview</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
+      {isEs ? 'Desktop es la preview actual. Studio y Gaming se instalan desde la misma ISO Preview con especializaciones y perfiles a elección, y pasaron su validación de instalación en VM en esta ISO; son ediciones ' : 'Desktop is the current preview. Studio and Gaming install from the same Preview ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are '}<strong>Preview</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
       <code>hornero-qa studio-gate</code> {isEs ? ' todavía está pendiente, así que los resultados en VM no son prueba en hardware físico y Studio todavía no es Supported. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Niri sigue siendo experimental dentro de Desktop.' : ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.'}{' '}
       <a href={L('/editions')}>{isEs ? 'Cómo encajan las ediciones.' : 'How the editions fit together.'}</a>
     </p>
@@ -141,18 +141,18 @@ const statusName = (
   <section class="section">
     <h2>{isEs ? 'Pruebas y reportes' : 'Testing and reports'}</h2>
     <p>
-      {isEs ? 'La ISO Preview se probó en máquinas virtuales, con firmware UEFI y BIOS. Los reportes desde hardware físico son el próximo paso, y son lo más útil que podés enviar. Incluí el nombre de la ISO, tu tipo de firmware, si el disco está cifrado y el paso donde falló.' : 'The Preview ISO was tested in virtual machines, with UEFI and BIOS firmware. Reports from physical hardware are the next step, and they are the most useful thing you can send. Include the ISO name, your firmware type, whether the disk is encrypted, and the step where it failed.'}
+      {isEs ? 'La ISO Preview se probó en máquinas virtuales (UEFI en esta ISO; BIOS y cifrado en previews anteriores). Los reportes desde hardware físico son el próximo paso, y son lo más útil que podés enviar. Incluí el nombre de la ISO, tu tipo de firmware, si el disco está cifrado y el paso donde falló.' : 'The Preview ISO was tested in virtual machines (UEFI on this ISO; BIOS and encryption on earlier previews). Reports from physical hardware are the next step, and they are the most useful thing you can send. Include the ISO name, your firmware type, whether the disk is encrypted, and the step where it failed.'}
     </p>
     <p>
       <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview29">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview30">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
     </p>
   </section>
 
   <section class="section">
     <h2>{isEs ? 'El instalador' : 'The installer'}</h2>
     <p>
-      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. Para la ISO Preview de arriba, la matriz de instalación Desktop y Studio (UEFI/BIOS, cifrado y sin cifrado) se ejecutó en máquinas virtuales desechables. Eso es evidencia de VM, no aceptación completa: el registro R11 del propio instalador todavía lista el primer login UEFI como pendiente y la paridad de paquetes como no verificada, y nada de esto está validado en hardware físico.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. For the Preview ISO above, the Desktop and Studio install matrix (UEFI/BIOS, encrypted and unencrypted) was executed in disposable virtual machines. That is VM evidence, not full acceptance: the installer's own R11 record still lists UEFI first login as pending and package parity as unverified, and nothing here is validated on physical hardware."}
+      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. Para la ISO Preview de arriba, la instalación Desktop, Studio y Gaming (UEFI, sin cifrado) se ejecutó en máquinas virtuales desechables, con primer login verificado. Eso es evidencia de VM, no aceptación completa: la matriz con BIOS y cifrado se heredó de previews anteriores, y nada de esto está validado en hardware físico.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. For the Preview ISO above, the Desktop, Studio and Gaming install validation (UEFI, unencrypted) was executed in disposable virtual machines, with first login verified. That is VM evidence, not full acceptance: the BIOS/encrypted matrix is carried forward from earlier previews, and nothing here is validated on physical hardware."}
     </p>
     <p>
       {isEs ? 'Quienes contribuyen pueden seguir el ' : 'Contributors can follow the '}<a href={L('/docs/development/design-language/')}>{isEs ? 'lenguaje de diseño de HorneroOS' : 'HorneroOS design language'}</a>{isEs ? ', que apunta a las fuentes de diseño autoritativas para el escritorio, el sitio web, el greeter y el instalador.' : ', which points to the authoritative design sources for the desktop, website, greeter and installer.'}
