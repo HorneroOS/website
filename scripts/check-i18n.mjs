@@ -23,6 +23,16 @@ const enBlock = ui.split(/^\s*en:\s*\{/m)[1] ?? '';
 const esKeys = new Set(keysOf(esBlock));
 const enKeys = new Set(keysOf(enBlock));
 for (const k of esKeys) if (!enKeys.has(k)) failures.push(`src/i18n/ui.ts: key '${k}' missing in en`);
+// Identical values across locales are only acceptable for product names.
+const valueOf = (block, key) => block.match(new RegExp(`^\\s+${key}:\\s*'([^']*)'`, 'm'))?.[1];
+const ALLOW_IDENTICAL = new Set(['HorneroOS', 'Studio', 'Gaming', 'Showroom', 'Layouts', 'Greeter', 'Companion', 'Discord', 'GitHub']);
+for (const k of esKeys) {
+  const esv = valueOf(esBlock, k);
+  const env = valueOf(enBlock, k);
+  if (esv && env && esv === env && esv.length > 2 && !ALLOW_IDENTICAL.has(esv) && /[A-Za-z]{3,}/.test(esv)) {
+    failures.push(`src/i18n/ui.ts: key '${k}' has identical es/en value '${esv}'`);
+  }
+}
 for (const k of enKeys) if (!esKeys.has(k)) failures.push(`src/i18n/ui.ts: key '${k}' missing in es`);
 
 // --- story.ts localized fields ---
