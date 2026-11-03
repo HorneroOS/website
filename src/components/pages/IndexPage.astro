@@ -39,7 +39,7 @@ const live = capture('terminal-tools');
 const beagle = wallpapers.find((wallpaper) => wallpaper.id === 'fin-del-mundo');
 if (!beagle) throw new Error('The Beagle Channel photograph is missing from the pinned wallpaper catalogue');
 
-const editionOrder = ['desktop', 'server', 'agents', 'studio'];
+const editionOrder = ['desktop', 'studio', 'gaming', 'server', 'agents'];
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const maturityNames = isEs
   ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
@@ -49,11 +49,13 @@ const familyRoleLabels: Record<string, string> = isEs
       server: 'Sin pantalla, para homelabs y servicios',
       'agent-host': 'Sin pantalla, para infraestructura de agentes',
       'creative-workstation': 'Escritorio, para producción creativa',
+      'gaming-workstation': 'Escritorio, para jugar',
     }
   : {
       server: 'Headless, for homelabs and services',
       'agent-host': 'Headless, for agent infrastructure',
       'creative-workstation': 'Desktop, for creative production',
+      'gaming-workstation': 'Desktop, for play',
     };
 const family = editionOrder.map((id) => {
   const edition = editionById[id];
@@ -91,8 +93,8 @@ const readiness = [
 
 const title = isEs ? 'HorneroOS | Un escritorio Linux con años de uso diario detrás' : 'HorneroOS | A Linux desktop with years of daily use behind it';
 const description = isEs
-  ? `HorneroOS es un escritorio Linux basado en Arch, Wayland-first, desde Argentina, construido en abierto. ${layouts.length} layouts, ${themes.length} temas, una CLI de sistema nativa y un laboratorio de QA que guarda sus capturas con hashes y revisiones pineadas. Preview en desarrollo; primera ISO Preview firmada publicada.`
-  : `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, a native system CLI and a QA lab that keeps its screenshots with hashes and pinned revisions. Development preview; first signed Preview ISO published.`;
+  ? `HorneroOS es un escritorio Linux basado en Arch, Wayland-first, desde Argentina, construido en abierto. ${layouts.length} layouts, ${themes.length} temas, un Centro de control propio y tres ediciones en Preview: Desktop, Studio y Gaming, en una sola ISO firmada.`
+  : `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, its own Control Center and three Preview editions — Desktop, Studio and Gaming — on one signed ISO.`;
 ---
 
 <SiteLayout
@@ -105,11 +107,11 @@ const description = isEs
       <h1 id="hero-title">{isEs ? <>Un escritorio Linux,<br />con años de uso diario detrás.</> : <>A Linux desktop,<br />with years of daily use behind it.</>}</h1>
       <div class="cover-aside">
         <p class="lede">
-          {isEs ? 'HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina, con una shell de escritorio Quickshell, una CLI de sistema nativa y un laboratorio de QA que registra sus capturas de prueba.' : 'HorneroOS is an Arch-based, Wayland-first desktop from Argentina, with a Quickshell desktop shell, a native system CLI and a QA lab that records its test captures.'}
+          {isEs ? 'HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina. Una shell Quickshell propia, un Centro de control integrado y tres ediciones —Desktop, Studio y Gaming— que se instalan desde una sola ISO.' : 'HorneroOS is an Arch-based, Wayland-first desktop from Argentina. Its own Quickshell shell, an integrated Control Center and three editions — Desktop, Studio and Gaming — that install from a single ISO.'}
         </p>
         <div class="cta-row">
-          <a href={L('/showroom')} class="cta primary">{isEs ? 'Explorá el escritorio' : 'Explore the desktop'}</a>
-          <a href={L('/install')} class="cta secondary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+          <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+          <a href={L('/showroom')} class="cta secondary">{isEs ? 'Explorá el escritorio' : 'Explore the desktop'}</a>
         </div>
       </div>
     </div>
@@ -146,7 +148,7 @@ const description = isEs
       <li>{isEs ? 'Hyprland soportado, Niri experimental' : 'Hyprland supported, Niri experimental'}</li>
       <li>{layouts.length} layouts, {themes.length} {isEs ? 'temas' : 'themes'}</li>
       <li><a href={L('/roots#community')}>{isEs ? 'Shell adaptada de Caelestia, GPL-3.0' : 'Shell adapted from Caelestia, GPL-3.0'}</a></li>
-      <li><a href={L('/install')}>{isEs ? 'Primera ISO Preview publicada' : 'First Preview ISO published'}</a></li>
+      <li><a href={L('/install')}>{isEs ? 'ISO Preview 31 publicada' : 'Preview 31 ISO available'}</a></li>
     </ul>
   </section>
 
@@ -156,7 +158,7 @@ const description = isEs
     <div class="band-head">
       <h2 id="looks-title">{isEs ? 'Oscuro y claro, mismo layout' : 'Dark and light, same layout'}</h2>
       <p>
-        {isEs ? 'Ambas capturas muestran Hornero Left, desde la misma imagen de QA y las mismas revisiones pineadas. Solo cambia el tema.' : 'Both captures show Hornero Left, from the same QA image and the same pinned revisions. Only the theme changes.'}
+        {isEs ? 'El mismo layout Hornero Left en oscuro y en claro. Cambiar de tema retematiza todo el escritorio al instante.' : 'The same Hornero Left layout in dark and light. Switching themes rethemes the whole desktop instantly.'}
       </p>
     </div>
     <LookCompare dark={capture('hornero-left')} light={capture('hornero-light')} locale={locale} />
@@ -194,9 +196,9 @@ const description = isEs
 
   <section class="section family" aria-labelledby="family-title">
     <div class="band-head">
-      <h2 id="family-title">{isEs ? 'Desktop y Studio en preview, dos perfiles planificados' : 'Desktop and Studio in preview, two profiles planned'}</h2>
+      <h2 id="family-title">{isEs ? 'Tres ediciones en Preview, dos planificadas' : 'Three Preview editions, two planned'}</h2>
       <p>
-        {isEs ? 'Las ediciones comparten un solo modelo de composición. Desktop, Studio y Gaming Preview se instalan desde la ISO firmada preview31 (probada en VM, todavía sin validación en hardware físico). Solo Server y Agents son definiciones del catálogo sin imagen instalable.' : 'Editions share one composition model. Desktop, Studio and Gaming Preview install from the signed preview31 ISO (VM-tested, no physical-hardware validation yet). Only Server and Agents are catalogue definitions with no installable image.'}
+        {isEs ? 'Las ediciones comparten la misma base y se arman a tu medida al instalar. Desktop, Studio y Gaming se instalan hoy desde la ISO firmada Preview 31; Server y Agents están planificadas.' : 'Editions share the same base and are composed to your measure at install time. Desktop, Studio and Gaming install today from the signed Preview 31 ISO; Server and Agents are planned.'}
       </p>
     </div>
     <ol class="family-rail" role="list">
@@ -223,6 +225,29 @@ const description = isEs
         ))
       }
     </ol>
+  </section>
+
+  <section class="section hardware" aria-labelledby="hardware-title">
+    <div class="band-head">
+      <h2 id="hardware-title">{isEs ? 'En uso diario, en hardware real' : 'In daily use, on real hardware'}</h2>
+      <p>
+        {isEs ? 'HorneroOS ya es la computadora de todos los días de quienes lo construyen — reportado por su maintainer, sin benchmarks de por medio.' : 'HorneroOS already is the everyday computer of the people building it — maintainer-reported, no benchmarks involved.'}
+      </p>
+    </div>
+    <ul class="hardware-list" role="list">
+      <li>
+        <strong>ASUS ROG Strix G16 (G615LR)</strong>
+        <span>{isEs ? 'Intel Core Ultra 9 275HX · NVIDIA RTX 5070 Ti Laptop · 32 GB RAM — HorneroOS Studio como estación creativa.' : 'Intel Core Ultra 9 275HX · NVIDIA RTX 5070 Ti Laptop · 32 GB RAM — HorneroOS Studio as a creative workstation.'}</span>
+      </li>
+      <li>
+        <strong>Lenovo Legion</strong>
+        <span>{isEs ? 'Notebook moderna con HorneroOS Studio como computadora de trabajo diaria.' : 'A modern laptop running HorneroOS Studio as the daily work computer.'}</span>
+      </li>
+      <li>
+        <strong>{isEs ? 'Desktop AMD Ryzen 9' : 'AMD Ryzen 9 desktop'}</strong>
+        <span>{isEs ? 'AMD Ryzen 9 · NVIDIA RTX 3060 — HorneroOS en uso diario.' : 'AMD Ryzen 9 · NVIDIA RTX 3060 — HorneroOS in daily use.'}</span>
+      </li>
+    </ul>
   </section>
 
   <section class="section ecosystem" aria-labelledby="ecosystem-title">
@@ -289,9 +314,9 @@ const description = isEs
       <div>
         <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
         <dd>
-          {isEs ? 'Las capturas de QA se siguen en ' : 'QA screenshots are tracked in '}<a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a>{isEs ? ' con sus hashes y revisiones pineadas. Otras capturas están etiquetadas como sesiones en vivo aportadas por colaboradores; el ' : ' with their hashes and pinned revisions. Other captures are labelled as contributor-provided live sessions; the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? ' lista la fuente de cada una. Shell ' : ' lists the source of each. Shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
+          {isEs ? 'Cada captura del sitio es real y su origen se sigue en ' : 'Every capture on this site is real, and its origin is tracked in '}<a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a>{isEs ? '; las sesiones en vivo aportadas por colaboradores se etiquetan como tales, y el ' : '; contributor live sessions are labelled as such, and the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? ' lista la fuente de cada una. Shell ' : ' lists the source of each. Shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
           {isEs ? 'y config ' : 'and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>{' '}
-          {isEs ? 'son los commits desde los que se construyen los datos de este sitio.' : 'are the commits this site’s data is built from.'}
+          {isEs ? 'son las revisiones exactas detrás de los datos de producto de este sitio.' : 'are the exact revisions behind this site’s product data.'}
         </dd>
       </div>
       <div>
