@@ -8,7 +8,9 @@
 import { posix, relative, resolve, sep } from 'node:path';
 
 export function docsRoute(relPath) {
-  const clean = relPath.replace(/\.md$/i, '');
+  // Spanish translations mirror English paths under es/; they serve at
+  // the same canonical /docs/ route as their English counterpart.
+  const clean = relPath.replace(/\.md$/i, '').replace(/^es\//, '').replace(/^es$/, 'README');
   if (clean === 'README') return '/docs/';
   if (clean.endsWith('/README')) return `/docs/${clean.slice(0, -'/README'.length)}/`;
   return `/docs/${clean}/`;

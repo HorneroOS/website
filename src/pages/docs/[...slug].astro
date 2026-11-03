@@ -2,10 +2,21 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import DocsPage from '../../components/pages/DocsPage.astro';
 
+// Spanish translations live under es/ in HorneroOS/docs, mirroring the
+// English paths. Each canonical slug renders its Spanish entry when one
+// exists and falls back to the English entry (declared as such) when not.
 export async function getStaticPaths() {
+  const canonicalOf = (id: string) => (id === 'es' ? 'index' : id.startsWith('es/') ? id.slice(3) : id);
   const entries = await getCollection('docs');
-  return entries.map((entry) => ({
-    params: { slug: entry.id === 'index' ? undefined : entry.id },
+  const byCanonical = new Map<string, CollectionEntry<'docs'>>();
+  for (const entry of entries) {
+    const canonical = canonicalOf(entry.id);
+    const existing = byCanonical.get(canonical);
+    const isSpanish = entry.id === 'es' || entry.id.startsWith('es/');
+    if (!existing || isSpanish) byCanonical.set(canonical, entry);
+  }
+  return [...byCanonical.entries()].map(([canonical, entry]) => ({
+    params: { slug: canonical === 'index' ? undefined : canonical },
     props: { entry },
   }));
 }
