@@ -1,7 +1,11 @@
 ---
-title: 'Dashboard'
+title:
+  es: 'Dashboard'
+  en: 'Dashboard'
 image: '../../../assets/screenshots/certified/dashboard.png'
-alt: 'The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper.'
+alt:
+  es: 'El Dashboard en vivo de Hornero Dark muestra cinco pestañas, un estado vacío «Sin medios», un gráfico de rendimiento despejado y el Companion sobre el fondo del escritorio.'
+  en: 'The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper.'
 order: 0
 provenance:
   source: Hornero QA

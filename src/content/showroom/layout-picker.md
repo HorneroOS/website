@@ -1,7 +1,11 @@
 ---
-title: 'Layout Picker'
+title:
+  es: 'Selector de layouts'
+  en: 'Layout Picker'
 image: '../../../assets/screenshots/certified/layout-picker.png'
-alt: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
+alt:
+  es: 'El selector de layouts de Hornero muestra quince disposiciones de barra, con instrucciones de teclado en su borde inferior.'
+  en: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
 order: 4
 provenance:
   source: Hornero QA

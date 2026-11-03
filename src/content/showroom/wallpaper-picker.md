@@ -1,7 +1,11 @@
 ---
-title: 'Launcher wallpaper picker · 25 October 2026'
+title:
+  es: 'Selector de fondos del lanzador · 25 de octubre de 2026'
+  en: 'Launcher wallpaper picker · 25 October 2026'
 image: '../../../assets/screenshots/curated/wallpaper-picker-2026-10-25.webp'
-alt: 'The Hornero launcher after typing ">wallpaper": a row of wallpaper thumbnails with one selected, previewed live as a pixel-art city street across the whole desktop behind it.'
+alt:
+  es: 'El lanzador de Hornero después de escribir «>wallpaper»: una fila de miniaturas de fondos con una seleccionada, previsualizada en vivo como una calle pixel-art en todo el escritorio.'
+  en: 'The Hornero launcher after typing ">wallpaper": a row of wallpaper thumbnails with one selected, previewed live as a pixel-art city street across the whole desktop behind it.'
 order: 16
 provenance:
   source: HorneroOS contributor-provided workstation capture

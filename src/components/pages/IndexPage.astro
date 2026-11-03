@@ -120,7 +120,7 @@ const description = isEs
       <div class="shot-frame">
         <Picture
           src={hero.data.image}
-          alt={hero.data.alt}
+          alt={hero.data.alt[locale]}
           formats={['avif', 'webp']}
           fallbackFormat="png"
           widths={[640, 960, 1280, 1600, 1920]}
@@ -133,7 +133,7 @@ const description = isEs
       <figcaption>
         <span class="shot-kind">{isEs ? 'Captura real' : 'Real capture'}</span>
         <span class="shot-detail">
-          {[hero.data.title, hero.data.provenance.resolution].filter(Boolean).join(' · ')}
+          {[hero.data.title[locale], hero.data.provenance.resolution].filter(Boolean).join(' · ')}
         </span>
         <a href={L('/showroom#dashboard-extensions')}>{isEs ? 'Procedencia' : 'Provenance'}</a>
         <span class="shot-credit">
@@ -182,7 +182,7 @@ const description = isEs
     <figure class="daily-shot">
       <Picture
         src={live.data.image}
-        alt={live.data.alt}
+        alt={live.data.alt[locale]}
         formats={['avif', 'webp']}
         fallbackFormat="png"
         widths={[640, 960, 1280, 1600]}

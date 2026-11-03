@@ -22,7 +22,7 @@ export default defineConfig({
   },
   // The single global stylesheet is small; inline it to avoid a render-blocking request.
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ i18n: { defaultLocale: 'es', locales: { es: 'es-AR', en: 'en' } }, filter: (page) => !page.includes('/search') })],
   markdown: {
     // Dual Shiki themes: token colors come from CSS variables so code
     // meets WCAG AA contrast on both the night and newsprint surfaces

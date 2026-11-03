@@ -30,10 +30,15 @@ const firstLine =
     .split('\n')
     .map((l) => l.trim())
     .find((l) => l && !/^(#|>|\||-|\*|```|!\[)/.test(l)) ?? '';
-const description = firstLine
+const englishDescription = firstLine
   .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
   .replace(/[`*_]/g, '')
   .slice(0, 180);
+// Docs are English-only upstream today: say so in Spanish metadata instead
+// of shipping an English description under an es-AR page.
+const description = isEs
+  ? `Documentación de HorneroOS en inglés: ${title}. Traducción al español pendiente.`
+  : englishDescription;
 
 const featuredApps = docsApps[entry.id] ?? [];
 const sourcePath = (entry.filePath ?? '').replace(/^\.?\/?\.cache\/product-src\/docs\//, '');
@@ -92,7 +97,7 @@ const current = entry.id;
       </a>
     </nav>
 
-    <article class="prose">
+    <article lang={isEs ? 'en' : undefined} data-pagefind-ignore={isEs ? '' : undefined} class="prose">
       {featuredApps.length > 0 && (
         <div class="doc-tools" role="group" aria-label={isEs ? 'Herramientas destacadas en esta página' : 'Featured tools on this page'}>
           <span class="doc-tools-label">{isEs ? 'Herramientas destacadas' : 'Featured tools'}</span>

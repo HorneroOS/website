@@ -1,7 +1,11 @@
 ---
-title: 'Cockpit Clear layout'
+title:
+  es: 'Layout Cockpit Clear'
+  en: 'Cockpit Clear layout'
 image: '../../../assets/screenshots/certified/cockpit-clear.png'
-alt: 'Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper.'
+alt:
+  es: 'Layout Cockpit Clear en un escritorio Hornero real, con una barra transparente en el borde superior sobre un fondo de cielo nocturno patagónico.'
+  en: 'Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper.'
 order: 2
 provenance:
   source: Hornero QA

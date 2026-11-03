@@ -1,7 +1,11 @@
 ---
-title: 'Hornero Left layout'
+title:
+  es: 'Layout Hornero Left'
+  en: 'Hornero Left layout'
 image: '../../../assets/screenshots/certified/hornero-left.png'
-alt: 'Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session.'
+alt:
+  es: 'Layout Hornero Left con la barra vertical de la shell, los controles de espacios de trabajo y el fondo de escritorio en una sesión de Hornero en ejecución.'
+  en: 'Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session.'
 order: 9
 provenance:
   source: Hornero QA

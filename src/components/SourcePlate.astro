@@ -5,24 +5,26 @@ import { pins, short } from '../data/product';
 interface Props {
   source: 'shell' | 'config' | 'hornero';
   path: string;
+  locale?: 'es' | 'en';
 }
 
-const { source, path } = Astro.props;
+const { source, path, locale = 'es' } = Astro.props;
+const isEs = locale === 'es';
 const pin = pins[source];
 ---
 
 <p class="source">
-  Generated from{' '}
+  {isEs ? 'Los datos de esta lista se generan desde' : 'The data in this list is generated from'}{' '}
   <a href={`${pin.repo}/tree/${pin.sha}/${path}`}>
     <code>
       HorneroOS/{source}/{path}
     </code>
   </a>{' '}
-  at commit{' '}
+  {isEs ? 'en el commit' : 'at commit'}{' '}
   <a href={`${pin.repo}/commit/${pin.sha}`}>
     <code>{short(pin.sha)}</code>
   </a>
-  . Nothing on this page is typed by hand.
+  . {isEs ? 'Nada de esta lista está escrito a mano.' : 'Nothing in this list is typed by hand.'}
 </p>
 
 <style>

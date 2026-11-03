@@ -1,7 +1,11 @@
 ---
-title: 'Settings search for “wallpaper”'
+title:
+  es: 'Búsqueda en Ajustes por «wallpaper»'
+  en: 'Settings search for “wallpaper”'
 image: '../../../assets/screenshots/reviews/settings-search.png'
-alt: 'Hornero Control Center search overlay finds wallpaper controls inside the Appearance settings pane.'
+alt:
+  es: 'La búsqueda del Centro de control de Hornero encuentra los controles de fondo dentro del panel de Ajustes de Apariencia.'
+  en: 'Hornero Control Center search overlay finds wallpaper controls inside the Appearance settings pane.'
 order: 12
 provenance:
   source: Hornero Shell visual review

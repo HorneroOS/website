@@ -1,7 +1,11 @@
 ---
-title: 'Neon City wallpaper'
+title:
+  es: 'Fondo Neon City'
+  en: 'Neon City wallpaper'
 image: '../../../assets/screenshots/curated/neon-city.webp'
-alt: 'Hornero desktop with the Neon City cyberpunk skyline, bright cyan signs and amber transit behind the vertical shell rail.'
+alt:
+  es: 'Escritorio Hornero con el horizonte cyberpunk de Neon City, letreros cián brillantes y tránsito ámbar detrás de la barra vertical de la shell.'
+  en: 'Hornero desktop with the Neon City cyberpunk skyline, bright cyan signs and amber transit behind the vertical shell rail.'
 order: 6
 provenance:
   source: Hornero host capture

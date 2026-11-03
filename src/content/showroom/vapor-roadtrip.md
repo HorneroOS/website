@@ -1,7 +1,11 @@
 ---
-title: 'Vapor Dreams wallpaper'
+title:
+  es: 'Fondo Vapor Dreams'
+  en: 'Vapor Dreams wallpaper'
 image: '../../../assets/screenshots/curated/vapor-roadtrip.webp'
-alt: 'Hornero desktop with a synthwave desert road, coral cliffs and a dusk-purple sky behind the vertical shell rail.'
+alt:
+  es: 'Escritorio Hornero con una ruta desértica synthwave, acantilados coral y un cielo violeta al atardecer detrás de la barra vertical de la shell.'
+  en: 'Hornero desktop with a synthwave desert road, coral cliffs and a dusk-purple sky behind the vertical shell rail.'
 order: 7
 provenance:
   source: Hornero host capture

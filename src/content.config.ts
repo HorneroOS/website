@@ -16,9 +16,9 @@ const showroom = defineCollection({
   loader: glob({ base: './src/content/showroom', pattern: '**/*.md' }),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
+      title: z.object({ es: z.string(), en: z.string() }),
       image: image(),
-      alt: z.string().min(20),
+      alt: z.object({ es: z.string().min(20), en: z.string().min(20) }),
       order: z.number().int(),
       provenance,
     }),

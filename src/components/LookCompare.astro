@@ -24,7 +24,7 @@ const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
   <figure class="look look-dark">
     <Picture
       src={dark.data.image}
-      alt={dark.data.alt}
+      alt={dark.data.alt[locale]}
       formats={['avif', 'webp']}
       widths={[640, 960, 1280]}
       sizes={sizes}
@@ -36,7 +36,7 @@ const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
   <figure class="look look-light">
     <Picture
       src={light.data.image}
-      alt={light.data.alt}
+      alt={light.data.alt[locale]}
       formats={['avif', 'webp']}
       widths={[640, 960, 1280]}
       sizes={sizes}

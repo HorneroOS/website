@@ -1,7 +1,11 @@
 ---
-title: 'Quick toggles · 25 October 2026'
+title:
+  es: 'Ajustes rápidos · 25 de octubre de 2026'
+  en: 'Quick toggles · 25 October 2026'
 image: '../../../assets/screenshots/curated/quick-toggles-2026-10-25.webp'
-alt: 'A Hornero desktop showing only a photograph of a ship on the Beagle Channel under dramatic clouds, the vertical shell rail, and a panel with Keep Awake, Screen Recorder and Quick Toggles.'
+alt:
+  es: 'Un escritorio Hornero que muestra solo una foto de un barco en el Canal Beagle bajo nubes dramáticas, la barra vertical de la shell y un panel con Keep Awake, Screen Recorder y ajustes rápidos.'
+  en: 'A Hornero desktop showing only a photograph of a ship on the Beagle Channel under dramatic clouds, the vertical shell rail, and a panel with Keep Awake, Screen Recorder and Quick Toggles.'
 order: 15
 provenance:
   source: HorneroOS contributor-provided workstation capture
