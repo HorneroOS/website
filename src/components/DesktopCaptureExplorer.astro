@@ -17,8 +17,8 @@ const selections = [
   { id: 'cockpit-clear', label: 'Cockpit Clear', group: 'Layout' },
   { id: 'islands', label: 'Islands', group: 'Layout' },
   { id: 'dock-bottom', label: 'Dock Bottom', group: 'Layout' },
-  { id: 'layout-picker', label: 'Layout Picker', group: 'Control Center' },
-  { id: 'appearance-search', label: 'Settings search', group: 'Control Center' },
+  { id: 'layout-picker', label: isEs ? 'Selector de layouts' : 'Layout Picker', group: isEs ? 'Centro de control' : 'Control Center' },
+  { id: 'appearance-search', label: isEs ? 'Búsqueda en Ajustes' : 'Settings search', group: isEs ? 'Centro de control' : 'Control Center' },
 ];
 
 const views = await Promise.all(
@@ -33,6 +33,8 @@ const views = await Promise.all(
     return {
       ...selection,
       ...capture.data,
+      title: capture.data.title[locale],
+      alt: capture.data.alt[locale],
       src: variants[1]?.src ?? variants[0]?.src,
       srcset: variants.map((variant) => `${variant.src} ${variant.options.width}w`).join(', '),
     };
@@ -131,7 +133,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       <a class="text-link" href={localizePath('/layouts', locale)}>
         {isEs ? `Explorá los ${layoutCount} layouts` : `Explore all ${layoutCount} layouts`}
       </a>
-      <a class="text-link archive-link" href="/showroom">
+      <a class="text-link archive-link" href={locale === 'es' ? '/showroom' : '/en/showroom'}>
         Browse the full capture archive
       </a>
     </div>

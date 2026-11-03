@@ -1,7 +1,11 @@
 ---
-title: 'Soft Morning wallpaper'
+title:
+  es: 'Fondo Soft Morning'
+  en: 'Soft Morning wallpaper'
 image: '../../../assets/screenshots/curated/morning-lake.webp'
-alt: 'Hornero desktop with a pale sunrise over a snow-covered alpine ridge and clouds, paired with a cool mint-accented shell rail.'
+alt:
+  es: 'Escritorio Hornero con un amanecer pálido sobre una cordillera nevada y nubes, con una barra de acentos menta fríos.'
+  en: 'Hornero desktop with a pale sunrise over a snow-covered alpine ridge and clouds, paired with a cool mint-accented shell rail.'
 order: 8
 provenance:
   source: Hornero host capture

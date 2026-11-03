@@ -18,7 +18,10 @@ interface Props {
 
 const { entries, variant = 'rail', label, locale = 'es' } = Astro.props;
 const isEs = locale === 'es';
-const display = (date: string) => (/^\d{4}$/.test(date) ? date : date.replaceAll('-', '.'));
+const display = (date: string) =>
+  /^\d{4}$/.test(date)
+    ? date
+    : new Intl.DateTimeFormat(isEs ? 'es-AR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
 ---
 
 <div class:list={['story', `story-${variant}`]} role="region" aria-label={label} tabindex={variant === 'rail' ? 0 : undefined}>
@@ -27,10 +30,10 @@ const display = (date: string) => (/^\d{4}$/.test(date) ? date : date.replaceAll
       entries.map((entry) => (
         <li class:list={[`evidence-${entry.evidence}`]} id={variant === 'ledger' ? `story-${entry.id}` : undefined}>
           <time datetime={entry.date}>{display(entry.date)}</time>
-          <h3>{entry.title}</h3>
-          <p>{entry.summary}</p>
+          <h3>{entry.title[locale]}</h3>
+          <p>{entry.summary[locale]}</p>
           {entry.source ? (
-            <a href={entry.source.href}>{entry.source.label} <span aria-hidden="true">↗</span></a>
+            <a href={entry.source.href}>{entry.source.label[locale]} <span aria-hidden="true">↗</span></a>
           ) : (
             <span class="evidence-note">{isEs ? 'Relato del maintainer · ningún commit público es anterior a 2019' : 'Maintainer’s account · no public commit predates 2019'}</span>
           )}

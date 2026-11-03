@@ -1,7 +1,11 @@
 ---
-title: 'Dock Bottom layout'
+title:
+  es: 'Layout Dock Bottom'
+  en: 'Dock Bottom layout'
 image: '../../../assets/screenshots/certified/dock-bottom.png'
-alt: 'Dock Bottom layout in a real Hornero desktop, with a floating dock along the bottom edge.'
+alt:
+  es: 'Layout Dock Bottom en un escritorio Hornero real, con un dock flotante en el borde inferior.'
+  en: 'Dock Bottom layout in a real Hornero desktop, with a floating dock along the bottom edge.'
 order: 5
 provenance:
   source: Hornero QA

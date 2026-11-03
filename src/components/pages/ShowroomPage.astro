@@ -66,7 +66,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
     <div class="hero-shot" id="dashboard" tabindex="-1">
       <ArchFrame
         src={shot('dashboard').data.image}
-        alt={shot('dashboard').data.alt}
+        alt={shot('dashboard').data.alt[locale]}
         eager
         provenance={shot('dashboard').data.provenance}
         sizes="(min-width: 1180px) 64vw, 100vw"
@@ -92,7 +92,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article id="dashboard-extensions" tabindex="-1" class="session-lead">
         <ArchFrame
           src={dashboardExtensions.data.image}
-          alt={dashboardExtensions.data.alt}
+          alt={dashboardExtensions.data.alt[locale]}
           provenance={dashboardExtensions.data.provenance}
           sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600, 1918]}
@@ -105,7 +105,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article id="terminal-tools" tabindex="-1" class="session-wide">
         <ArchFrame
           src={terminalTools.data.image}
-          alt={terminalTools.data.alt}
+          alt={terminalTools.data.alt[locale]}
           provenance={terminalTools.data.provenance}
           sizes="(min-width: 1100px) 62vw, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600]}
@@ -118,7 +118,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article id="quick-toggles" tabindex="-1" class="session-narrow">
         <ArchFrame
           src={quickToggles.data.image}
-          alt={quickToggles.data.alt}
+          alt={quickToggles.data.alt[locale]}
           provenance={quickToggles.data.provenance}
           sizes="(min-width: 1100px) 34vw, calc(100vw - 2rem)"
           widths={[640, 960, 1280]}
@@ -131,7 +131,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article id="wallpaper-picker" tabindex="-1" class="session-lead">
         <ArchFrame
           src={wallpaperPicker.data.image}
-          alt={wallpaperPicker.data.alt}
+          alt={wallpaperPicker.data.alt[locale]}
           provenance={wallpaperPicker.data.provenance}
           sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600, 1918]}
@@ -157,7 +157,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
     </div>
     <ArchFrame
       src={liveWorkstation.data.image}
-      alt={liveWorkstation.data.alt}
+      alt={liveWorkstation.data.alt[locale]}
       provenance={liveWorkstation.data.provenance}
       sizes="(min-width: 1180px) 76vw, 100vw"
       widths={[640, 960, 1280, 1918]}
@@ -178,14 +178,14 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         <article id={s.id} tabindex="-1" class:list={['atmosphere-card', `atmosphere-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
-            alt={s.data.alt}
+            alt={s.data.alt[locale]}
             provenance={s.data.provenance}
             sizes="(min-width: 1050px) 45vw, (min-width: 700px) 50vw, calc(100vw - 2rem)"
             widths={[480, 720, 960, 1280]}
           />
           <div class="story-caption">
             <span>{s.data.provenance.theme ?? (isEs ? 'Colores del fondo' : 'Wallpaper colors')}</span>
-            <h3>{s.data.title}</h3>
+            <h3>{s.data.title[locale]}</h3>
             <p>{s.data.provenance.context}</p>
           </div>
         </article>
@@ -210,12 +210,12 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         <article id={s.id} tabindex="-1" class:list={['topology-card', `topology-${i + 1}`]}>
           <ArchFrame
             src={s.data.image}
-            alt={s.data.alt}
+            alt={s.data.alt[locale]}
             provenance={s.data.provenance}
             sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
             widths={[480, 720, 960, 1280]}
           />
-          <h3>{s.data.title}</h3>
+          <h3>{s.data.title[locale]}</h3>
         </article>
       ))}
     </div>
@@ -237,7 +237,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article class="control-feature" id="appearance-search" tabindex="-1">
         <ArchFrame
           src={shot('appearance-search').data.image}
-          alt={shot('appearance-search').data.alt}
+          alt={shot('appearance-search').data.alt[locale]}
           provenance={shot('appearance-search').data.provenance}
           sizes="(min-width: 1100px) 58vw, 100vw"
           widths={[520, 800, 1080, 1280]}
@@ -250,7 +250,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       <article class="control-secondary" id="layout-picker" tabindex="-1">
         <ArchFrame
           src={shot('layout-picker').data.image}
-          alt={shot('layout-picker').data.alt}
+          alt={shot('layout-picker').data.alt[locale]}
           provenance={shot('layout-picker').data.provenance}
           sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
           widths={[480, 720, 960]}
@@ -284,7 +284,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         <tbody>
           {ledger.map((s) => (
             <tr>
-              <th scope="row">{s.data.title}</th>
+              <th scope="row">{s.data.title[locale]}</th>
               <td>{s.data.provenance.source}</td>
               <td>{s.data.provenance.theme ?? (isEs ? 'Sin registro' : 'Not recorded')}</td>
               <td>{s.data.provenance.resolution ?? (isEs ? 'Sin registro' : 'Not recorded')}</td>

@@ -1,7 +1,11 @@
 ---
-title: 'Islands layout'
+title:
+  es: 'Layout Islands'
+  en: 'Islands layout'
 image: '../../../assets/screenshots/certified/islands.png'
-alt: 'Islands layout in Hornero, with independent floating control surfaces arranged across the desktop.'
+alt:
+  es: 'Layout Islands en Hornero, con superficies de control flotantes e independientes repartidas por el escritorio.'
+  en: 'Islands layout in Hornero, with independent floating control surfaces arranged across the desktop.'
 order: 11
 provenance:
   source: Hornero QA
