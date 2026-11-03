@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import ArchFrame from '../../components/ArchFrame.astro';
+import AppLogo from '../../components/AppLogo.astro';
 import { extensionCatalogue, pins, commitUrl } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -99,7 +100,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         <h2 id="catalogue-title">{isEs ? `Catálogo oficial, ${plugins.length} paquetes` : `Official catalogue, ${plugins.length} packages`}</h2>
       </div>
       <p>
-        {isEs ? 'Cada tarjeta muestra dónde aparece la extensión y qué declara. Abrí una para ver su checksum, código y comando de instalación. Todavía no hay capturas de estas extensiones, así que los esquemas muestran solo la ubicación.' : 'Each card shows where the extension appears and what it declares. Open one for its checksum, source and install command. There are no screenshots of these extensions yet, so the schematics show placement only.'}
+        {isEs ? 'Cada tarjeta muestra dónde aparece la extensión y qué declara. Cada tarjeta lleva una insignia con iniciales propia del sitio, no el ícono de la extensión. Abrí una para ver su checksum, código y comando de instalación. Todavía no hay capturas de estas extensiones, así que los esquemas muestran solo la ubicación.' : 'Each card shows where the extension appears and what it declares. Each card carries an in-house initials badge, not an official extension icon. Open one for its checksum, source and install command. There are no screenshots of these extensions yet, so the schematics show placement only.'}
       </p>
     </div>
 
@@ -137,6 +138,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
           >
             <article aria-labelledby={`${plugin.id}-title`}>
               <header class="card-heading">
+                <span class="card-monogram"><AppLogo id={plugin.id} name={plugin.name} /></span>
                 <div>
                   <p class="extension-id"><span>{plugin.trust}</span><code>{plugin.id}</code></p>
                   <h3 id={`${plugin.id}-title`}>{plugin.name}</h3>
@@ -318,6 +320,9 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-card { min-width: 0; background: var(--bg); }
   .extension-card article { height: 100%; padding: clamp(1.1rem, 2.3vw, 1.8rem); }
   .card-heading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+  .card-heading > div { flex: 1; min-width: 0; }
+  .card-monogram { --app-logo-size: 2.2rem; flex: none; margin-top: 0.2rem; }
+  @media (max-width: 440px) { .placement svg { width: 6.5rem; } }
   .extension-id { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; color: var(--secondary); font: 0.63rem var(--font-data); text-transform: uppercase; }
   .extension-id span { padding: 0.18rem 0.35rem; border: 1px solid var(--secondary); }
   .extension-id code { overflow-wrap: anywhere; }

@@ -94,15 +94,24 @@ interface Props {
 
 const { id, class: className, name } = Astro.props;
 const logo = logos[id];
-const initials = name
-  ? name.replace(/\(.*?\)/g, '').replace(/^The\s+/i, '').split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w.charAt(0))).slice(0, 2).map((w) => w.charAt(0).toUpperCase()).join('')
-  : '';
+const words = name
+  ? name.replace(/\(.*?\)/g, '').replace(/^The\s+/i, '').trim().split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w.charAt(0)))
+  : [];
+const initials = (words.length > 1
+  ? words.slice(0, 2).map((w) => w.charAt(0)).join('')
+  : (words[0] ?? '').slice(0, 2)
+).toUpperCase();
+// Glyph-style marks that lose their silhouette on one of the two site
+// surfaces get a site plate (never a recolor of the upstream file).
+const PLATE_IDS = new Set(['audacity', 'guitarix', 'inkscape', 'kitty', 'ghostty', 'obs-studio', 'carla', 'steam', 'darktable', 'btop', 'niri', 'alacritty', 'thunar']);
+const plate = id === 'copyq' ? 'dark' : PLATE_IDS.has(id) ? 'std' : undefined;
 ---
 
 {
   logo ? (
     <img
-      class:list={['app-logo', className]}
+      class:list={['app-logo', `app-logo--${id}`, className]}
+      data-plate={plate}
       src={logo.src}
       width={logo.width}
       height={logo.height}
@@ -110,8 +119,6 @@ const initials = name
       loading="lazy"
       decoding="async"
     />
-  ) : name ? (
-    <span class:list={['app-logo', 'app-badge', className]} aria-hidden="true" title={name}>{initials}</span>
   ) : id === 'cava' ? (
     <span class:list={['app-logo', 'cava-glyph', className]} aria-hidden="true">
       <i />
@@ -120,6 +127,8 @@ const initials = name
       <i />
       <i />
     </span>
+  ) : name ? (
+    <span class:list={['app-logo', 'app-badge', className]} aria-hidden="true" title={name}>{initials}</span>
   ) : null
 }
 
@@ -129,6 +138,22 @@ const initials = name
     height: var(--app-logo-size, 2.5rem);
     object-fit: contain;
     flex: none;
+  }
+  .app-logo[data-plate] {
+    box-sizing: border-box;
+    padding: calc(var(--app-logo-size, 2.5rem) * 0.09);
+    border-radius: 24%;
+    background: var(--surface-raised, var(--night-raised));
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  :global(:root[data-color-mode='light']) .app-logo[data-plate='dark'] {
+    background: #263742;
+  }
+  /* The vendored REAPER mark is 32px; never upscale it past its pixels. */
+  .app-logo--reaper {
+    width: 2rem;
+    height: 2rem;
+    margin: calc((var(--app-logo-size, 2.5rem) - 2rem) / 2);
   }
   .app-badge {
     display: inline-flex;
@@ -141,7 +166,7 @@ const initials = name
     color: var(--secondary);
     font-family: var(--font-data, monospace);
     font-weight: 700;
-    font-size: calc(var(--app-logo-size, 2.5rem) * 0.36);
+    font-size: max(0.62rem, calc(var(--app-logo-size, 2.5rem) * 0.36));
     letter-spacing: 0.04em;
   }
   .cava-glyph {
@@ -152,7 +177,7 @@ const initials = name
     padding: calc(var(--app-logo-size, 2.5rem) * 0.16) calc(var(--app-logo-size, 2.5rem) * 0.13)
       calc(var(--app-logo-size, 2.5rem) * 0.13);
     box-sizing: border-box;
-    background: var(--night);
+    background: var(--surface-raised, var(--night-raised));
     border: 1px solid color-mix(in srgb, var(--river) 45%, transparent);
     border-radius: 24%;
   }
