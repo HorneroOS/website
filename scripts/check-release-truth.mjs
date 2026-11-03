@@ -1,6 +1,7 @@
 // Regression guard against stale launch claims.
 //
-// The v0.2.0-preview22 ISO is published (signed, Desktop + Studio Preview).
+// The current published ISO is v0.2.0-preview30 (signed, Desktop +
+// Studio + Gaming Preview).
 // These exact phrases claimed the opposite and kept coming back in copy, so
 // the build fails if they reappear in site-authored source. Historical
 // release records and generated product data are out of scope.

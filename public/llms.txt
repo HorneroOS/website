@@ -4,7 +4,7 @@
 
 ## Status
 
-HorneroOS is pre-release. The Desktop is available as Arch packages for existing Arch systems. Server, Agents, and Studio are defined as composable editions with planned maturity. There is no published ISO or guided installer yet.
+HorneroOS is pre-release. Desktop, Studio and Gaming Preview install from the signed v0.2.0-preview30 ISO (one x86_64 image, VM-validated; see horneroos.com/install). The Desktop is also available as Arch packages for existing Arch systems. Server and Agents are defined as composable editions with planned maturity and no installable image.
 
 - Official site: https://horneroos.com
 - Editions: https://horneroos.com/editions
