@@ -8,8 +8,12 @@ alt:
   en: 'Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session.'
 order: 9
 provenance:
-  source: Hornero QA
-  context: Layout acceptance · visual review
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Aceptación de layouts · revisión visual'
+    en: 'Layout acceptance · visual review'
   pins:
     shell: 98a5de2
     config: 96b6870

@@ -69,6 +69,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
         alt={shot('dashboard').data.alt[locale]}
         eager
         provenance={shot('dashboard').data.provenance}
+        locale={locale}
         sizes="(min-width: 1180px) 64vw, 100vw"
         widths={[640, 960, 1280, 1600]}
       />
@@ -94,6 +95,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={dashboardExtensions.data.image}
           alt={dashboardExtensions.data.alt[locale]}
           provenance={dashboardExtensions.data.provenance}
+          locale={locale}
           sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600, 1918]}
         />
@@ -107,6 +109,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={terminalTools.data.image}
           alt={terminalTools.data.alt[locale]}
           provenance={terminalTools.data.provenance}
+          locale={locale}
           sizes="(min-width: 1100px) 62vw, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600]}
         />
@@ -120,6 +123,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={quickToggles.data.image}
           alt={quickToggles.data.alt[locale]}
           provenance={quickToggles.data.provenance}
+          locale={locale}
           sizes="(min-width: 1100px) 34vw, calc(100vw - 2rem)"
           widths={[640, 960, 1280]}
         />
@@ -133,6 +137,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={wallpaperPicker.data.image}
           alt={wallpaperPicker.data.alt[locale]}
           provenance={wallpaperPicker.data.provenance}
+          locale={locale}
           sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
           widths={[640, 960, 1280, 1600, 1918]}
         />
@@ -159,6 +164,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
       src={liveWorkstation.data.image}
       alt={liveWorkstation.data.alt[locale]}
       provenance={liveWorkstation.data.provenance}
+      locale={locale}
       sizes="(min-width: 1180px) 76vw, 100vw"
       widths={[640, 960, 1280, 1918]}
     />
@@ -180,13 +186,14 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
             src={s.data.image}
             alt={s.data.alt[locale]}
             provenance={s.data.provenance}
+            locale={locale}
             sizes="(min-width: 1050px) 45vw, (min-width: 700px) 50vw, calc(100vw - 2rem)"
             widths={[480, 720, 960, 1280]}
           />
           <div class="story-caption">
             <span>{s.data.provenance.theme ?? (isEs ? 'Colores del fondo' : 'Wallpaper colors')}</span>
             <h3>{s.data.title[locale]}</h3>
-            <p>{s.data.provenance.context}</p>
+            <p>{s.data.provenance.context?.[locale]}</p>
           </div>
         </article>
       ))}
@@ -212,6 +219,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
             src={s.data.image}
             alt={s.data.alt[locale]}
             provenance={s.data.provenance}
+            locale={locale}
             sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
             widths={[480, 720, 960, 1280]}
           />
@@ -239,6 +247,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={shot('appearance-search').data.image}
           alt={shot('appearance-search').data.alt[locale]}
           provenance={shot('appearance-search').data.provenance}
+          locale={locale}
           sizes="(min-width: 1100px) 58vw, 100vw"
           widths={[520, 800, 1080, 1280]}
         />
@@ -252,6 +261,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           src={shot('layout-picker').data.image}
           alt={shot('layout-picker').data.alt[locale]}
           provenance={shot('layout-picker').data.provenance}
+          locale={locale}
           sizes="(min-width: 1100px) 32vw, (min-width: 700px) 48vw, calc(100vw - 2rem)"
           widths={[480, 720, 960]}
         />
@@ -285,7 +295,7 @@ const ledger = [...shots].sort((x, y) => x.data.order - y.data.order);
           {ledger.map((s) => (
             <tr>
               <th scope="row">{s.data.title[locale]}</th>
-              <td>{s.data.provenance.source}</td>
+              <td>{s.data.provenance.source[locale]}</td>
               <td>{s.data.provenance.theme ?? (isEs ? 'Sin registro' : 'Not recorded')}</td>
               <td>{s.data.provenance.resolution ?? (isEs ? 'Sin registro' : 'Not recorded')}</td>
               <td><time datetime={s.data.provenance.date}>{s.data.provenance.date}</time></td>

@@ -8,8 +8,12 @@ alt:
   en: 'Pampa appearance preview in Hornero, with a deep green grassland scene, warm moon and slim shell rail.'
 order: 3
 provenance:
-  source: Hornero QA
-  context: Runtime preview · revised artwork staged in guest
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Vista previa en tiempo de ejecución · arte revisado preparado en el guest'
+    en: 'Runtime preview · revised artwork staged in guest'
   pins:
     shell: 98a5de2
     base config: 96b6870

@@ -4,11 +4,13 @@
  * exact composition it shows. Every screenshot on the site carries one
  * (AGENTS.md "Website follows product").
  */
+export type LocalizedOrString = string | { es: string; en: string };
+
 export interface Provenance {
   /** Who produced the frame, e.g. "Hornero QA" or "Development capture". */
-  source: string;
+  source: LocalizedOrString;
   /** Scenario or context, e.g. "layouts/apply-cockpit-clear". */
-  context?: string;
+  context?: LocalizedOrString;
   /** Short component pins, e.g. { shell: '25d2206', config: 'dae2255' }. */
   pins?: Record<string, string>;
   resolution?: string;
@@ -18,9 +20,14 @@ export interface Provenance {
 
 interface Props extends Provenance {
   class?: string;
+  locale?: 'es' | 'en';
 }
 
-const { source, context, pins = {}, resolution, theme, date, class: className } = Astro.props;
+const { source: rawSource, context: rawContext, pins = {}, resolution, theme, date, class: className, locale = 'es' } = Astro.props;
+const resolve = (value: LocalizedOrString | undefined) =>
+  value === undefined ? undefined : typeof value === 'string' ? value : value[locale];
+const source = resolve(rawSource);
+const context = resolve(rawContext);
 const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), theme, resolution, date].filter(
   (p): p is string => Boolean(p),
 );

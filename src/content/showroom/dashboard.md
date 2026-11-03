@@ -8,8 +8,12 @@ alt:
   en: 'The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper.'
 order: 0
 provenance:
-  source: Hornero QA
-  context: QA run 20261003T160310Z · Preview 14 package base with the tested Companion fix candidate
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Corrida de QA 20261003T160310Z · base de paquetes Preview 14 con el candidato de arreglo del Companion probado'
+    en: 'QA run 20261003T160310Z · Preview 14 package base with the tested Companion fix candidate'
   pins:
     shell base: b2f27e6
     tested candidate: 4ebf3df

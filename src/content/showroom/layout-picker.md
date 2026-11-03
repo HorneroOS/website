@@ -8,8 +8,12 @@ alt:
   en: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
 order: 4
 provenance:
-  source: Hornero QA
-  context: Keyboard layout apply · Preview 14 candidate
+  source:
+    es: 'QA de Hornero'
+    en: 'Hornero QA'
+  context:
+    es: 'Aplicación de layout por teclado · candidato Preview 14'
+    en: 'Keyboard layout apply · Preview 14 candidate'
   pins:
     shell: '360bb6b'
     config: 'f5f7229'

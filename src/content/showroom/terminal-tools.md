@@ -8,8 +8,12 @@ alt:
   en: 'Two terminal windows on a Hornero desktop over a photograph of the Beagle Channel: btop showing processor, memory, disk, network and process panels, and the yazi file manager browsing a wallpapers folder with a mountain sunrise preview.'
 order: 14
 provenance:
-  source: HorneroOS contributor-provided workstation capture
-  context: 'Live Hyprland development desktop · btop and yazi · wallpaper: Beagle Channel photograph by RAYANDBEE, CC BY 2.0 · not an installer or release acceptance image'
+  source:
+    es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
+    en: 'HorneroOS contributor-provided workstation capture'
+  context:
+    es: 'Escritorio de desarrollo Hyprland en vivo · btop y yazi · fondo: fotografía del Canal Beagle de RAYANDBEE, CC BY 2.0 · no es una imagen del instalador ni de aceptación de release'
+    en: 'Live Hyprland development desktop · btop and yazi · wallpaper: Beagle Channel photograph by RAYANDBEE, CC BY 2.0 · not an installer or release acceptance image'
   resolution: 1918×1078
   date: '2026-10-25'
 ---

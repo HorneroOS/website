@@ -8,8 +8,12 @@ alt:
   en: 'The Hornero launcher after typing ">wallpaper": a row of wallpaper thumbnails with one selected, previewed live as a pixel-art city street across the whole desktop behind it.'
 order: 16
 provenance:
-  source: HorneroOS contributor-provided workstation capture
-  context: 'Live Hyprland development desktop · launcher wallpaper picker · the wallpapers shown come from the contributor’s own folder and are not shipped with HorneroOS · not an installer or release acceptance image'
+  source:
+    es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
+    en: 'HorneroOS contributor-provided workstation capture'
+  context:
+    es: 'Escritorio de desarrollo Hyprland en vivo · selector de fondos del lanzador · los fondos mostrados vienen de la carpeta propia del colaborador y no se distribuyen con HorneroOS · no es una imagen del instalador ni de aceptación de release'
+    en: 'Live Hyprland development desktop · launcher wallpaper picker · the wallpapers shown come from the contributor’s own folder and are not shipped with HorneroOS · not an installer or release acceptance image'
   resolution: 1918×1078
   date: '2026-10-25'
 ---
