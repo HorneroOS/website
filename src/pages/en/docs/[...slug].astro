@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import DocsPage from '../../../components/pages/DocsPage.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('docs');
+  const entries = (await getCollection('docs')).filter((e) => e.id !== 'es' && !e.id.startsWith('es/'));
   return entries.map((entry) => ({
     params: { slug: entry.id === 'index' ? undefined : entry.id },
     props: { entry },

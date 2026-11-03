@@ -16,12 +16,28 @@ const { entry, locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 const { Content, headings } = await render(entry);
-const all = await getCollection('docs');
+const allRaw = await getCollection('docs');
+// Canonical slug of an entry: Spanish translations mirror English paths
+// under es/ (es/README.md -> 'es', the Spanish docs home).
+const canonicalOf = (id: string) => (id === 'es' ? 'index' : id.startsWith('es/') ? id.slice(3) : id);
+const isSpanishEntry = entry.id === 'es' || entry.id.startsWith('es/');
+const translated = isEs && isSpanishEntry;
+const canonicalId = canonicalOf(entry.id);
+// Navigation lists each canonical page once, preferring this locale's
+// entry so Spanish pages show Spanish titles where translations exist.
+const byCanonicalNav = new Map<string, CollectionEntry<'docs'>>();
+for (const e of allRaw) {
+  const canonical = canonicalOf(e.id);
+  const spanish = e.id === 'es' || e.id.startsWith('es/');
+  const existing = byCanonicalNav.get(canonical);
+  if (!existing || (isEs && spanish) || (!isEs && !spanish)) byCanonicalNav.set(canonical, e);
+}
+const all = [...byCanonicalNav.values()];
 
 type Heading = { depth: number; text: string };
 const titleOf = (e: CollectionEntry<'docs'>) =>
   (e.rendered?.metadata?.headings as Heading[] | undefined)?.find((h) => h.depth === 1)?.text ?? e.id;
-const hrefOf = (id: string) => L(id === 'index' ? '/docs/' : `/docs/${id}/`);
+const hrefOf = (id: string) => L(id === 'index' ? '/docs/' : `/docs/${canonicalOf(id)}/`);
 const title = titleOf(entry);
 
 // Meta description: the first prose line, stripped of Markdown syntax.
@@ -34,13 +50,15 @@ const englishDescription = firstLine
   .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
   .replace(/[`*_]/g, '')
   .slice(0, 180);
-// Docs are English-only upstream today: say so in Spanish metadata instead
-// of shipping an English description under an es-AR page.
-const description = isEs
-  ? `Documentación de HorneroOS en inglés: ${title}. Traducción al español pendiente.`
-  : englishDescription;
+// Untranslated docs are English upstream: say so in Spanish metadata
+// instead of shipping an English description under an es-AR page.
+// Translated pages use their own (Spanish) first line.
+const description =
+  isEs && !translated
+    ? `Documentación de HorneroOS en inglés: ${title}. Traducción al español pendiente.`
+    : englishDescription;
 
-const featuredApps = docsApps[entry.id] ?? [];
+const featuredApps = docsApps[canonicalId] ?? [];
 const sourcePath = (entry.filePath ?? '').replace(/^\.?\/?\.cache\/product-src\/docs\//, '');
 const docsPin = pins.docs;
 const toc = headings.filter((h) => h.depth === 2);
@@ -58,10 +76,10 @@ const areaLabelsEs: Record<string, string> = {
 const areas = docsAreas.map((a) => ({
   ...a,
   label: isEs ? (areaLabelsEs[a.id] ?? a.label) : a.label,
-  index: all.find((e) => e.id === a.id),
-  pages: all.filter((e) => e.id.startsWith(`${a.id}/`)).sort((x, y) => titleOf(x).localeCompare(titleOf(y))),
+  index: all.find((e) => canonicalOf(e.id) === a.id),
+  pages: all.filter((e) => canonicalOf(e.id).startsWith(`${a.id}/`)).sort((x, y) => titleOf(x).localeCompare(titleOf(y))),
 }));
-const current = entry.id;
+const current = canonicalId;
 ---
 
 <SiteLayout title={isEs ? `${title} — Documentación de Hornero OS` : `${title} — Hornero OS docs`} description={description || (isEs ? `${title}, documentación de Hornero OS.` : `${title}, Hornero OS documentation.`)}>
@@ -97,7 +115,7 @@ const current = entry.id;
       </a>
     </nav>
 
-    <article lang={isEs ? 'en' : undefined} data-pagefind-ignore={isEs ? '' : undefined} class="prose">
+    <article lang={isEs && !translated ? 'en' : undefined} data-pagefind-ignore={isEs && !translated ? '' : undefined} class="prose">
       {featuredApps.length > 0 && (
         <div class="doc-tools" role="group" aria-label={isEs ? 'Herramientas destacadas en esta página' : 'Featured tools on this page'}>
           <span class="doc-tools-label">{isEs ? 'Herramientas destacadas' : 'Featured tools'}</span>
@@ -111,7 +129,7 @@ const current = entry.id;
           </ul>
         </div>
       )}
-      {isEs && (
+      {isEs && !translated && (
         <p class="docs-lang-note">
           Esta documentación todavía está en inglés. Sale del repositorio HorneroOS/docs y su traducción al español está pendiente ahí. La navegación del sitio ya está en español.
         </p>
