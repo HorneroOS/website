@@ -6,6 +6,7 @@ import DesktopCaptureExplorer from '../../components/DesktopCaptureExplorer.astr
 import LookCompare from '../../components/LookCompare.astro';
 import StoryTimeline from '../../components/StoryTimeline.astro';
 import AppLogo from '../../components/AppLogo.astro';
+import CommunityJoin from '../../components/CommunityJoin.astro';
 import { featuredStory } from '../../data/story';
 import {
   candidate,
@@ -328,6 +329,8 @@ const description = isEs
       </div>
     </dl>
   </section>
+
+  <CommunityJoin locale={locale} />
 
   <section class="section get" aria-labelledby="get-title">
     <div>

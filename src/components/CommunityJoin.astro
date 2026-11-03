@@ -1,0 +1,103 @@
+---
+// Community entry point for the Discord server shared by the open source projects
+// of Ulises Jeremías, HorneroOS included. A native link, not an embedded widget:
+// the Discord widget adds third-party scripts and a floating panel, and this site
+// loads no third-party resources.
+import { t, type Locale } from '../i18n/ui';
+import { discordInvite } from '../data/community';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const bugReport = 'https://github.com/HorneroOS/hornero/issues/new/choose';
+
+const points = [
+  { title: t(locale, 'communityJoinFeedback'), text: t(locale, 'communityJoinFeedbackText') },
+  { title: t(locale, 'communityJoinBugs'), text: t(locale, 'communityJoinBugsText') },
+  { title: t(locale, 'communityJoinContribute'), text: t(locale, 'communityJoinContributeText') },
+];
+---
+
+<section class="section community-join" aria-labelledby="community-join-title">
+  <div class="broadcast-plate join-plate">
+    <p class="plate-id">
+      <strong>{t(locale, 'communityJoinKicker')}</strong>
+      <span>ARG / 199X</span>
+      <span>{t(locale, 'discordLabel')}</span>
+    </p>
+    <h2 id="community-join-title">{t(locale, 'communityJoinTitle')}</h2>
+    <p class="join-lede">{t(locale, 'communityJoinLede')}</p>
+    <ul class="join-points" role="list">
+      {points.map((p) => (
+        <li>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="cta-row">
+      <a href={discordInvite} class="cta primary" rel="noopener">
+        {t(locale, 'discordJoin')}
+      </a>
+      <a href={bugReport} class="cta secondary">
+        {t(locale, 'communityJoinBug')}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .community-join {
+    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .join-plate {
+    display: grid;
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+  }
+  .join-plate h2 {
+    margin: 0;
+    font-size: clamp(1.7rem, 1rem + 2.4vw, 2.6rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .join-lede {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--muted, var(--text));
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
+    line-height: 1.55;
+  }
+  .join-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .join-points li {
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--accent);
+  }
+  .join-points h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1rem;
+  }
+  .join-points p {
+    margin: 0;
+    color: var(--muted, var(--text));
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .join-plate .cta-row {
+    margin-top: 0.25rem;
+  }
+  @media (max-width: 40rem) {
+    .join-plate .cta-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
