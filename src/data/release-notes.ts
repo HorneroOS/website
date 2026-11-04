@@ -3,6 +3,10 @@
 // engineering record; ReleasesPage renders these first and keeps the full
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
+  '0.2.0-preview32': {
+    es: 'La release de confiabilidad: la autenticación gráfica funciona desde la instalación, horneroctl gana actualizaciones seguras con chequeos previos, historial y aviso de reinicio, y recovery doctor diagnostica el estado de recuperación sin inventar rollback.',
+    en: 'The reliability release: graphical authentication works from a fresh install, horneroctl gains safer updates with preflight checks, history and reboot-required reporting, and recovery doctor diagnoses recovery readiness without faking rollback.',
+  },
   '0.2.0-preview31': {
     es: 'Arregla los paneles negros del Centro de control: Extensiones, Studio y Gaming vuelven a mostrar su interfaz completa, y un panel que falla ya no se esconde detrás de un rectángulo negro.',
     en: 'Fixes the black Control Center panels: Extensions, Studio and Gaming show their full interface again, and a failing panel no longer hides behind a black rectangle.',

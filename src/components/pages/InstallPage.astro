@@ -41,25 +41,25 @@ const statusName = (
     <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
     <h1>{isEs ? 'La primera ISO Preview de HorneroOS ya está acá' : 'The first HorneroOS Preview ISO is here'}</h1>
     <p class="lede">
-      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; la matriz UEFI/BIOS con y sin cifrado se heredó de previews anteriores para las áreas sin cambios) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; the UEFI/BIOS encrypted/unencrypted matrix is carried forward from earlier previews for unchanged areas) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
+      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS y Niri no se ejecutaron sobre esta ISO) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
     </p>
     <p>
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview31-x86_64.iso">
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso">
         {isEs ? 'Descargar la ISO Preview (2.7 GB)' : 'Download the Preview ISO (2.7 GB)'}
       </a>{' '}
       {isEs ? ' — también anunciada en la ' : ' — also announced on the '}
       {' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview31">{isEs ? 'página de la release v0.2.0-preview31' : 'v0.2.0-preview31 release page'}</a>.
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32">{isEs ? 'página de la release v0.2.0-preview32' : 'v0.2.0-preview32 release page'}</a>.
       {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview31-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
       {isEs ? 'y la ' : 'and the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview31-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>horneroos-2026.10-preview31-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
-      <li><code>SHA-256</code><span>4200ff28ee4ee42f84bd65d01ec4d0e67b19adc5827e6ff09f7b5c42438c5194</span></li>
+      <li><code>horneroos-2026.10-preview32-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
+      <li><code>SHA-256</code><span>b8cd0f8604bc69f7d2112fb8bccd97115d32d197e9c92c62e02faf5de6345aec</span></li>
       <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS FCFBEE43925AB5429362278AE59EAB44AA2498DC; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository ('}<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
     </ul>
     <p>
@@ -85,11 +85,11 @@ const statusName = (
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (v0.2.0-preview31), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (v0.2.0-preview31), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (v0.2.0-preview32), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (v0.2.0-preview32), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
-        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la validación en VM de esta ISO (Desktop, Studio y Gaming, UEFI, sin cifrado); la matriz UEFI/BIOS con y sin cifrado se ejecutó en previews anteriores y se hereda para las áreas sin cambios. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed this ISO's VM validation (Desktop, Studio and Gaming, UEFI, unencrypted); the UEFI/BIOS encrypted/unencrypted matrix ran on earlier previews and is carried forward for unchanged areas. Panda Foss's custom installer remains the future official path."}</dd>
+        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la validación en VM de esta ISO (Desktop, Studio y Gaming, UEFI, sin cifrado); LUKS, BIOS y Niri no se ejecutaron sobre esta ISO. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed this ISO's VM validation (Desktop, Studio and Gaming, UEFI, unencrypted); LUKS, legacy BIOS and Niri were not run against this ISO. Panda Foss's custom installer remains the future official path."}</dd>
       </div>
       <div class="state-available">
         <dt>{isEs ? 'Paquetes de escritorio' : 'Desktop packages'}</dt>
@@ -145,7 +145,7 @@ const statusName = (
     </p>
     <p>
       <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview31">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
     </p>
   </section>
 
