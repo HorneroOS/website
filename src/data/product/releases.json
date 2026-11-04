@@ -1,5 +1,23 @@
 [
   {
+    "name": "v0.2.0-preview32",
+    "version": "0.2.0-preview32",
+    "date": "2026-11-04",
+    "status": "tagged",
+    "summary": "Tenth Desktop + Studio + Gaming Preview ISO. The Reliability & Recovery release. Fresh installs now register a session polkit agent out of the box, so graphical authentication and `horneroctl package upgrade` work on first boot (#366/#367); existing installs gain the same agent through hornero-config 0.3.18-1, which also spawns it in Niri sessions. horneroctl 0.2.0-preview40 adds the read-only `recovery doctor`, `capture status`, safer upgrade preflight (pacman lock and free-space checks, no partial upgrades) and reboot-required reporting. Unencrypted installs no longer print the initramfs encryption-mapping error (installer#89). The exact published ISO was installed in disposable VMs for Desktop, Studio and Gaming with first-boot, polkit, studio doctor (5/5) and gaming doctor (12/14, only expected GPU-less VM failures) evidence. No OS snapshot backend ships yet and no rollback is claimed. Desktop, Studio and Gaming remain Preview; no NVENC, Vulkan, camera, Bluetooth hardware, or >=16 GiB copytoram qualification is claimed.",
+    "manifest": "hornero-0.2.0-preview32",
+    "shell": {
+      "sha": "b75bbddf8c6d9167dc2fd1b45383c44176f4917d",
+      "subject": "shell pin shipped in the preview32 ISO lock (hornero-shell 1.2.60-1)"
+    },
+    "config": {
+      "sha": "8754a454ac02a8aee49aac2856fbfdb0efb73f63",
+      "subject": "config pin shipped in the preview32 ISO lock (hornero-config 0.3.18-1)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview31",
     "version": "0.2.0-preview31",
     "date": "2026-11-03",
