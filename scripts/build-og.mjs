@@ -33,7 +33,7 @@ const shot = (path, w, h, label) => `
 const cards = {
   default: {
     title: 'A Linux desktop with years of daily use behind it.',
-    line: 'Arch-based and Wayland-first, from Argentina. Preview 31 ISO available.',
+    line: 'Arch-based and Wayland-first, from Argentina. Preview 32 ISO available.',
     panel: shot('assets/screenshots/curated/dashboard-extensions-2026-10-25.webp', 660, 371, 'Dashboard · live desktop · 2026-10-25'),
   },
   showroom: {
@@ -67,7 +67,7 @@ const cards = {
     </ol><p class="cap"><b>Timeline</b> each date after 2018 links to a commit</p>`,
   },
   install: {
-    title: 'Download the Preview 31 ISO.',
+    title: 'Download the Preview 32 ISO.',
     line: 'One signed x86_64 ISO: Desktop, Studio and Gaming Preview.',
     panel: `<ul class="ledger mono">
       <li><b>horneroctl-bin</b><span>system CLI</span></li>

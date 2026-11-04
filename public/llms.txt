@@ -4,7 +4,7 @@
 
 ## Status
 
-HorneroOS is pre-release. Desktop, Studio and Gaming Preview install from the signed v0.2.0-preview31 ISO (one x86_64 image, VM-validated; see https://www.horneroos.com/install). The Desktop is also available as Arch packages for existing Arch systems. Server and Agents are defined as composable editions with planned maturity and no installable image.
+HorneroOS is pre-release. Desktop, Studio and Gaming Preview install from the signed v0.2.0-preview32 ISO (one x86_64 image, VM-validated; see https://www.horneroos.com/install). The Desktop is also available as Arch packages for existing Arch systems. Server and Agents are defined as composable editions with planned maturity and no installable image.
 
 The default language is Spanish (Argentina); English lives under /en/.
 

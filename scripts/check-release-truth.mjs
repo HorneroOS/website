@@ -58,7 +58,7 @@ for (const file of ['public/llms.txt', 'scripts/build-og.mjs', 'src/components/p
     }
   }
   for (const match of text.matchAll(/v0\.2\.0-preview(\d+) ISO/g)) {
-    if (match[1] !== '31') {
+    if (match[1] !== '32') {
       console.error(`${file}: stale current-release claim (${match[0]}); current is v0.2.0-preview32`);
       failures += 1;
     }
