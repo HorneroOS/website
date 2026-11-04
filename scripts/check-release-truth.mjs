@@ -1,6 +1,6 @@
 // Regression guard against stale launch claims.
 //
-// The current published ISO is v0.2.0-preview31 (signed, Desktop +
+// The current published ISO is v0.2.0-preview32 (signed, Desktop +
 // Studio + Gaming Preview).
 // These exact phrases claimed the opposite and kept coming back in copy, so
 // the build fails if they reappear in site-authored source. Historical
@@ -22,7 +22,7 @@ const banned = [
   { pattern: /lived in since 2018|habitado desde 2018/i, claim: '2018 is the personal workstation, not the distribution (2026)' },
 ];
 
-const CURRENT_ISO = 'horneroos-2026.10-preview31-x86_64.iso';
+const CURRENT_ISO = 'horneroos-2026.10-preview32-x86_64.iso';
 
 const roots = ['src/components', 'src/layouts', 'src/pages', 'src/i18n', 'scripts', 'public'];
 const files = [];
@@ -59,7 +59,7 @@ for (const file of ['public/llms.txt', 'scripts/build-og.mjs', 'src/components/p
   }
   for (const match of text.matchAll(/v0\.2\.0-preview(\d+) ISO/g)) {
     if (match[1] !== '31') {
-      console.error(`${file}: stale current-release claim (${match[0]}); current is v0.2.0-preview31`);
+      console.error(`${file}: stale current-release claim (${match[0]}); current is v0.2.0-preview32`);
       failures += 1;
     }
   }
