@@ -1,0 +1,302 @@
+---
+import type { ImageMetadata } from 'astro';
+
+// Live specimen stage for Javi: plays the shell's own companion frames
+// at the shell's own timings, parsed at build time from the pinned
+// manifest.json. Works with manifest v1 (idle/walk/fly/greet) and v2
+// (full reboot reels) without code changes: whatever animations the
+// pinned shell ships are the buttons the visitor gets.
+// Browser recreation using the shell's own frames and timings — not a screenshot.
+
+interface Props {
+  locale: 'es' | 'en';
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+
+const frameFiles = import.meta.glob<ImageMetadata>(
+  '../../.cache/product-src/shell/assets/companion/frames/*.png',
+  { eager: true, import: 'default' },
+);
+const byBase = new Map<string, ImageMetadata>();
+for (const [path, meta] of Object.entries(frameFiles))
+  byBase.set(path.split('/').pop() ?? path, meta);
+
+interface FrameEntry { file: string; ms?: number }
+interface AnimEntry { frames: FrameEntry[]; frameMs: number; loop: boolean; next: string }
+interface SkinEntry {
+  label?: string;
+  palette?: Record<string, string>;
+  animations: Record<string, AnimEntry>;
+}
+interface Manifest {
+  skins: Record<string, SkinEntry>;
+  assistantStates?: Record<string, string>;
+  nests?: Record<string, string>;
+}
+const manifest = Object.values(
+  import.meta.glob<Manifest>(
+    '../../.cache/product-src/shell/assets/companion/manifest.json',
+    { eager: true, import: 'default' },
+  ),
+)[0];
+if (!manifest) throw new Error('companion manifest missing at the shell pin');
+
+const STAGE_ANIMS = ['idle', 'greet', 'walk', 'fly', 'sleep', 'think',
+  'work', 'approve', 'celebrate', 'hop', 'blink', 'deny'];
+const skinIds = ['default', ...Object.keys(manifest.skins).filter((s) => s !== 'default')];
+
+function animFrames(skin: string, anim: string) {
+  const entry = manifest.skins[skin]?.animations?.[anim];
+  if (!entry) return null;
+  const frames = entry.frames
+    .map((f) => byBase.get(f.file.split('/').pop() ?? '')?.src)
+    .filter((s): s is string => Boolean(s));
+  if (!frames.length) return null;
+  return {
+    frames,
+    frameMs: entry.frameMs ?? 900,
+    durations: entry.frames.map((f) => f.ms ?? entry.frameMs ?? 900),
+    loop: entry.loop ?? true,
+    next: entry.next ?? 'idle',
+  };
+}
+
+const stageData: Record<string, Record<string, ReturnType<typeof animFrames>>> = {};
+for (const skin of skinIds) {
+  stageData[skin] = {};
+  for (const anim of STAGE_ANIMS) {
+    const reel = animFrames(skin, anim);
+    if (reel) stageData[skin][anim] = reel;
+  }
+}
+const assistantStates = manifest.assistantStates ?? {};
+const nestData: Record<string, string> = {};
+for (const [stage, rel] of Object.entries(manifest.nests ?? {})) {
+  const hit = byBase.get(rel.split('/').pop() ?? '');
+  if (hit) nestData[stage] = hit.src;
+}
+const nestOrder = ['none', 'twigs', 'cup', 'dome', 'home'].filter((s) => nestData[s]);
+const firstFrame = stageData['default']?.['idle']?.frames?.[0] ?? '';
+const skinLabel = (s: string) => manifest.skins[s]?.label ?? s;
+---
+
+<div class="stage" data-stage>
+  <div class="stage-frame">
+    <div class="stage-scene">
+      {nestOrder.length > 0 && (
+        <img class="stage-nest" data-nest alt="" width="512" height="512" hidden />
+      )}
+      <img
+        class="stage-bird"
+        data-bird
+        src={firstFrame}
+        alt={isEs ? 'Javi, el companion hornero, en reposo' : 'Javi, the hornero companion, at rest'}
+        width="512"
+        height="512"
+      />
+      <div class="stage-sill" aria-hidden="true"></div>
+    </div>
+    <p class="stage-caption" data-caption aria-live="polite">
+      Hornero · idle · {stageData['default']?.['idle']?.frameMs ?? 900} ms
+    </p>
+  </div>
+
+  <div class="stage-controls" data-controls hidden>
+    <div class="ctl-group" role="group" aria-label={isEs ? 'Personaje' : 'Character'}>
+      <span class="ctl-label">{isEs ? 'Personaje' : 'Character'}</span>
+      {skinIds.map((s) => (
+        <button type="button" data-skin={s} aria-pressed={s === 'default' ? 'true' : 'false'}>
+          {skinLabel(s)}
+        </button>
+      ))}
+    </div>
+    <div class="ctl-group" role="group" aria-label={isEs ? 'Animación' : 'Animation'}>
+      <span class="ctl-label">{isEs ? 'Animación' : 'Animation'}</span>
+      {STAGE_ANIMS.filter((a) => stageData['default']?.[a]).map((a) => (
+        <button type="button" data-anim={a} aria-pressed={a === 'idle' ? 'true' : 'false'}>
+          {a}
+        </button>
+      ))}
+    </div>
+    {Object.keys(assistantStates).length > 0 && (
+      <div class="ctl-group" role="group" aria-label={isEs ? 'Estado del asistente' : 'Assistant state'}>
+        <span class="ctl-label">{isEs ? 'Asistente' : 'Assistant'}</span>
+        {Object.entries(assistantStates).map(([state, anim]) => (
+          <button type="button" data-anim={anim} aria-pressed="false">
+            {state}
+          </button>
+        ))}
+      </div>
+    )}
+    {nestOrder.length > 0 && (
+      <div class="ctl-group" role="group" aria-label={isEs ? 'Nido' : 'Nest'}>
+        <span class="ctl-label">{isEs ? 'Nido' : 'Nest'}</span>
+        {nestOrder.map((s, i) => (
+          <button type="button" data-nest-stage={s} aria-pressed={i === 0 ? 'true' : 'false'}>
+            {s}
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+  <p class="stage-note">
+    {isEs
+      ? 'Recreación en el navegador con los frames y tiempos propios de la shell — no es una captura de pantalla.'
+      : 'Browser recreation using the shell’s own frames and timings — not a screenshot.'}
+  </p>
+</div>
+
+<script define:vars={{ stageData, nestData }}>
+  const root = document.querySelector('[data-stage]');
+  if (root) {
+    const bird = root.querySelector('[data-bird]');
+    const nest = root.querySelector('[data-nest]');
+    const caption = root.querySelector('[data-caption]');
+    const controls = root.querySelector('[data-controls]');
+    if (controls) controls.hidden = false;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = Boolean(navigator.connection?.saveData);
+    let skin = 'default';
+    let anim = 'idle';
+    let frame = 0;
+    let timer = 0;
+    let inView = true;
+
+    const reel = () => stageData[skin]?.[anim] ?? stageData['default']?.['idle'];
+    const label = () => {
+      const r = reel();
+      if (caption && r) caption.textContent = `${skin} · ${anim} · ${r.durations[frame] ?? r.frameMs} ms`;
+    };
+    const show = () => {
+      const r = reel();
+      if (!r || !bird) return;
+      bird.src = r.frames[Math.min(frame, r.frames.length - 1)];
+      label();
+    };
+    const stop = () => window.clearTimeout(timer);
+    const tick = () => {
+      const r = reel();
+      if (!r) return;
+      timer = window.setTimeout(() => {
+        frame += 1;
+        if (frame >= r.frames.length) {
+          if (r.loop) frame = 0;
+          else if (r.next && r.next !== anim && stageData[skin]?.[r.next]) {
+            setAnim(r.next);
+            return;
+          } else {
+            frame = r.frames.length - 1;
+            show();
+            return;
+          }
+        }
+        show();
+        tick();
+      }, r.durations[frame] ?? r.frameMs);
+    };
+    const play = () => {
+      stop();
+      if (reduced || saveData || !inView || document.hidden) return;
+      const r = reel();
+      if (r && r.frames.length > 1) tick();
+    };
+    const press = (selector, active) => {
+      root.querySelectorAll(selector).forEach((b) =>
+        b.setAttribute('aria-pressed', b === active ? 'true' : 'false'));
+    };
+    function setAnim(next) {
+      if (!stageData[skin]?.[next] && !stageData['default']?.[next]) return;
+      anim = stageData[skin]?.[next] ? next : 'idle';
+      frame = 0;
+      show();
+      play();
+      root.querySelectorAll('[data-anim]').forEach((b) =>
+        b.setAttribute('aria-pressed', b.dataset.anim === anim ? 'true' : 'false'));
+    }
+
+    root.querySelectorAll('[data-skin]').forEach((b) =>
+      b.addEventListener('click', () => {
+        skin = b.dataset.skin ?? 'default';
+        press('[data-skin]', b);
+        if (!stageData[skin]?.[anim]) anim = 'idle';
+        frame = 0;
+        show();
+        play();
+      }));
+    root.querySelectorAll('[data-anim]').forEach((b) =>
+      b.addEventListener('click', () => setAnim(b.dataset.anim ?? 'idle')));
+    root.querySelectorAll('[data-nest-stage]').forEach((b) =>
+      b.addEventListener('click', () => {
+        press('[data-nest-stage]', b);
+        if (nest) {
+          const src = nestData[b.dataset.nestStage ?? ''] ?? '';
+          nest.src = src;
+          nest.hidden = src === '' || b.dataset.nestStage === 'none';
+        }
+      }));
+
+    new IntersectionObserver((entries) => {
+      inView = entries.some((e) => e.isIntersecting);
+      if (inView) play(); else stop();
+    }).observe(root);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
+    show();
+    play();
+  }
+</script>
+
+<style>
+  .stage { margin-top: 2rem; }
+  .stage-frame {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(color-mix(in srgb, var(--surface) 55%, transparent), transparent 70%),
+      repeating-linear-gradient(45deg, transparent 0 55px, color-mix(in srgb, var(--line) 35%, transparent) 55px 56px),
+      repeating-linear-gradient(-45deg, transparent 0 55px, color-mix(in srgb, var(--line) 35%, transparent) 55px 56px),
+      var(--bg);
+    padding: clamp(1rem, 4vw, 2rem);
+  }
+  .stage-scene { position: relative; width: min(340px, 80vw); margin-inline: auto; }
+  .stage-bird, .stage-nest { width: 100%; height: auto; display: block; }
+  .stage-nest { position: absolute; inset: 0; }
+  .stage-sill {
+    height: 6px; margin-top: -8px;
+    background: var(--accent);
+  }
+  .stage-caption {
+    font-family: var(--font-data);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.9rem;
+  }
+  .stage-controls { display: grid; gap: 0.75rem; margin-top: 1rem; }
+  .ctl-group { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+  .ctl-label {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-width: 7.5rem;
+  }
+  .ctl-group button {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .ctl-group button[aria-pressed="true"] {
+    border-color: var(--accent);
+    box-shadow: inset 0 -3px 0 var(--accent);
+  }
+  .ctl-group button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .stage-note { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.75rem; }
+</style>
