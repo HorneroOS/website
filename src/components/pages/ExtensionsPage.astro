@@ -22,6 +22,8 @@ const catalogueUrl = commitUrl(repo, extensionCatalogue.generatedFrom);
 const sourcePinUrl = commitUrl(repo, pins.plugins.sha);
 const cliSourceUrl = commitUrl(pins.hornero.repo, pins.hornero.sha);
 const categories = [...new Set(plugins.map((plugin) => plugin.category))].sort();
+const placements = [...new Set(plugins.map((plugin) => plugin.placement))].sort();
+const trusts = [...new Set(plugins.map((plugin) => plugin.trust))].sort();
 const processSummary = (commands: string[]) => (commands.length ? commands.join(', ') : isEs ? 'Ninguno declarado' : 'None declared');
 const networkSummary = (hosts: string[]) => (hosts.length ? hosts.join(', ') : isEs ? 'Ninguno declarado' : 'None declared');
 const settingsSummary = (settings: typeof plugins[number]['settings']) =>
@@ -72,7 +74,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     <div>
       <h2 id="trust-title">{isEs ? 'Las extensiones corren con tus permisos' : 'Extensions run with your permissions'}</h2>
       <p>
-        {isEs ? 'Hornero Shell no aísla las extensiones en un sandbox. Los comandos, hosts de red y ajustes de abajo son lo que cada plugin declara; nada los hace cumplir. Leé el código fijado antes de activar una. La Shell te pide confirmación.' : 'Hornero Shell does not sandbox extensions. The commands, network hosts and settings below are what each plugin declares; nothing enforces them. Read the pinned source before enabling one. The Shell asks you to confirm.'}
+        {isEs ? 'El QML de los plugins se ejecuta en el mismo proceso (in-process) dentro de Hornero Shell, con tus permisos de usuario: no hay sandbox. Los comandos, hosts de red y ajustes de abajo son lo que cada plugin declara; nada los hace cumplir. Leé el código fijado antes de activar una. La Shell te pide confirmación.' : 'Plugin QML runs in-process inside Hornero Shell, with your user permissions: there is no sandbox. The commands, network hosts and settings below are what each plugin declares; nothing enforces them. Read the pinned source before enabling one. The Shell asks you to confirm.'}
       </p>
     </div>
     <a class="text-link" href={`${repo}/blob/${pins.plugins.sha}/docs/SECURITY.md`}>{isEs ? 'Leé el modelo de seguridad' : 'Read the security model'}</a>
@@ -117,6 +119,20 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
           {categories.map((category) => <option value={category}>{category}</option>)}
         </select>
       </label>
+      <label class="catalogue-placement">
+        <span>{isEs ? 'Ubicación' : 'Placement'}</span>
+        <select data-catalogue-placement>
+          <option value="all">{isEs ? 'Todas las ubicaciones' : 'All placements'}</option>
+          {placements.map((placement) => <option value={placement}>{placement}</option>)}
+        </select>
+      </label>
+      <label class="catalogue-trust">
+        <span>{isEs ? 'Confianza' : 'Trust'}</span>
+        <select data-catalogue-trust>
+          <option value="all">{isEs ? 'Todos los niveles' : 'All trust levels'}</option>
+          {trusts.map((trust) => <option value={trust}>{trust}</option>)}
+        </select>
+      </label>
       <p class="catalogue-result-count" data-catalogue-count aria-live="polite" aria-atomic="true">
         {plugins.length} {isEs ? 'extensiones oficiales' : 'official extensions'}
       </p>
@@ -127,7 +143,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         const sourceUrl = `${repo}/tree/${pins.plugins.sha}/${plugin.path}`;
         const licenseUrl = `${repo}/blob/${pins.plugins.sha}/${plugin.path}/LICENSE`;
         const settings = settingsSummary(plugin.settings);
-        const searchText = [plugin.id, plugin.name, plugin.description, plugin.author, plugin.category, plugin.placement]
+        const searchText = [plugin.id, plugin.name, plugin.version, plugin.description, plugin.author, plugin.category, plugin.placement, plugin.trust, ...plugin.processCommands, ...plugin.networkHosts]
           .join(' ')
           .toLocaleLowerCase();
         return (
@@ -135,6 +151,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
             class="extension-card"
             data-extension-card
             data-category={plugin.category}
+            data-placement={plugin.placement}
+            data-trust={plugin.trust}
             data-search={searchText}
           >
             <article aria-labelledby={`${plugin.id}-title`}>
@@ -146,6 +164,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                 </div>
                 <span class="placement-tag">{plugin.placement}</span>
               </header>
+              <p class="card-version"><code>v{plugin.version}</code><span>{plugin.category}</span><span>{plugin.trust}</span></p>
               <p class="card-description">{plugin.description}</p>
 
               <div class="placement" aria-label={plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}>
@@ -212,6 +231,10 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                 </div>
                 <div class="card-actions">
                   <a class="text-link" href={sourceUrl}>{isEs ? 'Código fijado' : 'Pinned source'} <span aria-hidden="true">↗</span></a>
+                  <p class="install-via">
+                    {isEs ? 'Instalación recomendada: abrí Centro de control → Extensiones, buscá ' : 'Recommended install: open Control Center → Extensions, find '}<strong>{plugin.name}</strong>{isEs ? ', revisá sus capacidades declaradas e instalala; activarla es un paso aparte, con su propio consentimiento. Instalar solo copia datos de paquete inertes.' : ', review its declared capabilities and install it; enabling is a separate step with its own consent. Installing only copies inert package data.'}
+                  </p>
+                  <p class="install-alt">{isEs ? 'Alternativa por terminal:' : 'Terminal alternative:'}</p>
                   <code class="install-command">horneroctl plugin catalog install {plugin.id} --revision {pins.plugins.sha} --yes</code>
                   <small class="install-requirement">
                     {isEs ? 'Requiere ' : 'Requires '}<a href={cliSourceUrl}>{isEs ? 'horneroctl en esta revisión' : 'horneroctl at this revision'}</a> {isEs ? 'o posterior; Preview29 no soporta ' : 'or later; Preview29 does not support '}
@@ -224,7 +247,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         );
       })}
     </ul>
-    <p class="catalogue-empty" data-catalogue-empty hidden>{isEs ? 'Ninguna extensión coincide. Probá con otra búsqueda o categoría.' : 'No extensions match. Try another search or category.'}</p>
+    <p class="catalogue-empty" data-catalogue-empty hidden>{isEs ? 'Ninguna extensión coincide. Probá con otra búsqueda o ajustá los filtros.' : 'No extensions match. Try another search or adjust the filters.'}</p>
   </section>
 
   <section class="developer-section section" aria-labelledby="developer-title">
@@ -249,21 +272,27 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   const controls = document.querySelector<HTMLElement>('[data-catalogue-controls]');
   const search = document.querySelector<HTMLInputElement>('[data-catalogue-search]');
   const category = document.querySelector<HTMLSelectElement>('[data-catalogue-category]');
+  const placement = document.querySelector<HTMLSelectElement>('[data-catalogue-placement]');
+  const trust = document.querySelector<HTMLSelectElement>('[data-catalogue-trust]');
   const count = document.querySelector<HTMLElement>('[data-catalogue-count]');
   const empty = document.querySelector<HTMLElement>('[data-catalogue-empty]');
   const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-extension-card]'));
   let announcementTimer: number | undefined;
 
-  if (controls && search && category && count && empty && cards.length > 0) {
+  if (controls && search && category && placement && trust && count && empty && cards.length > 0) {
     const updateCatalogue = () => {
       const query = search.value.trim().toLocaleLowerCase();
       const selectedCategory = category.value;
+      const selectedPlacement = placement.value;
+      const selectedTrust = trust.value;
       let visible = 0;
 
       for (const card of cards) {
         const matchesQuery = (card.dataset.search ?? '').includes(query);
         const matchesCategory = selectedCategory === 'all' || card.dataset.category === selectedCategory;
-        const matches = matchesQuery && matchesCategory;
+        const matchesPlacement = selectedPlacement === 'all' || card.dataset.placement === selectedPlacement;
+        const matchesTrust = selectedTrust === 'all' || card.dataset.trust === selectedTrust;
+        const matches = matchesQuery && matchesCategory && matchesPlacement && matchesTrust;
         card.hidden = !matches;
         if (matches) visible += 1;
       }
@@ -280,6 +309,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
 
     search.addEventListener('input', updateCatalogue);
     category.addEventListener('change', updateCatalogue);
+    placement.addEventListener('change', updateCatalogue);
+    trust.addEventListener('change', updateCatalogue);
     controls.hidden = false;
   }
 </script>
@@ -309,7 +340,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-catalogue .section-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.7fr); align-items: end; gap: 2rem; margin-bottom: 1.7rem; }
   .extension-catalogue .section-heading h2, .developer-section h2 { margin-top: 0.45rem; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.055em; }
   .extension-catalogue .section-heading > p { max-width: 50ch; color: var(--text-muted); line-height: 1.6; }
-  .catalogue-controls { display: grid; grid-template-columns: minmax(16rem, 1fr) minmax(12rem, 0.45fr) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--line); background: var(--surface); }
+  .catalogue-controls { display: grid; grid-template-columns: minmax(14rem, 1fr) repeat(3, minmax(9rem, 0.4fr)) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--line); background: var(--surface); }
   .catalogue-controls[hidden], .extension-card[hidden], .catalogue-empty[hidden] { display: none; }
   .catalogue-controls label { display: grid; gap: 0.35rem; }
   .catalogue-controls label > span { color: var(--secondary); font: 0.65rem var(--font-data); text-transform: uppercase; }
@@ -329,7 +360,11 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-id code { overflow-wrap: anywhere; }
   .card-heading h3 { margin-top: 0.65rem; font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
   .placement-tag { flex: 0 0 auto; padding: 0.35rem 0.5rem; border: 1px solid var(--highlight); color: var(--highlight); font: 0.62rem var(--font-data); text-transform: uppercase; }
+  .card-version { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; color: var(--text-muted); font: 0.68rem var(--font-data); text-transform: uppercase; }
+  .card-version span { padding: 0.15rem 0.4rem; border: 1px solid var(--line); }
   .card-description { margin-top: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+  .install-via { color: var(--text-muted); font-size: 0.85rem; line-height: 1.55; }
+  .install-alt { color: var(--secondary); font: 0.64rem var(--font-data); text-transform: uppercase; }
   .placement { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.2rem; color: var(--text-muted); font: 0.7rem var(--font-data); font-stretch: 87.5%; }
   .placement svg { width: 8.5rem; height: auto; flex: none; }
   .slot-screen { fill: none; stroke: var(--line); stroke-width: 1.5; }
