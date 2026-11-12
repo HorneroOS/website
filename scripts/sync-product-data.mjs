@@ -189,7 +189,10 @@ function studioProjection(source) {
     if (!app || typeof app.title !== 'string' || !app.title.trim()) {
       fail(`studio application ${id} is missing a title`);
     }
-    const prov = provenance[id] ?? {};
+    // Provenance is keyed by package name; an application's own id only
+    // matches when it is also its package (the vendor entry
+    // artcraft-launcher -> ai.storyteller.artcraft-launcher does not).
+    const prov = provenance[id] ?? (app.packages ?? []).map((pkg) => provenance[pkg]).find((entry) => entry) ?? {};
     return {
       id,
       title: app.title,

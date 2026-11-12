@@ -542,6 +542,24 @@
         "licenseClass": "open-source",
         "optional": true,
         "support": "planned"
+      },
+      {
+        "id": "artcraft-launcher",
+        "title": "ArtCraft Launcher",
+        "packages": [
+          "ai.storyteller.artcraft-launcher"
+        ],
+        "experimental": true,
+        "availability": null,
+        "notes": "Experimental, early-alpha launcher; explicit application opt-in only, manual vendor install, managed by ArtCraft Launcher outside pacman repositories. Never installed by specialization selection.",
+        "source": "vendor",
+        "licenses": [
+          "MIT",
+          "Apache-2.0"
+        ],
+        "licenseClass": "open-source",
+        "optional": true,
+        "support": "experimental"
       }
     ],
     "audioModes": [
