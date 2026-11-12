@@ -167,7 +167,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
               <p class="card-version"><code>v{plugin.version}</code><span>{plugin.category}</span><span>{plugin.trust}</span></p>
               <p class="card-description">{plugin.description}</p>
 
-              <div class="placement" aria-label={plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}>
+              <div class="placement" aria-label={plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : plugin.placement === 'desktop' ? (isEs ? 'Vive en el escritorio' : 'Lives on the desktop') : plugin.placement === 'background' ? (isEs ? 'Corre en segundo plano' : 'Runs in the background') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}>
                 <svg viewBox="0 0 160 52" role="presentation" aria-hidden="true" focusable="false">
                   {plugin.placement === 'bar' ? (
                     <>
@@ -185,7 +185,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                     </>
                   )}
                 </svg>
-                <span>{plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}</span>
+                <span>{plugin.placement === 'bar' ? (isEs ? 'Vive en la barra' : 'Lives in the bar') : plugin.placement === 'desktop' ? (isEs ? 'Vive en el escritorio' : 'Lives on the desktop') : plugin.placement === 'background' ? (isEs ? 'Corre en segundo plano' : 'Runs in the background') : (isEs ? 'Vive en el dashboard' : 'Lives on the dashboard')}</span>
               </div>
 
               <ul class="declared" role="list" aria-label={isEs ? 'Declarado por el plugin, no impuesto por la shell' : 'Declared by the plugin, not enforced by the shell'}>

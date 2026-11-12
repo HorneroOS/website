@@ -23,7 +23,7 @@
     },
     "plugins": {
       "repo": "https://github.com/HorneroOS/plugins",
-      "sha": "618fde87847ffe6b33fbc2083ffe06c7fe642e08"
+      "sha": "af1cdaf417a12c5b24904d1bdb29530d32bab9a0"
     }
   },
   "releaseTags": [
