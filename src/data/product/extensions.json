@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "27c49d85590680ba0c9eeeb3209150481469dc94",
+  "generatedFrom": "e249b91ad490ac38e4defa4a8820008ac852a374",
   "plugins": [
     {
       "id": "hornero-ai-usage",
@@ -21,6 +21,23 @@
       "settings": {}
     },
     {
+      "id": "hornero-battery",
+      "name": "Hornero Battery",
+      "version": "1.0.0",
+      "description": "Bar widget showing battery percentage and charging state from PluginKit Power. Shows 'No battery' on machines without a battery instead of a fabricated percentage.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "bar",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-battery",
+      "sha256": "55537c2256c308c518741092ba6956b8bab50d51401632be9d17ee68a5ead6f8",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
       "id": "hornero-calendar",
       "name": "Hornero Calendar",
       "version": "1.0.0",
@@ -33,6 +50,40 @@
       "trust": "official",
       "path": "plugins/hornero-calendar",
       "sha256": "ca40592d7fed1b8c94ca5fb4f9f6e25f2678736c7173e4e5170089ddfb8a2026",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
+      "id": "hornero-countdown",
+      "name": "Hornero Countdown",
+      "version": "1.0.0",
+      "description": "Bar countdown timer with 5, 10 and 25 minute presets, start, pause and reset, and a visual ring and flashing text at zero. No sound. Pure QML, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "bar",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-countdown",
+      "sha256": "964e22a13744d989f3b679ca287b0f46b39524f3a7f691a9c90e6a3c2e7efccb",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
+      "id": "hornero-disk-usage",
+      "name": "Hornero Disk Usage",
+      "version": "1.0.0",
+      "description": "Dashboard card listing mounted disks from the PluginKit System service with used/total space and a percentage bar. Shows an empty state when no disks are reported. Read-only, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "dashboard",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-disk-usage",
+      "sha256": "f38fe78699bb300fe2085ed156f8a84b663932f09357705fc755652cf6e959de",
       "processCommands": [],
       "networkHosts": [],
       "settings": {}
@@ -67,6 +118,23 @@
       "trust": "official",
       "path": "plugins/hornero-focus-card",
       "sha256": "02a597f32423f8851dc7da6e832d48bc97eb5d12d1cdebe29f076ec60bbb448c",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
+      "id": "hornero-moon-phase",
+      "name": "Hornero Moon Phase",
+      "version": "1.0.0",
+      "description": "Desktop widget showing the current moon phase name and approximate illumination from a pure-JS synodic approximation anchored on the 2000-01-06 new moon. Labelled approximate. No processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "desktop",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-moon-phase",
+      "sha256": "23f65bf3ecc07454793a67f4aaf12338905affa47dc99fc32d76783df1e8e213",
       "processCommands": [],
       "networkHosts": [],
       "settings": {}
@@ -140,6 +208,23 @@
       "settings": {}
     },
     {
+      "id": "hornero-stopwatch",
+      "name": "Hornero Stopwatch",
+      "version": "1.0.0",
+      "description": "Bar stopwatch with start, pause and reset, showing elapsed time as mm:ss.t. Pure QML, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "bar",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-stopwatch",
+      "sha256": "b61b74d3f16e7bf0bb0cce05a1867589a1d32d73fdf66f15009ef659b2470106",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
       "id": "hornero-studio-audio",
       "name": "Hornero Studio Audio",
       "version": "1.0.2",
@@ -195,6 +280,42 @@
       "settings": {}
     },
     {
+      "id": "hornero-unit-converter",
+      "name": "Hornero Unit Converter",
+      "version": "1.0.0",
+      "description": "Dashboard unit converter for length (m, km, mi, ft), mass (kg, lb) and temperature (C, F, K). Pure-JS conversions computed live from a text field and unit selectors. No processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "dashboard",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-unit-converter",
+      "sha256": "2843672c0334f6c8e2084982a3cb948c5b853c7b2a5e6496e8d5c60eba30ccad",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
+      "id": "hornero-uptime",
+      "name": "Hornero Uptime",
+      "version": "1.0.0",
+      "description": "Bar widget showing system uptime read from /proc/uptime with the declared cat command, refreshed every 60 seconds. Shows an error state when uptime is unreadable instead of a fabricated zero.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "bar",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-uptime",
+      "sha256": "7a8737f27940834da97b9f0171d529e5b9f32dc05b8a9f1fd2bdd99e9be9a049",
+      "processCommands": [
+        "cat"
+      ],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
       "id": "hornero-weather",
       "name": "Hornero Weather",
       "version": "1.0.0",
@@ -207,6 +328,23 @@
       "trust": "official",
       "path": "plugins/hornero-weather",
       "sha256": "447bc6ad18b935fd936c4d0affc634f6368064969d562f64d7e3d089b01b9ce8",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
+      "id": "hornero-world-clock",
+      "name": "Hornero World Clock",
+      "version": "1.0.0",
+      "description": "Dashboard card showing local time, UTC, and Buenos Aires, Madrid and Tokyo. Times use pure-JS offsets (Madrid follows the EU DST rule); each row is labelled with its applied UTC offset. No processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "dashboard",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-world-clock",
+      "sha256": "5c8dafd0dfca9ae442bb303e6e159d6246f4e053e8532c1e35743d678d76dc62",
       "processCommands": [],
       "networkHosts": [],
       "settings": {}
