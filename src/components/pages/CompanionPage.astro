@@ -161,6 +161,24 @@ horneroctl assistant ask "what updates are available?"</code></pre>
     </ul>
   </section>
 
+  <section class="section" aria-labelledby="agents-title">
+    <h2 id="agents-title">{isEs ? 'Agentes en el sistema' : 'Agents on the system'}</h2>
+    <p>
+      {isEs ? 'HorneroOS trata a los agentes como ciudadanos del sistema, no como pestañas del navegador. Javi es el asistente residente, con políticas y aislamiento propios del sistema. Los agentes de programación externos (Codex, Claude Code, Muse, OpenCode) son runtimes independientes: el sistema los descubre, te deja elegir uno por defecto y compartir instrucciones y skills, sin fingir que heredan las políticas de Javi.' : 'HorneroOS treats agents as citizens of the system, not browser tabs. Javi is the resident assistant, with the system’s own policies and isolation. External coding agents (Codex, Claude Code, Muse, OpenCode) are independent runtimes: the system discovers them, lets you pick a default and share instructions and skills, without pretending they inherit Javi’s policies.'}
+    </p>
+    <p>{isEs ? 'Todo se maneja desde una terminal o desde Centro de control › Agent Center:' : 'Everything is managed from a terminal or from Control Center › Agent Center:'}</p>
+    <pre><code>horneroctl agent list
+horneroctl agent default set codex --yes
+horneroctl agent config apply --dry-run
+horneroctl assistant shell-proposal --command "ls -la"
+horneroctl assistant delegate codex --workspace ~/project "review the parser"</code></pre>
+    <ul>
+      <li>{isEs ? 'Las propuestas de comandos nunca se ejecutan solas: las inspeccionás, editás o corrés vos. Nada se aprueba automáticamente.' : 'Command proposals are never executed for you: you inspect, edit, or run them yourself. Nothing is approved automatically.'}</li>
+      <li>{isEs ? 'Cada runtime externo conserva su propio modelo de seguridad y permisos. HorneroOS lo dice en cada salida, sin promesas falsas de aislamiento.' : 'Each external runtime keeps its own security and permission model. HorneroOS says so in every output, with no false isolation promises.'}</li>
+      <li>{isEs ? 'Sin datos inventados: si horneroctl no reporta versión, uso o costos de un agente, el Agent Center lo dice en vez de adivinar.' : 'No invented data: when horneroctl does not report an agent’s version, usage, or cost, the Agent Center says so instead of guessing.'}</li>
+    </ul>
+  </section>
+
   <section class="section">
     <h2>{isEs ? 'Límites' : 'Limits'}</h2>
     <p>
