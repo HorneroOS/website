@@ -264,7 +264,9 @@ export interface ExtensionEntry {
   settings: Record<string, { type: string; default: boolean | number | string; description?: string }>;
 }
 
-export const extensionCatalogue = extensionsJson as {
+// Generated JSON is validated by data:check against the plugins schema;
+// its literal type is a union of per-plugin shapes, so assert via unknown.
+export const extensionCatalogue = extensionsJson as unknown as {
   generatedFrom: string;
   plugins: ExtensionEntry[];
 };
