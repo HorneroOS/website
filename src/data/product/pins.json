@@ -3,7 +3,7 @@
   "sources": {
     "shell": {
       "repo": "https://github.com/HorneroOS/shell",
-      "sha": "e602307b2c3fd75169d1b88757ca47f799b2c4e0"
+      "sha": "31771639eabc621825f7ef0f709597e5aa4e8ec2"
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
@@ -23,7 +23,7 @@
     },
     "plugins": {
       "repo": "https://github.com/HorneroOS/plugins",
-      "sha": "b49d9765022febfc024f845c4ececb0835f89419"
+      "sha": "721b6eec69026cba5cf9326ff944248e6c790533"
     }
   },
   "releaseTags": [
