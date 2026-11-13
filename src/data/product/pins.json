@@ -7,19 +7,19 @@
     },
     "config": {
       "repo": "https://github.com/HorneroOS/config",
-      "sha": "8754a454ac02a8aee49aac2856fbfdb0efb73f63"
+      "sha": "5fb758a00077d38f2cf89edc3a0c9c5bfb38b892"
     },
     "hornero": {
       "repo": "https://github.com/HorneroOS/hornero",
-      "sha": "46b75160574bea9d87778bd2c3b8c7a706ef8fc7"
+      "sha": "d3a9fbb116dc6d30b2aab1bd47a4619af3f2fb2b"
     },
     "docs": {
       "repo": "https://github.com/HorneroOS/docs",
-      "sha": "7be0bfe943b2758614623c451beec918b9a66edd"
+      "sha": "7e5fb0565db6016559bf0c080873be56af11632f"
     },
     "greeter": {
       "repo": "https://github.com/HorneroOS/greeter",
-      "sha": "b756cae4b09684d644ba3da29c41bc3e8bc574b6"
+      "sha": "97445301c1d639aef505946dde07f4b13e93a245"
     },
     "plugins": {
       "repo": "https://github.com/HorneroOS/plugins",
