@@ -619,28 +619,44 @@ if (!CHECK) {
 }
 
 
+// Catalog entries stay authoritative for identity and capabilities.
+// Manifest v2 surfaces and marketplace compatibility live only in each
+// pinned plugin manifest, so project them from the same checkout; the
+// site still renders generated data only, never a second database.
 function extensions(pluginsDir) {
   const catalog = readJson(join(pluginsDir, 'catalog.json'));
   if (!Array.isArray(catalog.plugins)) fail('plugins catalog.json has no plugins array');
   return {
     generatedFrom: catalog.generatedFrom ?? '',
-    plugins: catalog.plugins.map((e) => ({
-      id: e.id,
-      name: e.name,
-      version: e.version,
-      description: e.description,
-      author: e.author,
-      license: e.license,
-      homepage: e.homepage ?? '',
-      placement: e.placement ?? 'background',
-      category: e.category ?? 'utilities',
-      trust: e.trust ?? 'community',
-      path: e.path ?? '',
-      sha256: e.sha256 ?? '',
-      processCommands: e.capabilities?.processCommands ?? [],
-      networkHosts: e.capabilities?.networkHosts ?? [],
-      settings: e.capabilities?.settings ?? {},
-    })),
+    plugins: catalog.plugins.map((e) => {
+      const manifestPath = join(pluginsDir, e.path ?? '', 'manifest.json');
+      if (!e.path || !existsSync(manifestPath)) fail(`plugins catalog entry ${e.id} has no manifest at ${e.path}/manifest.json`);
+      const manifest = readJson(manifestPath);
+      if (manifest.id !== e.id) fail(`plugins catalog entry ${e.id} does not match manifest id ${manifest.id}`);
+      const surfaces = manifest.surfaces && typeof manifest.surfaces === 'object' && !Array.isArray(manifest.surfaces)
+        ? Object.keys(manifest.surfaces).sort()
+        : [];
+      return {
+        id: e.id,
+        name: e.name,
+        version: e.version,
+        description: e.description,
+        author: e.author,
+        license: e.license,
+        homepage: e.homepage ?? '',
+        placement: e.placement ?? 'background',
+        surfaces,
+        manifestSchema: typeof manifest.schemaVersion === 'number' ? manifest.schemaVersion : null,
+        minShellVersion: manifest.marketplace?.compatibility?.minShellVersion ?? null,
+        category: e.category ?? 'utilities',
+        trust: e.trust ?? 'community',
+        path: e.path ?? '',
+        sha256: e.sha256 ?? '',
+        processCommands: e.capabilities?.processCommands ?? [],
+        networkHosts: e.capabilities?.networkHosts ?? [],
+        settings: e.capabilities?.settings ?? {},
+      };
+    }),
   };
 }
 

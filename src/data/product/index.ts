@@ -255,13 +255,16 @@ export interface ExtensionEntry {
   license: string;
   homepage: string;
   placement: string;
+  surfaces: string[];
+  manifestSchema: number | null;
+  minShellVersion: string | null;
   category: string;
   trust: string;
   path: string;
   sha256: string;
   processCommands: string[];
   networkHosts: string[];
-  settings: Record<string, { type: string; default: boolean | number | string; description?: string }>;
+  settings: Record<string, { type: string; default: boolean | number | string; description?: string; options?: string[]; minimum?: number; maximum?: number; maxLength?: number }>;
 }
 
 // Generated JSON is validated by data:check against the plugins schema;

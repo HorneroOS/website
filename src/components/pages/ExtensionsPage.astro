@@ -84,7 +84,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     <div class="where-copy">
       <h2 id="where-title">{isEs ? 'Dónde aparecen las extensiones' : 'Where extensions appear'}</h2>
       <p>
-        {isEs ? 'Una extensión con ubicación en el dashboard obtiene una tarjeta en la pestaña Extensiones del Dashboard, junto a Media, Performance, Weather y Workspaces. Una extensión de barra queda en la barra. La captura muestra la barra de pestañas del Dashboard en un escritorio activo; no muestra la pestaña Extensiones en sí.' : 'An extension with a dashboard placement gets a card in the Dashboard’s Extensions tab, next to Media, Performance, Weather and Workspaces. A bar extension sits in the bar. The capture shows the Dashboard’s tab bar on a live desktop; it does not show the Extensions tab itself.'}
+        {isEs ? 'Una extensión con ubicación en el dashboard obtiene una tarjeta en la pestaña Extensiones del Dashboard, junto a Media, Performance, Weather y Workspaces. Una extensión de barra queda en la barra y una de escritorio vive en el escritorio. Un manifiesto también puede declarar superficies extra, como el launcher; cada tarjeta las nombra tal cual están declaradas. La captura muestra la barra de pestañas del Dashboard en un escritorio activo; no muestra la pestaña Extensiones en sí.' : 'An extension with a dashboard placement gets a card in the Dashboard’s Extensions tab, next to Media, Performance, Weather and Workspaces. A bar extension sits in the bar and a desktop extension lives on the desktop. A manifest may also declare extra surfaces, such as the launcher; each card names them exactly as declared. The capture shows the Dashboard’s tab bar on a live desktop; it does not show the Extensions tab itself.'}
       </p>
     </div>
     <ArchFrame
@@ -143,7 +143,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         const sourceUrl = `${repo}/tree/${pins.plugins.sha}/${plugin.path}`;
         const licenseUrl = `${repo}/blob/${pins.plugins.sha}/${plugin.path}/LICENSE`;
         const settings = settingsSummary(plugin.settings);
-        const searchText = [plugin.id, plugin.name, plugin.version, plugin.description, plugin.author, plugin.category, plugin.placement, plugin.trust, ...plugin.processCommands, ...plugin.networkHosts]
+        const searchText = [plugin.id, plugin.name, plugin.version, plugin.description, plugin.author, plugin.category, plugin.placement, plugin.trust, ...plugin.surfaces, plugin.minShellVersion ?? '', ...plugin.processCommands, ...plugin.networkHosts]
           .join(' ')
           .toLocaleLowerCase();
         return (
@@ -192,6 +192,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                 <li>{plugin.processCommands.length ? `${isEs ? 'Declara comandos' : 'Declares commands'}: ${plugin.processCommands.join(', ')}` : isEs ? 'Sin comandos de proceso declarados' : 'No process commands declared'}</li>
                 <li>{plugin.networkHosts.length ? `${isEs ? 'Declara hosts' : 'Declares hosts'}: ${plugin.networkHosts.join(', ')}` : isEs ? 'Sin hosts de red declarados' : 'No network hosts declared'}</li>
                 <li>{settings.length ? `${settings.length} ${settings.length === 1 ? (isEs ? 'ajuste declarado' : 'setting') : (isEs ? 'ajustes declarados' : 'settings')} ${isEs ? '' : 'declared'}`.trim() : isEs ? 'Sin ajustes declarados' : 'No settings declared'}</li>
+                <li>{plugin.surfaces.length ? `${isEs ? 'Superficies' : 'Surfaces'}: ${plugin.surfaces.join(', ')}` : isEs ? 'Sin superficies extra declaradas' : 'No extra surfaces declared'}</li>
+                <li>{plugin.minShellVersion ? `Shell >= ${plugin.minShellVersion} (${isEs ? 'declarado, no verificado' : 'declared, not verified'})` : isEs ? 'Compatibilidad con la Shell no declarada' : 'Shell compatibility not declared'}</li>
               </ul>
 
               <details class="evidence">
@@ -199,6 +201,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                 <dl class="extension-facts">
                   <div><dt>{isEs ? 'Versión' : 'Version'}</dt><dd>{plugin.version}</dd></div>
                   <div><dt>{isEs ? 'Categoría' : 'Category'}</dt><dd>{plugin.category}</dd></div>
+                  <div><dt>{isEs ? 'Superficies declaradas' : 'Surfaces declared'}</dt><dd>{plugin.surfaces.length ? plugin.surfaces.join(', ') : isEs ? 'Ninguna extra declarada' : 'None extra declared'}</dd></div>
+                  <div><dt>{isEs ? 'Compatibilidad declarada' : 'Compatibility declared'}</dt><dd>{plugin.minShellVersion ? `Shell >= ${plugin.minShellVersion}` : isEs ? 'No declarada' : 'Not declared'}{plugin.manifestSchema ? ` · manifest v${plugin.manifestSchema}` : ''}</dd></div>
                   <div><dt>{isEs ? 'Autor' : 'Author'}</dt><dd>{plugin.author}</dd></div>
                   <div><dt>{isEs ? 'Licencia' : 'License'}</dt><dd><a href={licenseUrl}>{plugin.license}</a></dd></div>
                   <div class="wide-fact">
@@ -217,6 +221,8 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
                           {settings.map((setting) => (
                             <li>
                               <code>{setting.name}</code> · {setting.type}, {isEs ? 'default' : 'default'} <code>{String(setting.default)}</code>
+                              {setting.options?.length ? <span> · {isEs ? 'opciones' : 'options'}: {setting.options.join(', ')}</span> : null}
+                              {setting.minimum !== undefined || setting.maximum !== undefined ? <span> · {setting.minimum ?? '…'}–{setting.maximum ?? '…'}</span> : null}
                               {setting.description ? <span> — {setting.description}</span> : null}
                             </li>
                           ))}
@@ -256,7 +262,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     </div>
     <div class="developer-copy">
       <p>
-        {isEs ? 'El esquema del catálogo no tiene campos para compatibilidad con la API de la Shell ni dependencias. Revisá el contrato fijado de la Shell y el validador de plugins antes de confiar en cualquiera de los dos. Las entradas oficiales se revisan y se guardan en ' : 'The catalogue schema has no fields for Shell API compatibility or dependencies. Check the pinned Shell contract and the plugin validator before relying on either. Official entries are reviewed and kept in '}
+        {isEs ? 'Las superficies y la compatibilidad de arriba vienen del manifiesto fijado de cada plugin (bloque marketplace), tal cual están declaradas: este sitio no las verificó en una Shell activa, y las entradas sin ese bloque figuran como no declaradas. Todavía no hay capturas por extensión. Revisá el contrato fijado de la Shell y el validador de plugins antes de confiar en cualquiera de los dos. Las entradas oficiales se revisan y se guardan en ' : 'The surfaces and compatibility above come from each plugin’s pinned manifest (its marketplace block), exactly as declared: this site has not verified them in a live Shell, and entries without that block are shown as not declared. There are still no per-extension screenshots. Check the pinned Shell contract and the plugin validator before relying on either. Official entries are reviewed and kept in '}
         <code>HorneroOS/plugins</code>. {isEs ? 'Todavía no hay un catálogo público de la comunidad.' : 'There is no public community catalogue yet.'}
       </p>
       <div class="developer-links">
