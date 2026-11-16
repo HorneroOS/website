@@ -1,11 +1,24 @@
 # Hornero OS website
 
-Official website for Hornero OS: what it is, what it looks like, how to
+Official website for HorneroOS, the Arch-based workstation operating-system
+family (Desktop · Studio · Gaming): what it is, what it looks like, how to
 install it, and where it comes from.
 
 An Astro static site with shared layouts and validated content collections.
 Product data and technical documentation are generated from pinned HorneroOS
-repositories; real desktop captures carry source provenance.
+repositories. The site uses the
+[Hornero Signal](https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md)
+roles in Signal Night and Signal Day and self-hosts IBM Plex Sans, Mono and
+Sans Condensed through Fontsource (see `docs/DESIGN_SYSTEM_SIGNAL.md`).
+
+## Captures and imagery
+
+Real desktop captures carry source provenance and an appearance label:
+captures taken before Hornero Signal are shown as *Preview — previous
+appearance*, and Signal specimens from HorneroOS/docs are shown as *Concept
+render — not a screenshot*. Replace captures through the slots in
+`src/data/captures.ts` as described in `docs/CAPTURES.md`; never present a
+concept or browser recreation as a desktop capture.
 
 ## Develop
 
@@ -25,7 +38,7 @@ npm run build
 
 ## Pages
 
-- `/` — what Hornero OS is
+- `/` — what HorneroOS is
 - `/editions` — the composed product family and maturity
 - `/layouts`, `/themes`, `/releases` — generated from pinned product sources
   (see `docs/PRODUCT_DATA.md`)
