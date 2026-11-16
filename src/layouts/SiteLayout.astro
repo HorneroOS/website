@@ -27,6 +27,7 @@ interface Props {
   socialImage?: string;
   socialImageAlt?: string;
   noindex?: boolean;
+  structuredData?: Record<string, unknown>;
 }
 
 interface NavLink {
@@ -41,7 +42,7 @@ interface NavGroup {
 
 type NavItem = ({ kind: 'link' } & NavLink) | ({ kind: 'group' } & NavGroup);
 
-const { title, description, noindex, socialImage, socialImageAlt } = Astro.props;
+const { title, description, noindex, socialImage, socialImageAlt, structuredData } = Astro.props;
 const locale: Locale = Astro.currentLocale === 'en' ? 'en' : localeFromPath(Astro.url.pathname);
 const L = (path: string) => localizePath(path, locale);
 const pathForSwitch = Astro.url.pathname.includes('404') ? '/' : Astro.url.pathname;
@@ -104,6 +105,7 @@ const community = {
       noindex={noindex}
       socialImage={socialImage}
       socialImageAlt={socialImageAlt}
+      structuredData={structuredData}
     />
   </head>
   <body>

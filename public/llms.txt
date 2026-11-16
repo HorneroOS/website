@@ -1,6 +1,6 @@
-# Hornero OS
+# HorneroOS
 
-> HorneroOS is an Arch-based operating-system family. Its current preview is a Wayland-first desktop powered by Hornero Shell; Hyprland is the supported default compositor and Niri is experimental.
+> HorneroOS is an Arch-based workstation for building, creating and playing, with a distinctive desktop experience and an integrated operating-system ecosystem: Desktop, Studio and Gaming editions, the horneroctl system tool and Hornero Shell. Hyprland is the supported default compositor and Niri is experimental. Its design language is Hornero Signal.
 
 ## Status
 
@@ -27,7 +27,7 @@ The default language is Spanish (Argentina); English lives under /en/.
 ## Pages
 
 - `/` — what Hornero OS is
-- `/install` — installation availability and current requirements
+- `/install` — download the signed ISO, verification and requirements
 - `/editions` — Desktop, Studio and Gaming Preview; Server and Agents planned
 - `/studio` — creative workflows and applications
 - `/gaming` — gaming capabilities and tools
