@@ -10,7 +10,9 @@
  *
  * Colour custom properties are the RFC §3.1 roles in kebab-case
  * (`inkMuted` -> `--ink-muted`). Values are the flagship palettes from
- * RFC §3.2: Signal Night (default) and Signal Day. Pages use roles only.
+ * RFC §3.2 as amended (amendment 2): Signal Night (default) and Signal Day.
+ * The visual direction is Signal Bezel (docs development/signal-visual-language.md).
+ * Pages use roles only.
  * See docs/DESIGN_SYSTEM_SIGNAL.md.
  */
 
@@ -31,7 +33,7 @@
   --ink-muted: #a8abad;
   --ink-faint: #737980;
   --rule: #2c333c;
-  --rule-strong: #66707b;
+  --rule-strong: #707a85;
   --focus: #7ec1ea;
   --signal: #f2a33a;
   --on-signal: #1a1205;
@@ -58,8 +60,10 @@
   /* Brand-surface details derived from roles (never used for text). */
   --diagonal: color-mix(in srgb, var(--signal) 9%, transparent);
   --scanline: color-mix(in srgb, var(--ink) 3%, transparent);
-  --glow: color-mix(in srgb, var(--signal) 28%, transparent);
   --browser-theme-color: #13171d;
+  /* Optional emission role (RFC amendment 2): halos only, never text or fill,
+     max 40 % alpha, blur <= 4px, never animated. Not rendered in Day. */
+  --glow: #ffb650;
 
   /* RFC §3.3 families. */
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
@@ -118,21 +122,21 @@
     --ink-muted: #4e545b;
     --ink-faint: #7a8086;
     --rule: #d3ccbd;
-    --rule-strong: #857f73;
-    --focus: #1d6894;
-    --signal: #9a5100;
+    --rule-strong: #736d62;
+    --focus: #1a5f88;
+    --signal: #8f4b00;
     --on-signal: #ffffff;
     --signal-well: #f6ddb8;
     --on-signal-well: #3d2200;
-    --cue: #1d6894;
+    --cue: #1a5f88;
     --on-cue: #ffffff;
     --cue-well: #d3e7f3;
     --on-cue-well: #0b2e44;
-    --phosphor: #2a7341;
+    --phosphor: #256a3b;
     --on-phosphor: #ffffff;
     --phosphor-well: #d5ebd9;
     --on-phosphor-well: #0e2e17;
-    --alert: #b0371f;
+    --alert: #a8341c;
     --on-alert: #ffffff;
     --alert-well: #f7d7d0;
     --on-alert-well: #4a1209;
@@ -141,7 +145,7 @@
     --inverse-signal: #f2a33a;
     --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
     --scanline: transparent;
-    --glow: transparent;
+    --glow: var(--signal);
     --browser-theme-color: #f2eee5;
   }
 }
@@ -158,21 +162,21 @@
   --ink-muted: #4e545b;
   --ink-faint: #7a8086;
   --rule: #d3ccbd;
-  --rule-strong: #857f73;
-  --focus: #1d6894;
-  --signal: #9a5100;
+  --rule-strong: #736d62;
+  --focus: #1a5f88;
+  --signal: #8f4b00;
   --on-signal: #ffffff;
   --signal-well: #f6ddb8;
   --on-signal-well: #3d2200;
-  --cue: #1d6894;
+  --cue: #1a5f88;
   --on-cue: #ffffff;
   --cue-well: #d3e7f3;
   --on-cue-well: #0b2e44;
-  --phosphor: #2a7341;
+  --phosphor: #256a3b;
   --on-phosphor: #ffffff;
   --phosphor-well: #d5ebd9;
   --on-phosphor-well: #0e2e17;
-  --alert: #b0371f;
+  --alert: #a8341c;
   --on-alert: #ffffff;
   --alert-well: #f7d7d0;
   --on-alert-well: #4a1209;
@@ -181,7 +185,7 @@
   --inverse-signal: #f2a33a;
   --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
   --scanline: transparent;
-  --glow: transparent;
+  --glow: var(--signal);
   --browser-theme-color: #f2eee5;
 }
 
@@ -470,8 +474,14 @@ hr {
 }
 
 .site-nav > nav > ul > li > a[aria-current='page']::after,
-.nav-more > summary.more-current::after {
+.nav-more > summary.more-current::after,
+.nav-more[open] > summary::after {
   transform: scaleX(1);
+}
+
+/* Open state (Signal Bezel §8): the trigger keeps its underline toward the surface. */
+.nav-more[open] > summary {
+  color: var(--ink);
 }
 
 .site-nav > nav > ul > li > a.nav-install {

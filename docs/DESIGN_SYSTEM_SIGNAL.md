@@ -26,7 +26,9 @@ kebab-case: `--ground --sunken --base --panel --raised --lifted --ink
 --on-alert --alert-well --on-alert-well --inverse --on-inverse
 --inverse-signal --scrim --shadow --focus`.
 
-Values are the RFC §3.2 flagship palettes:
+Values are the RFC §3.2 flagship palettes as amended (amendment 2 tightens
+Night `ruleStrong` and the Day `ruleStrong`, `signal`, `cue`/`focus`,
+`phosphor` and `alert` so every role passes on `sunken` wells too):
 
 - **Signal Night** (`:root`) — cool graphite instrument panels, warm
   phosphor-cream ink.
@@ -34,6 +36,15 @@ Values are the RFC §3.2 flagship palettes:
   warm technical-drawing paper with ink-black text.
 - **Signal High Contrast** values apply at night under
   `prefers-contrast: more`.
+
+`--glow` (Night `#FFB650`) is the optional emission role: a halo of at most
+40 % alpha and 4 px blur on live items only, never text, never animated, and
+never rendered in Signal Day.
+
+The visual direction is **Signal Bezel**
+([`development/signal-visual-language.md`](https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md)):
+rack-instrument faceplates, matte slabs split by short hairlines, readout
+wells for changing values, amber only for what is live.
 
 Usage on the site:
 
