@@ -78,17 +78,17 @@ const label = `${name}: ${bars.map(describe).join('; ')}`;
   }
 
   .screen {
-    fill: color-mix(in oklab, var(--bg) 60%, var(--surface));
-    stroke: var(--line);
+    fill: color-mix(in oklab, var(--base) 60%, var(--panel));
+    stroke: var(--rule);
   }
 
   .bar {
-    fill: var(--accent);
-    stroke: var(--accent);
+    fill: var(--signal);
+    stroke: var(--signal);
   }
 
   .bar.clear {
-    fill: color-mix(in oklab, var(--accent) 18%, transparent);
+    fill: color-mix(in oklab, var(--signal) 18%, transparent);
     stroke-dasharray: 3 2;
   }
 </style>

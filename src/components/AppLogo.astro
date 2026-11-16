@@ -2,7 +2,7 @@
 /**
  * Official upstream application logo, vendored unmodified in
  * `src/assets/apps/` for nominative identification (see
- * docs/DESIGN_SYSTEM_199X.md, "Artwork provenance"). The visible app name
+ * docs/DESIGN_SYSTEM_SIGNAL.md, "Artwork provenance"). The visible app name
  * always sits next to the mark, so the image itself is decorative.
  * Cava has no official logo upstream; it gets a generic audio-visualizer
  * glyph drawn in-house instead — never presented as Cava's logo.
@@ -143,8 +143,8 @@ const plate = id === 'copyq' ? 'dark' : PLATE_IDS.has(id) ? 'std' : undefined;
     box-sizing: border-box;
     padding: calc(var(--app-logo-size, 2.5rem) * 0.09);
     border-radius: 24%;
-    background: var(--surface-raised, var(--night-raised));
-    box-shadow: inset 0 0 0 1px var(--line);
+    background: var(--raised);
+    box-shadow: inset 0 0 0 1px var(--rule);
   }
   :global(:root[data-color-mode='light']) .app-logo[data-plate='dark'] {
     background: #263742;
@@ -160,11 +160,11 @@ const plate = id === 'copyq' ? 'dark' : PLATE_IDS.has(id) ? 'std' : undefined;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    background: var(--surface-raised, var(--night-raised));
-    border: 1px dashed color-mix(in srgb, var(--secondary) 55%, transparent);
+    background: var(--raised);
+    border: 1px dashed color-mix(in srgb, var(--phosphor) 55%, transparent);
     border-radius: 24%;
-    color: var(--secondary);
-    font-family: var(--font-data, monospace);
+    color: var(--phosphor);
+    font-family: var(--font-mono, monospace);
     font-weight: 700;
     font-size: max(0.62rem, calc(var(--app-logo-size, 2.5rem) * 0.36));
     letter-spacing: 0.04em;
@@ -177,14 +177,14 @@ const plate = id === 'copyq' ? 'dark' : PLATE_IDS.has(id) ? 'std' : undefined;
     padding: calc(var(--app-logo-size, 2.5rem) * 0.16) calc(var(--app-logo-size, 2.5rem) * 0.13)
       calc(var(--app-logo-size, 2.5rem) * 0.13);
     box-sizing: border-box;
-    background: var(--surface-raised, var(--night-raised));
-    border: 1px solid color-mix(in srgb, var(--river) 45%, transparent);
+    background: var(--raised);
+    border: 1px solid color-mix(in srgb, var(--cue) 45%, transparent);
     border-radius: 24%;
   }
   .cava-glyph i {
     flex: 1;
     min-width: 0;
-    background: linear-gradient(0deg, var(--electric), var(--river) 55%, var(--signal));
+    background: var(--cue);
     border-radius: 1px;
   }
   .cava-glyph i:nth-child(1) { height: 45%; }

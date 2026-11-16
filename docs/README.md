@@ -8,6 +8,8 @@ and is sourced from the HorneroOS repositories.
 - [Product data](./PRODUCT_DATA.md) — pinned repositories and catalogue generation.
 - [Components and styling](./COMPONENTS_AND_STYLING.md) — design tokens,
   accessibility, imagery and shared components.
+- [Hornero Signal design system](./DESIGN_SYSTEM_SIGNAL.md) — colour roles,
+  type, signature details and motion on the website.
 - [State management](./STATE_MANAGEMENT.md) — static content and the limited
   browser interactions.
 - [Project configuration](./PROJECT_CONFIGURATION.md) — commands, checks,

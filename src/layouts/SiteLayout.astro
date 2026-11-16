@@ -1,7 +1,14 @@
 ---
-import '@fontsource-variable/rubik';
-import '@fontsource-variable/martian-mono/wdth.css';
-import '@fontsource-variable/bricolage-grotesque';
+// Hornero Signal type (RFC 0001 §3.3): IBM Plex Sans, Mono and Sans Condensed, OFL-1.1.
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-400-italic.css';
+import '@fontsource/ibm-plex-sans/latin-500.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '@fontsource/ibm-plex-sans-condensed/latin-500.css';
+import '@fontsource/ibm-plex-sans-condensed/latin-600.css';
+import '@fontsource/ibm-plex-sans-condensed/latin-700.css';
 import BaseHead from '../components/BaseHead.astro';
 // Bird marks: HorneroOS/config assets/brand (MIT). logo-dark.svg @5df8300,
 // logo-light.svg @39c2bd8. Dark surfaces get the cream bird, light ones the adobe bird.
@@ -40,36 +47,34 @@ const L = (path: string) => localizePath(path, locale);
 const pathForSwitch = Astro.url.pathname.includes('404') ? '/' : Astro.url.pathname;
 const esHref = localizePath(pathForSwitch, 'es');
 const enHref = localizePath(pathForSwitch, 'en');
-// Grouped by what a visitor is trying to do: see it, compare editions, extend it,
-// learn the story, read the docs, get it. Hrefs are localized for the
-// current locale; labels come from the shared chrome dictionary.
+// Information architecture: the operating system first (editions and how to
+// get it), then the desktop experience, then the project. Hrefs are localized
+// for the current locale; labels come from the shared chrome dictionary.
+const systemLinks: NavLink[] = [
+  { href: L('/editions'), label: t(locale, 'navEditionsOverview') },
+  { href: `${L('/editions')}#desktop`, label: t(locale, 'navDesktopEdition') },
+  { href: L('/studio'), label: t(locale, 'navStudio') },
+  { href: L('/gaming'), label: t(locale, 'navGaming') },
+];
+const experienceLinks: NavLink[] = [
+  { href: L('/showroom'), label: t(locale, 'navShowroom') },
+  { href: L('/layouts'), label: t(locale, 'navLayouts') },
+  { href: L('/themes'), label: t(locale, 'navThemes') },
+  { href: L('/extensions'), label: t(locale, 'navExtensions') },
+  { href: L('/companion'), label: t(locale, 'navCompanion') },
+  { href: L('/wallpapers'), label: t(locale, 'navWallpapers') },
+  { href: L('/terminals'), label: t(locale, 'navTerminals') },
+  { href: L('/greeter'), label: t(locale, 'navGreeter') },
+];
+const projectLinks: NavLink[] = [
+  { href: L('/roots'), label: t(locale, 'navRoots') },
+  { href: L('/releases'), label: t(locale, 'navReleases') },
+  { href: L('/docs/development/design-language/'), label: t(locale, 'navDesignLanguage') },
+];
 const nav: NavItem[] = [
-  {
-    kind: 'group',
-    label: t(locale, 'navDesktop'),
-    links: [
-      { href: L('/showroom'), label: t(locale, 'navShowroom') },
-      { href: L('/layouts'), label: t(locale, 'navLayouts') },
-      { href: L('/themes'), label: t(locale, 'navThemes') },
-      { href: L('/wallpapers'), label: t(locale, 'navWallpapers') },
-      { href: L('/greeter'), label: t(locale, 'navGreeter') },
-      { href: L('/terminals'), label: t(locale, 'navTerminals') },
-      { href: L('/companion'), label: t(locale, 'navCompanion') },
-    ],
-  },
-  { kind: 'link', href: L('/editions'), label: t(locale, 'navEditions') },
-  { kind: 'link', href: L('/studio'), label: t(locale, 'navStudio') },
-  { kind: 'link', href: L('/gaming'), label: t(locale, 'navGaming') },
-  { kind: 'link', href: L('/extensions'), label: t(locale, 'navExtensions') },
-  {
-    kind: 'group',
-    label: t(locale, 'navStory'),
-    links: [
-      { href: L('/roots'), label: t(locale, 'navRoots') },
-      { href: L('/releases'), label: t(locale, 'navReleases') },
-      { href: L('/docs/development/design-language/'), label: t(locale, 'navDesignLanguage') },
-    ],
-  },
+  { kind: 'group', label: t(locale, 'navSystem'), links: systemLinks },
+  { kind: 'group', label: t(locale, 'navDesktop'), links: experienceLinks },
+  { kind: 'group', label: t(locale, 'navStory'), links: projectLinks },
   { kind: 'link', href: L('/docs/'), label: t(locale, 'navDocs') },
   { kind: 'link', href: L('/search/'), label: t(locale, 'navSearch') },
 ];
@@ -78,15 +83,7 @@ const isCurrent = (href: string) => {
   const h = href.replace(/\/$/, '') || '/';
   return current === h || (h !== '/' && current.startsWith(`${h}/`));
 };
-const groupCurrent = (group: NavGroup) => group.links.some((l) => isCurrent(l.href));
-const repos = [
-  { href: 'https://github.com/HorneroOS', label: 'GitHub' },
-  { href: L('/roots#repositories'), label: t(locale, 'footerProjectMap') },
-  { href: L('/docs/development/design-language/'), label: t(locale, 'navDesignLanguage') },
-  { href: 'https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md', label: t(locale, 'footerContribute') },
-  { href: L('/search/'), label: t(locale, 'navSearch') },
-  { href: 'https://github.com/HorneroOS/website/issues', label: t(locale, 'reportSiteIssue') },
-];
+const groupCurrent = (group: NavGroup) => group.links.some((l) => !l.href.includes('#') && isCurrent(l.href));
 // Community links. The star count is not fetched at runtime: this site loads no
 // third-party resources, so the star link is a plain link.
 const community = {
@@ -118,10 +115,8 @@ const community = {
         <LogoDark class="brand-mark mark-on-dark" width="32" height="32" aria-hidden="true" focusable="false" />
         <LogoLight class="brand-mark mark-on-light" width="32" height="32" aria-hidden="true" focusable="false" />
         <span class="brand-copy">
-          <span>
-            Hornero <span class="os">OS</span>
-          </span>
-          <small>ARG / 199X · La Plata — Buenos Aires</small>
+          <span class="brand-name">HorneroOS</span>
+          <small>{t(locale, 'brandTagline')}</small>
         </span>
       </a>
       <nav class="main-nav" aria-label={t(locale, 'mainNavLabel')}>
@@ -256,7 +251,7 @@ const community = {
       <fieldset class="color-switch" data-color-switch>
         <legend>{t(locale, 'colorMode')}</legend>
         <label title={t(locale, 'colorSystem')}>
-          <input type="radio" name="color-theme" value="system" />
+          <input type="radio" name="color-theme" value="system" checked />
           <span>
             <svg aria-hidden="true" viewBox="0 0 16 16" focusable="false">
               <rect x="1.5" y="2" width="13" height="9" rx="1.5" />
@@ -276,7 +271,7 @@ const community = {
           </span>
         </label>
         <label title={t(locale, 'colorDark')}>
-          <input type="radio" name="color-theme" value="dark" checked />
+          <input type="radio" name="color-theme" value="dark" />
           <span>
             <svg aria-hidden="true" viewBox="0 0 16 16" focusable="false">
               <path d="M12.8 10.3A5.7 5.7 0 0 1 5.7 3.2a5.8 5.8 0 1 0 7.1 7.1Z" />
@@ -291,56 +286,39 @@ const community = {
       <slot />
     </main>
     <footer class="site-footer">
-      <section class="involved" aria-labelledby="involved-title">
-        <h2 id="involved-title">{t(locale, 'getInvolved')}</h2>
-        <ul>
-          <li>
-            <a href={community.discord} rel="noopener">
-              <strong>{t(locale, 'discordTitle')}</strong>
-              <span>{t(locale, 'discordText')}</span>
-            </a>
-          </li>
-          <li>
-            <a href={community.star}>
-              <strong>{t(locale, 'starTitle')}</strong>
-              <span>{t(locale, 'starText')}</span>
-            </a>
-          </li>
-          <li>
-            <a href={community.org}>
-              <strong>{t(locale, 'browseOrgTitle')}</strong>
-              <span>{t(locale, 'browseOrgText')}</span>
-            </a>
-          </li>
-          <li>
-            <a href={community.bug}>
-              <strong>{t(locale, 'reportBugTitle')}</strong>
-              <span>{t(locale, 'reportBugText')}</span>
-            </a>
-          </li>
-          <li>
-            <a href={community.discord}>
-              <strong>{t(locale, 'discordTitle')}</strong>
-              <span>{t(locale, 'discordText')}</span>
-            </a>
-          </li>
-          <li>
-            <a href={community.siteIssue}>
-              <strong>{t(locale, 'reportSiteTitle')}</strong>
-              <span>{t(locale, 'reportSiteText')}</span>
-            </a>
-          </li>
-        </ul>
-      </section>
-      <nav aria-label={t(locale, 'projectNavLabel')}>
-        <ul>
-          {repos.map((r) => (
-            <li>
-              <a href={r.href}>{r.label}</a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p>HorneroOS</p>
+          <p>{t(locale, 'footerPositioning')}</p>
+          <a href={L('/install')} class="cta primary">{t(locale, 'getHorneroOS')}</a>
+        </div>
+        <nav aria-labelledby="footer-system">
+          <h2 id="footer-system">{t(locale, 'footerSystem')}</h2>
+          <ul>
+            {systemLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            <li><a href={L('/install')}>{t(locale, 'getHorneroOS')}</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="footer-experience">
+          <h2 id="footer-experience">{t(locale, 'footerExperience')}</h2>
+          <ul>
+            {experienceLinks.slice(0, 5).map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          </ul>
+        </nav>
+        <nav aria-labelledby="footer-project">
+          <h2 id="footer-project">{t(locale, 'footerProject')}</h2>
+          <ul>
+            {projectLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            <li><a href={L('/docs/')}>{t(locale, 'navDocs')}</a></li>
+            <li><a href={L('/roots#repositories')}>{t(locale, 'footerProjectMap')}</a></li>
+            <li><a href={community.org}>GitHub</a></li>
+            <li><a href={community.discord} rel="noopener">{t(locale, 'discordJoin')}</a></li>
+            <li><a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{t(locale, 'footerContribute')}</a></li>
+            <li><a href={community.bug}>{t(locale, 'reportBug')}</a></li>
+            <li><a href={community.siteIssue}>{t(locale, 'reportSiteIssue')}</a></li>
+          </ul>
+        </nav>
+      </div>
       <p class="fine">
         {t(locale, 'footerFineA')}
         <a href={L('/roots#timeline')}>{t(locale, 'footerHistory')}</a>
@@ -381,19 +359,17 @@ const community = {
         const key = 'hornero-color-mode';
         const media = matchMedia('(prefers-color-scheme: light)');
         const controls = [...document.querySelectorAll('[data-color-switch] input')];
-        let preference = document.documentElement.dataset.colorPreference || 'dark';
+        let preference = document.documentElement.dataset.colorPreference || 'system';
 
         const apply = (next, persist = true) => {
           preference = next;
           const mode = next === 'system' ? (media.matches ? 'light' : 'dark') : next;
           document.documentElement.dataset.colorPreference = next;
           document.documentElement.dataset.colorMode = mode;
-          const themeColor = document.querySelector('meta[name="theme-color"]');
-          if (themeColor) {
-            themeColor.content = getComputedStyle(document.documentElement)
-              .getPropertyValue('--browser-theme-color')
-              .trim();
-          }
+          const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--browser-theme-color').trim();
+          document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+            meta.content = themeColor;
+          });
           controls.forEach((control) => {
             control.checked = control.value === next;
           });
@@ -414,7 +390,7 @@ const community = {
         });
         window.addEventListener('storage', (event) => {
           if (event.key === key || event.key === null) {
-            const next = ['system', 'light', 'dark'].includes(event.newValue) ? event.newValue : 'dark';
+            const next = ['system', 'light', 'dark'].includes(event.newValue) ? event.newValue : 'system';
             apply(next, false);
           }
         });

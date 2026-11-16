@@ -48,10 +48,10 @@ const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), th
     gap: 0.15rem 0.6rem;
     padding: 0.4rem 0.75rem;
     border-radius: 8px;
-    background: color-mix(in oklab, var(--bg) 90%, transparent);
-    border: 1px solid var(--line);
-    color: var(--text-muted);
-    font-family: var(--font-data);
+    background: color-mix(in oklab, var(--base) 90%, transparent);
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
     font-stretch: 75%;
     font-size: 0.72rem;
     line-height: 1.5;
@@ -59,7 +59,7 @@ const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), th
   }
 
   .stamp-source {
-    color: var(--highlight);
+    color: var(--cue);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -69,6 +69,6 @@ const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), th
   .stamp-source + .stamp-part::before {
     content: '·';
     margin-right: 0.6rem;
-    color: var(--line);
+    color: var(--rule);
   }
 </style>

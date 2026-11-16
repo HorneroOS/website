@@ -24,7 +24,7 @@ const points = [
   <div class="broadcast-plate join-plate">
     <p class="plate-id">
       <strong>{t(locale, 'communityJoinKicker')}</strong>
-      <span>ARG / 199X</span>
+      
       <span>{t(locale, 'discordLabel')}</span>
     </p>
     <h2 id="community-join-title">{t(locale, 'communityJoinTitle')}</h2>
@@ -65,7 +65,7 @@ const points = [
   .join-lede {
     max-width: 62ch;
     margin: 0;
-    color: var(--muted, var(--text));
+    color: var(--ink-muted);
     font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1rem);
     line-height: 1.55;
   }
@@ -79,7 +79,7 @@ const points = [
   }
   .join-points li {
     padding-top: 0.75rem;
-    border-top: 2px solid var(--accent);
+    border-top: 2px solid var(--signal);
   }
   .join-points h3 {
     margin: 0 0 0.3rem;
@@ -87,7 +87,7 @@ const points = [
   }
   .join-points p {
     margin: 0;
-    color: var(--muted, var(--text));
+    color: var(--ink-muted);
     font-size: 0.95rem;
     line-height: 1.5;
   }

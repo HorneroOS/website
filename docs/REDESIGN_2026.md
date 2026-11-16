@@ -1,7 +1,8 @@
 # October 2026 redesign: decisions
 
-The redesign changes how the site introduces HorneroOS. It keeps the Hornero
-199X identity ([`DESIGN_SYSTEM_199X.md`](./DESIGN_SYSTEM_199X.md)), the Astro
+The redesign changes how the site introduces HorneroOS. It kept the Hornero
+199X identity of the time (since replaced by Hornero Signal,
+[`DESIGN_SYSTEM_SIGNAL.md`](./DESIGN_SYSTEM_SIGNAL.md)), the Astro
 static architecture, the pinned product-data model and every provenance rule.
 
 ## What problem it solves

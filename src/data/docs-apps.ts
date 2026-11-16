@@ -2,7 +2,7 @@
 // configures or integrates on that page, shown as logo chips under the
 // docs header (see src/pages/docs/[...slug].astro). Prose-only mentions
 // (SDDM, Calamares, Waybar, PipeWire, CLI backends and similar) carry no
-// chip by policy — see docs/DESIGN_SYSTEM_199X.md, "Artwork provenance".
+// chip by policy — see docs/DESIGN_SYSTEM_SIGNAL.md, "Artwork provenance".
 // Ids resolve through src/components/AppLogo.astro; keep to at most
 // three chips per page.
 export const docsApps: Record<string, { id: string; name: string }[]> = {

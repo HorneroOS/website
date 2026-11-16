@@ -60,18 +60,18 @@ const {
   .frame-shot {
     width: 100%;
     overflow: hidden;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
 
   .frame-arch .frame-shot {
     /* A shallow vault over a flat sill: the nest's opening. */
     border-radius: 50% 50% var(--radius) var(--radius) / 16% 16% var(--radius) var(--radius);
-    border-color: color-mix(in oklab, var(--clay) 45%, var(--line));
+    border-color: color-mix(in oklab, var(--phosphor) 45%, var(--rule));
     box-shadow:
-      0 0 0 6px var(--surface),
-      0 0 0 7px var(--line);
+      0 0 0 6px var(--panel),
+      0 0 0 7px var(--rule);
   }
 
   .frame-shot :global(img) {

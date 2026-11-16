@@ -40,7 +40,7 @@ const description = isEs
   <div class="greeter-page" data-locale={locale}>
     <div class="greeter-hero">
       <header class="greeter-intro">
-        <p class="plate-id"><strong>Antes del escritorio</strong><span>ARG / 199X</span><span>Recreación en navegador · no es una captura</span></p>
+        <p class="plate-id"><strong>Antes del escritorio</strong><span>Recreación en navegador · no es una captura</span></p>
         <h1>{isEs ? 'El greeter de HorneroOS' : 'The HorneroOS greeter'}</h1>
         <p class="intro-copy">
           {isEs ? 'La pantalla de login es un tema de SDDM. Su fondo cambia con la hora y muestra paisajes argentinos y escenas urbanas guardados en tu computadora.' : 'The login screen is an SDDM theme. Its background changes with the hour and shows Argentine landscapes and city scenes stored on your computer.'}
@@ -607,18 +607,18 @@ const description = isEs
     padding: 0;
   }
   .eyebrow {
-    color: var(--highlight);
-    font: 700 0.7rem/1.4 var(--font-data);
+    color: var(--cue);
+    font: 700 0.7rem/1.4 var(--font-mono);
     letter-spacing: 0.13em;
   }
   .eyebrow span {
-    color: var(--secondary);
+    color: var(--phosphor);
     margin-right: 0.8rem;
   }
   h1,
   h2,
   h3 {
-    font-family: var(--font-ui);
+    font-family: var(--font-sans);
     letter-spacing: -0.045em;
   }
   .greeter-intro h1 {
@@ -629,7 +629,7 @@ const description = isEs
     font-weight: 560;
   }
   .greeter-intro h1 em {
-    color: var(--accent);
+    color: var(--signal);
     font-style: normal;
   }
   .intro-copy {
@@ -637,15 +637,15 @@ const description = isEs
     margin-top: 1.5rem;
     font-size: clamp(1.05rem, 1.5vw, 1.24rem);
     line-height: 1.65;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .demo-note {
     margin-top: 1.4rem;
-    color: var(--text);
-    font: 600 0.78rem/1.5 var(--font-data);
+    color: var(--ink);
+    font: 600 0.78rem/1.5 var(--font-mono);
   }
   .demo-note span {
-    color: var(--secondary);
+    color: var(--phosphor);
     padding-right: 0.45rem;
   }
   .experience {
@@ -656,12 +656,12 @@ const description = isEs
   }
   .preview-label {
     margin: 0 0 0.75rem;
-    color: var(--text-muted);
-    font: 600 0.68rem/1.45 var(--font-data);
+    color: var(--ink-muted);
+    font: 600 0.68rem/1.45 var(--font-mono);
     letter-spacing: 0.02em;
   }
   .preview-label span {
-    color: var(--secondary);
+    color: var(--phosphor);
     padding-right: 0.35rem;
   }
   .screen {
@@ -671,7 +671,7 @@ const description = isEs
     width: 100%;
     min-width: 0;
     aspect-ratio: 16 / 9;
-    border: 1px solid color-mix(in oklab, var(--highlight) 35%, var(--line));
+    border: 1px solid color-mix(in oklab, var(--cue) 35%, var(--rule));
     border-radius: 18px;
     background: #111824;
     box-shadow: 0 28px 90px rgb(0 0 0 / 0.3);
@@ -728,7 +728,7 @@ const description = isEs
     align-items: center;
     justify-content: space-between;
     color: #ff796c;
-    font: 700 0.62rem/1.4 var(--font-ui);
+    font: 700 0.62rem/1.4 var(--font-sans);
   }
   .session-tools,
   .power-tools {
@@ -831,22 +831,21 @@ const description = isEs
     gap: 0.55rem;
     max-width: 48%;
     color: rgb(255 255 255 / 0.9);
-    font: 500 0.69rem var(--font-data);
+    font: 500 0.69rem var(--font-mono);
     text-shadow: 0 1px 8px #000;
   }
   .scene-pip {
     width: 0.45rem;
     height: 0.45rem;
     border-radius: 50%;
-    background: var(--secondary);
-    box-shadow: 0 0 1rem var(--secondary);
+    background: var(--phosphor);
   }
   .screen-edge {
     position: absolute;
     z-index: 3;
     inset: auto 0 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--highlight), var(--secondary));
+    background: var(--signal);
   }
   .preview-controls {
     display: grid;
@@ -869,10 +868,10 @@ const description = isEs
   }
   .mood-button {
     padding: 0.65rem 0.85rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--text-muted);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--panel);
+    color: var(--ink-muted);
     cursor: pointer;
     font-size: 0.78rem;
     transition:
@@ -882,9 +881,9 @@ const description = isEs
   }
   .mood-button:hover,
   .mood-button.is-active {
-    border-color: var(--highlight);
-    color: var(--text);
-    background: color-mix(in oklab, var(--highlight) 12%, var(--surface));
+    border-color: var(--cue);
+    color: var(--ink);
+    background: color-mix(in oklab, var(--cue) 12%, var(--panel));
   }
   .scene-control {
     display: flex;
@@ -898,16 +897,16 @@ const description = isEs
     margin-right: 0.4rem;
   }
   .control-kicker {
-    color: var(--highlight);
-    font: 600 0.56rem var(--font-data);
+    color: var(--cue);
+    font: 600 0.56rem var(--font-mono);
     letter-spacing: 0.1em;
   }
   .scene-copy strong {
-    color: var(--text);
+    color: var(--ink);
     font-size: 0.83rem;
   }
   .scene-copy small {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.68rem;
   }
   .icon-button,
@@ -917,10 +916,10 @@ const description = isEs
     justify-content: center;
     gap: 0.55rem;
     min-height: 2.65rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 7px;
-    background: var(--surface);
-    color: var(--text);
+    background: var(--panel);
+    color: var(--ink);
     cursor: pointer;
   }
   .icon-button {
@@ -933,10 +932,10 @@ const description = isEs
   }
   .icon-button:hover,
   .next-button:hover:not(:disabled) {
-    border-color: var(--accent);
+    border-color: var(--signal);
   }
   .next-button:disabled {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     cursor: not-allowed;
     opacity: 0.72;
   }
@@ -948,8 +947,8 @@ const description = isEs
     justify-content: space-between;
     gap: 1rem;
     padding-top: 0.65rem;
-    color: var(--text-muted);
-    font: 500 0.55rem var(--font-data);
+    color: var(--ink-muted);
+    font: 500 0.55rem var(--font-mono);
     letter-spacing: 0.11em;
   }
   .section-head,
@@ -968,7 +967,7 @@ const description = isEs
   .section-head > p:last-child,
   .scene-section-head > p {
     max-width: 58ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     line-height: 1.65;
   }
   .mood-rail {
@@ -982,7 +981,7 @@ const description = isEs
     position: relative;
     min-height: 15rem;
     overflow: hidden;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 10px;
     background: #101521;
     color: white;
@@ -1007,7 +1006,7 @@ const description = isEs
     transform: scale(1.025);
   }
   .mood-card.is-selected {
-    outline: 2px solid var(--highlight);
+    outline: 2px solid var(--cue);
     outline-offset: 2px;
   }
   .mood-card-copy {
@@ -1021,7 +1020,7 @@ const description = isEs
   }
   .mood-card-copy small {
     color: #a9f4f7;
-    font: 600 0.56rem var(--font-data);
+    font: 600 0.56rem var(--font-mono);
     letter-spacing: 0.08em;
   }
   .mood-card-copy strong {
@@ -1069,7 +1068,7 @@ const description = isEs
     aspect-ratio: 16/9;
     border: 0;
     border-radius: 9px;
-    background: var(--surface);
+    background: var(--panel);
     cursor: pointer;
   }
   .scene-image img {
@@ -1089,7 +1088,7 @@ const description = isEs
     border-radius: 3px;
     background: rgb(5 10 17 / 0.7);
     color: white;
-    font: 600 0.55rem var(--font-data);
+    font: 600 0.55rem var(--font-mono);
     letter-spacing: 0.1em;
   }
   .scene-meta {
@@ -1097,16 +1096,16 @@ const description = isEs
     justify-content: space-between;
     gap: 0.5rem;
     margin-top: 0.85rem;
-    color: var(--text-muted);
-    font: 500 0.56rem var(--font-data);
+    color: var(--ink-muted);
+    font: 500 0.56rem var(--font-mono);
     letter-spacing: 0.04em;
   }
   .scene-meta span:last-child {
-    color: var(--highlight);
+    color: var(--cue);
     text-align: right;
   }
   .scene-meta i {
-    color: var(--secondary);
+    color: var(--phosphor);
     font-style: normal;
   }
   .scene-card h3 {
@@ -1117,7 +1116,7 @@ const description = isEs
   .scene-card > p {
     min-height: 3.3rem;
     margin-top: 0.4rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.78rem;
     line-height: 1.55;
   }
@@ -1126,14 +1125,14 @@ const description = isEs
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.5rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
     padding-top: 0.7rem;
     margin-top: 0.8rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.68rem;
   }
   .credit-line a {
-    color: var(--highlight);
+    color: var(--cue);
     text-decoration: none;
   }
   .credit-line a:hover {
@@ -1147,13 +1146,13 @@ const description = isEs
     width: min(100%, 1280px);
     margin-inline: auto;
     padding: clamp(1.5rem, 4vw, 4rem);
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 13px;
-    background: color-mix(in oklab, var(--surface) 74%, transparent);
+    background: color-mix(in oklab, var(--panel) 74%, transparent);
   }
   .quiet-number {
-    color: var(--accent);
-    font: 500 1rem var(--font-data);
+    color: var(--signal);
+    font: 500 1rem var(--font-mono);
   }
   .quiet-design h2 {
     margin-top: 1rem;
@@ -1168,13 +1167,13 @@ const description = isEs
     display: grid;
     gap: 0.2rem;
     padding-bottom: 0.9rem;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rule);
   }
   .quiet-design li strong {
     font-size: 0.9rem;
   }
   .quiet-design li span {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.78rem;
     line-height: 1.55;
   }
@@ -1191,22 +1190,22 @@ const description = isEs
   .technical > div:first-child > p:last-child {
     max-width: 55ch;
     margin-top: 1rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     line-height: 1.65;
   }
   .tech-facts {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
   }
   .tech-facts p {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
     padding: 0.85rem 0;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rule);
   }
   .tech-facts span {
-    color: var(--text-muted);
-    font: 500 0.6rem var(--font-data);
+    color: var(--ink-muted);
+    font: 500 0.6rem var(--font-mono);
     letter-spacing: 0.08em;
   }
   .tech-facts strong {
@@ -1222,8 +1221,8 @@ const description = isEs
     width: min(100%, 1280px);
     margin-inline: auto;
     padding: clamp(1.5rem, 4vw, 3.5rem);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
   .get-greeter h2 {
     margin-top: 0.8rem;
@@ -1231,7 +1230,7 @@ const description = isEs
   .get-greeter > div:first-child > p:last-child {
     max-width: 58ch;
     margin-top: 0.8rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.85rem;
     line-height: 1.6;
   }
@@ -1241,7 +1240,7 @@ const description = isEs
     gap: 0.8rem;
   }
   .get-links > a:not(.cta) {
-    color: var(--highlight);
+    color: var(--cue);
     font-size: 0.76rem;
     text-decoration: none;
   }
@@ -1255,16 +1254,16 @@ const description = isEs
     gap: 0.6rem;
     min-height: 2.8rem;
     padding: 0 1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 6px;
-    color: var(--text);
+    color: var(--ink);
     text-decoration: none;
     font-size: 0.8rem;
   }
   .cta.primary {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--accent-ink);
+    border-color: var(--signal);
+    background: var(--signal);
+    color: var(--on-signal);
     font-weight: 600;
   }
   button:focus-visible,
@@ -1466,7 +1465,7 @@ const description = isEs
 
 <style>
   /* 199X per-page direction: the greeter as a broadcast film frame. */
-  .greeter-hero { box-shadow: 12px 12px 0 color-mix(in srgb, var(--highlight) 16%, transparent); }
-  .film-mark { font-family: var(--font-data); letter-spacing: 0.12em; text-transform: uppercase; }
+  .greeter-hero { box-shadow: 12px 12px 0 color-mix(in srgb, var(--cue) 16%, transparent); }
+  .film-mark { font-family: var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
   .clock { font-family: var(--font-display); }
 </style>

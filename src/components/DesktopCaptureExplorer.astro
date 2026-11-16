@@ -265,7 +265,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     display: grid;
     gap: clamp(1.5rem, 3vw, 2.5rem);
     padding-block: clamp(3rem, 7vw, 6rem);
-    border-block: 1px solid var(--line);
+    border-block: 1px solid var(--rule);
     scroll-margin-top: 8rem;
   }
 
@@ -286,7 +286,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .explorer-heading > p {
     max-width: 40ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step-0);
   }
 
@@ -301,10 +301,10 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   .capture-stage {
     min-width: 0;
     padding: 0.65rem;
-    border: 1px solid var(--line);
-    border-top-color: color-mix(in srgb, var(--highlight) 58%, var(--line));
-    background: var(--surface);
-    box-shadow: 0.55rem 0.55rem 0 color-mix(in srgb, var(--highlight) 14%, transparent);
+    border: 1px solid var(--rule);
+    border-top-color: color-mix(in srgb, var(--cue) 58%, var(--rule));
+    background: var(--panel);
+    box-shadow: 0.55rem 0.55rem 0 color-mix(in srgb, var(--cue) 14%, transparent);
   }
 
   .stage-heading {
@@ -312,14 +312,14 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     justify-content: space-between;
     gap: 1rem;
     padding: 0.25rem 0.35rem 0.65rem;
-    color: var(--text-muted);
-    font: 0.64rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.64rem var(--font-mono);
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
   .stage-heading span:first-child {
-    color: var(--highlight);
+    color: var(--cue);
   }
 
   .capture-screen {
@@ -327,8 +327,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     place-items: center;
     overflow: hidden;
     aspect-ratio: 16 / 9;
-    background: var(--night);
-    border: 1px solid var(--line);
+    background: var(--ground);
+    border: 1px solid var(--rule);
   }
 
   .capture-screen img {
@@ -350,8 +350,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .capture-kicker,
   .navigation-label {
-    color: var(--secondary);
-    font: 0.65rem var(--font-data);
+    color: var(--phosphor);
+    font: 0.65rem var(--font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -364,12 +364,12 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .capture-context {
     margin-top: 0.35rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step--1);
   }
 
   .capture-provenance :global(.stamp) {
-    background: var(--bg);
+    background: var(--base);
   }
 
   .capture-navigation {
@@ -384,11 +384,11 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   }
 
   .capture-navigation li {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
   }
 
   .capture-navigation li:last-child {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rule);
   }
 
   .capture-navigation button[data-capture-choice] {
@@ -402,7 +402,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     width: 100%;
     border: 0;
     background: transparent;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font: inherit;
     cursor: pointer;
     text-align: left;
@@ -418,7 +418,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
     inset-block: 0.6rem;
     left: -0.66rem;
     width: 2px;
-    background: var(--highlight);
+    background: var(--cue);
     content: '';
     opacity: 0;
     transform: scaleY(0.6);
@@ -428,7 +428,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   }
 
   .choice-label {
-    color: var(--text);
+    color: var(--ink);
     font-family: var(--font-display);
     font-size: 1.06rem;
     font-weight: 650;
@@ -437,8 +437,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .choice-group {
     grid-column: 1;
-    color: var(--text-muted);
-    font: 0.61rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.61rem var(--font-mono);
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -446,7 +446,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   .choice-arrow {
     grid-column: 2;
     grid-row: 1 / span 2;
-    color: var(--secondary);
+    color: var(--phosphor);
     font-size: 1.1rem;
     opacity: 0.45;
     transform: translate(-0.2rem, 0.2rem);
@@ -457,8 +457,8 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .capture-navigation button[data-capture-choice]:hover,
   .capture-navigation button[data-capture-choice][aria-selected='true'] {
-    color: var(--text);
-    background: color-mix(in srgb, var(--highlight) 5%, transparent);
+    color: var(--ink);
+    background: color-mix(in srgb, var(--cue) 5%, transparent);
   }
 
   .capture-navigation button[data-capture-choice][aria-selected='true'] {
@@ -484,7 +484,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .navigation-note {
     margin-top: 1rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.82rem;
     line-height: 1.5;
   }
@@ -492,7 +492,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
   .capture-fallback-link {
     display: inline-flex;
     margin: 0.15rem 0 0.65rem 0.4rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.72rem;
   }
 
@@ -513,7 +513,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
 
   .capture-navigation > .archive-link {
     margin-top: 0.55rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.8rem;
   }
 
@@ -559,10 +559,10 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .capture-navigation li:nth-child(odd) {
-      border-right: 1px solid var(--line);
+      border-right: 1px solid var(--rule);
     }
     .capture-navigation li:nth-last-child(2):nth-child(odd) {
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--rule);
     }
     .capture-navigation li:last-child {
       border-bottom: 0;
@@ -590,7 +590,7 @@ if (!firstView?.src) throw new Error('The desktop capture explorer has no initia
       border-right: 0;
     }
     .capture-navigation li:last-child {
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--rule);
     }
   }
 

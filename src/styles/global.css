@@ -1,105 +1,212 @@
 /*
- * Hornero OS site design system — Hornero 199X.
+ * HorneroOS website — Hornero Signal.
  *
- * Argentine retrofuturism, 1985-1995: broadcast identification plates,
- * newsprint editorial print, La Plata's diagonal grid, and restrained
- * phosphor/orange signal color. Night mode is the broadcast studio;
- * light mode is the midday newsprint edition: cool grey paper, black
- * ink and the same signal inks at print strength. The earlier warm
- * cream ramp read as generic beige and was retired. See
- * docs/DESIGN_SYSTEM_199X.md.
- * Type is Bricolage Grotesque for display, Rubik for UI, and Martian Mono
- * for technical identification. All are self-hosted.
+ * Design authority: RFC 0001 (HorneroOS/docs development/rfc-0001-hornero-signal.md).
+ * A contemporary engineering workstation from an alternate 1990s Argentina:
+ * broadcast control rooms, oscilloscope bezels, test cards and technical
+ * drawing sheets, executed with restraint. Amber (`signal`) means live /
+ * active / primary; celeste (`cue`) means focus / selection / information;
+ * phosphor green means healthy / available.
+ *
+ * Colour custom properties are the RFC §3.1 roles in kebab-case
+ * (`inkMuted` -> `--ink-muted`). Values are the flagship palettes from
+ * RFC §3.2 as amended (amendment 2): Signal Night (default) and Signal Day.
+ * The visual direction is Signal Bezel (docs development/signal-visual-language.md).
+ * Pages use roles only.
+ * See docs/DESIGN_SYSTEM_SIGNAL.md.
  */
+
+
+/* ------------------------------------------------------------ tokens --- */
 
 :root {
   color-scheme: dark;
 
-  /* Nighttime / Broadcast: deep CRT ink, midnight blue, signal orange. */
-  --night: #0b1018;
-  --night-surface: #142745;
-  --night-raised: #1b335c;
-  --ice: #fff6e6;
-  --ice-muted: #b9c6de;
-  --signal: #f08b43;
-  --river: #7fb0e6;
-  --electric: #427ccd;
-  --sodium: #f5a76c;
-  --mint: #91c8a2;
-  --phosphor: #91c8a2;
-  --paper: #eff0ee;
+  /* Signal Night — cool graphite instrument panels, warm phosphor-cream ink. */
+  --ground: #0c0f13;
+  --sunken: #101419;
+  --base: #13171d;
+  --panel: #181d24;
+  --raised: #1f252e;
+  --lifted: #283039;
+  --ink: #ece6da;
+  --ink-muted: #a8abad;
+  --ink-faint: #737980;
+  --rule: #2c333c;
+  --rule-strong: #707a85;
+  --focus: #7ec1ea;
+  --signal: #f2a33a;
+  --on-signal: #1a1205;
+  --signal-well: #3a2a12;
+  --on-signal-well: #ffd9a3;
+  --cue: #7ec1ea;
+  --on-cue: #06151f;
+  --cue-well: #16303f;
+  --on-cue-well: #cde8f8;
+  --phosphor: #8bd49a;
+  --on-phosphor: #07170c;
+  --phosphor-well: #173222;
+  --on-phosphor-well: #cdefd4;
+  --alert: #f0705a;
+  --on-alert: #1e0905;
+  --alert-well: #3d1a14;
+  --on-alert-well: #ffd3ca;
+  --inverse: #ece6da;
+  --on-inverse: #181d24;
+  --inverse-signal: #8a5200;
+  --scrim: #000000;
+  --shadow: #000000;
 
-  /* Roles */
-  --bg: var(--night);
-  --surface: var(--night-surface);
-  --surface-raised: var(--night-raised);
-  --line: #2e4a73;
-  --text: var(--ice);
-  --text-muted: var(--ice-muted);
-  --accent: var(--signal);
-  accent-color: var(--accent);
-  --accent-ink: #0b1018;
-  --highlight: var(--river);
-  --secondary: var(--mint);
-  --focus: #91c8a2;
-  --browser-theme-color: #0b1018;
-  --signal-grid: color-mix(in srgb, var(--river) 2.4%, transparent);
-  --diag-grid: color-mix(in srgb, var(--signal) 3.2%, transparent);
-  --sign-haze: 10%;
-  --river-haze: 10%;
-  --sodium-haze: 8%;
-  --ink: var(--text);
-  --muted: var(--text-muted);
-  --clay: var(--secondary);
+  /* Brand-surface details derived from roles (never used for text). */
+  --diagonal: color-mix(in srgb, var(--signal) 9%, transparent);
+  --scanline: color-mix(in srgb, var(--ink) 3%, transparent);
+  --browser-theme-color: #13171d;
+  /* Optional emission role (RFC amendment 2): halos only, never text or fill,
+     max 40 % alpha, blur <= 4px, never animated. Not rendered in Day. */
+  --glow: #ffb650;
 
-  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
-  --font-ui: 'Rubik Variable', 'Rubik', system-ui, sans-serif;
-  --font-data: 'Martian Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+  /* RFC §3.3 families. */
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif;
 
-  --step--1: clamp(0.84rem, 0.8rem + 0.15vw, 0.9rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.08rem);
-  --step-1: clamp(1.25rem, 1.15rem + 0.45vw, 1.45rem);
-  --step-2: clamp(1.6rem, 1.4rem + 0.9vw, 2.1rem);
-  --step-3: clamp(2.2rem, 1.7rem + 2.2vw, 3.6rem);
+  /* Web type scale (the shell's px scale is tuned for 13px chrome). */
+  --step--2: 0.72rem;
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.88rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.06rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1vw, 2.2rem);
+  --step-3: clamp(2.2rem, 1.6rem + 2.6vw, 3.8rem);
+  --step-4: clamp(2.8rem, 1.7rem + 5vw, 6.4rem);
 
-  --gutter: clamp(1rem, 0.7rem + 2vw, 2.5rem);
-  --measure: 66ch;
-  --radius: 6px;
-  --step-4: clamp(2.8rem, 2rem + 4.5vw, 5.6rem);
-  /* Motion tokens: mechanical, brief, broadcast-like. */
-  --motion-fast: 160ms;
-  --motion-panel: 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  /* The hornero's oven nest: a rounded arch over a flat sill. */
-  --arch: 46% 46% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
+  /* RFC §3.5 geometry. */
+  --radius-small: 3px;
+  --radius: 5px;
+  --radius-large: 8px;
+  --space-small: 4px;
+  --space-smaller: 8px;
+  --space-normal: 12px;
+  --space-larger: 16px;
+  --space-large: 24px;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --measure: 68ch;
+  --elevation: 0 4px 12px color-mix(in srgb, var(--shadow) 35%, transparent);
+
+  /* RFC §3.6 motion names. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --ease-sweep: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-settle: cubic-bezier(0.32, 1.24, 0.42, 1);
+  --ease-settle-fast: cubic-bezier(0.34, 1.36, 0.5, 1);
+  --dur-quick: 90ms;
+  --dur-short: 160ms;
+  --dur-medium: 240ms;
+  --dur-long: 360ms;
+  --dur-scan: 480ms;
+  --dur-settle-fast: 220ms;
+  --dur-settle: 320ms;
+}
+
+/* Signal Day — warm technical-drawing paper with ink-black text. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) {
+    color-scheme: light;
+    --ground: #e6e1d5;
+    --sunken: #dcd6c8;
+    --base: #f2eee5;
+    --panel: #f7f4ee;
+    --raised: #fbf9f5;
+    --lifted: #ffffff;
+    --ink: #1b1e22;
+    --ink-muted: #4e545b;
+    --ink-faint: #7a8086;
+    --rule: #d3ccbd;
+    --rule-strong: #736d62;
+    --focus: #1a5f88;
+    --signal: #8f4b00;
+    --on-signal: #ffffff;
+    --signal-well: #f6ddb8;
+    --on-signal-well: #3d2200;
+    --cue: #1a5f88;
+    --on-cue: #ffffff;
+    --cue-well: #d3e7f3;
+    --on-cue-well: #0b2e44;
+    --phosphor: #256a3b;
+    --on-phosphor: #ffffff;
+    --phosphor-well: #d5ebd9;
+    --on-phosphor-well: #0e2e17;
+    --alert: #a8341c;
+    --on-alert: #ffffff;
+    --alert-well: #f7d7d0;
+    --on-alert-well: #4a1209;
+    --inverse: #1b1e22;
+    --on-inverse: #f2eee5;
+    --inverse-signal: #f2a33a;
+    --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
+    --scanline: transparent;
+    --glow: var(--signal);
+    --browser-theme-color: #f2eee5;
+  }
 }
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  /* Daytime / Newsprint: cool Orchis-style neutrals, black ink, and the
-   * Hornero inks at print strength — blue primary, blue-grey secondary,
-   * burnt signal orange. Same family as the Hornero Light GTK ramp in
-   * HorneroOS/config so site and desktop read as one system. */
-  --bg: #eff0ee;
-  --surface: #e5e8e3;
-  --surface-raised: #ffffff;
-  --line: #aeb5ac;
-  --text: #212121;
-  --text-muted: #47525e;
-  --accent: #9e4f00;
-  --accent-ink: #ffffff;
-  --highlight: #155cb8;
-  --secondary: #48616f;
-  --focus: #155cb8;
-  --browser-theme-color: #eff0ee;
-  --signal-grid: color-mix(in srgb, var(--highlight) 3%, transparent);
-  --diag-grid: color-mix(in srgb, var(--accent) 4%, transparent);
-  --sign-haze: 5%;
-  --river-haze: 5%;
-  --sodium-haze: 3%;
-  --ink: var(--text);
-  --muted: var(--text-muted);
-  --clay: var(--secondary);
+  --ground: #e6e1d5;
+  --sunken: #dcd6c8;
+  --base: #f2eee5;
+  --panel: #f7f4ee;
+  --raised: #fbf9f5;
+  --lifted: #ffffff;
+  --ink: #1b1e22;
+  --ink-muted: #4e545b;
+  --ink-faint: #7a8086;
+  --rule: #d3ccbd;
+  --rule-strong: #736d62;
+  --focus: #1a5f88;
+  --signal: #8f4b00;
+  --on-signal: #ffffff;
+  --signal-well: #f6ddb8;
+  --on-signal-well: #3d2200;
+  --cue: #1a5f88;
+  --on-cue: #ffffff;
+  --cue-well: #d3e7f3;
+  --on-cue-well: #0b2e44;
+  --phosphor: #256a3b;
+  --on-phosphor: #ffffff;
+  --phosphor-well: #d5ebd9;
+  --on-phosphor-well: #0e2e17;
+  --alert: #a8341c;
+  --on-alert: #ffffff;
+  --alert-well: #f7d7d0;
+  --on-alert-well: #4a1209;
+  --inverse: #1b1e22;
+  --on-inverse: #f2eee5;
+  --inverse-signal: #f2a33a;
+  --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
+  --scanline: transparent;
+  --glow: var(--signal);
+  --browser-theme-color: #f2eee5;
 }
+
+/* Signal High Contrast (RFC §3.2) when the visitor asks for more contrast at night. */
+@media (prefers-contrast: more) {
+  :root:not([data-color-mode='light']) {
+    --ground: #000000;
+    --base: #000000;
+    --sunken: #000000;
+    --panel: #0a0a0a;
+    --ink: #ffffff;
+    --ink-muted: #e0e0e0;
+    --signal: #ffc247;
+    --cue: #8fd3ff;
+    --focus: #8fd3ff;
+    --rule: #8a8a8a;
+    --rule-strong: #ffffff;
+  }
+}
+
+/* ------------------------------------------------------------- reset --- */
 
 *,
 *::before,
@@ -116,48 +223,41 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
+  accent-color: var(--signal);
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--accent) 76%, var(--highlight));
-  color: var(--accent-ink);
+  background: var(--cue-well);
+  color: var(--on-cue-well);
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(62rem 34rem at 96% -8%, color-mix(in srgb, var(--accent) var(--sign-haze), transparent), transparent 84%),
-    radial-gradient(46rem 34rem at -12% 34%, color-mix(in srgb, var(--highlight) var(--river-haze), transparent), transparent 84%),
-    radial-gradient(42rem 24rem at 62% 108%, color-mix(in srgb, var(--secondary) var(--sodium-haze), transparent), transparent 82%),
-    /* La Plata diagonal: one 45deg cut across the orthogonal city grid. */
-    repeating-linear-gradient(45deg, var(--diag-grid) 0 1px, transparent 1px 112px),
-    linear-gradient(var(--signal-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--signal-grid) 1px, transparent 1px);
-  background-size: auto, auto, auto, auto, 56px 56px, 56px 56px;
-  color: var(--text);
-  font-family: var(--font-ui);
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--font-sans);
   font-size: var(--step-0);
   line-height: 1.6;
-  font-optical-sizing: auto;
+  font-variant-numeric: tabular-nums;
   transition:
-    background-color 180ms ease,
-    color 180ms ease;
+    background-color var(--dur-medium) var(--ease-standard),
+    color var(--dur-medium) var(--ease-standard);
 }
 
 img,
 svg,
-picture {
+picture,
+video {
   display: block;
   max-width: 100%;
 }
 
 a {
-  color: var(--accent);
+  color: var(--cue);
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.22em;
 }
 
 a:hover {
@@ -165,25 +265,25 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-small);
 }
 
 h1,
 h2,
-h3 {
-  font-family: var(--font-display), var(--font-ui);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--step-3);
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  font-weight: 700;
 }
 
 h2 {
@@ -202,33 +302,36 @@ li {
 code,
 kbd,
 samp {
-  font-family: var(--font-data);
-  font-size: 0.86em;
-  font-stretch: 87.5%;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
 }
 
-code.inline,
 :not(pre) > code {
-  /* Long paths and commands wrap instead of widening the page on phones. */
   overflow-wrap: anywhere;
-  padding: 0.1em 0.35em;
-  border-radius: 6px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  padding: 0.08em 0.34em;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-small);
+  background: var(--panel);
+}
+
+kbd {
+  padding: 0.05em 0.38em;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-small);
+  background: var(--panel);
 }
 
 pre {
   overflow-x: auto;
   padding: 1rem 1.25rem;
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-inline-start: 2px solid var(--highlight);
-  box-shadow: inset 0 0 1.5rem color-mix(in srgb, var(--highlight) 3%, transparent);
+  border: 1px solid var(--rule);
+  border-inline-start: 2px solid var(--cue);
+  border-radius: var(--radius-small);
+  background: var(--sunken);
 }
 
-/* Shiki dual themes (astro.config.mjs): night tokens by default,
-   newsprint tokens in light mode, both AA-checked against their bg. */
+/* Shiki dual themes (astro.config.mjs), both AA-checked against their bg. */
 pre,
 pre span {
   color: var(--shiki-dark) !important;
@@ -244,22 +347,21 @@ pre span {
 hr {
   height: 1px;
   border: 0;
-  background: linear-gradient(90deg, var(--secondary), var(--accent) 52%, var(--highlight));
-  opacity: 0.7;
+  background: var(--rule);
 }
 
-/* ------------------------------------------------------------- chrome --- */
+/* ------------------------------------------------------------ chrome --- */
 
 .skip-link {
   position: absolute;
-  left: 1rem;
   top: -4rem;
+  left: 1rem;
   z-index: 100;
   padding: 0.6rem 1rem;
-  border-radius: 8px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 700;
+  border-radius: var(--radius-small);
+  background: var(--signal);
+  color: var(--on-signal);
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -267,6 +369,7 @@ hr {
   top: 1rem;
 }
 
+/* Top rail: the site's Cockpit bar. Solid `base`, one hairline on the inner edge. */
 .site-nav {
   position: sticky;
   top: 0;
@@ -275,73 +378,44 @@ hr {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding: 0.75rem var(--gutter);
-  background: color-mix(in oklab, var(--bg) 91%, transparent);
-  backdrop-filter: blur(14px) saturate(1.2);
-  border-bottom: 1px solid var(--line);
-  box-shadow: 0 0.6rem 1.8rem color-mix(in srgb, var(--bg) 34%, transparent);
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-
-/* A single illuminated route ties the Buenos Aires / Patagonia visual language
-   together without turning every surface into a neon sign. */
-.site-nav::after {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 2%,
-    var(--secondary) 24%,
-    var(--accent) 54%,
-    var(--highlight) 78%,
-    transparent 98%
-  );
-  content: '';
-  opacity: 0.72;
-  pointer-events: none;
+  gap: 0.5rem 1.25rem;
+  min-height: 3.5rem;
+  padding: 0.35rem var(--gutter);
+  border-bottom: 1px solid var(--rule);
+  background: var(--base);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  color: var(--text);
+  gap: 0.6rem;
+  color: var(--ink);
   text-decoration: none;
-  font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .brand-copy {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.18rem;
   line-height: 1;
 }
 
-.brand .os {
-  color: var(--accent);
+.brand-name {
+  font: 600 1.18rem var(--font-display);
+  letter-spacing: 0.01em;
 }
 
 .brand-copy small {
-  color: var(--text-muted);
-  font: 0.52rem var(--font-data);
-  letter-spacing: 0.09em;
+  color: var(--ink-muted);
+  font: 500 0.6rem var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .brand-mark {
   flex: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin: -0.25rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .mark-on-light {
@@ -360,41 +434,71 @@ hr {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem clamp(0.55rem, 1vw, 1rem);
+  gap: 0.25rem clamp(0.6rem, 1.1vw, 1.15rem);
   list-style: none;
 }
 
+/* Rail items: an on-air bar on the edge facing the content marks the current page. */
 .site-nav > nav > ul > li > a,
 .nav-more > summary {
-  display: inline-block;
-  padding: 0.3rem 0;
-  color: var(--text-muted);
+  position: relative;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: var(--ink-muted);
+  font-size: 0.94rem;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
+}
+
+.site-nav > nav > ul > li > a::after,
+.nav-more > summary::after {
+  position: absolute;
+  right: 0;
+  bottom: calc(-0.35rem - 1px);
+  left: 0;
+  height: 3px;
+  background: var(--signal);
+  content: '';
+  transform: scaleX(0);
+  transition: transform var(--dur-settle-fast) var(--ease-settle-fast);
 }
 
 .site-nav > nav > ul > li > a:hover,
 .nav-more > summary:hover {
-  color: var(--text);
+  color: var(--ink);
 }
 
 .site-nav > nav > ul > li > a[aria-current='page'],
 .nav-more > summary.more-current {
-  color: var(--text);
-  border-bottom-color: var(--accent);
+  color: var(--ink);
+}
+
+.site-nav > nav > ul > li > a[aria-current='page']::after,
+.nav-more > summary.more-current::after,
+.nav-more[open] > summary::after {
+  transform: scaleX(1);
+}
+
+/* Open state (Signal Bezel §8): the trigger keeps its underline toward the surface. */
+.nav-more[open] > summary {
+  color: var(--ink);
 }
 
 .site-nav > nav > ul > li > a.nav-install {
-  padding: 0.3rem 0.85rem;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  color: var(--text);
+  min-height: 2.25rem;
+  padding: 0 0.85rem;
+  border-radius: var(--radius-small);
+  background: var(--signal);
+  color: var(--on-signal);
+  font-weight: 600;
 }
 
-.site-nav > nav > ul > li > a.nav-install[aria-current='page'],
+.site-nav > nav > ul > li > a.nav-install::after {
+  display: none;
+}
+
 .site-nav > nav > ul > li > a.nav-install:hover {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: color-mix(in oklab, var(--signal) 88%, var(--ink));
 }
 
 .nav-more {
@@ -402,10 +506,7 @@ hr {
 }
 
 .nav-more > summary {
-  display: inline-flex;
-  min-height: 2rem;
-  align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   cursor: pointer;
   list-style: none;
 }
@@ -415,115 +516,129 @@ hr {
 }
 
 .nav-more > summary span {
-  color: var(--secondary);
-  font-size: 0.9em;
-  transition: transform 160ms ease;
+  font-size: 0.85em;
+  transition: transform var(--dur-short) var(--ease-standard);
 }
 
 .nav-more[open] > summary span {
   transform: rotate(180deg);
 }
 
+/* Anchored surfaces (menus) reveal by scan-in from their trigger edge. */
+.nav-more > ul,
+.mobile-menu nav {
+  animation: scan-in-down var(--dur-medium) var(--ease-enter) both;
+}
+
 .nav-more > ul {
   position: absolute;
   z-index: 24;
-  top: calc(100% + 0.8rem);
-  right: -0.8rem;
+  top: calc(100% + 0.4rem);
+  left: 50%;
   display: grid;
-  width: 13.5rem;
-  gap: 0.15rem;
-  padding: 0.45rem;
-  border: 1px solid var(--line);
+  width: 14rem;
+  gap: 1px;
+  padding: 0.35rem;
+  border: 1px solid var(--rule-strong);
   border-radius: var(--radius);
-  background: color-mix(in oklab, var(--surface-raised) 94%, var(--bg));
-  box-shadow:
-    0 1rem 2.5rem color-mix(in srgb, var(--bg) 38%, transparent),
-    0 0 1.2rem color-mix(in srgb, var(--highlight) 9%, transparent);
+  background: var(--panel);
+  box-shadow: var(--elevation);
   list-style: none;
+  translate: -50% 0;
 }
 
-.nav-more > ul::before {
+/* Registration tick: the open surface's leading top corner. */
+.nav-more > ul::before,
+.mobile-menu nav::before {
   position: absolute;
   top: -1px;
-  right: 0.6rem;
-  left: 0.6rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--secondary), var(--accent), var(--highlight));
+  left: -1px;
+  width: 2px;
+  height: 10px;
+  background: var(--signal);
   content: '';
 }
 
 .nav-more > ul a {
   display: flex;
-  min-height: 2.55rem;
+  min-height: 2.5rem;
   align-items: center;
-  padding: 0.45rem 0.7rem;
-  border: 1px solid transparent;
-  border-radius: 0.55rem;
-  color: var(--text-muted);
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-small);
+  color: var(--ink-muted);
   text-decoration: none;
 }
 
-.nav-more > ul a:hover,
-.nav-more > ul a[aria-current='page'] {
-  border-color: var(--line);
-  background: var(--surface);
-  color: var(--text);
+.nav-more > ul a:hover {
+  background: var(--raised);
+  color: var(--ink);
 }
 
 .nav-more > ul a[aria-current='page'] {
-  box-shadow: inset 2px 0 var(--accent);
+  background: var(--raised);
+  color: var(--ink);
+  box-shadow: inset 2px 0 var(--signal);
 }
 
-.lang-switch {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 0.12rem;
-  padding: 0.18rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--surface) 82%, var(--bg));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+@keyframes scan-in-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    clip-path: inset(0 0 -2rem 0);
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.lang-switch a {
-  display: inline-flex;
-  min-height: 2rem;
-  align-items: center;
-  gap: 0.32rem;
-  padding: 0 0.55rem;
-  border-radius: 999px;
-  color: var(--text-muted);
-  font: 0.74rem var(--font-data);
-  letter-spacing: 0.015em;
-  text-decoration: none;
-}
-
-.lang-switch a:hover {
-  color: var(--text);
-}
-
-.lang-switch a.lang-current {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: inset 0 0 0 1px var(--line);
-}
-
-.lang-switch .flag-ar {
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text) 18%, transparent);
-}
-
+/* Segmented switches (language, colour mode): square segments, on-air state. */
+.lang-switch,
 .color-switch {
   display: inline-flex;
   flex: none;
+  align-items: stretch;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  background: var(--sunken);
+}
+
+.lang-switch a,
+.color-switch label span {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.25rem;
   align-items: center;
-  gap: 0.12rem;
-  padding: 0.18rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--surface) 82%, var(--bg));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+  gap: 0.4rem;
+  padding: 0 0.6rem;
+  color: var(--ink-muted);
+  font: 500 0.72rem var(--font-mono);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.lang-switch a + a,
+.color-switch label + label span {
+  border-left: 1px solid var(--rule);
+}
+
+.lang-switch a:hover,
+.color-switch label:hover span {
+  color: var(--ink);
+}
+
+.lang-switch a.lang-current,
+.color-switch input:checked + span {
+  background: var(--raised);
+  color: var(--ink);
+  box-shadow: inset 0 -2px var(--signal);
+}
+
+.lang-switch .flag-ar {
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px var(--rule);
 }
 
 .color-switch legend {
@@ -538,25 +653,7 @@ hr {
 .color-switch label {
   position: relative;
   display: inline-flex;
-  min-height: 2rem;
-  align-items: center;
-  border-radius: 999px;
-  color: var(--text-muted);
   cursor: pointer;
-  font: 0.74rem var(--font-data);
-  letter-spacing: 0.015em;
-}
-
-.color-switch label:has(input[value='system']) {
-  --choice-signal: var(--secondary);
-}
-
-.color-switch label:has(input[value='light']) {
-  --choice-signal: var(--highlight);
-}
-
-.color-switch label:has(input[value='dark']) {
-  --choice-signal: var(--accent);
 }
 
 .color-switch input {
@@ -566,327 +663,147 @@ hr {
   opacity: 0;
 }
 
-.color-switch label span {
-  display: inline-flex;
-  min-height: 2rem;
-  align-items: center;
-  gap: 0.4rem;
-  padding-inline: 0.6rem;
-  border: 1px solid transparent;
-  border-radius: inherit;
-  transition:
-    color 160ms ease,
-    background-color 160ms ease,
-    border-color 160ms ease;
-}
-
 .color-switch label svg {
-  width: 0.86rem;
-  height: 0.86rem;
+  width: 0.9rem;
+  height: 0.9rem;
   flex: none;
   fill: none;
-  stroke: var(--choice-signal);
+  stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.35;
-  opacity: 0.78;
-  transition:
-    opacity 160ms ease,
-    filter 160ms ease,
-    transform 160ms ease;
-}
-
-.color-switch input:checked + span {
-  border-color: color-mix(in oklab, var(--choice-signal, var(--accent)) 54%, var(--line));
-  background: color-mix(in oklab, var(--choice-signal, var(--accent)) 10%, var(--surface-raised));
-  color: var(--text);
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--choice-signal, var(--accent)) 12%, transparent),
-    0 0 1rem color-mix(in srgb, var(--choice-signal, var(--accent)) 10%, transparent);
+  stroke-width: 1.5;
 }
 
 .color-switch input:checked + span svg {
-  opacity: 1;
-  transform: scale(1.12);
-  filter: drop-shadow(0 0 0.22rem color-mix(in srgb, var(--choice-signal) 55%, transparent));
+  stroke: var(--signal);
 }
 
 .color-switch input:focus-visible + span {
-  outline: 3px solid var(--focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
-.color-switch label:hover span {
-  color: var(--text);
+.mode-name {
+  font-weight: inherit;
 }
 
-.color-switch label:hover svg {
-  opacity: 1;
+.community {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+.community a {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-small);
+  color: var(--ink);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.community a:hover {
+  border-color: var(--rule-strong);
+  background: var(--raised);
 }
 
 .mobile-menu {
   display: none;
 }
 
-.app {
-  position: relative;
-  flex: 1;
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: clamp(2rem, 1rem + 4vw, 4rem) var(--gutter);
-}
-
-/* A quiet transit line carries the site's Buenos Aires signal through long pages. */
-.app::before {
-  position: absolute;
-  top: 3rem;
-  bottom: 3rem;
-  left: 1rem;
-  width: 1px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    color-mix(in srgb, var(--highlight) 54%, transparent) 8%,
-    color-mix(in srgb, var(--accent) 38%, transparent) 52%,
-    color-mix(in srgb, var(--secondary) 52%, transparent) 88%,
-    transparent
-  );
-  box-shadow: 0 0 0.6rem color-mix(in srgb, var(--highlight) 20%, transparent);
-  content: '';
-  pointer-events: none;
-}
-
-@media (max-width: 1219px) {
-  .app::before {
-    display: none;
-  }
-}
-
-@media (min-width: 1600px) {
-  .app {
-    max-width: 1400px;
-  }
-}
-
-.site-footer {
-  display: grid;
-  gap: 0.75rem;
-  padding: 2rem var(--gutter) 2.5rem;
-  border-top: 1px solid var(--line);
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent 56%);
-  color: var(--text-muted);
-  font-size: var(--step--1);
-  transition:
-    border-color 180ms ease,
-    color 180ms ease;
-}
-
-.site-footer nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.25rem;
-  list-style: none;
-}
-
-.site-footer .fine {
-  max-width: var(--measure);
-}
-
-.involved {
-  display: grid;
-  gap: 0.9rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.involved h2 {
-  margin: 0;
-  color: var(--text);
-  font-size: var(--step-0);
-}
-
-.involved ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.involved a {
-  display: grid;
-  gap: 0.35rem;
-  height: 100%;
-  padding: 1rem 1.05rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--text-muted);
-  text-decoration: none;
-  transition:
-    border-color 180ms ease,
-    background-color 180ms ease;
-}
-
-.involved a strong {
-  color: var(--text);
-  font-size: var(--step-0);
-}
-
-.involved a:hover,
-.involved a:focus-visible {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
-}
-
-.community {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.community a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  min-height: 2.1rem;
-  padding: 0.3rem 0.65rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--text);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease;
-}
-
-.community a.community-org {
-  padding-inline: 0.5rem;
-}
-
-.community a:hover,
-.community a:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 .mobile-community {
   display: flex;
+  grid-template-columns: none !important;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
   list-style: none;
 }
 
 .mobile-menu nav .mobile-community a {
   display: inline-flex;
-  min-height: 2.1rem;
+  min-height: 2.5rem;
   align-items: center;
-  padding: 0.3rem 0.7rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--text);
-  font-size: 0.9rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-small);
+  color: var(--ink);
+  font-size: 0.88rem;
   text-decoration: none;
 }
 
-.mobile-menu nav .mobile-community a:hover,
-.mobile-menu nav .mobile-community a:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent);
+.mobile-group > p {
+  padding: 0.5rem 0.65rem 0.15rem;
+  color: var(--ink-muted);
+  font: 500 0.68rem var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-@media (max-width: 1200px) {
+/* The rail stays one row: community links live in the footer and the mobile menu below 1440px. */
+@media (max-width: 1439px) {
   .community {
     display: none;
   }
 }
 
-@media (min-width: 1201px) {
-  .mobile-community {
-    display: none;
-  }
-}
-
-/* Between the hamburger breakpoint and full desktop width, compact the
-   bar instead of letting the color switch wrap to a second row. */
-@media (min-width: 1201px) and (max-width: 1440px) {
-  .site-nav {
-    gap: 0.4rem 0.9rem;
-    padding-block: 0.55rem;
-  }
-  .brand {
-    font-size: 1.02rem;
-    gap: 0.5rem;
-  }
+@media (min-width: 1201px) and (max-width: 1360px) {
   .brand-copy small {
     display: none;
   }
-  .brand-mark {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
+
   .site-nav > nav > ul {
-    gap: 0.2rem 0.6rem;
-    font-size: 0.92rem;
-  }
-  .color-switch {
-    font-size: 0.8rem;
+    gap: 0.25rem 0.75rem;
   }
 }
 
 @media (max-width: 1200px) {
-  .site-nav {
-    position: sticky;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.75rem;
-    padding: 0.4rem var(--gutter);
-  }
-
   .site-nav > nav.main-nav {
     display: none;
   }
 
-  .lang-switch {
-    order: 2;
+  .site-nav {
+    gap: 0.4rem 0.6rem;
+  }
+
+  .brand {
+    margin-right: auto;
   }
 
   .mobile-menu {
-    display: block;
     position: relative;
-    order: 4;
-    margin-left: auto;
+    display: block;
+    order: 3;
+  }
+
+  .lang-switch {
+    order: 1;
   }
 
   .color-switch {
-    order: 3;
-    flex-basis: auto;
-    justify-content: flex-end;
-    margin: 0;
+    order: 2;
   }
 
   .mobile-menu summary {
     display: flex;
-    min-width: 5.5rem;
+    min-width: 2.75rem;
     min-height: 2.75rem;
     align-items: center;
     justify-content: center;
-    gap: 0.55rem;
-    padding: 0.35rem 0.65rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--text);
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-small);
+    color: var(--ink);
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     list-style: none;
   }
@@ -896,29 +813,28 @@ hr {
   }
 
   .mobile-menu[open] summary {
-    border-color: var(--accent);
+    box-shadow: inset 0 -2px var(--signal);
   }
 
   .mobile-menu nav {
     position: absolute;
     z-index: 20;
-    /* Keep the compact menu close to its trigger. */
     top: calc(100% + 0.5rem);
     right: 0;
-    width: min(19rem, calc(100vw - 1.6rem));
-    padding: 0.6rem;
-    border: 1px solid var(--line);
+    width: min(20rem, calc(100vw - 2rem));
+    max-height: calc(100svh - 5rem);
+    overflow-y: auto;
+    padding: 0.5rem;
+    border: 1px solid var(--rule-strong);
     border-radius: var(--radius);
-    background: var(--bg);
-    box-shadow: 0 1rem 2.5rem rgb(9 11 23 / 24%);
+    background: var(--panel);
+    box-shadow: var(--elevation);
   }
 
   .mobile-menu nav ul {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.25rem;
-    margin: 0;
-    padding: 0;
+    gap: 2px;
     list-style: none;
   }
 
@@ -926,142 +842,218 @@ hr {
     min-width: 0;
   }
 
+  .mobile-group,
+  .mobile-menu nav ul > li:last-child {
+    grid-column: 1 / -1;
+  }
+
   .mobile-menu nav ul a {
     display: flex;
     min-height: 2.75rem;
     align-items: center;
     padding: 0.35rem 0.65rem;
-    border: 1px solid transparent;
-    border-radius: 0.6rem;
+    border-radius: var(--radius-small);
+    color: var(--ink);
+    font-size: 0.92rem;
     text-decoration: none;
-    font-size: 0.9rem;
   }
 
   .mobile-menu nav ul a[aria-current='page'] {
-    border-color: var(--line);
-    background: var(--surface);
-    color: var(--text);
+    background: var(--raised);
+    box-shadow: inset 2px 0 var(--signal);
   }
 
   .mobile-menu nav ul a.nav-install {
-    margin: 0;
-    padding-inline: 0.65rem;
+    justify-content: center;
+    margin-top: 0.35rem;
+    background: var(--signal);
+    color: var(--on-signal);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 900px) {
+  .mode-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  .mobile-menu nav ul a.nav-install[aria-current='page'] {
-    border-color: var(--accent);
-    background: color-mix(in oklab, var(--accent) 12%, var(--surface));
-    color: var(--text);
+  .color-switch label span,
+  .lang-switch a {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+    padding-inline: 0.45rem;
   }
 }
 
 @media (max-width: 600px) {
-  .site-nav {
-    gap: 0.3rem 0.6rem;
-    padding-block: 0.45rem;
-  }
-
-  .brand {
-    font-size: 1rem;
-    gap: 0.5rem;
-  }
-
-  .brand-mark {
-    width: 1.7rem;
-    height: 1.7rem;
-  }
-
   .brand-copy small {
     display: none;
   }
 
-  .lang-switch {
-    order: 1;
-    margin-left: auto;
+  .mobile-menu summary > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .mobile-menu {
-    order: 2;
-    margin-left: 0;
-  }
-
-  .color-switch {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: center;
-    margin-inline: auto;
+    position: static;
   }
 
   .mobile-menu nav {
-    top: calc(100% + 3.2rem);
+    right: var(--gutter);
   }
 
-  .color-switch label span {
-    min-width: 2.65rem;
-    justify-content: center;
-    padding-inline: 0.45rem;
-    font-size: 0.68rem;
+  .lang-switch .flag-ar {
+    display: none;
   }
-}
 
-@media (max-width: 899px) {
-  body {
-    background-attachment: scroll;
+  .color-switch label span,
+  .lang-switch a {
+    min-width: 2.5rem;
+    padding-inline: 0.3rem;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body,
-  .site-nav,
-  .site-footer {
-    transition: none;
+/* Phones: the mark carries the brand; its name stays available to assistive tech. */
+@media (max-width: 440px) {
+  .brand-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  .color-switch label span {
-    transition: none;
-  }
-
-  .nav-more > summary span {
-    transition: none;
-  }
-
-  .card:hover {
-    transform: none;
+  .color-switch label span,
+  .lang-switch a {
+    min-width: 2.4rem;
   }
 }
 
-/* ----------------------------------------------------------- sections --- */
+/* -------------------------------------------------------------- main --- */
+
+.app {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(2rem, 1rem + 4vw, 4rem) var(--gutter);
+}
+
+@media (min-width: 1600px) {
+  .app {
+    max-width: 1440px;
+  }
+}
+
+/* ------------------------------------------------------------ footer --- */
+
+.site-footer {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2.5rem var(--gutter) 2.75rem;
+  border-top: 1px solid var(--rule);
+  background: var(--ground);
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.footer-brand {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  max-width: 36ch;
+}
+
+.footer-brand p:first-child {
+  color: var(--ink);
+  font: 600 1.25rem/1.2 var(--font-display);
+}
+
+.site-footer h2 {
+  margin-bottom: 0.6rem;
+  color: var(--ink-muted);
+  font: 500 0.7rem var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer ul {
+  display: grid;
+  gap: 0.15rem;
+  list-style: none;
+}
+
+.site-footer ul a {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-footer ul a:hover {
+  color: var(--cue);
+  text-decoration: underline;
+}
+
+.site-footer .fine {
+  max-width: 96ch;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.site-footer .fine a {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------------------------------------------------------- sections --- */
 
 .section {
-  margin-block: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  margin-block: clamp(3rem, 1.5rem + 5vw, 6rem);
 }
 
 .section[id] {
-  scroll-margin-top: 10rem;
-}
-
-@media (min-width: 421px) and (max-width: 899px) {
-  .section[id] {
-    scroll-margin-top: 7rem;
-  }
-}
-
-@media (min-width: 900px) {
-  .section[id] {
-    scroll-margin-top: 5rem;
-  }
+  scroll-margin-top: 5rem;
 }
 
 .section > * + * {
   margin-top: 1rem;
 }
 
-/* Prose lists only: component grids opt out with role="list". */
 .section > p,
 .section > ul:not([role='list']),
 .section > ol:not([role='list']) {
   max-width: var(--measure);
-  color: var(--text-muted);
+  color: var(--ink-muted);
 }
 
 .section > ul:not([role='list']),
@@ -1075,186 +1067,250 @@ hr {
 }
 
 .lede {
+  max-width: 52ch;
+  color: var(--ink-muted);
   font-size: var(--step-1);
   line-height: 1.45;
-  color: var(--text-muted);
-  max-width: 48ch;
 }
 
-/* An eyebrow names what kind of thing follows (a status, a section role). */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: var(--font-data);
-  font-stretch: 87.5%;
-  font-size: var(--step--1);
+/* Eyebrow (RFC §2): Plex Mono, uppercase, +8% tracking, inkMuted, optional channel number. */
+.eyebrow,
+main .plate-id {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.9rem;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  font-weight: 500;
+  line-height: 1.5 !important;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--secondary);
 }
 
-/* A short three-signal route marker repeats the cyan / sign / sodium palette. */
-.eyebrow::before {
-  width: 1.15rem;
-  height: 2px;
-  flex: none;
-  background: linear-gradient(90deg, var(--highlight) 0 38%, var(--accent) 38% 72%, var(--secondary) 72%);
-  box-shadow: 0 0 0.6rem color-mix(in srgb, var(--highlight) 20%, transparent);
-  content: '';
+main .plate-id {
+  margin-bottom: 1rem;
 }
 
+.eyebrow b,
+.plate-id strong,
+.channel {
+  color: var(--signal);
+  font-weight: 500;
+}
+
+.plate-id span + span::before {
+  margin-right: 0.9rem;
+  color: var(--ink-faint);
+  content: '/';
+}
+
+/* Hairline section head: rule + eyebrow + heading, flush left. */
+.rule-head {
+  display: grid;
+  gap: 0.6rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* CTAs: square-shouldered instrument keys. */
 .cta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .cta {
   display: inline-flex;
+  min-height: 2.75rem;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  border-radius: 999px;
-  border: 1px solid var(--accent);
-  font-weight: 600;
+  gap: 0.55rem;
+  padding: 0 1.15rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  color: var(--ink);
+  font-weight: 500;
   text-decoration: none;
   transition:
-    color 160ms ease,
-    background-color 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease,
-    transform 160ms ease;
-}
-
-.cta.primary {
-  background: var(--accent);
-  color: var(--accent-ink);
-  box-shadow: 0 0.4rem 1.5rem color-mix(in srgb, var(--accent) 19%, transparent);
-}
-
-.cta.secondary {
-  color: var(--text);
+    background-color var(--dur-short) var(--ease-standard),
+    border-color var(--dur-short) var(--ease-standard),
+    transform var(--dur-settle-fast) var(--ease-settle-fast);
 }
 
 .cta:hover {
-  text-decoration: none;
-  filter: brightness(1.06);
-  transform: translateY(-1px);
+  border-color: var(--ink-muted);
+  background: var(--raised);
+}
+
+.cta:active {
+  transform: translateY(1px);
+}
+
+.cta.primary {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--on-signal);
+  font-weight: 600;
 }
 
 .cta.primary:hover {
-  box-shadow: 0 0.5rem 1.8rem color-mix(in srgb, var(--accent) 30%, transparent);
+  background: color-mix(in oklab, var(--signal) 88%, var(--ink));
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-  gap: 1rem;
+.cta.secondary {
+  background: transparent;
 }
 
-.card {
-  padding: 1.4rem 1.5rem;
-  border-radius: var(--radius);
-  background: linear-gradient(145deg, color-mix(in oklab, var(--surface-raised) 54%, var(--surface)), var(--surface));
-  border: 1px solid var(--line);
-  box-shadow: 0 1rem 2.4rem color-mix(in srgb, var(--bg) 12%, transparent);
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
-}
-
-.card:hover {
-  border-color: color-mix(in oklab, var(--highlight) 44%, var(--line));
-  box-shadow:
-    0 1rem 2.4rem color-mix(in srgb, var(--bg) 18%, transparent),
-    0 0 1.1rem color-mix(in srgb, var(--highlight) 8%, transparent);
-  transform: translateY(-2px);
-}
-
-.card h3 {
-  margin-bottom: 0.4rem;
-}
-
-.card p {
-  color: var(--text-muted);
-  font-size: 0.97rem;
-}
-
-/* ------------------------------------------------ Hornero 199X plates --- */
-
-/* Numbered editorial chapter head: 01 / LA SEÑAL — vintage technical press. */
-.chapter {
-  display: flex;
-  align-items: baseline;
-  gap: 0.9rem;
-  margin-bottom: 1.15rem;
-  font-family: var(--font-data);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+/* Maturity tag: honest labels from the edition catalogue. */
+.maturity {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  color: var(--ink-muted);
+  font: 500 0.68rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
 }
-.chapter b {
-  color: var(--accent);
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-}
-.chapter::after {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--line), transparent);
+
+.maturity::before {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
   content: '';
 }
 
-/* Broadcast identification plate: mechanical frame, registration marks. */
-.broadcast-plate {
-  position: relative;
-  border: 1px solid var(--line);
-  background: color-mix(in oklab, var(--surface) 72%, transparent);
-  padding: clamp(1rem, 2.5vw, 1.6rem);
+.maturity[data-maturity='supported'] {
+  border-color: var(--phosphor);
+  color: var(--phosphor);
 }
-.broadcast-plate::before,
-.broadcast-plate::after {
+
+.maturity[data-maturity='preview'] {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.maturity[data-maturity='experimental'] {
+  border-color: var(--cue);
+  color: var(--cue);
+}
+
+.maturity[data-maturity='planned'],
+.maturity[data-maturity='in-development'] {
+  border-style: dashed;
+}
+
+.maturity[data-maturity='planned']::before,
+.maturity[data-maturity='in-development']::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+/* Segmented meter (RFC §2): discrete VU-style segments with a tabular readout. */
+.meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font: 500 0.72rem var(--font-mono);
+  color: var(--ink-muted);
+}
+
+.meter-track {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 2px;
+}
+
+.meter-track i {
+  width: 0.7rem;
+  height: 0.5rem;
+  background: var(--sunken);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.meter-track i.on {
+  background: var(--meter-color, var(--signal));
+  box-shadow: none;
+}
+
+/* Registration ticks for brand frames (captures, plates). */
+.ticked {
+  position: relative;
+}
+
+.ticked::before,
+.ticked::after {
   position: absolute;
-  width: 0.9rem;
-  height: 0.9rem;
-  border: 0 solid var(--accent);
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--signal);
   content: '';
   pointer-events: none;
 }
-.broadcast-plate::before {
-  top: -1px;
-  left: -1px;
+
+.ticked::before {
+  top: -6px;
+  left: -6px;
   border-top-width: 2px;
   border-left-width: 2px;
 }
-.broadcast-plate::after {
-  right: -1px;
-  bottom: -1px;
+
+.ticked::after {
+  right: -6px;
+  bottom: -6px;
   border-right-width: 2px;
   border-bottom-width: 2px;
 }
-main .plate-id {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.9rem;
-  margin-bottom: 0.9rem;
-  font-family: var(--font-data);
-  /* Page-scoped hero rules must not inflate the identification plate. */
-  font-size: 0.62rem !important;
-  line-height: 1.5 !important;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--secondary);
-}
-.plate-id strong {
-  color: var(--text);
+
+/* Broadcast identification plate (community, 404). */
+.broadcast-plate {
+  position: relative;
+  padding: clamp(1rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--panel);
 }
 
-/* Signal acquisition: three bars settle once on load; static otherwise. */
-@keyframes signal-in {
+.broadcast-plate::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 2px;
+  height: 10px;
+  background: var(--signal);
+  content: '';
+}
+
+/* Signal acquisition: three meter segments settle once. */
+.signal-bars {
+  display: flex;
+  gap: 3px;
+  width: 7rem;
+  height: 6px;
+  margin-top: 0.8rem;
+}
+
+.signal-bars i {
+  flex: 1;
+  background: var(--signal);
+  transform-origin: left;
+  animation: segment-in var(--dur-settle) var(--ease-settle) both;
+}
+
+.signal-bars i:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.signal-bars i:nth-child(3) {
+  background: var(--rule-strong);
+  animation-delay: 160ms;
+}
+
+@keyframes segment-in {
   from {
     transform: scaleX(0);
   }
@@ -1262,39 +1318,30 @@ main .plate-id {
     transform: scaleX(1);
   }
 }
-.signal-bars {
-  display: flex;
-  gap: 4px;
-  height: 4px;
-  margin-top: 0.7rem;
-}
-.signal-bars i {
-  flex: 1;
-  transform-origin: left;
-  animation: signal-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-.signal-bars i:nth-child(1) {
-  background: var(--electric, #427ccd);
-}
-.signal-bars i:nth-child(2) {
-  background: var(--accent);
-  animation-delay: 120ms;
-}
-.signal-bars i:nth-child(3) {
-  background: var(--secondary);
-  animation-delay: 240ms;
-}
-@media (prefers-reduced-motion: reduce) {
-  .signal-bars i {
-    animation: none;
-  }
+
+/* Honest imagery label for captures taken before Hornero Signal shipped. */
+.capture-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink-muted);
+  font: 500 0.68rem/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-/* ------------------------------------------------------------- tables --- */
+.capture-label[data-appearance='pre-signal'] {
+  color: var(--on-cue-well);
+  background: var(--cue-well);
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-small);
+}
+
+/* ------------------------------------------------------------ tables --- */
 
 .table-scroll {
   overflow-x: auto;
-  border: 1px solid var(--line);
+  border: 1px solid var(--rule);
   border-radius: var(--radius);
 }
 
@@ -1306,154 +1353,29 @@ table {
 
 caption {
   padding: 0.75rem 1rem;
-  text-align: left;
-  color: var(--text-muted);
+  color: var(--ink-muted);
   font-size: var(--step--1);
+  text-align: left;
 }
 
 th,
 td {
-  padding: 0.7rem 1rem;
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--rule);
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid var(--line);
 }
 
 thead th {
-  background: var(--surface);
-  font-weight: 600;
-}
-
-.table-note {
-  font-size: var(--step--1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* ------------------------------------------- navigation by visitor task --- */
-
-.mode-name {
-  font-weight: inherit;
-}
-
-.mobile-group > p {
-  padding: 0.5rem 0.65rem 0.15rem;
-  color: var(--secondary);
-  font: 0.68rem var(--font-data);
-  font-stretch: 87.5%;
+  background: var(--panel);
+  color: var(--ink-muted);
+  font: 500 0.72rem var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.mobile-menu nav ul a:not(.nav-install) {
-  color: var(--text);
-}
+/* ------------------------------------------------------------ motion --- */
 
-.mobile-group,
-.mobile-menu nav ul > li:last-child {
-  grid-column: 1 / -1;
-}
-
-.mobile-group > ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.25rem;
-}
-
-@media (max-width: 900px) {
-  /* A single header row on phones: the desktop capture should come into view fast. */
-  .mode-name {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .color-switch label span {
-    min-width: 2.75rem;
-    min-height: 2.75rem;
-    justify-content: center;
-    padding-inline: 0;
-  }
-
-  .color-switch label svg {
-    width: 1rem;
-    height: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  /* One row no longer fits with the language switch added: the brand and
-     the hamburger keep the first row; language and color share the second. */
-  .site-nav {
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .brand {
-    margin-right: auto;
-    min-width: 0;
-  }
-
-  .lang-switch {
-    order: 2;
-    margin-left: 0;
-  }
-
-  .color-switch {
-    order: 3;
-  }
-
-  .mobile-menu {
-    order: 1;
-    margin-left: 0;
-  }
-
-  .mobile-menu summary {
-    min-width: 2.75rem;
-    padding-inline: 0.7rem;
-  }
-
-  .mobile-menu summary > span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .color-switch {
-    order: 2;
-    flex-basis: auto;
-    margin: 0;
-  }
-
-  /* Anchor the panel to the header (the hamburger is no longer at the
-     right edge now that the language switch sits next to it). */
-  .mobile-menu {
-    position: static;
-  }
-
-  .mobile-menu nav {
-    top: calc(100% + 0.5rem);
-    right: 0.8rem;
-  }
-}
-
-/* Cross-page transitions: a short mechanical dissolve, the header stays put.
-   Browsers without support, and reduced-motion visitors, navigate normally. */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
@@ -1465,12 +1387,22 @@ thead th {
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 180ms;
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+    animation-duration: var(--dur-short);
+    animation-timing-function: var(--ease-sweep);
   }
 }
 
-/* The AR flag's white band needs a real ring on light surfaces. */
-:root[data-color-mode='light'] .lang-switch .flag-ar {
-  box-shadow: 0 0 0 1px var(--line);
+/* RFC §3.6: reduced motion sets durations to 0 except short opacity cross-fades. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

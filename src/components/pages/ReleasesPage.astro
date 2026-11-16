@@ -36,7 +36,7 @@ const config = pins.config.repo;
   description={isEs ? `Cada release de HorneroOS: qué cambió para quienes lo usan y el registro técnico completo. La última es ${latestTagged?.name ?? 'la Preview actual'}, con Desktop, Studio y Gaming en una ISO firmada.` : `Every HorneroOS release: what changed for the people using it, and the full technical record. The latest is ${latestTagged?.name ?? 'the current Preview'}, with Desktop, Studio and Gaming on one signed ISO.`}
 >
   <section class="section">
-    <p class="plate-id"><strong>Archivo de transmisiones</strong><span>ARG / 199X</span><span>{isEs ? 'Historial de pre-releases' : 'Pre-release history'}</span></p>
+    <p class="plate-id"><strong>Archivo de transmisiones</strong><span>{isEs ? 'Historial de pre-releases' : 'Pre-release history'}</span></p>
     <h1>Releases</h1>
     <p>
       {isEs ? 'Cada release cuenta qué cambió para quienes usan HorneroOS y deja el registro técnico completo a un clic: el manifiesto fija las versiones exactas de shell y config que salen juntas, y ' : 'Each release says what changed for the people using HorneroOS and keeps the full technical record one click away: the manifest pins the exact shell and config versions that ship together, and '}
@@ -127,12 +127,12 @@ const config = pins.config.repo;
   }
 
   .now dt {
-    font-family: var(--font-data);
+    font-family: var(--font-mono);
     font-stretch: 87.5%;
     font-size: var(--step--1);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--secondary);
+    color: var(--phosphor);
   }
 
   .timeline {
@@ -148,8 +148,8 @@ const config = pins.config.repo;
     gap: 0.5rem;
     padding: 1.2rem 1.4rem;
     border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: var(--surface);
+    border: 1px solid var(--rule);
+    background: var(--panel);
   }
 
   .release.untagged {
@@ -157,7 +157,7 @@ const config = pins.config.repo;
   }
 
   .release:target {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--signal);
   }
 
   .release-head {
@@ -173,31 +173,31 @@ const config = pins.config.repo;
   }
 
   .status {
-    font-family: var(--font-data);
+    font-family: var(--font-mono);
     font-stretch: 87.5%;
     font-size: 0.74rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    color: var(--text-muted);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--rule);
+    color: var(--ink-muted);
   }
 
   .tagged .status {
-    border-color: var(--accent);
-    color: var(--text);
+    border-color: var(--signal);
+    color: var(--ink);
   }
 
   .candidate .status {
-    border-color: var(--highlight);
-    color: var(--highlight);
+    border-color: var(--cue);
+    color: var(--cue);
   }
 
   .when,
   .links {
     font-size: var(--step--1);
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .summary {
@@ -208,7 +208,7 @@ const config = pins.config.repo;
     display: grid;
     gap: 0.25rem;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .pins div {
@@ -218,9 +218,9 @@ const config = pins.config.repo;
   }
 
   .pins dt {
-    font-family: var(--font-data);
+    font-family: var(--font-mono);
     font-stretch: 87.5%;
     font-size: 0.78rem;
-    color: var(--secondary);
+    color: var(--phosphor);
   }
 </style>

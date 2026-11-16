@@ -52,7 +52,7 @@ const filters = (
   <main class="wallpapers-page" data-locale={locale}>
     <header class="wallpaper-intro">
       <div class="wallpaper-intro-copy">
-        <p class="plate-id"><strong>Fotografía argentina</strong><span>ARG / 199X</span><span>Autor y licencia en cada obra</span></p>
+        <p class="plate-id"><strong>Fotografía argentina</strong><span>Autor y licencia en cada obra</span></p>
         <h1>{isEs ? 'Fondos' : 'Wallpapers'}</h1>
         <p>
           {isEs ? 'Fotografías hechas en Argentina, combinadas con los temas regionales Hornero Originals: el canal Beagle en la hora azul, los Esteros del Iberá, Buenos Aires de noche.' : 'Photographs made in Argentina, paired with the regional Hornero Originals themes: the Beagle Channel at blue hour, the Iberá wetlands, Buenos Aires at night.'}
@@ -359,8 +359,8 @@ const filters = (
     max-width: 48rem;
   }
   .eyebrow {
-    color: var(--accent);
-    font: 0.72rem var(--font-data);
+    color: var(--signal);
+    font: 0.72rem var(--font-mono);
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -372,12 +372,12 @@ const filters = (
   }
   h1 em,
   h2 em {
-    color: var(--accent);
+    color: var(--signal);
     font-weight: 400;
   }
   .wallpaper-intro-copy > p:not(.eyebrow):not(.collection-facts) {
     max-width: 42rem;
-    color: var(--muted);
+    color: var(--ink-muted);
     font-size: clamp(1.05rem, 1.5vw, 1.25rem);
     line-height: 1.7;
   }
@@ -389,13 +389,13 @@ const filters = (
   }
   .collection-facts span {
     padding: 0.55rem 0.8rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font: 0.68rem var(--font-data);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    font: 0.68rem var(--font-mono);
   }
   .wallpaper-feature {
     min-width: 0;
-    border-left: 1px solid var(--line);
+    border-left: 1px solid var(--rule);
     padding-left: clamp(1rem, 2vw, 1.5rem);
   }
   .wallpaper-feature[hidden] {
@@ -409,7 +409,7 @@ const filters = (
     position: relative;
     overflow: hidden;
     aspect-ratio: 16 / 10;
-    background: var(--surface-raised);
+    background: var(--raised);
   }
   .wallpaper-feature img {
     display: block;
@@ -428,7 +428,7 @@ const filters = (
     padding: 0.5rem 0.65rem;
     color: white;
     background: rgb(8 11 20 / 78%);
-    font: 0.62rem var(--font-data);
+    font: 0.62rem var(--font-mono);
     letter-spacing: 0.08em;
   }
   .wallpaper-feature figcaption {
@@ -440,8 +440,8 @@ const filters = (
   }
   .wallpaper-feature figcaption p {
     margin-bottom: 0.35rem;
-    color: var(--muted);
-    font: 0.64rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.64rem var(--font-mono);
   }
   .wallpaper-feature figcaption strong {
     font-size: 1.12rem;
@@ -454,7 +454,7 @@ const filters = (
     font-size: 0.68rem;
   }
   .feature-credit span {
-    color: var(--muted);
+    color: var(--ink-muted);
   }
   .feature-links {
     display: flex;
@@ -464,11 +464,11 @@ const filters = (
   }
   .feature-links a {
     color: var(--ink);
-    text-decoration-color: var(--accent);
+    text-decoration-color: var(--signal);
     text-underline-offset: 0.2em;
   }
   .gallery {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
     padding-top: clamp(2rem, 5vw, 4rem);
   }
   .gallery-heading {
@@ -485,7 +485,7 @@ const filters = (
   }
   .gallery-heading > p {
     max-width: 27rem;
-    color: var(--muted);
+    color: var(--ink-muted);
   }
   .filters {
     display: flex;
@@ -500,14 +500,14 @@ const filters = (
     min-height: 2.75rem;
     color: var(--ink);
     background: transparent;
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
     padding: 0.6rem 0.9rem;
     cursor: pointer;
-    font: 0.7rem var(--font-data);
+    font: 0.7rem var(--font-mono);
   }
   .filter-count {
-    color: var(--muted);
+    color: var(--ink-muted);
     font-size: 0.62rem;
   }
   .filters button[aria-pressed='true'] .filter-count {
@@ -517,17 +517,17 @@ const filters = (
   .filter-status {
     min-height: 1.2em;
     margin: -1rem 0 1.25rem;
-    color: var(--muted);
-    font: 0.66rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.66rem var(--font-mono);
   }
   .filters button[aria-pressed='true'] {
-    color: var(--surface);
-    background: var(--accent);
-    border-color: var(--accent);
+    color: var(--panel);
+    background: var(--signal);
+    border-color: var(--signal);
   }
   .filters button:focus-visible,
   a:focus-visible {
-    outline: 3px solid var(--accent);
+    outline: 3px solid var(--signal);
     outline-offset: 3px;
   }
   .wallpaper-grid {
@@ -541,8 +541,8 @@ const filters = (
   .wallpaper-card {
     grid-column: span 3;
     min-width: 0;
-    border: 1px solid var(--line);
-    background: var(--surface);
+    border: 1px solid var(--rule);
+    background: var(--panel);
   }
   .wallpaper-card:nth-child(3n + 1) {
     grid-column: span 4;
@@ -574,7 +574,7 @@ const filters = (
     padding: 0.45rem 0.65rem;
     color: white;
     background: #090a0dcc;
-    font: 0.65rem var(--font-data);
+    font: 0.65rem var(--font-mono);
   }
   .wallpaper-caption {
     padding: clamp(1rem, 2vw, 1.4rem);
@@ -591,8 +591,8 @@ const filters = (
     margin: 0;
   }
   .wallpaper-title p {
-    color: var(--muted);
-    font: 0.67rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.67rem var(--font-mono);
   }
   .wallpaper-title h3 {
     margin-top: 0.45rem;
@@ -604,7 +604,7 @@ const filters = (
   .credits a,
   .note-links a {
     color: var(--ink);
-    text-decoration-color: var(--accent);
+    text-decoration-color: var(--signal);
     text-underline-offset: 0.2em;
   }
   .theme-link {
@@ -622,7 +622,7 @@ const filters = (
     font-size: 0.76rem;
   }
   .credits dt {
-    color: var(--muted);
+    color: var(--ink-muted);
   }
   .credits dd {
     margin: 0;
@@ -633,12 +633,12 @@ const filters = (
   .photo-note {
     margin-top: clamp(4rem, 9vw, 8rem);
     padding: clamp(1.4rem, 4vw, 3rem);
-    border: 1px solid var(--line);
-    background: var(--surface);
+    border: 1px solid var(--rule);
+    background: var(--panel);
   }
   .photo-note > p:not(.eyebrow) {
     max-width: 46rem;
-    color: var(--muted);
+    color: var(--ink-muted);
     line-height: 1.7;
   }
   .note-links {
@@ -649,7 +649,7 @@ const filters = (
     font-size: 0.82rem;
   }
   .no-results {
-    color: var(--muted);
+    color: var(--ink-muted);
   }
   .wallpaper-lightbox {
     width: min(72rem, calc(100vw - 2rem));
@@ -658,14 +658,13 @@ const filters = (
     margin: auto;
     padding: clamp(0.75rem, 2vw, 1.25rem);
     overflow: auto;
-    border: 1px solid var(--line);
-    background: var(--bg);
-    color: var(--text);
+    border: 1px solid var(--rule);
+    background: var(--base);
+    color: var(--ink);
     box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 55%);
   }
   .wallpaper-lightbox::backdrop {
-    background: rgb(4 7 13 / 82%);
-    backdrop-filter: blur(5px);
+    background: color-mix(in srgb, var(--scrim) 82%, transparent);
   }
   .lightbox-close-row {
     display: flex;
@@ -678,15 +677,15 @@ const filters = (
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.75rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--text);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--panel);
+    color: var(--ink);
     cursor: pointer;
-    font: 0.75rem var(--font-data);
+    font: 0.75rem var(--font-mono);
   }
   .lightbox-close span {
-    color: var(--accent);
+    color: var(--signal);
     font-size: 1.2rem;
     line-height: 1;
   }
@@ -709,8 +708,8 @@ const filters = (
     padding-top: 1rem;
   }
   .lightbox-place {
-    color: var(--highlight);
-    font: 0.7rem var(--font-data);
+    color: var(--cue);
+    font: 0.7rem var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
@@ -720,7 +719,7 @@ const filters = (
   }
   .lightbox-credit {
     grid-column: 1 / -1;
-    color: var(--muted);
+    color: var(--ink-muted);
     font-size: 0.85rem;
   }
   .lightbox-links {
@@ -732,8 +731,8 @@ const filters = (
     font-size: 0.82rem;
   }
   .lightbox-links a {
-    color: var(--text);
-    text-decoration-color: var(--accent);
+    color: var(--ink);
+    text-decoration-color: var(--signal);
     text-underline-offset: 0.2em;
   }
   .wallpaper-image:focus-visible,
@@ -817,7 +816,7 @@ const filters = (
 <style>
   /* 199X per-page direction: photography as a printed contact sheet. */
   .gallery figure, .gallery .photo-card { border-radius: 2px; }
-  .feature-index { font-family: var(--font-data); color: var(--accent); }
-  :root[data-color-mode='light'] .feature-index { color: var(--ice, #fff6e6); }
-  .credits { border-top: 3px solid var(--accent); padding-top: 0.6rem; }
+  .feature-index { font-family: var(--font-mono); color: var(--signal); }
+  :root[data-color-mode='light'] .feature-index { color: var(--ink); }
+  .credits { border-top: 3px solid var(--signal); padding-top: 0.6rem; }
 </style>
