@@ -1045,6 +1045,11 @@ hr {
   scroll-margin-top: 5rem;
 }
 
+/* The page's opening section sits under the rail, not a section gap below it. */
+.app > .section:first-child {
+  margin-top: 0;
+}
+
 .section > * + * {
   margin-top: 1rem;
 }
