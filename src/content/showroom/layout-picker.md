@@ -8,6 +8,7 @@ alt:
   en: 'The Hornero Layout Picker shows fifteen bar arrangements, with keyboard instructions along its lower edge.'
 order: 4
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

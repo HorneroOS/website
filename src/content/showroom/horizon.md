@@ -8,6 +8,7 @@ alt:
   en: 'Horizon layout in a real Hornero session, with controls arranged as a wide low-profile composition.'
 order: 10
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

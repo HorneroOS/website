@@ -3,7 +3,11 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 // Provenance travels with every capture (AGENTS.md "Website follows product").
+// `appearance` records whether the capture shows Hornero Signal or the desktop
+// before Signal shipped; pre-Signal captures render an honest label
+// (docs/CAPTURES.md).
 const provenance = z.object({
+  appearance: z.enum(['signal', 'pre-signal']),
   source: z.object({ es: z.string(), en: z.string() }),
   context: z.object({ es: z.string(), en: z.string() }).optional(),
   pins: z.record(z.string(), z.string()).optional(),

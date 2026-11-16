@@ -8,6 +8,7 @@ alt:
   en: 'Hornero Light running with a slim side rail over a sunlit Patagonian landscape; a shell notification confirms the theme was applied.'
 order: 1
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

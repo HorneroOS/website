@@ -8,6 +8,7 @@ alt:
   en: 'The Hornero launcher after typing ">wallpaper": a row of wallpaper thumbnails with one selected, previewed live as a pixel-art city street across the whole desktop behind it.'
 order: 16
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
     en: 'HorneroOS contributor-provided workstation capture'

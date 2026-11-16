@@ -8,6 +8,7 @@ alt:
   en: 'Hornero Control Center search overlay finds wallpaper controls inside the Appearance settings pane.'
 order: 12
 provenance:
+  appearance: pre-signal
   source:
     es: 'Revisión visual de Hornero Shell'
     en: 'Hornero Shell visual review'

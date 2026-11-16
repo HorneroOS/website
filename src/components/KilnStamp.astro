@@ -7,6 +7,8 @@
 export type LocalizedOrString = string | { es: string; en: string };
 
 export interface Provenance {
+  /** Whether the capture shows Hornero Signal or the appearance before it. */
+  appearance?: 'signal' | 'pre-signal';
   /** Who produced the frame, e.g. "Hornero QA" or "Development capture". */
   source: LocalizedOrString;
   /** Scenario or context, e.g. "layouts/apply-cockpit-clear". */
@@ -23,7 +25,7 @@ interface Props extends Provenance {
   locale?: 'es' | 'en';
 }
 
-const { source: rawSource, context: rawContext, pins = {}, resolution, theme, date, class: className, locale = 'es' } = Astro.props;
+const { appearance, source: rawSource, context: rawContext, pins = {}, resolution, theme, date, class: className, locale = 'es' } = Astro.props;
 const resolve = (value: LocalizedOrString | undefined) =>
   value === undefined ? undefined : typeof value === 'string' ? value : value[locale];
 const source = resolve(rawSource);
@@ -34,6 +36,11 @@ const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), th
 ---
 
 <p class:list={['stamp', className]}>
+  {appearance === 'pre-signal' && (
+    <span class="capture-label" data-appearance="pre-signal">
+      {locale === 'es' ? 'Preview — apariencia anterior' : 'Preview — previous appearance'}
+    </span>
+  )}
   <span class="stamp-source">{source}</span>
   {parts.map((p) => (
     <span class="stamp-part">{p}</span>
@@ -47,12 +54,11 @@ const parts = [context, ...Object.entries(pins).map(([k, v]) => `${k} ${v}`), th
     align-items: baseline;
     gap: 0.15rem 0.6rem;
     padding: 0.4rem 0.75rem;
-    border-radius: 8px;
-    background: color-mix(in oklab, var(--base) 90%, transparent);
+    border-radius: var(--radius-small);
+    background: var(--panel);
     border: 1px solid var(--rule);
     color: var(--ink-muted);
     font-family: var(--font-mono);
-    font-stretch: 75%;
     font-size: 0.72rem;
     line-height: 1.5;
     letter-spacing: 0.02em;

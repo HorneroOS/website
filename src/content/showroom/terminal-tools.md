@@ -8,6 +8,7 @@ alt:
   en: 'Two terminal windows on a Hornero desktop over a photograph of the Beagle Channel: btop showing processor, memory, disk, network and process panels, and the yazi file manager browsing a wallpapers folder with a mountain sunrise preview.'
 order: 14
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
     en: 'HorneroOS contributor-provided workstation capture'

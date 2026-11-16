@@ -8,6 +8,7 @@ alt:
   en: 'Hornero desktop with the Neon City cyberpunk skyline, bright cyan signs and amber transit behind the vertical shell rail.'
 order: 6
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura en host de Hornero'
     en: 'Hornero host capture'

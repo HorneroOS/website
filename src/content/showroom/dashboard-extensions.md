@@ -8,6 +8,7 @@ alt:
   en: 'The Hornero Dashboard over a photograph of the Beagle Channel at dusk: weather at 11 degrees and overcast, system details, calendar and clock, resource bars, a media panel with the Companion, and tabs for Dashboard, Media, Performance, Weather, Workspaces and Extensions.'
 order: 13
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
     en: 'HorneroOS contributor-provided workstation capture'

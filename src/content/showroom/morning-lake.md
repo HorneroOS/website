@@ -8,6 +8,7 @@ alt:
   en: 'Hornero desktop with a pale sunrise over a snow-covered alpine ridge and clouds, paired with a cool mint-accented shell rail.'
 order: 8
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura en host de Hornero'
     en: 'Hornero host capture'

@@ -57,6 +57,8 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
       </div>
       <figcaption>
         <KilnStamp
+          appearance="pre-signal"
+          locale={locale}
           source={isEs ? 'Host de desarrollo de Hornero' : 'Hornero development host'}
           context={isEs ? 'Kitty · CLI de apariencia' : 'Kitty · appearance CLI'}
           theme={isEs ? 'Oscuro' : 'Dark'}

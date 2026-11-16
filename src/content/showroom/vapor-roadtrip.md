@@ -8,6 +8,7 @@ alt:
   en: 'Hornero desktop with a synthwave desert road, coral cliffs and a dusk-purple sky behind the vertical shell rail.'
 order: 7
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura en host de Hornero'
     en: 'Hornero host capture'
