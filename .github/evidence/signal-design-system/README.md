@@ -1,7 +1,7 @@
 # Hornero Signal design system — evidence
 
 Captured with Playwright (Chromium) against the local Astro dev server of
-this branch (`after-*`) and against production www.horneroos.com before the
+this branch (`after-*`) and against production (`www.horneroos.com`) before the
 change (`before-*`). Browser screenshots of the website, not desktop
 captures.
 
