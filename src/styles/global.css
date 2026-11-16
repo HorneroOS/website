@@ -1045,6 +1045,11 @@ hr {
   scroll-margin-top: 5rem;
 }
 
+/* The page's opening section sits under the rail, not a section gap below it. */
+.app > .section:first-child {
+  margin-top: 0;
+}
+
 .section > * + * {
   margin-top: 1rem;
 }
@@ -1112,6 +1117,28 @@ main .plate-id {
   gap: 0.6rem;
   padding-top: 0.9rem;
   border-top: 1px solid var(--rule);
+}
+
+/* Edition hero: product name with its tagline and maturity meter. */
+.hero-head {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  margin-block: 0.4rem 1.25rem;
+}
+
+.hero-head h1 {
+  font-size: var(--step-4);
+  line-height: 0.98;
+}
+
+.hero-head .tagline {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--ink-muted);
+  font-size: 0.48em;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 /* CTAs: square-shouldered instrument keys. */
