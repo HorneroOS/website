@@ -224,7 +224,21 @@ const description = isEs
   : `HorneroOS is an Arch-based workstation for building, creating and playing, with a distinctive desktop experience and an integrated operating-system ecosystem. Desktop, Studio and Gaming editions on one signed ISO (${latestTagged?.version ?? 'Preview'}).`;
 ---
 
-<SiteLayout title={title} description={description}>
+<SiteLayout
+  title={title}
+  description={description}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'HorneroOS',
+    applicationCategory: 'OperatingSystem',
+    operatingSystem: 'Arch Linux (x86_64)',
+    description,
+    url: Astro.site ? new URL(L('/'), Astro.site).toString() : undefined,
+    softwareVersion: latestTagged?.version,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  }}
+>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-field" aria-hidden="true"></div>
     <div class="hero-copy">
