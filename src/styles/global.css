@@ -1114,6 +1114,28 @@ main .plate-id {
   border-top: 1px solid var(--rule);
 }
 
+/* Edition hero: product name with its tagline and maturity meter. */
+.hero-head {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  margin-block: 0.4rem 1.25rem;
+}
+
+.hero-head h1 {
+  font-size: var(--step-4);
+  line-height: 0.98;
+}
+
+.hero-head .tagline {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--ink-muted);
+  font-size: 0.48em;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 /* CTAs: square-shouldered instrument keys. */
 .cta-row {
   display: flex;

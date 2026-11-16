@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import AppLogo from '../../components/AppLogo.astro';
-import { gamingCatalogue, pins, short } from '../../data/product';
+import MaturityMeter from '../../components/MaturityMeter.astro';
+import { editions, gamingCatalogue, pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
 interface Props {
@@ -11,6 +12,8 @@ const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 
+const gamingEdition = editions.find((edition) => edition.id === 'gaming');
+if (!gamingEdition) throw new Error('Gaming edition is missing from the pinned catalogue');
 const catalogue = gamingCatalogue;
 const specializations = catalogue?.specializations ?? [];
 const applications = catalogue?.applications ?? [];
@@ -61,18 +64,21 @@ const stats = gamingCatalogue
 ---
 
 <SiteLayout
-  title="Gaming | HorneroOS"
+  title={isEs ? 'Gaming: jugá a tu manera | HorneroOS' : 'Gaming: play on your terms | HorneroOS'}
   socialImage="/og/gaming.png"
   socialImageAlt={isEs ? "El Dashboard de HorneroOS en un escritorio real, junto a la frase 'Gaming: play on HorneroOS'." : "The HorneroOS Dashboard on a live desktop, beside the line 'Gaming: play on HorneroOS'."}
   description={isEs ? 'HorneroOS Gaming es una edición Preview construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Se instala desde la misma ISO que Desktop y Studio.' : 'HorneroOS Gaming is a Preview edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It installs from the same ISO as Desktop and Studio.'}
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>{isEs ? 'Estado: Preview' : 'Status: Preview'}</span>
+      <strong>CH 03</strong><span>{isEs ? 'Edición Gaming' : 'Gaming edition'}</span><span>{isEs ? 'Escritorio para jugar' : 'Desktop for play'}</span>
     </p>
-    <h1>Gaming</h1>
+    <div class="hero-head">
+      <h1>Gaming <span class="tagline">{isEs ? 'Jugá a tu manera.' : 'Play on your terms.'}</span></h1>
+      <MaturityMeter maturity={gamingEdition.maturity} locale={locale} />
+    </div>
     <p class="lede">
-      {isEs ? 'HorneroOS Gaming es la edición para jugar construida sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Es una edición Preview: se elige en el mismo instalador y la misma ISO que Desktop y Studio, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition built on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is a Preview edition: you pick it in the same installer and the same ISO as Desktop and Studio, nothing installs silently, and we promise no game runs on any hardware.'}
+      {isEs ? 'HorneroOS Gaming es la edición para jugar construida sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Es una edición Preview: se elige en el mismo instalador y la misma ISO que Desktop y Studio, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition built on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is a Preview edition: you pick it in the same installer and the same ISO as Desktop and Studio, nothing installs silently, and it makes no promise that any given game runs on any given hardware.'}
     </p>
 
     {
@@ -234,9 +240,6 @@ const stats = gamingCatalogue
 </SiteLayout>
 
 <style>
-  .intro h1 {
-    margin-block: 0.55rem 1rem;
-  }
   .lede {
     max-width: 54ch;
     font-size: var(--step-1);

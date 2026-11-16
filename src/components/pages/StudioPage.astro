@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import AppLogo from '../../components/AppLogo.astro';
+import MaturityMeter from '../../components/MaturityMeter.astro';
 import { studioCatalogue, editions, pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -34,7 +35,6 @@ const tagKind = (app: StudioApp): TagKind => {
   if (app.optional) return 'optional';
   return 'catalogued';
 };
-const maturityLabel = studio.maturity === 'preview' ? 'Preview' : studio.maturity;
 // The hero lineup is editorial: the flagship tool of each creative field,
 // always rendered from the generated catalogue, never hand-listed twice.
 const heroLineup = ['ardour', 'obs-studio', 'blender', 'krita', 'godot']
@@ -54,18 +54,18 @@ const stats = isEs
 ---
 
 <SiteLayout
-  title="Studio | HorneroOS"
+  title={isEs ? 'Studio: hacé algo real | HorneroOS' : 'Studio: make something real | HorneroOS'}
   socialImage="/og/studio.png"
   socialImageAlt={isEs ? 'Las aplicaciones insignia de HorneroOS Studio (Ardour, OBS Studio, Blender, Krita y Godot) listadas por nombre, junto a la frase sobre la edición creativa Preview.' : 'The flagship HorneroOS Studio applications (Ardour, OBS Studio, Blender, Krita and Godot) listed by name, beside the line about the Preview creative edition.'}
   description={isEs ? 'HorneroOS Studio es una edición Preview para trabajo creativo: audio, video, streaming, diseño, foto y 3D. Se instala desde la ISO Preview de HorneroOS con especializaciones a elección.' : 'HorneroOS Studio is a Preview edition for creative work: audio, video, streaming, design, photo and 3D. It installs from the HorneroOS Preview ISO with selectable specializations.'}
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>{isEs ? 'Ficha técnica · Edición Studio' : 'Technical sheet · Studio Edition'}</strong><span>{isEs ? 'Estado' : 'Status'}: {maturityLabel}</span>
+      <strong>CH 02</strong><span>{isEs ? 'Edición Studio' : 'Studio edition'}</span><span>{isEs ? 'Estación de trabajo creativa' : 'Creative workstation'}</span>
     </p>
     <div class="hero-head">
-      <h1>Studio</h1>
-      <span class="preview-pill">{maturityLabel} · {isEs ? 'no Supported' : 'not Supported'}</span>
+      <h1>Studio <span class="tagline">{isEs ? 'Hacé algo real.' : 'Make something real.'}</span></h1>
+      <MaturityMeter maturity={studio.maturity} locale={locale} />
     </div>
     <p class="lede">
       {isEs ? 'HorneroOS Studio es una edición creativa Preview construida sobre Desktop, y hoy se instala desde la ISO Preview de HorneroOS. Elegís especializaciones (audio, video, streaming, diseño, fotografía, 3D) y el sistema configura las aplicaciones, la política de audio y el espacio de trabajo para ellas.' : 'HorneroOS Studio is a Preview creative edition built on the Desktop, and it installs today from the HorneroOS Preview ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for them.'}
@@ -83,8 +83,8 @@ const stats = isEs
     </div>
 
     <p class="hero-ctas">
-      <a class="cta-primary" href={L('/install')}>{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
-      <a class="cta-secondary" href="#apps-title">{isEs ? 'Ver aplicaciones' : 'Browse applications'}</a>
+      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+      <a class="cta secondary" href="#apps-title">{isEs ? 'Ver aplicaciones' : 'Browse applications'}</a>
     </p>
     <nav class="section-nav" aria-label={isEs ? 'Secciones de Studio' : 'Studio sections'}>
       <a href="#workloads-title">{isEs ? 'Especializaciones' : 'Specializations'}</a>
@@ -234,42 +234,12 @@ const stats = isEs
 </SiteLayout>
 
 <style>
-  .intro h1 {
-    margin-block: 0.55rem 1rem;
-  }
-  .hero-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.6rem 1rem;
-  }
-  .hero-head h1 { margin-block: 0.55rem 1rem; }
-  .preview-pill {
-    padding: 0.28rem 0.7rem;
-    border: 1px solid var(--signal);
-    border-radius: var(--radius-small);
-    color: var(--signal);
-    font-family: var(--font-mono, monospace);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
   .hero-ctas {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
     margin-top: 1.4rem;
   }
-  .cta-primary, .cta-secondary {
-    padding: 0.65rem 1.1rem;
-    border-radius: var(--radius);
-    font-weight: 700;
-    text-decoration: none;
-  }
-  .cta-primary { background: var(--signal); color: var(--on-signal); }
-  .cta-secondary { border: 1px solid var(--rule); color: var(--ink); }
   .section-nav {
     display: flex;
     flex-wrap: wrap;

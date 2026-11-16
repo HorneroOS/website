@@ -34,20 +34,23 @@ const statusName = (
 <SiteLayout
   socialImage="/og/install.png"
   socialImageAlt={isEs ? 'ISO Preview de HorneroOS: una imagen con las ediciones Desktop, Studio y Gaming Preview.' : 'HorneroOS Preview ISO: one image with Desktop, Studio and Gaming Preview editions.'}
-  title={isEs ? 'Instalar | HorneroOS' : 'Install | HorneroOS'}
-  description={isEs ? 'La primera ISO Preview de HorneroOS ya está publicada: una imagen x86_64 con las ediciones Desktop, Studio y Gaming Preview, firmada y verificada por checksum. Los paquetes de Arch siguen disponibles.' : 'The first HorneroOS Preview ISO is published: one x86_64 image with Desktop, Studio and Gaming Preview editions, signed and checksum-verified. Arch packages remain available.'}
+  title={isEs ? 'Descargá HorneroOS | ISO Preview firmada para x86_64' : 'Download HorneroOS | Signed x86_64 Preview ISO'}
+  description={isEs ? 'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming Preview, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.' : 'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming Preview editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.'}
 >
   <section class="section">
-    <p class="plate-id"><strong>Estado real de instalación</strong><span>Primera ISO Preview</span></p>
-    <h1>{isEs ? 'La primera ISO Preview de HorneroOS ya está acá' : 'The first HorneroOS Preview ISO is here'}</h1>
+    <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>v0.2.0-preview32</span><span>x86_64 · 2.7 GB</span></p>
+    <h1>{isEs ? 'Descargá HorneroOS' : 'Download HorneroOS'}</h1>
     <p class="lede">
       {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS y Niri no se ejecutaron sobre esta ISO) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
     </p>
-    <p>
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso">
+    <p class="cta-row download-row">
+      <a class="cta primary" href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso">
         {isEs ? 'Descargar la ISO Preview (2.7 GB)' : 'Download the Preview ISO (2.7 GB)'}
-      </a>{' '}
-      {isEs ? ' — también anunciada en la ' : ' — also announced on the '}
+      </a>
+      <a class="cta secondary" href={L('/editions')}>{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
+    </p>
+    <p>
+      {isEs ? 'También anunciada en la ' : 'Also announced on the '}
       {' '}
       <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32">{isEs ? 'página de la release v0.2.0-preview32' : 'v0.2.0-preview32 release page'}</a>.
       {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
@@ -254,7 +257,7 @@ const statusName = (
 </style>
 
 <style>
-  /* 199X per-page direction: install as an honest status board. */
-  .edition-status { border: 1px solid var(--rule); box-shadow: 8px 8px 0 color-mix(in srgb, var(--signal) 16%, transparent); }
+  /* Per-page direction: install as an honest status board. */
+  .edition-status { border: 1px solid var(--rule); }
   .packages > * { border-radius: 2px; }
 </style>
