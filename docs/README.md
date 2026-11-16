@@ -10,6 +10,8 @@ and is sourced from the HorneroOS repositories.
   accessibility, imagery and shared components.
 - [Hornero Signal design system](./DESIGN_SYSTEM_SIGNAL.md) — colour roles,
   type, signature details and motion on the website.
+- [Capture slots](./CAPTURES.md) — capture provenance, the pre-Signal label
+  and how QA replaces homepage captures.
 - [State management](./STATE_MANAGEMENT.md) — static content and the limited
   browser interactions.
 - [Project configuration](./PROJECT_CONFIGURATION.md) — commands, checks,

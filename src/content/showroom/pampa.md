@@ -8,6 +8,7 @@ alt:
   en: 'Pampa appearance preview in Hornero, with a deep green grassland scene, warm moon and slim shell rail.'
 order: 3
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

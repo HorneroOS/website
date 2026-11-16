@@ -2,23 +2,26 @@
 import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import DesktopCaptureExplorer from '../../components/DesktopCaptureExplorer.astro';
 import LookCompare from '../../components/LookCompare.astro';
 import StoryTimeline from '../../components/StoryTimeline.astro';
-import AppLogo from '../../components/AppLogo.astro';
 import CommunityJoin from '../../components/CommunityJoin.astro';
+import MaturityMeter from '../../components/MaturityMeter.astro';
+import CaptureLabel from '../../components/CaptureLabel.astro';
 import { featuredStory } from '../../data/story';
+import { captureSlots } from '../../data/captures';
 import {
   candidate,
   editionCatalogue,
   editions,
   extensionCatalogue,
+  gamingCatalogue,
   latestTagged,
   layouts,
   pins,
   short,
+  studioCatalogue,
   themes,
-  wallpapers,
+  type Maturity,
 } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -29,433 +32,1099 @@ const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 
+// Captures come from capture slots (src/data/captures.ts) so QA can replace a
+// pre-Signal capture with a Signal one without touching this page.
 const captures = await getCollection('showroom');
 const capture = (id: string) => {
   const entry = captures.find((item) => item.id === id);
   if (!entry) throw new Error(`Showroom capture is missing: ${id}`);
   return entry;
 };
-const hero = capture('dashboard-extensions');
-const live = capture('terminal-tools');
-const beagle = wallpapers.find((wallpaper) => wallpaper.id === 'fin-del-mundo');
-if (!beagle) throw new Error('The Beagle Channel photograph is missing from the pinned wallpaper catalogue');
+const workstation = capture(captureSlots['home-workstation'].capture);
+const shellDark = capture(captureSlots['home-shell-dark'].capture);
+const shellLight = capture(captureSlots['home-shell-light'].capture);
 
-const editionOrder = ['desktop', 'studio', 'gaming', 'server', 'agents'];
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
-const maturityNames = isEs
-  ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
-  : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
-const familyRoleLabels: Record<string, string> = isEs
-  ? {
-      server: 'Sin pantalla, para homelabs y servicios',
-      'agent-host': 'Sin pantalla, para infraestructura de agentes',
-      'creative-workstation': 'Escritorio, para producción creativa',
-      'gaming-workstation': 'Escritorio, para jugar',
-    }
-  : {
-      server: 'Headless, for homelabs and services',
-      'agent-host': 'Headless, for agent infrastructure',
-      'creative-workstation': 'Desktop, for creative production',
-      'gaming-workstation': 'Desktop, for play',
-    };
-const family = editionOrder.map((id) => {
-  const edition = editionById[id];
-  if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
-  return {
-    ...edition,
-    name: edition.title.replace('HorneroOS ', ''),
-    status: maturityNames[edition.maturity],
-    roleLabel: familyRoleLabels[edition.role] ?? edition.role,
-    compositors: edition.compositor?.supported ?? [],
-  };
-});
-const compositorMaturity = (id: string) =>
-  maturityNames[editionCatalogue.compositors.find((item) => item.id === id)?.maturity ?? 'planned'];
+const edition = (id: string) => {
+  const found = editionById[id];
+  if (!found) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
+  return found;
+};
+const compositor = (id: string) => editionCatalogue.compositors.find((item) => item.id === id);
+const maturityName = (maturity: Maturity) =>
+  (isEs
+    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' })[maturity];
 
+const studioApp = (id: string) => studioCatalogue.applications.find((app) => app.id === id)?.title ?? id;
+const studioSpec = (id: string) => {
+  const spec = studioCatalogue.specializations.find((item) => item.id === id);
+  if (!spec) throw new Error(`Studio specialization ${id} is missing from the pinned catalogue`);
+  return { title: spec.title, apps: spec.applications.map(studioApp) };
+};
+if (!gamingCatalogue) throw new Error('The Gaming catalogue is missing from the pinned edition catalogue');
+const gaming = gamingCatalogue;
+const gamingApp = (id: string) => gaming.applications.find((app) => app.id === id)?.title ?? id;
+const gamingSpec = (id: string) => {
+  const spec = gaming.specializations.find((item) => item.id === id);
+  if (!spec) throw new Error(`Gaming specialization ${id} is missing from the pinned catalogue`);
+  return { title: spec.title, apps: spec.applications.map(gamingApp), isDefault: spec.isDefault };
+};
+const audioDefault = studioCatalogue.audioModes.find((mode) => mode.isDefault)?.title;
+const audioOptIn = studioCatalogue.audioModes.filter((mode) => mode.explicitOptIn).map((mode) => mode.title);
 const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.trust === 'official');
-const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0] ?? text;
 const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1] ?? version;
-const readiness = [
-  latestTagged
-    ? isEs
-      ? `Development Preview ${previewNumber(latestTagged.version)} es la última composición etiquetada`
-      : `Development Preview ${previewNumber(latestTagged.version)} is the latest tagged composition`
-    : isEs
-      ? 'HorneroOS es una preview en desarrollo'
-      : 'HorneroOS is a development preview',
-  candidate
-    ? isEs
-      ? `Preview ${previewNumber(candidate.version)} se está preparando`
-      : `Preview ${previewNumber(candidate.version)} is being prepared`
-    : undefined,
-]
-  .filter(Boolean)
-  .join('; ');
+const previewLabel = latestTagged ? `Development Preview ${previewNumber(latestTagged.version)}` : 'Development Preview';
+const hyprland = compositor('hyprland');
+const niri = compositor('niri');
+const planned = editions.filter((item) => item.maturity === 'planned').map((item) => item.title.replace('HorneroOS ', ''));
+const shipping = editions.filter((item) => item.maturity !== 'planned');
 
-const title = isEs ? 'HorneroOS | Un escritorio Linux con años de uso diario detrás' : 'HorneroOS | A Linux desktop with years of daily use behind it';
+const channels = [
+  {
+    id: 'desktop',
+    channel: 'CH 01',
+    name: 'Desktop',
+    title: isEs ? 'Construí tu mundo' : 'Build your world',
+    href: `${L('/editions')}#desktop`,
+    summary: isEs
+      ? `La base de todas las ediciones: Hyprland por defecto (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell con ${layouts.length} layouts y ${themes.length} temas, un Centro de control propio y horneroctl.`
+      : `The base of every edition: Hyprland by default (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell with ${layouts.length} layouts and ${themes.length} themes, its own Control Center and horneroctl.`,
+    workflows: isEs
+      ? [
+          { lead: 'Programá', text: 'en kitty, con yazi y btop, en espacios de trabajo por proyecto.' },
+          { lead: 'Ordená', text: `el escritorio con uno de ${layouts.length} layouts, desde el selector o con horneroctl.` },
+          { lead: 'Extendé', text: `la shell con ${officialPlugins.length} extensiones oficiales que declaran sus permisos.` },
+        ]
+      : [
+          { lead: 'Code', text: 'in kitty, with yazi and btop, in a workspace per project.' },
+          { lead: 'Arrange', text: `the desktop with one of ${layouts.length} layouts, from the picker or with horneroctl.` },
+          { lead: 'Extend', text: `the shell with ${officialPlugins.length} official extensions that declare their permissions.` },
+        ],
+    maturity: edition('desktop').maturity,
+  },
+  {
+    id: 'studio',
+    channel: 'CH 02',
+    name: 'Studio',
+    title: isEs ? 'Hacé algo real' : 'Make something real',
+    href: L('/studio'),
+    summary: isEs
+      ? `Desktop más ${studioCatalogue.specializations.length - 2} especializaciones creativas que elegís al instalar. Audio en modo ${audioDefault ?? 'Balanced'} por defecto; ${audioOptIn.join(' y ')} solo si los activás.`
+      : `Desktop plus ${studioCatalogue.specializations.length - 2} creative specializations you pick at install time. Audio runs ${audioDefault ?? 'Balanced'} by default; ${audioOptIn.join(' and ')} only when you opt in.`,
+    workflows: [
+      studioSpec('audio-music-production'),
+      studioSpec('video-editing-post-production'),
+      studioSpec('graphic-design-illustration'),
+    ].map((spec) => ({ lead: spec.title, text: spec.apps.join(', ') })),
+    maturity: edition('studio').maturity,
+  },
+  {
+    id: 'gaming',
+    channel: 'CH 03',
+    name: 'Gaming',
+    title: isEs ? 'Jugá a tu manera' : 'Play on your terms',
+    href: L('/gaming'),
+    summary: isEs
+      ? 'Desktop más una capa de juego combinable: Mesa y Vulkan, GameMode, Gamescope y MangoHud. Steam es propietario y se instala solo si lo elegís; nada se instala en silencio.'
+      : 'Desktop plus a composable gaming layer: Mesa and Vulkan, GameMode, Gamescope and MangoHud. Steam is proprietary and installs only if you choose it; nothing installs silently.',
+    workflows: [gamingSpec('desktop-gaming'), gamingSpec('multi-launcher'), gamingSpec('streaming')].map((spec) => ({
+      lead: spec.title,
+      text: spec.apps.join(', ') + (spec.isDefault ? (isEs ? ' · selección por defecto' : ' · default selection') : ''),
+    })),
+    maturity: edition('gaming').maturity,
+  },
+];
+
+const readouts = [
+  { label: isEs ? 'Versión' : 'Release', value: latestTagged?.version ?? '—', href: L('/releases') },
+  {
+    label: isEs ? 'Ediciones' : 'Editions',
+    value: isEs ? `${shipping.length} Preview · ${planned.length} planificadas` : `${shipping.length} Preview · ${planned.length} planned`,
+    href: L('/editions'),
+  },
+  {
+    label: isEs ? 'Compositor' : 'Compositor',
+    value: `Hyprland ${maturityName(hyprland?.maturity ?? 'planned').toLowerCase()} · Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}`,
+    href: L('/docs/desktop/compositors/'),
+  },
+  { label: 'Shell', value: short(pins.shell.sha), href: `${pins.shell.repo}/commit/${pins.shell.sha}` },
+];
+
+const system = [
+  {
+    id: 'horneroctl',
+    title: 'horneroctl',
+    text: isEs
+      ? 'Una herramienta de sistema para el escritorio, los temas, los paquetes y el diagnóstico. Salida --json para scripts; todo cambio muestra un --dry-run antes de pedir --yes.'
+      : 'One system tool for the desktop, themes, packages and diagnostics. --json output for scripts; every change shows a --dry-run before it asks for --yes.',
+    command: 'horneroctl doctor',
+  },
+  {
+    id: 'updates',
+    title: isEs ? 'Actualizaciones' : 'Updates',
+    text: isEs
+      ? 'Las consultas de actualización solo miran: listan repositorios y AUR por separado y no instalan nada. Actualizar el sistema es un paso explícito.'
+      : 'Update checks only look: they list repository and AUR packages separately and install nothing. Upgrading the system is an explicit step.',
+    command: 'horneroctl package check',
+  },
+  {
+    id: 'configuration',
+    title: isEs ? 'Configuración' : 'Configuration',
+    text: isEs
+      ? 'El Centro de control y la CLI cambian la misma configuración. Lo que instala un paquete es de solo lectura; tus cambios viven en tu usuario y las actualizaciones no los pisan.'
+      : 'Control Center and the CLI change the same configuration. Package-shipped defaults are read-only; your changes live in your user configuration and updates do not overwrite them.',
+    command: 'horneroctl config validate',
+  },
+  {
+    id: 'reliability',
+    title: isEs ? 'Confiabilidad' : 'Reliability',
+    text: isEs
+      ? 'Cada versión fija los commits exactos de la shell y la configuración, la ISO llega firmada con su checksum, y un laboratorio de QA instala en máquinas virtuales desechables antes de publicar.'
+      : 'Every release pins the exact shell and configuration commits, the ISO ships signed with its checksum, and a QA lab installs into disposable virtual machines before anything is published.',
+    command: 'horneroctl system info',
+  },
+];
+
+const modes = isEs
+  ? [
+      { name: 'Focus', text: 'Más espacio útil, menos movimiento y notificaciones en silencio.' },
+      { name: 'Everyday', text: 'El modo de todos los días; el de fábrica.' },
+      { name: 'Signal', text: 'La telemetría más rica y el movimiento más expresivo.' },
+      { name: 'Gaming', text: 'Nada se dibuja sobre el juego en pantalla completa ni le roba el foco.' },
+      { name: 'Studio', text: 'Ganchos de la edición Studio, como el modo de audio.' },
+    ]
+  : [
+      { name: 'Focus', text: 'More usable space, less motion, notifications held back.' },
+      { name: 'Everyday', text: 'The everyday mode; the factory default.' },
+      { name: 'Signal', text: 'The richest telemetry and the most expressive motion.' },
+      { name: 'Gaming', text: 'Nothing draws over a fullscreen game or steals its focus.' },
+      { name: 'Studio', text: 'Studio edition hooks, such as the audio mode.' },
+    ];
+
+const journey = isEs
+  ? [
+      { title: 'Descargá', text: `La ISO ${latestTagged?.version ?? 'Preview'} para x86_64 trae Desktop, Studio y Gaming en una sola imagen.` },
+      { title: 'Verificá', text: 'Compará el checksum SHA-256 y la firma GPG publicados en la release antes de grabarla.' },
+      { title: 'Instalá', text: 'Elegí la edición, las especializaciones y el compositor durante la instalación.' },
+    ]
+  : [
+      { title: 'Download', text: `The ${latestTagged?.version ?? 'Preview'} x86_64 ISO carries Desktop, Studio and Gaming in one image.` },
+      { title: 'Verify', text: 'Check the SHA-256 checksum and GPG signature published on the release before you write it.' },
+      { title: 'Install', text: 'Pick the edition, the specializations and the compositor during installation.' },
+    ];
+
+const title = isEs
+  ? 'HorneroOS | Una estación de trabajo basada en Arch para construir, crear y jugar'
+  : 'HorneroOS | An Arch-based workstation for building, creating and playing';
 const description = isEs
-  ? `HorneroOS es un escritorio Linux basado en Arch, Wayland-first, desde Argentina, construido en abierto. ${layouts.length} layouts, ${themes.length} temas, un Centro de control propio y tres ediciones en Preview: Desktop, Studio y Gaming, en una sola ISO firmada.`
-  : `HorneroOS is an Arch-based, Wayland-first Linux desktop from Argentina, built in the open. ${layouts.length} layouts, ${themes.length} themes, its own Control Center and three Preview editions — Desktop, Studio and Gaming — on one signed ISO.`;
+  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar, con una experiencia de escritorio propia y un ecosistema de sistema operativo integrado. Ediciones Desktop, Studio y Gaming en una ISO firmada (${latestTagged?.version ?? 'Preview'}).`
+  : `HorneroOS is an Arch-based workstation for building, creating and playing, with a distinctive desktop experience and an integrated operating-system ecosystem. Desktop, Studio and Gaming editions on one signed ISO (${latestTagged?.version ?? 'Preview'}).`;
 ---
 
-<SiteLayout
-  title={title}
-  description={description}
->
-  <section class="cover" aria-labelledby="hero-title">
-    <div class="cover-head">
-      <p class="plate-id"><strong>Transmisión 001</strong><span lang="es">El futuro se construye acá</span></p>
-      <h1 id="hero-title">{isEs ? <>Un escritorio Linux,<br />con años de uso diario detrás.</> : <>A Linux desktop,<br />with years of daily use behind it.</>}</h1>
-      <div class="cover-aside">
-        <p class="lede">
-          {isEs ? 'HorneroOS es un escritorio basado en Arch, Wayland-first, desde Argentina. Una shell Quickshell propia, un Centro de control integrado y tres ediciones —Desktop, Studio y Gaming— que se instalan desde una sola ISO.' : 'HorneroOS is an Arch-based, Wayland-first desktop from Argentina. Its own Quickshell shell, an integrated Control Center and three editions — Desktop, Studio and Gaming — that install from a single ISO.'}
-        </p>
-        <div class="cta-row">
-          <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
-          <a href={L('/showroom')} class="cta secondary">{isEs ? 'Explorá el escritorio' : 'Explore the desktop'}</a>
-        </div>
+<SiteLayout title={title} description={description}>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-field" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow"><b>HorneroOS</b><span>{previewLabel}</span><span>x86_64 · Arch Linux</span></p>
+      <h1 id="hero-title">
+        {isEs ? 'Una estación de trabajo para construir, crear y jugar.' : 'A workstation for building, creating and playing.'}
+      </h1>
+      <p class="lede">
+        {
+          isEs
+            ? 'HorneroOS es un sistema operativo basado en Arch con una experiencia de escritorio propia y un ecosistema integrado: tres ediciones, una herramienta de sistema y una shell hecha para trabajar horas sin estorbar.'
+            : 'HorneroOS is an Arch-based operating system with a distinctive desktop experience and an integrated ecosystem: three editions, one system tool and a shell built to stay out of the way for hours of work.'
+        }
+      </p>
+      <div class="cta-row">
+        <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+        <a href={L('/editions')} class="cta secondary">{isEs ? 'Elegí tu edición' : 'Choose your edition'}</a>
       </div>
     </div>
+    <dl class="telemetry" aria-label={isEs ? 'Estado actual, desde los datos de producto fijados' : 'Current status, from the pinned product data'}>
+      {
+        readouts.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>
+              <a href={item.href}>{item.value}</a>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
 
-    <figure class="cover-shot">
-      <div class="shot-frame">
+  <section class="monitor" aria-labelledby="monitor-title">
+    <h2 id="monitor-title" class="visually-hidden">{isEs ? 'El escritorio trabajando' : 'The desktop at work'}</h2>
+    <figure class="monitor-frame ticked">
+      <div class="monitor-strip">
+        <span class="channel">MON 01</span>
+        <span>{workstation.data.title[locale]}</span>
+        <CaptureLabel appearance={workstation.data.provenance.appearance} locale={locale} />
+      </div>
+      <div class="monitor-screen">
         <Picture
-          src={hero.data.image}
-          alt={hero.data.alt[locale]}
+          src={workstation.data.image}
+          alt={workstation.data.alt[locale]}
           formats={['avif', 'webp']}
-          fallbackFormat="png"
           widths={[640, 960, 1280, 1600, 1920]}
-          sizes="(min-width: 1400px) 1320px, calc(100vw - 2rem)"
+          sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)"
           loading="eager"
           fetchpriority="high"
           decoding="async"
         />
       </div>
       <figcaption>
-        <span class="shot-kind">{isEs ? 'Captura real' : 'Real capture'}</span>
-        <span class="shot-detail">
-          {[hero.data.title[locale], hero.data.provenance.resolution].filter(Boolean).join(' · ')}
-        </span>
-        <a href={L('/showroom#dashboard-extensions')}>{isEs ? 'Procedencia' : 'Provenance'}</a>
-        <span class="shot-credit">
-          {isEs ? 'Fondo: ' : 'Wallpaper: '}<a href={beagle.sourcePage}>{beagle.title}</a>, {beagle.place}. {isEs ? 'Fotografía de ' : 'Photograph by '}{beagle.photographer},{' '}
-          <a href={beagle.licenseUrl}>{beagle.license}</a>.
-        </span>
+        <span>{workstation.data.provenance.source[locale]}</span>
+        <span>{workstation.data.provenance.resolution}</span>
+        <span>{workstation.data.provenance.date}</span>
+        <a href={L('/showroom#capture-ledger')}>{isEs ? 'Procedencia de cada captura' : 'Provenance for every capture'}</a>
       </figcaption>
     </figure>
-
-    <ul class="cover-facts" role="list" aria-label={isEs ? 'Qué es HorneroOS, en breve' : 'What HorneroOS is, in brief'}>
-      <li>{isEs ? 'Base Arch Linux' : 'Arch Linux base'}</li>
-      <li>{isEs ? 'Hyprland soportado, Niri experimental' : 'Hyprland supported, Niri experimental'}</li>
-      <li>{layouts.length} layouts, {themes.length} {isEs ? 'temas' : 'themes'}</li>
-      <li><a href={L('/roots#community')}>{isEs ? 'Shell adaptada de Caelestia, GPL-3.0' : 'Shell adapted from Caelestia, GPL-3.0'}</a></li>
-      <li><a href={L('/install')}>{isEs ? 'ISO Preview 32 publicada' : 'Preview 32 ISO available'}</a></li>
-    </ul>
+    {
+      workstation.data.provenance.appearance === 'pre-signal' && (
+        <p class="monitor-note">
+          {isEs
+            ? 'Esta captura es de un escritorio real en uso, tomada antes de Hornero Signal, el nuevo lenguaje de diseño de esta página. Las capturas con Signal llegan cuando pasen la validación en hardware real.'
+            : 'This capture is a real desktop in use, taken before Hornero Signal, the new design language of this page. Signal captures follow once they pass validation on real hardware.'}
+        </p>
+      )
+    }
   </section>
 
-  <DesktopCaptureExplorer captures={captures} layoutCount={layouts.length} locale={locale} />
-
-  <section class="section looks" aria-labelledby="looks-title">
-    <div class="band-head">
-      <h2 id="looks-title">{isEs ? 'Oscuro y claro, mismo layout' : 'Dark and light, same layout'}</h2>
+  <section class="section editions" aria-labelledby="editions-title">
+    <header class="section-head">
+      <p class="eyebrow"><b>{isEs ? 'Ediciones' : 'Editions'}</b><span>{isEs ? 'Una base, tres oficios' : 'One base, three crafts'}</span></p>
+      <h2 id="editions-title">{isEs ? 'Elegí para qué es tu computadora.' : 'Choose what your computer is for.'}</h2>
       <p>
-        {isEs ? 'El mismo layout Hornero Left en oscuro y en claro. Cambiar de tema retematiza todo el escritorio al instante.' : 'The same Hornero Left layout in dark and light. Switching themes rethemes the whole desktop instantly.'}
+        {
+          isEs
+            ? 'Las tres ediciones comparten base, shell y herramientas, y se arman al instalar desde la misma ISO. La madurez sale del catálogo de ediciones fijado, no de este texto.'
+            : 'All three editions share the base, the shell and the tools, and are composed at install time from the same ISO. Maturity comes from the pinned edition catalogue, not from this copy.'
+        }
       </p>
-    </div>
-    <LookCompare dark={capture('hornero-left')} light={capture('hornero-light')} locale={locale} />
-    <p class="band-foot">
-      <a href={L('/themes')}>{isEs ? `Explorá ${themes.length} temas` : `Browse ${themes.length} themes`}</a>
-      <a href={L('/wallpapers')}>{isEs ? 'Mirá las fotografías argentinas detrás de ellos' : 'See the Argentine photographs behind them'}</a>
-      <a href={L('/terminals')}>{isEs ? 'Llevá la paleta a tu terminal' : 'Carry the palette into your terminal'}</a>
-    </p>
-  </section>
-
-  <section class="section daily" aria-labelledby="daily-title">
-    <div class="daily-copy">
-      <h2 id="daily-title">{isEs ? 'Una sesión de trabajo' : 'A working session'}</h2>
-      <p>
-        {isEs ? 'btop monitorea la máquina en una ventana y yazi explora una carpeta de fondos en otra, sobre una fotografía del Canal Beagle. Ambos son programas de terminal comunes.' : 'btop monitors the machine in one window and yazi browses a wallpapers folder in another, over a photograph of the Beagle Channel. Both are ordinary terminal programs.'}
-      </p>
-      <p class="caveat">
-        {isEs ? `Captura aportada por un colaborador el ${live.data.provenance.date}, tomada en un setup de desarrollo Hyprland en vivo. No es una imagen de aceptación del instalador ni de una release.` : `Contributor-provided capture from ${live.data.provenance.date}, taken on a live Hyprland development setup. It is not an installer or release acceptance image.`}
-      </p>
-    </div>
-    <figure class="daily-shot">
-      <Picture
-        src={live.data.image}
-        alt={live.data.alt[locale]}
-        formats={['avif', 'webp']}
-        fallbackFormat="png"
-        widths={[640, 960, 1280, 1600]}
-        sizes="(min-width: 1180px) 1100px, calc(100vw - 2rem)"
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>{live.data.provenance.source[locale]} · {live.data.provenance.resolution} · {live.data.provenance.date}</figcaption>
-    </figure>
-  </section>
-
-  <section class="section family" aria-labelledby="family-title">
-    <div class="band-head">
-      <h2 id="family-title">{isEs ? 'Tres ediciones en Preview, dos planificadas' : 'Three Preview editions, two planned'}</h2>
-      <p>
-        {isEs ? 'Las ediciones comparten la misma base y se arman a tu medida al instalar. Desktop, Studio y Gaming se instalan hoy desde la ISO firmada Preview 32; Server y Agents están planificadas.' : 'Editions share the same base and are composed to your measure at install time. Desktop, Studio and Gaming install today from the signed Preview 32 ISO; Server and Agents are planned.'}
-      </p>
-    </div>
-    <ol class="family-rail" role="list">
+    </header>
+    <ol class="channels" role="list">
       {
-        family.map((edition) => (
-          <li class:list={['family-cell', `maturity-${edition.maturity}`]}>
-            <a href={L(`/editions#${edition.id}`)}>
-              <span class="family-name">{edition.name}</span>
-              <span class="family-status">{edition.status}</span>
-              {edition.compositors.length > 0 ? (
-                <span class="family-detail">
-                  {edition.compositors.map((id) => (
-                    <span class="family-backend">
-                      <AppLogo id={id} />
-                      {id === 'hyprland' ? 'Hyprland' : id === 'niri' ? 'Niri' : id}, {compositorMaturity(id).toLowerCase()}
-                    </span>
-                  ))}
-                </span>
-              ) : (
-                <span class="family-detail">{edition.roleLabel}</span>
-              )}
-            </a>
+        channels.map((item) => (
+          <li class="channel-row" id={`edition-${item.id}`}>
+            <div class="channel-id">
+              <p class="eyebrow">
+                <b>{item.channel}</b>
+                <span>{item.name}</span>
+              </p>
+              <h3>{item.title}</h3>
+              <MaturityMeter maturity={item.maturity} locale={locale} />
+            </div>
+            <p class="channel-summary">{item.summary}</p>
+            <div class="channel-work">
+              <h4>{isEs ? 'Flujos de trabajo' : 'Workflows'}</h4>
+              <ul role="list">
+                {item.workflows.map((flow) => (
+                  <li>
+                    <strong>{flow.lead}</strong> {flow.text}
+                  </li>
+                ))}
+              </ul>
+              <a href={item.href}>{isEs ? `Conocé ${item.name}` : `Explore ${item.name}`}</a>
+            </div>
           </li>
         ))
       }
     </ol>
-  </section>
-
-  <section class="section hardware" aria-labelledby="hardware-title">
-    <div class="band-head">
-      <h2 id="hardware-title">{isEs ? 'En uso diario, en hardware real' : 'In daily use, on real hardware'}</h2>
-      <p>
-        {isEs ? 'HorneroOS ya es la computadora de todos los días de quienes lo construyen — reportado por su maintainer, sin benchmarks de por medio.' : 'HorneroOS already is the everyday computer of the people building it — maintainer-reported, no benchmarks involved.'}
-      </p>
-    </div>
-    <ul class="hardware-list" role="list">
-      <li>
-        <strong>ASUS ROG Strix G16 (G615LR)</strong>
-        <span>{isEs ? 'Intel Core Ultra 9 275HX · NVIDIA RTX 5070 Ti Laptop · 32 GB RAM — HorneroOS Studio como estación creativa.' : 'Intel Core Ultra 9 275HX · NVIDIA RTX 5070 Ti Laptop · 32 GB RAM — HorneroOS Studio as a creative workstation.'}</span>
-      </li>
-      <li>
-        <strong>Lenovo Legion</strong>
-        <span>{isEs ? 'Notebook moderna con HorneroOS Studio como computadora de trabajo diaria.' : 'A modern laptop running HorneroOS Studio as the daily work computer.'}</span>
-      </li>
-      <li>
-        <strong>{isEs ? 'Desktop AMD Ryzen 9' : 'AMD Ryzen 9 desktop'}</strong>
-        <span>{isEs ? 'AMD Ryzen 9 · NVIDIA RTX 3060 — HorneroOS en uso diario.' : 'AMD Ryzen 9 · NVIDIA RTX 3060 — HorneroOS in daily use.'}</span>
-      </li>
-    </ul>
-  </section>
-
-  <section class="section ecosystem" aria-labelledby="ecosystem-title">
-    <div class="band-head">
-      <h2 id="ecosystem-title">{isEs ? 'Extensiones oficiales' : 'Official extensions'}</h2>
-      <p>
-        {isEs ? 'Pequeños plugins QML con un checksum publicado y permisos declarados. La shell no los aísla en un sandbox, así que el catálogo lista lo que declara cada uno antes de instalarlo.' : 'Small QML plugins with a published checksum and declared permissions. The shell does not sandbox them, so the catalogue lists what each one declares before you install it.'}
-      </p>
-    </div>
-    <ul class="plugin-list" role="list">
+    <p class="editions-foot">
       {
-        officialPlugins.map((plugin) => (
+        isEs
+          ? `${planned.join(' y ')} están planificadas: todavía no tienen imagen instalable.`
+          : `${planned.join(' and ')} are planned: they have no installable image yet.`
+      }{' '}
+      <a href={L('/editions')}>{isEs ? 'Compará todas las ediciones' : 'Compare every edition'}</a>
+    </p>
+  </section>
+
+  <section class="section system" aria-labelledby="system-title">
+    <header class="section-head">
+      <p class="eyebrow"><b>{isEs ? 'Sistema' : 'System'}</b><span>{isEs ? 'Debajo del escritorio' : 'Beneath the desktop'}</span></p>
+      <h2 id="system-title">{isEs ? 'Un sistema operativo, no un tema.' : 'An operating system, not a theme.'}</h2>
+      <p>
+        {
+          isEs
+            ? 'Lo que hace confiable a una estación de trabajo pasa lejos de los colores: cómo se configura, cómo se actualiza y qué se verifica antes de publicar.'
+            : 'What makes a workstation dependable happens far from its colours: how it is configured, how it updates and what is verified before anything ships.'
+        }
+      </p>
+    </header>
+    <dl class="spec">
+      {
+        system.map((item) => (
+          <div class="spec-row">
+            <dt>{item.title}</dt>
+            <dd>
+              <p>{item.text}</p>
+              <code>{item.command}</code>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="section-foot">
+      <a href={L('/docs/desktop/horneroctl/')}>{isEs ? 'Leé la guía de horneroctl' : 'Read the horneroctl guide'}</a>
+      <a href={L('/docs/architecture/updates-delivery/')}>{isEs ? 'Cómo se entregan los paquetes' : 'How packages are delivered'}</a>
+    </p>
+  </section>
+
+  <section class="section experience" aria-labelledby="experience-title">
+    <header class="section-head">
+      <p class="eyebrow"><b>{isEs ? 'Experiencia' : 'Experience'}</b><span>Hornero Shell</span></p>
+      <h2 id="experience-title">{isEs ? 'Un escritorio propio, que se adapta a vos.' : 'A desktop of its own, shaped around you.'}</h2>
+      <p>
+        {
+          isEs
+            ? `Hornero Shell es la capa visible: ${layouts.length} layouts, ${themes.length} temas, ${officialPlugins.length} extensiones oficiales y el Companion, un hornero que vive en tu escritorio. Hornero Left y Hornero Right se inspiran en el layout de Caelestia Shell, de donde se adaptó la shell, con crédito y licencia.`
+            : `Hornero Shell is the visible layer: ${layouts.length} layouts, ${themes.length} themes, ${officialPlugins.length} official extensions and the Companion, a hornero that lives on your desktop. Hornero Left and Hornero Right are inspired by the layout of Caelestia Shell, the shell's upstream, with credit and licence.`
+        }
+      </p>
+    </header>
+    <div class="experience-grid">
+      <div class="experience-compare">
+        <LookCompare dark={shellDark} light={shellLight} locale={locale} />
+        <p class="compare-note">
+          <CaptureLabel appearance={shellDark.data.provenance.appearance} locale={locale} />
+          <span>{shellDark.data.provenance.source[locale]} · {shellDark.data.provenance.date}</span>
+        </p>
+      </div>
+      <ul class="index" role="list">
+        <li>
+          <a href={L('/layouts')}><b>{layouts.length}</b><span>{isEs ? 'Layouts' : 'Layouts'}</span></a>
+        </li>
+        <li>
+          <a href={L('/themes')}><b>{themes.length}</b><span>{isEs ? 'Temas' : 'Themes'}</span></a>
+        </li>
+        <li>
+          <a href={L('/extensions')}><b>{officialPlugins.length}</b><span>{isEs ? 'Extensiones oficiales' : 'Official extensions'}</span></a>
+        </li>
+        <li>
+          <a href={L('/companion')}><b>1</b><span>Companion</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="modes">
+      <div class="modes-head">
+        <h3>{isEs ? 'Modos de experiencia' : 'Experience modes'}</h3>
+        <span class="maturity" data-maturity="in-development">{isEs ? 'En desarrollo' : 'In development'}</span>
+      </div>
+      <p>
+        {
+          isEs
+            ? 'Un concepto en desarrollo, no una función publicada: perfiles que cambian cómo se comporta el escritorio en el momento, sin cambiar de shell. Los activás vos; nada cambia solo.'
+            : 'A concept in development, not a shipped feature: profiles that change how the desktop behaves right now, without changing shells. You switch them; nothing changes on its own.'
+        }
+      </p>
+      <ul role="list">
+        {
+          modes.map((mode) => (
+            <li>
+              <strong>{mode.name}</strong>
+              <span>{mode.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md">{isEs ? 'Leé la propuesta (RFC 0001)' : 'Read the proposal (RFC 0001)'}</a>
+    </div>
+  </section>
+
+  <section class="section get" aria-labelledby="get-title">
+    <header class="section-head">
+      <p class="eyebrow"><b>{isEs ? 'Instalación' : 'Install'}</b><span>{previewLabel}</span></p>
+      <h2 id="get-title">{isEs ? 'De la descarga al primer arranque.' : 'From download to first boot.'}</h2>
+      <p>
+        {
+          isEs
+            ? `Es una preview: usable hoy, todavía puliéndose${candidate ? `, con la Preview ${previewNumber(candidate.version)} en preparación` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`
+            : `It is a preview: usable today, still being polished${candidate ? `, with Preview ${previewNumber(candidate.version)} in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`
+        }
+      </p>
+    </header>
+    <ol class="journey" role="list">
+      {
+        journey.map((step, index) => (
           <li>
-            <a href={L(`/extensions#${plugin.id}-title`)}>
-              <strong>{plugin.name}</strong>
-              <span class="plugin-where">{plugin.placement === 'bar' ? (isEs ? 'En la barra' : 'In the bar') : (isEs ? 'En el dashboard' : 'On the dashboard')}</span>
-              <span class="plugin-what">{firstSentence(plugin.description)}</span>
-            </a>
+            <span class="step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
           </li>
         ))
       }
-    </ul>
-    <p class="band-foot">
-      <a href={L('/extensions')}>{isEs ? 'Abrí el catálogo de extensiones' : 'Open the extensions catalogue'}</a>
-      <a href="https://github.com/HorneroOS/plugins">{isEs ? 'Creá una para la comunidad' : 'Write one for the community'}</a>
-    </p>
-  </section>
-
-  <section class="section roots" aria-labelledby="roots-title">
-    <div class="band-head">
-      <h2 id="roots-title">{isEs ? 'Historia, con fuentes' : 'History, with sources'}</h2>
-      <p>
-        {isEs ? 'Hornero empezó como el escritorio diario de una persona y después se convirtió en proyectos separados. Cada paso posterior al primero enlaza al commit o tag que lo fecha. El primer paso es anterior a la historia pública y se basa en el relato de su maintainer.' : 'Hornero started as one person’s daily desktop and later became separate projects. Each step after the first links to the commit or tag that dates it. The first step predates public history and rests on the maintainer’s account.'}
-      </p>
+    </ol>
+    <div class="cta-row">
+      <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+      <a href={L('/docs/getting-started/')} class="cta secondary">{isEs ? 'Leé la guía de inicio' : 'Read the getting-started guide'}</a>
     </div>
-    <StoryTimeline entries={featuredStory} label={isEs ? 'Línea de tiempo de HorneroOS, 2018 a 2026' : 'HorneroOS timeline, 2018 to 2026'} locale={locale} />
-    <p class="band-foot">
-      <a href={L('/roots')}>{isEs ? 'Leé la historia completa' : 'Read the whole story'}</a>
-      <a href={`${pins.shell.repo}/blob/${pins.shell.sha}/NOTICE`}>{isEs ? 'El crédito y la licencia de Caelestia' : 'The Caelestia credit and license'}</a>
-    </p>
   </section>
 
   <section class="section open" aria-labelledby="open-title">
-    <div class="band-head">
-      <h2 id="open-title">{isEs ? 'Quiénes trabajan en esto' : 'Who works on it'}</h2>
-    </div>
+    <header class="section-head">
+      <p class="eyebrow"><b>{isEs ? 'Código abierto' : 'Open source'}</b><span>{isEs ? 'Evidencia e historia' : 'Evidence and history'}</span></p>
+      <h2 id="open-title">{isEs ? 'De dotfiles a HorneroOS, en público.' : 'From dotfiles to HorneroOS, in public.'}</h2>
+      <p>
+        {
+          isEs
+            ? 'Hornero empezó en 2018 como el escritorio diario de una persona, se publicó como dotfiles en 2019 y hoy son proyectos separados con su propio instalador, QA y documentación. Cada paso después del primero enlaza al commit o tag que lo fecha.'
+            : 'Hornero began in 2018 as one person’s daily desktop, went public as dotfiles in 2019 and is now separate projects with their own installer, QA and documentation. Every step after the first links to the commit or tag that dates it.'
+        }
+      </p>
+    </header>
+    <StoryTimeline entries={featuredStory} label={isEs ? 'Línea de tiempo de HorneroOS, 2018 a 2026' : 'HorneroOS timeline, 2018 to 2026'} locale={locale} />
     <dl class="ledger">
-      <div>
-        <dt>{isEs ? 'Mantenedor' : 'Maintainer'}</dt>
-        <dd><a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>{isEs ? ', que usa este escritorio a diario desde 2018.' : ', who has used this desktop daily since 2018.'}</dd>
-      </div>
-      <div>
-        <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
-        <dd>
-          <a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ', mantenedor de ' : ', a maintainer of '}<a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>{isEs ? ', está desarrollando el instalador a medida.' : ', is developing the custom installer.'}
-        </dd>
-      </div>
-      <div>
-        <dt>Upstream</dt>
-        <dd>
-          {isEs ? 'La shell está adaptada de ' : 'The shell is adapted from '}<a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>{isEs ? '; su autor, su licencia y el commit importado quedan documentados en el repositorio.' : '; its author, license and imported commit stay documented in the repository.'}
-        </dd>
-      </div>
       <div>
         <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
         <dd>
-          {isEs ? 'Cada captura del sitio es real y su origen se sigue en ' : 'Every capture on this site is real, and its origin is tracked in '}<a href="https://github.com/HorneroOS/qa">HorneroOS/qa</a>{isEs ? '; las sesiones en vivo aportadas por colaboradores se etiquetan como tales, y el ' : '; contributor live sessions are labelled as such, and the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? ' lista la fuente de cada una. Shell ' : ' lists the source of each. Shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{' '}
-          {isEs ? 'y config ' : 'and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>{' '}
-          {isEs ? 'son las revisiones exactas detrás de los datos de producto de este sitio.' : 'are the exact revisions behind this site’s product data.'}
+          {isEs ? 'Cada captura de este sitio es real y lista su fuente en el ' : 'Every capture on this site is real and lists its source in the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
         </dd>
       </div>
       <div>
-        <dt>{isEs ? 'Contribuir' : 'Contribute'}</dt>
+        <dt>{isEs ? 'Uso diario' : 'Daily use'}</dt>
         <dd>
-          {isEs ? 'Empezá con la ' : 'Start with the '}<a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{isEs ? 'guía de contribución' : 'contribution guide'}</a>
-          {isEs ? ' o el ' : ' or the '}<a href={L('/roots#repositories')}>{isEs ? 'mapa del proyecto' : 'project map'}</a>.
+          {
+            isEs
+              ? 'Según su maintainer, HorneroOS es la computadora de todos los días de quienes lo construyen: una ASUS ROG Strix G16 y una Lenovo Legion con Studio, y un desktop AMD Ryzen 9 con RTX 3060. No son benchmarks.'
+              : 'By the maintainer’s account, HorneroOS is the everyday computer of the people building it: an ASUS ROG Strix G16 and a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060. These are not benchmarks.'
+          }
+        </dd>
+      </div>
+      <div>
+        <dt>{isEs ? 'Personas' : 'People'}</dt>
+        <dd>
+          <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>{isEs ? ' mantiene el proyecto; ' : ' maintains the project; '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ', mantenedor de ' : ', a maintainer of '}<a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>{isEs ? ', desarrolla el instalador. La shell se adaptó de ' : ', is developing the installer. The shell is adapted from '}<a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>{isEs ? '; su ' : '; its '}<a href={`${pins.shell.repo}/blob/${pins.shell.sha}/NOTICE`}>{isEs ? 'crédito y licencia' : 'credit and licence'}</a>{isEs ? ' quedan en el repositorio.' : ' stay in the repository.'}
         </dd>
       </div>
     </dl>
+    <p class="section-foot">
+      <a href={L('/roots')}>{isEs ? 'Leé la historia completa' : 'Read the whole story'}</a>
+      <a href="https://github.com/HorneroOS">{isEs ? 'Explorá el código fuente' : 'Browse the source'}</a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{isEs ? 'Contribuí' : 'Contribute'}</a>
+    </p>
   </section>
 
   <CommunityJoin locale={locale} />
-
-  <section class="section get" aria-labelledby="get-title">
-    <div>
-      <h2 id="get-title">{isEs ? 'Conseguí HorneroOS' : 'Get HorneroOS'}</h2>
-      <p>
-        {readiness}. {isEs ? 'La ISO pública actual es v0.2.0-preview32, firmada, con Desktop, Studio y Gaming Preview en una sola imagen x86_64. El escritorio también se instala como paquetes de Arch.' : 'The current public ISO is v0.2.0-preview32, signed, with Desktop, Studio and Gaming Preview in one x86_64 image. The desktop also installs as Arch packages.'}
-      </p>
-    </div>
-    <div class="get-links">
-      <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
-      <a href={L('/docs/')} class="cta secondary">{isEs ? 'Leé la documentación' : 'Read the docs'}</a>
-      <a href="https://github.com/HorneroOS" class="cta secondary">{isEs ? 'Explorá el código fuente' : 'Browse the source'}</a>
-    </div>
-  </section>
 </SiteLayout>
 
 <style>
-  /* ----------------------------------------------------------- cover --- */
-  .cover { position: relative; isolation: isolate; display: grid; gap: clamp(1rem, 2vw, 1.75rem); padding-block: 0 clamp(1.5rem, 3vw, 2.5rem); overflow-x: clip; }
-  /* La Plata's diagonal avenue cuts behind the capture, once. */
-  .cover-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; gap: clamp(1rem, 3vw, 3rem); }
-  .cover-head .plate-id { grid-column: 1 / -1; margin-bottom: 0; }
-  .cover h1 { font-size: clamp(2.4rem, 0.8rem + 3.8vw, 4.4rem); line-height: 0.96; letter-spacing: -0.045em; text-wrap: balance; }
-  .cover-aside { display: grid; gap: 1rem; justify-items: start; padding-bottom: 0.3rem; }
-  .cover .lede { max-width: 40ch; font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.2rem); line-height: 1.5; }
-
-  .cover-shot { position: relative; justify-self: center; width: min(100%, calc((100svh - 19rem) * 1.7778)); min-width: min(100%, 38rem); margin: 0; }
-  .shot-frame { position: relative; padding: clamp(0.4rem, 1vw, 0.8rem); border: 1px solid color-mix(in srgb, var(--cue) 40%, var(--rule)); background: color-mix(in srgb, var(--panel) 60%, transparent); box-shadow: 0 2rem 4.5rem color-mix(in srgb, var(--base) 55%, transparent); }
-  /* Registration marks at the four corners of the tube. */
-  .shot-frame::before, .shot-frame::after { position: absolute; width: 1.1rem; height: 1.1rem; content: ''; pointer-events: none; }
-  .shot-frame::before { top: -0.45rem; left: -0.45rem; border-top: 2px solid var(--signal); border-left: 2px solid var(--signal); }
-  .shot-frame::after { right: -0.45rem; bottom: -0.45rem; border-right: 2px solid var(--signal); border-bottom: 2px solid var(--signal); }
-  .shot-frame :global(img) { width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--panel); animation: tube-on 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-  @media (min-width: 1240px) {
-    .cover-shot::before { position: absolute; z-index: -1; top: 0; left: calc(100% + 0.45rem); width: 9rem; height: 2px; background: linear-gradient(90deg, var(--signal), transparent); content: ''; opacity: 0.7; transform: rotate(-35deg); transform-origin: left center; }
+  /* ------------------------------------------------------------ hero --- */
+  /* The homepage hero is a brand surface: it may carry the La Plata diagonal. */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    margin-top: calc(-1 * clamp(2rem, 1rem + 4vw, 4rem));
+    padding-block: clamp(2rem, 1.5rem + 3vw, 4rem) clamp(1.25rem, 2.5vw, 2rem);
   }
-  /* A fixed grid, so the caption's height does not depend on which face is loaded. */
-  .cover-shot figcaption { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.25rem 1rem; align-items: baseline; padding: 0.55rem 0.2rem 0; color: var(--ink-muted); font: 0.68rem/1.35 var(--font-mono); font-stretch: 87.5%; }
-  .shot-detail { min-width: 0; }
-  .shot-kind { color: var(--signal); font-weight: 700; }
-  .shot-credit { grid-column: 1 / -1; font: 0.7rem/1.4 var(--font-sans); letter-spacing: 0; }
-  .shot-credit a { color: var(--ink); text-decoration-color: var(--signal); }
-  .cover-shot figcaption a { color: var(--ink); text-decoration-color: var(--signal); }
-  @keyframes tube-on { from { clip-path: inset(46% 0 46% 0); filter: brightness(1.7); } to { clip-path: inset(0); filter: none; } }
 
-  .cover-facts { display: flex; flex-wrap: wrap; gap: 0.35rem 0; padding-top: 0.9rem; border-top: 1px solid var(--rule); list-style: none; color: var(--ink-muted); font-size: 0.86rem; }
-  .cover-facts li + li::before { margin-inline: 0.8rem; color: var(--signal); content: '/'; }
-  .cover-facts a { color: var(--ink); text-decoration-color: var(--signal); }
-
-  /* ------------------------------------------------------------ bands --- */
-  .band-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: clamp(1.25rem, 3vw, 2.25rem); }
-  .band-head h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
-  .band-head p { max-width: 52ch; color: var(--ink-muted); }
-  .band-foot { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin-top: 1.25rem; }
-  .band-foot a { color: var(--ink); text-decoration-color: var(--signal); }
-  .band-foot a:hover { color: var(--signal); }
-  .section { margin-block: clamp(3.5rem, 2rem + 6vw, 7rem); }
-  .section > * + * { margin-top: 0; }
-
-  .daily { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); }
-  .daily h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
-  .daily-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 0.9rem clamp(1.5rem, 5vw, 5rem); }
-  .daily-copy h2 { grid-row: 1 / span 2; }
-  .daily-copy > p { grid-column: 2; }
-  .daily-copy p { color: var(--ink-muted); max-width: 52ch; }
-  .daily .caveat { padding-left: 0.85rem; border-left: 2px solid var(--phosphor); font-size: 0.85rem; }
-  .daily-shot { margin: 0; }
-  .daily-shot :global(img) { width: 100%; height: auto; aspect-ratio: 1918 / 1078; border: 1px solid var(--rule); background: var(--panel); }
-  .daily-shot figcaption { padding-top: 0.5rem; color: var(--ink-muted); font: 0.68rem var(--font-mono); font-stretch: 87.5%; }
-
-  .family-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--rule); list-style: none; }
-  .family-cell + .family-cell { border-left: 1px solid var(--rule); }
-  .family-cell a { display: grid; align-content: start; gap: 0.4rem; height: 100%; padding: 1.1rem 1rem 1.25rem; color: var(--ink); text-decoration: none; }
-  .family-cell a:hover .family-name { color: var(--signal); }
-  .family-name { font: 700 1.5rem var(--font-display); letter-spacing: -0.03em; }
-  .family-status { width: fit-content; padding: 0.1rem 0.45rem; border: 1px solid var(--phosphor); color: var(--phosphor); font: 0.64rem var(--font-mono); font-stretch: 87.5%; text-transform: uppercase; }
-  .maturity-planned .family-status { border-style: dashed; color: var(--ink-muted); border-color: var(--rule); }
-  .maturity-preview .family-status, .maturity-supported .family-status { border-color: var(--signal); color: var(--signal); }
-  .family-detail { --app-logo-size: 0.95rem; display: grid; gap: 0.25rem; color: var(--ink-muted); font-size: 0.82rem; }
-  .family-backend { display: inline-flex; align-items: center; gap: 0.4rem; }
-
-  .plugin-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 5vw, 4rem); list-style: none; border-top: 1px solid var(--rule); }
-  .plugin-list li { border-bottom: 1px solid var(--rule); }
-  .plugin-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.2rem 1rem; padding-block: 1rem; color: var(--ink); text-decoration: none; }
-  .plugin-list a:hover strong { color: var(--signal); }
-  .plugin-list strong { font-family: var(--font-display); font-size: 1.1rem; }
-  .plugin-where { color: var(--phosphor); font: 0.68rem var(--font-mono); font-stretch: 87.5%; }
-  .plugin-what { grid-column: 1 / -1; color: var(--ink-muted); font-size: 0.9rem; }
-
-  .ledger { display: grid; border-top: 1px solid var(--rule); }
-  .ledger > div { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 5fr); gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--rule); }
-  .ledger dt { color: var(--signal); font: 600 0.78rem var(--font-mono); font-stretch: 87.5%; }
-  .ledger dd { max-width: 70ch; color: var(--ink-muted); }
-  .ledger dd a { color: var(--ink); text-decoration-color: var(--signal); }
-
-  .get { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--rule); background: linear-gradient(115deg, color-mix(in srgb, var(--signal) 9%, var(--panel)), var(--panel) 60%); }
-  .get h2 { margin-bottom: 0.5rem; font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.2rem); letter-spacing: -0.04em; }
-  .get p { max-width: 54ch; color: var(--ink-muted); }
-  .get-links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-end; }
-
-  @media (max-width: 900px) {
-    .cover-head, .band-head, .daily-copy { grid-template-columns: 1fr; }
-    .daily-copy h2 { grid-row: auto; }
-    .daily-copy > p { grid-column: 1; }
-    .family-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .family-cell:nth-child(odd) { border-left: 0; }
-    .family-cell:nth-child(n + 3) { border-top: 1px solid var(--rule); }
-    .plugin-list { grid-template-columns: 1fr; }
-    .get { align-items: start; flex-direction: column; }
-    .get-links { justify-content: flex-start; }
+  .hero-field {
+    position: absolute;
+    z-index: -1;
+    inset: 0 calc(50% - 50vw);
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+    background: var(--ground);
   }
-  @media (max-width: 560px) {
-    .cover { gap: 1rem; }
-    /* On a phone the desktop comes right after the headline; the copy follows. */
-    .cover-head { display: contents; }
-    .cover-head .plate-id { order: 1; }
-    .cover h1 { order: 2; }
-    .cover-shot { order: 3; min-width: 100%; }
-    .cover-shot figcaption { grid-template-columns: 1fr auto; }
-    .shot-detail { grid-column: 1 / -1; grid-row: 2; min-height: 2.7em; }
-    .cover-aside { order: 4; }
-    .cover-facts { order: 5; }
-    .ledger > div { grid-template-columns: 1fr; gap: 0.2rem; }
+
+  /* One La Plata diagonal avenue cuts across the hero's right side. */
+  .hero-field::before,
+  .hero-field::after {
+    position: absolute;
+    inset: 0;
+    content: '';
   }
-  @media (prefers-reduced-motion: reduce) {
-    .shot-frame :global(img) { animation: none; }
+
+  .hero-field::before {
+    background: repeating-linear-gradient(45deg, var(--diagonal) 0 1px, transparent 1px 9px);
+    clip-path: polygon(74% 0, 92% 0, 72% 100%, 54% 100%);
+  }
+
+  .hero-field::after {
+    background: var(--signal);
+    clip-path: polygon(92% 0, calc(92% + 2px) 0, calc(72% + 2px) 100%, 72% 100%);
+    opacity: 0.55;
+  }
+
+  .hero-copy {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 62rem;
+  }
+
+  .hero h1 {
+    max-width: 18ch;
+    font-size: clamp(2.6rem, 1.5rem + 4vw, 5.4rem);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  .hero .lede {
+    max-width: 56ch;
+  }
+
+  .hero .cta-row {
+    margin-top: 0.4rem;
+  }
+
+  /* Telemetry: live readouts from the pinned product data, never invented. */
+  .telemetry {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .telemetry > div {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 1rem 0.2rem 0;
+  }
+
+  .telemetry > div + div {
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .telemetry dt {
+    color: var(--ink-muted);
+    font: 500 0.68rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .telemetry dd a {
+    color: var(--ink);
+    font: 500 0.95rem var(--font-mono);
+    text-decoration: none;
+  }
+
+  .telemetry dd a:hover {
+    color: var(--cue);
+    text-decoration: underline;
+  }
+
+  .telemetry > div:first-child dt::before {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.5rem;
+    background: var(--phosphor);
+    content: '';
+    vertical-align: 0.1em;
+  }
+
+  /* --------------------------------------------------------- monitor --- */
+  .monitor {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .monitor-frame {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--sunken);
+  }
+
+  .monitor-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1rem;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    background:
+      repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px),
+      var(--panel);
+    color: var(--ink-muted);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  .monitor-strip :global(.capture-label) {
+    margin-left: auto;
+  }
+
+  .monitor-screen {
+    overflow: hidden;
+    padding: clamp(0.3rem, 0.8vw, 0.6rem);
+  }
+
+  .monitor-screen :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1918 / 1078;
+    background: var(--ground);
+  }
+
+  /* One orchestrated moment: the capture scans in from the top edge. */
+  @media (prefers-reduced-motion: no-preference) {
+    .monitor-screen :global(img) {
+      animation: monitor-scan var(--dur-scan) var(--ease-sweep) 120ms both;
+    }
+
+    .telemetry > div {
+      animation: readout-in var(--dur-settle) var(--ease-settle) both;
+    }
+
+    .telemetry > div:nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    .telemetry > div:nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    .telemetry > div:nth-child(4) {
+      animation-delay: 180ms;
+    }
+  }
+
+  @keyframes monitor-scan {
+    from {
+      clip-path: inset(0 0 100% 0);
+      transform: translateY(-6px);
+    }
+    to {
+      clip-path: inset(0);
+      transform: none;
+    }
+  }
+
+  @keyframes readout-in {
+    from {
+      transform: translateY(6px);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  .monitor-frame figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    padding: 0.55rem 0.8rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font: 0.72rem var(--font-mono);
+  }
+
+  .monitor-frame figcaption a {
+    margin-left: auto;
+  }
+
+  .monitor-note {
+    max-width: 72ch;
+    margin-top: 0.9rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  /* ---------------------------------------------------------- shared --- */
+  .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 0.8rem clamp(1.5rem, 5vw, 4.5rem);
+    align-items: end;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-head .eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .section-head h2 {
+    font-size: var(--step-3);
+    line-height: 1.02;
+  }
+
+  .section-head > p:last-child {
+    max-width: 52ch;
+    color: var(--ink-muted);
+  }
+
+  .section > * + * {
+    margin-top: 0;
+  }
+
+  .section-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin-top: 1.5rem;
+  }
+
+  /* -------------------------------------------------------- editions --- */
+  .channels {
+    list-style: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .channel-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 5fr);
+    gap: 1rem clamp(1.5rem, 3.5vw, 3rem);
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  .channel-row::before {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 2px;
+    height: 10px;
+    background: var(--signal);
+    content: '';
+  }
+
+  .channel-id {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+  }
+
+  .channel-id h3 {
+    font-size: var(--step-2);
+  }
+
+  .channel-summary {
+    color: var(--ink-muted);
+  }
+
+  .channel-work h4 {
+    margin-bottom: 0.5rem;
+    color: var(--ink-muted);
+    font: 500 0.7rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .channel-work ul {
+    display: grid;
+    gap: 0.45rem;
+    margin-bottom: 0.9rem;
+    list-style: none;
+  }
+
+  .channel-work li {
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--rule-strong);
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+
+  .channel-work strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .editions-foot {
+    margin-top: 1rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  /* ---------------------------------------------------------- system --- */
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--rule);
+  }
+
+  .spec-row {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) minmax(0, 3fr);
+    gap: 0.5rem 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .spec-row:nth-child(odd) {
+    padding-right: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .spec-row:nth-child(even) {
+    padding-left: clamp(1rem, 3vw, 2.5rem);
+    border-left: 1px solid var(--rule);
+  }
+
+  .spec dt {
+    color: var(--ink);
+    font: 600 1.15rem var(--font-display);
+  }
+
+  .spec dd {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: start;
+    color: var(--ink-muted);
+  }
+
+  .spec dd code {
+    padding: 0.25rem 0.55rem;
+    border-color: var(--rule);
+    border-left: 2px solid var(--signal);
+    color: var(--ink);
+  }
+
+  .spec dd code::before {
+    margin-right: 0.5rem;
+    color: var(--ink-muted);
+    content: '$';
+  }
+
+  /* ------------------------------------------------------ experience --- */
+  .experience-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(12rem, 1fr);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  .compare-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin-top: 0.6rem;
+    color: var(--ink-muted);
+    font: 0.72rem var(--font-mono);
+  }
+
+  .index {
+    display: grid;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .index a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.25rem;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .index a:hover span {
+    color: var(--cue);
+    text-decoration: underline;
+  }
+
+  .index b {
+    order: 2;
+    color: var(--signal);
+    font: 600 1.6rem var(--font-display);
+  }
+
+  .modes {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius);
+  }
+
+  .modes-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .modes > p {
+    max-width: 70ch;
+    color: var(--ink-muted);
+  }
+
+  .modes ul {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .modes li {
+    display: grid;
+    align-content: start;
+    gap: 0.3rem;
+    padding: 0.8rem 0.9rem 0.2rem 0;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+  }
+
+  .modes li + li {
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .modes strong {
+    color: var(--ink);
+    font: 600 1.05rem var(--font-display);
+  }
+
+  /* ------------------------------------------------------------- get --- */
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 1.5rem;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .journey li {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 1.1rem 1.25rem 1.1rem 0;
+  }
+
+  .journey li + li {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  .step {
+    color: var(--signal);
+    font: 500 0.8rem var(--font-mono);
+  }
+
+  .journey p {
+    color: var(--ink-muted);
+  }
+
+  /* ------------------------------------------------------------ open --- */
+  .ledger {
+    display: grid;
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--rule);
+  }
+
+  .ledger > div {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) minmax(0, 5fr);
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ledger dt {
+    color: var(--ink-muted);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ledger dd {
+    max-width: 72ch;
+    color: var(--ink-muted);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* ------------------------------------------------------ responsive --- */
+  @media (max-width: 1000px) {
+    .channel-row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .channel-work {
+      grid-column: 1 / -1;
+    }
+
+    .modes ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .modes li,
+    .modes li + li {
+      padding: 0.8rem 0.9rem 0.6rem 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .section-head,
+    .experience-grid,
+    .spec {
+      grid-template-columns: 1fr;
+    }
+
+    .spec-row:nth-child(n) {
+      padding-inline: 0;
+      border-left: 0;
+    }
+
+    .telemetry {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .telemetry > div:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .telemetry > div:nth-child(n + 3) {
+      border-top: 1px solid var(--rule);
+    }
+
+    .journey {
+      grid-template-columns: 1fr;
+    }
+
+    .journey li + li {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--rule);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .channel-row,
+    .spec-row,
+    .ledger > div {
+      grid-template-columns: 1fr;
+    }
+
+    .modes ul {
+      grid-template-columns: 1fr;
+    }
+
+    .monitor-frame figcaption a {
+      margin-left: 0;
+    }
+
+    .hero-field::before {
+      clip-path: polygon(82% 0, 100% 0, 100% 40%);
+    }
+
+    .hero-field::after {
+      display: none;
+    }
   }
 </style>

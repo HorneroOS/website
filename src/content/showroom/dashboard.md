@@ -8,6 +8,7 @@ alt:
   en: 'The live Hornero Dark Dashboard shows five tabs, one No media empty state, a clear performance graph, and the Companion over the desktop wallpaper.'
 order: 0
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

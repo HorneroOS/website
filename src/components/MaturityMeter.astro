@@ -1,0 +1,61 @@
+---
+/**
+ * Edition maturity as a segmented meter (Hornero Signal, RFC 0001 §2) plus its
+ * text label. The value always comes from the pinned edition catalogue; the
+ * meter is decorative and hidden from assistive tech, the label carries meaning.
+ */
+import type { Maturity } from '../data/product';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  maturity: Maturity;
+  locale?: Locale;
+}
+
+const { maturity, locale = 'es' } = Astro.props;
+const steps: Maturity[] = ['planned', 'experimental', 'preview', 'supported'];
+const level = steps.indexOf(maturity) + 1;
+const names: Record<Maturity, string> =
+  locale === 'es'
+    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+const color: Record<Maturity, string> = {
+  planned: 'var(--rule-strong)',
+  experimental: 'var(--cue)',
+  preview: 'var(--signal)',
+  supported: 'var(--phosphor)',
+};
+---
+
+<span class="meter maturity-meter" style={`--meter-color:${color[maturity]}`}>
+  <span class="maturity" data-maturity={maturity}>{names[maturity]}</span>
+  <span class="meter-track" aria-hidden="true">
+    {steps.map((_, index) => <i class={index < level ? 'on' : undefined} />)}
+  </span>
+  <span class="meter-value" aria-hidden="true">{level}/{steps.length}</span>
+</span>
+
+<style>
+  .maturity-meter {
+    flex-wrap: wrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .meter-track :global(i.on) {
+      transform-origin: left;
+      animation: segment-in var(--dur-settle) var(--ease-settle) both;
+    }
+
+    .meter-track :global(i.on:nth-child(2)) {
+      animation-delay: 50ms;
+    }
+
+    .meter-track :global(i.on:nth-child(3)) {
+      animation-delay: 100ms;
+    }
+
+    .meter-track :global(i.on:nth-child(4)) {
+      animation-delay: 150ms;
+    }
+  }
+</style>

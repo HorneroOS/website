@@ -17,6 +17,11 @@ type. Real Hornero captures provide the strongest visual statements.
   plate. `KilnStamp.astro` carries capture metadata.
 - `LayoutDiagram.astro` and `SourcePlate.astro` render focused product
   explanations.
+- `MaturityMeter.astro` renders an edition's maturity from the pinned
+  catalogue as a text label plus a segmented meter. `CaptureLabel.astro`
+  renders a capture's appearance label (pre-Signal or Signal).
+- Capture slots in `src/data/captures.ts` decide which showroom capture
+  each homepage slot shows ([`CAPTURES.md`](./CAPTURES.md)).
 - `StoryTimeline.astro` renders `src/data/story.ts` (compact rail on `/`, ledger
   on `/roots`). `LookCompare.astro` wipes between two real captures and falls
   back to a side-by-side pair without JavaScript.

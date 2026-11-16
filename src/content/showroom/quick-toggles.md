@@ -8,6 +8,7 @@ alt:
   en: 'A Hornero desktop showing only a photograph of a ship on the Beagle Channel under dramatic clouds, the vertical shell rail, and a panel with Keep Awake, Screen Recorder and Quick Toggles.'
 order: 15
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
     en: 'HorneroOS contributor-provided workstation capture'

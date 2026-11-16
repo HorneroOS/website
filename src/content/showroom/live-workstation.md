@@ -8,6 +8,7 @@ alt:
   en: 'A Hornero desktop with btop open across the screen, an agent workspace sidebar at left, and system quick toggles at the lower right.'
 order: 11
 provenance:
+  appearance: pre-signal
   source:
     es: 'Captura de estación de trabajo aportada por un colaborador de HorneroOS'
     en: 'HorneroOS contributor-provided workstation capture'

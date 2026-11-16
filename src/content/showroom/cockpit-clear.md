@@ -8,6 +8,7 @@ alt:
   en: 'Cockpit Clear layout in a real Hornero desktop, with a clear bar across the top edge over a Patagonian night-sky wallpaper.'
 order: 2
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

@@ -189,3 +189,12 @@ upstream, so `AppLogo` draws a generic audio-visualizer glyph for it
 in-house; that glyph is site iconography, never presented as Cava's
 logo. Prose-only mentions (Polybar, Waybar, Calamares, SDDM and similar
 lineage or status references) intentionally carry no logo.
+
+## Imagery honesty
+
+Every product image is a real capture with provenance
+(`src/content/showroom/`). Captures taken before Hornero Signal shipped
+carry `provenance.appearance: pre-signal` and render a visible
+"Preview — previous appearance" label (`CaptureLabel.astro`,
+`KilnStamp.astro`) until a Signal capture replaces them. See
+[`CAPTURES.md`](./CAPTURES.md) for the capture slots QA fills.

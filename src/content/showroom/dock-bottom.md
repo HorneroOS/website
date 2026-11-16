@@ -8,6 +8,7 @@ alt:
   en: 'Dock Bottom layout in a real Hornero desktop, with a floating dock along the bottom edge.'
 order: 5
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

@@ -8,6 +8,7 @@ alt:
   en: 'Hornero Left layout with the vertical shell rail, workspace controls and desktop wallpaper in a running Hornero session.'
 order: 9
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'

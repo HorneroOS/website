@@ -8,6 +8,7 @@ alt:
   en: 'Islands layout in Hornero, with independent floating control surfaces arranged across the desktop.'
 order: 11
 provenance:
+  appearance: pre-signal
   source:
     es: 'QA de Hornero'
     en: 'Hornero QA'
