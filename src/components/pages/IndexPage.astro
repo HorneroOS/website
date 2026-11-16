@@ -8,6 +8,8 @@ import CommunityJoin from '../../components/CommunityJoin.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import CaptureLabel from '../../components/CaptureLabel.astro';
 import { featuredStory } from '../../data/story';
+import conceptNight from '../../assets/concepts/concept-final-night.png';
+import conceptDay from '../../assets/concepts/concept-final-day.png';
 import { captureSlots } from '../../data/captures';
 import {
   candidate,
@@ -387,6 +389,38 @@ const description = isEs
         }
       </p>
     </header>
+    <figure class="concept">
+      <div class="concept-strip">
+        <span class="channel">{isEs ? 'Dirección Signal Bezel' : 'Signal Bezel direction'}</span>
+        <CaptureLabel appearance="concept" locale={locale} />
+      </div>
+      <div class="concept-pair">
+        <Picture
+          src={conceptNight}
+          alt={isEs ? 'Render conceptual de Cockpit en Signal Night: barra superior con medidores segmentados, un panel de telemetría con osciloscopio, un popout de audio anclado a su botón y una barra inferior con espacios de trabajo, sobre una foto nocturna de Buenos Aires. Valores de muestra.' : 'Concept render of Cockpit in Signal Night: a top rail with segmented meters, a telemetry panel with an oscilloscope, an audio popout anchored to its trigger and a bottom strip with workspaces, over a night photograph of Buenos Aires. Sample values.'}
+          formats={['avif', 'webp']}
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 1240px) 820px, calc(100vw - 2rem)"
+          loading="lazy"
+          decoding="async"
+        />
+        <Picture
+          src={conceptDay}
+          alt={isEs ? 'Render conceptual de la misma dirección en Signal Day, sobre una foto del glaciar Perito Moreno. Valores de muestra.' : 'Concept render of the same direction in Signal Day, over a photograph of the Perito Moreno glacier. Sample values.'}
+          formats={['avif', 'webp']}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 1240px) 380px, calc(100vw - 2rem)"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figcaption>
+        {isEs ? 'Así se ve hacia dónde va el escritorio: especímenes HTML/CSS de la dirección elegida, con valores de muestra, no telemetría real ni capturas del producto. ' : 'Where the desktop is heading: HTML/CSS specimens of the chosen direction with sample values, not live telemetry or product screenshots. '}
+        <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">{isEs ? 'Leé el lenguaje visual Signal' : 'Read the Signal visual language'}</a>.
+        {isEs ? ' Fondos: Buenos Aires Nocturno, de Luis Argerich (CC BY 2.0); Perito Moreno, de ThartmannWiki (CC BY-SA 4.0).' : ' Wallpapers: Buenos Aires Nocturno by Luis Argerich (CC BY 2.0); Perito Moreno by ThartmannWiki (CC BY-SA 4.0).'}
+      </figcaption>
+    </figure>
+
     <div class="experience-grid">
       <div class="experience-compare">
         <LookCompare dark={shellDark} light={shellLight} locale={locale} />
@@ -599,9 +633,15 @@ const description = isEs
     text-transform: uppercase;
   }
 
+  /* Readout wells (Signal Bezel §4.1): changing values sit in sunken wells. */
   .telemetry dd a {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
     color: var(--ink);
-    font: 500 0.95rem var(--font-mono);
+    font: 500 0.92rem var(--font-mono);
     text-decoration: none;
   }
 
@@ -616,8 +656,14 @@ const description = isEs
     height: 6px;
     margin-right: 0.5rem;
     background: var(--phosphor);
+    /* The one live indicator on the page: a static halo, Night only (glow role). */
+    box-shadow: 0 0 4px color-mix(in srgb, var(--phosphor) 40%, transparent);
     content: '';
     vertical-align: 0.1em;
+  }
+
+  :global(:root[data-color-mode='light']) .telemetry > div:first-child dt::before {
+    box-shadow: none;
   }
 
   /* --------------------------------------------------------- monitor --- */
@@ -893,6 +939,43 @@ const description = isEs
     align-items: start;
   }
 
+  .concept {
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .concept-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.6rem;
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .concept-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .concept-pair :global(img) {
+    width: 100%;
+    height: auto;
+    border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-small);
+  }
+
+  .concept figcaption {
+    max-width: 90ch;
+    margin-top: 0.6rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
   .compare-note {
     display: flex;
     flex-wrap: wrap;
@@ -1069,6 +1152,7 @@ const description = isEs
   }
 
   @media (max-width: 860px) {
+    .concept-pair,
     .section-head,
     .experience-grid,
     .spec {

@@ -47,6 +47,15 @@ provenance:
 - Never use a render, mock-up or composited image. If an image is a
   concept, it does not belong in this collection.
 
+## Concept renders
+
+The homepage shows two Signal Bezel concept specimens from HorneroOS/docs
+(`development/assets/signal-visual-language/`, vendored under
+`src/assets/concepts/`). They are not captures: they render only with
+`<CaptureLabel appearance="concept" />` ("Concept render — not a
+screenshot"), keep their own baked-in "CONCEPT RENDER" label, credit their
+wallpapers, and never fill a capture slot.
+
 ## Capture slots
 
 `src/data/captures.ts` maps each place that shows a capture to the showroom

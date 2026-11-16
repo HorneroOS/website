@@ -1330,6 +1330,14 @@ main .plate-id {
   text-transform: uppercase;
 }
 
+.capture-label[data-appearance='concept'] {
+  padding: 0.1rem 0.45rem;
+  border: 1px dashed var(--signal);
+  border-radius: var(--radius-small);
+  background: var(--signal-well);
+  color: var(--on-signal-well);
+}
+
 .capture-label[data-appearance='pre-signal'] {
   color: var(--on-cue-well);
   background: var(--cue-well);
