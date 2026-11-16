@@ -68,7 +68,7 @@ const stats = gamingCatalogue
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>ARG / 199X</span><span>{isEs ? 'Estado: Preview' : 'Status: Preview'}</span>
+      <strong>{isEs ? 'Ficha técnica · Edición Gaming' : 'Technical sheet · Gaming Edition'}</strong><span>{isEs ? 'Estado: Preview' : 'Status: Preview'}</span>
     </p>
     <h1>Gaming</h1>
     <p class="lede">
@@ -247,7 +247,7 @@ const stats = gamingCatalogue
     gap: 0.7rem 1.6rem;
     margin-top: 1.8rem;
     padding-block: 1rem;
-    border-block: 1px solid var(--line);
+    border-block: 1px solid var(--rule);
   }
   .lineup-item {
     display: inline-flex;
@@ -268,7 +268,7 @@ const stats = gamingCatalogue
     gap: 0.15rem;
   }
   .stats dt {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step--1);
   }
   .stats dd {
@@ -276,24 +276,24 @@ const stats = gamingCatalogue
     font-family: var(--font-mono, monospace);
     font-size: var(--step-2, 1.6rem);
     font-weight: 700;
-    color: var(--accent);
+    color: var(--signal);
   }
   .availability {
     max-width: 66ch;
     margin-top: 1.6rem;
     padding: 0.9rem 1.1rem;
-    border: 1px solid var(--secondary);
+    border: 1px solid var(--phosphor);
     border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--text-muted);
+    background: var(--panel);
+    color: var(--ink-muted);
     font-size: var(--step--1);
   }
   .availability strong {
-    color: var(--text);
+    color: var(--ink);
   }
   .section-copy {
     max-width: 66ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .tracks {
     margin: 1.4rem 0 0;
@@ -306,10 +306,10 @@ const stats = gamingCatalogue
     gap: 0.5rem 1.5rem;
     align-items: start;
     padding-block: 1rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
   }
   .track:last-child {
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rule);
   }
   .track h3 {
     margin: 0;
@@ -327,12 +327,12 @@ const stats = gamingCatalogue
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     --app-logo-size: 1.35rem;
   }
   .muted {
     margin: 0;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .app-grid {
     display: grid;
@@ -344,9 +344,9 @@ const stats = gamingCatalogue
   }
   .app-tile {
     padding: 1rem 1.1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .app-head {
     display: flex;
@@ -363,9 +363,9 @@ const stats = gamingCatalogue
   }
   .tag {
     padding: 0.12rem 0.55rem;
-    border: 1px solid var(--secondary);
-    border-radius: 999px;
-    color: var(--secondary);
+    border: 1px solid var(--phosphor);
+    border-radius: var(--radius-small);
+    color: var(--phosphor);
     font-size: 0.72rem;
     font-weight: 600;
     white-space: nowrap;
@@ -382,7 +382,7 @@ const stats = gamingCatalogue
     gap: 0.5rem;
   }
   .app-meta dt {
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .app-meta dd {
     margin: 0;
@@ -390,7 +390,7 @@ const stats = gamingCatalogue
   }
   .note {
     margin: 0.7rem 0 0;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step--1);
   }
   .modes {
@@ -406,20 +406,20 @@ const stats = gamingCatalogue
     align-items: center;
     gap: 0.4rem 0.9rem;
     padding: 0.85rem 1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .mode span:not(.tag) {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     flex: 1;
   }
   .tool-badge {
     display: inline-block;
     padding: 0.12rem 0.55rem;
-    border: 1px solid var(--secondary);
-    border-radius: 999px;
-    color: var(--secondary) !important;
+    border: 1px solid var(--phosphor);
+    border-radius: var(--radius-small);
+    color: var(--phosphor) !important;
     font-family: var(--font-mono, monospace);
     font-size: 0.78rem;
     font-weight: 600;
@@ -434,16 +434,16 @@ const stats = gamingCatalogue
   }
   .status-grid article {
     padding: 1rem 1.1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .status-grid h3 {
     margin-top: 0;
   }
   .status-grid ul {
     padding-left: 1.1rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   @media (max-width: 40rem) {
     .track {

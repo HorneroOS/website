@@ -73,7 +73,7 @@ const proof = {
   description={isEs ? `${layouts.length} layouts de la shell de Hornero, cada uno en una captura real: rieles laterales, barras de a dos, barras transparentes, islas y docks.` : `${layouts.length} Hornero shell layouts, each shown in a real capture: side rails, paired bars, clear bars, islands and docks.`}
 >
   <section class="intro section">
-    <p class="plate-id"><strong>Catálogo de formas</strong><span>ARG / 199X</span><span>{layouts.length} layouts · {isEs ? 'capturas reales' : 'real captures'}</span></p>
+    <p class="plate-id"><strong>Catálogo de formas</strong><span>{layouts.length} layouts · {isEs ? 'capturas reales' : 'real captures'}</span></p>
     <h1>Layouts</h1>
     <p>
       {isEs ? 'Poné la shell sobre un borde, en un par de barras, como islas flotantes o abajo de todo en la pantalla. El lanzador, las notificaciones y los ajustes son los mismos en todos.' : 'Put the shell along an edge, in a pair of bars, as floating islands or at the bottom of the screen. The launcher, notifications and settings are shared by all of them.'}
@@ -165,14 +165,14 @@ const proof = {
     letter-spacing: -0.055em;
   }
   .intro h1 em {
-    color: var(--accent);
+    color: var(--signal);
     font-style: normal;
   }
   .intro > p:not(.eyebrow) {
     max-width: 57ch;
     margin-top: 1.1rem;
     font-size: var(--step-1);
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .intro-actions {
     display: flex;
@@ -182,12 +182,12 @@ const proof = {
     margin-top: 1.4rem;
   }
   .intro-actions > span {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.9rem;
   }
   kbd {
     padding: 0.05em 0.4em;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-bottom-width: 2px;
     border-radius: 5px;
   }
@@ -220,20 +220,20 @@ const proof = {
   }
   .showcase-copy > p:not(.eyebrow) {
     max-width: 37ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .text-link {
     margin-top: 0.5rem;
-    color: var(--text);
+    color: var(--ink);
     font-weight: 600;
     text-decoration: none;
   }
   .text-link:hover {
-    color: var(--accent);
+    color: var(--signal);
   }
   .catalog {
     padding-top: clamp(2rem, 4vw, 4rem);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
   }
   .catalog-heading {
     display: flex;
@@ -247,7 +247,7 @@ const proof = {
   }
   .catalog-heading > p {
     max-width: 48ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .layout-grid {
     display: grid;
@@ -261,13 +261,13 @@ const proof = {
     gap: 0.7rem;
     min-width: 0;
     padding: 1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
     scroll-margin-top: 7rem;
   }
   .layout-card:target {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--signal);
     outline-offset: 3px;
   }
   .layout-title {
@@ -280,27 +280,27 @@ const proof = {
     font-size: 1.15rem;
   }
   .layout-title span {
-    color: var(--text-muted);
-    font: 0.67rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.67rem var(--font-mono);
     white-space: nowrap;
   }
   .layout-card > p {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.9rem;
   }
   .layout-card details {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
     padding-top: 0.55rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.83rem;
   }
   .layout-card summary {
-    color: var(--text);
+    color: var(--ink);
     cursor: pointer;
     font-weight: 600;
   }
   .layout-card summary::marker {
-    color: var(--secondary);
+    color: var(--phosphor);
   }
   .bars {
     display: grid;
@@ -309,8 +309,8 @@ const proof = {
   }
   .bars dt {
     margin-top: 0.35rem;
-    color: var(--secondary);
-    font: 0.69rem var(--font-data);
+    color: var(--phosphor);
+    font: 0.69rem var(--font-mono);
     text-transform: uppercase;
   }
   .bars dd {
@@ -347,7 +347,7 @@ const proof = {
 
 <style>
   /* 199X per-page direction: layouts as mechanical shape specimens. */
-  .layout-card { border-radius: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--highlight) 14%, transparent); }
+  .layout-card { border-radius: 2px; box-shadow: 6px 6px 0 color-mix(in srgb, var(--cue) 14%, transparent); }
   .layout-title { font-family: var(--font-display); }
-  .catalog-heading { border-bottom: 3px solid var(--accent); padding-bottom: 0.6rem; }
+  .catalog-heading { border-bottom: 3px solid var(--signal); padding-bottom: 0.6rem; }
 </style>

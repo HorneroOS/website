@@ -25,7 +25,7 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   description={isEs ? 'Cómo Hornero pasó de una configuración personal de escritorio a proyectos abiertos separados, con una fuente para cada paso y crédito a su upstream.' : 'How Hornero went from a personal desktop configuration to separate open projects, with a source for each step and credit to its upstream.'}
 >
   <section class="intro section">
-    <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>ARG / 199X</span><span>Las raíces del proyecto</span></p>
+    <p class="plate-id"><strong>Archivo 2018 — hoy</strong><span>Las raíces del proyecto</span></p>
     <h1>{isEs ? 'Raíces' : 'Roots'}</h1>
     <p>
       {isEs ? 'Hornero empezó como una configuración personal y creció hasta convertirse en proyectos mantenidos para la shell, los temas, las herramientas del sistema, el testing y la documentación.' : 'Hornero began as a personal configuration and grew into maintained projects for the shell, themes, system tools, testing and documentation.'}
@@ -225,13 +225,13 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     letter-spacing: -0.055em;
   }
   .intro h1 em {
-    color: var(--accent);
+    color: var(--signal);
     font-style: normal;
   }
   .intro > p:last-child {
     max-width: 59ch;
     margin-top: 1.2rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step-1);
   }
   .timeline-section > h2,
@@ -241,20 +241,20 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     margin-top: 0.4rem;
   }
   .repo-mark {
-    color: var(--secondary);
-    font: 0.75rem var(--font-data);
+    color: var(--phosphor);
+    font: 0.75rem var(--font-mono);
   }
   .map-section {
     display: grid;
     gap: 1.5rem;
     padding: clamp(1.3rem, 4vw, 2.6rem);
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .map-section > div:first-child > p:last-child {
     margin-top: 0.55rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .repo-list {
     display: grid;
@@ -266,8 +266,8 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
     gap: 0.6rem;
     min-width: 0;
     padding: 0.9rem 0.1rem;
-    border-top: 1px solid var(--line);
-    color: var(--text);
+    border-top: 1px solid var(--rule);
+    color: var(--ink);
     text-decoration: none;
   }
   .repo-list strong,
@@ -276,47 +276,47 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   }
   .repo-list small {
     margin-top: 0.12rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .repo-list code {
-    color: var(--secondary);
+    color: var(--phosphor);
   }
   .repo-list a:hover strong {
-    color: var(--accent);
+    color: var(--signal);
   }
   .contributor-guide {
     display: grid;
     gap: 1.5rem;
     padding-inline-start: clamp(1rem, 3vw, 2rem);
-    border-inline-start: 2px solid var(--highlight);
+    border-inline-start: 2px solid var(--cue);
   }
   .contributor-guide > div > p:last-child {
     max-width: 58ch;
     margin-top: 0.55rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .contributor-guide nav {
     display: grid;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
   }
   .contributor-guide nav a {
     display: grid;
     gap: 0.25rem;
     padding: 0.8rem 0.1rem;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--rule);
     text-decoration: none;
   }
   .contributor-guide nav a > span {
-    color: var(--secondary);
-    font: 0.68rem var(--font-data);
+    color: var(--phosphor);
+    font: 0.68rem var(--font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
   .contributor-guide nav a strong {
-    color: var(--text);
+    color: var(--ink);
   }
   .contributor-guide nav a:hover strong {
-    color: var(--accent);
+    color: var(--signal);
   }
   .lineage-grid {
     display: grid;
@@ -325,19 +325,19 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   }
   .lineage-grid article {
     padding: 1rem 1.1rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .lineage-grid p {
     margin-top: 0.35rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .source-line {
     margin-top: 1.4rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--line);
-    color: var(--text-muted);
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
     font-size: 0.82rem;
   }
   @media (min-width: 900px) {
@@ -355,14 +355,14 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
   }
   .timeline-head { display: grid; gap: 1rem clamp(1.5rem, 5vw, 5rem); margin-bottom: 1.5rem; }
   .timeline-head h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
-  .timeline-head p { max-width: 58ch; color: var(--text-muted); }
+  .timeline-head p { max-width: 58ch; color: var(--ink-muted); }
   .identity { display: grid; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
-  .poster { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+  .poster { margin: 0; border: 1px solid var(--rule); background: var(--panel); }
   .poster img { width: 100%; height: auto; }
-  .poster figcaption { padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); color: var(--text-muted); font: 0.68rem var(--font-data); font-stretch: 87.5%; }
+  .poster figcaption { padding: 0.6rem 0.8rem; border-top: 1px solid var(--rule); color: var(--ink-muted); font: 0.68rem var(--font-mono); font-stretch: 87.5%; }
   .identity-copy { display: grid; gap: 1rem; }
   .identity-copy h2 { font-size: clamp(1.7rem, 1.2rem + 2vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; }
-  .identity-copy p { max-width: 50ch; color: var(--text-muted); }
+  .identity-copy p { max-width: 50ch; color: var(--ink-muted); }
   @media (min-width: 900px) {
     .timeline-head { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; }
     .identity { grid-template-columns: 1.1fr 0.9fr; }
@@ -371,6 +371,6 @@ const currentRelease = releases.find((release) => release.status === 'tagged');
 
 <style>
   /* 199X per-page direction: roots as an archival timeline. */
-  .repo-mark { font-family: var(--font-data); }
+  .repo-mark { font-family: var(--font-mono); }
   .lineage-grid > * { border-radius: 2px; }
 </style>

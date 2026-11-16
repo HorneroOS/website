@@ -170,9 +170,9 @@ const current = canonicalId;
 <style>
   .docs-lang-note {
     padding: 0.7rem 0.9rem;
-    border: 1px solid var(--line);
-    background: color-mix(in oklab, var(--surface) 58%, transparent);
-    color: var(--text-muted);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--panel) 58%, transparent);
+    color: var(--ink-muted);
   }
 
   .doc-tools {
@@ -183,12 +183,12 @@ const current = canonicalId;
     gap: 0.6rem 1rem;
     margin-bottom: 1.4rem;
     padding: 0.7rem 0.9rem;
-    border: 1px solid var(--line);
-    background: color-mix(in oklab, var(--surface) 58%, transparent);
+    border: 1px solid var(--rule);
+    background: color-mix(in oklab, var(--panel) 58%, transparent);
   }
   .doc-tools-label {
-    color: var(--secondary);
-    font: 0.62rem var(--font-data);
+    color: var(--phosphor);
+    font: 0.62rem var(--font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -221,7 +221,7 @@ const current = canonicalId;
     .docs-nav {
       order: 2;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid var(--rule);
     }
 
     .toc {
@@ -261,25 +261,25 @@ const current = canonicalId;
 
   .docs-nav a,
   .toc a {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     text-decoration: none;
   }
 
   .docs-nav a:hover,
   .toc a:hover {
-    color: var(--text);
+    color: var(--ink);
   }
 
   .docs-nav a[aria-current='page'] {
-    color: var(--text);
+    color: var(--ink);
     font-weight: 600;
-    box-shadow: inset 2px 0 0 var(--accent);
+    box-shadow: inset 2px 0 0 var(--signal);
     padding-left: 0.6rem;
   }
 
   .area-title {
     font-weight: 600;
-    color: var(--text);
+    color: var(--ink);
   }
 
   .area ul,
@@ -290,7 +290,7 @@ const current = canonicalId;
     gap: 0.35rem;
     margin-top: 0.4rem;
     padding-left: 0.6rem;
-    border-left: 1px solid var(--line);
+    border-left: 1px solid var(--rule);
   }
 
   .docs-search {
@@ -335,8 +335,7 @@ const current = canonicalId;
     width: 1.1rem;
     height: 2px;
     flex: none;
-    background: linear-gradient(90deg, var(--secondary), var(--accent), var(--highlight));
-    box-shadow: 0 0 0.65rem color-mix(in srgb, var(--highlight) 18%, transparent);
+    background: var(--signal);
     content: '';
     transform: translateY(-0.28em);
   }
@@ -360,10 +359,10 @@ const current = canonicalId;
 
   .prose :global(blockquote) {
     padding: 0.75rem 1rem;
-    border-left: 3px solid var(--secondary);
-    background: linear-gradient(110deg, color-mix(in srgb, var(--secondary) 5%, var(--surface)), var(--surface) 48%);
+    border-left: 3px solid var(--phosphor);
+    background: var(--panel);
     border-radius: 0 10px 10px 0;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .prose :global(table) {
@@ -373,15 +372,15 @@ const current = canonicalId;
 
   .prose :global(img) {
     border-radius: 10px;
-    border: 1px solid var(--line);
-    box-shadow: 0 0.8rem 2rem color-mix(in srgb, var(--bg) 15%, transparent);
+    border: 1px solid var(--rule);
+    box-shadow: 0 0.8rem 2rem color-mix(in srgb, var(--base) 15%, transparent);
   }
 
   .doc-foot {
     margin-top: 3rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--rule);
     font-size: var(--step--1);
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 </style>

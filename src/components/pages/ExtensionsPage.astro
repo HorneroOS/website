@@ -38,7 +38,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
 >
   <section class="extension-intro section" aria-labelledby="extensions-title">
     <div class="intro-copy">
-      <p class="plate-id"><strong>Extensiones Hornero</strong><span>ARG / 199X</span><span>{isEs ? 'Catálogo oficial' : 'Official catalogue'}</span></p>
+      <p class="plate-id"><strong>Extensiones Hornero</strong><span>{isEs ? 'Catálogo oficial' : 'Official catalogue'}</span></p>
       <h1 id="extensions-title">{isEs ? 'Extensiones' : 'Extensions'}</h1>
       <p class="lede">
         {isEs ? 'Extensiones propias para Hornero Shell, publicadas en ' : 'First-party extensions for Hornero Shell, published in '}<a href={repo}>HorneroOS/plugins</a>. {isEs ? 'El Centro de control y ' : 'Control Center and '}<code>horneroctl</code> {isEs ? 'las instalan como datos de paquete inertes. Activar una es un paso aparte.' : ' install them as inert package data. Enabling one is a separate step.'}
@@ -324,64 +324,64 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
 <style>
   .extension-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.7fr); gap: clamp(2rem, 7vw, 7rem); align-items: end; padding-block: clamp(1.5rem, 4vw, 3rem); }
   .intro-copy h1 { max-width: 13ch; margin-top: 1rem; font-size: clamp(3.4rem, 7vw, 6.4rem); line-height: 0.88; letter-spacing: -0.08em; }
-  .intro-copy h1 em { color: var(--accent); font-style: normal; }
+  .intro-copy h1 em { color: var(--signal); font-style: normal; }
   .intro-copy .lede { max-width: 62ch; margin-top: 1.25rem; }
   .intro-links, .developer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1.5rem; }
-  .catalogue-stamp { padding: 1.25rem; border: 1px solid var(--line); border-top: 3px solid var(--accent); background: var(--surface); }
-  .stamp-heading { display: flex; justify-content: space-between; gap: 1rem; color: var(--secondary); font: 0.67rem var(--font-data); text-transform: uppercase; }
+  .catalogue-stamp { padding: 1.25rem; border: 1px solid var(--rule); border-top: 3px solid var(--signal); background: var(--panel); }
+  .stamp-heading { display: flex; justify-content: space-between; gap: 1rem; color: var(--phosphor); font: 0.67rem var(--font-mono); text-transform: uppercase; }
   .stamp-count { display: flex; align-items: center; gap: 1rem; margin-block: 1.2rem; }
-  .stamp-count strong { color: var(--accent); font: 5.5rem/0.85 var(--font-display); letter-spacing: -0.1em; }
-  .stamp-count span { color: var(--text-muted); font: 0.72rem var(--font-data); line-height: 1.5; text-transform: uppercase; }
-  .catalogue-stamp dl { display: grid; gap: 0.85rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .stamp-count strong { color: var(--signal); font: 5.5rem/0.85 var(--font-display); letter-spacing: -0.1em; }
+  .stamp-count span { color: var(--ink-muted); font: 0.72rem var(--font-mono); line-height: 1.5; text-transform: uppercase; }
+  .catalogue-stamp dl { display: grid; gap: 0.85rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
   .catalogue-stamp dl div { display: grid; gap: 0.3rem; }
-  .catalogue-stamp dt, .extension-facts dt, .integrity-fact > span { color: var(--secondary); font: 0.64rem var(--font-data); text-transform: uppercase; }
+  .catalogue-stamp dt, .extension-facts dt, .integrity-fact > span { color: var(--phosphor); font: 0.64rem var(--font-mono); text-transform: uppercase; }
   .catalogue-stamp dd { margin: 0; overflow-wrap: anywhere; font-size: 0.78rem; }
   .catalogue-stamp code { font-size: 0.7rem; }
-  .trust-strip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.25rem; padding-block: clamp(1.5rem, 4vw, 2.5rem); border-block: 1px solid var(--line); }
-  .trust-mark { display: grid; width: 2.4rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--accent); color: var(--accent); font: 1.4rem var(--font-data); }
+  .trust-strip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.25rem; padding-block: clamp(1.5rem, 4vw, 2.5rem); border-block: 1px solid var(--rule); }
+  .trust-mark { display: grid; width: 2.4rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--signal); color: var(--signal); font: 1.4rem var(--font-mono); }
   .trust-strip h2 { margin-top: 0.2rem; font-size: clamp(1.45rem, 2.2vw, 2rem); }
-  .trust-strip p:not(.eyebrow) { max-width: 78ch; margin-top: 0.45rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+  .trust-strip p:not(.eyebrow) { max-width: 78ch; margin-top: 0.45rem; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.6; }
   .trust-strip > a { max-width: 14rem; }
   .extension-catalogue { padding-block: clamp(3rem, 7vw, 6rem); }
   .extension-catalogue .section-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.7fr); align-items: end; gap: 2rem; margin-bottom: 1.7rem; }
   .extension-catalogue .section-heading h2, .developer-section h2 { margin-top: 0.45rem; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.055em; }
-  .extension-catalogue .section-heading > p { max-width: 50ch; color: var(--text-muted); line-height: 1.6; }
-  .catalogue-controls { display: grid; grid-template-columns: minmax(14rem, 1fr) repeat(3, minmax(9rem, 0.4fr)) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--line); background: var(--surface); }
+  .extension-catalogue .section-heading > p { max-width: 50ch; color: var(--ink-muted); line-height: 1.6; }
+  .catalogue-controls { display: grid; grid-template-columns: minmax(14rem, 1fr) repeat(3, minmax(9rem, 0.4fr)) auto; align-items: end; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem; border-block: 1px solid var(--rule); background: var(--panel); }
   .catalogue-controls[hidden], .extension-card[hidden], .catalogue-empty[hidden] { display: none; }
   .catalogue-controls label { display: grid; gap: 0.35rem; }
-  .catalogue-controls label > span { color: var(--secondary); font: 0.65rem var(--font-data); text-transform: uppercase; }
-  .catalogue-controls input, .catalogue-controls select { min-height: 2.8rem; padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text); font: inherit; }
-  .catalogue-controls input::placeholder { color: var(--text-muted); opacity: 1; }
-  .catalogue-result-count { align-self: center; color: var(--text-muted); font: 0.68rem var(--font-data); white-space: nowrap; }
-  .catalogue-empty { padding: 2rem 1rem; border: 1px dashed var(--line); color: var(--text-muted); text-align: center; }
-  .extension-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; padding: 1px; background: var(--line); list-style: none; }
-  .extension-card { min-width: 0; background: var(--bg); }
+  .catalogue-controls label > span { color: var(--phosphor); font: 0.65rem var(--font-mono); text-transform: uppercase; }
+  .catalogue-controls input, .catalogue-controls select { min-height: 2.8rem; padding: 0.55rem 0.7rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--base); color: var(--ink); font: inherit; }
+  .catalogue-controls input::placeholder { color: var(--ink-muted); opacity: 1; }
+  .catalogue-result-count { align-self: center; color: var(--ink-muted); font: 0.68rem var(--font-mono); white-space: nowrap; }
+  .catalogue-empty { padding: 2rem 1rem; border: 1px dashed var(--rule); color: var(--ink-muted); text-align: center; }
+  .extension-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; padding: 1px; background: var(--rule); list-style: none; }
+  .extension-card { min-width: 0; background: var(--base); }
   .extension-card article { height: 100%; padding: clamp(1.1rem, 2.3vw, 1.8rem); }
   .card-heading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
   .card-heading > div { flex: 1; min-width: 0; }
   .card-monogram { --app-logo-size: 2.2rem; flex: none; margin-top: 0.2rem; }
   @media (max-width: 440px) { .placement svg { width: 6.5rem; } }
-  .extension-id { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; color: var(--secondary); font: 0.63rem var(--font-data); text-transform: uppercase; }
-  .extension-id span { padding: 0.18rem 0.35rem; border: 1px solid var(--secondary); }
+  .extension-id { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem; color: var(--phosphor); font: 0.63rem var(--font-mono); text-transform: uppercase; }
+  .extension-id span { padding: 0.18rem 0.35rem; border: 1px solid var(--phosphor); }
   .extension-id code { overflow-wrap: anywhere; }
   .card-heading h3 { margin-top: 0.65rem; font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: -0.04em; }
-  .placement-tag { flex: 0 0 auto; padding: 0.35rem 0.5rem; border: 1px solid var(--highlight); color: var(--highlight); font: 0.62rem var(--font-data); text-transform: uppercase; }
-  .card-version { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; color: var(--text-muted); font: 0.68rem var(--font-data); text-transform: uppercase; }
-  .card-version span { padding: 0.15rem 0.4rem; border: 1px solid var(--line); }
-  .card-description { margin-top: 0.85rem; color: var(--text-muted); line-height: 1.55; }
-  .install-via { color: var(--text-muted); font-size: 0.85rem; line-height: 1.55; }
-  .install-alt { color: var(--secondary); font: 0.64rem var(--font-data); text-transform: uppercase; }
-  .placement { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.2rem; color: var(--text-muted); font: 0.7rem var(--font-data); font-stretch: 87.5%; }
+  .placement-tag { flex: 0 0 auto; padding: 0.35rem 0.5rem; border: 1px solid var(--cue); color: var(--cue); font: 0.62rem var(--font-mono); text-transform: uppercase; }
+  .card-version { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; color: var(--ink-muted); font: 0.68rem var(--font-mono); text-transform: uppercase; }
+  .card-version span { padding: 0.15rem 0.4rem; border: 1px solid var(--rule); }
+  .card-description { margin-top: 0.85rem; color: var(--ink-muted); line-height: 1.55; }
+  .install-via { color: var(--ink-muted); font-size: 0.85rem; line-height: 1.55; }
+  .install-alt { color: var(--phosphor); font: 0.64rem var(--font-mono); text-transform: uppercase; }
+  .placement { display: flex; align-items: center; gap: 0.9rem; margin-top: 1.2rem; color: var(--ink-muted); font: 0.7rem var(--font-mono); font-stretch: 87.5%; }
   .placement svg { width: 8.5rem; height: auto; flex: none; }
-  .slot-screen { fill: none; stroke: var(--line); stroke-width: 1.5; }
-  .slot-bar { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
-  .slot-tile { fill: var(--surface-raised); }
-  .slot-plugin { fill: var(--accent); }
+  .slot-screen { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+  .slot-bar { fill: var(--panel); stroke: var(--rule); stroke-width: 1; }
+  .slot-tile { fill: var(--raised); }
+  .slot-plugin { fill: var(--signal); }
   .declared { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; list-style: none; }
-  .declared li { padding: 0.2rem 0.55rem; border: 1px solid var(--line); color: var(--text); font-size: 0.78rem; }
-  .evidence { margin-top: 1.2rem; border-top: 1px solid var(--line); }
-  .evidence > summary { padding-block: 0.8rem; color: var(--text); font-size: 0.86rem; font-weight: 600; cursor: pointer; }
-  .evidence > summary:hover { color: var(--accent); }
+  .declared li { padding: 0.2rem 0.55rem; border: 1px solid var(--rule); color: var(--ink); font-size: 0.78rem; }
+  .evidence { margin-top: 1.2rem; border-top: 1px solid var(--rule); }
+  .evidence > summary { padding-block: 0.8rem; color: var(--ink); font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+  .evidence > summary:hover { color: var(--signal); }
   .evidence[open] > summary { margin-bottom: 0.4rem; }
   .extension-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .extension-facts > div { display: grid; align-content: start; gap: 0.35rem; min-width: 0; }
@@ -389,14 +389,14 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .extension-facts code { font-size: 0.74rem; }
   .extension-facts .wide-fact { grid-column: 1 / -1; }
   .settings-list { display: grid; gap: 0.4rem; padding: 0; list-style: none; }
-  .integrity-fact { display: grid; gap: 0.4rem; margin-top: 1rem; padding: 0.85rem; border-left: 2px solid var(--accent); background: var(--surface); }
+  .integrity-fact { display: grid; gap: 0.4rem; margin-top: 1rem; padding: 0.85rem; border-left: 2px solid var(--signal); background: var(--panel); }
   .integrity-fact code { overflow-wrap: anywhere; font-size: 0.68rem; }
   .card-actions { display: grid; gap: 0.9rem; margin-top: 1.1rem; }
   .card-actions .text-link { justify-self: start; }
-  .install-command { display: block; padding: 0.65rem; overflow-wrap: anywhere; border: 1px solid var(--line); color: var(--text); font-size: 0.69rem; }
-  .developer-section { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1fr); gap: clamp(2rem, 8vw, 8rem); padding-block: clamp(3rem, 8vw, 7rem); border-top: 1px solid var(--line); }
-  .developer-copy > p { max-width: 72ch; color: var(--text-muted); line-height: 1.7; }
-  .developer-copy code { color: var(--text); }
+  .install-command { display: block; padding: 0.65rem; overflow-wrap: anywhere; border: 1px solid var(--rule); color: var(--ink); font-size: 0.69rem; }
+  .developer-section { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1fr); gap: clamp(2rem, 8vw, 8rem); padding-block: clamp(3rem, 8vw, 7rem); border-top: 1px solid var(--rule); }
+  .developer-copy > p { max-width: 72ch; color: var(--ink-muted); line-height: 1.7; }
+  .developer-copy code { color: var(--ink); }
   .developer-links { margin-top: 1.25rem; }
   @media (max-width: 760px) {
     .extension-intro, .extension-catalogue .section-heading, .developer-section { grid-template-columns: 1fr; }
@@ -417,6 +417,6 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
   .where-section { display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
   .where-copy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; gap: 1rem clamp(1.5rem, 5vw, 5rem); }
   .where-copy h2 { font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
-  .where-copy p { max-width: 54ch; color: var(--text-muted); }
+  .where-copy p { max-width: 54ch; color: var(--ink-muted); }
   @media (max-width: 760px) { .where-copy { grid-template-columns: minmax(0, 1fr); } }
 </style>

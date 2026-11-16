@@ -27,9 +27,10 @@ contracts are in [`docs/`](docs/).
 - Shared navigation, color modes, and document shell are in
   `src/layouts/SiteLayout.astro`. Shared styling tokens are in
   `src/styles/global.css`.
-- Use the global role tokens across pages. Preserve the Hornero 199X
-  Argentine retrofuturist identity (docs/DESIGN_SYSTEM_199X.md) in both color modes without sacrificing text contrast or
-  turning long-form content into decoration.
+- Use the global Hornero Signal role tokens (RFC 0001 §3.1 names, see
+  docs/DESIGN_SYSTEM_SIGNAL.md) across pages, in both Signal Night and Signal
+  Day, without sacrificing text contrast or turning long-form content into
+  decoration. No gradient blobs, glassmorphism or generic card grids.
 - Preserve semantic landmarks, descriptive labels, visible focus, keyboard
   operation, reduced-motion behavior, responsive layouts and image
   alternatives.

@@ -186,7 +186,7 @@ const colorRoles = [
     gap: 1.25rem clamp(1.5rem, 5vw, 4rem);
     align-items: start;
     padding-block: clamp(3rem, 7vw, 6rem);
-    border-block: 1px solid var(--line);
+    border-block: 1px solid var(--rule);
   }
 
   .palette-intro {
@@ -202,12 +202,12 @@ const colorRoles = [
 
   .palette-intro > p:not(.eyebrow) {
     max-width: 46ch;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .palette-intro .palette-mode-note {
     margin-top: 0.7rem;
-    font: 0.7rem/1.5 var(--font-data);
+    font: 0.7rem/1.5 var(--font-mono);
   }
 
   .palette-controls {
@@ -228,9 +228,9 @@ const colorRoles = [
     gap: 0.65rem;
     min-width: 0;
     padding: 0.7rem;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--text);
+    border: 1px solid var(--rule);
+    background: var(--panel);
+    color: var(--ink);
     text-align: left;
     cursor: pointer;
     transition:
@@ -240,8 +240,8 @@ const colorRoles = [
 
   .palette-choice:hover,
   .palette-choice[aria-pressed='true'] {
-    border-color: var(--highlight);
-    background: color-mix(in srgb, var(--highlight) 8%, var(--surface));
+    border-color: var(--cue);
+    background: color-mix(in srgb, var(--cue) 8%, var(--panel));
   }
 
   .choice-swatches {
@@ -282,8 +282,8 @@ const colorRoles = [
 
   .choice-copy small,
   .choice-check {
-    color: var(--text-muted);
-    font: 0.6rem var(--font-data);
+    color: var(--ink-muted);
+    font: 0.6rem var(--font-mono);
     text-transform: uppercase;
   }
 
@@ -291,7 +291,7 @@ const colorRoles = [
     opacity: 0;
   }
   .palette-choice[aria-pressed='true'] .choice-check {
-    color: var(--highlight);
+    color: var(--cue);
     opacity: 1;
   }
 
@@ -305,7 +305,7 @@ const colorRoles = [
     background: var(--study-background);
     color: var(--study-text);
     box-shadow:
-      0.55rem 0.55rem 0 -0.1rem var(--bg),
+      0.55rem 0.55rem 0 -0.1rem var(--base),
       0.55rem 0.55rem 0 var(--study-primary);
   }
 
@@ -317,7 +317,7 @@ const colorRoles = [
     padding-bottom: 0.65rem;
     border-bottom: 1px solid color-mix(in srgb, var(--study-text) 20%, transparent);
     color: color-mix(in srgb, var(--study-text) 72%, var(--study-background));
-    font: 0.65rem var(--font-data);
+    font: 0.65rem var(--font-mono);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -328,7 +328,7 @@ const colorRoles = [
   }
   .specimen-kicker {
     color: var(--study-secondary);
-    font: 0.65rem var(--font-data);
+    font: 0.65rem var(--font-mono);
     text-transform: uppercase;
   }
   .specimen-content h3 {
@@ -400,7 +400,7 @@ const colorRoles = [
   }
   .role-swatch code {
     color: var(--study-text);
-    font: 0.55rem var(--font-data);
+    font: 0.55rem var(--font-mono);
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -411,8 +411,8 @@ const colorRoles = [
   .palette-fallback,
   .palette-status {
     grid-column: 2;
-    color: var(--text-muted);
-    font: 0.68rem/1.5 var(--font-data);
+    color: var(--ink-muted);
+    font: 0.68rem/1.5 var(--font-mono);
   }
 
   .palette-status {

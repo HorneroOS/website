@@ -1,11 +1,12 @@
 # Components and styling
 
 The website is built with Astro components and plain CSS. Most routes render
-to static HTML and need no client-side framework. Its visual language is Hornero 199X (see
-[`DESIGN_SYSTEM_199X.md`](./DESIGN_SYSTEM_199X.md)): Argentine editorial and
-broadcast design from 1985-1995, La Plata's diagonal grid, signal orange and
-phosphor over midnight blue at night, and warm printed paper by day. Real
-Hornero captures provide the strongest visual statements.
+to static HTML and need no client-side framework. Its visual language is
+Hornero Signal, the HorneroOS design language (RFC 0001; see
+[`DESIGN_SYSTEM_SIGNAL.md`](./DESIGN_SYSTEM_SIGNAL.md)): graphite instrument
+panels at night, technical-drawing paper by day, amber for live/primary,
+celeste for focus/information, hairline rules, segmented meters and IBM Plex
+type. Real Hornero captures provide the strongest visual statements.
 
 ## Component boundaries
 
@@ -29,25 +30,23 @@ page-specific composition with its route.
 
 ## Design tokens and color modes
 
-`src/styles/global.css` defines the shared role tokens used across the site:
-canvas, surface, line, text, muted text, accent, highlight, secondary and
-focus. The palette is Hornero 199X: deep CRT ink and midnight broadcast blue
-with signal orange and phosphor at night; warm printed paper with midnight
-type by day. The page-wide La Plata diagonal over the orthogonal grid uses
-those same tokens, so informational routes keep the product identity without
-placing decoration over their reading surfaces. A scene may use local overlay
-tokens when text must remain legible over artwork; do not replace role
-tokens with ad-hoc colors across ordinary UI.
+`src/styles/global.css` defines the RFC 0001 §3.1 colour roles as custom
+properties (`--ground`, `--base`, `--panel`, `--ink`, `--ink-muted`,
+`--rule`, `--signal`, `--cue`, `--phosphor`, …) with Signal Night and Signal
+Day values, plus type, geometry and motion tokens. Pages use these roles
+only; do not introduce ad-hoc colours across ordinary UI. A scene over
+artwork may use local overlay values where text must remain legible.
 
 The `SiteLayout` control exposes System, Light and Dark on every route.
-System follows `prefers-color-scheme`; explicit choices persist in local
-storage and sync across tabs. Dark mode is the nighttime broadcast
-studio. Light mode is the daytime printed edition on warm paper. Keep all three options keyboard accessible,
-visibly focused and available at desktop and mobile widths. Respect reduced
-motion and preserve readable contrast in both palettes.
+System is the default and follows `prefers-color-scheme`; explicit choices
+persist in local storage and sync across tabs. Keep all three options
+keyboard accessible, visibly focused and available at desktop and mobile
+widths. Respect reduced motion and preserve readable contrast in both
+palettes.
 
-Rubik is the UI/display face and Martian Mono is reserved for provenance and
-data. Both are self-hosted through Fontsource packages.
+IBM Plex Sans (UI), IBM Plex Mono (eyebrows, readouts, provenance, code) and
+IBM Plex Sans Condensed (headings) are self-hosted through Fontsource
+packages.
 
 ## Images and provenance
 
@@ -64,8 +63,8 @@ caption claims to show.
   alternatives.
 - Preserve visible focus styles and sufficient contrast in both color modes.
 - Use native controls (`button`, `fieldset`, `details`) where they fit.
-- Keep decorative background grids and glow effects out of the accessibility
-  tree.
+- Keep decorative details (diagonals, ticks, meters' segments) out of the
+  accessibility tree; pair every meter with a text label.
 - Disable nonessential transitions under `prefers-reduced-motion: reduce`.
 - Avoid adding client-side state when CSS, native HTML or URL state is enough.
 

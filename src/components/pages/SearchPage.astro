@@ -12,7 +12,7 @@ const L = (path: string) => localizePath(path, locale);
 
 <SiteLayout title={isEs ? 'Buscar | HorneroOS' : 'Search | HorneroOS'} description={isEs ? 'Buscá en el sitio de HorneroOS y en la documentación.' : 'Search the HorneroOS site and documentation.'} noindex>
   <section class="section">
-    <p class="plate-id"><strong>Índice local</strong><span>ARG / 199X</span><span>Pagefind · en tu navegador</span></p>
+    <p class="plate-id"><strong>Índice local</strong><span>Pagefind · en tu navegador</span></p>
     <h1>{isEs ? 'Buscar' : 'Search'}</h1>
     <p>
       {isEs ? 'Buscá en este sitio y en la documentación. El índice se construye con el sitio y corre en tu navegador: nada de lo que escribas sale de esta página.' : 'Searches this site and the documentation. The index is built with the site and runs in your browser: nothing you type leaves this page.'}
@@ -35,15 +35,15 @@ const L = (path: string) => localizePath(path, locale);
 
 <style is:global>
   .search {
-    --pf-text: var(--text);
-    --pf-text-secondary: var(--text-muted);
-    --pf-text-muted: var(--text-muted);
-    --pf-background: var(--surface-raised);
-    --pf-border: var(--line);
+    --pf-text: var(--ink);
+    --pf-text-secondary: var(--ink-muted);
+    --pf-text-muted: var(--ink-muted);
+    --pf-background: var(--raised);
+    --pf-border: var(--rule);
     --pf-border-focus: var(--focus);
-    --pf-hover: var(--surface);
-    --pf-mark: var(--accent-ink);
-    --pf-font: var(--font-ui);
+    --pf-hover: var(--panel);
+    --pf-mark: var(--on-signal);
+    --pf-font: var(--font-sans);
     --pf-outline-focus: var(--focus);
     --pf-input-height: 3.25rem;
     --pf-input-font-size: 1rem;
@@ -59,13 +59,13 @@ const L = (path: string) => localizePath(path, locale);
   .search pagefind-summary {
     display: block;
     margin: 1rem 0;
-    color: var(--text-muted);
-    font-family: var(--font-data);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
   }
 
   .search mark {
     /* Pagefind uses high-specificity selectors for highlighted excerpts. */
-    background: var(--accent) !important;
+    background: var(--signal) !important;
     border-radius: 0.15em;
     padding-inline: 0.12em;
   }

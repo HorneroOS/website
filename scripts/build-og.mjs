@@ -19,7 +19,7 @@ import puppeteer from 'puppeteer';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'public/og');
 const file = (path) => pathToFileURL(join(root, path)).href;
-const fonts = (name, f) => file(`node_modules/@fontsource-variable/${name}/files/${f}`);
+const fonts = (name, f) => file(`node_modules/@fontsource/${name}/files/${f}`);
 const logo = readFileSync(join(root, 'src/assets/brand/logo-dark.svg'), 'utf8').replace(/<svg /, '<svg width="54" height="54" ');
 const plugins = JSON.parse(readFileSync(join(root, 'src/data/product/extensions.json'), 'utf8')).plugins;
 const studioApps = new Map(
@@ -96,9 +96,9 @@ const cards = {
 };
 
 const page = ({ title, line, panel }) => `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:B;src:url(${fonts('bricolage-grotesque', 'bricolage-grotesque-latin-wght-normal.woff2')});font-weight:200 800}
-@font-face{font-family:R;src:url(${fonts('rubik', 'rubik-latin-wght-normal.woff2')});font-weight:300 900}
-@font-face{font-family:M;src:url(${fonts('martian-mono', 'martian-mono-latin-wght-normal.woff2')});font-weight:100 800}
+@font-face{font-family:B;src:url(${fonts('ibm-plex-sans-condensed', 'ibm-plex-sans-condensed-latin-700-normal.woff2')});font-weight:600 800}
+@font-face{font-family:R;src:url(${fonts('ibm-plex-sans', 'ibm-plex-sans-latin-400-normal.woff2')});font-weight:300 500}
+@font-face{font-family:M;src:url(${fonts('ibm-plex-mono', 'ibm-plex-mono-latin-500-normal.woff2')});font-weight:100 800}
 *{box-sizing:border-box;margin:0}
 body{width:1200px;height:630px;position:relative;overflow:hidden;background:#0b1018;color:#fff6e6;font-family:R}
 .grid{position:absolute;inset:0;background:

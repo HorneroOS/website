@@ -60,7 +60,7 @@ const roleLabel = (
   description={isEs ? 'HorneroOS tiene cinco perfiles sobre una misma base: Desktop, Studio y Gaming en Preview, más Server y Agents planificadas. Las tres ediciones Preview se instalan desde la misma ISO firmada.' : 'HorneroOS has five profiles on one base: Desktop, Studio and Gaming in Preview, plus Server and Agents planned. The three Preview editions install from the same signed ISO.'}
 >
   <section class="intro section">
-    <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>ARG / 199X</span><span>Madurez verificada por edición</span></p>
+    <p class="plate-id"><strong>Ficha técnica · Familia HorneroOS</strong><span>Madurez verificada por edición</span></p>
     <h1>{isEs ? 'Ediciones' : 'Editions'}</h1>
     <p class="lede">
       {isEs ? 'HorneroOS se construye desde una base compartida más capacidades para cada rol. Desktop, Server, Agents y Studio son perfiles de ese único sistema, no distribuciones separadas.' : 'HorneroOS is built from a shared base plus capabilities for each role. Desktop, Server, Agents and Studio are profiles of that one system, not separate distributions.'}
@@ -145,7 +145,7 @@ const roleLabel = (
     font-size: clamp(2.8rem, 2.1rem + 5vw, 5.7rem);
   }
   .intro h1 em {
-    color: var(--accent);
+    color: var(--signal);
     font-style: normal;
   }
   .lede {
@@ -155,7 +155,7 @@ const roleLabel = (
   .availability {
     max-width: 64ch;
     margin-top: 1rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: var(--step--1);
   }
   .family {
@@ -168,9 +168,9 @@ const roleLabel = (
     width: fit-content;
     margin-inline: auto;
     padding: 0.9rem 1.15rem;
-    border: 1px solid var(--secondary);
-    border-radius: var(--arch);
-    background: var(--surface);
+    border: 1px solid var(--phosphor);
+    border-radius: var(--radius-large);
+    background: var(--panel);
   }
   .foundation-mark {
     display: grid;
@@ -178,8 +178,8 @@ const roleLabel = (
     aspect-ratio: 1;
     place-items: center;
     border-radius: 50%;
-    background: var(--accent);
-    color: var(--accent-ink);
+    background: var(--signal);
+    color: var(--on-signal);
     font-weight: 800;
   }
   .foundation strong,
@@ -188,19 +188,19 @@ const roleLabel = (
   }
   .foundation div span,
   .foundation-note {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.76rem;
   }
   .foundation-note {
     padding-left: 0.9rem;
-    border-left: 1px solid var(--line);
+    border-left: 1px solid var(--rule);
     font-size: 0.7rem;
   }
   .branch-line {
     width: 1px;
     height: 2.2rem;
     margin: auto;
-    background: var(--secondary);
+    background: var(--phosphor);
   }
   .edition-grid {
     display: grid;
@@ -213,10 +213,10 @@ const roleLabel = (
     min-width: 0;
     flex-direction: column;
     padding: clamp(1rem, 1.8vw, 1.5rem);
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--secondary);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--phosphor);
     border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--panel);
   }
   .edition-card::before {
     position: absolute;
@@ -224,20 +224,20 @@ const roleLabel = (
     left: 50%;
     width: 1px;
     height: 2.1rem;
-    background: var(--secondary);
+    background: var(--phosphor);
     content: '';
   }
   .edition-desktop {
-    border-top-color: var(--accent);
+    border-top-color: var(--signal);
   }
   .edition-server {
-    border-top-color: var(--highlight);
+    border-top-color: var(--cue);
   }
   .edition-agents {
-    border-top-color: var(--accent);
+    border-top-color: var(--signal);
   }
   .edition-studio {
-    border-top-color: var(--mint);
+    border-top-color: var(--phosphor);
   }
   .edition-meta {
     display: flex;
@@ -248,39 +248,39 @@ const roleLabel = (
   }
   .edition-role,
   .maturity {
-    font: 0.67rem var(--font-data);
+    font: 0.67rem var(--font-mono);
     letter-spacing: 0.035em;
     text-transform: uppercase;
   }
   .edition-role {
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .maturity {
     padding: 0.2rem 0.45rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--text);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    color: var(--ink);
   }
   .maturity-preview {
-    border-color: var(--accent);
+    border-color: var(--signal);
   }
   .edition-card > h2 {
     margin-block: 1rem 0.3rem;
     font-size: clamp(1.25rem, 1.15rem + 0.6vw, 1.8rem);
   }
   .edition-card > h3 {
-    color: var(--secondary);
+    color: var(--phosphor);
     font-size: 0.85rem;
     font-weight: 500;
   }
   .edition-card > p {
     margin-top: 0.8rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.9rem;
   }
   .edition-card .extends {
     margin-top: 0.45rem;
-    color: var(--text);
+    color: var(--ink);
     font-size: 0.77rem;
   }
   .backend-list {
@@ -291,7 +291,7 @@ const roleLabel = (
   }
   .backend-heading {
     grid-column: 1 / -1;
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.74rem;
   }
   .backend {
@@ -302,7 +302,7 @@ const roleLabel = (
     align-items: center;
     gap: 0.55rem;
     padding: 0.45rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 8px;
   }
   .backend-name { display: grid; gap: 0.1rem; min-width: 0; }
@@ -311,7 +311,7 @@ const roleLabel = (
     overflow-wrap: anywhere;
   }
   .backend small {
-    color: var(--text-muted);
+    color: var(--ink-muted);
     font-size: 0.68rem;
     overflow-wrap: anywhere;
   }
@@ -323,13 +323,13 @@ const roleLabel = (
     gap: 0.5rem;
     margin-top: auto;
     padding-top: 1.2rem;
-    color: var(--text);
+    color: var(--ink);
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
   }
   .edition-link:hover {
-    color: var(--accent);
+    color: var(--signal);
   }
   .composition-note {
     max-width: 82ch;
@@ -340,7 +340,7 @@ const roleLabel = (
   }
   .composition-note p:not(.eyebrow) {
     margin-top: 0.7rem;
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
   .sr-only {
     position: absolute;
@@ -386,7 +386,7 @@ const roleLabel = (
 
 <style>
   /* 199X per-page direction: editions as a technical composition diagram. */
-  .foundation { border: 1px solid var(--line); box-shadow: 10px 10px 0 color-mix(in srgb, var(--highlight) 18%, transparent); }
-  .maturity { font-family: var(--font-data); letter-spacing: 0.08em; text-transform: uppercase; }
-  .branch-line { background: linear-gradient(90deg, var(--accent), var(--highlight)); }
+  .foundation { border: 1px solid var(--rule); box-shadow: 10px 10px 0 color-mix(in srgb, var(--cue) 18%, transparent); }
+  .maturity { font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .branch-line { background: var(--rule-strong); }
 </style>

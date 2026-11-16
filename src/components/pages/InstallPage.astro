@@ -38,7 +38,7 @@ const statusName = (
   description={isEs ? 'La primera ISO Preview de HorneroOS ya está publicada: una imagen x86_64 con las ediciones Desktop, Studio y Gaming Preview, firmada y verificada por checksum. Los paquetes de Arch siguen disponibles.' : 'The first HorneroOS Preview ISO is published: one x86_64 image with Desktop, Studio and Gaming Preview editions, signed and checksum-verified. Arch packages remain available.'}
 >
   <section class="section">
-    <p class="plate-id"><strong>Estado real de instalación</strong><span>ARG / 199X</span><span>Primera ISO Preview</span></p>
+    <p class="plate-id"><strong>Estado real de instalación</strong><span>Primera ISO Preview</span></p>
     <h1>{isEs ? 'La primera ISO Preview de HorneroOS ya está acá' : 'The first HorneroOS Preview ISO is here'}</h1>
     <p class="lede">
       {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS y Niri no se ejecutaron sobre esta ISO) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
@@ -179,8 +179,8 @@ const statusName = (
     gap: 0.25rem 1rem;
     padding: 0.6rem 0.9rem;
     border-radius: 10px;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background: var(--panel);
+    border: 1px solid var(--rule);
   }
 
   .packages code,
@@ -190,7 +190,7 @@ const statusName = (
   }
 
   .packages span {
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .edition-status {
@@ -208,28 +208,28 @@ const statusName = (
     justify-content: space-between;
     gap: 0.75rem;
     padding: 0.75rem 0.9rem;
-    border: 1px solid var(--line);
+    border: 1px solid var(--rule);
     border-radius: 10px;
-    background: var(--surface);
+    background: var(--panel);
   }
 
   .status-pill {
     flex: none;
     padding: 0.15rem 0.5rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--text-muted);
-    font: 0.66rem var(--font-data);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    color: var(--ink-muted);
+    font: 0.66rem var(--font-mono);
     text-transform: uppercase;
   }
 
   .status-preview {
-    border-color: var(--accent);
-    color: var(--text);
+    border-color: var(--signal);
+    color: var(--ink);
   }
   .status-experimental {
-    border-color: var(--highlight);
-    color: var(--highlight);
+    border-color: var(--cue);
+    color: var(--cue);
   }
 
   @media (max-width: 520px) {
@@ -241,20 +241,20 @@ const statusName = (
       grid-template-columns: 1fr;
     }
   }
-  .readiness-ledger { max-width: 58rem; border-top: 1px solid var(--line); }
-  .readiness-ledger > div { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); gap: 0.4rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .readiness-ledger { max-width: 58rem; border-top: 1px solid var(--rule); }
+  .readiness-ledger > div { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); gap: 0.4rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--rule); }
   .readiness-ledger dt { font: 700 1.1rem var(--font-display); }
-  .readiness-ledger dd { color: var(--text-muted); }
-  .state { display: inline-block; margin-right: 0.7rem; padding: 0.1rem 0.5rem; border: 1px solid var(--line); color: var(--text); font: 600 0.7rem var(--font-data); font-stretch: 87.5%; text-transform: uppercase; }
+  .readiness-ledger dd { color: var(--ink-muted); }
+  .state { display: inline-block; margin-right: 0.7rem; padding: 0.1rem 0.5rem; border: 1px solid var(--rule); color: var(--ink); font: 600 0.7rem var(--font-mono); font-stretch: 87.5%; text-transform: uppercase; }
   .state-none { border-bottom-style: dashed; }
-  .state-none .state { border-style: dashed; color: var(--text-muted); }
-  .state-provisional .state { border-color: var(--highlight); color: var(--highlight); }
-  .state-available .state { border-color: var(--accent); color: var(--accent); }
+  .state-none .state { border-style: dashed; color: var(--ink-muted); }
+  .state-provisional .state { border-color: var(--cue); color: var(--cue); }
+  .state-available .state { border-color: var(--signal); color: var(--signal); }
   @media (max-width: 560px) { .readiness-ledger > div { grid-template-columns: 1fr; } }
 </style>
 
 <style>
   /* 199X per-page direction: install as an honest status board. */
-  .edition-status { border: 1px solid var(--line); box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent) 16%, transparent); }
+  .edition-status { border: 1px solid var(--rule); box-shadow: 8px 8px 0 color-mix(in srgb, var(--signal) 16%, transparent); }
   .packages > * { border-radius: 2px; }
 </style>

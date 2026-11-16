@@ -29,7 +29,7 @@ export default defineConfig({
     // (see the `pre` rules in src/styles/global.css). The inherited
     // single theme rendered comments at 3.1:1 on the dark surface.
     shikiConfig: {
-      themes: { light: 'github-light', dark: 'github-dark-high-contrast' },
+      themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
       defaultColor: false,
     },
     processor: unified({
