@@ -6,7 +6,7 @@ pinned Hornero sources, never typed into pages.
 | File | Generated from |
 | --- | --- |
 | `src/data/product/layouts.json` | HorneroOS/shell `presets/*.json` |
-| `src/data/product/themes.json` | HorneroOS/config `profiles/themes/*/theme.json`; the official trio from HorneroOS/hornero `official_theme_ids()` |
+| `src/data/product/themes.json` | HorneroOS/config `profiles/themes/*/theme.json`; the official Signal built-ins from HorneroOS/hornero `signal_builtin_theme_ids` (`signal.v`) |
 | `src/data/product/releases.json` | HorneroOS/hornero `releases/`, `manifests/` and the candidate pointer; tagged status from git tags |
 | `src/data/product/editions.json` | HorneroOS/hornero `editions/catalogue.yaml` |
 | `src/data/product/greeter-scenes.json` | Pinned HorneroOS/greeter runtime catalog, approved scene manifests, still provenance records, and daypart windows |
