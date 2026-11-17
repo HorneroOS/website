@@ -130,21 +130,12 @@ function layouts(shellDir) {
     });
 }
 
-// The official trio is defined by horneroctl (`appearance theme set` only
-// accepts these), so read it from the pinned hornero source.
+// The official themes are the Hornero Signal built-ins that horneroctl
+// accepts (`appearance theme set`), so read them from the pinned hornero source.
 function officialThemes(horneroDir) {
-  const src = readFileSync(join(horneroDir, 'cli/modules/hornero_core/theme_switch.v'), 'utf8');
-  const m = /fn official_theme_ids\(\) \[\]string \{\s*return \[([^\]]*)\]/.exec(src);
-  if (!m) fail('official_theme_ids() not found in hornero theme_switch.v');
-  return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
-}
-
-// Color generation variants are exposed by the native Hornero CLI. Keep the
-// editorial sample palettes on /themes honest when that command changes.
-function schemeFlavours(horneroDir) {
-  const src = readFileSync(join(horneroDir, 'cli/modules/hornero_core/scheme_apply.v'), 'utf8');
-  const m = /pub fn scheme_flavours\(\) \[\]string \{\s*return \[([^\]]*)\]/.exec(src);
-  if (!m) fail('scheme_flavours() not found in hornero scheme_apply.v');
+  const src = readFileSync(join(horneroDir, 'cli/modules/hornero_core/signal.v'), 'utf8');
+  const m = /pub const signal_builtin_theme_ids = \[([^\]]*)\]/.exec(src);
+  if (!m) fail('signal_builtin_theme_ids not found in hornero signal.v');
   return [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]);
 }
 
@@ -446,21 +437,18 @@ function greeterScenes(greeterDir) {
   };
 }
 
-function checkPaletteVariantSamples(horneroDir) {
-  const data = readJson(join(DATA, 'palette-variants.json'));
-  const expected = schemeFlavours(horneroDir);
-  const actual = (data.variants ?? []).map((v) => v.id);
-  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    fail(`palette-variants.json IDs do not match horneroctl scheme_flavours(): ${actual.join(', ')}`);
-  }
-  if (data.sample?.mode !== 'dark' || !data.sample?.wallpaper || !data.sample?.generator) {
-    fail('palette-variants.json needs sample mode, wallpaper, and generator provenance');
-  }
-}
-
 function themes(configDir, official) {
   const dir = join(configDir, 'profiles/themes');
-  const keep = ['background', 'surface', 'text', 'primary', 'secondary', 'accent'];
+  // The site's six-swatch study reads the Hornero Signal roles under
+  // editorial names: ground, panel, ink, signal (amber), cue (celeste), phosphor.
+  const keep = {
+    background: 'ground',
+    surface: 'panel',
+    text: 'ink',
+    primary: 'signal',
+    secondary: 'cue',
+    accent: 'phosphor',
+  };
   const list = readdirSync(dir, { withFileTypes: true })
     .filter((d) => d.isDirectory() && existsSync(join(dir, d.name, 'theme.json')))
     .map((d) => {
@@ -473,13 +461,14 @@ function themes(configDir, official) {
         official: official.includes(t.id),
         collection: t.collection ?? null,
         collectionOrder: t.collectionOrder ?? null,
-        paletteModel: t.family ? 'semantic' : 'wallpaper',
+        paletteModel: t.palette?.signal ? 'semantic' : 'wallpaper',
         gtkTheme: t.gtkTheme ?? null,
         iconTheme: t.iconTheme ?? null,
         // Packs without a static palette derive their colours from the
-        // wallpaper when applied (Material You scheme of this type).
-        schemeType: t.schemeType ?? null,
-        palette: Object.fromEntries(keep.filter((k) => t.palette?.[k]).map((k) => [k, t.palette[k].toUpperCase()])),
+        // wallpaper when applied.
+        palette: Object.fromEntries(
+          Object.entries(keep).filter(([, role]) => t.palette?.[role]).map(([k, role]) => [k, t.palette[role].toUpperCase()]),
+        ),
       };
     });
   const rank = (t) => (t.collection === 'hornero-originals' ? t.collectionOrder : 1000);
@@ -595,7 +584,6 @@ if (BUMP) {
   }
 }
 const dirs = Object.fromEntries(Object.entries(pins.sources).map(([name, pin]) => [name, checkout(name, pin)]));
-checkPaletteVariantSamples(dirs.hornero);
 if (FETCH_ONLY) {
   console.log(`fetched ${Object.keys(dirs).join(', ')} at their pins`);
   process.exit(0);
