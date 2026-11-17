@@ -12,6 +12,8 @@ and is sourced from the HorneroOS repositories.
   type, signature details and motion on the website.
 - [Capture slots](./CAPTURES.md) — capture provenance, the pre-Signal label
   and how QA replaces homepage captures.
+- [Information architecture](./INFORMATION_ARCHITECTURE.md) — audit, routes, the
+  feature ledger (released / experimental / unreleased / planned) and shared tokens.
 - [State management](./STATE_MANAGEMENT.md) — static content and the limited
   browser interactions.
 - [Project configuration](./PROJECT_CONFIGURATION.md) — commands, checks,
