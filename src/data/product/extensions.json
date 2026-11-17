@@ -1,11 +1,11 @@
 {
-  "generatedFrom": "4a1514f29e00b8b5766bc0e671c86f6e29abdd45",
+  "generatedFrom": "fc34867aa1670ee29d78623e92f32eac917f4014",
   "plugins": [
     {
       "id": "hornero-agenda",
       "name": "Hornero Agenda",
-      "version": "2.1.0",
-      "description": "Agenda: desktop widget of date facts from PluginKit Time (weekday, ISO week and week-year, day of year, remaining days, year progress) with Desktop Widgets 2.0 size classes, per-display slot display and hide-with-restore. No events backend.",
+      "version": "3.0.0",
+      "description": "Agenda 3.0 on Hornero Signal: a desktop widget of date facts (day, ISO week, quarter, day of year, days remaining) with a year partition bar, from the shared time provider. Dates only; no events source.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -13,12 +13,12 @@
       "surfaces": [
         "desktop"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-agenda",
-      "sha256": "d2a1144d31d6a1d30bbcec1db4f32984d282270599cee2ee69a657e82bca5ed4",
+      "sha256": "16e9a13b8af86c8093c5ab2fc333bfa896c4168e6147da40fe43649ac48c0703",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -36,28 +36,13 @@
           "type": "boolean",
           "default": true,
           "description": "Show the elapsed fraction of the year as a progress bar."
-        },
-        "sizeClass": {
-          "type": "enum",
-          "default": "standard",
-          "options": [
-            "compact",
-            "standard",
-            "wide"
-          ],
-          "description": "Desktop widget size class within the host width cap (300 logical px today); standard keeps the 2.0 size. This sizes content, not the slot."
-        },
-        "showOnDesktop": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the widget content on the desktop (the 2.0 behaviour). Off leaves a visible Show widget button so the content can always be restored."
         }
       }
     },
     {
       "id": "hornero-ai-usage",
       "name": "Hornero AI Usage",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "AI Usage 2.0: bar indicator, provider switcher popover and dashboard card over the normalized horneroctl agent usage records. Quota is shown only when a provider record carries it; otherwise it is unknown.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -66,12 +51,12 @@
       "surfaces": [
         "bar"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": null,
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-ai-usage",
-      "sha256": "ce23f0087c324fa70f560f39dc9e856697b124573cb46e1b8813ce33d0089841",
+      "sha256": "7918808354d40f584d5a54a28830a4dac879fdab9bbda72512836f0139218919",
       "processCommands": [
         "horneroctl"
       ],
@@ -87,9 +72,42 @@
       }
     },
     {
+      "id": "hornero-audio-deck",
+      "name": "Hornero Audio Deck",
+      "version": "1.0.0",
+      "description": "Audio Deck: a desktop instrument over the shared media, audio and spectrum providers: the real PipeWire spectrum as VU strips, the current track and the output volume. Real data only.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "desktop",
+      "surfaces": [
+        "desktop"
+      ],
+      "manifestSchema": 3,
+      "minShellVersion": "1.0.0",
+      "category": "media",
+      "trust": "official",
+      "path": "plugins/hornero-audio-deck",
+      "sha256": "dfb8f554e31402d5b546577007fbc62f36fc8f0e4a3be5a7591b9a4c61f515f2",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {
+        "showSpectrum": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the spectrum. It holds the shared `spectrum` lease, which runs the PipeWire visualiser only while this is on and the widget is loaded."
+        },
+        "showArtist": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the artist and album line of the current track."
+        }
+      }
+    },
+    {
       "id": "hornero-base-converter",
       "name": "Hornero Base Converter",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 base converter: bar quick action (decimal or 0x hex) and compact dashboard detail converting decimal integers to binary/octal/hex and hex back. Invalid digits show errors.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -99,12 +117,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-base-converter",
-      "sha256": "0789307a9e58f79073d061691823b537a4fd74639750ae19470a25e4330c01fb",
+      "sha256": "2c8ffc09c9f610411a5aefc1d024dac70001c431b15f9ae9c56a815351c88d76",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -118,8 +136,8 @@
     {
       "id": "hornero-battery",
       "name": "Hornero Battery",
-      "version": "2.0.0",
-      "description": "Battery 2.0: contextual bar indicator over the PluginKit Power facade, hidden by default when no battery is reported, with a power-detail popover and dashboard card. Real no-battery/unknown states only.",
+      "version": "3.0.0",
+      "description": "Battery 3.0 on Hornero Signal: contextual bar indicator with a Hornero Glyph and a popover/dashboard module showing charge, time left, rate, health and power profile from the shared power provider. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -127,12 +145,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-battery",
-      "sha256": "6c52647f70ac6cd8233502e9d0690ce958bd6fc4bf11ac58fc0e14b9454cd66c",
+      "sha256": "c5c582a7128e84a5a9753d256f8025435613020893b4ebd234f38554c1e34574",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -163,22 +181,23 @@
     {
       "id": "hornero-calculator",
       "name": "Hornero Calculator",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 calculator: bar quick action and compact dashboard detail over a safe tokenizer/recursive-descent parser (+ - * / %, parentheses, decimals, unary minus). Division by zero shows Error.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [
+        "bar",
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.73",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-calculator",
-      "sha256": "eab8a6b5e3d0e2ea62e88fb6325295d55a8b9d16b6982ae23fee2a5cb50b3ac6",
+      "sha256": "6318fb859d904f2e3b72228975f678b4d471db8aa61a2c39a9f8c600bdd73da7",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -197,8 +216,8 @@
     {
       "id": "hornero-calendar",
       "name": "Hornero Calendar",
-      "version": "2.1.0",
-      "description": "Calendar: desktop widget with date/time header and current month grid from PluginKit Time, plus Desktop Widgets 2.0 size classes, per-display slot display and hide-with-restore. Locale dates, no events backend, no processes or network.",
+      "version": "3.0.0",
+      "description": "Calendar 3.0 on Hornero Signal: a desktop widget with a display clock, the full date and a square-celled month grid over the shared time provider. Dates only; no events source.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -206,12 +225,12 @@
       "surfaces": [
         "desktop"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-calendar",
-      "sha256": "5b7c48426e4d102bb67e170f641e00b255b5c5dd8c31149e89f4ff711d1bc5b4",
+      "sha256": "2e9d299aea990dcf43ae5a8bfa2185a710cb439dee7b1fe5435562e4478d41b3",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -238,28 +257,13 @@
             "sunday"
           ],
           "description": "First weekday column of the month grid. PluginKit does not expose the locale week start."
-        },
-        "sizeClass": {
-          "type": "enum",
-          "default": "standard",
-          "options": [
-            "compact",
-            "standard",
-            "wide"
-          ],
-          "description": "Desktop widget size class within the host width cap (300 logical px today); standard keeps the 2.0 size. This sizes content, not the slot."
-        },
-        "showOnDesktop": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the widget content on the desktop (the 2.0 behaviour). Off leaves a visible Show widget button so the content can always be restored."
         }
       }
     },
     {
       "id": "hornero-color-converter",
       "name": "Hornero Color Converter",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 color converter: bar quick hex action and compact dashboard detail converting validated #RGB/#RRGGBB to RGB and HSL and RGB back to hex. Invalid hex shows an error.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -269,12 +273,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-color-converter",
-      "sha256": "94d63bcba0532c2ab8c2351e502684d076385aa97741655b41947a285b61b2d0",
+      "sha256": "de6abc1f5d606a6e4aa72c6f02e734750547a042437fe71257f2dd07ef240837",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -294,19 +298,19 @@
     {
       "id": "hornero-countdown",
       "name": "Hornero Countdown",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Countdown 2.0: compact bar countdown (5/10/25 presets) with a popover, progress, deadline-correct timing across sleep/reload and a completion toast. No sound, no processes, no network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [],
-      "manifestSchema": 1,
+      "manifestSchema": 3,
       "minShellVersion": null,
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-countdown",
-      "sha256": "86454f4cf2b0c257d86139d65607079989be470856bedc2cde94172511050e62",
+      "sha256": "c3e730610484874aa87da44cd8e0014e980bbc8aef6edc363645dfb766ea2f33",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -342,7 +346,7 @@
     {
       "id": "hornero-date-calculator",
       "name": "Hornero Date Calculator",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 date calculator: bar quick action and compact dashboard detail for days-between and add-days on validated YYYY-MM-DD dates, using UTC math to avoid DST drift.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -352,12 +356,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-date-calculator",
-      "sha256": "2fd8823f1f85e77a1bf770f0b963d2407c7e796e2ddddd033f1f5a6c1cfc28c0",
+      "sha256": "420a558b4d9650fbb3309dd52b1d51cec9a4cfc411a977afc8e30842fc9ab5d9",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -371,8 +375,8 @@
     {
       "id": "hornero-disk-usage",
       "name": "Hornero Disk Usage",
-      "version": "2.0.0",
-      "description": "Disk Usage 2.0: dashboard card over the shared PluginKit System.disks facade with per-disk used/total/free space, a most-full summary and near-full alerts. No invented SMART data. Read-only.",
+      "version": "3.0.0",
+      "description": "Disk Usage 3.0 on Hornero Signal: every physical disk as a partition bar with a dimension line, free space and a near-full flag from the shared system provider. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -380,12 +384,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-disk-usage",
-      "sha256": "b3a831cc208792eac60b9b7604afd239b2d87e5857f4b3a35cdeeaece6650d36",
+      "sha256": "78c035d5240df3fb96bf7de77fb696478e951c3a26dfff0ece4fc7132ea39e75",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -406,19 +410,19 @@
     {
       "id": "hornero-dual-clock",
       "name": "Hornero Dual Clock",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Dual Clock 2.0: local time next to a second zone (UTC by default, as in 1.x) in the bar, with a details popover. Pure-JS rule-based offsets, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [],
-      "manifestSchema": 1,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.74",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-dual-clock",
-      "sha256": "97396e2ea2d7004c0af34e259cc660d8e926c9795cf0aa308c8bb81c2f211e1a",
+      "sha256": "531a0d9dd0b83b839d571eefe173bd794cf3f5bed2246b640f05c2a3b4a6f764",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -456,19 +460,19 @@
     {
       "id": "hornero-focus-card",
       "name": "Hornero Focus Card",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Focus Card 2.0: dashboard card with the locale date and a rotating original one-line focus reminder, from PluginKit Time. Keyboard Previous/Next and pause, optional own leading line, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "surfaces": [],
-      "manifestSchema": 1,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.72",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-focus-card",
-      "sha256": "71eceb1b491b2371ed956c7dd49c9a6bd33cf105b0edc246e35376a1c7652f94",
+      "sha256": "ed4567e399fed745c29829fccfa157f2028b4d6ed8e79b4b23a91944aa291f3e",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -495,7 +499,7 @@
     {
       "id": "hornero-json-tools",
       "name": "Hornero JSON Tools",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 JSON tools: bar quick format/validate action and compact dashboard detail with Format and Minify using JSON parse/stringify only. Parser errors are shown.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -505,12 +509,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-json-tools",
-      "sha256": "2dd8e98bd5553462f13dca936e42a45a753844d3b2f70b9baacdf790e0582f06",
+      "sha256": "5e9e16c6598b850cab835736434bda8ad1ccc0ffba54af7688b7c00e23fd45d0",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -535,19 +539,19 @@
     {
       "id": "hornero-metronome",
       "name": "Hornero Metronome",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Metronome 2.0: compact bar metronome with a popover (BPM slider plus minus/plus), deadline-scheduled beats that skip missed beats after sleep, and optional first-beat accent. No processes, no network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [],
-      "manifestSchema": 1,
+      "manifestSchema": 3,
       "minShellVersion": null,
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-metronome",
-      "sha256": "92a1829f50f6ce54af6f4ecdc921dfba6f71942f1b8c3929716ce20bd1c68858",
+      "sha256": "c21db62e21f902e046d62c246fa383f385a31e65d95c7f740f6fba49a1af757d",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -575,7 +579,7 @@
     {
       "id": "hornero-microphone",
       "name": "Hornero Microphone",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Audio Extensions 2.0: compact bar indicator, details popover and dashboard card for microphone state over the shared PluginKit Audio facade, with honest muted and no-input-device states. Never records audio.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -584,12 +588,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-microphone",
-      "sha256": "dc380d657c1f6d75d681b1d7cb12370756c46db768b8cf58ca00d47db6af7b5c",
+      "sha256": "5a1fb7c547a38b0af7b315ee1e9532e195c385feb7dbd5bcc104efc1fc3b6ab5",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -608,7 +612,7 @@
     {
       "id": "hornero-moon-phase",
       "name": "Hornero Moon Phase",
-      "version": "2.1.0",
+      "version": "3.0.0",
       "description": "Moon Phase: desktop widget and bar indicator for the approximate moon phase and illumination from the 1.x synodic approximation, plus Desktop Widgets 2.0 size classes, per-display slot display and hide-with-restore. Always labelled approximate.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -618,12 +622,12 @@
         "bar",
         "desktop"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-moon-phase",
-      "sha256": "b814a6a4d6844a0268c62a9e62a2daf0ce82741c02030ad47e898765a865d351",
+      "sha256": "419fa2cd145101cd4a1e3bdacdc7d65eece265acac8d7cc1b725591d8878b945",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -651,29 +655,14 @@
             "detailed"
           ],
           "description": "compact shows only the phase name; standard keeps the 1.x rows; detailed adds the approximation note."
-        },
-        "sizeClass": {
-          "type": "enum",
-          "default": "standard",
-          "options": [
-            "compact",
-            "standard",
-            "wide"
-          ],
-          "description": "Desktop widget size class within the host width cap (300 logical px today); standard keeps the 2.0 size. This sizes content, not the slot."
-        },
-        "showOnDesktop": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the widget content on the desktop (the 2.0 behaviour). Off leaves a visible Show widget button so the content can always be restored."
         }
       }
     },
     {
       "id": "hornero-network-monitor",
       "name": "Hornero Network Monitor",
-      "version": "2.0.0",
-      "description": "Network Monitor 2.0: dashboard card over the shared PluginKit Network facade with the 1.x speeds and session totals plus in-card history, peak readouts and honest unavailable states. Read-only.",
+      "version": "3.0.0",
+      "description": "Network Monitor 3.0 on Hornero Signal: a download oscilloscope and upload trace from the shared Telemetry history with peak readouts, plus current speeds and session totals. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -681,12 +670,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-network-monitor",
-      "sha256": "e70c1501ba7f9d40824f4af9af7320fe8be4484750d3dab1412bf9d75be76381",
+      "sha256": "e8baadd29ffaf53d2e008d1f369c0d0a41ca0c3e24d505a0e1f195193705de2e",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -698,21 +687,47 @@
         "showHistory": {
           "type": "boolean",
           "default": true,
-          "description": "Show the in-card speed history sampled from the shared Network facade while the card is loaded."
+          "description": "Show the download oscilloscope, upload trace and peak readouts from the shared telemetry history."
+        }
+      }
+    },
+    {
+      "id": "hornero-network-scope",
+      "name": "Hornero Network Scope",
+      "version": "1.0.0",
+      "description": "Network Scope: a desktop instrument over the shared network provider: download and upload oscilloscopes with stated scales, current rates, Wi-Fi signal and session totals. Real telemetry only.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "desktop",
+      "surfaces": [
+        "desktop"
+      ],
+      "manifestSchema": 3,
+      "minShellVersion": "1.0.0",
+      "category": "system",
+      "trust": "official",
+      "path": "plugins/hornero-network-scope",
+      "sha256": "e2deacb3cd68e94c17efd9caf64552db89cf8e0b3f0eabd26b5e5b52b9bb905e",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {
+        "showSessionTotals": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the downloaded/uploaded totals since the shell started."
         },
-        "sampleSeconds": {
-          "type": "integer",
-          "default": 5,
-          "minimum": 1,
-          "maximum": 60,
-          "description": "Seconds between history samples read from the already-live shared Network facade."
+        "showNetworkName": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show the Wi-Fi network name (personal data; off by default on an always-visible desktop widget)."
         }
       }
     },
     {
       "id": "hornero-now-playing",
       "name": "Hornero Now Playing",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Now Playing 2.0: compact bar indicator, details popover and dashboard card over the shared PluginKit Media (MPRIS) facade, with graceful no-player and idle-player states.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -721,12 +736,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-now-playing",
-      "sha256": "e5456fb198019c0cc87c07c122a268a18649f309bd3cf656feb69b49505d0f6f",
+      "sha256": "028fa9f14a494c22a953cbb15f8bc996788710bfabcf65a6873132ce3b031432",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -752,19 +767,19 @@
     {
       "id": "hornero-pomodoro",
       "name": "Hornero Pomodoro",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Pomodoro 2.0: compact bar focus timer with a popover, deadline-correct timing across sleep/reload, a typed session-length setting and a completion toast. No processes, no network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [],
-      "manifestSchema": 1,
-      "minShellVersion": null,
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.74",
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-pomodoro",
-      "sha256": "16897ab08e5e3db038ada13c42054b3c784ad4ac296eb48ac0d65f6636a27d59",
+      "sha256": "fbdbf58d41873cf13eab65a7e4ce4b52f966df403df4eeeb62bb7790ade0c05e",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -793,19 +808,19 @@
     {
       "id": "hornero-quick-notes",
       "name": "Hornero Quick Notes",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Quick Notes 2.0: dashboard card with one persistent note saved through PluginKit Settings (same key as 1.x). Debounced autosave, Ctrl+S, flush on unload, clear confirmation, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "surfaces": [],
-      "manifestSchema": 1,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-quick-notes",
-      "sha256": "bafb43dbac46548dee3dc0e8be09e75d961f8f2f5551a28721d5f6355991324d",
+      "sha256": "d1053391b2a4a7c5d0fcc316df4c43b46986399c9fd28bfecc470ecf16f27144",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -832,19 +847,19 @@
     {
       "id": "hornero-quiet-notes",
       "name": "Hornero Quiet Notes",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Quiet Notes 2.0: dashboard card for one short session-only intention. The line is never saved (in-memory only, as in 1.x) and the card says so. Keyboard-first capture, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "surfaces": [],
-      "manifestSchema": 1,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.72",
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-quiet-notes",
-      "sha256": "6e7c53610e1ed3a16361ade283577a45c9b36ce08534f05228bd69560cc6706d",
+      "sha256": "6059eb2eed5f8d35dced15cd1337a729702382cd352a4fe55981e952537e8004",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -865,19 +880,19 @@
     {
       "id": "hornero-stopwatch",
       "name": "Hornero Stopwatch",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Stopwatch 2.0: compact bar stopwatch with a popover, wall-clock-anchored elapsed time correct across sleep/reload and an optional tenths display. Pure QML, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [],
-      "manifestSchema": 1,
+      "manifestSchema": 3,
       "minShellVersion": null,
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-stopwatch",
-      "sha256": "0cc043047688207dc24bcef4086db4dce87ae20d6cf1a8f929a93bb47c82f4bd",
+      "sha256": "46033c243800ee2d85f346ff1f1af6f870c761b30996940448121302a4cdab80",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -903,21 +918,22 @@
     {
       "id": "hornero-studio-audio",
       "name": "Hornero Studio Audio",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Audio Extensions 2.0: bar indicator, popover and dashboard card for the Studio audio mode and Temporary Performance state from the typed horneroctl contract. Read-only; mode changes stay in the CLI and Control Center.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "bar",
       "surfaces": [
+        "bar",
         "dashboard"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-studio-audio",
-      "sha256": "1f079648e3706cf79d2afea145e6aa498dd584ce5d8d2ce58fbf22f4c42b00c9",
+      "sha256": "0879699a1709f9483c884d9dafffbe434678b4bd4d888ddc3a086677e10a18a2",
       "processCommands": [
         "horneroctl"
       ],
@@ -940,19 +956,19 @@
     {
       "id": "hornero-studio-jobs",
       "name": "Hornero Studio Jobs",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "description": "Render and export job monitor for HorneroOS Studio: shows queued, running, finished and interrupted jobs from the typed horneroctl studio jobs contract. Read-only; jobs are submitted and cancelled from the CLI or Control Center.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "surfaces": [],
-      "manifestSchema": 1,
-      "minShellVersion": null,
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.72",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-studio-jobs",
-      "sha256": "7182f286d2ddb6bcd9a240acd9e15d8a1ccf16f3e2c3b440cc0d73e3b7fef458",
+      "sha256": "75bbbe012a5bf69007452d6f8d00bf1b7f379486a4b8d6fc976167b7ddb2ad3f",
       "processCommands": [
         "horneroctl"
       ],
@@ -962,7 +978,7 @@
     {
       "id": "hornero-sun-card",
       "name": "Hornero Sun Card",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Sun Card 2.0: dashboard astronomy card and contextual bar indicator with sunrise/sunset from PluginKit Weather plus derived day length, sun progress and next sun event. Approximations are labelled derived.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -972,12 +988,12 @@
         "bar",
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-sun-card",
-      "sha256": "94727d67b8cd9083d478f4a006e6d5dc21975c690653fb233011a8bfffe33ef6",
+      "sha256": "f63fe98c8d0935d26fcb2ec1c708294df26f09b4d05bdb43064bd51dc657551c",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1011,8 +1027,8 @@
     {
       "id": "hornero-system-health",
       "name": "Hornero System Health",
-      "version": "2.0.0",
-      "description": "System Health 2.0: dashboard health summary over the shared PluginKit System, Power and Network facades, with per-row health states, thresholds and troubleshooting hints. No invented SMART data.",
+      "version": "3.0.0",
+      "description": "System Health 3.0 on Hornero Signal: a health rack over the shared system, power and network providers: segmented meters that cross to signal at your thresholds, status chips and troubleshooting hints. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -1020,12 +1036,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-system-health",
-      "sha256": "8c61627a42b02b8cfc50d2ea5150c5454dea042954a93fbb4c96b380c3dbf8c0",
+      "sha256": "757db0357baca8fdd286f7c42c5e96503c8d55f0b14f200b8b7862725797cb7b",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1056,10 +1072,50 @@
       }
     },
     {
+      "id": "hornero-system-insight",
+      "name": "Hornero System Insight",
+      "version": "1.0.0",
+      "description": "System Insight: a desktop instrument over the shared system provider: a CPU oscilloscope from the shared Telemetry history, segmented meters, per-core load strips and temperatures. Real telemetry only.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "desktop",
+      "surfaces": [
+        "desktop"
+      ],
+      "manifestSchema": 3,
+      "minShellVersion": "1.0.0",
+      "category": "system",
+      "trust": "official",
+      "path": "plugins/hornero-system-insight",
+      "sha256": "c929f3b63d6ab304b1a6176effbc007d288b9855064eb084578051656f2bbd98",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {
+        "showCores": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show one vertical load strip per logical CPU when the widget is tall enough."
+        },
+        "showTemperatures": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CPU/GPU temperatures and memory use when the system provider reports them."
+        },
+        "warnPercent": {
+          "type": "integer",
+          "default": 85,
+          "minimum": 50,
+          "maximum": 100,
+          "description": "Usage percent at or above which a meter segment turns signal (the visual language default is 85)."
+        }
+      }
+    },
+    {
       "id": "hornero-system-monitor",
       "name": "Hornero System Monitor",
-      "version": "2.0.0",
-      "description": "System Monitor 2.0: dashboard card over the shared PluginKit System facade with the 1.x usage bars plus in-card session history, peak/average readouts and a high-load alert. Read-only.",
+      "version": "3.0.0",
+      "description": "System Monitor 3.0 on Hornero Signal: a CPU oscilloscope from the shared Telemetry history, segmented meter rows for CPU, memory, GPU and storage with a user threshold, and peak/average readouts. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -1067,12 +1123,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-system-monitor",
-      "sha256": "1e9a4da368b53255703864a06bfaf505d395494101cf2b305c8fd948d483c014",
+      "sha256": "07eff5f001655704631beab17e4cb4d189878c2b35c6d0d12b6a0af174f83439",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1091,21 +1147,14 @@
         "showHistory": {
           "type": "boolean",
           "default": true,
-          "description": "Show the in-card session history sampled from the shared System facade while the card is loaded."
-        },
-        "sampleSeconds": {
-          "type": "integer",
-          "default": 5,
-          "minimum": 1,
-          "maximum": 60,
-          "description": "Seconds between history samples read from the already-live shared System facade."
+          "description": "Show the CPU oscilloscope and peak/average readouts from the shared telemetry history."
         }
       }
     },
     {
       "id": "hornero-text-tools",
       "name": "Hornero Text Tools",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 text tools: bar quick transform and compact dashboard detail with Uppercase, Lowercase, Title Case and Reverse plus character, word and line counts. Pure QML.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1115,12 +1164,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-text-tools",
-      "sha256": "2f541a54e57e6b8e22141a91c5f032442e171285654a608b4b8017c58f23e15c",
+      "sha256": "6b4044f32261db0379c6f40c88e789ebe4953b964b42d70e84a4e908aac59e4a",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1145,7 +1194,7 @@
     {
       "id": "hornero-unit-converter",
       "name": "Hornero Unit Converter",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Utility Tools 2.0 unit converter: bar quick action (10 km to mi) and compact dashboard detail for length (m, km, mi, ft), mass (kg, lb) and temperature (C, F, K). Pure JS, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1155,12 +1204,12 @@
         "dashboard",
         "launcher"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-unit-converter",
-      "sha256": "d04680ce811b30749f979b880c957866e7699a6051236c0e5cd033387931f1e0",
+      "sha256": "e0116d6153475c298568d840ae276488886a2cf6a648e465ccf5097be3f81f0a",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1186,7 +1235,7 @@
     {
       "id": "hornero-uptime",
       "name": "Hornero Uptime",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Uptime 2.0: bar indicator plus popover/dashboard session detail (uptime, boot time, idle time) from /proc/uptime with the declared cat command. No PluginKit uptime facade exists; error state instead of a fabricated zero.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1195,12 +1244,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
-      "minShellVersion": "1.0.0",
+      "manifestSchema": 3,
+      "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-uptime",
-      "sha256": "731b4956234de3ff5f6579e552b547e9ca2b4250e41d58cc8238d9bdd1ed71b3",
+      "sha256": "302cff238193520c146be128ccb9e36727d1f5a17dcc0fcb0d57426fbcca4bfa",
       "processCommands": [
         "cat"
       ],
@@ -1228,7 +1277,7 @@
     {
       "id": "hornero-volume",
       "name": "Hornero Volume",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Audio Extensions 2.0: compact bar indicator, details popover and dashboard card for output volume over the shared PluginKit Audio facade, with honest muted and no-output-device states.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1237,12 +1286,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-volume",
-      "sha256": "c927fff9c17af2a471770ff2d7cc5e43e20b5885ec536057d9328f34c6813394",
+      "sha256": "466c51c2bfae4f9bb31a6b045959c5fc7ee9acf8c3f55c368a01d34a43abdcaa",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1261,7 +1310,7 @@
     {
       "id": "hornero-weather",
       "name": "Hornero Weather",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "Weather 2.0: dashboard card and contextual bar indicator complementing native Weather with configurable density, a local wind-threshold alert and forecast detail from the PluginKit Weather facade only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1271,12 +1320,12 @@
         "bar",
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-weather",
-      "sha256": "651e20784b4754811a5bde2947bd4412a94944916252dd4007b948cccac6b894",
+      "sha256": "bc8185c0127fee3c67d051ed3fd526ea11ac452686a628bbbd3cf4d3d051c96f",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1324,7 +1373,7 @@
     {
       "id": "hornero-world-clock",
       "name": "Hornero World Clock",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "description": "World Clock 2.0: dashboard card with local, UTC and three selectable cities. Pure-JS rule-based offsets (fixed, EU, US and southern DST rules) labelled per row; no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1333,12 +1382,12 @@
       "surfaces": [
         "dashboard"
       ],
-      "manifestSchema": 2,
+      "manifestSchema": 3,
       "minShellVersion": "1.0.0",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-world-clock",
-      "sha256": "339e912e05c2913590b7e07fe7a50704541ac9c9493f8813ae9a06dd33958f31",
+      "sha256": "624215c3d139e179023034490b35369c90884703298713648170ae0ec0fac692",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
