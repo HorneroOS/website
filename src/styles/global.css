@@ -1519,6 +1519,7 @@ thead th {
   display: grid;
   position: relative;
   aspect-ratio: 16 / 9;
+  max-height: 22rem;
   place-items: center;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
