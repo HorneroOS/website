@@ -73,6 +73,26 @@ website checkout. The website previews are short web derivatives and are not
 the offline SDDM media pack. They are served locally; no third-party player is
 embedded.
 
+## Release bump
+
+After a release is fully published (distro tag pushed, AUR packages live,
+ISO signed and uploaded), apply it to the site in one reviewed PR:
+
+```sh
+npm run release:bump -- --version 0.2.0-preview33 --iso-file ./horneroos-2026.10-preview33-x86_64.iso
+# or, without the ISO on disk: --sha256 <64 hex> --size "2.8 GB"
+# preview first: add --dry-run
+```
+
+The script moves the pins to the current mains, rewrites
+`src/data/download.json` (version, ISO name, URLs, SHA-256, size),
+`reviewedAgainst` in `src/data/features.json` and the ISO mentions that
+`scripts/check-release-truth.mjs` guards, then runs the release-truth,
+ledger and i18n checks. It refuses to run when the version is not a tagged
+release in the regenerated `releases.json`, and it never guesses a checksum.
+Flipping feature-ledger entries to `shipping` stays a human review step.
+Merging the PR deploys production.
+
 ## Updating
 
 The `product-data` workflow runs daily (and on demand), bumps the pins and
