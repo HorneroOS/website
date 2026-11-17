@@ -28,6 +28,22 @@ files to GitHub at the pinned commit; the area order lives in
 any internal link that does not resolve, and Pagefind indexes the site for
 `/search/` (its script loads only on that page).
 
+## Hand-authored records
+
+Two small records sit beside the generated data. They are validated at build
+time and are the only places a release or feature status is typed:
+
+- `src/data/download.json` — the single published ISO (version, URL, SHA-256,
+  signature, key). `scripts/check-release-truth.mjs` fails the build when its
+  version is not a tagged release in `releases.json` or the ISO name does not
+  match it, and when copy elsewhere names a different ISO. Update it in the
+  same PR that publishes a new ISO; never point it at a candidate.
+- `src/data/features.json` — the feature ledger (released / experimental /
+  on main, unreleased / planned) with evidence links.
+  `scripts/check-feature-ledger.mjs` fails a `shipping` feature whose release
+  is not tagged. The release PR flips entries and bumps `reviewedAgainst`.
+  See [`INFORMATION_ARCHITECTURE.md`](./INFORMATION_ARCHITECTURE.md).
+
 ## Pins
 
 `src/data/product/pins.json` names one full commit SHA per source plus a
