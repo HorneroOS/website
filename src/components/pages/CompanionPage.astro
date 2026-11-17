@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CompanionStage from '../CompanionStage.astro';
+import CaptureFigure from '../CaptureFigure.astro';
 import { pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -50,16 +51,20 @@ const paletteOf = (s: string) => Object.entries(manifest.skins[s]?.palette ?? {}
 ---
 
 <SiteLayout
-  title={isEs ? 'Companion | HorneroOS' : 'Companion | HorneroOS'}
+  title={isEs ? 'Javi, el compañero del escritorio | HorneroOS' : 'Javi, the desktop companion | HorneroOS'}
   description={isEs ? 'Javi, el hornero que vive en el escritorio de HorneroOS: descansa, saluda, vuela, arma su nido de a poco y actúa los estados del asistente.' : 'Javi, the hornero that lives on the HorneroOS desktop: it rests, greets, flies, slowly builds its nest and acts out the assistant states.'}
 >
   <section class="section">
-    <p class="plate-id"><strong>Compañero Hornero</strong><span>Parte del shell</span></p>
-    <h1>Companion</h1>
+    <p class="plate-id"><strong>{isEs ? 'Compañero Hornero' : 'Hornero Companion'}</strong><span>{isEs ? 'Parte del shell' : 'Part of the shell'}</span></p>
+    <h1>{isEs ? 'Javi, el compañero' : 'Javi, the companion'}</h1>
     <p class="lede">
       {isEs ? 'Javi es un hornero que vive en tu escritorio. Descansa en su rincón, pestañea, se despereza, junta ramitas para su nido y vuela hacia vos cuando lo llamás. No te saca el foco ni los clics de las ventanas que estás usando.' : 'Javi is a hornero that lives on your desktop. It rests in its corner, blinks, stretches, gathers twigs for its nest and flies in when you call it. It does not take focus or clicks away from the windows you are using.'}
     </p>
     <CompanionStage locale={locale} />
+  </section>
+
+  <section class="section" aria-label={isEs ? 'Javi en un escritorio real' : 'Javi on a real desktop'}>
+    <CaptureFigure slot="javi-desktop" locale={locale} />
   </section>
 
   <section class="section">
