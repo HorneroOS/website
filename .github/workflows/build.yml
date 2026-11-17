@@ -23,6 +23,8 @@ jobs:
       - name: Product data matches its pins
         run: npm run data:check
       - run: npm run lint
+      - name: Brand marks use Signal colours
+        run: npm run check:brand
       # `astro check` prints an error and exits 0 when @astrojs/check cannot be
       # loaded, so prove the checker imports before trusting its exit code.
       - name: Verify astro check toolchain loads
