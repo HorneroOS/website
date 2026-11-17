@@ -13,7 +13,8 @@
     "data:bump": "node scripts/sync-product-data.mjs --bump",
     "a11y": "node scripts/a11y-check.mjs",
     "check:truth": "node scripts/check-release-truth.mjs",
-    "check:i18n": "node scripts/check-i18n.mjs"
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:brand": "node scripts/check-brand.mjs"
   },
   "version": "0.1.0",
   "private": true,
