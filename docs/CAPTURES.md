@@ -77,3 +77,12 @@ ledger keeps the project's visual history.
 All captures in `src/content/showroom/` predate Hornero Signal and carry
 `appearance: pre-signal`. They stay published, labelled, until W9 (QA)
 supplies Signal captures from the real host.
+
+## Slots without a capture
+
+A slot whose `capture` is `null` (most of the slots added for the Desktop,
+Studio, Gaming, modes, Chromatic, Javi and PluginKit pages) renders
+`<CapturePlaceholder slot="…" />`: a dashed schematic labelled "Placeholder —
+not a screenshot" that prints the `wanted` brief. Fill a slot exactly as
+above: add the showroom entry, set the slot's `capture`. The slot ids and
+briefs in `src/data/captures.ts` are the list QA works from.

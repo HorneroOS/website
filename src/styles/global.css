@@ -1441,3 +1441,95 @@ thead th {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------- ledger stage badge --- */
+
+.stage-badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  color: var(--ink-muted);
+  font: 500 0.68rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stage-badge[data-stage='released'] {
+  border-color: var(--phosphor);
+  color: var(--phosphor);
+}
+
+.stage-badge[data-stage='experimental'] {
+  border-color: var(--cue);
+  color: var(--cue);
+}
+
+.stage-badge[data-stage='unreleased'] {
+  border-style: dotted;
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.stage-badge[data-stage='planned'] {
+  border-style: dashed;
+}
+
+.stage-badge i {
+  font-style: normal;
+}
+
+/* Capture placeholder: a labelled schematic, never a drawn desktop. */
+.capture-label[data-appearance='placeholder'] {
+  padding: 0.1rem 0.45rem;
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius-small);
+}
+
+.capture-placeholder {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.capture-placeholder-frame {
+  display: grid;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--sunken);
+  color: var(--ink-faint);
+}
+
+.capture-placeholder-frame svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.capture-placeholder-title {
+  position: relative;
+  padding: 0.3rem 0.7rem;
+  background: var(--sunken);
+  color: var(--ink-muted);
+  font: 500 0.78rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.capture-placeholder figcaption {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+
+.capture-placeholder-slot code {
+  font-size: 0.75rem;
+}

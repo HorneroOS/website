@@ -1,0 +1,26 @@
+---
+/**
+ * Ledger stage as a text label plus a shape. The label carries the meaning;
+ * the glyph is decorative. Stages come from src/data/features.ts, never from
+ * page copy. Released and unreleased are told apart by more than colour
+ * (solid, outlined, dashed, dotted border).
+ */
+import type { Stage } from '../data/features';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  stage: Stage;
+  locale?: Locale;
+}
+
+const { stage, locale = 'es' } = Astro.props;
+const names: Record<Stage, { es: string; en: string }> = {
+  released: { es: 'Lanzado', en: 'Released' },
+  experimental: { es: 'Experimental', en: 'Experimental' },
+  unreleased: { es: 'En main, sin lanzar', en: 'On main, unreleased' },
+  planned: { es: 'Planificado', en: 'Planned' },
+};
+const glyph: Record<Stage, string> = { released: '●', experimental: '◐', unreleased: '◌', planned: '○' };
+---
+
+<span class="stage-badge" data-stage={stage}><i aria-hidden="true">{glyph[stage]}</i>{names[stage][locale]}</span>
