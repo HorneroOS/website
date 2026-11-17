@@ -124,7 +124,6 @@ function layouts(shellDir) {
         id: f.replace(/\.json$/, ''),
         name: p._name ?? f,
         description: p._description ?? '',
-        icon: p._iconMaterial ?? null,
         bars: presetBars(p.bar ?? {}),
       };
     });

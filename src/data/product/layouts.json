@@ -3,7 +3,6 @@
     "id": "classic-bottom",
     "name": "Classic Bottom",
     "description": "Bottom bar — dock-like layout with all status icons",
-    "icon": null,
     "bars": [
       {
         "edge": "bottom",
@@ -31,7 +30,6 @@
     "id": "classic-top",
     "name": "Classic Top",
     "description": "Traditional top bar with all status icons",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -59,7 +57,6 @@
     "id": "cockpit-clear",
     "name": "Cockpit Clear",
     "description": "The dual bar with no backdrop: controls and telemetry straight on the wallpaper",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -108,7 +105,6 @@
     "id": "cockpit",
     "name": "Cockpit",
     "description": "Two bars: act on top, glance below — a classic desktop composition",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -158,7 +154,6 @@
     "id": "cozy-minimal",
     "name": "Minimal Float",
     "description": "Soft floating top ribbon — workspaces, centred time, a few tools",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -187,7 +182,6 @@
     "id": "dock-bottom",
     "name": "Dock Bottom",
     "description": "Bottom dock — launcher, workspaces, pinned apps, tools and status",
-    "icon": null,
     "bars": [
       {
         "edge": "bottom",
@@ -217,7 +211,6 @@
     "id": "floating-island",
     "name": "Floating Island",
     "description": "One compact floating module: workspaces, clock and status in a hairline frame",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -243,7 +236,6 @@
     "id": "gaming",
     "name": "Gaming",
     "description": "Bottom bar — minimal footprint, no logo",
-    "icon": null,
     "bars": [
       {
         "edge": "bottom",
@@ -265,7 +257,6 @@
     "id": "horizon",
     "name": "Horizon",
     "description": "One slab carries every control and reading; workspaces rest on a clear line below",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -310,7 +301,6 @@
     "id": "hornero-left",
     "name": "Hornero Left",
     "description": "Left sidebar — full featured, reference shell style — inspired by Caelestia's layout",
-    "icon": null,
     "bars": [
       {
         "edge": "left",
@@ -339,7 +329,6 @@
     "id": "hornero-right",
     "name": "Hornero Right",
     "description": "Right sidebar — full featured, mirrored reference shell style — inspired by Caelestia's layout",
-    "icon": null,
     "bars": [
       {
         "edge": "right",
@@ -368,7 +357,6 @@
     "id": "islands",
     "name": "Islands",
     "description": "Three floating islands: controls, time, status",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -400,7 +388,6 @@
     "id": "minimal-left",
     "name": "Minimal Left",
     "description": "Clean left sidebar — workspaces and power only",
-    "icon": null,
     "bars": [
       {
         "edge": "left",
@@ -423,7 +410,6 @@
     "id": "minimal-top",
     "name": "Minimal Top",
     "description": "Minimal top bar — workspaces + clock",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -447,7 +433,6 @@
     "id": "productivity",
     "name": "Productivity",
     "description": "Calm focused-work rail: workspaces, the active window, the clock and only the essential tray",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
@@ -475,7 +460,6 @@
     "id": "studio",
     "name": "Studio",
     "description": "Top bar for creative work — media and audio at hand, stable reserved canvas",
-    "icon": null,
     "bars": [
       {
         "edge": "top",
