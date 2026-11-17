@@ -36,8 +36,8 @@ export const captureSlots = {
     usedOn: ['/ (shell, light half of the comparison)'],
     wanted: 'Signal Day, Hornero Left preset, 1920×1080, same wallpaper and window arrangement as home-shell-dark.',
   },
-  'desktop-signal-night': {
-    capture: null,
+  'desktop-hero': {
+    capture: 'live-workstation',
     usedOn: ['/desktop (hero)'],
     wanted: 'Signal Night, Cockpit, 1920×1080, real host: a working session with an editor, a terminal and the bar visible.',
   },
@@ -82,14 +82,14 @@ export const captureSlots = {
     wanted: 'Javi perched in his desktop corner on a real desktop, not overlapping windows.',
   },
   'pluginkit-deck': {
-    capture: null,
+    capture: 'dashboard-extensions',
     usedOn: ['/extensions (lead)'],
     wanted: 'Three or more official extensions placed on the bar, desktop and Dashboard in one real session (Signal appearance).',
   },
-  'customise-control-center': {
-    capture: null,
+  'customise-layout-picker': {
+    capture: 'layout-picker',
     usedOn: ['/desktop (customisation)'],
-    wanted: 'Control Center on the Bars or Layout page with live preview, in Signal.',
+    wanted: 'Layout picker or the Control Center Bars page with live preview, in Signal.',
   },
 } satisfies Record<string, CaptureSlot>;
 

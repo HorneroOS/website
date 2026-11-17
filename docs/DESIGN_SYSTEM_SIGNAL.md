@@ -125,6 +125,9 @@ RFC §3.6 curves and durations are tokens: `--ease-standard --ease-enter
   trigger/anchor edge plus 6 px travel and a fade (`scan-in-down`).
 - **Settle** — small overshoot (≤ 4 % of travel) only for spatial motion:
   the on-air bar and meter segments. Never for opacity or colour.
+- **Page change** — cross-document view transition: the next page is
+  drawn top to bottom (`clip-path` raster scan, `--dur-medium`) over the old
+  one dimmed to 60 %; the site header keeps its own transition name.
 - One orchestrated moment per page at most; sections do not fade in on
   scroll.
 - `prefers-reduced-motion: reduce` sets durations to ~0; the page is
