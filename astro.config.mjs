@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import remarkDocsLinks from './src/lib/remark-docs-links.mjs';
+import rehypeTaskLabels from './src/lib/rehype-task-labels.mjs';
 
 // HorneroOS/docs is checked out at its pinned commit before every build
 // (scripts/sync-product-data.mjs --fetch-only); see docs/PRODUCT_DATA.md.
@@ -37,6 +38,7 @@ export default defineConfig({
         remarkDocsLinks,
         { docsRoot: './.cache/product-src/docs', repo: pins.sources.docs.repo, sha: pins.sources.docs.sha },
       ]],
+      rehypePlugins: [rehypeTaskLabels],
     }),
   },
 });

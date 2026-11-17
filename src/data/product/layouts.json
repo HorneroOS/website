@@ -3,7 +3,6 @@
     "id": "classic-bottom",
     "name": "Classic Bottom",
     "description": "Bottom bar — dock-like layout with all status icons",
-    "icon": "vertical_align_bottom",
     "bars": [
       {
         "edge": "bottom",
@@ -31,7 +30,6 @@
     "id": "classic-top",
     "name": "Classic Top",
     "description": "Traditional top bar with all status icons",
-    "icon": "vertical_align_top",
     "bars": [
       {
         "edge": "top",
@@ -59,7 +57,6 @@
     "id": "cockpit-clear",
     "name": "Cockpit Clear",
     "description": "The dual bar with no backdrop: controls and telemetry straight on the wallpaper",
-    "icon": "blur_on",
     "bars": [
       {
         "edge": "top",
@@ -77,8 +74,10 @@
             "Weather"
           ],
           "end": [
+            "modeIndicator",
             "Status icons",
             "Tray",
+            "extensions",
             "Power"
           ]
         }
@@ -106,7 +105,6 @@
     "id": "cockpit",
     "name": "Cockpit",
     "description": "Two bars: act on top, glance below — a classic desktop composition",
-    "icon": "view_agenda",
     "bars": [
       {
         "edge": "top",
@@ -124,9 +122,10 @@
             "Weather"
           ],
           "end": [
-            "Battery",
+            "modeIndicator",
             "Status icons",
             "Tray",
+            "extensions",
             "Power"
           ]
         }
@@ -144,7 +143,8 @@
           ],
           "end": [
             "Keyboard layout",
-            "Resources"
+            "Resources",
+            "Battery"
           ]
         }
       }
@@ -152,9 +152,8 @@
   },
   {
     "id": "cozy-minimal",
-    "name": "Cozy Minimal",
+    "name": "Minimal Float",
     "description": "Soft floating top ribbon — workspaces, centred time, a few tools",
-    "icon": "weekend",
     "bars": [
       {
         "edge": "top",
@@ -172,7 +171,8 @@
             "Quick actions",
             "Status icons",
             "Battery",
-            "Tray"
+            "Tray",
+            "extensions"
           ]
         }
       }
@@ -182,7 +182,6 @@
     "id": "dock-bottom",
     "name": "Dock Bottom",
     "description": "Bottom dock — launcher, workspaces, pinned apps, tools and status",
-    "icon": "dock_to_bottom",
     "bars": [
       {
         "edge": "bottom",
@@ -201,7 +200,8 @@
             "Clock",
             "Status icons",
             "Battery",
-            "Tray"
+            "Tray",
+            "extensions"
           ]
         }
       }
@@ -210,8 +210,7 @@
   {
     "id": "floating-island",
     "name": "Floating Island",
-    "description": "Pill-shaped floating island on top — glassy and glowy",
-    "icon": "web_asset",
+    "description": "One compact floating module: workspaces, clock and status in a hairline frame",
     "bars": [
       {
         "edge": "top",
@@ -237,7 +236,6 @@
     "id": "gaming",
     "name": "Gaming",
     "description": "Bottom bar — minimal footprint, no logo",
-    "icon": "sports_esports",
     "bars": [
       {
         "edge": "bottom",
@@ -259,7 +257,6 @@
     "id": "horizon",
     "name": "Horizon",
     "description": "One slab carries every control and reading; workspaces rest on a clear line below",
-    "icon": "horizontal_split",
     "bars": [
       {
         "edge": "top",
@@ -286,7 +283,7 @@
       },
       {
         "edge": "bottom",
-        "style": "attached",
+        "style": "inset",
         "clear": true,
         "groups": {
           "start": [
@@ -303,8 +300,7 @@
   {
     "id": "hornero-left",
     "name": "Hornero Left",
-    "description": "Left sidebar — full featured, reference shell style",
-    "icon": "dock_to_left",
+    "description": "Left sidebar — full featured, reference shell style — inspired by Caelestia's layout",
     "bars": [
       {
         "edge": "left",
@@ -319,9 +315,10 @@
             "Active window"
           ],
           "end": [
-            "Tray",
             "Clock",
             "Status icons",
+            "Tray",
+            "extensions",
             "Power"
           ]
         }
@@ -331,8 +328,7 @@
   {
     "id": "hornero-right",
     "name": "Hornero Right",
-    "description": "Right sidebar — full featured, mirrored reference shell style",
-    "icon": "dock_to_right",
+    "description": "Right sidebar — full featured, mirrored reference shell style — inspired by Caelestia's layout",
     "bars": [
       {
         "edge": "right",
@@ -347,9 +343,10 @@
             "Active window"
           ],
           "end": [
-            "Tray",
             "Clock",
             "Status icons",
+            "Tray",
+            "extensions",
             "Power"
           ]
         }
@@ -360,7 +357,6 @@
     "id": "islands",
     "name": "Islands",
     "description": "Three floating islands: controls, time, status",
-    "icon": "view_column",
     "bars": [
       {
         "edge": "top",
@@ -381,6 +377,7 @@
             "Battery",
             "Status icons",
             "Tray",
+            "extensions",
             "Power"
           ]
         }
@@ -391,7 +388,6 @@
     "id": "minimal-left",
     "name": "Minimal Left",
     "description": "Clean left sidebar — workspaces and power only",
-    "icon": "view_sidebar",
     "bars": [
       {
         "edge": "left",
@@ -414,7 +410,6 @@
     "id": "minimal-top",
     "name": "Minimal Top",
     "description": "Minimal top bar — workspaces + clock",
-    "icon": "minimize",
     "bars": [
       {
         "edge": "top",
@@ -437,12 +432,11 @@
   {
     "id": "productivity",
     "name": "Productivity",
-    "description": "Top bar optimized for focused work — no distractions",
-    "icon": "work",
+    "description": "Calm focused-work rail: workspaces, the active window, the clock and only the essential tray",
     "bars": [
       {
         "edge": "top",
-        "style": "attached",
+        "style": "inset",
         "clear": false,
         "groups": {
           "start": [
@@ -453,6 +447,8 @@
             "Clock"
           ],
           "end": [
+            "Tray",
+            "extensions",
             "Status icons",
             "Power"
           ]
@@ -464,7 +460,6 @@
     "id": "studio",
     "name": "Studio",
     "description": "Top bar for creative work — media and audio at hand, stable reserved canvas",
-    "icon": "movie_creation",
     "bars": [
       {
         "edge": "top",

@@ -23,7 +23,6 @@ export interface Layout {
   id: string;
   name: string;
   description: string;
-  icon: string | null;
   bars: LayoutBar[];
 }
 

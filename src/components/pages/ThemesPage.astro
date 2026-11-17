@@ -12,7 +12,6 @@ import ArchFrame from '../../components/ArchFrame.astro';
 import ThemePaletteStudy from '../../components/ThemePaletteStudy.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import { paletteApplications, themes, wallpapers } from '../../data/product';
-import variantSample from '../../data/product/palette-variants.json';
 
 const originals = themes.filter((theme) => theme.collection === 'hornero-originals');
 const paletteRoles = ['background', 'surface', 'text', 'primary', 'secondary', 'accent'] as const;
@@ -33,7 +32,6 @@ const wallpaperMedia = {
 const modes = (mode: string) => (mode === 'light' ? (isEs ? 'Claro' : 'Light') : (isEs ? 'Oscuro' : 'Dark'));
 const buenosAires = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
 if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pinned wallpaper catalogue');
-const paletteVariants = variantSample.variants;
 const showroom = await getCollection('showroom');
 const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
   const capture = showroom.find((item) => item.id === id);
@@ -44,7 +42,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
 
 <SiteLayout
   title={isEs ? 'Temas | HorneroOS' : 'Themes | HorneroOS'}
-  description={isEs ? `${themes.length} temas: los Hornero Originals más aspectos naturales, minimalistas, cyberpunk, synthwave y clásicos. Cada aspecto coordina el escritorio y se puede ajustar con variantes de color del fondo.` : `${themes.length} themes: the Hornero Originals plus natural, minimal, cyberpunk, synthwave and classic looks. Each look coordinates the desktop and can be adjusted with wallpaper color variants.`}
+  description={isEs ? `${themes.length} temas: los Hornero Originals más aspectos naturales, minimalistas, cyberpunk, synthwave y clásicos. Cada aspecto coordina el escritorio y se ajusta desde el Centro de control.` : `${themes.length} themes: the Hornero Originals plus natural, minimal, cyberpunk, synthwave and classic looks. Each look coordinates the desktop and is adjustable from the Control Center.`}
 >
   <section class="intro section">
     <div class="intro-copy-column">
@@ -56,7 +54,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       <div class="intro-meta">
         <span>{themes.length} {isEs ? 'aspectos' : 'looks'}</span>
         <span>{originals.length} Hornero Originals</span>
-        <span>{isEs ? '7 estilos de generación de paleta' : '7 palette-generation styles'}</span>
+        <span>{themes.filter((theme) => theme.official).length} {isEs ? 'aspectos Hornero Signal' : 'Hornero Signal looks'}</span>
       </div>
     </div>
     <div class="intro-preview">
@@ -253,37 +251,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </p>
   </section>
 
-  <section class="section variants-section" id="palette-variants" aria-labelledby="palette-variants-title">
-    <div class="section-heading">
-      <div>
-        <h2 id="palette-variants-title">{isEs ? 'Siete estilos de generación de paleta' : 'Seven palette-generation styles'}</h2>
-      </div>
-      <p>
-        {isEs ? 'El estilo define cómo Hornero lee el fondo y deriva los colores de la Shell, desde tonos sobrios hasta una paleta más expresiva. El fondo queda igual.' : 'The style sets how Hornero reads the wallpaper and derives the Shell colors, from restrained tones to a more expressive palette. The wallpaper stays the same.'}
-      </p>
-    </div>
-    <ul class="variant-grid" role="list">
-      {paletteVariants.map((variant) => (
-        <li class="variant-card" data-variant={variant.id}>
-          <span
-            class="variant-swatches"
-            aria-hidden="true"
-            style={`--swatch-a:${variant.colors[0]};--swatch-b:${variant.colors[1]};--swatch-c:${variant.colors[2]}`}
-          >
-            <i></i>
-            <i></i>
-            <i></i>
-          </span>
-          <strong>{variant.name}</strong>
-          <span>{variant.mood}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="variant-footnote">
-      {isEs ? 'Las siete paletas de muestra se generaron en modo oscuro desde el mismo fondo Neon City, con el generador Material 3 de Hornero Config. Son salidas reales para esa imagen. Otro fondo o el modo claro dan colores distintos. ' : 'All seven sample palettes were generated in dark mode from the same Neon City wallpaper with Hornero Config’s Material 3 generator. They are real outputs for that image. Another wallpaper or light mode gives different colors. '}<a href={L('/docs/desktop/appearance/')}>{isEs ? 'Leé cómo funcionan los colores del fondo' : 'Read how wallpaper colors work'}</a>.
-    </p>
-  </section>
-
   <section class="section terminals-section" aria-labelledby="terminals-title">
     <div class="section-heading">
       <div>
@@ -341,7 +308,7 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     <div>
       <h2>{isEs ? 'Qué incluye un aspecto' : 'What a look includes'}</h2>
       <p>
-        {isEs ? 'Un aspecto cubre la Shell, la política GTK, los íconos y el fondo. Algunos packs referencian estilos GTK o de íconos opcionales; Hornero verifica si están instalados y nunca los descarga en silencio. Podés cambiar el estilo de generación de paleta y el modo claro u oscuro en Apariencia.' : 'A look covers the Shell, GTK policy, icons and wallpaper. Some packs reference optional GTK or icon styles; Hornero checks whether they are installed and never downloads them silently. You can change the palette-generation style and light or dark mode in Appearance.'}
+        {isEs ? 'Un aspecto cubre la Shell, la política GTK, los íconos y el fondo. Algunos packs referencian estilos GTK o de íconos opcionales; Hornero verifica si están instalados y nunca los descarga en silencio. Podés cambiar el aspecto y el modo claro u oscuro en Apariencia.' : 'A look covers the Shell, GTK policy, icons and wallpaper. Some packs reference optional GTK or icon styles; Hornero checks whether they are installed and never downloads them silently. You can change the look and light or dark mode in Appearance.'}
       </p>
     </div>
     <div class="try-panel">
@@ -795,49 +762,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   .artwork-note a {
     color: var(--ink);
   }
-  .variant-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.75rem;
-    padding: 0;
-    list-style: none;
-  }
-  .variant-card {
-    display: grid;
-    gap: 0.4rem;
-    padding: 0.9rem;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    background: var(--panel);
-  }
-  .variant-card > span:last-child,
-  .variant-footnote {
-    color: var(--ink-muted);
-    font-size: 0.82rem;
-  }
-  .variant-swatches {
-    display: flex;
-    gap: 0.3rem;
-    margin-bottom: 0.25rem;
-  }
-  .variant-swatches i {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    background: var(--swatch-a);
-  }
-  .variant-swatches i:nth-child(2) {
-    background: var(--swatch-b);
-  }
-  .variant-swatches i:nth-child(3) {
-    background: var(--swatch-c);
-  }
-  .variant-footnote {
-    margin-top: 0.9rem;
-  }
-  .variant-footnote a {
-    color: var(--ink);
-  }
   .terminal-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1074,9 +998,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     .landscape-grid {
       grid-template-columns: 1fr;
     }
-    .variant-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
     .terminal-grid {
       grid-template-columns: 1fr;
     }
@@ -1117,9 +1038,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
   @media (max-width: 420px) {
     .capture-slide-copy h3 {
       font-size: 1.15rem;
-    }
-    .variant-grid {
-      grid-template-columns: 1fr;
     }
     .look-grid {
       grid-template-columns: 1fr;
