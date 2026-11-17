@@ -1,0 +1,15 @@
+{
+  "$comment": "The one published ISO the site offers. `version` must be a tagged release in product/releases.json (scripts/check-release-truth.mjs). Update this record in the same PR that publishes a new ISO; never point it at a candidate or an unpublished build.",
+  "version": "0.2.0-preview32",
+  "iso": {
+    "name": "horneroos-2026.10-preview32-x86_64.iso",
+    "url": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso",
+    "sha256": "b8cd0f8604bc69f7d2112fb8bccd97115d32d197e9c92c62e02faf5de6345aec",
+    "sizeLabel": "2.7 GB"
+  },
+  "checksumUrl": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sha256",
+  "signatureUrl": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sig",
+  "releaseUrl": "https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32",
+  "keyFingerprint": "FCFBEE43925AB5429362278AE59EAB44AA2498DC",
+  "keyPath": "packaging/keys/hornero-release.pub.asc"
+}
