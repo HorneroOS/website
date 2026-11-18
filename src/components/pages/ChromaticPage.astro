@@ -2,7 +2,6 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
 import CaptureFigure from '../CaptureFigure.astro';
-import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -57,7 +56,7 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
     </p>
     <p class="chroma-status">
       <StageBadge stage={ledger.stage} locale={locale} />
-      <ReleaseChannelNote feature={ledger} locale={locale} />
+      <span>{isEs ? 'El motor, la interfaz de Ajustes y los verbos de horneroctl están en main. Ninguna ISO Preview publicada los incluye todavía.' : 'The engine, the Settings interface and the horneroctl verbs are on main. No published Preview ISO includes them yet.'}</span>
     </p>
   </section>
 
