@@ -16,11 +16,12 @@ interface Props {
 const { stage, locale = 'es' } = Astro.props;
 const names: Record<Stage, { es: string; en: string }> = {
   released: { es: 'Lanzado', en: 'Released' },
+  packaged: { es: 'Lanzado en paquetes', en: 'Released as packages' },
   experimental: { es: 'Experimental', en: 'Experimental' },
   unreleased: { es: 'En main, sin lanzar', en: 'On main, unreleased' },
   planned: { es: 'Planificado', en: 'Planned' },
 };
-const glyph: Record<Stage, string> = { released: '●', experimental: '◐', unreleased: '◌', planned: '○' };
+const glyph: Record<Stage, string> = { released: '●', packaged: '◉', experimental: '◐', unreleased: '◌', planned: '○' };
 ---
 
 <span class="stage-badge" data-stage={stage}><i aria-hidden="true">{glyph[stage]}</i>{names[stage][locale]}</span>

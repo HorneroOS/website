@@ -1,11 +1,11 @@
 {
-  "$comment": "Feature ledger. Hand-authored claims live here, never in page copy. `stage` is what the project asserts: shipping (in a published release; needs releasedIn naming a tagged release in product/releases.json), main (merged to main, in no published release), experimental (merged and flagged experimental) or planned. scripts/check-feature-ledger.mjs fails the build when a 'shipping' feature names a release that does not exist or is not tagged. When a release is cut, the release PR flips the matching entries; edition and compositor maturity is derived from the pinned catalogue (src/data/features.ts), not listed here.",
-  "reviewedAgainst": "0.2.0-preview32",
+  "$comment": "Feature ledger. Hand-authored claims live here, never in page copy. `stage` is what the project asserts: shipping (in a published release; needs releasedIn naming a released (tagged, or recorded as published) release in product/releases.json), main (merged to main, in no published release), experimental (merged and flagged experimental) or planned. scripts/check-feature-ledger.mjs fails the build when a 'shipping' feature names a release that does not exist or is not released. When a release is cut, the release PR flips the matching entries; edition and compositor maturity is derived from the pinned catalogue (src/data/features.ts), not listed here.",
+  "reviewedAgainst": "0.2.0-preview33",
   "features": [
     {
       "id": "signal",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
       "title": {
         "es": "Hornero Signal",
         "en": "Hornero Signal"
@@ -23,8 +23,8 @@
     },
     {
       "id": "experience-modes",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
       "title": {
         "es": "Modos de experiencia",
         "en": "Experience modes"
@@ -42,8 +42,8 @@
     },
     {
       "id": "chromatic",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
       "title": {
         "es": "Hornero Chromatic",
         "en": "Hornero Chromatic"
@@ -69,8 +69,8 @@
     },
     {
       "id": "pluginkit",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
       "title": {
         "es": "PluginKit 3",
         "en": "PluginKit 3"
@@ -92,8 +92,8 @@
     },
     {
       "id": "instrument-deck",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
       "title": {
         "es": "Deck de instrumentos",
         "en": "Instrument deck"
@@ -106,6 +106,197 @@
         {
           "label": "docs: instrument deck",
           "href": "https://github.com/HorneroOS/docs/blob/main/desktop/experience-modes.md#the-signal-instrument-deck"
+        }
+      ]
+    },
+    {
+      "id": "apply-undo",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "Aplicar y deshacer",
+        "en": "Apply and undo"
+      },
+      "summary": {
+        "es": "Una sola política en el Centro de control: los cambios se aplican al elegirlos, sin botones de Aplicar, con una franja común de Aplicado y Deshacer.",
+        "en": "One policy across Control Center: changes apply as you choose them, with no Apply buttons and one shared Applied and Undo strip."
+      },
+      "evidence": [
+        {
+          "label": "shell#667",
+          "href": "https://github.com/HorneroOS/shell/pull/667"
+        },
+        {
+          "label": "docs: Control Center apply",
+          "href": "https://github.com/HorneroOS/shell/blob/main/docs/CONTROL-CENTER-APPLY.md"
+        }
+      ]
+    },
+    {
+      "id": "workspace-needle",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "Aguja de espacios de trabajo",
+        "en": "Workspace needle"
+      },
+      "summary": {
+        "es": "En la barra, una aguja viaja hasta el espacio de trabajo activo; el espacio especial se repliega.",
+        "en": "In the bar, a needle travels to the active workspace; the special workspace recedes."
+      },
+      "evidence": [
+        {
+          "label": "shell#677",
+          "href": "https://github.com/HorneroOS/shell/pull/677"
+        }
+      ]
+    },
+    {
+      "id": "console-dashboard",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "Dashboard consola",
+        "en": "Console Dashboard"
+      },
+      "summary": {
+        "es": "La composición consola del Dashboard, con un deck alto como protagonista, más las composiciones clásica y compacta.",
+        "en": "The Dashboard console composition, with a tall deck as its hero, plus the classic and compact compositions."
+      },
+      "evidence": [
+        {
+          "label": "shell#684",
+          "href": "https://github.com/HorneroOS/shell/pull/684"
+        },
+        {
+          "label": "docs: Dashboard",
+          "href": "https://github.com/HorneroOS/shell/blob/main/docs/DASHBOARD.md"
+        }
+      ]
+    },
+    {
+      "id": "media-deck",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "Deck multimedia",
+        "en": "Media deck"
+      },
+      "summary": {
+        "es": "El reproductor del Dashboard como un deck: espectro estéreo, marcas de pico y contador de cinta.",
+        "en": "The Dashboard player as a deck: stereo spectrum, peak ticks and a tape counter."
+      },
+      "evidence": [
+        {
+          "label": "shell#683",
+          "href": "https://github.com/HorneroOS/shell/pull/683"
+        }
+      ]
+    },
+    {
+      "id": "javi-radio",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "Javi Radio",
+        "en": "Javi Radio"
+      },
+      "summary": {
+        "es": "Una pregunta corta y una respuesta corta, desde el lanzador, haciendo clic en Javi o desde su menú. Usa el asistente, que viene apagado: hay que activarlo y configurarlo primero.",
+        "en": "One short question and one short answer, from the launcher, by clicking Javi or from his menu. It uses the assistant, which is off by default: enable and set it up first."
+      },
+      "evidence": [
+        {
+          "label": "shell#665",
+          "href": "https://github.com/HorneroOS/shell/pull/665"
+        },
+        {
+          "label": "docs: Javi Radio",
+          "href": "https://github.com/HorneroOS/shell/blob/main/docs/JAVI_RADIO.md"
+        }
+      ]
+    },
+    {
+      "id": "javi-nest",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview33",
+      "title": {
+        "es": "El nido de Javi",
+        "en": "Javi’s nest"
+      },
+      "summary": {
+        "es": "Un nido en una esquina del escritorio cuyas luces muestran estados reales (asistente, tareas, aprobaciones). El arte del nido todavía es un placeholder marcado.",
+        "en": "A nest in a desktop corner whose lights show real states (assistant, runs, approvals). The nest art is still a marked placeholder."
+      },
+      "evidence": [
+        {
+          "label": "shell#661",
+          "href": "https://github.com/HorneroOS/shell/pull/661"
+        },
+        {
+          "label": "docs: the Nest",
+          "href": "https://github.com/HorneroOS/shell/blob/main/docs/COMPANION_NEST.md"
+        }
+      ]
+    },
+    {
+      "id": "javi-final-art",
+      "stage": "planned",
+      "releasedIn": null,
+      "title": {
+        "es": "Arte final de Javi y su nido",
+        "en": "Final Javi and nest art"
+      },
+      "summary": {
+        "es": "El arte definitivo de Javi y del nido. Hoy el nido usa un placeholder marcado.",
+        "en": "The final art for Javi and the nest. Today the nest uses a marked placeholder."
+      },
+      "evidence": [
+        {
+          "label": "docs: nest art status",
+          "href": "https://github.com/HorneroOS/shell/blob/main/docs/COMPANION_NEST.md"
+        }
+      ]
+    },
+    {
+      "id": "greeter-cinematic",
+      "stage": "planned",
+      "releasedIn": null,
+      "title": {
+        "es": "Escenas cinematográficas del greeter",
+        "en": "Cinematic greeter scenes"
+      },
+      "summary": {
+        "es": "Un catálogo nuevo de video argentino para el greeter. Está parado hasta resolver los derechos de redistribución; el greeter actual sigue con sus escenas.",
+        "en": "A new catalogue of Argentine video for the greeter. It is on hold until redistribution rights are cleared; the current greeter keeps its scenes."
+      },
+      "evidence": [
+        {
+          "label": "greeter#47",
+          "href": "https://github.com/HorneroOS/greeter/pull/47"
+        }
+      ]
+    },
+    {
+      "id": "system-rollback",
+      "stage": "planned",
+      "releasedIn": null,
+      "title": {
+        "es": "Rollback del sistema",
+        "en": "System rollback"
+      },
+      "summary": {
+        "es": "Volver el sistema operativo a un estado anterior. No existe todavía: los snapshots de horneroctl son solo de configuración.",
+        "en": "Returning the operating system to an earlier state. It does not exist yet: horneroctl snapshots cover configuration only."
+      },
+      "evidence": [
+        {
+          "label": "docs: update and recovery",
+          "href": "https://github.com/HorneroOS/hornero/blob/main/docs/UPDATE_RECOVERY.md"
+        },
+        {
+          "label": "hornero#179",
+          "href": "https://github.com/HorneroOS/hornero/issues/179"
         }
       ]
     },

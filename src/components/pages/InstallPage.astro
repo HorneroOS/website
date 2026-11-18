@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { candidate, editions, latestTagged } from '../../data/product';
-import { download, downloadTag } from '../../data/download';
+import { candidate, editions, latestTagged, releases } from '../../data/product';
+import { download, downloadTag, packageRelease, packageTag } from '../../data/download';
 import { features } from '../../data/features';
 import StageBadge from '../StageBadge.astro';
 
@@ -27,6 +27,11 @@ const packages = isEs
       { name: 'hornero-greeter', what: 'the SDDM login screen' },
     ];
 const preview = (v: string) => /preview(\d+)$/.exec(v)?.[1];
+const packageVersion = packageRelease?.version;
+const packageRecord = packageVersion ? releases.find((r) => r.version === packageVersion) : undefined;
+const packaged = features.filter((f) => f.stage === 'packaged');
+const unreleased = features.filter((f) => f.stage === 'unreleased');
+const planned = features.filter((f) => f.stage === 'planned');
 const statusName = (
   isEs
     ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
@@ -68,6 +73,31 @@ const statusName = (
       <li><code>SHA-256</code><span>{download.iso.sha256}</span></li>
       <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS ' + download.keyFingerprint + '; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key ' + download.keyFingerprint + '; verify with the public key in the hornero repository ('}<code>{download.keyPath}</code>)</span></li>
     </ul>
+    {packageRelease && (
+      <div class="package-release" aria-labelledby="pkg-release-title">
+        <h2 id="pkg-release-title">
+          {isEs ? `Paquetes más nuevos que la ISO: Preview ${preview(packageRelease.version)}` : `Packages newer than the ISO: Preview ${preview(packageRelease.version)}`}
+        </h2>
+        <p>
+          {isEs
+            ? `La ISO de arriba sigue siendo la ${downloadTag}: no hay ISO nueva. La ${packageTag}${packageRecord ? ` (${packageRecord.date})` : ''} es una release de paquetes del AUR que trae Hornero Signal. Una instalación hecha con la ISO, o una existente, la recibe actualizando esos paquetes:`
+            : `The ISO above is still ${downloadTag}: there is no new ISO. ${packageTag}${packageRecord ? ` (${packageRecord.date})` : ''} is an AUR package release that brings Hornero Signal. An install made from the ISO, or an existing one, gets it by updating those packages:`}
+        </p>
+        <ul role="list" class="packages">
+          {packageRelease.packages.map((p) => (
+            <li>
+              <a href={`https://aur.archlinux.org/packages/${p.name}`}><code>{p.name}</code></a>
+              <span>{p.version}</span>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <a href={packageRelease.recordUrl}>{isEs ? 'Registro de la release' : 'Release record'}</a> ·{' '}
+          <a href={packageRelease.checklistUrl}>{isEs ? 'Checklist y evidencia' : 'Checklist and evidence'}</a> ·{' '}
+          <a href={L(`/releases#${packageTag}`)}>{isEs ? 'En el historial de releases' : 'In the release history'}</a>
+        </p>
+      </div>
+    )}
     <p>
       {isEs ? 'Las releases hasta ahora son composiciones: commits exactos de shell y config probados en conjunto.' : 'Releases so far are compositions: exact shell and config commits tested together.'}{' '}
       {latestTagged && (
@@ -101,28 +131,33 @@ gpg --verify {download.iso.name}.sig</code></pre>
         <h3>{isEs ? 'Instalá' : 'Install'}</h3>
         <p>{isEs ? 'Elegí la edición, las especializaciones y el compositor. Es una preview: probala en una máquina virtual o en un equipo que puedas reinstalar.' : 'Pick the edition, specializations and compositor. It is a preview: try it in a virtual machine or on a machine you can reinstall.'}</p>
       </li>
-      <li>
+      <li id="update">
         <span class="journey-n" aria-hidden="true">03</span>
         <h3>{isEs ? 'Actualizá' : 'Update'}</h3>
-        <p>{isEs ? 'Después de instalar, las actualizaciones llegan por paquetes firmados, no por una ISO nueva. Revisá el estado y aplicalas con horneroctl:' : 'After installing, updates arrive as signed packages, not as a new ISO. Check the state and apply them with horneroctl:'}</p>
-        <pre tabindex="0"><code>horneroctl package status
-horneroctl package upgrade</code></pre>
+        <p>{isEs ? 'Después de instalar, las novedades llegan como paquetes, no como una ISO nueva. Los paquetes de HorneroOS vienen del AUR, así que se actualizan con un ayudante de AUR como yay (la ISO no instala ninguno). Antes, guardá tu configuración y mirá qué hay pendiente:' : 'After installing, new work arrives as packages, not as a new ISO. HorneroOS packages come from the AUR, so you update them with an AUR helper such as yay (the ISO does not install one). First save your configuration and see what is pending:'}</p>
+        <pre tabindex="0"><code>horneroctl config snapshot create --yes
+horneroctl package check
+yay -Syu</code></pre>
+        <p>{isEs ? 'horneroctl package upgrade corre pacman -Syu: actualiza los repositorios de Arch, no los paquetes del AUR. Ningún comando hace rollback del sistema; el snapshot guarda solo la configuración de Hornero.' : 'horneroctl package upgrade runs pacman -Syu: it updates the Arch repositories, not AUR packages. No command rolls the system back; the snapshot keeps Hornero configuration only.'}</p>
+        {packageRelease && (
+          <p>{isEs ? `La actualización en el lugar a la ${packageTag} todavía figura como pendiente de verificación en su checklist.` : `The in-place upgrade to ${packageTag} is still listed as pending verification in its checklist.`}</p>
+        )}
       </li>
     </ol>
     <h3>{isEs ? 'Lo que todavía no está en esta ISO' : 'What is not in this ISO yet'}</h3>
     <p class="journey-note">
-      {isEs ? `La ISO ${downloadTag} es la última publicada. Lo siguiente está en la rama main de los repositorios, pero no en esa imagen; llega con una versión futura, cuando el registro del proyecto lo marque como lanzado.` : `The ${downloadTag} ISO is the latest published. The following is on the repositories’ main branch but not in that image; it arrives with a future release, when the project ledger marks it as released.`}
+      {isEs ? `La ISO ${downloadTag} es la última publicada. Lo que sigue no está en esa imagen.` : `The ${downloadTag} ISO is the latest published. What follows is not in that image.`}{' '}
+      {packaged.length > 0 && (isEs ? 'Lo lanzado como paquetes se obtiene actualizando (paso 03). ' : 'What was released as packages arrives by updating (step 03). ')}
+      {isEs ? 'Lo que está en main llega con una release futura, cuando el registro del proyecto lo marque como lanzado; lo planificado todavía no existe.' : 'What is on main arrives with a future release, when the project ledger marks it as released; what is planned does not exist yet.'}
     </p>
     <ul class="journey-next" role="list">
       {
-        features
-          .filter((f) => f.stage === 'unreleased')
-          .map((f) => (
-            <li>
-              <StageBadge stage={f.stage} locale={locale} />
-              <strong>{f.title[locale]}</strong>
-            </li>
-          ))
+        [...packaged, ...unreleased, ...planned].map((f) => (
+          <li>
+            <StageBadge stage={f.stage} locale={locale} />
+            <strong>{f.title[locale]}</strong>
+          </li>
+        ))
       }
     </ul>
   </section>
@@ -148,7 +183,7 @@ horneroctl package upgrade</code></pre>
   <section class="section">
     <h2>{isEs ? 'Qué existe hoy' : 'What exists today'}</h2>
     <p>
-      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO Preview firmada de arriba (Desktop o Studio Preview), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed Preview ISO above (Desktop or Studio Preview), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
+      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO Preview firmada de arriba (Desktop, Studio o Gaming Preview), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed Preview ISO above (Desktop, Studio or Gaming Preview), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
     </p>
     <ul role="list" class="packages">
       {packages.map((p) => (
@@ -212,6 +247,18 @@ horneroctl package upgrade</code></pre>
 </SiteLayout>
 
 <style>
+  .package-release {
+    margin-block: 1.5rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--phosphor);
+    border-radius: var(--radius);
+    max-width: var(--measure);
+  }
+
+  .package-release h2 {
+    font-size: var(--step-1);
+  }
+
   .packages {
     display: grid;
     gap: 0.5rem;

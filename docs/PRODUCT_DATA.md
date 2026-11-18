@@ -93,6 +93,29 @@ release in the regenerated `releases.json`, and it never guesses a checksum.
 Flipping feature-ledger entries to `shipping` stays a human review step.
 Merging the PR deploys production.
 
+### Package-only releases (no new ISO)
+
+When a release ships only as AUR package updates (for example
+`v0.2.0-preview33`, Hornero Signal), the ISO does not change and no checksum
+is asked for:
+
+```sh
+npm run release:bump -- --package-only --version 0.2.0-preview33 \
+  --packages hornero-shell=1.3.0-1,hornero-config=0.4.0-1,hornero-greeter=1.1.0-1,horneroctl-bin=0.2.0_preview46-1
+```
+
+The script checks every `name=pkgver-pkgrel` against the AUR RPC and refuses
+a version the AUR does not serve, moves the pins, requires the release to be
+`tagged` or `published` in the regenerated `releases.json`, and writes
+`packageRelease` into `src/data/download.json` next to the unchanged ISO
+record. A release counts as `published` when its record in HorneroOS/hornero
+says `published: true` but no git tag exists yet; once the tag is pushed the
+next sync reports it as `tagged` with no site change. Ledger entries released
+this way render as **Released as packages**: the install page tells people
+the ISO does not include them and how to update (`yay -Syu`, because
+`horneroctl package upgrade` runs `pacman -Syu` only). The next ISO bump drops
+`packageRelease`.
+
 ## Updating
 
 The `product-data` workflow runs daily (and on demand), bumps the pins and

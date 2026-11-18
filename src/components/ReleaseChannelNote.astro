@@ -1,0 +1,40 @@
+---
+/**
+ * Where a ledger feature can be had today, in one sentence derived from the
+ * feature stage and src/data/download.json. Pages never type "on main" or
+ * "released" themselves.
+ */
+import type { Feature } from '../data/features';
+import { download, packageRelease } from '../data/download';
+import { localizePath, type Locale } from '../i18n/ui';
+
+interface Props {
+  feature: Feature;
+  locale: Locale;
+  /** The package that carries the feature (default hornero-shell). */
+  pkg?: string;
+}
+const { feature, locale, pkg = 'hornero-shell' } = Astro.props;
+const isEs = locale === 'es';
+const n = (v: string) => /preview(\d+)$/.exec(v)?.[1] ?? v;
+const carried = packageRelease?.packages.find((p) => p.name === pkg);
+const iso = n(download.version);
+const install = localizePath('/install', locale);
+---
+
+{feature.stage === 'packaged' && packageRelease && (
+  <span>
+    {isEs
+      ? `Lanzado como paquetes en la Preview ${n(packageRelease.version)}${carried ? ` (${pkg} ${carried.version})` : ''}. La ISO de instalación sigue siendo la Preview ${iso} y no lo trae: después de instalar, o en una instalación existente, actualizá los paquetes del AUR.`
+      : `Released as packages in Preview ${n(packageRelease.version)}${carried ? ` (${pkg} ${carried.version})` : ''}. The install ISO is still Preview ${iso} and does not include it: after installing, or on an existing install, update the AUR packages.`}{' '}
+    <a href={`${install}#update`}>{isEs ? 'Cómo actualizar' : 'How to update'}</a>
+  </span>
+)}
+{feature.stage === 'released' && (
+  <span>{isEs ? `Incluido en la ISO Preview ${iso} y en sus paquetes.` : `Included in the Preview ${iso} ISO and its packages.`}</span>
+)}
+{feature.stage === 'unreleased' && (
+  <span>{isEs ? 'Está en la rama main de los repositorios, todavía en ninguna release.' : 'On the repositories’ main branch, in no release yet.'}</span>
+)}
+{feature.stage === 'experimental' && <span>{isEs ? 'Experimental: puede cambiar o desaparecer.' : 'Experimental: it may change or go away.'}</span>}
+{feature.stage === 'planned' && <span>{isEs ? 'Planificado: todavía no existe.' : 'Planned: it does not exist yet.'}</span>}
