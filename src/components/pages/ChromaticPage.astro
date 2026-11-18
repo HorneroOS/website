@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
-import CapturePlaceholder from '../CapturePlaceholder.astro';
+import CaptureFigure from '../CaptureFigure.astro';
+import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -56,7 +57,7 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
     </p>
     <p class="chroma-status">
       <StageBadge stage={ledger.stage} locale={locale} />
-      <span>{isEs ? 'El motor, la interfaz de Ajustes y los verbos de horneroctl están en main. Ninguna ISO Preview publicada los incluye todavía.' : 'The engine, the Settings interface and the horneroctl verbs are on main. No published Preview ISO includes them yet.'}</span>
+      <ReleaseChannelNote feature={ledger} locale={locale} />
     </p>
   </section>
 
@@ -138,8 +139,8 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
       {isEs ? 'Un escritorio, dos fondos distintos y la paleta siguiéndolos: ese par lo va a mostrar una captura real de QA. Hasta entonces, el sitio no inventa uno.' : 'One desktop, two different wallpapers and the palette following them: a real QA capture pair will show that. Until then the site does not invent one.'}
     </p>
     <div class="chroma-pair">
-      <CapturePlaceholder slot="chromatic-pair-a" locale={locale} />
-      <CapturePlaceholder slot="chromatic-pair-b" locale={locale} />
+      <CaptureFigure slot="chromatic-pair-a" locale={locale} />
+      <CaptureFigure slot="chromatic-pair-b" locale={locale} />
     </div>
   </section>
 
