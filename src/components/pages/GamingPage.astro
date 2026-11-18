@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaptureFigure from '../CaptureFigure.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import { editions, gamingCatalogue, pins, short } from '../../data/product';
@@ -115,6 +116,10 @@ const stats = gamingCatalogue
       <code>horneroctl gaming doctor</code>
       {isEs ? ' ya te ayuda a chequear tu máquina, y Gaming se instala como Preview desde la ISO compartida (Desktop, Studio y Gaming). Sí se usa a diario en hardware real del equipo (por ejemplo un escritorio Ryzen 9 con RTX 3060); es uso real reportado, no una certificación: tu hardware puede comportarse distinto, y AMD, Intel, gráficas híbridas, handhelds y pantallas VRR/HDR todavía no están calificados.' : ' already helps you check your machine, and Gaming installs as Preview from the shared ISO (Desktop, Studio and Gaming). It is used daily on the team’s real hardware (for example a Ryzen 9 desktop with an RTX 3060); that is reported real use, not a certification: your hardware may behave differently, and AMD, Intel, hybrid graphics, handhelds and VRR/HDR displays are not qualified yet.'}
     </p>
+  </section>
+
+  <section class="section" aria-label={isEs ? 'Una sesión real' : 'A real session'}>
+    <CaptureFigure slot="gaming-session" locale={locale} />
   </section>
 
   {

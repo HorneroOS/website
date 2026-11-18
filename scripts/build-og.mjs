@@ -29,6 +29,16 @@ const editionsData = JSON.parse(readFileSync(join(root, 'src/data/product/editio
 const gamingApps = new Map((editionsData.gaming?.applications ?? []).map((a) => [a.id, a.title]));
 const releases = JSON.parse(readFileSync(join(root, 'src/data/product/releases.json'), 'utf8'));
 const latest = releases.find((r) => r.status === 'tagged');
+const download = JSON.parse(readFileSync(join(root, 'src/data/download.json'), 'utf8'));
+const ledger = JSON.parse(readFileSync(join(root, 'src/data/features.json'), 'utf8')).features;
+const taggedVersions = new Set(releases.filter((r) => r.status === 'tagged').map((r) => r.version));
+// Ledger stage as card text; the same rule as src/data/features.ts.
+const stageLabel = (f) =>
+  f.stage === 'shipping' ? (taggedVersions.has(f.releasedIn) ? 'Released' : 'On main, unreleased') : f.stage === 'main' ? 'On main, unreleased' : f.stage === 'experimental' ? 'Experimental' : 'Planned';
+const featureLine = (id) => {
+  const f = ledger.find((x) => x.id === id);
+  return `<li><b>${f.title.en}</b><span>${stageLabel(f)}</span></li>`;
+};
 const maturityName = { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
 const level = { planned: 1, experimental: 2, preview: 3, supported: 4 };
 const meter = (m) => `<span class="meter">${[1, 2, 3, 4].map((i) => `<i class="${i <= level[m] ? 'on ' + m : ''}"></i>`).join('')}</span>`;
@@ -90,7 +100,7 @@ const cards = {
     title: 'Download HorneroOS.',
     line: 'One signed x86_64 ISO with Desktop, Studio and Gaming Preview. Checksum and GPG signature on the release.',
     panel: `<ol class="ledger steps">
-      <li><b>01</b><span>Download the ISO (2.7 GB)</span></li>
+      <li><b>01</b><span>Download the ISO (${download.iso.sizeLabel})</span></li>
       <li><b>02</b><span>Verify SHA-256 and signature</span></li>
       <li><b>03</b><span>Pick edition and compositor</span></li>
     </ol><p class="cap"><b>Signed ISO</b> plus Arch packages for existing Arch systems</p>`,
@@ -110,6 +120,24 @@ const cards = {
     panel: `<ul class="ledger">${['steam', 'lutris', 'bottles', 'wine', 'obs-studio']
       .map((id) => `<li><b>${gamingApps.get(id) ?? id}</b><span>${id === 'steam' ? 'proprietary · opt-in' : 'opt-in'}</span></li>`)
       .join('')}</ul><p class="cap"><b>Catalogue</b> nothing installs silently</p>`,
+  },
+  modes: {
+    eyebrow: 'Atmospheres',
+    title: 'One desktop, five atmospheres.',
+    line: 'Focus, Everyday, Signal, Gaming and Studio change how the desktop behaves, not your layout or theme.',
+    panel: `<ul class="ledger">${['Focus', 'Everyday', 'Signal', 'Gaming', 'Studio'].map((m, i) => `<li><b>${m}</b><span>CH 0${i + 1}</span></li>`).join('')}</ul><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'experience-modes'))}</b> not in a published ISO yet</p>`,
+  },
+  chromatic: {
+    eyebrow: 'Hornero Chromatic',
+    title: 'Colour from your wallpaper.',
+    line: 'Optional dynamic colour with contrast guarantees. Signal Night and Day stay the default.',
+    panel: `<ol class="ledger steps"><li><b>01</b><span>Image</span></li><li><b>02</b><span>Seeds</span></li><li><b>03</b><span>Signal roles</span></li><li><b>04</b><span>Contrast gate</span></li></ol><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'chromatic'))}</b> a diagram, not a screenshot</p>`,
+  },
+  desktop: {
+    eyebrow: 'CH 01 · Desktop',
+    title: 'Desktop: your desktop, your way.',
+    line: 'The base edition: its own shell, layouts, themes, extensions and a Wayland compositor.',
+    panel: `<ul class="ledger">${['layouts', 'themes', 'experience-modes', 'chromatic', 'pluginkit'].map(featureLine).join('')}</ul><p class="cap"><b>Feature ledger</b> status from the project data</p>`,
   },
   greeter: {
     eyebrow: 'Greeter',
@@ -165,7 +193,7 @@ h1{position:absolute;left:48px;top:122px;width:500px;font:700 64px/1 D;letter-sp
 </body></html>`;
 
 mkdirSync(out, { recursive: true });
-const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+const browser = await puppeteer.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox'] });
 for (const [name, card] of Object.entries(cards)) {
   const tab = await browser.newPage();
   await tab.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
