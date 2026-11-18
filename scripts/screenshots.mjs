@@ -7,6 +7,14 @@ for (const [w,h] of [[1440,900],[1024,768],[390,844]]) {
   const p = await b.newPage(); await p.setViewport({width:w,height:h});
   for (const path of paths) {
     await p.goto(base+path,{waitUntil:'networkidle0'});
+    await p.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += 400) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+      window.scrollTo(0, 0);
+    });
+    await new Promise((r) => setTimeout(r, 1500));
     const name = (path.replace(/\W+/g,'_')||'home')+'-'+w+'.png';
     await p.screenshot({path:`${out}/${name}`,fullPage:true});
   }

@@ -1420,10 +1420,30 @@ thead th {
     view-transition-name: site-nav;
   }
 
-  ::view-transition-old(root),
+  /* Raster-scan page change: the next page is drawn top to bottom over the
+     old one, like a broadcast monitor refreshing. The header stays put. */
+  ::view-transition-old(root) {
+    animation: vt-dim var(--dur-medium) var(--ease-sweep) both;
+  }
+
   ::view-transition-new(root) {
-    animation-duration: var(--dur-short);
-    animation-timing-function: var(--ease-sweep);
+    animation: vt-scan var(--dur-medium) var(--ease-sweep) both;
+  }
+
+  @keyframes vt-scan {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+
+    to {
+      clip-path: inset(0);
+    }
+  }
+
+  @keyframes vt-dim {
+    to {
+      opacity: 0.6;
+    }
   }
 }
 

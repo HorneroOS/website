@@ -6,104 +6,184 @@
       "id": "signal",
       "stage": "main",
       "releasedIn": null,
-      "title": { "es": "Hornero Signal", "en": "Hornero Signal" },
+      "title": {
+        "es": "Hornero Signal",
+        "en": "Hornero Signal"
+      },
       "summary": {
         "es": "El lenguaje visual de la estación de trabajo: paletas Night, Day y Alto contraste, tipografía y movimiento propios.",
         "en": "The workstation's visual language: Night, Day and High Contrast palettes, its own type and motion."
       },
       "evidence": [
-        { "label": "RFC 0001", "href": "https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md" }
+        {
+          "label": "RFC 0001",
+          "href": "https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md"
+        }
       ]
     },
     {
       "id": "experience-modes",
       "stage": "main",
       "releasedIn": null,
-      "title": { "es": "Modos de experiencia", "en": "Experience modes" },
+      "title": {
+        "es": "Modos de experiencia",
+        "en": "Experience modes"
+      },
       "summary": {
         "es": "Focus, Everyday, Signal, Gaming y Studio: cinco atmósferas que cambian cómo se comporta el escritorio ahora, sin pisar tu layout ni tu tema.",
         "en": "Focus, Everyday, Signal, Gaming and Studio: five atmospheres that change how the desktop behaves right now, without replacing your layout or theme."
       },
       "evidence": [
-        { "label": "docs: experience modes", "href": "https://github.com/HorneroOS/docs/blob/main/desktop/experience-modes.md" }
+        {
+          "label": "docs: experience modes",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/experience-modes.md"
+        }
       ]
     },
     {
       "id": "chromatic",
       "stage": "main",
       "releasedIn": null,
-      "title": { "es": "Hornero Chromatic", "en": "Hornero Chromatic" },
+      "title": {
+        "es": "Hornero Chromatic",
+        "en": "Hornero Chromatic"
+      },
       "summary": {
         "es": "Color dinámico opcional: la paleta de Signal sale del fondo de pantalla, con garantías de contraste. Signal Night y Day siguen siendo el valor de fábrica.",
         "en": "Optional dynamic colour: the Signal palette comes from the wallpaper, with contrast guarantees. Signal Night and Day stay the factory default."
       },
       "evidence": [
-        { "label": "RFC 0002", "href": "https://github.com/HorneroOS/docs/blob/main/development/rfc-0002-hornero-chromatic.md" },
-        { "label": "shell#567", "href": "https://github.com/HorneroOS/shell/pull/567" },
-        { "label": "hornero#430", "href": "https://github.com/HorneroOS/hornero/pull/430" }
+        {
+          "label": "RFC 0002",
+          "href": "https://github.com/HorneroOS/docs/blob/main/development/rfc-0002-hornero-chromatic.md"
+        },
+        {
+          "label": "shell#567",
+          "href": "https://github.com/HorneroOS/shell/pull/567"
+        },
+        {
+          "label": "hornero#430",
+          "href": "https://github.com/HorneroOS/hornero/pull/430"
+        }
       ]
     },
     {
       "id": "pluginkit",
       "stage": "main",
       "releasedIn": null,
-      "title": { "es": "PluginKit 3", "en": "PluginKit 3" },
+      "title": {
+        "es": "PluginKit 3",
+        "en": "PluginKit 3"
+      },
       "summary": {
         "es": "Superficies de contribución para barra, escritorio y Dashboard, con manifiesto v3 y catálogo oficial.",
         "en": "Contribution surfaces for the bar, desktop and Dashboard, with a v3 manifest and an official catalogue."
       },
       "evidence": [
-        { "label": "shell#486", "href": "https://github.com/HorneroOS/shell/pull/486" },
-        { "label": "HorneroOS/plugins", "href": "https://github.com/HorneroOS/plugins" }
+        {
+          "label": "shell#486",
+          "href": "https://github.com/HorneroOS/shell/pull/486"
+        },
+        {
+          "label": "HorneroOS/plugins",
+          "href": "https://github.com/HorneroOS/plugins"
+        }
       ]
     },
     {
       "id": "instrument-deck",
       "stage": "main",
       "releasedIn": null,
-      "title": { "es": "Deck de instrumentos", "en": "Instrument deck" },
+      "title": {
+        "es": "Deck de instrumentos",
+        "en": "Instrument deck"
+      },
       "summary": {
         "es": "El escritorio del modo Signal: widgets de telemetría de plugins sobre el fondo, muestreados a 2 Hz.",
         "en": "The Signal mode desktop: plugin telemetry widgets over the wallpaper, sampled at 2 Hz."
       },
       "evidence": [
-        { "label": "docs: instrument deck", "href": "https://github.com/HorneroOS/docs/blob/main/desktop/experience-modes.md#the-signal-instrument-deck" }
+        {
+          "label": "docs: instrument deck",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/experience-modes.md#the-signal-instrument-deck"
+        }
       ]
     },
     {
       "id": "companion",
       "stage": "shipping",
       "releasedIn": "0.2.0-preview32",
-      "title": { "es": "Javi, el compañero", "en": "Javi, the companion" },
+      "title": {
+        "es": "Javi, el compañero",
+        "en": "Javi, the companion"
+      },
       "summary": {
         "es": "Un hornero que vive en el escritorio: descansa, pestañea, vuela y actúa los estados del asistente.",
         "en": "A hornero that lives on the desktop: it rests, blinks, flies and acts out the assistant states."
       },
       "evidence": [
-        { "label": "shell assets/companion", "href": "https://github.com/HorneroOS/shell/tree/main/assets/companion" }
+        {
+          "label": "shell assets/companion",
+          "href": "https://github.com/HorneroOS/shell/tree/main/assets/companion"
+        }
       ]
     },
     {
       "id": "layouts",
       "stage": "shipping",
       "releasedIn": "0.2.0-preview32",
-      "title": { "es": "Layouts", "en": "Layouts" },
+      "title": {
+        "es": "Layouts",
+        "en": "Layouts"
+      },
       "summary": {
         "es": "Presets de barras y rieles intercambiables, generados desde el shell fijado.",
         "en": "Swappable bar and rail presets, generated from the pinned shell."
       },
-      "evidence": [{ "label": "docs: layouts", "href": "https://github.com/HorneroOS/docs/blob/main/desktop/layouts.md" }]
+      "evidence": [
+        {
+          "label": "docs: layouts",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/layouts.md"
+        }
+      ]
     },
     {
       "id": "greeter",
       "stage": "shipping",
       "releasedIn": "0.2.0-preview32",
-      "title": { "es": "Greeter offline", "en": "Offline greeter" },
+      "title": {
+        "es": "Greeter offline",
+        "en": "Offline greeter"
+      },
       "summary": {
         "es": "La pantalla de inicio de sesión con escenas argentinas, sin red.",
         "en": "The login screen with Argentine scenes, no network."
       },
-      "evidence": [{ "label": "HorneroOS/greeter", "href": "https://github.com/HorneroOS/greeter" }]
+      "evidence": [
+        {
+          "label": "HorneroOS/greeter",
+          "href": "https://github.com/HorneroOS/greeter"
+        }
+      ]
+    },
+    {
+      "id": "themes",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview32",
+      "title": {
+        "es": "Temas",
+        "en": "Themes"
+      },
+      "summary": {
+        "es": "Apariencias coordinadas con sus fondos, generadas desde el catálogo fijado de config.",
+        "en": "Appearances coordinated with their wallpapers, generated from config's pinned catalogue."
+      },
+      "evidence": [
+        {
+          "label": "docs: appearance",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/appearance.md"
+        }
+      ]
     }
   ]
 }
