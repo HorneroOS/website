@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { candidate, editions, latestTagged } from '../../data/product';
+import { download, downloadTag } from '../../data/download';
+import { features } from '../../data/features';
+import StageBadge from '../StageBadge.astro';
 
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -38,32 +41,32 @@ const statusName = (
   description={isEs ? 'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming Preview, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.' : 'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming Preview editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.'}
 >
   <section class="section">
-    <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>v0.2.0-preview32</span><span>x86_64 · 2.7 GB</span></p>
+    <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>{downloadTag}</span><span>x86_64 · {download.iso.sizeLabel}</span></p>
     <h1>{isEs ? 'Descargá HorneroOS' : 'Download HorneroOS'}</h1>
     <p class="lede">
       {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS y Niri no se ejecutaron sobre esta ISO) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
     </p>
     <p class="cta-row download-row">
-      <a class="cta primary" href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso">
-        {isEs ? 'Descargar la ISO Preview (2.7 GB)' : 'Download the Preview ISO (2.7 GB)'}
+      <a class="cta primary" href={download.iso.url}>
+        {isEs ? `Descargar la ISO Preview (${download.iso.sizeLabel})` : `Download the Preview ISO (${download.iso.sizeLabel})`}
       </a>
       <a class="cta secondary" href={L('/editions')}>{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
     </p>
     <p>
       {isEs ? 'También anunciada en la ' : 'Also announced on the '}
       {' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32">{isEs ? 'página de la release v0.2.0-preview32' : 'v0.2.0-preview32 release page'}</a>.{' '}
+      <a href={download.releaseUrl}>{isEs ? `página de la release ${downloadTag}` : `${downloadTag} release page`}</a>.{' '}
       {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sha256">{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
+      <a href={download.checksumUrl}>{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
       {isEs ? 'y la ' : 'and the '}
       {' '}
-      <a href="https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/iso/horneroos-2026.10-preview32-x86_64.iso.sig">{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+      <a href={download.signatureUrl}>{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>horneroos-2026.10-preview32-x86_64.iso</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
-      <li><code>SHA-256</code><span>b8cd0f8604bc69f7d2112fb8bccd97115d32d197e9c92c62e02faf5de6345aec</span></li>
-      <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS FCFBEE43925AB5429362278AE59EAB44AA2498DC; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key FCFBEE43925AB5429362278AE59EAB44AA2498DC; verify with the public key in the hornero repository ('}<code>packaging/keys/hornero-release.pub.asc</code>)</span></li>
+      <li><code>{download.iso.name}</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
+      <li><code>SHA-256</code><span>{download.iso.sha256}</span></li>
+      <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS ' + download.keyFingerprint + '; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key ' + download.keyFingerprint + '; verify with the public key in the hornero repository ('}<code>{download.keyPath}</code>)</span></li>
     </ul>
     <p>
       {isEs ? 'Las releases hasta ahora son composiciones: commits exactos de shell y config probados en conjunto.' : 'Releases so far are compositions: exact shell and config commits tested together.'}{' '}
@@ -83,12 +86,53 @@ const statusName = (
     </p>
   </section>
 
+  <section class="section journey" aria-labelledby="journey-title">
+    <h2 id="journey-title">{isEs ? 'Del archivo al escritorio, y después' : 'From file to desktop, and after'}</h2>
+    <ol class="journey-steps" role="list">
+      <li>
+        <span class="journey-n" aria-hidden="true">01</span>
+        <h3>{isEs ? 'Verificá' : 'Verify'}</h3>
+        <p>{isEs ? 'Antes de grabar la ISO, compará el resultado de sha256sum con el checksum publicado y verificá la firma.' : 'Before you write the ISO, compare the sha256sum output with the published checksum and verify the signature.'}</p>
+        <pre tabindex="0"><code>sha256sum {download.iso.name}
+gpg --verify {download.iso.name}.sig</code></pre>
+      </li>
+      <li>
+        <span class="journey-n" aria-hidden="true">02</span>
+        <h3>{isEs ? 'Instalá' : 'Install'}</h3>
+        <p>{isEs ? 'Elegí la edición, las especializaciones y el compositor. Es una preview: probala en una máquina virtual o en un equipo que puedas reinstalar.' : 'Pick the edition, specializations and compositor. It is a preview: try it in a virtual machine or on a machine you can reinstall.'}</p>
+      </li>
+      <li>
+        <span class="journey-n" aria-hidden="true">03</span>
+        <h3>{isEs ? 'Actualizá' : 'Update'}</h3>
+        <p>{isEs ? 'Después de instalar, las actualizaciones llegan por paquetes firmados, no por una ISO nueva. Revisá el estado y aplicalas con horneroctl:' : 'After installing, updates arrive as signed packages, not as a new ISO. Check the state and apply them with horneroctl:'}</p>
+        <pre tabindex="0"><code>horneroctl package status
+horneroctl package upgrade</code></pre>
+      </li>
+    </ol>
+    <h3>{isEs ? 'Lo que todavía no está en esta ISO' : 'What is not in this ISO yet'}</h3>
+    <p class="journey-note">
+      {isEs ? `La ISO ${downloadTag} es la última publicada. Lo siguiente está en la rama main de los repositorios, pero no en esa imagen; llega con una versión futura, cuando el registro del proyecto lo marque como lanzado.` : `The ${downloadTag} ISO is the latest published. The following is on the repositories’ main branch but not in that image; it arrives with a future release, when the project ledger marks it as released.`}
+    </p>
+    <ul class="journey-next" role="list">
+      {
+        features
+          .filter((f) => f.stage === 'unreleased')
+          .map((f) => (
+            <li>
+              <StageBadge stage={f.stage} locale={locale} />
+              <strong>{f.title[locale]}</strong>
+            </li>
+          ))
+      }
+    </ul>
+  </section>
+
   <section class="section readiness" aria-labelledby="readiness-title">
     <h2 id="readiness-title">{isEs ? 'Cómo está la instalación' : 'Where installation stands'}</h2>
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (v0.2.0-preview32), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (v0.2.0-preview32), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
@@ -148,7 +192,7 @@ const statusName = (
     </p>
     <p>
       <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
-      <a href="https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview32">{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+      <a href={download.releaseUrl}>{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
     </p>
   </section>
 
@@ -254,10 +298,64 @@ const statusName = (
   .state-provisional .state { border-color: var(--cue); color: var(--cue); }
   .state-available .state { border-color: var(--signal); color: var(--signal); }
   @media (max-width: 560px) { .readiness-ledger > div { grid-template-columns: 1fr; } }
-</style>
 
-<style>
   /* Per-page direction: install as an honest status board. */
   .edition-status { border: 1px solid var(--rule); }
   .packages > * { border-radius: 2px; }
+
+  .journey-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .journey-steps li {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .journey-steps p,
+  .journey-note {
+    color: var(--ink-muted);
+  }
+
+  .journey-steps pre {
+    overflow-x: auto;
+    padding: 0.7rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: 0.78rem;
+  }
+
+  .journey-n {
+    color: var(--signal);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.08em;
+  }
+
+  .journey-next {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .journey-next li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 900px) {
+    .journey-steps {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
