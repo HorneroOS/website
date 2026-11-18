@@ -3,6 +3,10 @@
 // engineering record; ReleasesPage renders these first and keeps the full
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
+  '0.2.0-preview33': {
+    es: 'Hornero Signal llega como actualización de paquetes, sin ISO nueva: hornero-shell 1.3.0, hornero-config 0.4.0, hornero-greeter 1.1.0 y horneroctl-bin 0.2.0_preview46 firmado. Las instalaciones existentes lo reciben actualizando los paquetes del AUR; la ISO de instalación sigue siendo la Preview 32.',
+    en: 'Hornero Signal arrives as a package update, with no new ISO: hornero-shell 1.3.0, hornero-config 0.4.0, hornero-greeter 1.1.0 and signed horneroctl-bin 0.2.0_preview46. Existing installs get it by updating their AUR packages; the install ISO is still Preview 32.',
+  },
   '0.2.0-preview32': {
     es: 'La release de confiabilidad: la autenticación gráfica funciona desde la instalación, horneroctl gana actualizaciones seguras con chequeos previos, historial y aviso de reinicio, y recovery doctor diagnostica el estado de recuperación sin inventar rollback.',
     en: 'The reliability release: graphical authentication works from a fresh install, horneroctl gains safer updates with preflight checks, history and reboot-required reporting, and recovery doctor diagnoses recovery readiness without faking rollback.',

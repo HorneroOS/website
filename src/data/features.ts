@@ -4,10 +4,16 @@
 // pinned catalogue; the rest come from features.json and are validated by
 // scripts/check-feature-ledger.mjs.
 import ledger from './features.json';
-import { editionCatalogue, latestTagged, releases } from './product';
+import isoRecord from './download.json';
+import { editionCatalogue, latestTagged, releasedVersions, releases } from './product';
 import type { Maturity } from './product';
 
-export type Stage = 'released' | 'experimental' | 'unreleased' | 'planned';
+/**
+ * released: in the published install ISO (and its packages).
+ * packaged: released as packages after that ISO; existing installs get it by
+ *           updating, a fresh install from the ISO needs the same update.
+ */
+export type Stage = 'released' | 'packaged' | 'experimental' | 'unreleased' | 'planned';
 type Localized = { es: string; en: string };
 
 export interface Feature {
@@ -28,12 +34,15 @@ interface LedgerEntry {
   evidence: { label: string; href: string }[];
 }
 
-const taggedVersions = new Set(releases.filter((r) => r.status === 'tagged').map((r) => r.version));
+// releases is newest first, so a lower index is a newer release.
+const order = (version: string) => releases.findIndex((r) => r.version === version);
+const isoOrder = order(isoRecord.version);
 
 const stageOf = (entry: LedgerEntry): Stage => {
   if (entry.stage === 'shipping') {
-    // A shipping claim only stands while its release is a tagged, published one.
-    return entry.releasedIn && taggedVersions.has(entry.releasedIn) ? 'released' : 'unreleased';
+    // A shipping claim only stands while its release is a published one.
+    if (!entry.releasedIn || !releasedVersions.has(entry.releasedIn)) return 'unreleased';
+    return order(entry.releasedIn) < isoOrder ? 'packaged' : 'released';
   }
   return entry.stage === 'main' ? 'unreleased' : entry.stage;
 };
