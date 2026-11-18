@@ -1,0 +1,83 @@
+---
+/**
+ * One component for every capture slot (src/data/captures.ts). A slot filled
+ * by a showroom entry renders that real capture with its provenance label; a
+ * slot with no capture renders the labelled placeholder. Pages never choose
+ * between the two, so a QA capture appears everywhere the moment its slot is
+ * pointed at it.
+ */
+import { Picture } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { captureSlots, type CaptureSlotId } from '../data/captures';
+import CaptureLabel from './CaptureLabel.astro';
+import CapturePlaceholder from './CapturePlaceholder.astro';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  slot: CaptureSlotId;
+  locale?: Locale;
+  eager?: boolean;
+  sizes?: string;
+}
+
+const { slot, locale = 'es', eager = false, sizes = '(min-width: 1100px) 1000px, calc(100vw - 2rem)' } = Astro.props;
+const captureId: string | null = captureSlots[slot].capture;
+const entry = captureId ? await getEntry('showroom', captureId) : undefined;
+if (captureId && !entry) throw new Error(`Capture slot '${slot}' points at a missing showroom entry: ${captureId}`);
+---
+
+{
+  entry ? (
+    <figure class="capture-figure ticked" data-slot={slot}>
+      <div class="capture-figure-strip">
+        <span>{entry.data.title[locale]}</span>
+        <CaptureLabel appearance={entry.data.provenance.appearance} locale={locale} />
+      </div>
+      <Picture
+        src={entry.data.image}
+        alt={entry.data.alt[locale]}
+        formats={['avif', 'webp']}
+        widths={[640, 960, 1280, 1600, 1920]}
+        sizes={sizes}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+        decoding="async"
+      />
+      <figcaption>
+        <span>{entry.data.provenance.source[locale]}</span>
+        <span>{entry.data.provenance.resolution}</span>
+        <span>{entry.data.provenance.date}</span>
+      </figcaption>
+    </figure>
+  ) : (
+    <CapturePlaceholder slot={slot} locale={locale} />
+  )
+}
+
+<style>
+  .capture-figure {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .capture-figure-strip,
+  .capture-figure figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    color: var(--ink-muted);
+    font: 500 0.7rem/1.4 var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  .capture-figure :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+</style>

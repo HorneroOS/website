@@ -53,7 +53,7 @@ const enHref = localizePath(pathForSwitch, 'en');
 // for the current locale; labels come from the shared chrome dictionary.
 const systemLinks: NavLink[] = [
   { href: L('/editions'), label: t(locale, 'navEditionsOverview') },
-  { href: `${L('/editions')}#desktop`, label: t(locale, 'navDesktopEdition') },
+  { href: L('/desktop'), label: t(locale, 'navDesktopEdition') },
   { href: L('/studio'), label: t(locale, 'navStudio') },
   { href: L('/gaming'), label: t(locale, 'navGaming') },
 ];

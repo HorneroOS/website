@@ -1,5 +1,6 @@
 ---
-import { Picture } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import LookCompare from '../../components/LookCompare.astro';
@@ -7,6 +8,9 @@ import StoryTimeline from '../../components/StoryTimeline.astro';
 import CommunityJoin from '../../components/CommunityJoin.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import CaptureLabel from '../../components/CaptureLabel.astro';
+import StageBadge from '../../components/StageBadge.astro';
+import { feature } from '../../data/features';
+import { modes } from '../../data/modes';
 import { featuredStory } from '../../data/story';
 import conceptNight from '../../assets/concepts/concept-final-night.png';
 import conceptDay from '../../assets/concepts/concept-final-day.png';
@@ -78,6 +82,16 @@ const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.tru
 const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1] ?? version;
 const previewLabel = latestTagged ? `Development Preview ${previewNumber(latestTagged.version)}` : 'Development Preview';
 const hyprland = compositor('hyprland');
+// Javi: a real frame from HorneroOS/shell assets/companion at the shell pin.
+const javiFrames = import.meta.glob<ImageMetadata>('../../../.cache/product-src/shell/assets/companion/frames/default-greet-01.png', {
+  eager: true,
+  import: 'default',
+});
+const javiFrame = Object.values(javiFrames)[0];
+if (!javiFrame) throw new Error('Javi greet frame is missing at the shell pin');
+const modesFeature = feature('experience-modes');
+const chromaticFeature = feature('chromatic');
+const javiFeature = feature('companion');
 const niri = compositor('niri');
 const planned = editions.filter((item) => item.maturity === 'planned').map((item) => item.title.replace('HorneroOS ', ''));
 const shipping = editions.filter((item) => item.maturity !== 'planned');
@@ -88,7 +102,7 @@ const channels = [
     channel: 'CH 01',
     name: 'Desktop',
     title: isEs ? 'Construí tu mundo' : 'Build your world',
-    href: `${L('/editions')}#desktop`,
+    href: L('/desktop'),
     summary: isEs
       ? `La base de todas las ediciones: Hyprland por defecto (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell con ${layouts.length} layouts y ${themes.length} temas, un Centro de control propio y horneroctl.`
       : `The base of every edition: Hyprland by default (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell with ${layouts.length} layouts and ${themes.length} themes, its own Control Center and horneroctl.`,
@@ -187,22 +201,6 @@ const system = [
     command: 'horneroctl system info',
   },
 ];
-
-const modes = isEs
-  ? [
-      { name: 'Focus', text: 'Más espacio útil, menos movimiento y notificaciones en silencio.' },
-      { name: 'Everyday', text: 'El modo de todos los días; el de fábrica.' },
-      { name: 'Signal', text: 'La telemetría más rica y el movimiento más expresivo.' },
-      { name: 'Gaming', text: 'Nada se dibuja sobre el juego en pantalla completa ni le roba el foco.' },
-      { name: 'Studio', text: 'Ganchos de la edición Studio, como el modo de audio.' },
-    ]
-  : [
-      { name: 'Focus', text: 'More usable space, less motion, notifications held back.' },
-      { name: 'Everyday', text: 'The everyday mode; the factory default.' },
-      { name: 'Signal', text: 'The richest telemetry and the most expressive motion.' },
-      { name: 'Gaming', text: 'Nothing draws over a fullscreen game or steals its focus.' },
-      { name: 'Studio', text: 'Studio edition hooks, such as the audio mode.' },
-    ];
 
 const journey = isEs
   ? [
@@ -454,20 +452,20 @@ const description = isEs
           <a href={L('/extensions')}><b>{officialPlugins.length}</b><span>{isEs ? 'Extensiones oficiales' : 'Official extensions'}</span></a>
         </li>
         <li>
-          <a href={L('/companion')}><b>1</b><span>Companion</span></a>
+          <a href={L('/companion')}><b>1</b><span>Javi</span></a>
         </li>
       </ul>
     </div>
     <div class="modes">
       <div class="modes-head">
-        <h3>{isEs ? 'Modos de experiencia' : 'Experience modes'}</h3>
-        <span class="maturity" data-maturity="in-development">{isEs ? 'En desarrollo' : 'In development'}</span>
+        <h3>{isEs ? 'Atmósferas: modos de experiencia' : 'Atmospheres: experience modes'}</h3>
+        <StageBadge stage={modesFeature.stage} locale={locale} />
       </div>
       <p>
         {
           isEs
-            ? 'Un concepto en desarrollo, no una función publicada: perfiles que cambian cómo se comporta el escritorio en el momento, sin cambiar de shell. Los activás vos; nada cambia solo.'
-            : 'A concept in development, not a shipped feature: profiles that change how the desktop behaves right now, without changing shells. You switch them; nothing changes on its own.'
+            ? 'Cinco modos que cambian cómo se comporta el escritorio ahora mismo, sin tocar tu layout ni tu tema. Los activás vos; nada cambia solo.'
+            : 'Five modes that change how the desktop behaves right now, without touching your layout or theme. You switch them; nothing changes on its own.'
         }
       </p>
       <ul role="list">
@@ -475,13 +473,31 @@ const description = isEs
           modes.map((mode) => (
             <li>
               <strong>{mode.name}</strong>
-              <span>{mode.text}</span>
+              <span>{mode.line[locale]}</span>
             </li>
           ))
         }
       </ul>
-      <a href="https://github.com/HorneroOS/docs/blob/main/development/rfc-0001-hornero-signal.md">{isEs ? 'Leé la propuesta (RFC 0001)' : 'Read the proposal (RFC 0001)'}</a>
+      <a href={L('/modes')}>{isEs ? 'Conocé las cinco atmósferas' : 'Meet the five atmospheres'}</a>
     </div>
+    <ul class="world" role="list">
+      <li>
+        <StageBadge stage={chromaticFeature.stage} locale={locale} />
+        <h3><a href={L('/chromatic')}>Hornero Chromatic</a></h3>
+        <p>{chromaticFeature.summary[locale]}</p>
+      </li>
+      <li class="world-art">
+        <Image class="world-javi" src={javiFrame} alt={isEs ? 'Javi, el hornero del escritorio, saludando.' : 'Javi, the desktop hornero, waving hello.'} height={112} densities={[1, 2]} loading="lazy" />
+        <StageBadge stage={javiFeature.stage} locale={locale} />
+        <h3><a href={L('/companion')}>{isEs ? 'Javi, el hornero del escritorio' : 'Javi, the desktop hornero'}</a></h3>
+        <p>{javiFeature.summary[locale]}</p>
+      </li>
+      <li>
+        <StageBadge stage={feature('pluginkit').stage} locale={locale} />
+        <h3><a href={L('/extensions')}>{isEs ? 'Extensiones y PluginKit' : 'Extensions and PluginKit'}</a></h3>
+        <p>{feature('pluginkit').summary[locale]}</p>
+      </li>
+    </ul>
   </section>
 
   <section class="section get" aria-labelledby="get-title">
@@ -1027,6 +1043,50 @@ const description = isEs
     order: 2;
     color: var(--signal);
     font: 600 1.6rem var(--font-display);
+  }
+
+  .world {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    margin-top: 2rem;
+    list-style: none;
+  }
+
+  .world li {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule-strong);
+  }
+
+  .world .world-art {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1rem;
+  }
+
+  .world .world-art > :not(:global(.world-javi)) {
+    grid-column: 1;
+  }
+
+  .world :global(.world-javi) {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    width: auto;
+    height: 5.5rem;
+  }
+
+  .world p {
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 900px) {
+    .world {
+      grid-template-columns: 1fr;
+    }
   }
 
   .modes {
