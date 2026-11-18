@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaptureFigure from '../CaptureFigure.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import { studioCatalogue, editions, pins, short } from '../../data/product';
@@ -108,6 +109,10 @@ const stats = isEs
       <strong>{isEs ? 'Studio ya está disponible como Preview.' : 'Studio is available now as a Preview.'}</strong> {isEs ? 'Se instala desde la misma ISO Preview firmada que Desktop y Gaming, y elegís tus especializaciones durante la instalación. Después del primer inicio, ' : 'It installs from the same signed Preview ISO as Desktop and Gaming, and you choose your specializations during installation. After first boot, '}<code>horneroctl studio doctor</code>{isEs ? ' chequea tu stack creativo cuando quieras. Mirá ' : ' checks your creative stack whenever you want. See '}
       <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a>{isEs ? ' para descargarla. La validación en hardware físico (interfaces de audio, MIDI, codificación por GPU) todavía está pendiente, así que Studio es Preview, no Supported.' : ' to download it. Physical-hardware validation (audio interfaces, MIDI, GPU encode) is still pending, so Studio is Preview, not Supported.'}
     </p>
+  </section>
+
+  <section class="section" aria-label={isEs ? 'Una sesión real' : 'A real session'}>
+    <CaptureFigure slot="studio-session" locale={locale} />
   </section>
 
   <section class="section" aria-labelledby="workloads-title">

@@ -67,6 +67,13 @@ entry that fills it, plus a `wanted` brief for its Signal replacement:
 | `home-shell-dark` | `/` shell comparison (dark) | Signal Night, Hornero Left, 1920×1080 |
 | `home-shell-light` | `/` shell comparison (light) | Signal Day, Hornero Left, same arrangement as the dark half |
 
+The other slots (`desktop-hero`, `customise-layout-picker`, `pluginkit-deck`,
+`studio-session`, `gaming-session`, `mode-focus`, `mode-signal-deck`,
+`mode-gaming`, `chromatic-pair-a`, `chromatic-pair-b`, `javi-desktop`) are
+declared with their briefs in `src/data/captures.ts`. Every page renders them
+through `CaptureFigure`, so a slot with `capture: null` shows the labelled
+placeholder and fills itself once the slot names an entry.
+
 To replace a capture: add the new entry with `appearance: signal`, change
 the slot's `capture` id, run `npm run build`, and check the page. The
 pre-Signal label disappears on its own. Keep the old entry; the showroom

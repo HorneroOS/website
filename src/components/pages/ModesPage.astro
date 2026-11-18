@@ -2,7 +2,7 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
 import ModeSchematic from '../ModeSchematic.astro';
-import CapturePlaceholder from '../CapturePlaceholder.astro';
+import CaptureFigure from '../CaptureFigure.astro';
 import { feature } from '../../data/features';
 import { modes, type Motion, type BarDensity, type DesktopContent } from '../../data/modes';
 import { localizePath, type Locale } from '../../i18n/ui';
@@ -35,6 +35,8 @@ const docs = ledger.evidence[0].href;
 ---
 
 <SiteLayout
+  socialImage="/og/modes.png"
+  socialImageAlt={isEs ? 'Los cinco modos de HorneroOS (Focus, Everyday, Signal, Gaming y Studio) listados como canales, con su estado en el registro del proyecto.' : 'The five HorneroOS modes (Focus, Everyday, Signal, Gaming and Studio) listed as channels, with their status in the project ledger.'}
   title={isEs ? 'Atmósferas: modos de experiencia | HorneroOS' : 'Atmospheres: experience modes | HorneroOS'}
   description={isEs ? 'Focus, Everyday, Signal, Gaming y Studio: cinco modos que cambian cómo se comporta el escritorio de HorneroOS sin tocar tu layout ni tu tema.' : 'Focus, Everyday, Signal, Gaming and Studio: five modes that change how the HorneroOS desktop behaves without touching your layout or theme.'}
 >
@@ -108,9 +110,9 @@ const docs = ledger.evidence[0].href;
       {isEs ? 'Cuando QA publique capturas de cada modo en una máquina virtual o un escritorio real, reemplazan estos espacios. Hasta entonces, el sitio no dibuja un escritorio por ellas.' : 'When QA publishes captures of each mode from a virtual machine or a real desktop, they replace these slots. Until then the site does not draw a desktop in their place.'}
     </p>
     <div class="mode-captures">
-      <CapturePlaceholder slot="mode-focus" locale={locale} />
-      <CapturePlaceholder slot="mode-signal-deck" locale={locale} />
-      <CapturePlaceholder slot="mode-gaming" locale={locale} />
+      <CaptureFigure slot="mode-focus" locale={locale} />
+      <CaptureFigure slot="mode-signal-deck" locale={locale} />
+      <CaptureFigure slot="mode-gaming" locale={locale} />
     </div>
   </section>
 

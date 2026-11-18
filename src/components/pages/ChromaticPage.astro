@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
-import CapturePlaceholder from '../CapturePlaceholder.astro';
+import CaptureFigure from '../CaptureFigure.astro';
 import { feature } from '../../data/features';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -42,6 +42,8 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
 ---
 
 <SiteLayout
+  socialImage="/og/chromatic.png"
+  socialImageAlt={isEs ? 'Diagrama de Hornero Chromatic en cuatro pasos: imagen, semillas, roles de Signal y control de contraste. No es una captura.' : 'Hornero Chromatic diagram in four steps: image, seeds, Signal roles and contrast gate. Not a screenshot.'}
   title={isEs ? 'Hornero Chromatic: color desde tu fondo | HorneroOS' : 'Hornero Chromatic: colour from your wallpaper | HorneroOS'}
   description={isEs ? 'Hornero Chromatic es color dinámico opcional para HorneroOS: la paleta de Signal sale de tu fondo de pantalla, con garantías de contraste. Signal Night y Day siguen siendo el valor de fábrica.' : 'Hornero Chromatic is optional dynamic colour for HorneroOS: the Signal palette comes from your wallpaper, with contrast guarantees. Signal Night and Day stay the factory default.'}
 >
@@ -136,8 +138,8 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
       {isEs ? 'Un escritorio, dos fondos distintos y la paleta siguiéndolos: ese par lo va a mostrar una captura real de QA. Hasta entonces, el sitio no inventa uno.' : 'One desktop, two different wallpapers and the palette following them: a real QA capture pair will show that. Until then the site does not invent one.'}
     </p>
     <div class="chroma-pair">
-      <CapturePlaceholder slot="chromatic-pair-a" locale={locale} />
-      <CapturePlaceholder slot="chromatic-pair-b" locale={locale} />
+      <CaptureFigure slot="chromatic-pair-a" locale={locale} />
+      <CaptureFigure slot="chromatic-pair-b" locale={locale} />
     </div>
   </section>
 
