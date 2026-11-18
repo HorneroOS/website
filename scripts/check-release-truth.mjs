@@ -22,7 +22,17 @@ const banned = [
   { pattern: /lived in since 2018|habitado desde 2018/i, claim: '2018 is the personal workstation, not the distribution (2026)' },
 ];
 
-const CURRENT_ISO = 'horneroos-2026.10-preview32-x86_64.iso';
+const download = JSON.parse(readFileSync('src/data/download.json', 'utf8'));
+const CURRENT_ISO = download.iso.name;
+const releaseRecords = JSON.parse(readFileSync('src/data/product/releases.json', 'utf8'));
+if (!releaseRecords.some((r) => r.version === download.version && r.status === 'tagged')) {
+  console.error(`src/data/download.json: ${download.version} is not a tagged release in releases.json`);
+  process.exit(1);
+}
+if (!download.iso.name.includes(`preview${/preview(\d+)$/.exec(download.version)?.[1]}`)) {
+  console.error('src/data/download.json: ISO name does not match its version');
+  process.exit(1);
+}
 
 const roots = ['src/components', 'src/layouts', 'src/pages', 'src/i18n', 'scripts', 'public'];
 const files = [];
@@ -58,8 +68,8 @@ for (const file of ['public/llms.txt', 'scripts/build-og.mjs', 'src/components/p
     }
   }
   for (const match of text.matchAll(/v0\.2\.0-preview(\d+) ISO/g)) {
-    if (match[1] !== '32') {
-      console.error(`${file}: stale current-release claim (${match[0]}); current is v0.2.0-preview32`);
+    if (match[1] !== /preview(\d+)$/.exec(download.version)?.[1]) {
+      console.error(`${file}: stale current-release claim (${match[0]}); current is v${download.version}`);
       failures += 1;
     }
   }
