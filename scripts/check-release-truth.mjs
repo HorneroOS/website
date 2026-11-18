@@ -33,6 +33,25 @@ if (!download.iso.name.includes(`preview${/preview(\d+)$/.exec(download.version)
   console.error('src/data/download.json: ISO name does not match its version');
   process.exit(1);
 }
+// A package-only release sits on top of the ISO: it must be a released record
+// newer than the ISO, and it must never rename the ISO.
+if (download.packageRelease) {
+  const pr = download.packageRelease;
+  const at = (v) => releaseRecords.findIndex((r) => r.version === v);
+  const hit = releaseRecords[at(pr.version)];
+  if (!hit || !['tagged', 'published'].includes(hit.status)) {
+    console.error(`src/data/download.json: packageRelease ${pr.version} is not a tagged or published release in releases.json`);
+    process.exit(1);
+  }
+  if (!(at(pr.version) < at(download.version))) {
+    console.error(`src/data/download.json: packageRelease ${pr.version} is not newer than the ISO ${download.version}; drop it`);
+    process.exit(1);
+  }
+  if (!Array.isArray(pr.packages) || pr.packages.length === 0 || pr.packages.some((p) => !p.name || !p.version)) {
+    console.error('src/data/download.json: packageRelease.packages must list name and version');
+    process.exit(1);
+  }
+}
 
 const roots = ['src/components', 'src/layouts', 'src/pages', 'src/i18n', 'scripts', 'public'];
 const files = [];

@@ -50,7 +50,7 @@ export interface Release {
   name: string;
   version: string;
   date: string;
-  status: 'tagged' | 'candidate' | 'untagged';
+  status: 'tagged' | 'published' | 'candidate' | 'untagged';
   summary: string;
   manifest: string;
   shell: Pin | null;
@@ -243,6 +243,10 @@ export const pins = pinsJson.sources as Record<'shell' | 'config' | 'hornero' | 
 export const short = (sha: string) => sha.slice(0, 7);
 export const commitUrl = (repo: string, sha: string) => `${repo}/commit/${sha}`;
 export const latestTagged = releases.find((r) => r.status === 'tagged');
+/** Released means it reached users: git-tagged, or recorded as published (AUR package releases). */
+export const isReleased = (r: Release) => r.status === 'tagged' || r.status === 'published';
+export const releasedVersions = new Set(releases.filter(isReleased).map((r) => r.version));
+export const latestReleased = releases.find(isReleased);
 export const candidate = releases.find((r) => r.status === 'candidate');
 
 export interface ExtensionEntry {

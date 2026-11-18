@@ -31,10 +31,21 @@ const releases = JSON.parse(readFileSync(join(root, 'src/data/product/releases.j
 const latest = releases.find((r) => r.status === 'tagged');
 const download = JSON.parse(readFileSync(join(root, 'src/data/download.json'), 'utf8'));
 const ledger = JSON.parse(readFileSync(join(root, 'src/data/features.json'), 'utf8')).features;
-const taggedVersions = new Set(releases.filter((r) => r.status === 'tagged').map((r) => r.version));
+const releasedVersions = new Set(releases.filter((r) => r.status === 'tagged' || r.status === 'published').map((r) => r.version));
+const order = (v) => releases.findIndex((r) => r.version === v);
 // Ledger stage as card text; the same rule as src/data/features.ts.
 const stageLabel = (f) =>
-  f.stage === 'shipping' ? (taggedVersions.has(f.releasedIn) ? 'Released' : 'On main, unreleased') : f.stage === 'main' ? 'On main, unreleased' : f.stage === 'experimental' ? 'Experimental' : 'Planned';
+  f.stage === 'shipping'
+    ? !releasedVersions.has(f.releasedIn)
+      ? 'On main, unreleased'
+      : order(f.releasedIn) < order(download.version)
+        ? 'Released as packages'
+        : 'Released'
+    : f.stage === 'main'
+      ? 'On main, unreleased'
+      : f.stage === 'experimental'
+        ? 'Experimental'
+        : 'Planned';
 const featureLine = (id) => {
   const f = ledger.find((x) => x.id === id);
   return `<li><b>${f.title.en}</b><span>${stageLabel(f)}</span></li>`;

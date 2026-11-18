@@ -535,7 +535,10 @@ function releases(horneroDir, tags) {
       const m = manifests.get(r.manifest);
       if (!m) fail(`${f}: manifest ${r.manifest} not found`);
       // Git tags are the truth (checklists were not always ticked): tagged,
-      // else the current candidate, else an untagged composition record.
+      // else a record the maintainers marked `published: true` (a reviewed
+      // release that reached users, e.g. AUR-only package releases cut
+      // before the git tag), else the current candidate, else an untagged
+      // composition record.
       const tagged = tags.includes(r.tag ?? r.name);
       const pin = (c) =>
         m.components?.[c]?.sha ? { sha: m.components[c].sha, subject: m.components[c].subject ?? '' } : null;
@@ -543,7 +546,7 @@ function releases(horneroDir, tags) {
         name: r.name,
         version: r.version,
         date: String(m.date),
-        status: tagged ? 'tagged' : m.file === candidate ? 'candidate' : 'untagged',
+        status: tagged ? 'tagged' : r.published === true ? 'published' : m.file === candidate ? 'candidate' : 'untagged',
         summary: (r.summary ?? '').trim(),
         manifest: r.manifest,
         shell: pin('shell'),

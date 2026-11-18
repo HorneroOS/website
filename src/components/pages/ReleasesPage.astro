@@ -1,7 +1,8 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import SourcePlate from '../../components/SourcePlate.astro';
-import { candidate, commitUrl, latestTagged, pins, releases, short, type Release } from '../../data/product';
+import { candidate, commitUrl, latestReleased, latestTagged, pins, releases, short, type Release } from '../../data/product';
+import { download } from '../../data/download';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { releaseNotes } from '../../data/release-notes';
 
@@ -18,11 +19,13 @@ const title = (r: Release) => {
 const statusText: Record<Release['status'], string> = isEs
   ? {
       tagged: 'Pre-release etiquetada',
+      published: 'Publicada como paquetes, sin etiqueta git',
       candidate: 'Candidata a release',
       untagged: 'Registro de composición, sin etiquetar',
     }
   : {
       tagged: 'Tagged pre-release',
+      published: 'Published as packages, no git tag yet',
       candidate: 'Release candidate',
       untagged: 'Composition record, not tagged',
     };
@@ -44,6 +47,14 @@ const config = pins.config.repo;
       <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a> {isEs ? 'para el checksum, la firma y las instrucciones de verificación.' : 'for the checksum, signature and verification instructions.'}
     </p>
     <dl class="now">
+      {latestReleased && latestReleased !== latestTagged && (
+        <div>
+          <dt>{isEs ? 'Última publicada' : 'Latest published'}</dt>
+          <dd>
+            <a href={`#${latestReleased.name}`}>{title(latestReleased)}</a>, {latestReleased.date} ({isEs ? `paquetes; la ISO sigue en v${download.version}` : `packages; the ISO stays at v${download.version}`})
+          </dd>
+        </div>
+      )}
       {latestTagged && (
         <div>
           <dt>{isEs ? 'Última etiquetada' : 'Latest tagged'}</dt>
@@ -184,7 +195,8 @@ const config = pins.config.repo;
     color: var(--ink-muted);
   }
 
-  .tagged .status {
+  .tagged .status,
+  .published .status {
     border-color: var(--signal);
     color: var(--ink);
   }
