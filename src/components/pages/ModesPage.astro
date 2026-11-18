@@ -3,7 +3,6 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
 import ModeSchematic from '../ModeSchematic.astro';
 import CaptureFigure from '../CaptureFigure.astro';
-import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { modes, type Motion, type BarDensity, type DesktopContent } from '../../data/modes';
 import { localizePath, type Locale } from '../../i18n/ui';
@@ -49,7 +48,9 @@ const docs = ledger.evidence[0].href;
     </p>
     <p class="modes-status">
       <StageBadge stage={ledger.stage} locale={locale} />
-      <ReleaseChannelNote feature={ledger} locale={locale} />
+      <span>
+        {isEs ? 'Los modos están en la rama main del shell desde noviembre de 2026. Las ISO Preview publicadas hasta ahora no los incluyen, y todavía no se validaron visualmente en una máquina virtual ni en un escritorio físico.' : 'Modes are on the shell’s main branch since November 2026. The Preview ISOs published so far do not include them, and they have not yet been validated visually in a virtual machine or on a physical desktop.'}
+      </span>
     </p>
   </section>
 
