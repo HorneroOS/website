@@ -10,8 +10,10 @@ and is sourced from the HorneroOS repositories.
   accessibility, imagery and shared components.
 - [Hornero Signal design system](./DESIGN_SYSTEM_SIGNAL.md) — colour roles,
   type, signature details and motion on the website.
-- [Capture slots](./CAPTURES.md) — capture provenance, the pre-Signal label
-  and how QA replaces homepage captures.
+- [Capture slots](./CAPTURES.md) — the capture-slot contract: pending
+  plates, provenance, and how a real host capture fills a slot. The
+  [shot list](./CAPTURE-SHOT-LIST.md) is the generated list of every
+  capture the showcase needs.
 - [Information architecture](./INFORMATION_ARCHITECTURE.md) — audit, routes, the
   feature ledger (released / experimental / unreleased / planned) and shared tokens.
 - [State management](./STATE_MANAGEMENT.md) — static content and the limited

@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // Renders the 1200x630 Open Graph cards in public/og/.
 //
-// Every card pairs the Hornero Signal identity with something real: a desktop
-// capture (labelled as pre-Signal when it predates Signal), or pinned site data
-// (edition maturity, catalogues, the story timeline). Nothing is mocked up. Re-run after changing a card, then commit the PNGs:
+// Every card pairs the Hornero Signal identity with pinned site data
+// (edition maturity, catalogues, the story timeline, the capture-slot
+// ledger). Cards do not embed a desktop screenshot while captures are
+// pending: product captures live in capture slots (docs/CAPTURES.md), and a
+// pending slot's card falls back to brand and data only. Nothing is mocked up. Re-run after changing a card, then commit the PNGs:
 //
 //   node scripts/build-og.mjs
 //
@@ -54,25 +56,35 @@ const maturityName = { planned: 'Planned', experimental: 'Experimental', preview
 const level = { planned: 1, experimental: 2, preview: 3, supported: 4 };
 const meter = (m) => `<span class="meter">${[1, 2, 3, 4].map((i) => `<i class="${i <= level[m] ? 'on ' + m : ''}"></i>`).join('')}</span>`;
 
-// Every image panel states what it is: captures taken before Hornero Signal
-// say so, and the greeter card is a browser recreation, not a screenshot.
+// The only photographic panel is the greeter card's licensed scene photo,
+// labelled as a browser recreation, not a screenshot.
 const shot = (path, w, h, kind, label) => `
   <div class="shot" style="width:${w}px;height:${h}px"><img src="${file(path)}" alt="" /></div>
   <p class="cap"><b>${kind}</b> ${label}</p>`;
-const preSignal = 'Preview · previous appearance';
+// Capture-slot ledger for the showroom card: counts come from the data
+// file, so the card stays truthful as slots are filled.
+const captureSlots = JSON.parse(readFileSync(join(root, 'src/data/capture-slots.json'), 'utf8')).slots;
+const slotsByPriority = ['P0', 'P1', 'P2'].map((priority) => ({
+  priority,
+  total: captureSlots.filter((s) => s.priority === priority).length,
+  captured: captureSlots.filter((s) => s.priority === priority && s.status === 'captured').length,
+}));
+const priorityName = { P0: 'Launch-critical', P1: 'Important', P2: 'Complete the story' };
 
 const cards = {
   default: {
     eyebrow: `HorneroOS · ${latest ? latest.version : 'Preview'}`,
     title: 'A workstation for building, creating and playing.',
     line: 'Arch-based, with a desktop of its own. Desktop, Studio and Gaming on one signed ISO.',
-    panel: shot('assets/screenshots/curated/terminal-tools-2026-10-25.webp', 640, 360, preSignal, 'btop and yazi · 2026-10-25'),
+    panel: `<ul class="ledger">${['signal', 'layouts', 'chromatic', 'pluginkit', 'companion'].map(featureLine).join('')}</ul><p class="cap"><b>Feature ledger</b> status from the project data</p>`,
   },
   showroom: {
     eyebrow: 'Showroom',
-    title: 'Real desktop captures.',
-    line: 'Each one lists its source, date and appearance.',
-    panel: shot('assets/screenshots/curated/live-workstation-2026-10-23.png', 640, 360, preSignal, 'live workstation · 2026-10-23'),
+    title: 'Every capture, planned.',
+    line: 'The full shot list for the Signal desktop: what each capture must show, and how to take it on a real machine.',
+    panel: `<ul class="ledger">${slotsByPriority
+      .map((g) => `<li><b>${g.priority} · ${priorityName[g.priority]}</b><span>${g.captured}/${g.total} captured</span></li>`)
+      .join('')}</ul><p class="cap"><b>Capture slots</b> ${captureSlots.length} planned captures, from src/data/capture-slots.json</p>`,
   },
   editions: {
     eyebrow: 'Editions',

@@ -2,18 +2,14 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { localizePath, type Locale } from '../../i18n/ui';
 import LayoutDiagram from '../../components/LayoutDiagram.astro';
-import ArchFrame from '../../components/ArchFrame.astro';
+import CaptureFigure from '../../components/CaptureFigure.astro';
+import CaptureGallery from '../../components/CaptureGallery.astro';
 import { layouts } from '../../data/product';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
-import horneroLeftShot from '../../../assets/screenshots/certified/hornero-left.png';
-import cockpitShot from '../../../assets/screenshots/certified/cockpit-clear.png';
-import horizonShot from '../../../assets/screenshots/certified/horizon.png';
-import islandsShot from '../../../assets/screenshots/certified/islands.png';
-import dockShot from '../../../assets/screenshots/certified/dock-bottom.png';
 
 const styleNames: Record<string, string> = isEs
   ? { attached: 'barra al borde', floating: 'barra flotante', dock: 'dock', islands: 'islas', inset: 'barra encajada' }
@@ -26,54 +22,46 @@ const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
 const selectedEn = [
   {
     id: 'hornero-left',
-    shot: horneroLeftShot,
+    slot: 'CAP-LAYOUT-01',
     text: 'A side rail with the main controls close by and the workspace left open.',
   },
   {
     id: 'cockpit-clear',
-    shot: cockpitShot,
+    slot: 'CAP-LAYOUT-02',
     text: 'A full-width line with no backdrop, so the wallpaper shows through.',
   },
   {
     id: 'horizon',
-    shot: horizonShot,
+    slot: 'CAP-LAYOUT-03',
     text: 'A top bar with status, context and a centered clock.',
   },
   {
     id: 'islands',
-    shot: islandsShot,
+    slot: 'CAP-LAYOUT-04',
     text: 'Separate floating islands group the controls.',
   },
   {
     id: 'dock-bottom',
-    shot: dockShot,
+    slot: 'CAP-LAYOUT-05',
     text: 'A dock along the bottom edge.',
   },
 ];
 const selectedEs = [
-  { id: 'hornero-left', shot: horneroLeftShot, text: 'Un riel lateral con los controles principales a mano y el área de trabajo libre.' },
-  { id: 'cockpit-clear', shot: cockpitShot, text: 'Una línea de borde a borde sin fondo, para que se vea el fondo de pantalla.' },
-  { id: 'horizon', shot: horizonShot, text: 'Una barra superior con estado, contexto y un reloj centrado.' },
-  { id: 'islands', shot: islandsShot, text: 'Islas flotantes separadas que agrupan los controles.' },
-  { id: 'dock-bottom', shot: dockShot, text: 'Un dock sobre el borde inferior.' },
+  { id: 'hornero-left', slot: 'CAP-LAYOUT-01', text: 'Un riel lateral con los controles principales a mano y el área de trabajo libre.' },
+  { id: 'cockpit-clear', slot: 'CAP-LAYOUT-02', text: 'Una línea de borde a borde sin fondo, para que se vea el fondo de pantalla.' },
+  { id: 'horizon', slot: 'CAP-LAYOUT-03', text: 'Una barra superior con estado, contexto y un reloj centrado.' },
+  { id: 'islands', slot: 'CAP-LAYOUT-04', text: 'Islas flotantes separadas que agrupan los controles.' },
+  { id: 'dock-bottom', slot: 'CAP-LAYOUT-05', text: 'Un dock sobre el borde inferior.' },
 ];
 const selected = isEs ? selectedEs : selectedEn;
-const proof = {
-  source: isEs ? 'QA de Hornero' : 'Hornero QA',
-  context: isEs ? 'Aceptación de layouts · revisión visual' : 'Layout acceptance · visual review',
-  pins: { shell: '98a5de2', config: '96b6870', horneroctl: '9c15172' },
-  resolution: '1280×800',
-  theme: 'Hornero Dark',
-  date: '2026-10-03',
-};
 ---
 
 <SiteLayout
   title={isEs ? 'Layouts | HorneroOS' : 'Layouts | HorneroOS'}
-  description={isEs ? `${layouts.length} layouts de la shell de Hornero, cada uno en una captura real: rieles laterales, barras de a dos, barras transparentes, islas y docks.` : `${layouts.length} Hornero shell layouts, each shown in a real capture: side rails, paired bars, clear bars, islands and docks.`}
+  description={isEs ? `${layouts.length} layouts de la shell de Hornero, cada uno con su captura real del escritorio: rieles laterales, barras de a dos, barras transparentes, islas y docks.` : `${layouts.length} Hornero shell layouts, each with its real desktop capture: side rails, paired bars, clear bars, islands and docks.`}
 >
   <section class="intro section">
-    <p class="plate-id"><strong>Catálogo de formas</strong><span>{layouts.length} layouts · {isEs ? 'capturas reales' : 'real captures'}</span></p>
+    <p class="plate-id"><strong>Catálogo de formas</strong><span>{layouts.length} layouts</span></p>
     <h1>Layouts</h1>
     <p>
       {isEs ? 'Poné la shell sobre un borde, en un par de barras, como islas flotantes o abajo de todo en la pantalla. El lanzador, las notificaciones y los ajustes son los mismos en todos.' : 'Put the shell along an edge, in a pair of bars, as floating islands or at the bottom of the screen. The launcher, notifications and settings are shared by all of them.'}
@@ -93,15 +81,7 @@ const proof = {
       const layout = layouts.find((item) => item.id === entry.id);
       return (
         <article class:list={['layout-showcase', `showcase-${index + 1}`]} id={entry.id}>
-          <ArchFrame
-            src={entry.shot}
-            alt={isEs ? `${layout?.name ?? entry.id} andando en un escritorio Hornero real, capturado durante la aceptación de layouts.` : `${layout?.name ?? entry.id} running in a real Hornero desktop, captured during layout acceptance.`}
-            eager={index < 2}
-            sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)"
-            widths={[480, 720, 1080, 1280]}
-            provenance={proof}
-            locale={locale}
-          />
+          <CaptureFigure slot={entry.slot} locale={locale} eager={index < 2} sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)" />
           <div class="showcase-copy">
             <h2>{layout?.name}</h2>
             <p>{entry.text}</p>
@@ -152,6 +132,8 @@ const proof = {
       ))}
     </ul>
   </section>
+
+  <CaptureGallery route="/layouts" locale={locale} exclude={['CAP-LAYOUT-01', 'CAP-LAYOUT-02', 'CAP-LAYOUT-03', 'CAP-LAYOUT-04', 'CAP-LAYOUT-05']} />
 </SiteLayout>
 
 <style>
@@ -200,14 +182,9 @@ const proof = {
     align-items: center;
     gap: 1.3rem;
   }
-  .layout-showcase :global(.frame) {
+  .layout-showcase :global(.capture-figure) {
     width: 100%;
     min-width: 0;
-  }
-  .layout-showcase :global(.frame-shot) :global(img) {
-    width: 100%;
-    aspect-ratio: 16/10;
-    object-fit: cover;
   }
   .showcase-copy {
     display: grid;

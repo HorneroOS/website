@@ -3,6 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import MaturityMeter from '../MaturityMeter.astro';
 import StageBadge from '../StageBadge.astro';
 import CaptureFigure from '../CaptureFigure.astro';
+import CaptureGallery from '../CaptureGallery.astro';
 import { feature, stageFromMaturity } from '../../data/features';
 import { editionCatalogue, editions, extensionCatalogue, layouts, themes } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
@@ -59,12 +60,12 @@ const keys = [
     </p>
     <p class="hero-ctas">
       <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
-      <a class="cta secondary" href={L('/showroom')}>{isEs ? 'Ver capturas reales' : 'See real captures'}</a>
+      <a class="cta secondary" href={L('/showroom')}>{isEs ? 'Ver el showroom' : 'See the showroom'}</a>
     </p>
   </section>
 
   <section class="section desk-capture" aria-label={isEs ? 'El escritorio trabajando' : 'The desktop at work'}>
-    <CaptureFigure slot="desktop-hero" locale={locale} eager />
+    <CaptureFigure slot="CAP-DESKTOP-01" locale={locale} eager />
   </section>
 
   <section class="section" aria-labelledby="levers-title">
@@ -109,10 +110,10 @@ const keys = [
     <div>
       <h2 id="custom-title">{isEs ? 'Cambiá la forma, no el sistema' : 'Change the shape, not the system'}</h2>
       <p class="desk-copy">
-        {isEs ? 'El selector de layouts reordena barras y rieles sin tocar tus aplicaciones ni tu tema. La captura es real y anterior a Hornero Signal; está etiquetada así.' : 'The layout picker rearranges bars and rails without touching your applications or theme. The capture is real and predates Hornero Signal; it is labelled accordingly.'}
+        {isEs ? 'El selector de layouts reordena barras y rieles sin tocar tus aplicaciones ni tu tema. ' : 'The layout picker rearranges bars and rails without touching your applications or theme. '}
       </p>
     </div>
-    <CaptureFigure slot="customise-layout-picker" locale={locale} />
+    <CaptureFigure slot="CAP-DESKTOP-02" locale={locale} />
   </section>
 
   <section class="section" aria-labelledby="comp-title">
@@ -142,6 +143,8 @@ const keys = [
       <a class="cta secondary" href={L('/editions')}>{isEs ? 'Todas las ediciones' : 'All editions'}</a>
     </p>
   </section>
+
+  <CaptureGallery route="/desktop" locale={locale} exclude={['CAP-DESKTOP-01', 'CAP-DESKTOP-02']} />
 </SiteLayout>
 
 <style>

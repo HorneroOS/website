@@ -1,58 +1,39 @@
 ---
 /**
- * The same Hornero Left layout, captured in Hornero Dark and Hornero Light from
- * the same QA image and the same pinned revisions. Without JavaScript the two
- * captures sit side by side; with it, a native range input wipes between them.
+ * The same layout in Signal Night and Signal Day. Until both captures exist
+ * the two pending plates sit side by side; once both slots are `captured` a
+ * native range input wipes between the two real images.
  */
-import { Picture } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-
+import CaptureFigure from './CaptureFigure.astro';
+import { getSlot } from '../data/captures';
 import type { Locale } from '../i18n/ui';
 
 interface Props {
-  dark: CollectionEntry<'showroom'>;
-  light: CollectionEntry<'showroom'>;
+  dark: string;
+  light: string;
   locale?: Locale;
 }
 
 const { dark, light, locale = 'es' } = Astro.props;
 const isEs = locale === 'es';
-const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
+const bothCaptured = getSlot(dark).status === 'captured' && getSlot(light).status === 'captured';
 ---
 
-<div class="look-compare" data-look-compare>
-  <figure class="look look-dark">
-    <Picture
-      src={dark.data.image}
-      alt={dark.data.alt[locale]}
-      formats={['avif', 'webp']}
-      widths={[640, 960, 1280]}
-      sizes={sizes}
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>{isEs ? 'Hornero Oscuro' : 'Hornero Dark'}</figcaption>
-  </figure>
-  <figure class="look look-light">
-    <Picture
-      src={light.data.image}
-      alt={light.data.alt[locale]}
-      formats={['avif', 'webp']}
-      widths={[640, 960, 1280]}
-      sizes={sizes}
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>{isEs ? 'Hornero Claro' : 'Hornero Light'}</figcaption>
-  </figure>
+<div class="look-compare" data-look-compare data-ready={bothCaptured ? 'true' : 'false'}>
+  <div class="look look-dark">
+    <CaptureFigure slot={dark} locale={locale} />
+  </div>
+  <div class="look look-light">
+    <CaptureFigure slot={light} locale={locale} />
+  </div>
   <label class="look-range" hidden>
-    <span class="visually-hidden">{isEs ? 'Revelá Hornero Claro sobre Hornero Oscuro' : 'Reveal Hornero Light over Hornero Dark'}</span>
+    <span class="visually-hidden">{isEs ? 'Revelá Signal Day sobre Signal Night' : 'Reveal Signal Day over Signal Night'}</span>
     <input type="range" min="0" max="100" value="50" step="1" />
   </label>
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-look-compare]').forEach((root) => {
+  document.querySelectorAll<HTMLElement>('[data-look-compare][data-ready="true"]').forEach((root) => {
     const range = root.querySelector<HTMLInputElement>('input[type="range"]');
     const label = root.querySelector<HTMLElement>('.look-range');
     if (!range || !label) return;
@@ -66,16 +47,11 @@ const sizes = '(min-width: 1100px) 1100px, calc(100vw - 2rem)';
 
 <style>
   .look-compare { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .look { position: relative; margin: 0; min-width: 0; }
-  .look :global(img) { width: 100%; height: auto; aspect-ratio: 8 / 5; border: 1px solid var(--rule); background: var(--panel); }
-  .look figcaption { position: absolute; bottom: 0.7rem; padding: 0.3rem 0.6rem; background: color-mix(in srgb, #05080f 78%, transparent); color: #fff; font: 600 0.72rem var(--font-mono); font-stretch: 87.5%; }
-  .look-dark figcaption { left: 0.7rem; }
-  .look-light figcaption { right: 0.7rem; background: color-mix(in srgb, #fff 86%, transparent); color: #212121; }
+  .look { position: relative; min-width: 0; }
 
   /* Live: stack the captures and wipe the light one in from the right. */
   .look-compare.is-live { display: block; --reveal: 50%; max-width: min(100%, 72rem); margin-inline: auto; }
   .is-live .look-light { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--reveal)); }
-  .is-live .look-light figcaption { right: 0.7rem; }
   .is-live::after { position: absolute; top: 0; bottom: 0; left: var(--reveal); width: 2px; background: var(--signal); content: ''; pointer-events: none; }
   .is-live .look-range { position: absolute; inset: 0; z-index: 2; display: block; }
   .is-live .look-range input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }

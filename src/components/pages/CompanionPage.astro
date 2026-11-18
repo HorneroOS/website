@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CompanionStage from '../CompanionStage.astro';
 import CaptureFigure from '../CaptureFigure.astro';
+import CaptureGallery from '../CaptureGallery.astro';
 import { pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -64,7 +65,7 @@ const paletteOf = (s: string) => Object.entries(manifest.skins[s]?.palette ?? {}
   </section>
 
   <section class="section" aria-label={isEs ? 'Javi en un escritorio real' : 'Javi on a real desktop'}>
-    <CaptureFigure slot="javi-desktop" locale={locale} />
+    <CaptureFigure slot="CAP-JAVI-01" locale={locale} />
   </section>
 
   <section class="section">
@@ -201,6 +202,8 @@ horneroctl assistant delegate codex --workspace ~/project "review the parser"</c
       {isEs ? ', los assets que dibuja la shell, generados desde masters SVG parametrizados.' : ', the assets the shell draws, generated from parameterized SVG masters.'}
     </p>
   </section>
+
+  <CaptureGallery route="/companion" locale={locale} exclude={['CAP-JAVI-01']} />
 </SiteLayout>
 
 <style>

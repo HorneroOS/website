@@ -1,0 +1,26 @@
+{
+  "$schema": "hornero.website.kept-images/1",
+  "note": "Every image or video file in public/, src/assets/ and assets/ must be listed here with a reason, or be a captured showcase slot file (src/data/capture-slots.json). scripts/check-capture-slots.mjs enforces this so a product screenshot, concept render or mock-up cannot come back unnoticed. Product captures belong in the capture slots only.",
+  "categories": {
+    "brand": "Logo, favicon and wordmark: identity, not a showcase image.",
+    "brand-card": "Open Graph card rendered by scripts/build-og.mjs from brand tokens and pinned product data only; never embeds a screenshot.",
+    "brand-artwork": "Original website identity artwork. Not a desktop capture, wallpaper or theme preview.",
+    "app-logo": "Third-party application logo used nominatively to name an application (src/components/AppLogo.astro).",
+    "wallpaper-licensed": "A licensed, credited photograph that HorneroOS ships as a wallpaper (CC BY / CC BY-SA, credit on /wallpapers). It shows a place, not the desktop.",
+    "greeter-media": "Licensed, credited photo or video scene shipped with the greeter, played behind the greeter recreation on /greeter. Kept pending a maintainer decision (see the PR).",
+    "mascot": "Javi sprite art rendered from the shell asset pin at build time (not stored in this repository)."
+  },
+  "entries": [
+    { "path": "public/favicon.svg", "category": "brand" },
+    { "path": "src/assets/brand/logo-dark.svg", "category": "brand" },
+    { "path": "src/assets/brand/logo-light.svg", "category": "brand" },
+    { "path": "src/assets/brand/hornero-199x-poster.jpg", "category": "brand-artwork", "note": "AI-assisted 199X identity illustration shown on /roots, captioned as artwork, not a capture." },
+    { "path": "assets/brand/buenos-aires-cyberpunk.webp", "category": "brand-artwork", "note": "Website identity artwork per its sidecar; currently unreferenced." },
+    { "prefix": "public/og/", "category": "brand-card" },
+    { "prefix": "src/assets/apps/", "category": "app-logo" },
+    { "prefix": "public/wallpapers/argentina/", "category": "wallpaper-licensed" },
+    { "prefix": "assets/wallpapers/theme-wallpapers/", "category": "wallpaper-licensed", "note": "Wallpaper previews on /themes; eight of them are currently unreferenced." },
+    { "prefix": "assets/wallpapers/photos/", "category": "wallpaper-licensed", "note": "See provenance.json beside them." },
+    { "prefix": "public/media/greeter/", "category": "greeter-media" }
+  ]
+}

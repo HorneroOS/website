@@ -1,20 +1,16 @@
 ---
-import { Image, Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import LookCompare from '../../components/LookCompare.astro';
 import StoryTimeline from '../../components/StoryTimeline.astro';
 import CommunityJoin from '../../components/CommunityJoin.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
-import CaptureLabel from '../../components/CaptureLabel.astro';
+import CaptureFigure from '../../components/CaptureFigure.astro';
 import StageBadge from '../../components/StageBadge.astro';
 import { feature } from '../../data/features';
 import { modes } from '../../data/modes';
 import { featuredStory } from '../../data/story';
-import conceptNight from '../../assets/concepts/concept-final-night.png';
-import conceptDay from '../../assets/concepts/concept-final-day.png';
-import { captureSlots } from '../../data/captures';
 import {
   candidate,
   editionCatalogue,
@@ -37,18 +33,6 @@ interface Props {
 const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
-
-// Captures come from capture slots (src/data/captures.ts) so QA can replace a
-// pre-Signal capture with a Signal one without touching this page.
-const captures = await getCollection('showroom');
-const capture = (id: string) => {
-  const entry = captures.find((item) => item.id === id);
-  if (!entry) throw new Error(`Showroom capture is missing: ${id}`);
-  return entry;
-};
-const workstation = capture(captureSlots['home-workstation'].capture);
-const shellDark = capture(captureSlots['home-shell-dark'].capture);
-const shellLight = capture(captureSlots['home-shell-light'].capture);
 
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const edition = (id: string) => {
@@ -272,40 +256,13 @@ const description = isEs
 
   <section class="monitor" aria-labelledby="monitor-title">
     <h2 id="monitor-title" class="visually-hidden">{isEs ? 'El escritorio trabajando' : 'The desktop at work'}</h2>
-    <figure class="monitor-frame ticked">
+    <div class="monitor-frame">
       <div class="monitor-strip">
         <span class="channel">MON 01</span>
-        <span>{workstation.data.title[locale]}</span>
-        <CaptureLabel appearance={workstation.data.provenance.appearance} locale={locale} />
+        <a href={L('/showroom')}>{isEs ? 'Todas las capturas previstas' : 'Every planned capture'}</a>
       </div>
-      <div class="monitor-screen">
-        <Picture
-          src={workstation.data.image}
-          alt={workstation.data.alt[locale]}
-          formats={['avif', 'webp']}
-          widths={[640, 960, 1280, 1600, 1920]}
-          sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
-      <figcaption>
-        <span>{workstation.data.provenance.source[locale]}</span>
-        <span>{workstation.data.provenance.resolution}</span>
-        <span>{workstation.data.provenance.date}</span>
-        <a href={L('/showroom#capture-ledger')}>{isEs ? 'Procedencia de cada captura' : 'Provenance for every capture'}</a>
-      </figcaption>
-    </figure>
-    {
-      workstation.data.provenance.appearance === 'pre-signal' && (
-        <p class="monitor-note">
-          {isEs
-            ? 'Esta captura es de un escritorio real en uso, tomada antes de Hornero Signal, el nuevo lenguaje de diseño de esta página. Las capturas con Signal llegan cuando pasen la validación en hardware real.'
-            : 'This capture is a real desktop in use, taken before Hornero Signal, the new design language of this page. Signal captures follow once they pass validation on real hardware.'}
-        </p>
-      )
-    }
+      <CaptureFigure slot="CAP-HERO-01" locale={locale} eager sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)" />
+    </div>
   </section>
 
   <section class="section editions" aria-labelledby="editions-title">
@@ -401,45 +358,20 @@ const description = isEs
         }
       </p>
     </header>
-    <figure class="concept">
-      <div class="concept-strip">
-        <span class="channel">{isEs ? 'Dirección Signal Bezel' : 'Signal Bezel direction'}</span>
-        <CaptureLabel appearance="concept" locale={locale} />
-      </div>
+    <div class="concept">
       <div class="concept-pair">
-        <Picture
-          src={conceptNight}
-          alt={isEs ? 'Render conceptual de Cockpit en Signal Night: barra superior con medidores segmentados, un panel de telemetría con osciloscopio, un popout de audio anclado a su botón y una barra inferior con espacios de trabajo, sobre una foto nocturna de Buenos Aires. Valores de muestra.' : 'Concept render of Cockpit in Signal Night: a top rail with segmented meters, a telemetry panel with an oscilloscope, an audio popout anchored to its trigger and a bottom strip with workspaces, over a night photograph of Buenos Aires. Sample values.'}
-          formats={['avif', 'webp']}
-          widths={[640, 960, 1280, 1600]}
-          sizes="(min-width: 1240px) 820px, calc(100vw - 2rem)"
-          loading="lazy"
-          decoding="async"
-        />
-        <Picture
-          src={conceptDay}
-          alt={isEs ? 'Render conceptual de la misma dirección en Signal Day, sobre una foto del glaciar Perito Moreno. Valores de muestra.' : 'Concept render of the same direction in Signal Day, over a photograph of the Perito Moreno glacier. Sample values.'}
-          formats={['avif', 'webp']}
-          widths={[480, 800, 1200]}
-          sizes="(min-width: 1240px) 380px, calc(100vw - 2rem)"
-          loading="lazy"
-          decoding="async"
-        />
+        <CaptureFigure slot="CAP-SIGNAL-01" locale={locale} />
+        <CaptureFigure slot="CAP-SIGNAL-02" locale={locale} />
       </div>
-      <figcaption>
-        {isEs ? 'Así se ve hacia dónde va el escritorio: especímenes HTML/CSS de la dirección elegida, con valores de muestra, no telemetría real ni capturas del producto. ' : 'Where the desktop is heading: HTML/CSS specimens of the chosen direction with sample values, not live telemetry or product screenshots. '}
+      <p class="concept-note">
+        {isEs ? 'La dirección Signal Bezel, tal como se ve en un escritorio real. ' : 'The Signal Bezel direction as it looks on a real desktop. '}
         <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">{isEs ? 'Leé el lenguaje visual Signal' : 'Read the Signal visual language'}</a>.
-        {isEs ? ' Fondos: Buenos Aires Nocturno, de Luis Argerich (CC BY 2.0); Perito Moreno, de ThartmannWiki (CC BY-SA 4.0).' : ' Wallpapers: Buenos Aires Nocturno by Luis Argerich (CC BY 2.0); Perito Moreno by ThartmannWiki (CC BY-SA 4.0).'}
-      </figcaption>
-    </figure>
+      </p>
+    </div>
 
     <div class="experience-grid">
       <div class="experience-compare">
-        <LookCompare dark={shellDark} light={shellLight} locale={locale} />
-        <p class="compare-note">
-          <CaptureLabel appearance={shellDark.data.provenance.appearance} locale={locale} />
-          <span>{shellDark.data.provenance.source[locale]} · {shellDark.data.provenance.date}</span>
-        </p>
+        <LookCompare dark="CAP-COMPARE-01" light="CAP-COMPARE-02" locale={locale} />
       </div>
       <ul class="index" role="list">
         <li>
@@ -491,6 +423,7 @@ const description = isEs
         <StageBadge stage={javiFeature.stage} locale={locale} />
         <h3><a href={L('/companion')}>{isEs ? 'Javi, el hornero del escritorio' : 'Javi, the desktop hornero'}</a></h3>
         <p>{javiFeature.summary[locale]}</p>
+        <CaptureFigure slot="CAP-JAVI-01" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
       </li>
       <li>
         <StageBadge stage={feature('pluginkit').stage} locale={locale} />
@@ -546,7 +479,7 @@ const description = isEs
       <div>
         <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
         <dd>
-          {isEs ? 'Cada captura de este sitio es real y lista su fuente en el ' : 'Every capture on this site is real and lists its source in the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'registro del showroom' : 'showroom ledger'}</a>{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
+          {isEs ? 'Cada captura que publiquemos será real y listará su fuente; hoy todas están pendientes, y el ' : 'Every capture we publish will be real and list its source; today all of them are pending, and the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra cuáles faltan' : ' shows which are missing'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
         </dd>
       </div>
       <div>
@@ -724,28 +657,15 @@ const description = isEs
     letter-spacing: 0.04em;
   }
 
-  .monitor-strip :global(.capture-label) {
+  .monitor-strip a {
     margin-left: auto;
   }
 
-  .monitor-screen {
-    overflow: hidden;
-    padding: clamp(0.3rem, 0.8vw, 0.6rem);
+  .monitor-frame :global(.capture-figure) {
+    padding: clamp(0.5rem, 1.2vw, 0.9rem);
   }
 
-  .monitor-screen :global(img) {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1918 / 1078;
-    background: var(--ground);
-  }
-
-  /* One orchestrated moment: the capture scans in from the top edge. */
   @media (prefers-reduced-motion: no-preference) {
-    .monitor-screen :global(img) {
-      animation: monitor-scan var(--dur-scan) var(--ease-sweep) 120ms both;
-    }
-
     .telemetry > div {
       animation: readout-in var(--dur-settle) var(--ease-settle) both;
     }
@@ -763,17 +683,6 @@ const description = isEs
     }
   }
 
-  @keyframes monitor-scan {
-    from {
-      clip-path: inset(0 0 100% 0);
-      transform: translateY(-6px);
-    }
-    to {
-      clip-path: inset(0);
-      transform: none;
-    }
-  }
-
   @keyframes readout-in {
     from {
       transform: translateY(6px);
@@ -781,27 +690,6 @@ const description = isEs
     to {
       transform: none;
     }
-  }
-
-  .monitor-frame figcaption {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1rem;
-    padding: 0.55rem 0.8rem;
-    border-top: 1px solid var(--rule);
-    color: var(--ink-muted);
-    font: 0.72rem var(--font-mono);
-  }
-
-  .monitor-frame figcaption a {
-    margin-left: auto;
-  }
-
-  .monitor-note {
-    max-width: 72ch;
-    margin-top: 0.9rem;
-    color: var(--ink-muted);
-    font-size: var(--step--1);
   }
 
   /* ---------------------------------------------------------- shared --- */
@@ -973,47 +861,18 @@ const description = isEs
     margin: 0 0 clamp(2rem, 4vw, 3rem);
   }
 
-  .concept-strip {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.4rem 1rem;
-    margin-bottom: 0.6rem;
-    font: 500 0.72rem var(--font-mono);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
   .concept-pair {
     display: grid;
-    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
     align-items: start;
   }
 
-  .concept-pair :global(img) {
-    width: 100%;
-    height: auto;
-    border: 1px dashed var(--rule-strong);
-    border-radius: var(--radius-small);
-  }
-
-  .concept figcaption {
+  .concept-note {
     max-width: 90ch;
     margin-top: 0.6rem;
     color: var(--ink-muted);
     font-size: var(--step--1);
-  }
-
-  .compare-note {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.4rem 0.9rem;
-    margin-top: 0.6rem;
-    color: var(--ink-muted);
-    font: 0.72rem var(--font-mono);
   }
 
   .index {
@@ -1271,10 +1130,6 @@ const description = isEs
 
     .modes ul {
       grid-template-columns: 1fr;
-    }
-
-    .monitor-frame figcaption a {
-      margin-left: 0;
     }
 
     .hero-field::before {

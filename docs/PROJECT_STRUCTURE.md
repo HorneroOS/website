@@ -72,12 +72,14 @@ its client script is loaded on `/search/` only.
 
 ## Real captures
 
-Showroom entries live in `src/content/showroom/*.md`. The collection schema in
-`src/content.config.ts` requires a real image, meaningful alt text, display
-order and provenance. Keep the source commit, scenario/context, theme,
-resolution and date with each capture where available. `ArchFrame.astro` and
-`KilnStamp.astro` render the image and its provenance; do not substitute
-concept mockups for product evidence.
+Capture slots live in `src/data/capture-slots.json` (typed by
+`src/data/captures.ts`); captured files live in `src/assets/captures/`
+(clips in `public/captures/`). `npm run check:captures` requires each slot
+to declare its brief, ES/EN alt text, geometry, staging and provenance, and
+each captured file to match its recorded checksum. `CaptureFigure.astro`
+renders the slot — a labelled pending plate until the capture exists, then
+the image and its provenance; do not substitute concept mockups for product
+evidence. See [`CAPTURES.md`](./CAPTURES.md).
 
 ## Shared presentation
 

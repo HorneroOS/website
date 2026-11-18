@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaptureGallery from '../../components/CaptureGallery.astro';
 import { candidate, editions, latestTagged, releases } from '../../data/product';
 import { download, downloadTag, packageRelease, packageTag } from '../../data/download';
 import { features } from '../../data/features';
@@ -161,6 +162,14 @@ yay -Syu</code></pre>
       }
     </ul>
   </section>
+
+  <CaptureGallery
+    route="/install"
+    locale={locale}
+    id="install-captures"
+    heading={isEs ? 'Cómo se ve instalar HorneroOS' : 'What installing HorneroOS looks like'}
+    intro={isEs ? 'Los pasos del instalador, la sesión en vivo y la verificación, en capturas reales de una instalación. Hasta que estén listas, cada espacio reservado dice qué va a mostrar.' : 'The installer steps, the live session and verification, in real captures of an install. Until they are ready, each placeholder says what it will show.'}
+  />
 
   <section class="section readiness" aria-labelledby="readiness-title">
     <h2 id="readiness-title">{isEs ? 'Cómo está la instalación' : 'Where installation stands'}</h2>
