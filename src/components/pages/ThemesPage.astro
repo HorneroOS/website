@@ -6,9 +6,8 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
-import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
-import ArchFrame from '../../components/ArchFrame.astro';
+import CaptureGallery from '../../components/CaptureGallery.astro';
 import ThemePaletteStudy from '../../components/ThemePaletteStudy.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import { paletteApplications, themes, wallpapers } from '../../data/product';
@@ -21,23 +20,17 @@ const paletteStudies = originals.filter(
 const otherLooks = themes.filter((theme) => theme.collection !== 'hornero-originals');
 const photosByTheme = new Map(wallpapers.map((wallpaper) => [wallpaper.themeId, wallpaper]));
 const wallpaperMedia = {
-  gruvbox: (await import('../../../assets/screenshots/theme-wallpapers/gruvbox.webp')).default,
-  landscape: (await import('../../../assets/screenshots/theme-wallpapers/landscape.webp')).default,
-  monochrome: (await import('../../../assets/screenshots/theme-wallpapers/monochrome.webp')).default,
-  'neon-city': (await import('../../../assets/screenshots/theme-wallpapers/neon-city.webp')).default,
-  'soft-morning': (await import('../../../assets/screenshots/theme-wallpapers/soft-morning.webp')).default,
-  'vapor-dreams': (await import('../../../assets/screenshots/theme-wallpapers/vapor-dreams.webp')).default,
-  'warm-sunset': (await import('../../../assets/screenshots/theme-wallpapers/warm-sunset.webp')).default,
+  gruvbox: (await import('../../../assets/wallpapers/theme-wallpapers/gruvbox.webp')).default,
+  landscape: (await import('../../../assets/wallpapers/theme-wallpapers/landscape.webp')).default,
+  monochrome: (await import('../../../assets/wallpapers/theme-wallpapers/monochrome.webp')).default,
+  'neon-city': (await import('../../../assets/wallpapers/theme-wallpapers/neon-city.webp')).default,
+  'soft-morning': (await import('../../../assets/wallpapers/theme-wallpapers/soft-morning.webp')).default,
+  'vapor-dreams': (await import('../../../assets/wallpapers/theme-wallpapers/vapor-dreams.webp')).default,
+  'warm-sunset': (await import('../../../assets/wallpapers/theme-wallpapers/warm-sunset.webp')).default,
 };
 const modes = (mode: string) => (mode === 'light' ? (isEs ? 'Claro' : 'Light') : (isEs ? 'Oscuro' : 'Dark'));
 const buenosAires = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
 if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pinned wallpaper catalogue');
-const showroom = await getCollection('showroom');
-const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip', 'morning-lake'].map((id) => {
-  const capture = showroom.find((item) => item.id === id);
-  if (!capture) throw new Error(`Showroom capture not found: ${id}`);
-  return capture;
-});
 ---
 
 <SiteLayout
@@ -76,66 +69,13 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     </div>
   </section>
 
-  <section class="section desktop-gallery" aria-labelledby="desktop-gallery-title">
-    <div class="section-heading">
-      <div>
-        <h2 id="desktop-gallery-title">{isEs ? 'Aspectos en un escritorio andando' : 'Looks on a running desktop'}</h2>
-      </div>
-      <p>
-        {isEs ? 'Elegí una captura para ver un aspecto en la Shell. Cada cuadro conserva su fuente y los datos de la captura. Son capturas separadas, no un solo escritorio en vivo.' : 'Choose a capture to see a look in the Shell. Each frame keeps its source and capture details. They are separate captures, not one live desktop.'}
-      </p>
-    </div>
-    <fieldset class="capture-switcher">
-      <legend>{isEs ? 'Explorá capturas reales del escritorio Hornero' : 'Explore real Hornero desktop captures'}</legend>
-      {desktopCaptures.map((capture, i) => {
-        const captureId = `capture-${capture.id}`;
-        return (
-          <>
-            <input
-              class="capture-radio"
-              type="radio"
-              name="desktop-capture"
-              id={`${captureId}-choice`}
-              value={capture.id}
-              checked={i === 0}
-            />
-            <label class="capture-tab" for={`${captureId}-choice`}>
-              <span class="capture-index">0{i + 1}</span>
-              <span class="capture-tab-copy">
-                <strong>{capture.data.title[locale]}</strong>
-                <small>{capture.data.provenance.theme ?? (isEs ? 'Apariencia personalizada' : 'Custom appearance')}</small>
-              </span>
-              <span class="capture-arrow" aria-hidden="true">↗</span>
-            </label>
-          </>
-        );
-      })}
-      <div class="capture-stage">
-        {desktopCaptures.map((capture) => {
-          const captureId = `capture-${capture.id}`;
-          return (
-            <article class="capture-slide" id={`${captureId}-panel`} aria-label={capture.data.title[locale]}>
-              <ArchFrame
-                src={capture.data.image}
-                alt={capture.data.alt[locale]}
-                provenance={capture.data.provenance}
-                locale={locale}
-                sizes="(min-width: 1100px) 68vw, calc(100vw - 2rem)"
-                widths={[480, 800, 1280, 1600]}
-              />
-              <div class="capture-slide-copy">
-                <h3>{capture.data.title[locale]}</h3>
-                <p aria-hidden="true">{capture.data.alt[locale]}</p>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </fieldset>
-    <p class="capture-footnote">
-      {isEs ? 'Si usás teclado, podés moverte entre capturas con las flechas. ' : 'Keyboard users can move between captures with the arrow keys. '}<a href={L('/showroom')}>{isEs ? 'Explorá la vidriera completa del escritorio' : 'Browse the complete desktop showcase'}</a>.
-    </p>
-  </section>
+  <CaptureGallery
+    route="/themes"
+    locale={locale}
+    id="desktop-gallery"
+    heading={isEs ? 'Aspectos en un escritorio andando' : 'Looks on a running desktop'}
+    intro={isEs ? 'Cada aspecto, aplicado a la misma terminal, la misma app GTK y los mismos Ajustes, en capturas reales del host. Hasta que estén listas, cada espacio reservado dice qué va a mostrar.' : 'Each look applied to the same terminal, GTK app and Settings, in real host captures. Until they are ready, each placeholder says what it will show.'}
+  />
 
   <ThemePaletteStudy themes={paletteStudies} locale={locale} />
 
@@ -353,158 +293,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     object-fit: cover;
     border: 1px solid color-mix(in srgb, var(--cue) 45%, var(--rule));
     box-shadow: 0.7rem 0.7rem 0 -0.1rem var(--base), 0.7rem 0.7rem 0 var(--cue);
-  }
-  .desktop-gallery {
-    padding-block: clamp(3rem, 7vw, 6rem);
-    border-block: 1px solid var(--rule);
-  }
-  .desktop-gallery .section-heading {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
-    align-items: end;
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-  .desktop-gallery .section-heading h2 {
-    font-size: clamp(2rem, 4vw, 4rem);
-    line-height: 1.02;
-    letter-spacing: -0.05em;
-  }
-  .desktop-gallery .section-heading > p {
-    max-width: 38rem;
-    margin: 0;
-    color: var(--ink-muted);
-  }
-  .capture-switcher {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(13rem, 0.32fr) minmax(0, 1fr);
-    grid-template-rows: auto repeat(5, minmax(4.5rem, auto));
-    align-items: stretch;
-    gap: 0.4rem 1.5rem;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-  .capture-switcher legend {
-    grid-column: 1 / -1;
-    margin-bottom: 0.75rem;
-    color: var(--ink-muted);
-    font: 0.72rem var(--font-mono);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .capture-radio {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-  .capture-tab {
-    display: grid;
-    min-width: 0;
-    grid-column: 1;
-    grid-template-columns: 2rem minmax(0, 1fr) 1rem;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.7rem 0.8rem;
-    border-bottom: 1px solid var(--rule);
-    color: var(--ink-muted);
-    cursor: pointer;
-    transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
-  }
-  .capture-tab:hover,
-  .capture-radio:checked + .capture-tab {
-    color: var(--ink);
-    border-color: var(--cue);
-    background: color-mix(in srgb, var(--cue) 8%, transparent);
-  }
-  .capture-radio:focus-visible + .capture-tab {
-    outline: 2px solid var(--cue);
-    outline-offset: 2px;
-  }
-  .capture-index {
-    color: var(--ink-muted);
-    font: 0.68rem var(--font-mono);
-  }
-  .capture-tab-copy {
-    display: grid;
-    gap: 0.2rem;
-    min-width: 0;
-  }
-  .capture-tab-copy strong {
-    font-size: 0.88rem;
-    line-height: 1.25;
-  }
-  .capture-tab-copy small {
-    color: var(--ink-muted);
-    font-size: 0.72rem;
-    line-height: 1.25;
-  }
-  .capture-arrow {
-    opacity: 0;
-    transform: translate(-0.2rem, 0.2rem);
-    transition: opacity 160ms ease, transform 160ms ease;
-  }
-  .capture-radio:checked + .capture-tab .capture-arrow,
-  .capture-tab:hover .capture-arrow {
-    opacity: 1;
-    transform: none;
-  }
-  .capture-stage {
-    grid-column: 2;
-    grid-row: 2 / span 5;
-    min-width: 0;
-  }
-  .capture-slide {
-    display: none;
-    margin: 0;
-    animation: capture-arrive 260ms ease both;
-  }
-  .capture-slide :global(.frame-shot) {
-    aspect-ratio: 16 / 10;
-  }
-  .capture-slide :global(.frame-shot img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .capture-slide-copy {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 0.7rem;
-  }
-  .capture-slide-copy h3 {
-    margin: 0;
-    font-size: var(--step-1);
-  }
-  .capture-slide-copy p {
-    max-width: 52ch;
-    margin: 0;
-    color: var(--ink-muted);
-    font-size: 0.84rem;
-  }
-  #capture-hornero-light-choice:checked ~ .capture-stage #capture-hornero-light-panel,
-  #capture-pampa-choice:checked ~ .capture-stage #capture-pampa-panel,
-  #capture-neon-city-choice:checked ~ .capture-stage #capture-neon-city-panel,
-  #capture-vapor-roadtrip-choice:checked ~ .capture-stage #capture-vapor-roadtrip-panel,
-  #capture-morning-lake-choice:checked ~ .capture-stage #capture-morning-lake-panel {
-    display: block;
-  }
-  @keyframes capture-arrive {
-    from { opacity: 0.65; }
-    to { opacity: 1; }
-  }
-  .capture-footnote {
-    color: var(--ink-muted);
-    font-size: 0.9rem;
-  }
-  .capture-footnote a {
-    color: var(--ink);
   }
   .intro-preview > p {
     display: grid;
@@ -1002,32 +790,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
       grid-template-columns: 1fr;
     }
     .native-tool-note { grid-template-columns: 1fr; gap: 0.4rem; }
-    .desktop-gallery .section-heading {
-      grid-template-columns: 1fr;
-      align-items: start;
-      gap: 0.65rem;
-    }
-    .capture-switcher {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: auto repeat(5, auto) auto;
-      gap: 0.3rem;
-    }
-    .capture-switcher legend {
-      grid-column: 1;
-    }
-    .capture-tab {
-      grid-column: 1;
-      min-height: 3.5rem;
-    }
-    .capture-stage {
-      grid-column: 1;
-      grid-row: 7;
-      margin-top: 0.8rem;
-    }
-    .capture-slide-copy {
-      display: grid;
-      gap: 0.3rem;
-    }
   }
   @media (min-width: 721px) and (max-width: 1100px) {
     .intro {
@@ -1036,9 +798,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
   }
   @media (max-width: 420px) {
-    .capture-slide-copy h3 {
-      font-size: 1.15rem;
-    }
     .look-grid {
       grid-template-columns: 1fr;
     }
@@ -1047,12 +806,6 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .capture-tab,
-    .capture-arrow,
-    .capture-slide {
-      transition: none;
-      animation: none;
-    }
     .look-card,
     .look-art :global(img) {
       transition: none;
@@ -1067,6 +820,5 @@ const desktopCaptures = ['hornero-light', 'pampa', 'neon-city', 'vapor-roadtrip'
 <style>
   /* Per-page direction: the catalogue as a broadcast test-card stage. */
 
-  .capture-tab .capture-index { color: var(--signal); }
   .collection-label { border-top: 3px solid var(--signal); padding-top: 0.6rem; }
 </style>

@@ -3,8 +3,12 @@
 //   desktop/appearance.md#x  -> /docs/desktop/appearance/#x
 //   ../architecture/README.md -> /docs/architecture/
 //   LICENSE, scripts/...      -> GitHub blob at the pinned docs commit
-// Only files under the docs checkout are touched; absolute URLs, anchors and
-// images (handled by Astro's asset pipeline) are left alone.
+// Only files under the docs checkout are touched; absolute URLs and anchors
+// are left alone. Images that pointed at the website's removed showcase
+// captures (`/images/apps/...`, deleted pending real host captures) are
+// replaced with a labelled pending-capture note naming their capture slot
+// (src/data/capture-slots.json) instead of a broken link; the docs
+// repository should point at the captured asset once the slot is filled.
 import { posix, relative, resolve, sep } from 'node:path';
 
 export function docsRoute(relPath) {
@@ -21,8 +25,29 @@ export default function remarkDocsLinks({ docsRoot, repo, sha }) {
   return (tree, file) => {
     const filePath = file?.history?.[0] ?? file?.path;
     if (!filePath || !resolve(filePath).startsWith(root + sep)) return;
-    const fromDir = posix.dirname(relative(root, resolve(filePath)).split(sep).join('/'));
+    const relFile = relative(root, resolve(filePath)).split(sep).join('/');
+    const fromDir = posix.dirname(relFile);
+    const spanish = relFile.startsWith('es/');
+    const pendingSlots = {
+      '/images/apps/thunar-wallpapers.webp': 'CAP-TERM-06',
+      '/images/apps/yazi-wallpapers.webp': 'CAP-TERM-06',
+      '/images/apps/kitty-appearance.webp': 'CAP-TERM-01',
+    };
     const walk = (node) => {
+      if (node.type === 'image' && typeof node.url === 'string' && node.url.startsWith('/images/apps/')) {
+        const slot = pendingSlots[node.url];
+        const label = spanish ? 'Pendiente — captura en el equipo' : 'Pending — host capture';
+        const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        node.type = 'html';
+        node.value = slot
+          ? `<span data-capture-slot="${slot}"><em>${label} (${slot}): ${alt}</em></span>`
+          : `<span><em>${label}: ${alt}</em></span>`;
+        delete node.url;
+        delete node.alt;
+        delete node.title;
+        delete node.children;
+        return;
+      }
       if (node.type === 'link' && typeof node.url === 'string') {
         const url = node.url;
         if (!/^(?:[a-z][a-z0-9+.-]*:|#|\/)/i.test(url)) {

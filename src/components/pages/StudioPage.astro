@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaptureFigure from '../CaptureFigure.astro';
+import CaptureGallery from '../CaptureGallery.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import { studioCatalogue, editions, pins, short } from '../../data/product';
@@ -112,7 +113,7 @@ const stats = isEs
   </section>
 
   <section class="section" aria-label={isEs ? 'Una sesión real' : 'A real session'}>
-    <CaptureFigure slot="studio-session" locale={locale} />
+    <CaptureFigure slot="CAP-STUDIO-01" locale={locale} />
   </section>
 
   <section class="section" aria-labelledby="workloads-title">
@@ -236,6 +237,8 @@ const stats = isEs
       </article>
     </div>
   </section>
+
+  <CaptureGallery route="/studio" locale={locale} exclude={['CAP-STUDIO-01']} />
 </SiteLayout>
 
 <style>

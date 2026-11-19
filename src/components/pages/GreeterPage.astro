@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import CaptureGallery from '../../components/CaptureGallery.astro';
 import { greeterSceneCatalogue, greeterScenes } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -582,6 +583,14 @@ const description = isEs
     choose(mood());
     if (saveData || prefersReduced.matches) setPlaying(false);
   </script>
+
+  <CaptureGallery
+    route="/greeter"
+    locale={locale}
+    id="greeter-captures"
+    heading={isEs ? 'El greeter y la pantalla de bloqueo, de verdad' : 'The real greeter and lock screen'}
+    intro={isEs ? 'La recreación de arriba no es una captura. Estas son las capturas reales del greeter y de la pantalla de bloqueo que la van a acompañar.' : 'The recreation above is not a screenshot. These are the real captures of the greeter and the lock screen that will accompany it.'}
+  />
 </SiteLayout>
 
 <style>

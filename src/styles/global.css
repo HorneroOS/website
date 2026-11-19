@@ -1357,7 +1357,7 @@ main .plate-id {
   text-transform: uppercase;
 }
 
-.capture-label[data-appearance='concept'] {
+.capture-label[data-state='pending'] {
   padding: 0.1rem 0.45rem;
   border: 1px dashed var(--signal);
   border-radius: var(--radius-small);
@@ -1365,11 +1365,11 @@ main .plate-id {
   color: var(--on-signal-well);
 }
 
-.capture-label[data-appearance='pre-signal'] {
-  color: var(--on-cue-well);
-  background: var(--cue-well);
+.capture-label[data-state='captured'] {
   padding: 0.1rem 0.45rem;
   border-radius: var(--radius-small);
+  background: var(--phosphor-well);
+  color: var(--on-phosphor-well);
 }
 
 /* ------------------------------------------------------------ tables --- */
@@ -1509,55 +1509,3 @@ thead th {
   font-style: normal;
 }
 
-/* Capture placeholder: a labelled schematic, never a drawn desktop. */
-.capture-label[data-appearance='placeholder'] {
-  padding: 0.1rem 0.45rem;
-  border: 1px dashed var(--rule-strong);
-  border-radius: var(--radius-small);
-}
-
-.capture-placeholder {
-  display: grid;
-  gap: 0.6rem;
-  margin: 0;
-}
-
-.capture-placeholder-frame {
-  display: grid;
-  position: relative;
-  aspect-ratio: 16 / 9;
-  max-height: 22rem;
-  place-items: center;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--sunken);
-  color: var(--ink-faint);
-}
-
-.capture-placeholder-frame svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.capture-placeholder-title {
-  position: relative;
-  padding: 0.3rem 0.7rem;
-  background: var(--sunken);
-  color: var(--ink-muted);
-  font: 500 0.78rem/1.4 var(--font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.capture-placeholder figcaption {
-  display: grid;
-  gap: 0.3rem;
-  color: var(--ink-muted);
-  font-size: var(--step--1);
-}
-
-.capture-placeholder-slot code {
-  font-size: 0.75rem;
-}

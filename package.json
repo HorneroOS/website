@@ -2,7 +2,7 @@
   "name": "hornero-website",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-release-truth.mjs && node scripts/sync-product-data.mjs --fetch-only && node scripts/check-i18n.mjs && node scripts/check-feature-ledger.mjs && astro build && pagefind --site dist && node scripts/check-links.mjs",
+    "build": "node scripts/check-release-truth.mjs && node scripts/sync-product-data.mjs --fetch-only && node scripts/check-i18n.mjs && node scripts/check-feature-ledger.mjs && node scripts/check-capture-slots.mjs && astro build && pagefind --site dist && node scripts/check-links.mjs && node scripts/check-capture-slots.mjs --dist",
     "preview": "astro preview",
     "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
     "lint": "eslint .",
@@ -16,7 +16,8 @@
     "check:i18n": "node scripts/check-i18n.mjs",
     "release:bump": "node scripts/release-bump.mjs",
     "check:ledger": "node scripts/check-feature-ledger.mjs",
-    "check:brand": "node scripts/check-brand.mjs"
+    "check:brand": "node scripts/check-brand.mjs",
+    "check:captures": "node scripts/check-capture-slots.mjs"
   },
   "version": "0.1.0",
   "private": true,

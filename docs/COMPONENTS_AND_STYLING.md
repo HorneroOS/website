@@ -13,15 +13,17 @@ type. Real Hornero captures provide the strongest visual statements.
 - `SiteLayout.astro` owns the shared document shell, main navigation, color
   mode selector and footer.
 - `BaseHead.astro` owns document metadata and shared head tags.
-- `ArchFrame.astro` renders responsive product imagery and its provenance
-  plate. `KilnStamp.astro` carries capture metadata.
+- `CaptureFigure.astro` is the one component for product imagery: it
+  renders a capture slot from `src/data/capture-slots.json` as a labelled
+  pending plate or, once captured, as the real image with provenance.
+  `CaptureGallery.astro` renders the remaining slots declared for a route.
 - `LayoutDiagram.astro` and `SourcePlate.astro` render focused product
   explanations.
 - `MaturityMeter.astro` renders an edition's maturity from the pinned
   catalogue as a text label plus a segmented meter. `CaptureLabel.astro`
-  renders a capture's appearance label (pre-Signal or Signal).
-- Capture slots in `src/data/captures.ts` decide which showroom capture
-  each homepage slot shows ([`CAPTURES.md`](./CAPTURES.md)).
+  states what a slot's imagery is (pending, or a real capture).
+- Capture slots in `src/data/capture-slots.json` decide what every place
+  that shows the distro displays ([`CAPTURES.md`](./CAPTURES.md)).
 - `StoryTimeline.astro` renders `src/data/story.ts` (compact rail on `/`, ledger
   on `/roots`). `LookCompare.astro` wipes between two real captures and falls
   back to a side-by-side pair without JavaScript.

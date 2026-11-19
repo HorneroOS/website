@@ -5,9 +5,9 @@
  * Fails when:
  *  - src/i18n/ui.ts es/en key sets diverge.
  *  - src/data/story.ts has a title/summary/label without both es and en.
- *  - a src/content/showroom/*.md frontmatter title/alt lacks es or en.
+ *  - a capture slot (src/data/capture-slots.json) lacks ES or EN title/description/alt.
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -43,16 +43,23 @@ for (const m of story.matchAll(/(title|summary|label):\s*(?:\{\s*es:\s*'[^']*',\
   }
 }
 
-// --- showroom frontmatter ---
-for (const file of readdirSync(join(root, 'src/content/showroom')).filter((f) => f.endsWith('.md'))) {
-  const text = read(`src/content/showroom/${file}`);
-  for (const field of ['title', 'alt', 'source', 'context']) {
-    const m = text.match(new RegExp(`^\\s*${field}:\\n\\s+es:[^\\n]*\\n\\s+en:`, 'm'));
-    const present = new RegExp(`^\\s*${field}:`, 'm').test(text);
-    if (field === 'context' && !present) continue; // provenance context is optional
-    if (!m) {
-      failures.push(`src/content/showroom/${file}: ${field} lacks es/en`);
+// --- capture slots: every slot carries ES and EN copy ---
+const slotData = JSON.parse(read('src/data/capture-slots.json'));
+for (const slot of slotData.slots) {
+  for (const field of ['title', 'description', 'alt']) {
+    for (const lang of ['es', 'en']) {
+      if (typeof slot[field]?.[lang] !== 'string' || slot[field][lang].trim().length < 4) {
+        failures.push(`src/data/capture-slots.json: ${slot.id} ${field}.${lang} is missing`);
+      }
     }
+    if (field !== 'title' && slot[field]?.es && slot[field]?.es === slot[field]?.en) {
+      failures.push(`src/data/capture-slots.json: ${slot.id} ${field} has identical es/en text`);
+    }
+  }
+}
+for (const session of slotData.sessions) {
+  for (const lang of ['es', 'en']) {
+    if (!session.title?.[lang]) failures.push(`src/data/capture-slots.json: session ${session.id} title.${lang} is missing`);
   }
 }
 
@@ -61,4 +68,4 @@ if (failures.length) {
   for (const f of failures) console.error(`  - ${f}`);
   process.exit(1);
 }
-console.log('check-i18n: OK (ui keys, story, showroom parity)');
+console.log('check-i18n: OK (ui keys, story, capture-slot copy parity)');

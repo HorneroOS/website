@@ -1,96 +1,90 @@
-// Capture slots: where the site shows a real desktop capture, and which
-// showroom entry fills each slot today. QA replaces a slot by adding a new
-// showroom entry (src/content/showroom/<id>.md, with provenance and
-// `appearance: signal`) and pointing the slot's `capture` at it — no page
-// code changes. See docs/CAPTURES.md for the full contract.
+// Capture slots: every place the site would show what the distro looks like.
 //
-// `wanted` is the brief for the replacement capture. It is never shown as if
-// it were an image; slots always render a real capture.
+// The single source of truth is src/data/capture-slots.json. A slot is
+// `pending` until a real host capture exists; the shared CaptureFigure
+// component then renders a labelled "pending capture" plate with the same
+// aspect ratio the image will have, so swapping in a capture causes no layout
+// shift. To fill a slot: drop the file in src/assets/captures/ (clips go in
+// public/captures/) and flip `status` to `captured` and set `file`
+// (`node scripts/capture-ingest.mjs <ID> <file>` does both and validates the
+// image). docs/CAPTURES.md has the contract and docs/CAPTURE-SHOT-LIST.md the
+// full list of what to shoot.
 
-export type CaptureAppearance = 'signal' | 'pre-signal';
+import data from './capture-slots.json';
 
-export interface CaptureSlot {
-  /** Showroom entry id (src/content/showroom/<id>.md) that fills the slot. */
-  /** Showroom entry id, or null while no authentic capture exists (the page then shows a labelled placeholder). */
-  capture: string | null;
-  /** Where the slot renders. */
-  usedOn: string[];
-  /** Brief for QA: what a Hornero Signal replacement capture must show. */
-  wanted: string;
+export type SlotPriority = 'P0' | 'P1' | 'P2';
+export type SlotKind = 'screenshot' | 'clip' | 'photo';
+export type SlotStatus = 'pending' | 'captured';
+
+export interface Localized {
+  en: string;
+  es: string;
 }
 
-export const captureSlots = {
-  'home-workstation': {
-    capture: 'terminal-tools',
-    usedOn: ['/ (hero workstation)', '/editions (Desktop)'],
-    wanted:
-      'Signal Night, Cockpit preset, 1920×1080 at 100 % scale, real host. Two or more application windows doing real work (for example an editor and a terminal running a build, or btop and a file manager). No popouts, no Dashboard over the windows.',
-  },
-  'home-shell-dark': {
-    capture: 'hornero-left',
-    usedOn: ['/ (shell, dark half of the comparison)'],
-    wanted: 'Signal Night, Hornero Left preset, 1920×1080, same wallpaper and window arrangement as home-shell-light.',
-  },
-  'home-shell-light': {
-    capture: 'hornero-light',
-    usedOn: ['/ (shell, light half of the comparison)'],
-    wanted: 'Signal Day, Hornero Left preset, 1920×1080, same wallpaper and window arrangement as home-shell-dark.',
-  },
-  'desktop-hero': {
-    capture: 'live-workstation',
-    usedOn: ['/desktop (hero)'],
-    wanted: 'Signal Night, Cockpit, 1920×1080, real host: a working session with an editor, a terminal and the bar visible.',
-  },
-  'studio-session': {
-    capture: null,
-    usedOn: ['/studio (hero)'],
-    wanted: 'Studio mode on a real host or the QA VM: Ardour or Blender open, the mode indicator on the bar, Studio layout.',
-  },
-  'gaming-session': {
-    capture: null,
-    usedOn: ['/gaming (hero)'],
-    wanted: 'Gaming mode, Gaming layout: Steam or Heroic open, a game windowed, the mode indicator visible. No fabricated frame rates.',
-  },
-  'mode-focus': {
-    capture: null,
-    usedOn: ['/modes (Focus)'],
-    wanted: 'Focus mode: icon-only bar, empty desktop, one working window. Same wallpaper as the other mode captures.',
-  },
-  'mode-signal-deck': {
-    capture: null,
-    usedOn: ['/modes (Signal)'],
-    wanted: 'Signal mode with the instrument deck showing real telemetry widgets from the official plugins.',
-  },
-  'mode-gaming': {
-    capture: null,
-    usedOn: ['/modes (Gaming)'],
-    wanted: 'Gaming mode: motion off, empty desktop, icon-only bar, fullscreen-adjacent state.',
-  },
-  'chromatic-pair-a': {
-    capture: null,
-    usedOn: ['/chromatic (before/after, wallpaper A)'],
-    wanted: 'Hornero Chromatic active over wallpaper A: Cockpit with a terminal, the Control Center Appearance section in view.',
-  },
-  'chromatic-pair-b': {
-    capture: null,
-    usedOn: ['/chromatic (before/after, wallpaper B)'],
-    wanted: 'Same arrangement as chromatic-pair-a with a different wallpaper, showing the palette and terminal colours following it.',
-  },
-  'javi-desktop': {
-    capture: null,
-    usedOn: ['/companion', '/ (Javi section)'],
-    wanted: 'Javi perched in his desktop corner on a real desktop, not overlapping windows.',
-  },
-  'pluginkit-deck': {
-    capture: 'dashboard-extensions',
-    usedOn: ['/extensions (lead)'],
-    wanted: 'Three or more official extensions placed on the bar, desktop and Dashboard in one real session (Signal appearance).',
-  },
-  'customise-layout-picker': {
-    capture: 'layout-picker',
-    usedOn: ['/desktop (customisation)'],
-    wanted: 'Layout picker or the Control Center Bars page with live preview, in Signal.',
-  },
-} satisfies Record<string, CaptureSlot>;
+export interface CaptureSlot {
+  id: string;
+  priority: SlotPriority;
+  session: string;
+  kind: SlotKind;
+  title: Localized;
+  description: Localized;
+  alt: Localized;
+  /** Routes (Spanish, root-relative) where the slot renders inline. Every slot also renders in /showroom. */
+  pages: string[];
+  section: string;
+  aspect: string;
+  width: number;
+  height: number;
+  scale2x: boolean;
+  format: string;
+  theme: string;
+  mode: string;
+  layout: string;
+  wallpaper: string;
+  setup: string[];
+  privacy: string;
+  status: SlotStatus;
+  /** File name under src/assets/captures/ (public/captures/ for clips) once captured. */
+  file: string | null;
+  /** Poster image (src/assets/captures/) for clips. */
+  poster?: string | null;
+  capturedAt?: string;
+  sha256?: string;
+  source?: Localized;
+  pins?: Record<string, string>;
+  credit?: Localized;
+}
 
-export type CaptureSlotId = keyof typeof captureSlots;
+export interface CaptureSession {
+  id: string;
+  title: Localized;
+  where: string;
+  minutes: number;
+}
+
+export const captureSlots = data.slots as CaptureSlot[];
+export const captureSessions = data.sessions as CaptureSession[];
+
+const byId = new Map(captureSlots.map((slot) => [slot.id, slot]));
+
+export function getSlot(id: string): CaptureSlot {
+  const slot = byId.get(id);
+  if (!slot) throw new Error(`Capture slot '${id}' is not declared in src/data/capture-slots.json`);
+  return slot;
+}
+
+/** Slots declared for a route, in the order they appear in the data file. */
+export function slotsForPage(route: string): CaptureSlot[] {
+  return captureSlots.filter((slot) => slot.pages.includes(route));
+}
+
+export const priorityOrder: SlotPriority[] = ['P0', 'P1', 'P2'];
+
+export function slotCounts() {
+  const counts = { P0: 0, P1: 0, P2: 0, total: captureSlots.length, captured: 0 };
+  for (const slot of captureSlots) {
+    counts[slot.priority] += 1;
+    if (slot.status === 'captured') counts.captured += 1;
+  }
+  return counts;
+}

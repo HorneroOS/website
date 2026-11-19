@@ -34,9 +34,9 @@ What was stale or missing relative to the OS:
 5. **PluginKit is described as a catalogue only.** `/extensions` lists 36
    extensions well but does not tell the story of personal worlds
    (contribution surfaces, deck, per-instance settings).
-6. **Capture currency.** All 18 captures in `src/content/showroom/` carry
-   `appearance: pre-signal`; the first screen shows an older appearance
-   with an honest label. Replacement captures are a QA hand-off (slots below).
+6. **Capture currency.** The 18 pre-Signal captures were withdrawn. Every
+   place that shows the desktop is now a pending capture slot with an
+   honest plate; replacement captures are a QA hand-off (slots below).
 7. **No machine-readable maturity for features.** Edition maturity came from
    the catalogue, but everything else was prose. Fixed by the feature ledger.
 8. **Tone.** The Signal chrome is precise and calm, and the page copy is
@@ -79,10 +79,11 @@ renders `<StageBadge>`; it never types a status by hand.
 
 ### Capture slots
 
-Every place that shows a desktop declares a slot in `src/data/captures.ts`.
-A slot with `capture: null` renders `<CapturePlaceholder>`: a dashed schematic
-that says "Placeholder — not a screenshot" and prints QA's brief. Nothing
-drawn ever stands in for a desktop. See [`CAPTURES.md`](./CAPTURES.md).
+Every place that shows a desktop declares a slot in
+`src/data/capture-slots.json`. A `pending` slot renders through
+`<CaptureFigure>` as an instrument-panel plate that says "Pending — host
+capture" and prints QA's brief. Nothing drawn ever stands in for a desktop.
+See [`CAPTURES.md`](./CAPTURES.md).
 
 ## Visual system and shared tokens
 
@@ -96,7 +97,8 @@ labelled swatches), not as page theming.
 Additions are structural, not decorative:
 
 - `.stage-badge` — ledger stage (text label plus shape: solid, dotted, dashed).
-- `.capture-placeholder` — the labelled slot stand-in.
+- `.capture-plate` — the labelled pending-capture plate inside
+  `CaptureFigure`.
 - Motion stays within RFC 0001 §3.6 tokens; one orchestrated moment per page,
   none under `prefers-reduced-motion`.
 

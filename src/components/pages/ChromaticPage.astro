@@ -2,6 +2,7 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import StageBadge from '../StageBadge.astro';
 import CaptureFigure from '../CaptureFigure.astro';
+import CaptureGallery from '../CaptureGallery.astro';
 import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { localizePath, type Locale } from '../../i18n/ui';
@@ -134,13 +135,13 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
   </section>
 
   <section class="section" aria-labelledby="pair-title">
-    <h2 id="pair-title">{isEs ? 'Capturas reales: pendientes' : 'Real captures: pending'}</h2>
+    <h2 id="pair-title">{isEs ? 'Un escritorio, dos fondos' : 'One desktop, two wallpapers'}</h2>
     <p class="section-copy">
-      {isEs ? 'Un escritorio, dos fondos distintos y la paleta siguiéndolos: ese par lo va a mostrar una captura real de QA. Hasta entonces, el sitio no inventa uno.' : 'One desktop, two different wallpapers and the palette following them: a real QA capture pair will show that. Until then the site does not invent one.'}
+      {isEs ? 'Un escritorio, dos fondos distintos y la paleta siguiéndolos: ese par lo muestran dos capturas reales del host. Hasta entonces, cada espacio reservado dice qué va a mostrar.' : 'One desktop, two different wallpapers and the palette following them: a pair of real host captures shows that. Until then each placeholder says what it will show.'}
     </p>
     <div class="chroma-pair">
-      <CaptureFigure slot="chromatic-pair-a" locale={locale} />
-      <CaptureFigure slot="chromatic-pair-b" locale={locale} />
+      <CaptureFigure slot="CAP-CHROMA-01" locale={locale} />
+      <CaptureFigure slot="CAP-CHROMA-02" locale={locale} />
     </div>
   </section>
 
@@ -154,6 +155,8 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
       {ledger.evidence.map((e) => <li><a href={e.href}>{e.label}</a></li>)}
     </ul>
   </section>
+
+  <CaptureGallery route="/chromatic" locale={locale} exclude={['CAP-CHROMA-01', 'CAP-CHROMA-02']} />
 </SiteLayout>
 
 <style>

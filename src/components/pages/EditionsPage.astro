@@ -1,11 +1,8 @@
 ---
-import { Picture } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
-import CaptureLabel from '../../components/CaptureLabel.astro';
-import { captureSlots } from '../../data/captures';
+import CaptureFigure from '../../components/CaptureFigure.astro';
 import { editions, editionCatalogue, studioCatalogue, gamingCatalogue, layouts, themes, type Maturity } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 
@@ -49,10 +46,6 @@ const rows = familyOrder.map((id) => {
   return { ...edition, ...copy[id], name: edition.title.replace('HorneroOS ', ''), parent: parent?.title.replace('HorneroOS ', ''), compositors };
 });
 const compositorName = (id: string) => (id === 'hyprland' ? 'Hyprland' : id === 'niri' ? 'Niri' : id);
-
-const captures = await getCollection('showroom');
-const desktopShot = captures.find((entry) => entry.id === captureSlots['home-workstation'].capture);
-if (!desktopShot) throw new Error('The Desktop edition capture slot points to a missing showroom entry');
 
 const yes = isEs ? 'Sí' : 'Yes';
 const no = '—';
@@ -124,21 +117,9 @@ const matrix = [
               <a class="row-link" href={row.href.startsWith('/') ? L(row.href) : row.href}>{row.link}</a>
             </div>
             {row.id === 'desktop' && (
-              <figure class="row-shot">
-                <Picture
-                  src={desktopShot.data.image}
-                  alt={desktopShot.data.alt[locale]}
-                  formats={['avif', 'webp']}
-                  widths={[480, 800, 1200]}
-                  sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption>
-                  <CaptureLabel appearance={desktopShot.data.provenance.appearance} locale={locale} />
-                  <span>{desktopShot.data.provenance.source[locale]} · {desktopShot.data.provenance.date}</span>
-                </figcaption>
-              </figure>
+              <div class="row-shot">
+                <CaptureFigure slot="CAP-HERO-01" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
+              </div>
             )}
           </li>
         ))
@@ -261,20 +242,6 @@ const matrix = [
   }
   .row-shot {
     margin: 0;
-  }
-  .row-shot :global(img) {
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--rule-strong);
-    border-radius: var(--radius-small);
-  }
-  .row-shot figcaption {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.75rem;
-    margin-top: 0.5rem;
-    color: var(--ink-muted);
-    font: 0.72rem var(--font-mono);
   }
   .matrix td,
   .matrix th[scope='row'] {
