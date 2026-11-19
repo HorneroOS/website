@@ -11,18 +11,7 @@
 // src/assets/captures/<slot-file> kept for docs), keeping the slot id in
 // data-capture-slot; until then they render a labelled pending-capture
 // note instead of a broken link.
-import { readFileSync } from 'node:fs';
 import { posix, relative, resolve, sep } from 'node:path';
-
-const capturedFiles = (() => {
-  try {
-    const data = JSON.parse(readFileSync(resolve('src/data/capture-slots.json'), 'utf8'));
-    const slots = Array.isArray(data) ? data : data.slots;
-    return new Map(slots.filter((s) => s.status === 'captured' && s.file).map((s) => [s.id, s.file]));
-  } catch {
-    return new Map();
-  }
-})();
 
 export function docsRoute(relPath) {
   // Spanish translations mirror English paths under es/; they serve at
@@ -33,7 +22,7 @@ export function docsRoute(relPath) {
   return `/docs/${clean}/`;
 }
 
-export default function remarkDocsLinks({ docsRoot, repo, sha }) {
+export default function remarkDocsLinks({ docsRoot, repo, sha, capturedFiles = {} }) {
   const root = resolve(docsRoot);
   return (tree, file) => {
     const filePath = file?.history?.[0] ?? file?.path;
@@ -51,7 +40,7 @@ export default function remarkDocsLinks({ docsRoot, repo, sha }) {
         const slot = pendingSlots[node.url];
         const label = spanish ? 'Pendiente — captura en el equipo' : 'Pending — host capture';
         const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        const capturedFile = slot ? capturedFiles.get(slot) : undefined;
+        const capturedFile = slot ? capturedFiles[slot] : undefined;
         node.type = 'html';
         node.value = capturedFile
           ? `<img data-capture-slot="${slot}" src="/captures/${capturedFile}" alt="${alt}" loading="lazy" />`
