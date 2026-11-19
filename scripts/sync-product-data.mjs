@@ -6,7 +6,7 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases,editions,greeter-scenes,wallpapers,terminals,palette-applications}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions,greeter,wallpapers,terminals,palette-applications,extensions}.json
 //
 // Product facts on /layouts, /themes, /releases and /terminals come from these files, and
 // these files come only from the pinned commits: never edit them by hand.
@@ -352,87 +352,105 @@ function paletteApplications(configDir) {
   }));
 }
 
-// The greeter catalog and per-scene provenance are canonical. This generated
-// website projection carries only metadata and local preview paths; preview
-// binaries are built separately by greeter/scripts/media/export-web-previews.py.
-function greeterScenes(greeterDir) {
-  const catalog = readJson(join(greeterDir, 'media/catalog.json'));
-  const manifests = new Map(
-    readdirSync(join(greeterDir, 'media/manifests'))
-      .filter((file) => file.endsWith('.json'))
-      .map((file) => {
-        const data = readJson(join(greeterDir, 'media/manifests', file));
-        return [data.id, data];
-      }),
-  );
-  const stills = readdirSync(join(greeterDir, 'media/stills'))
-    .filter((file) => file.endsWith('.json'))
-    .map((file) => readJson(join(greeterDir, 'media/stills', file)));
-  const scenes = [];
-  for (const [daypart, entries] of Object.entries(catalog.dayparts)) {
-    for (const entry of entries) {
-      const source = manifests.get(entry.id);
-      if (!source) fail(`greeter catalog entry ${entry.id} has no manifest`);
-      if (!['own-work', 'reviewed', 'written-permission'].includes(source.review?.status)) {
-        fail(`greeter catalog entry ${entry.id} has no approved redistribution review`);
-      }
-      scenes.push({
-        id: source.id,
-        title: source.title,
-        place: source.location.place,
-        province: source.location.province,
-        region: source.location.region,
-        daypart,
-        kind: 'video',
-        preview: `/media/greeter/${source.id}.mp4`,
-        poster: `/media/greeter/${source.id}.webp`,
-        creator: source.creator,
-        license: source.license.short,
-        licenseUrl: source.license.url,
-        sourceUrl: source.source.page,
-        description: source.description ?? source.notes,
-      });
-    }
+// The Signal-native greeter (HorneroOS/greeter#51) bundles no media: there
+// is no scene catalogue to project any more. This projection carries the
+// facts the /greeter page states about the theme itself, read from the
+// pinned checkout and failing closed on drift: the theme.conf defaults,
+// the components that make up the design, the built-in palettes and
+// languages, and the offscreen renders the greeter repository publishes
+// under screens/ (renders of the real sddm-greeter-qt6 --test-mode, not
+// captures of a real login; the website links to them, it does not serve
+// them as screenshots \u2014 see docs/CAPTURES.md).
+function greeter(greeterDir) {
+  if (existsSync(join(greeterDir, 'media'))) {
+    fail('greeter checkout has a media/ tree: the Signal-native greeter bundles no media, so this projection would be wrong');
   }
-  for (const source of stills) {
-    if (!['own-work', 'reviewed', 'written-permission'].includes(source.review?.status)) {
-      fail(`greeter still ${source.id} has no approved redistribution review`);
-    }
-    if (!['static-golden-hour-fallback', 'static-night-fallback'].includes(source.role)) {
-      fail(`greeter still ${source.id} has unsupported role ${source.role}`);
-    }
-    scenes.push({
-      id: source.id,
-      title: source.title,
-      place: source.location.place,
-      province: source.location.province,
-      region: source.location.region,
-      daypart: source.role === 'static-golden-hour-fallback' ? 'golden-hour' : 'night',
-      kind: 'still',
-      preview: null,
-      poster: `/media/greeter/${source.id}.webp`,
-      creator: source.creator,
-      license: source.license.short,
-      licenseUrl: source.license.url,
-      sourceUrl: source.source.page,
-      description: source.description ?? source.notes,
-    });
+  const components = ['HorizonField.qml', 'ChannelStrip.qml', 'HorneroSprite.qml', 'Signal.js', 'Strings.js', 'UserVideo.qml'];
+  for (const name of components) {
+    if (!existsSync(join(greeterDir, 'components', name))) fail(`greeter component components/${name} is missing`);
   }
-  const theme = readFileSync(join(greeterDir, 'theme.conf'), 'utf8');
-  const value = (key) => {
-    const match = new RegExp(`^${key}=(\\d+)$`, 'm').exec(theme);
-    if (!match) fail(`greeter theme.conf is missing numeric ${key}`);
-    return Number(match[1]);
+  const themeText = readFileSync(join(greeterDir, 'theme.conf'), 'utf8');
+  const raw = {};
+  for (const line of themeText.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('[')) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq > 0) raw[trimmed.slice(0, eq).trim()] = trimmed.slice(eq + 1).trim();
+  }
+  const stringKey = (key, allowed) => {
+    if (!(key in raw)) fail(`greeter theme.conf is missing ${key}`);
+    if (allowed && !allowed.includes(raw[key])) fail(`greeter theme.conf ${key}=${raw[key]} is not one of ${allowed.join(', ')}`);
+    return raw[key];
   };
+  const boolKey = (key) => {
+    const value = stringKey(key, ['true', 'false']);
+    return value === 'true';
+  };
+  const backgroundDim = Number(stringKey('backgroundDim'));
+  if (!Number.isFinite(backgroundDim) || backgroundDim < 0.3 || backgroundDim > 0.9) {
+    fail(`greeter theme.conf backgroundDim=${raw.backgroundDim} is outside its documented 0.3-0.9 range`);
+  }
+  if (stringKey('backgroundImage') !== '') {
+    fail('greeter theme.conf backgroundImage default must stay empty (nothing is bundled)');
+  }
+  if (stringKey('backgroundSeed') !== '') {
+    fail('greeter theme.conf backgroundSeed default must stay empty (a new sky each day per machine)');
+  }
+  const defaults = {
+    colorScheme: stringKey('colorScheme', ['auto', 'night', 'day']),
+    highContrast: boolKey('highContrast'),
+    largeText: boolKey('largeText'),
+    reducedMotion: boolKey('reducedMotion'),
+    language: stringKey('language'),
+    voice: stringKey('voice', ['cozy', 'plain']),
+    mascot: boolKey('mascot'),
+    background: stringKey('background', ['horizon', 'plain']),
+    backgroundMotion: boolKey('backgroundMotion'),
+    backgroundDim,
+    showUserChannels: boolKey('showUserChannels'),
+    allowOtherUser: boolKey('allowOtherUser'),
+    confirmPower: boolKey('confirmPower'),
+  };
+  const signal = readFileSync(join(greeterDir, 'components/Signal.js'), 'utf8');
+  const palettes = [
+    ['night', 'Signal Night', 'var NIGHT'],
+    ['day', 'Signal Day', 'var DAY'],
+    ['highContrast', 'Signal High Contrast', 'var CONTRAST'],
+  ]
+    .filter(([, , marker]) => signal.includes(marker))
+    .map(([id, name]) => ({ id, name }));
+  if (palettes.length !== 3) fail('greeter Signal.js must define the Night, Day and High Contrast palettes');
+  const strings = readFileSync(join(greeterDir, 'components/Strings.js'), 'utf8');
+  const languages = [
+    ['en', 'var EN'],
+    ['es', 'var ES'],
+  ]
+    .filter(([, marker]) => strings.includes(marker))
+    .map(([id]) => id);
+  if (languages.length !== 2) fail('greeter Strings.js must define the English and Spanish tables');
+  const pngSize = (path) => {
+    const bytes = readFileSync(path);
+    if (bytes.length < 24 || bytes.toString('latin1', 1, 4) !== 'PNG') fail(`${path} is not a PNG`);
+    return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+  };
+  const renderFiles = [
+    'screens/screenshot.png',
+    ...readdirSync(join(greeterDir, 'screens/signal'))
+      .filter((file) => file.endsWith('.png'))
+      .sort()
+      .map((file) => `screens/signal/${file}`),
+  ];
+  const renders = renderFiles.map((file) => ({ file, ...pngSize(join(greeterDir, file)) }));
+  if (renders.length === 0) fail('greeter screens/ has no offscreen renders');
   return {
     version: 1,
-    dayparts: {
-      dayStart: value('dayTimeStart'),
-      dayEnd: value('dayTimeEnd'),
-      goldenHourStart: value('goldenHourStart'),
-      goldenHourEnd: value('goldenHourEnd'),
-    },
-    scenes,
+    design: 'signal',
+    bundledMedia: false,
+    components,
+    palettes,
+    languages,
+    defaults,
+    renders,
   };
 }
 
@@ -656,7 +674,7 @@ const generated = {
   'wallpapers.json': wallpapers(dirs.config),
   'releases.json': releases(dirs.hornero, pins.releaseTags ?? []),
   'editions.json': editionCatalogue(dirs.hornero),
-  'greeter-scenes.json': greeterScenes(dirs.greeter),
+  'greeter.json': greeter(dirs.greeter),
   'terminals.json': terminalIntegrations(dirs.config),
   'palette-applications.json': paletteApplications(dirs.config),
   'extensions.json': extensions(dirs.plugins),

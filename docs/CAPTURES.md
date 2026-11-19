@@ -80,7 +80,7 @@ ingesting.
 
 Not every image in the repository is a product capture. Brand marks,
 favicons, social cards, third-party application logos shown nominatively,
-licensed wallpapers and licensed greeter scene media are listed, with a
+licensed wallpapers are listed, with a
 category and a reason, in `src/data/kept-images.json`. Anything else image-
 or video-like in `public/`, `src/assets/` or `assets/` fails the build.
 

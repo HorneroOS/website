@@ -5,13 +5,13 @@
 
 The site currently shows **no product imagery**. Every place that will show how HorneroOS looks is a
 pending-capture plate driven by one slot in the data file. This is the definitive list of what the best
-possible showcase needs: **143 slots** (33 P0, 70 P1, 40 P2) in
+possible showcase needs: **144 slots** (33 P0, 71 P1, 40 P2) in
 13 capture sessions, roughly 16 hours of work if done in order.
 
 | Priority | Meaning | Slots |
 | --- | --- | --- |
 | P0 | Launch-critical: a page looks broken or dishonest without it | 33 |
-| P1 | Important: makes the page convincing | 70 |
+| P1 | Important: makes the page convincing | 71 |
 | P2 | Complementary: depth for people who keep reading | 40 |
 
 ## How to deliver a capture
@@ -75,7 +75,7 @@ Send the files to the maintainer who runs the ingest, or open a PR containing th
 | [S09 Modes, Studio and Gaming](#session-s09-modes-studio-and-gaming) | Host, demo user, Studio and Gaming installed | 14 | 90 min |
 | [S10 Terminals and horneroctl](#session-s10-terminals-and-horneroctl) | Host, demo user | 6 | 40 min |
 | [S11 Multi-monitor and physical photography](#session-s11-multi-monitor-and-physical-photography) | Host + camera | 6 | 90 min |
-| [S12 Greeter, boot, installer and updates](#session-s12-greeter-boot-installer-and-updates) | QA VM or a fresh install | 15 | 120 min |
+| [S12 Greeter, boot, installer and updates](#session-s12-greeter-boot-installer-and-updates) | QA VM or a fresh install | 16 | 120 min |
 | [S13 Motion clips](#session-s13-motion-clips) | Host, demo user (recorder) | 8 | 90 min |
 
 Run the sessions in order: S01 sets the arrangement and wallpapers that S02 to S09 reuse.
@@ -1954,7 +1954,7 @@ Where: Host + camera. About 90 minutes, 6 slots.
 
 ## Session S12: Greeter, boot, installer and updates
 
-Where: QA VM or a fresh install. About 120 minutes, 15 slots.
+Where: QA VM or a fresh install. About 120 minutes, 16 slots.
 
 | Slot | Priority | Kind | Shown on |
 | --- | --- | --- | --- |
@@ -1964,8 +1964,9 @@ Where: QA VM or a fresh install. About 120 minutes, 15 slots.
 | CAP-INSTALL-08 | P0 | screenshot | /install |
 | CAP-BOOT-01 | P1 | screenshot | /install |
 | CAP-BOOT-02 | P1 | screenshot | Showroom only |
-| CAP-GREETER-02 | P1 | screenshot | Showroom only |
-| CAP-GREETER-03 | P1 | screenshot | Showroom only |
+| CAP-GREETER-02 | P1 | screenshot | /greeter |
+| CAP-GREETER-03 | P1 | screenshot | /greeter |
+| CAP-GREETER-04 | P1 | screenshot | /greeter |
 | CAP-INSTALL-03 | P1 | screenshot | /install |
 | CAP-INSTALL-04 | P1 | screenshot | Showroom only |
 | CAP-INSTALL-05 | P1 | screenshot | Showroom only |
@@ -1974,19 +1975,20 @@ Where: QA VM or a fresh install. About 120 minutes, 15 slots.
 | CAP-INSTALL-06 | P2 | screenshot | Showroom only |
 | CAP-UPDATE-02 | P2 | screenshot | Showroom only |
 
-### CAP-GREETER-01 The greeter, real screen
+### CAP-GREETER-01 The Signal greeter, real screen
 
 - **Priority:** P0 (launch-critical).
-- **Page and section:** /greeter · Greeter.
-- **On screen:** The real Hornero greeter on its default scene with the demo user, session picker and clock; no recreation.
+- **Page and section:** /greeter · Greeter, Signal Night hero.
+- **On screen:** The real Hornero Signal greeter on Signal Night: the generative Pampa horizon, the centred clock, Javi's greeting and the sign-in module with accounts as channels and the demo user tuned; no recreation.
 - **Spec:** 16:9, 1920x1080 (also a 2x master), PNG master (lossless).
-- **State:** theme Greeter default, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
+- **State:** theme Signal Night (greeter), mode n/a, layout n/a, wallpaper Generative horizon (no wallpaper).
 - **Setup:**
-  1. Preferred: the QA VM or a fresh install (`hornero-qa` images), log out to SDDM and capture from the host with the VM screenshot tool.
-  2. On real hardware use a second TTY: `sudo -u sddm` environments differ; prefer the VM.
+  1. Preferred: the QA VM or a fresh install with the released Signal greeter (`hornero-qa` images), log out to SDDM and capture from the host with the VM screenshot tool.
+  2. Leave theme.conf at its defaults (colorScheme=auto on a dark platform, background=horizon, mascot=true); the demo user must be the tuned channel.
+  3. On real hardware use a second TTY: `sudo -u sddm` environments differ; prefer the VM.
 - **Privacy:** Demo user only.
-- **Alt text (EN):** The real Hornero greeter on its default scene with the demo user, session picker and clock; no recreation.
-- **Alt text (ES):** El greeter real de Hornero en su escena por defecto con el usuario de demostración, el selector de sesión y el reloj; sin recreación.
+- **Alt text (EN):** The real Hornero Signal greeter on Signal Night: the generative Pampa horizon, the centred clock, Javi's greeting and the sign-in module with accounts as channels and the demo user tuned; no recreation.
+- **Alt text (ES):** El greeter real de Hornero Signal en Signal Night: el horizonte generativo de la pampa, el reloj al centro, el saludo de Javi y el módulo de ingreso con las cuentas como canales y el usuario de demostración sintonizado; sin recreación.
 
 ### CAP-INSTALL-01 Installer: welcome
 
@@ -2056,31 +2058,46 @@ Where: QA VM or a fresh install. About 120 minutes, 15 slots.
 - **Alt text (EN):** The boot splash with the hornero mark and progress.
 - **Alt text (ES):** La pantalla de arranque con la marca del hornero y el progreso.
 
-### CAP-GREETER-02 Greeter: session and power
+### CAP-GREETER-02 Greeter: session list and power confirmation
 
 - **Priority:** P1 (important).
-- **Page and section:** Showroom only · Greeter.
-- **On screen:** The greeter with the session picker open (Hyprland, Niri) and the power menu.
+- **Page and section:** /greeter · Greeter, sessions and power.
+- **On screen:** The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.
 - **Spec:** 16:9, 1920x1080, PNG master (lossless).
-- **State:** theme Greeter default, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
+- **State:** theme Signal Night (greeter), mode n/a, layout n/a, wallpaper Generative horizon (no wallpaper).
 - **Setup:**
-  1. Open the session picker without choosing.
+  1. In the QA VM or a fresh install, open the session selector without choosing; capture.
+  2. Then choose Restart and capture the confirmation dialog before confirming; cancel out of it.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** The greeter with the session picker open (Hyprland, Niri) and the power menu.
-- **Alt text (ES):** El greeter con el selector de sesión abierto (Hyprland, Niri) y el menú de energía.
+- **Alt text (EN):** The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.
+- **Alt text (ES):** El greeter Signal con la lista de sesiones abierta (Desktop, Studio y Gaming, las experimentales al final) o la confirmación de reinicio con Cancelar enfocado.
 
-### CAP-GREETER-03 Greeter scenes
+### CAP-GREETER-03 Greeter palettes: Day and High Contrast
 
 - **Priority:** P1 (important).
-- **Page and section:** Showroom only · Greeter.
-- **On screen:** Three shipped greeter scenes (Iguazu, Perito Moreno, Ushuaia) as three real captures of the greeter.
+- **Page and section:** /greeter · Greeter, palettes.
+- **On screen:** The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.
 - **Spec:** 16:9, 1920x1080, PNG master (lossless).
-- **State:** theme Greeter default, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
+- **State:** theme Signal Day / High Contrast (greeter), mode n/a, layout n/a, wallpaper Generative horizon (no wallpaper).
 - **Setup:**
-  1. Switch scene in the greeter settings and capture each (-iguazu, -perito-moreno, -ushuaia suffixes).
+  1. In the QA VM, set colorScheme=day in theme.conf.user and capture (-day suffix).
+  2. Then set highContrast=true and largeText=true and capture again (-high-contrast suffix); restore theme.conf.user afterwards.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** Three shipped greeter scenes (Iguazu, Perito Moreno, Ushuaia) as three real captures of the greeter.
-- **Alt text (ES):** Tres escenas incluidas del greeter (Iguazú, Perito Moreno, Ushuaia) como tres capturas reales del greeter.
+- **Alt text (EN):** The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.
+- **Alt text (ES):** El greeter Signal en Signal Day y en Alto contraste con texto grande, como dos capturas reales del mismo módulo de ingreso y horizonte generativo.
+
+### CAP-GREETER-04 Greeter on two monitors
+
+- **Priority:** P1 (important).
+- **Page and section:** /greeter · Greeter, several displays.
+- **On screen:** The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.
+- **Spec:** 16:9, 1920x1080, PNG master (lossless).
+- **State:** theme Signal Night (greeter), mode n/a, layout n/a, wallpaper Generative horizon (no wallpaper).
+- **Setup:**
+  1. In the QA VM with two virtual outputs, log out to SDDM and capture the secondary output's quiet plate; capture the primary output in the same session for the pair.
+- **Privacy:** Demo user only.
+- **Alt text (EN):** The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.
+- **Alt text (ES):** El greeter Signal en dos salidas: el módulo de ingreso en la pantalla principal y la placa tranquila (marca, hora y aviso de ingreso) en la secundaria.
 
 ### CAP-INSTALL-03 Installer: specializations
 

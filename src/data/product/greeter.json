@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "design": "signal",
+  "bundledMedia": false,
+  "components": [
+    "HorizonField.qml",
+    "ChannelStrip.qml",
+    "HorneroSprite.qml",
+    "Signal.js",
+    "Strings.js",
+    "UserVideo.qml"
+  ],
+  "palettes": [
+    {
+      "id": "night",
+      "name": "Signal Night"
+    },
+    {
+      "id": "day",
+      "name": "Signal Day"
+    },
+    {
+      "id": "highContrast",
+      "name": "Signal High Contrast"
+    }
+  ],
+  "languages": [
+    "en",
+    "es"
+  ],
+  "defaults": {
+    "colorScheme": "auto",
+    "highContrast": false,
+    "largeText": false,
+    "reducedMotion": false,
+    "language": "auto",
+    "voice": "cozy",
+    "mascot": true,
+    "background": "horizon",
+    "backgroundMotion": true,
+    "backgroundDim": 0.55,
+    "showUserChannels": true,
+    "allowOtherUser": true,
+    "confirmPower": true
+  },
+  "renders": [
+    {
+      "file": "screens/screenshot.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/01-night-1920x1080.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/02-day-1920x1080.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/04-high-contrast-large-text-1920x1080.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/06-large-text-1366x768.png",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "file": "screens/signal/08-two-monitors-secondary.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/09-login-failed.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/11-no-sessions.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/14-power-confirm-restart.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/15-session-list-open.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "screens/signal/17-es-day-1366x768.png",
+      "width": 1366,
+      "height": 768
+    }
+  ]
+}

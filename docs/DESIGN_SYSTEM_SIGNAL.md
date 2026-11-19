@@ -61,7 +61,7 @@ Usage on the site:
 | `cue` | Links, focus, informational labels |
 | `phosphor` | Healthy / available / Supported |
 
-Pages use roles only. A scene over artwork (the greeter recreation, theme
+Pages use roles only. A scene over artwork (theme
 previews) may use local overlay values where text must stay legible over a
 photograph; it never introduces new site-wide colours.
 

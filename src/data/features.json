@@ -260,7 +260,7 @@
     },
     {
       "id": "greeter-signal-original",
-      "stage": "planned",
+      "stage": "main",
       "releasedIn": null,
       "title": {
         "es": "Greeter original en Hornero Signal",

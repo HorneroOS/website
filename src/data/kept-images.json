@@ -7,7 +7,6 @@
     "brand-artwork": "Original website identity artwork. Not a desktop capture, wallpaper or theme preview.",
     "app-logo": "Third-party application logo used nominatively to name an application (src/components/AppLogo.astro).",
     "wallpaper-licensed": "A licensed, credited photograph that HorneroOS ships as a wallpaper (CC BY / CC BY-SA, credit on /wallpapers). It shows a place, not the desktop.",
-    "greeter-media": "Licensed, credited photo or video scene shipped with the greeter, played behind the greeter recreation on /greeter. Kept pending a maintainer decision (see the PR).",
     "mascot": "Javi sprite art rendered from the shell asset pin at build time (not stored in this repository)."
   },
   "entries": [
@@ -20,7 +19,6 @@
     { "prefix": "src/assets/apps/", "category": "app-logo" },
     { "prefix": "public/wallpapers/argentina/", "category": "wallpaper-licensed" },
     { "prefix": "assets/wallpapers/theme-wallpapers/", "category": "wallpaper-licensed", "note": "Wallpaper previews on /themes; eight of them are currently unreferenced." },
-    { "prefix": "assets/wallpapers/photos/", "category": "wallpaper-licensed", "note": "See provenance.json beside them." },
-    { "prefix": "public/media/greeter/", "category": "greeter-media" }
+    { "prefix": "assets/wallpapers/photos/", "category": "wallpaper-licensed", "note": "See provenance.json beside them." }
   ]
 }

@@ -9,7 +9,7 @@ pinned Hornero sources, never typed into pages.
 | `src/data/product/themes.json` | HorneroOS/config `profiles/themes/*/theme.json`; the official Signal built-ins from HorneroOS/hornero `signal_builtin_theme_ids` (`signal.v`) |
 | `src/data/product/releases.json` | HorneroOS/hornero `releases/`, `manifests/` and the candidate pointer; tagged status from git tags |
 | `src/data/product/editions.json` | HorneroOS/hornero `editions/catalogue.yaml` |
-| `src/data/product/greeter-scenes.json` | Pinned HorneroOS/greeter runtime catalog, approved scene manifests, still provenance records, and daypart windows |
+| `src/data/product/greeter.json` | Pinned HorneroOS/greeter `theme.conf` defaults, design components, built-in palettes and languages, and the offscreen renders under `screens/` (the Signal greeter bundles no media, so there is no scene catalogue) |
 | `src/data/product/wallpapers.json` | Pinned HorneroOS/config photo provenance manifest; local website previews are checked against its output hashes |
 | `src/data/product/terminals.json` | Pinned HorneroOS/config `profiles/factory.json` terminal integration catalogue |
 | `src/data/product/palette-applications.json` | Pinned HorneroOS/config `profiles/factory.json` optional palette application catalogue |
@@ -62,16 +62,17 @@ The sync fetches each pinned commit shallowly into `.cache/` (git and
 network, no token). It refuses abbreviated SHAs and release records whose
 name, version and manifest disagree.
 
-The `/greeter` browser recreation uses generated scene metadata and local
-preview paths. Do not hand-edit its generated scene catalogue. After greeter
-media is reviewed and merged, update the `greeter` pin to the reviewed commit
-and run `npm run data:sync`. From the greeter checkout, run
-`scripts/media/build.py`, then
-`scripts/media/export-web-previews.py --output /path/to/website/public/media/greeter`.
-Review the generated metadata and assets, then run `npm run data:check` in the
-website checkout. The website previews are short web derivatives and are not
-the offline SDDM media pack. They are served locally; no third-party player is
-embedded.
+The `/greeter` page states its product facts (theme defaults, palettes,
+languages, components and the published offscreen renders) from
+`src/data/product/greeter.json`, generated from the pinned greeter
+checkout. Do not hand-edit it: update the `greeter` pin to a reviewed
+commit and run `npm run data:sync`, then `npm run data:check`. The
+Signal-native greeter removed its `media/` tree, so the sync fails
+closed if that tree (or a missing design component) comes back, and
+there are no website preview assets to export. The offscreen renders
+stay in the greeter repository and are linked, not served as
+screenshots; real captures of a login use the capture slots
+(`docs/CAPTURES.md`).
 
 ## Release bump
 
