@@ -8,20 +8,29 @@
  * Source checks:
  *  - src/data/capture-slots.json is well formed (ids, priority, kind, aspect
  *    matches width x height, session exists, ES/EN copy, setup steps).
- *  - A `captured` slot has its file, checksum and a poster for clips; a
- *    `pending` slot has none.
+ *  - A `captured` or `archived` slot has its file and a verified checksum
+ *    (clips: the MP4), plus a poster for clips; a `pending` slot has no file.
+ *    `archived` keeps the asset and record but must never render.
+ *  - Editorial layer (src/data/editorial.json): every placed id is declared
+ *    and `captured` (never pending/archived/docs-only), pair/compare sections
+ *    hold exactly two slots, no id repeats on one page, and every captured
+ *    non-archived slot is placed editorially or flagged `docsOnly`.
+ *  - Two slots with identical content (same checksum) fail unless both are
+ *    archived. Still copies under public/captures (the stable docs URLs)
+ *    must be byte-identical to their src/assets/captures originals.
  *  - Every slot id mentioned in src/ or docs/ exists in the data file.
  *  - No showcase image remains unaccounted for: every image or video file in
- *    public/, src/assets/ and assets/ is either a captured slot file or is
- *    listed in src/data/kept-images.json with a category; every file in
- *    public/ is also referenced from src/ or scripts/. The old showroom
- *    collection and public/images cannot come back.
+ *    public/, src/assets/ and assets/ is either a slot file or is listed in
+ *    src/data/kept-images.json with a category; every file in public/ is also
+ *    referenced from src/ or scripts/. The old showroom collection and
+ *    public/images cannot come back.
  *  - docs/CAPTURE-SHOT-LIST.md matches the data file (scripts/gen-shot-list.mjs).
  *
  * Dist checks:
- *  - Every `data-capture-slot` in a built page names a declared slot.
- *  - Every pending slot renders on /showroom, and on each route in `pages`,
- *    in both locales.
+ *  - Every `data-capture-slot` in a built page names a declared, captured slot.
+ *  - Each editorially placed slot renders on its route (and showroom groups
+ *    render on /showroom) in both locales; archived and pending slots never
+ *    appear, and no page carries placeholder-plate text.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -35,6 +44,7 @@ const failures = [];
 const fail = (message) => failures.push(message);
 
 const data = JSON.parse(read('src/data/capture-slots.json'));
+const editorial = JSON.parse(read('src/data/editorial.json'));
 const kept = JSON.parse(read('src/data/kept-images.json'));
 const slots = data.slots;
 const byId = new Map(slots.map((slot) => [slot.id, slot]));
@@ -62,8 +72,8 @@ if (failures.length) {
   for (const message of failures) console.error(`  - ${message}`);
   process.exit(1);
 }
-const pending = slots.filter((slot) => slot.status === 'pending').length;
-console.log(`check-capture-slots: OK (${slots.length} slots, ${pending} pending, ${slots.length - pending} captured${process.argv.includes('--dist') ? ', rendered pages' : ''})`);
+const byStatus = (status) => slots.filter((slot) => slot.status === status).length;
+console.log(`check-capture-slots: OK (${slots.length} slots: ${byStatus('captured')} captured, ${byStatus('archived')} archived, ${byStatus('pending')} pending/deferred${process.argv.includes('--dist') ? ', rendered pages' : ''})`);
 
 function checkSource() {
   const idPattern = /^CAP-[A-Z]+-\d{2}$/;
@@ -79,7 +89,7 @@ function checkSource() {
     seen.add(slot.id);
     if (!['P0', 'P1', 'P2'].includes(slot.priority)) fail(`${where}: priority must be P0, P1 or P2`);
     if (!['screenshot', 'clip', 'photo'].includes(slot.kind)) fail(`${where}: unknown kind ${slot.kind}`);
-    if (!['pending', 'captured'].includes(slot.status)) fail(`${where}: unknown status ${slot.status}`);
+    if (!['pending', 'captured', 'archived'].includes(slot.status)) fail(`${where}: unknown status ${slot.status}`);
     if (!sessionIds.has(slot.session)) fail(`${where}: unknown session ${slot.session}`);
     if (!/^\d+:\d+$/.test(slot.aspect) || Math.abs(ratioOf(slot.aspect) - slot.width / slot.height) > 0.01) {
       fail(`${where}: aspect ${slot.aspect} does not match ${slot.width}x${slot.height}`);
@@ -97,24 +107,34 @@ function checkSource() {
     if (slot.status === 'pending') {
       if (slot.file) fail(`${where}: pending slots must have file: null`);
     } else {
+      if (!slot.sha256) fail(`${where}: ${slot.status} slots need a sha256 checksum`);
       if (!slot.file) fail(`${where}: captured slots need a file`);
       else if (slot.kind === 'clip') {
         const base = slot.file.replace(/\.[^.]+$/, '');
         for (const ext of ['webm', 'mp4']) {
           if (!existsSync(join(root, 'public/captures', `${base}.${ext}`))) fail(`${where}: public/captures/${base}.${ext} is missing`);
         }
+        const mp4 = join(root, 'public/captures', `${base}.mp4`);
+        if (existsSync(mp4) && slot.sha256 && createHash('sha256').update(readFileSync(mp4)).digest('hex') !== slot.sha256) fail(`${where}: checksum mismatch for ${base}.mp4`);
         if (!slot.poster || !existsSync(join(root, 'src/assets/captures', slot.poster))) fail(`${where}: poster is missing`);
       } else {
         const file = join(root, 'src/assets/captures', slot.file);
         if (!existsSync(file)) fail(`${where}: src/assets/captures/${slot.file} is missing`);
         else if (slot.sha256 && createHash('sha256').update(readFileSync(file)).digest('hex') !== slot.sha256) fail(`${where}: checksum mismatch for ${slot.file}`);
+        // Stable docs URL copy, when present, must be the same bytes.
+        const pub = join(root, 'public/captures', slot.file);
+        if (existsSync(pub) && createHash('sha256').update(readFileSync(pub)).digest('hex') !== slot.sha256) fail(`${where}: public/captures/${slot.file} is not byte-identical to the original`);
+        if (slot.docsOnly && !existsSync(pub)) fail(`${where}: docs-only slots need their stable public/captures copy`);
       }
     }
+    if (slot.docsOnly && slot.status !== 'captured') fail(`${where}: docsOnly slots must be captured`);
   }
 
   // Slot ids mentioned in source or docs must exist.
+  // docs/IMAGE_CURATION.md is the decision record: it legitimately names
+  // cancelled slot ids, so it is exempt from the dangling-reference sweep.
   const mentioned = [...walk(join(root, 'src')), ...walk(join(root, 'docs')).filter((f) => f.endsWith('.md')), join(root, 'README.md'), join(root, 'AGENTS.md')]
-    .filter((f) => existsSync(f) && !f.endsWith('capture-slots.json') && !f.includes('/assets/'));
+    .filter((f) => existsSync(f) && !f.endsWith('capture-slots.json') && !f.endsWith('IMAGE_CURATION.md') && !f.includes('/assets/'));
   for (const file of mentioned) {
     for (const match of readFileSync(file, 'utf8').matchAll(/CAP-[A-Z]+-\d{2}/g)) {
       if (!byId.has(match[0]) && !/CAP-AREA-01|CAP-[A-Z]+-NN/.test(match[0])) fail(`${relative(root, file)} mentions undeclared slot ${match[0]}`);
@@ -124,20 +144,48 @@ function checkSource() {
     }
   }
 
-  // Slots promising a page must be placed by that page or by its gallery.
-  const pageSources = walk(join(root, 'src/components/pages')).map((f) => readFileSync(f, 'utf8')).join('\n') + read('src/components/LookCompare.astro');
-  for (const slot of slots) {
-    for (const page of slot.pages) {
-      const placed = pageSources.includes(`"${slot.id}"`) || pageSources.includes(`'${slot.id}'`) || pageSources.includes(`route="${page}"`);
-      if (!placed) fail(`${slot.id}: declared for ${page} but no page component renders it`);
+  // Editorial validation: inventory `pages` no longer renders anything.
+  const placedIds = new Set();
+  const checkSection = (where, section) => {
+    if ((section.format === 'pair' || section.format === 'compare') && section.slots.length !== 2) fail(`${where}: ${section.format} sections need exactly 2 slots`);
+    for (const [capId, cap] of Object.entries(section.captions ?? {})) {
+      if (!section.slots.includes(capId)) fail(`${where}: captions key ${capId} is not in the section slots`);
+      if (!cap?.en || !cap?.es) fail(`${where}: caption for ${capId} needs en and es`);
     }
+    for (const id of section.slots) {
+      const slot = byId.get(id);
+      if (!slot) fail(`${where}: editorial places undeclared slot ${id}`);
+      else if (slot.status !== 'captured') fail(`${where}: editorial places ${id} with status ${slot.status} (only captured may render)`);
+      else if (slot.docsOnly) fail(`${where}: editorial places docs-only slot ${id}`);
+      placedIds.add(id);
+    }
+  };
+  for (const [route, sections] of Object.entries(editorial.pages ?? {})) {
+    const onPage = new Set();
+    for (const section of sections) {
+      checkSection(`editorial ${route}`, section);
+      for (const id of section.slots) {
+        if (onPage.has(id)) fail(`editorial ${route}: ${id} is placed twice on one page`);
+        onPage.add(id);
+      }
+    }
+  }
+  for (const group of editorial.showroom ?? []) checkSection(`editorial showroom "${group.group?.en}"`, group);
+  for (const slot of slots) {
+    if (slot.status === 'captured' && !slot.docsOnly && !placedIds.has(slot.id)) fail(`${slot.id}: captured but placed nowhere in editorial.json (place it, archive it, or flag docsOnly)`);
+  }
+  // Identical content under two slot ids is only tolerable fully archived.
+  const bySha = new Map();
+  for (const slot of slots) if (slot.sha256) bySha.set(slot.sha256, [...(bySha.get(slot.sha256) ?? []), slot]);
+  for (const group of bySha.values()) {
+    if (group.length > 1 && !group.every((slot) => slot.status === 'archived')) fail(`${group.map((s) => s.id).join(', ')}: identical file content under multiple slots (archive the duplicates)`);
   }
 
   // Image inventory.
   const mediaExt = /\.(png|jpe?g|webp|avif|gif|svg|mp4|webm|mov|ico)$/i;
   const slotFiles = new Set();
   for (const slot of slots) {
-    if (slot.status !== 'captured' || !slot.file) continue;
+    if (slot.status === 'pending' || !slot.file) continue;
     slotFiles.add(`src/assets/captures/${slot.file}`);
     // Docs pages serve stills from public/captures (remark-docs-links).
     slotFiles.add(`public/captures/${slot.file}`);
@@ -201,23 +249,26 @@ function checkDist() {
   };
   const ids = (page) => new Set([...(page ?? '').matchAll(/data-capture-slot="([^"]+)"/g)].map((m) => m[1]));
   for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
-    for (const id of ids(readFileSync(file, 'utf8'))) {
-      if (!byId.has(id)) fail(`${relative(dist, file)} renders undeclared slot ${id}`);
+    const text = readFileSync(file, 'utf8');
+    for (const id of ids(text)) {
+      const slot = byId.get(id);
+      if (!slot) fail(`${relative(dist, file)} renders undeclared slot ${id}`);
+      else if (slot.status !== 'captured') fail(`${relative(dist, file)} renders ${id} with status ${slot.status}`);
+      else if (slot.docsOnly && !relative(dist, file).split('/').includes('docs')) fail(`${relative(dist, file)} renders docs-only slot ${id} outside /docs`);
     }
+    if (/Pending — host capture|PENDING — host capture|Pendiente — captura del host|PENDIENTE — captura del host|espacio reservado dice|placeholder says/.test(text)) fail(`${relative(dist, file)} still carries placeholder-plate text`);
   }
   for (const locale of ['es', 'en']) {
-    const wall = html('/showroom', locale);
-    const onWall = ids(wall);
-    for (const slot of slots) if (!onWall.has(slot.id)) fail(`${locale} /showroom does not render ${slot.id}`);
-    for (const slot of slots) {
-      for (const route of slot.pages) {
-        const page = html(route, locale);
-        if (!page) fail(`${locale} ${route} is not built`);
-        else if (!ids(page).has(slot.id)) fail(`${locale} ${route} does not render ${slot.id}`);
+    for (const [route, sections] of Object.entries(editorial.pages ?? {})) {
+      const page = html(route, locale);
+      if (!page) {
+        fail(`${locale} ${route} is not built`);
+        continue;
       }
+      const onPage = ids(page);
+      for (const section of sections) for (const id of section.slots) if (!onPage.has(id)) fail(`${locale} ${route} does not render editorial slot ${id}`);
     }
+    const wall = ids(html('/showroom', locale));
+    for (const group of editorial.showroom ?? []) for (const id of group.slots) if (!wall.has(id)) fail(`${locale} /showroom does not render ${id}`);
   }
-  // Pending plates must tell the visitor so, in text.
-  const sample = html('/showroom', 'en') ?? '';
-  if (slots.some((s) => s.status === 'pending') && !/Pending — host capture/.test(sample)) fail('pending plates are missing their "Pending — host capture" label');
 }

@@ -263,9 +263,9 @@ const description = isEs
     <div class="monitor-frame">
       <div class="monitor-strip">
         <span class="channel">MON 01</span>
-        <a href={L('/showroom')}>{isEs ? 'Todas las capturas previstas' : 'Every planned capture'}</a>
+        <a href={L('/showroom')}>{isEs ? 'Todas las capturas seleccionadas' : 'Every selected capture'}</a>
       </div>
-      <CaptureFigure slot="CAP-HERO-01" locale={locale} eager sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)" />
+      <CaptureFigure slot="CAP-SIGNAL-01" locale={locale} eager sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)" />
     </div>
   </section>
 
@@ -364,7 +364,7 @@ const description = isEs
     </header>
     <div class="concept">
       <div class="concept-pair">
-        <CaptureFigure slot="CAP-SIGNAL-01" locale={locale} />
+        <CaptureFigure slot="CAP-THEME-05" locale={locale} />
         <CaptureFigure slot="CAP-SIGNAL-02" locale={locale} />
       </div>
       <p class="concept-note">
@@ -427,7 +427,7 @@ const description = isEs
         <StageBadge stage={javiFeature.stage} locale={locale} />
         <h3><a href={L('/companion')}>{isEs ? 'Javi, el hornero del escritorio' : 'Javi, the desktop hornero'}</a></h3>
         <p>{javiFeature.summary[locale]}</p>
-        <CaptureFigure slot="CAP-JAVI-01" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
+        <CaptureFigure slot="CAP-JAVI-08" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
       </li>
       <li>
         <StageBadge stage={feature('pluginkit').stage} locale={locale} />
@@ -483,7 +483,7 @@ const description = isEs
       <div>
         <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
         <dd>
-          {isEs ? `De las capturas previstas, ${counts.captured} de ${counts.total} ya salen de un host real y listan su fuente; el ` : `Of the planned captures, ${counts.captured} of ${counts.total} already come from a real host and list their source; the `}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra cuáles faltan' : ' shows which are missing'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
+          {isEs ? `El sitio muestra una selección curada de ${counts.public} capturas de un host real, cada una con su fuente; el ` : `The site shows a curated selection of ${counts.public} captures from a real host, each listing its source; the `}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra la selección completa' : ' shows the full selection'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
         </dd>
       </div>
       <div>

@@ -107,10 +107,10 @@ const docs = ledger.evidence[0].href;
   <section class="section" aria-labelledby="captures-title">
     <h2 id="captures-title">{isEs ? 'Los cinco modos, en un escritorio real' : 'The five modes on a real desktop'}</h2>
     <p class="section-copy">
-      {isEs ? 'Cada modo sobre el mismo fondo y en el mismo host. Hasta que las capturas estén listas, cada espacio reservado dice qué va a mostrar.' : 'Each mode on the same wallpaper and the same host. Until the captures are ready, each placeholder says what it will show.'}
+      {isEs ? 'Capturas reales del mismo host: el selector de los cinco modos, Focus y el deck Signal. Los esquemas de arriba están rotulados como esquemas; esto de abajo es el escritorio tal cual.' : 'Real captures from the same host: the five-mode switcher, Focus and the Signal deck. The diagrams above are labelled as diagrams; below is the desktop as it is.'}
     </p>
     <div class="mode-captures">
-      {['CAP-MODE-01', 'CAP-MODE-02', 'CAP-MODE-03', 'CAP-MODE-04', 'CAP-MODE-05'].map((id) => <CaptureFigure slot={id} locale={locale} />)}
+      {['CAP-CC-04', 'CAP-MODE-01', 'CAP-DECK-01'].map((id) => <CaptureFigure slot={id} locale={locale} />)}
     </div>
   </section>
 
@@ -122,7 +122,7 @@ const docs = ledger.evidence[0].href;
     </p>
   </section>
 
-  <CaptureGallery route="/modes" locale={locale} exclude={['CAP-MODE-01', 'CAP-MODE-02', 'CAP-MODE-03', 'CAP-MODE-04', 'CAP-MODE-05']} />
+  <CaptureGallery route="/modes" locale={locale} exclude={['CAP-CC-04', 'CAP-MODE-01', 'CAP-DECK-01']} />
 </SiteLayout>
 
 <style>

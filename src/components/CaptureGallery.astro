@@ -1,10 +1,10 @@
 ---
 /**
- * Every slot declared for a route in src/data/capture-slots.json that the
- * page does not place by hand, as a grid of CaptureFigure plates. Captures
- * fill themselves in once their slot is flipped to `captured`.
+ * Editorial sections for a route (src/data/editorial.json, render:gallery).
+ * Inventory never auto-renders: only curated placements appear, each with its
+ * human caption, plus one provenance line for the page.
  */
-import { slotsForPage } from '../data/captures';
+import { editorial, editorialForPage, getSlot } from '../data/captures';
 import CaptureFigure from './CaptureFigure.astro';
 import type { Locale } from '../i18n/ui';
 
@@ -20,29 +20,33 @@ interface Props {
 
 const { route, locale = 'es', exclude = [], heading, intro, id } = Astro.props;
 const isEs = locale === 'es';
-const slots = slotsForPage(route).filter((slot) => !exclude.includes(slot.id));
-const title = heading ?? (isEs ? 'Capturas previstas para esta página' : 'Captures planned for this page');
-const lead =
-  intro ??
-  (isEs
-    ? 'Las imágenes de HorneroOS salen de capturas reales del host. Hasta que cada una esté lista, el espacio reservado dice qué va a mostrar y cómo se va a tomar.'
-    : 'HorneroOS imagery comes from real host captures. Until each one is ready, its placeholder says what it will show and how it will be taken.');
+const sections = editorialForPage(route)
+  .filter((section) => section.render === 'gallery')
+  .map((section) => ({ ...section, slots: section.slots.filter((sid) => !exclude.includes(sid)) }))
+  .filter((section) => section.slots.length > 0);
+const title = heading ?? (isEs ? 'Capturas seleccionadas' : 'Selected captures');
+const lead = intro ?? editorial.provenance[locale];
 ---
 
 {
-  slots.length > 0 && (
+  sections.length > 0 && (
     <section class="section capture-gallery" id={id} aria-labelledby={`${id ?? 'capture-gallery'}-title`}>
       <header class="section-head">
         <h2 id={`${id ?? 'capture-gallery'}-title`}>{title}</h2>
         <p>{lead}</p>
       </header>
-      <div class="capture-grid">
-        {slots.map((slot) => (
-          <div class="capture-cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined}>
-            <CaptureFigure slot={slot.id} locale={locale} />
-          </div>
-        ))}
-      </div>
+      {sections.map((section) => (
+        <div class:list={['capture-grid', `is-${section.format}`]}>
+          {section.slots.map((sid) => {
+            const slot = getSlot(sid);
+            return (
+              <div class="capture-cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined}>
+                <CaptureFigure slot={sid} locale={locale} caption={section.captions?.[sid]?.[locale] ?? section.caption[locale]} crop={section.crop} eager={section.eager} />
+              </div>
+            );
+          })}
+        </div>
+      ))}
     </section>
   )
 }
@@ -66,6 +70,9 @@ const lead =
   @media (min-width: 900px) {
     .capture-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .capture-grid.is-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>

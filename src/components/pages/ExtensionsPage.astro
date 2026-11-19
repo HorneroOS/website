@@ -84,7 +84,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
         {isEs ? 'Una extensión con ubicación en el dashboard obtiene una tarjeta en la pestaña Extensiones del Dashboard, junto a Media, Performance, Weather y Workspaces. Una extensión de barra queda en la barra y una de escritorio vive en el escritorio. Un manifiesto también puede declarar superficies extra, como el launcher; cada tarjeta las nombra tal cual están declaradas.' : 'An extension with a dashboard placement gets a card in the Dashboard’s Extensions tab, next to Media, Performance, Weather and Workspaces. A bar extension sits in the bar and a desktop extension lives on the desktop. A manifest may also declare extra surfaces, such as the launcher; each card names them exactly as declared.'}
       </p>
     </div>
-    <CaptureFigure slot="CAP-EXT-01" locale={locale} />
+    <CaptureFigure slot="CAP-EXT-04" locale={locale} />
   </section>
 
   <section class="extension-catalogue section" id="catalogue" aria-labelledby="catalogue-title">
@@ -263,7 +263,7 @@ const settingsSummary = (settings: typeof plugins[number]['settings']) =>
     </div>
   </section>
 
-  <CaptureGallery route="/extensions" locale={locale} exclude={['CAP-EXT-01']} />
+  <CaptureGallery route="/extensions" locale={locale} exclude={['CAP-EXT-04']} />
 </SiteLayout>
 
 <script>

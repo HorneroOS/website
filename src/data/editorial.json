@@ -1,0 +1,591 @@
+{
+  "$comment": "Editorial placements (docs/IMAGE_CURATION.md). Inventory/provenance stay in capture-slots.json; this file alone decides what renders publicly, where, in what order, with which human caption. Only status:captured slots may appear here. render:manual = placed by the page component in its own layout; render:gallery = rendered by CaptureGallery for the route.",
+  "provenance": {
+    "en": "Real captures from the maintainer's machine (Hyprland, staged demo content). Shown values are that machine's, not requirements.",
+    "es": "Capturas reales del equipo del maintainer (Hyprland, contenido de demostración preparado). Los valores que se ven son de ese equipo, no requisitos."
+  },
+  "pages": {
+    "/": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-SIGNAL-01"
+        ],
+        "eager": true,
+        "caption": {
+          "en": "The Signal instruments, live on the desktop",
+          "es": "Los instrumentos Signal, en vivo en el escritorio"
+        }
+      },
+      {
+        "format": "compare",
+        "render": "manual",
+        "slots": [
+          "CAP-COMPARE-01",
+          "CAP-COMPARE-02"
+        ],
+        "caption": {
+          "en": "Same terminal, Night and Day shell",
+          "es": "La misma terminal, shell Night y Day"
+        }
+      },
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-SIGNAL-02"
+        ],
+        "caption": {
+          "en": "Day instruments (sample data)",
+          "es": "Instrumentos Day (datos de ejemplo)"
+        }
+      },
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-THEME-05"
+        ],
+        "caption": {
+          "en": "Originals: Patagonia (photo credit on Wallpapers)",
+          "es": "Originals: Patagonia (crédito de la foto en Fondos)"
+        }
+      },
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-JAVI-08"
+        ],
+        "caption": {
+          "en": "Ask, approve, review — Javi's workbench",
+          "es": "Preguntá, aprobá, revisá: el taller de Javi"
+        }
+      }
+    ],
+    "/why-horneroos": [
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-CC-04"
+        ],
+        "caption": {
+          "en": "Five modes, one switch",
+          "es": "Cinco modos, un solo cambio"
+        }
+      },
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-CC-01"
+        ],
+        "caption": {
+          "en": "Every setting in one Control Center",
+          "es": "Todos los ajustes en un Centro de control"
+        }
+      }
+    ],
+    "/editions": [
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-HERO-01"
+        ],
+        "crop": "top",
+        "caption": {
+          "en": "HorneroOS rolling on Hyprland — the maintainer's machine, shown as an example",
+          "es": "HorneroOS rolling sobre Hyprland: el equipo del maintainer, a modo de ejemplo"
+        }
+      }
+    ],
+    "/desktop": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-DESKTOP-02"
+        ],
+        "caption": {
+          "en": "Pick a layout",
+          "es": "Elegí un layout"
+        }
+      },
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-DESKTOP-01"
+        ],
+        "caption": {
+          "en": "The quiet Cockpit desktop",
+          "es": "El escritorio Cockpit, sin ventanas"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-SHELL-07"
+        ],
+        "caption": {
+          "en": "Dashboard: calendar, station, resources",
+          "es": "Panel: calendario, estación, recursos"
+        }
+      },
+      {
+        "format": "strip",
+        "render": "gallery",
+        "slots": [
+          "CAP-SHELL-03",
+          "CAP-SHELL-08",
+          "CAP-SHELL-09",
+          "CAP-CC-09"
+        ],
+        "caption": {
+          "en": "Shell details: quick settings, keybindings, stand-by, accessibility",
+          "es": "Detalles del shell: ajustes rápidos, atajos, stand-by, accesibilidad"
+        },
+        "captions": {
+          "CAP-SHELL-03": {
+            "en": "Shell detail: quick settings",
+            "es": "Detalle del shell: ajustes rápidos"
+          },
+          "CAP-SHELL-08": {
+            "en": "Shell detail: the keybinding overlay",
+            "es": "Detalle del shell: la superposición de atajos"
+          },
+          "CAP-SHELL-09": {
+            "en": "Shell detail: the reload cover shown while the shell restarts",
+            "es": "Detalle del shell: la cubierta de recarga mientras el shell reinicia"
+          },
+          "CAP-CC-09": {
+            "en": "Shell detail: accessibility settings",
+            "es": "Detalle del shell: ajustes de accesibilidad"
+          }
+        }
+      }
+    ],
+    "/layouts": [
+      {
+        "format": "selector",
+        "render": "manual",
+        "slots": [
+          "CAP-LAYOUT-01",
+          "CAP-LAYOUT-02",
+          "CAP-LAYOUT-04",
+          "CAP-LAYOUT-05",
+          "CAP-LAYOUT-12",
+          "CAP-LAYOUT-11"
+        ],
+        "caption": {
+          "en": "Six bar topologies, one picker",
+          "es": "Seis topologías de barras, un selector"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-DESKTOP-02"
+        ],
+        "caption": {
+          "en": "The layout picker names every preset",
+          "es": "El selector de layouts nombra cada preset"
+        }
+      }
+    ],
+    "/themes": [
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-APPEARANCE-01"
+        ],
+        "caption": {
+          "en": "Themes with contrast checked for you",
+          "es": "Temas con contraste verificado"
+        }
+      },
+      {
+        "format": "pair",
+        "render": "gallery",
+        "slots": [
+          "CAP-THEME-05",
+          "CAP-THEME-06"
+        ],
+        "caption": {
+          "en": "Two Hornero Originals on the desktop",
+          "es": "Dos Originals de Hornero en el escritorio"
+        },
+        "captions": {
+          "CAP-THEME-05": {
+            "en": "Patagonia, a Hornero Original (photo credit on Wallpapers)",
+            "es": "Patagonia, un Original de Hornero (crédito de la foto en Fondos)"
+          },
+          "CAP-THEME-06": {
+            "en": "Quebrada, a Hornero Original (photo credit on Wallpapers)",
+            "es": "Quebrada, un Original de Hornero (crédito de la foto en Fondos)"
+          }
+        }
+      },
+      {
+        "format": "strip",
+        "render": "gallery",
+        "slots": [
+          "CAP-THEME-08",
+          "CAP-THEME-10",
+          "CAP-THEME-02"
+        ],
+        "caption": {
+          "en": "More wallpapers in use",
+          "es": "Más fondos en uso"
+        },
+        "captions": {
+          "CAP-THEME-08": {
+            "en": "Fin del Mundo, a Hornero Original (photo credit on Wallpapers)",
+            "es": "Fin del Mundo, un Original de Hornero (crédito de la foto en Fondos)"
+          },
+          "CAP-THEME-10": {
+            "en": "Pampa, a Hornero Original (photo credit on Wallpapers)",
+            "es": "Pampa, un Original de Hornero (crédito de la foto en Fondos)"
+          },
+          "CAP-THEME-02": {
+            "en": "Signal Day bars over a personal anime wallpaper (not an Originals photo; no credit recorded)",
+            "es": "Barras Signal Day sobre un fondo animé personal (no es una foto Originals; sin crédito registrado)"
+          }
+        }
+      }
+    ],
+    "/chromatic": [
+      {
+        "format": "support",
+        "render": "manual",
+        "slots": [
+          "CAP-CHROMA-07"
+        ],
+        "caption": {
+          "en": "Chromatic reads your wallpaper and checks contrast",
+          "es": "Chromatic lee tu fondo y verifica el contraste"
+        }
+      },
+      {
+        "format": "pair",
+        "render": "manual",
+        "slots": [
+          "CAP-CHROMA-01",
+          "CAP-CHROMA-02"
+        ],
+        "caption": {
+          "en": "Two wallpapers Chromatic can sample",
+          "es": "Dos fondos que Chromatic puede muestrear"
+        },
+        "captions": {
+          "CAP-CHROMA-01": {
+            "en": "Sample wallpaper A: an alpine sunrise desktop Chromatic can sample",
+            "es": "Fondo de ejemplo A: un escritorio alpino al amanecer que Chromatic puede muestrear"
+          },
+          "CAP-CHROMA-02": {
+            "en": "Sample wallpaper B: Fin del Mundo under the same bars",
+            "es": "Fondo de ejemplo B: Fin del Mundo bajo las mismas barras"
+          }
+        }
+      }
+    ],
+    "/modes": [
+      {
+        "format": "selector",
+        "render": "manual",
+        "slots": [
+          "CAP-CC-04",
+          "CAP-MODE-01",
+          "CAP-DECK-01"
+        ],
+        "caption": {
+          "en": "Five modes explained; Focus and the Signal deck below",
+          "es": "Los cinco modos, explicados; Focus y el deck Signal abajo"
+        }
+      },
+      {
+        "format": "clip",
+        "render": "gallery",
+        "slots": [
+          "CAP-CLIP-03"
+        ],
+        "caption": {
+          "en": "Switching modes moves the instruments (short loop)",
+          "es": "Cambiar de modo mueve los instrumentos (bucle corto)"
+        }
+      }
+    ],
+    "/extensions": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-EXT-04"
+        ],
+        "caption": {
+          "en": "Extensions living on the desktop (sample data)",
+          "es": "Extensiones viviendo en el escritorio (datos de ejemplo)"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-CC-07"
+        ],
+        "caption": {
+          "en": "Install, update, remove — with honest warnings",
+          "es": "Instalá, actualizá, eliminá, con avisos honestos"
+        }
+      }
+    ],
+    "/companion": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-JAVI-08"
+        ],
+        "caption": {
+          "en": "Ask, approve, review — Javi's workbench (empty state)",
+          "es": "Preguntá, aprobá, revisá: el taller de Javi (estado vacío)"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-JAVI-07"
+        ],
+        "crop": "panel",
+        "caption": {
+          "en": "The quick-ask panel",
+          "es": "El panel de pregunta rápida"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-JAVI-02"
+        ],
+        "crop": "br-quadrant",
+        "caption": {
+          "en": "Javi resting by the nest",
+          "es": "Javi descansando junto al nido"
+        }
+      }
+    ],
+    "/studio": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-MODE-05"
+        ],
+        "caption": {
+          "en": "A REAPER vocal template, ready to record (template, not a session)",
+          "es": "Una plantilla vocal de REAPER, lista para grabar (plantilla, no una sesión)"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-STUDIO-03"
+        ],
+        "caption": {
+          "en": "Krita and Kdenlive included (empty projects)",
+          "es": "Krita y Kdenlive incluidos (proyectos vacíos)"
+        }
+      }
+    ],
+    "/gaming": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-CC-14"
+        ],
+        "caption": {
+          "en": "Gaming readiness, checked honestly (Preview)",
+          "es": "Preparación gamer, verificada con honestidad (Preview)"
+        }
+      }
+    ],
+    "/greeter": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-LOCK-01"
+        ],
+        "caption": {
+          "en": "The Signal lock screen (greeter capture still pending)",
+          "es": "La pantalla de bloqueo Signal (la captura del greeter sigue pendiente)"
+        }
+      }
+    ],
+    "/install": [
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-CC-10"
+        ],
+        "caption": {
+          "en": "Updates and rollback after install",
+          "es": "Actualizaciones y rollback tras instalar"
+        }
+      }
+    ],
+    "/terminals": [
+      {
+        "format": "hero",
+        "render": "manual",
+        "slots": [
+          "CAP-TERM-06"
+        ],
+        "caption": {
+          "en": "Files two ways: Thunar and yazi",
+          "es": "Archivos de dos maneras: Thunar y yazi"
+        }
+      },
+      {
+        "format": "support",
+        "render": "gallery",
+        "slots": [
+          "CAP-TERM-05"
+        ],
+        "crop": "bottom",
+        "caption": {
+          "en": "Presets with a dry-run before anything changes",
+          "es": "Presets con prueba en seco antes de cambiar nada"
+        }
+      }
+    ]
+  },
+  "showroom": [
+    {
+      "group": {
+        "en": "Desktop",
+        "es": "Escritorio"
+      },
+      "slots": [
+        "CAP-DESKTOP-01",
+        "CAP-SHELL-07",
+        "CAP-SHELL-03",
+        "CAP-SHELL-08",
+        "CAP-SHELL-09",
+        "CAP-CC-09"
+      ]
+    },
+    {
+      "group": {
+        "en": "Customization",
+        "es": "Personalización"
+      },
+      "slots": [
+        "CAP-APPEARANCE-01",
+        "CAP-CHROMA-07",
+        "CAP-CHROMA-01",
+        "CAP-CHROMA-02",
+        "CAP-THEME-05",
+        "CAP-THEME-06",
+        "CAP-THEME-08",
+        "CAP-THEME-10",
+        "CAP-THEME-02"
+      ]
+    },
+    {
+      "group": {
+        "en": "Layouts",
+        "es": "Layouts"
+      },
+      "slots": [
+        "CAP-DESKTOP-02",
+        "CAP-LAYOUT-01",
+        "CAP-LAYOUT-02",
+        "CAP-LAYOUT-04",
+        "CAP-LAYOUT-05",
+        "CAP-LAYOUT-12",
+        "CAP-LAYOUT-11"
+      ]
+    },
+    {
+      "group": {
+        "en": "Creative",
+        "es": "Creación"
+      },
+      "slots": [
+        "CAP-MODE-05",
+        "CAP-STUDIO-03"
+      ]
+    },
+    {
+      "group": {
+        "en": "Gaming",
+        "es": "Gaming"
+      },
+      "slots": [
+        "CAP-CC-14"
+      ]
+    },
+    {
+      "group": {
+        "en": "Javi",
+        "es": "Javi"
+      },
+      "slots": [
+        "CAP-JAVI-08",
+        "CAP-JAVI-07",
+        "CAP-JAVI-02"
+      ]
+    },
+    {
+      "group": {
+        "en": "System details",
+        "es": "Detalles del sistema"
+      },
+      "slots": [
+        "CAP-SIGNAL-01",
+        "CAP-SIGNAL-02",
+        "CAP-DECK-01",
+        "CAP-CC-01",
+        "CAP-CC-02",
+        "CAP-CC-04",
+        "CAP-CC-07",
+        "CAP-EXT-04",
+        "CAP-EXT-01",
+        "CAP-TERM-06",
+        "CAP-TERM-05",
+        "CAP-LOCK-01",
+        "CAP-CC-10",
+        "CAP-CLIP-03",
+        "CAP-HERO-01",
+        "CAP-COMPARE-01",
+        "CAP-MODE-01"
+      ],
+      "captions": {
+        "CAP-COMPARE-01": {
+          "en": "Shell comparison, Night half (the Day wipe is on the home page)",
+          "es": "Comparación de la shell, mitad Night (el barrido Day está en el inicio)"
+        },
+        "CAP-EXT-04": {
+          "en": "Extensions living on the desktop (sample data)",
+          "es": "Extensiones viviendo en el escritorio (datos de ejemplo)"
+        },
+        "CAP-SIGNAL-02": {
+          "en": "Day instruments (sample data)",
+          "es": "Instrumentos Day (datos de ejemplo)"
+        }
+      }
+    }
+  ]
+}

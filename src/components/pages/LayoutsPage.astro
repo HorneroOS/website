@@ -31,9 +31,14 @@ const selectedEn = [
     text: 'A full-width line with no backdrop, so the wallpaper shows through.',
   },
   {
-    id: 'horizon',
-    slot: 'CAP-LAYOUT-03',
-    text: 'A top bar with status, context and a centered clock.',
+    id: 'studio',
+    slot: 'CAP-LAYOUT-12',
+    text: 'A top bar with a full-width audio visualiser along the bottom.',
+  },
+  {
+    id: 'minimal-float',
+    slot: 'CAP-LAYOUT-11',
+    text: 'A single floating pill, inset from the edges.',
   },
   {
     id: 'islands',
@@ -49,7 +54,8 @@ const selectedEn = [
 const selectedEs = [
   { id: 'hornero-left', slot: 'CAP-LAYOUT-01', text: 'Un riel lateral con los controles principales a mano y el área de trabajo libre.' },
   { id: 'cockpit-clear', slot: 'CAP-LAYOUT-02', text: 'Una línea de borde a borde sin fondo, para que se vea el fondo de pantalla.' },
-  { id: 'horizon', slot: 'CAP-LAYOUT-03', text: 'Una barra superior con estado, contexto y un reloj centrado.' },
+  { id: 'studio', slot: 'CAP-LAYOUT-12', text: 'Una barra superior con un visualizador de audio a todo lo ancho abajo.' },
+  { id: 'minimal-float', slot: 'CAP-LAYOUT-11', text: 'Una sola píldora flotante, separada de los bordes.' },
   { id: 'islands', slot: 'CAP-LAYOUT-04', text: 'Islas flotantes separadas que agrupan los controles.' },
   { id: 'dock-bottom', slot: 'CAP-LAYOUT-05', text: 'Un dock sobre el borde inferior.' },
 ];
@@ -133,7 +139,7 @@ const selected = isEs ? selectedEs : selectedEn;
     </ul>
   </section>
 
-  <CaptureGallery route="/layouts" locale={locale} exclude={['CAP-LAYOUT-01', 'CAP-LAYOUT-02', 'CAP-LAYOUT-03', 'CAP-LAYOUT-04', 'CAP-LAYOUT-05']} />
+  <CaptureGallery route="/layouts" locale={locale} exclude={['CAP-LAYOUT-01', 'CAP-LAYOUT-02', 'CAP-LAYOUT-04', 'CAP-LAYOUT-05', 'CAP-LAYOUT-11', 'CAP-LAYOUT-12']} />
 </SiteLayout>
 
 <style>

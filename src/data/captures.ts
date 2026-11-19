@@ -1,20 +1,23 @@
-// Capture slots: every place the site would show what the distro looks like.
+// Capture slots: the inventory of real host captures (docs/IMAGE_CURATION.md).
 //
-// The single source of truth is src/data/capture-slots.json. A slot is
-// `pending` until a real host capture exists; the shared CaptureFigure
-// component then renders a labelled "pending capture" plate with the same
-// aspect ratio the image will have, so swapping in a capture causes no layout
-// shift. To fill a slot: drop the file in src/assets/captures/ (clips go in
-// public/captures/) and flip `status` to `captured` and set `file`
-// (`node scripts/capture-ingest.mjs <ID> <file>` does both and validates the
-// image). docs/CAPTURES.md has the contract and docs/CAPTURE-SHOT-LIST.md the
-// full list of what to shoot.
+// src/data/capture-slots.json is the inventory source of truth (provenance,
+// pins, checksums, privacy). What renders publicly is decided separately by
+// src/data/editorial.json: only `captured` slots listed there appear on the
+// site. `archived` slots keep their asset and record but never render;
+// `pending` slots are the deferred shot list and never render either — there
+// are no public placeholder plates. To fill a pending slot: drop the file in
+// src/assets/captures/ (clips in public/captures/), flip `status` to
+// `captured` and set `file` (`node scripts/capture-ingest.mjs <ID> <file>`),
+// then add an editorial placement. docs/CAPTURES.md has the contract.
 
 import data from './capture-slots.json';
+import editorialData from './editorial.json';
 
 export type SlotPriority = 'P0' | 'P1' | 'P2';
 export type SlotKind = 'screenshot' | 'clip' | 'photo';
-export type SlotStatus = 'pending' | 'captured';
+export type SlotStatus = 'pending' | 'captured' | 'archived';
+export type Curation = 'FEATURE' | 'SUPPORT' | 'DOCS' | 'ARCHIVE' | 'DEFER';
+export type Crop = 'top' | 'bottom' | 'br-quadrant' | 'panel';
 
 export interface Localized {
   en: string;
@@ -53,6 +56,27 @@ export interface CaptureSlot {
   source?: Localized;
   pins?: Record<string, string>;
   credit?: Localized;
+  /** Curation decision (docs/IMAGE_CURATION.md). DOCS slots also set docsOnly. */
+  curation?: Curation;
+  /** Captured for documentation only; served from public/captures, never placed editorially. */
+  docsOnly?: boolean;
+}
+
+export interface EditorialSection {
+  format: 'hero' | 'pair' | 'compare' | 'selector' | 'support' | 'clip' | 'strip';
+  render: 'manual' | 'gallery';
+  slots: string[];
+  caption: Localized;
+  /** Per-slot captions for multi-image sections, so no caption repeats verbatim. */
+  captions?: Record<string, Localized>;
+  crop?: Crop;
+  eager?: boolean;
+}
+
+export interface ShowroomGroup {
+  group: Localized;
+  slots: string[];
+  captions?: Record<string, Localized>;
 }
 
 export interface CaptureSession {
@@ -73,18 +97,69 @@ export function getSlot(id: string): CaptureSlot {
   return slot;
 }
 
-/** Slots declared for a route, in the order they appear in the data file. */
+/**
+ * @deprecated Inventory metadata only — public rendering is editorial.
+ * Kept for non-rendering lookups; pages must use editorialForPage.
+ */
 export function slotsForPage(route: string): CaptureSlot[] {
   return captureSlots.filter((slot) => slot.pages.includes(route));
+}
+
+export const editorial = editorialData as unknown as {
+  provenance: Localized;
+  pages: Record<string, EditorialSection[]>;
+  showroom: ShowroomGroup[];
+};
+
+/** Editorial sections for a route, in placement order. */
+export function editorialForPage(route: string): EditorialSection[] {
+  return editorial.pages[route] ?? [];
+}
+
+export function showroomGroups(): ShowroomGroup[] {
+  return editorial.showroom;
+}
+
+/**
+ * The human editorial caption for a slot, wherever it renders (manual page
+ * placements and the showroom included). Per-slot captions win, then the
+ * caption of a section that places this slot alone, then its first section.
+ * Returns undefined when no placement exists (caller falls back to title).
+ */
+export function editorialCaption(id: string, locale: 'en' | 'es'): string | undefined {
+  let sectionCaption: string | undefined;
+  for (const sections of Object.values(editorial.pages)) {
+    for (const section of sections) {
+      if (section.captions?.[id]) return section.captions[id][locale];
+      if (section.slots.includes(id)) {
+        if (section.slots.length === 1) return section.caption[locale];
+        sectionCaption ??= section.caption[locale];
+      }
+    }
+  }
+  for (const group of editorial.showroom) {
+    if (group.captions?.[id]) return group.captions[id][locale];
+  }
+  return sectionCaption;
+}
+
+/** Distinct slot ids placed anywhere publicly (pages + showroom). */
+export function publicSlotIds(): Set<string> {
+  const ids = new Set<string>();
+  for (const sections of Object.values(editorial.pages)) for (const section of sections) for (const id of section.slots) ids.add(id);
+  for (const group of editorial.showroom) for (const id of group.slots) ids.add(id);
+  return ids;
 }
 
 export const priorityOrder: SlotPriority[] = ['P0', 'P1', 'P2'];
 
 export function slotCounts() {
-  const counts = { P0: 0, P1: 0, P2: 0, total: captureSlots.length, captured: 0 };
+  const counts = { P0: 0, P1: 0, P2: 0, total: captureSlots.length, captured: 0, archived: 0, pending: 0, public: publicSlotIds().size };
   for (const slot of captureSlots) {
     counts[slot.priority] += 1;
-    if (slot.status === 'captured') counts.captured += 1;
+    if (slot.status === 'captured' && !slot.docsOnly) counts.captured += 1;
+    if (slot.status === 'archived') counts.archived += 1;
+    if (slot.status === 'pending') counts.pending += 1;
   }
   return counts;
 }

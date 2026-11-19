@@ -1,19 +1,16 @@
 ---
 /**
  * The one component for every place the site shows what the distro looks
- * like. It is driven by src/data/capture-slots.json:
+ * like. Placements come from src/data/editorial.json; the slot record in
+ * src/data/capture-slots.json carries provenance and alt text.
  *
- * - `pending` slots render an instrument-panel plate: slot id, what must be
- *   captured, the aspect ratio, resolution, theme, mode and format, and the
- *   text "Pending — host capture".
- * - `captured` slots render the real file with its provenance.
- *
- * Both states live in a box with the slot's own aspect ratio, so filling a
- * slot never moves the page (docs/CAPTURES.md).
+ * Only `captured` slots render. A pending (deferred) or archived slot id is
+ * a build error: there are no public placeholder plates (docs/IMAGE_CURATION.md).
+ * Crops are CSS framing of the original asset — never new files.
  */
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { getSlot } from '../data/captures';
+import { editorialCaption, getSlot, type Crop } from '../data/captures';
 import CaptureLabel from './CaptureLabel.astro';
 import type { Locale } from '../i18n/ui';
 
@@ -22,12 +19,19 @@ interface Props {
   locale?: Locale;
   eager?: boolean;
   sizes?: string;
+  /** Human editorial caption; falls back to the slot title. */
+  caption?: string;
+  crop?: Crop;
 }
 
-const { slot: slotId, locale = 'es', eager = false, sizes = '(min-width: 1100px) 1000px, calc(100vw - 2rem)' } = Astro.props;
+const { slot: slotId, locale = 'es', eager = false, sizes = '(min-width: 1100px) 1000px, calc(100vw - 2rem)', caption, crop } = Astro.props;
 const slot = getSlot(slotId);
-const isEs = locale === 'es';
-const pending = slot.status !== 'captured' || !slot.file;
+if (slot.status !== 'captured' || !slot.file) {
+  throw new Error(`Capture slot ${slot.id} is ${slot.status}: only captured slots placed in src/data/editorial.json may render publicly`);
+}
+if (slot.docsOnly) {
+  throw new Error(`Capture slot ${slot.id} is docs-only and must not be placed on the website`);
+}
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../assets/captures/*.{png,jpg,jpeg,webp,avif}', { eager: true });
 const resolveImage = (file: string | null | undefined): ImageMetadata | undefined => {
@@ -36,53 +40,29 @@ const resolveImage = (file: string | null | undefined): ImageMetadata | undefine
   return hit?.[1].default;
 };
 const isClip = slot.kind === 'clip';
-const image = !pending && !isClip ? resolveImage(slot.file) : undefined;
-const poster = !pending && isClip ? resolveImage(slot.poster) : undefined;
-if (!pending && !isClip && !image) throw new Error(`Capture slot ${slot.id} is captured but src/assets/captures/${slot.file} is missing`);
-if (!pending && isClip && !poster) throw new Error(`Capture slot ${slot.id} is a clip but its poster ${slot.poster} is missing`);
+const image = !isClip ? resolveImage(slot.file) : undefined;
+const poster = isClip ? resolveImage(slot.poster) : undefined;
+if (!isClip && !image) throw new Error(`Capture slot ${slot.id} is captured but src/assets/captures/${slot.file} is missing`);
+if (isClip && !poster) throw new Error(`Capture slot ${slot.id} is a clip but its poster ${slot.poster} is missing`);
 
-const title = slot.title[locale];
-const brief = slot.description[locale];
 const alt = slot.alt[locale];
-const label = isEs ? `Captura pendiente ${slot.id}: ${alt}` : `Pending capture ${slot.id}: ${alt}`;
-const t = isEs
-  ? { pending: 'PENDIENTE — captura del host', ratio: 'Proporción', size: 'Resolución', theme: 'Tema', mode: 'Modo', format: 'Formato', clip: 'Clip en bucle', x2: 'master a 2x' }
-  : { pending: 'PENDING — host capture', ratio: 'Aspect', size: 'Size', theme: 'Theme', mode: 'Mode', format: 'Format', clip: 'Looping clip', x2: '2x master' };
-const caption = [slot.id, `${slot.aspect}`, `${slot.width}×${slot.height}`].join(' · ');
-const sourceText = slot.source?.[locale];
+// Human editorial caption everywhere; provenance (incl. capture date) lives
+// in the page-level line and the slot record, not repeated under each figure.
+const captionText = caption ?? editorialCaption(slot.id, locale) ?? slot.title[locale];
 ---
 
 <figure
   class:list={['capture-figure', { 'is-clip': isClip }]}
   data-capture-slot={slot.id}
-  data-status={pending ? 'pending' : 'captured'}
+  data-status="captured"
   data-priority={slot.priority}
   data-kind={slot.kind}
+  data-crop={crop}
   style={`--cap-ratio:${slot.width} / ${slot.height}`}
-  aria-label={pending ? label : undefined}
 >
-  <div class:list={['capture-frame', 'ticked']}>
+  <div class:list={['capture-frame', 'ticked', { 'is-cropped': !!crop }]}>
     {
-      pending ? (
-        <div class="capture-plate">
-          <div class="plate-head">
-            <span class="plate-id-tag">{slot.id}</span>
-            <span class="plate-state">{t.pending}</span>
-            <span class="plate-pri" title={slot.priority === 'P0' ? (isEs ? 'Imprescindible para el lanzamiento' : 'Launch-critical') : undefined}>{slot.priority}</span>
-          </div>
-          <div class="plate-body">
-            <p class="plate-title">{title}</p>
-            <p class="plate-brief">{brief}</p>
-          </div>
-          <dl class="plate-spec">
-            <div><dt>{t.ratio}</dt><dd>{slot.aspect}</dd></div>
-            <div><dt>{t.size}</dt><dd>{slot.width}×{slot.height}{slot.scale2x ? ` · ${t.x2}` : ''}</dd></div>
-            <div><dt>{t.theme}</dt><dd>{slot.theme}</dd></div>
-            <div><dt>{t.mode}</dt><dd>{slot.mode}</dd></div>
-            <div class="plate-format"><dt>{t.format}</dt><dd>{isClip ? t.clip : slot.format}</dd></div>
-          </dl>
-        </div>
-      ) : isClip ? (
+      isClip ? (
         <video
           class="capture-media"
           width={slot.width}
@@ -115,9 +95,9 @@ const sourceText = slot.source?.[locale];
     }
   </div>
   <figcaption>
-    <CaptureLabel state={pending ? 'pending' : 'captured'} kind={slot.kind} locale={locale} />
-    <span class="capture-meta">{pending ? caption : [sourceText, `${slot.width}×${slot.height}`, slot.capturedAt].filter(Boolean).join(' · ')}</span>
-    {!pending && slot.credit && <span class="capture-meta">{slot.credit[locale]}</span>}
+    <CaptureLabel state="captured" kind={slot.kind} locale={locale} />
+    <span class="capture-caption">{captionText}</span>
+    {slot.credit && <span class="capture-meta">{slot.credit[locale]}</span>}
   </figcaption>
 </figure>
 
@@ -153,6 +133,10 @@ const sourceText = slot.source?.[locale];
     overflow: visible;
   }
 
+  .capture-frame.is-cropped {
+    overflow: hidden;
+  }
+
   .capture-frame :global(picture) {
     display: block;
     width: 100%;
@@ -167,123 +151,27 @@ const sourceText = slot.source?.[locale];
     object-fit: cover;
   }
 
-  .capture-plate {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: 0.5rem;
-    padding: clamp(0.6rem, 2.4cqi, 1.1rem);
-    overflow: hidden;
-    border-radius: var(--radius);
-    background:
-      repeating-linear-gradient(45deg, var(--diagonal) 0 1px, transparent 1px 11px),
-      var(--sunken);
-    color: var(--ink);
+  /* Editorial crops: CSS framing of the original asset, never a new file. */
+  .capture-figure[data-crop='top'] .capture-frame {
+    aspect-ratio: 16 / 7;
   }
-
-  .plate-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem 0.7rem;
-    font: 500 0.7rem/1.3 var(--font-mono);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .capture-figure[data-crop='top'] :global(.capture-media) {
+    object-position: top;
   }
-
-  .plate-id-tag {
-    padding: 0.1rem 0.45rem;
-    border: 1px solid var(--rule-strong);
-    border-radius: var(--radius-small);
-    background: var(--base);
-    color: var(--ink);
+  .capture-figure[data-crop='bottom'] .capture-frame {
+    aspect-ratio: 16 / 7;
   }
-
-  .plate-state {
-    padding: 0.1rem 0.45rem;
-    border: 1px dashed var(--signal);
-    border-radius: var(--radius-small);
-    background: var(--signal-well);
-    color: var(--on-signal-well);
+  .capture-figure[data-crop='bottom'] :global(.capture-media) {
+    object-position: bottom;
   }
-
-  .plate-pri {
-    margin-left: auto;
-    color: var(--ink-muted);
+  .capture-figure[data-crop='br-quadrant'] .capture-frame,
+  .capture-figure[data-crop='panel'] .capture-frame {
+    aspect-ratio: 4 / 3;
   }
-
-  .plate-body {
-    display: grid;
-    align-content: center;
-    gap: 0.4rem;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .plate-title {
-    margin: 0;
-    font: 700 clamp(1rem, 4.4cqi, 1.9rem) / 1.1 var(--font-display);
-    letter-spacing: -0.005em;
-  }
-
-  .plate-brief {
-    margin: 0;
-    max-width: 62ch;
-    color: var(--ink-muted);
-    font-size: clamp(0.78rem, 1.9cqi, 0.95rem);
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .plate-spec {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.1rem;
-    margin: 0;
-    padding-top: 0.45rem;
-    border-top: 1px solid var(--rule);
-    font: 500 0.68rem/1.35 var(--font-mono);
-    letter-spacing: 0.04em;
-  }
-
-  .plate-spec div {
-    display: flex;
-    gap: 0.4rem;
-  }
-
-  .plate-spec dt {
-    color: var(--ink-muted);
-    text-transform: uppercase;
-  }
-
-  .plate-spec dd {
-    margin: 0;
-    color: var(--ink);
-  }
-
-  /* Compact plates: keep the identity and the state, drop the detail. */
-  @container capture (max-width: 30rem) {
-    .plate-brief,
-    .plate-spec {
-      display: none;
-    }
-    .plate-pri {
-      display: none;
-    }
-  }
-
-  @container capture (min-width: 30rem) and (max-width: 44rem) {
-    .plate-spec .plate-format,
-    .plate-spec div:nth-child(n + 4) {
-      display: none;
-    }
-    .plate-brief {
-      -webkit-line-clamp: 3;
-    }
+  .capture-figure[data-crop='br-quadrant'] :global(.capture-media),
+  .capture-figure[data-crop='panel'] :global(.capture-media) {
+    transform: scale(2.1);
+    transform-origin: bottom right;
   }
 
   .capture-figure figcaption {
@@ -294,5 +182,9 @@ const sourceText = slot.source?.[locale];
     color: var(--ink-muted);
     font: 500 0.7rem/1.4 var(--font-mono);
     letter-spacing: 0.05em;
+  }
+
+  .capture-caption {
+    color: var(--ink);
   }
 </style>

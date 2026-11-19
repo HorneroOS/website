@@ -46,7 +46,7 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
 
   <section class="terminal-proof section" aria-labelledby="terminal-proof-title">
     <div class="terminal-capture">
-      <CaptureFigure slot="CAP-TERM-01" locale={locale} />
+      <CaptureFigure slot="CAP-TERM-06" locale={locale} />
     </div>
     <div class="proof-copy">
       <h2 id="terminal-proof-title">{isEs ? 'Kitty con la paleta de Hornero' : 'Kitty with the Hornero palette'}</h2>
@@ -112,7 +112,7 @@ const displayPath = (path: string) => path.replaceAll('{config}', '~/.config').r
     </div>
   </section>
 
-  <CaptureGallery route="/terminals" locale={locale} exclude={['CAP-TERM-01']} />
+  <CaptureGallery route="/terminals" locale={locale} exclude={['CAP-TERM-06']} />
 </SiteLayout>
 
 <style>

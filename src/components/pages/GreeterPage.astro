@@ -104,12 +104,12 @@ const description = isEs
         </p>
         <p class="intro-copy status-note">
           {isEs
-            ? `Estado: este diseño está en la rama principal del greeter (pin ${short(greeterPin.sha)}) y todavía no está en un paquete publicado. El paquete publicado hornero-greeter 1.1.0 sigue siendo el greeter de paisajes; sus créditos quedan al final de esta página mientras esa versión siga publicada. Las capturas reales del nuevo diseño están previstas abajo y en la lista de capturas: hasta que existan, esta página no muestra ninguna imagen del greeter.`
-            : `Status: this design is on the greeter's main branch (pin ${short(greeterPin.sha)}) and is not in a published package yet. The published hornero-greeter 1.1.0 package is still the landscape greeter; its credits stay at the end of this page while that release is published. Real captures of the new design are planned below and in the capture shot list: until they exist, this page shows no image of the greeter.`}
+            ? `Estado: este diseño está en la rama principal del greeter (pin ${short(greeterPin.sha)}) y todavía no está en un paquete publicado. El paquete publicado hornero-greeter 1.1.0 sigue siendo el greeter de paisajes; sus créditos quedan al final de esta página mientras esa versión siga publicada. Todavía no existe una captura de un login real con el nuevo diseño: hasta que exista, esta página no muestra ninguna imagen del greeter (la de abajo es la pantalla de bloqueo, rotulada como tal).`
+            : `Status: this design is on the greeter's main branch (pin ${short(greeterPin.sha)}) and is not in a published package yet. The published hornero-greeter 1.1.0 package is still the landscape greeter; its credits stay at the end of this page while that release is published. No capture of a real login with the new design exists yet: until one does, this page shows no image of the greeter (the one below is the lock screen, labelled as such).`}
         </p>
       </header>
       <div class="greeter-hero-capture">
-        <CaptureFigure slot="CAP-GREETER-01" locale={locale} eager />
+        <CaptureFigure slot="CAP-LOCK-01" locale={locale} eager />
       </div>
     </div>
 
@@ -185,22 +185,11 @@ const description = isEs
             : 'The greeter repository publishes renders of the real theme (sddm-greeter-qt6 --test-mode on Qt offscreen platform, with fixture accounts and sessions): Signal Night, Signal Day, high contrast with large text, 1366×768 and 1920×1080, the secondary plate and the error states. They are the current design reference, but they are not captures of a real login or of a published package, so this site links to them instead of showing them as captures.'}
         </p>
       </div>
-      <ul class="render-list" role="list">
-        {greeter.renders.map((render) => (
-          <li>
-            <a href={renderUrl(render.file)}>
-              <code>{render.file}</code>
-            </a>
-            <span>
-              {render.width}×{render.height}
-            </span>
-          </li>
-        ))}
-      </ul>
       <p class="renders-note">
         {isEs
-          ? 'Lista y tamaños generados desde el greeter pineado; las capturas de un login real, cuando el diseño se publique, llenan los espacios previstos de abajo sin cambiar el diseño de la página.'
-          : 'List and sizes generated from the pinned greeter; captures of a real login, once the design is released, fill the planned slots below with no page redesign.'}
+          ? 'La lista completa de renders (con tamaños) vive en el repositorio del greeter pineado; esta página no muestra ninguna imagen del greeter hasta que exista una captura de un login real.'
+          : 'The full render list (with sizes) lives in the pinned greeter repository; this page shows no image of the greeter until a capture of a real login exists.'}
+        <a class="text-link" href={renderUrl('screens/README.md')}>{isEs ? 'Ver los renders en el repositorio' : 'See the renders in the repository'} <span aria-hidden="true">↗</span></a>
       </p>
     </section>
 
@@ -333,7 +322,7 @@ const description = isEs
   <CaptureGallery
     route="/greeter"
     locale={locale}
-    exclude={['CAP-GREETER-01']}
+    exclude={['CAP-LOCK-01']}
     id="greeter-captures"
     heading={isEs ? 'El greeter Signal y la pantalla de bloqueo, de verdad' : 'The real Signal greeter and lock screen'}
     intro={
