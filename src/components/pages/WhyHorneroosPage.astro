@@ -1,0 +1,218 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import StageBadge from '../StageBadge.astro';
+import CaptureFigure from '../CaptureFigure.astro';
+import CompareTable from '../CompareTable.astro';
+import FaqList from '../FaqList.astro';
+import { editionStage, feature } from '../../data/features';
+import { faqItems } from '../../data/why';
+import { slotCounts } from '../../data/captures';
+import { localizePath, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const L = (path: string) => localizePath(path, locale);
+const counts = slotCounts();
+
+const pillars = [
+  {
+    id: 'editions',
+    stage: editionStage('desktop'),
+    title: isEs ? 'Ediciones por oficio' : 'Editions by craft',
+    body: isEs
+      ? 'HorneroOS se compone al instalar: Desktop para el trabajo diario, Studio para crear y Gaming para jugar, sobre la misma base y la misma ISO. Server y Agents están planificadas y todavía no tienen imagen.'
+      : 'HorneroOS is composed at install time: Desktop for daily work, Studio for creating and Gaming for playing, on the same base and the same ISO. Server and Agents are planned and have no image yet.',
+    href: '/editions',
+    link: isEs ? 'Ver las ediciones' : 'See the editions',
+  },
+  {
+    id: 'signal',
+    stage: feature('signal').stage,
+    title: isEs ? 'Hornero Signal, modos y Chromatic opcional' : 'Hornero Signal, modes and optional Chromatic',
+    body: isEs
+      ? 'El escritorio tiene un lenguaje visual propio (Signal Night y Day), cinco modos que cambian cómo se comporta sin tocar tu layout ni tu tema, y color dinámico opcional desde el fondo de pantalla. La idea del color dinámico viene de Caelestia (GPL-3.0) y la implementación es nueva; la página de Chromatic lo documenta.'
+      : 'The desktop has a visual language of its own (Signal Night and Day), five modes that change how it behaves without touching your layout or theme, and optional dynamic colour from the wallpaper. The dynamic-colour idea comes from Caelestia (GPL-3.0) and the implementation is new; the Chromatic page documents it.',
+    href: '/modes',
+    link: isEs ? 'Ver los modos' : 'See the modes',
+  },
+  {
+    id: 'settings',
+    stage: feature('layouts').stage,
+    title: isEs ? 'Ajustes en el Centro de control' : 'Settings in the Control Center',
+    body: isEs
+      ? 'Layouts, temas, extensiones y el companion se ajustan desde el Centro de control y desde horneroctl, con el estado de cada cosa salido del registro del proyecto. Cambiar archivos a mano sigue siendo posible, pero no hace falta para los ajustes del escritorio.'
+      : 'Layouts, themes, extensions and the companion are adjusted from the Control Center and from horneroctl, with each status taken from the project ledger. Editing files by hand stays possible, but the desktop settings do not require it.',
+    href: '/desktop',
+    link: isEs ? 'Ver el Desktop' : 'See the Desktop',
+  },
+  {
+    id: 'language',
+    stage: feature('greeter').stage,
+    title: isEs ? 'Español rioplatense e inglés' : 'Rioplatense Spanish and English',
+    body: isEs
+      ? 'Este sitio se escribe primero en español rioplatense y después en inglés. La documentación técnica de /docs/ se escribe en inglés en HorneroOS/docs; las páginas en español lo avisan en vez de esconderlo.'
+      : 'This site is written in Rioplatense Spanish first and English second. The technical documentation under /docs/ is written in English in HorneroOS/docs; the Spanish pages say so instead of hiding it.',
+    href: '/docs/',
+    link: isEs ? 'Leer la documentación' : 'Read the documentation',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question[locale],
+    acceptedAnswer: { '@type': 'Answer', text: item.answer[locale] },
+  })),
+};
+---
+
+<SiteLayout
+  socialImage="/og/why-horneroos.png"
+  socialImageAlt={
+    isEs
+      ? 'Tarjeta de HorneroOS: por qué HorneroOS, con el estado de sus ediciones desde el catálogo fijado.'
+      : 'HorneroOS card: why HorneroOS, with the status of its editions from the pinned catalogue.'
+  }
+  title={isEs ? 'Por qué HorneroOS | HorneroOS' : 'Why HorneroOS | HorneroOS'}
+  description={
+    isEs
+      ? 'Qué hace HorneroOS, en qué estado está, cómo se compara con otros sistemas operativos y shells, y las preguntas frecuentes, con fuentes y fecha de verificación.'
+      : 'What HorneroOS does, what state it is in, how it compares with other operating systems and shells, and frequently asked questions, with sources and a verification date.'
+  }
+  structuredData={faqJsonLd}
+>
+  <section class="section why-intro" aria-labelledby="why-title">
+    <p class="plate-id">
+      <strong>{isEs ? 'Por qué HorneroOS' : 'Why HorneroOS'}</strong>
+      <span>Preview</span>
+    </p>
+    <h1 id="why-title">{isEs ? 'Por qué HorneroOS' : 'Why HorneroOS'}</h1>
+    <p class="lede">
+      {isEs
+        ? 'HorneroOS es un sistema operativo basado en Arch que se compone por oficio (Desktop, Studio y Gaming), con una shell propia adaptada de Caelestia Shell y ajustes en el Centro de control. Está en Preview: esta página dice qué hace hoy, qué falta y en qué se diferencia de otros proyectos, sin cifras de rendimiento ni testimonios.'
+        : 'HorneroOS is an Arch-based operating system composed by craft (Desktop, Studio and Gaming), with a shell of its own adapted from Caelestia Shell and settings in the Control Center. It is in Preview: this page says what it does today, what is missing and how it differs from other projects, with no performance figures and no testimonials.'}
+    </p>
+    <p class="why-ctas">
+      <a class="cta primary" href={L('/install')}>
+        {isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}
+      </a>
+      <a class="cta secondary" href={L('/editions')}>
+        {isEs ? 'Compará las ediciones' : 'Compare the editions'}
+      </a>
+    </p>
+    <CaptureFigure slot="CAP-HERO-01" locale={locale} eager />
+  </section>
+
+  <section class="section" aria-labelledby="pillars-title">
+    <h2 id="pillars-title">{isEs ? 'Qué hace HorneroOS' : 'What HorneroOS does'}</h2>
+    <ol class="why-pillars" role="list">
+      {pillars.map((pillar) => (
+        <li id={pillar.id}>
+          <h3>{pillar.title}</h3>
+          <p>
+            <StageBadge stage={pillar.stage} locale={locale} />
+          </p>
+          <p class="why-copy">{pillar.body}</p>
+          <p>
+            <a class="text-link" href={L(pillar.href)}>
+              {pillar.link}
+            </a>
+          </p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="compare-title">
+    <h2 id="compare-title">
+      {isEs ? 'Comparación: sistemas operativos y shells' : 'Comparison: operating systems and shells'}
+    </h2>
+    <p class="why-copy">
+      {isEs
+        ? 'Los proyectos de esta tabla no son todos la misma clase de cosa. Omarchy, CachyOS y Ryoku son sistemas operativos; Caelestia Shell y Dux Modular Shell son shells de escritorio que corren sobre un sistema ya instalado. Cada fila enlaza a su fuente primaria.'
+        : 'The projects in this table are not all the same kind of thing. Omarchy, CachyOS and Ryoku are operating systems; Caelestia Shell and Dux Modular Shell are desktop shells that run on an already installed system. Every row links to its primary source.'}
+    </p>
+    <CompareTable locale={locale} />
+  </section>
+
+  <section class="section" aria-labelledby="limits-title">
+    <h2 id="limits-title">{isEs ? 'Límites y estado' : 'Limits and status'}</h2>
+    <ul class="why-limits">
+      <li>
+        {isEs
+          ? `La ISO publicada es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview33. Ninguna edición es Soportada todavía.`
+          : `The published ISO is 0.2.0-preview32 and the packages reached 0.2.0-preview33. No edition is Supported yet.`}
+      </li>
+      <li>
+        {isEs
+          ? `De las capturas previstas para mostrar el escritorio, ${counts.captured} de ${counts.total} están tomadas de un host real y el resto sigue pendiente en el showroom.`
+          : `Of the captures planned to show the desktop, ${counts.captured} of ${counts.total} are taken on a real host and the rest stay pending in the showroom.`}{' '}
+        <a href={L('/showroom')}>{isEs ? 'Ver el showroom' : 'See the showroom'}</a>
+      </li>
+      <li>
+        {isEs
+          ? 'HorneroOS no publica benchmarks. Las afirmaciones de rendimiento de otros proyectos se atribuyen a su fuente y no se comparan acá.'
+          : 'HorneroOS publishes no benchmarks. Other projects’ performance claims are attributed to their source and are not compared here.'}
+      </li>
+      <li>
+        {isEs
+          ? 'El rollback del sistema está planificado en el registro del proyecto; no se anuncia como una capacidad actual.'
+          : 'System rollback is planned in the project ledger; it is not announced as a current capability.'}
+      </li>
+    </ul>
+    <CaptureFigure slot="CAP-CC-01" locale={locale} />
+  </section>
+
+  <section class="section" aria-labelledby="faq-title" id="faq">
+    <h2 id="faq-title">{isEs ? 'Preguntas frecuentes' : 'Frequently asked questions'}</h2>
+    <FaqList items={faqItems} locale={locale} />
+  </section>
+</SiteLayout>
+
+<style>
+  .why-intro h1 {
+    max-width: 16ch;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .why-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .why-copy {
+    max-width: 68ch;
+    color: var(--ink-muted);
+  }
+
+  .why-pillars {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .why-pillars li {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: clamp(1.2rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .why-limits {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 72ch;
+    padding-left: 1.1rem;
+    color: var(--ink-muted);
+  }
+</style>

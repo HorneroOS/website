@@ -1,0 +1,104 @@
+{
+  "$comment": "Single source for the FAQ on /why-horneroos and the home-page teaser. Answers state only what the pinned product data, the feature ledger and the download record on this site support. No benchmarks, testimonials or unreleased capabilities.",
+  "items": [
+    {
+      "id": "what",
+      "question": {
+        "es": "¿Qué es HorneroOS?",
+        "en": "What is HorneroOS?"
+      },
+      "answer": {
+        "es": "Es un sistema operativo basado en Arch para construir, crear y jugar, compuesto al instalar en ediciones Desktop, Studio y Gaming. Trae su propia shell (Hornero Shell), su herramienta de sistema (horneroctl) y su lenguaje de diseño (Hornero Signal).",
+        "en": "It is an Arch-based operating system for building, creating and playing, composed at install time into Desktop, Studio and Gaming editions. It ships its own shell (Hornero Shell), its system tool (horneroctl) and its design language (Hornero Signal)."
+      }
+    },
+    {
+      "id": "ready",
+      "question": {
+        "es": "¿Está listo para usar todos los días?",
+        "en": "Is it ready for daily use?"
+      },
+      "answer": {
+        "es": "Está en Preview. La ISO publicada es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview33. Desktop, Studio y Gaming tienen madurez Preview en el catálogo fijado: se pueden probar e instalar, y todavía no son una edición Soportada. Las páginas de cada edición dicen qué validación en hardware falta.",
+        "en": "It is in Preview. The published ISO is 0.2.0-preview32 and the packages reached 0.2.0-preview33. Desktop, Studio and Gaming carry Preview maturity in the pinned catalogue: they can be tried and installed, and they are not a Supported edition yet. Each edition page says which hardware validation is still missing."
+      }
+    },
+    {
+      "id": "editions",
+      "question": {
+        "es": "¿Qué ediciones existen y cuáles faltan?",
+        "en": "Which editions exist, and which are missing?"
+      },
+      "answer": {
+        "es": "Desktop, Studio y Gaming se instalan desde la misma ISO en Preview. Server y Agents están definidas en el catálogo con madurez Planificada: no tienen imagen instalable.",
+        "en": "Desktop, Studio and Gaming install from the same ISO in Preview. Server and Agents are defined in the catalogue with Planned maturity: they have no installable image."
+      }
+    },
+    {
+      "id": "compositor",
+      "question": {
+        "es": "¿Qué compositor usa?",
+        "en": "Which compositor does it use?"
+      },
+      "answer": {
+        "es": "Hyprland es el compositor por defecto soportado. Niri figura como experimental y Labwc como planificado en el catálogo de ediciones.",
+        "en": "Hyprland is the supported default compositor. Niri is listed as experimental and Labwc as planned in the edition catalogue."
+      }
+    },
+    {
+      "id": "install",
+      "question": {
+        "es": "¿Cómo se instala?",
+        "en": "How do I install it?"
+      },
+      "answer": {
+        "es": "Descargás la ISO x86_64 firmada de la página de instalación, verificás el SHA-256 y la firma GPG publicados, y elegís edición y compositor durante la instalación. En un Arch ya instalado, el Desktop también está como paquetes.",
+        "en": "You download the signed x86_64 ISO from the install page, verify the published SHA-256 and GPG signature, and pick the edition and compositor during installation. On an existing Arch system, the Desktop is also available as packages."
+      }
+    },
+    {
+      "id": "caelestia",
+      "question": {
+        "es": "¿Qué relación tiene con Caelestia?",
+        "en": "How is it related to Caelestia?"
+      },
+      "answer": {
+        "es": "Hornero Shell se adaptó de Caelestia Shell (GPL-3.0). El autor upstream, la licencia y el commit importado quedan documentados en el repositorio de la shell. HorneroOS suma el sistema operativo alrededor de esa shell: ediciones, instalador, paquetes y documentación.",
+        "en": "Hornero Shell was adapted from Caelestia Shell (GPL-3.0). The upstream author, the licence and the imported commit stay documented in the shell repository. HorneroOS adds the operating system around that shell: editions, installer, packages and documentation."
+      }
+    },
+    {
+      "id": "language",
+      "question": {
+        "es": "¿En qué idiomas está?",
+        "en": "Which languages is it in?"
+      },
+      "answer": {
+        "es": "Este sitio se publica en español rioplatense e inglés, con el español como idioma por defecto. La documentación técnica de /docs/ se escribe en inglés en HorneroOS/docs; las páginas en español lo avisan.",
+        "en": "This site is published in Rioplatense Spanish and English, with Spanish as the default. The technical documentation under /docs/ is written in English in HorneroOS/docs; the Spanish pages say so."
+      }
+    },
+    {
+      "id": "performance",
+      "question": {
+        "es": "¿Es más rápido que otras distribuciones?",
+        "en": "Is it faster than other distributions?"
+      },
+      "answer": {
+        "es": "HorneroOS no publica benchmarks ni cifras de rendimiento, así que este sitio no afirma que sea más rápido que otra distribución. Si una cifra aparece en el futuro, va a decir en qué hardware y con qué método se midió.",
+        "en": "HorneroOS publishes no benchmarks or performance figures, so this site does not claim it is faster than another distribution. If a figure appears in the future, it will say on which hardware and by what method it was measured."
+      }
+    },
+    {
+      "id": "assistant",
+      "question": {
+        "es": "¿Qué es Javi? ¿Viene activado?",
+        "en": "What is Javi? Is it on by default?"
+      },
+      "answer": {
+        "es": "Javi es el companion que vive en el escritorio; es solo presentación y se puede apagar. Detrás puede haber un asistente opcional y experimental, desactivado por defecto, que nunca corre como root. La edición Agents, separada, sigue planificada.",
+        "en": "Javi is the companion that lives on the desktop; it is presentation only and can be turned off. An optional, experimental assistant can sit behind it, off by default and never running as root. The separate Agents edition is still planned."
+      }
+    }
+  ]
+}

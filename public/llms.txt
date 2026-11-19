@@ -1,6 +1,6 @@
 # HorneroOS
 
-> HorneroOS is an Arch-based workstation for building, creating and playing, with a distinctive desktop experience and an integrated operating-system ecosystem: Desktop, Studio and Gaming editions, the horneroctl system tool and Hornero Shell. Hyprland is the supported default compositor and Niri is experimental. Its design language is Hornero Signal.
+> HorneroOS is an Arch-based workstation for building, creating and playing: Desktop, Studio and Gaming editions, the horneroctl system tool and Hornero Shell. Hyprland is the supported default compositor and Niri is experimental. Its design language is Hornero Signal.
 
 ## Status
 
@@ -9,6 +9,7 @@ HorneroOS is pre-release. Desktop, Studio and Gaming Preview install from the si
 The default language is Spanish (Argentina); English lives under /en/.
 
 - Official site: https://www.horneroos.com
+- Why HorneroOS (comparison and FAQ): https://www.horneroos.com/en/why-horneroos
 - Editions: https://www.horneroos.com/editions
 - Studio: https://www.horneroos.com/studio
 - Gaming: https://www.horneroos.com/gaming
@@ -27,13 +28,22 @@ The default language is Spanish (Argentina); English lives under /en/.
 ## Pages
 
 - `/` — what Hornero OS is
+- `/why-horneroos` — what it does, comparison with other operating systems
+  and shells, limits and FAQ
 - `/install` — download the signed ISO, verification and requirements
 - `/editions` — Desktop, Studio and Gaming Preview; Server and Agents planned
+- `/desktop` — the Desktop edition and its settings
 - `/studio` — creative workflows and applications
 - `/gaming` — gaming capabilities and tools
 - `/releases` — Preview history and verification links
+- `/modes` — the five experience modes
+- `/chromatic` — optional dynamic colour
 - `/themes` — the coordinated look catalogue and palette generation
 - `/layouts` — bar, dock, island, and rail arrangements
+- `/extensions` — the official extension catalogue
+- `/terminals` — terminal presets and tools
+- `/wallpapers` — wallpaper gallery with licences
+- `/companion` — Javi, the desktop companion
 - `/roots` — where each piece comes from
 - `/showroom` — real desktop captures with provenance
 - `/docs/` — the user and contributor handbook

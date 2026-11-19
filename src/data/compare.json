@@ -1,0 +1,120 @@
+{
+  "$comment": "Hand-authored comparison for /why-horneroos. Category discipline: an operating system (distribution) is not a desktop shell, and a shell is not dotfiles. Every row names its primary source and the date it was checked. Vendor performance claims are attributed to their source, never repeated as HorneroOS results. Unknowns stay labelled instead of being guessed.",
+  "verifiedOn": "2026-11-19",
+  "rows": [
+    {
+      "id": "horneroos",
+      "name": "HorneroOS",
+      "category": "os",
+      "version": "ISO 0.2.0-preview32 · packages 0.2.0-preview33",
+      "href": "https://github.com/HorneroOS/hornero",
+      "what": {
+        "es": "Sistema operativo basado en Arch, con ediciones Desktop, Studio y Gaming en Preview. Server y Agents están planificadas, sin imagen instalable.",
+        "en": "An Arch-based operating system, with Desktop, Studio and Gaming editions in Preview. Server and Agents are planned, with no installable image."
+      },
+      "install": {
+        "es": "Una ISO x86_64 firmada (preview32) o paquetes para sistemas Arch existentes; preview33 llega como actualización de paquetes.",
+        "en": "One signed x86_64 ISO (preview32) or packages for existing Arch systems; preview33 arrives as a package update."
+      },
+      "note": {
+        "es": "Hyprland es el compositor soportado y Niri es experimental, según el catálogo de ediciones fijado en este sitio.",
+        "en": "Hyprland is the supported compositor and Niri is experimental, per the edition catalogue pinned on this site."
+      }
+    },
+    {
+      "id": "omarchy",
+      "name": "Omarchy",
+      "category": "os",
+      "version": "v4.5.0 (2026-11-05)",
+      "href": "https://github.com/omacom/omarchy",
+      "what": {
+        "es": "Una distribución Linux. Su README la describe como una distribución opinada, de DHH.",
+        "en": "A Linux distribution. Its README describes it as an opinionated distribution by DHH."
+      },
+      "install": {
+        "es": "Se instala como sistema completo; los detalles viven en omarchy.org.",
+        "en": "It installs as a complete system; the details live at omarchy.org."
+      },
+      "note": {
+        "es": "HorneroOS la estudió como referencia de diseño. No hay linaje de código declarado en este sitio.",
+        "en": "HorneroOS studied it as a design reference. This site claims no code lineage from it."
+      }
+    },
+    {
+      "id": "cachyos",
+      "name": "CachyOS",
+      "category": "os",
+      "version": "checked 2026-11-19",
+      "href": "https://cachyos.org/",
+      "what": {
+        "es": "Un sistema operativo basado en Arch. Su sitio lo presenta centrado en rendimiento, con paquetes compilados por CPU y un kernel propio: son afirmaciones de su proyecto, no mediciones de HorneroOS.",
+        "en": "An Arch-based operating system. Its site presents it as performance-first, with CPU-compiled packages and its own kernel: those are its project's claims, not HorneroOS measurements."
+      },
+      "install": {
+        "es": "Se instala como sistema completo, con instalador gráfico o por terminal según su sitio.",
+        "en": "It installs as a complete system, with a graphical or a CLI installer according to its site."
+      },
+      "note": {
+        "es": "HorneroOS no publica cifras de rendimiento propias, así que esta tabla no compara velocidad.",
+        "en": "HorneroOS publishes no performance figures of its own, so this table does not compare speed."
+      }
+    },
+    {
+      "id": "ryoku",
+      "name": "Ryoku",
+      "category": "os",
+      "version": "v1.1.0 (2026-11-17)",
+      "href": "https://github.com/Ryoku-dev/ryoku",
+      "what": {
+        "es": "Una estación de trabajo Arch opinada, según la descripción de su repositorio.",
+        "en": "An opinionated Arch workstation, per its repository description."
+      },
+      "install": {
+        "es": "Se instala como sistema de escritorio; los detalles viven en su repositorio.",
+        "en": "It installs as a desktop system; the details live in its repository."
+      },
+      "note": {
+        "es": "HorneroOS lo estudió como referencia de diseño. Sus conteos de ajustes no se verificaron en esta revisión y no se repiten acá.",
+        "en": "HorneroOS studied it as a design reference. Its settings counts were not verified in this pass and are not repeated here."
+      }
+    },
+    {
+      "id": "caelestia-shell",
+      "name": "Caelestia Shell",
+      "category": "shell",
+      "version": "v2.5.0 (2026-09-18) · GPL-3.0",
+      "href": "https://github.com/caelestia-dots/shell",
+      "what": {
+        "es": "Una shell de escritorio para Linux. No es un sistema operativo: corre sobre un compositor en un sistema ya instalado.",
+        "en": "A desktop shell for Linux. It is not an operating system: it runs on a compositor in an already installed system."
+      },
+      "install": {
+        "es": "Se instala como shell sobre un sistema existente, según su repositorio.",
+        "en": "It installs as a shell on an existing system, per its repository."
+      },
+      "note": {
+        "es": "Hornero Shell se adaptó de Caelestia Shell. El autor upstream, la licencia GPL-3.0 y el commit importado quedan documentados en el repositorio de la shell.",
+        "en": "Hornero Shell was adapted from Caelestia Shell. The upstream author, the GPL-3.0 licence and the imported commit stay documented in the shell repository."
+      }
+    },
+    {
+      "id": "dux-shell",
+      "name": "Dux Modular Shell (DMS)",
+      "category": "shell",
+      "version": "v2.1.2 (2026-11-08)",
+      "href": "https://github.com/duxlabs-dev/dux-shell",
+      "what": {
+        "es": "Una shell de escritorio para compositores Wayland, hecha con Quickshell y Go según su repositorio. No es un sistema operativo.",
+        "en": "A desktop shell for Wayland compositors, built with Quickshell and Go per its repository. It is not an operating system."
+      },
+      "install": {
+        "es": "Se instala como shell sobre un compositor compatible en un sistema existente.",
+        "en": "It installs as a shell on a supported compositor in an existing system."
+      },
+      "note": {
+        "es": "Antes se llamaba DankMaterialShell; su repositorio anterior hoy resuelve a duxlabs-dev/dux-shell. HorneroOS lo estudió como referencia de diseño.",
+        "en": "It was previously called DankMaterialShell; its former repository now resolves to duxlabs-dev/dux-shell. HorneroOS studied it as a design reference."
+      }
+    }
+  ]
+}

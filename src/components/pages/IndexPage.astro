@@ -8,6 +8,9 @@ import CommunityJoin from '../../components/CommunityJoin.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import CaptureFigure from '../../components/CaptureFigure.astro';
 import StageBadge from '../../components/StageBadge.astro';
+import FaqList from '../../components/FaqList.astro';
+import { faqItems } from '../../data/why';
+import { slotCounts } from '../../data/captures';
 import { feature } from '../../data/features';
 import { modes } from '../../data/modes';
 import { featuredStory } from '../../data/story';
@@ -201,9 +204,10 @@ const journey = isEs
 const title = isEs
   ? 'HorneroOS | Una estación de trabajo basada en Arch para construir, crear y jugar'
   : 'HorneroOS | An Arch-based workstation for building, creating and playing';
+const counts = slotCounts();
 const description = isEs
-  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar, con una experiencia de escritorio propia y un ecosistema de sistema operativo integrado. Ediciones Desktop, Studio y Gaming en una ISO firmada (${latestTagged?.version ?? 'Preview'}).`
-  : `HorneroOS is an Arch-based workstation for building, creating and playing, with a distinctive desktop experience and an integrated operating-system ecosystem. Desktop, Studio and Gaming editions on one signed ISO (${latestTagged?.version ?? 'Preview'}).`;
+  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar: ediciones Desktop, Studio y Gaming, Hornero Shell y horneroctl, en una ISO firmada (${latestTagged?.version ?? 'Preview'}).`
+  : `HorneroOS is an Arch-based workstation for building, creating and playing: Desktop, Studio and Gaming editions, Hornero Shell and horneroctl, on one signed ISO (${latestTagged?.version ?? 'Preview'}).`;
 ---
 
 <SiteLayout
@@ -231,8 +235,8 @@ const description = isEs
       <p class="lede">
         {
           isEs
-            ? 'HorneroOS es un sistema operativo basado en Arch con una experiencia de escritorio propia y un ecosistema integrado: tres ediciones, una herramienta de sistema y una shell hecha para trabajar horas sin estorbar.'
-            : 'HorneroOS is an Arch-based operating system with a distinctive desktop experience and an integrated ecosystem: three editions, one system tool and a shell built to stay out of the way for hours of work.'
+            ? 'HorneroOS es un sistema operativo basado en Arch: tres ediciones, una herramienta de sistema (horneroctl) y Hornero Shell para el escritorio.'
+            : 'HorneroOS is an Arch-based operating system: three editions, one system tool (horneroctl) and Hornero Shell for the desktop.'
         }
       </p>
       <div class="cta-row">
@@ -318,7 +322,7 @@ const description = isEs
   <section class="section system" aria-labelledby="system-title">
     <header class="section-head">
       <p class="eyebrow"><b>{isEs ? 'Sistema' : 'System'}</b><span>{isEs ? 'Debajo del escritorio' : 'Beneath the desktop'}</span></p>
-      <h2 id="system-title">{isEs ? 'Un sistema operativo, no un tema.' : 'An operating system, not a theme.'}</h2>
+      <h2 id="system-title">{isEs ? 'El sistema operativo' : 'The operating system'}</h2>
       <p>
         {
           isEs
@@ -354,7 +358,7 @@ const description = isEs
         {
           isEs
             ? `Hornero Shell es la capa visible: ${layouts.length} layouts, ${themes.length} temas, ${officialPlugins.length} extensiones oficiales y el Companion, un hornero que vive en tu escritorio. Hornero Left y Hornero Right se inspiran en el layout de Caelestia Shell, de donde se adaptó la shell, con crédito y licencia.`
-            : `Hornero Shell is the visible layer: ${layouts.length} layouts, ${themes.length} themes, ${officialPlugins.length} official extensions and the Companion, a hornero that lives on your desktop. Hornero Left and Hornero Right are inspired by the layout of Caelestia Shell, the shell's upstream, with credit and licence.`
+            : `Hornero Shell is the visible layer: ${layouts.length} layouts, ${themes.length} themes, ${officialPlugins.length} official extensions and the Companion, a hornero that lives on your desktop. The shell was adapted from Caelestia Shell (GPL-3.0); Hornero Left and Hornero Right follow its layout, with the upstream credit and licence kept in the repository.`
         }
       </p>
     </header>
@@ -479,7 +483,7 @@ const description = isEs
       <div>
         <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
         <dd>
-          {isEs ? 'Cada captura que publiquemos será real y listará su fuente; hoy todas están pendientes, y el ' : 'Every capture we publish will be real and list its source; today all of them are pending, and the '}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra cuáles faltan' : ' shows which are missing'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
+          {isEs ? `De las capturas previstas, ${counts.captured} de ${counts.total} ya salen de un host real y listan su fuente; el ` : `Of the planned captures, ${counts.captured} of ${counts.total} already come from a real host and list their source; the `}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra cuáles faltan' : ' shows which are missing'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
         </dd>
       </div>
       <div>
@@ -487,8 +491,8 @@ const description = isEs
         <dd>
           {
             isEs
-              ? 'Según su maintainer, HorneroOS es la computadora de todos los días de quienes lo construyen: una ASUS ROG Strix G16 y una Lenovo Legion con Studio, y un desktop AMD Ryzen 9 con RTX 3060. No son benchmarks.'
-              : 'By the maintainer’s account, HorneroOS is the everyday computer of the people building it: an ASUS ROG Strix G16 and a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060. These are not benchmarks.'
+              ? 'Según cuenta su maintainer, su computadora de todos los días corre HorneroOS: una ASUS ROG Strix G16 y una Lenovo Legion con Studio, y un desktop AMD Ryzen 9 con RTX 3060. Es el relato del maintainer, no una medición.'
+              : 'By the maintainer’s account, their everyday computers run HorneroOS: an ASUS ROG Strix G16 and a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060. That is the maintainer’s account, not a measurement.'
           }
         </dd>
       </div>
@@ -504,6 +508,16 @@ const description = isEs
       <a href="https://github.com/HorneroOS">{isEs ? 'Explorá el código fuente' : 'Browse the source'}</a>
       <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{isEs ? 'Contribuí' : 'Contribute'}</a>
     </p>
+  </section>
+
+  <section class="section" aria-labelledby="faq-teaser-title">
+    <header class="section-head">
+      <h2 id="faq-teaser-title">{isEs ? 'Preguntas frecuentes' : 'Frequently asked questions'}</h2>
+      <p>
+        <a href={L('/why-horneroos#faq')}>{isEs ? 'Todas las preguntas, la comparación y los límites están en Por qué HorneroOS' : 'Every question, the comparison and the limits are on Why HorneroOS'}</a>.
+      </p>
+    </header>
+    <FaqList items={faqItems.slice(0, 3)} locale={locale} />
   </section>
 
   <CommunityJoin locale={locale} />

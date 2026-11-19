@@ -1,0 +1,127 @@
+---
+// Comparison table with a native radio-group filter. Radios are keyboard
+// and touch operable by default; without JavaScript every row stays
+// visible, and the script only hides rows outside the chosen category.
+import { compareRows, compareVerifiedOn, type CompareCategory } from '../data/why';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const isEs = locale === 'es';
+const categoryLabel: Record<CompareCategory, string> = isEs
+  ? { os: 'Sistema operativo', shell: 'Shell de escritorio' }
+  : { os: 'Operating system', shell: 'Desktop shell' };
+const filters = [
+  { value: 'all', label: isEs ? 'Todo' : 'All' },
+  { value: 'os', label: categoryLabel.os },
+  { value: 'shell', label: categoryLabel.shell },
+];
+---
+
+<div class="compare" data-compare>
+  <fieldset class="compare-filter">
+    <legend>{isEs ? 'Mostrar por tipo' : 'Show by type'}</legend>
+    {filters.map((filter, index) => (
+      <label>
+        <input type="radio" name="compare-type" value={filter.value} checked={index === 0} data-compare-filter />
+        <span>{filter.label}</span>
+      </label>
+    ))}
+  </fieldset>
+  <div class="table-scroll">
+    <table>
+      <caption>
+        {isEs
+          ? `Sistemas operativos y shells, verificados el ${compareVerifiedOn} contra su fuente primaria.`
+          : `Operating systems and shells, checked on ${compareVerifiedOn} against their primary source.`}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">{isEs ? 'Proyecto' : 'Project'}</th>
+          <th scope="col">{isEs ? 'Tipo' : 'Type'}</th>
+          <th scope="col">{isEs ? 'Qué es' : 'What it is'}</th>
+          <th scope="col">{isEs ? 'Instalación' : 'Install'}</th>
+          <th scope="col">{isEs ? 'Relación con HorneroOS' : 'Relation to HorneroOS'}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {compareRows.map((row) => (
+          <tr data-category={row.category}>
+            <th scope="row">
+              <a href={row.href}>{row.name}</a>
+              <span class="compare-version">{row.version}</span>
+            </th>
+            <td>{categoryLabel[row.category]}</td>
+            <td>{row.what[locale]}</td>
+            <td>{row.install[locale]}</td>
+            <td>{row.note[locale]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="compare-note">
+    {isEs
+      ? 'Una shell no es un sistema operativo, y unos dotfiles no son ninguno de los dos: la columna Tipo dice qué se instala en cada caso. Lo que esta revisión no verificó queda dicho en la fila, no adivinado.'
+      : 'A shell is not an operating system, and dotfiles are neither: the Type column says what gets installed in each case. What this pass did not verify is stated in the row, not guessed.'}
+  </p>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-compare]').forEach((block) => {
+    const rows = [...block.querySelectorAll('tbody tr')];
+    block.querySelectorAll('[data-compare-filter]').forEach((radio) => {
+      radio.addEventListener('change', () => {
+        rows.forEach((row) => {
+          row.hidden = radio.value !== 'all' && row.dataset.category !== radio.value;
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .compare-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+    margin: 0 0 1rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--rule);
+  }
+
+  .compare-filter legend {
+    padding: 0 0.4rem;
+    color: var(--ink-muted);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .compare-filter label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    cursor: pointer;
+  }
+
+  .compare-filter input:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  .compare-version {
+    display: block;
+    color: var(--ink-muted);
+    font: 500 0.72rem var(--font-mono);
+  }
+
+  .compare-note {
+    max-width: 68ch;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+</style>

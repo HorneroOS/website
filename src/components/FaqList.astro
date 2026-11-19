@@ -1,0 +1,49 @@
+---
+// FAQ rendered with native <details>: keyboard and touch work without
+// client-side state, and every answer stays in the static HTML.
+import type { FaqItem } from '../data/why';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  items: FaqItem[];
+  locale: Locale;
+}
+const { items, locale } = Astro.props;
+---
+
+<div class="faq-list">
+  {items.map((item) => (
+    <details class="faq-item" id={`faq-${item.id}`}>
+      <summary>{item.question[locale]}</summary>
+      <p>{item.answer[locale]}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq-list {
+    display: grid;
+    border-top: 1px solid var(--rule);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq-item summary {
+    padding: 1rem 0.25rem;
+    font: 600 var(--step-0) var(--font-display);
+    cursor: pointer;
+  }
+
+  .faq-item summary:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  .faq-item p {
+    max-width: 68ch;
+    padding: 0 0.25rem 1.1rem;
+    color: var(--ink-muted);
+  }
+</style>
