@@ -243,8 +243,21 @@
         "Only HorneroOS-shipped wallpapers may be in the folder the picker scans (remove personal folders from the picker first)."
       ],
       "privacy": "The picker must not list personal wallpaper folders or third-party images.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-appearance-03.png",
+      "sha256": "e57fcb2efa63be2a47035b3d9d69dca2e2b00c94437c3b45f25317f8b200a2b6",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-APPEARANCE-04",
@@ -386,8 +399,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-01`), pane id `search`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-01.png",
+      "sha256": "f292531960efb418257ddd822b977e37555b331d60e07663dfea9fd32134d76b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-02",
@@ -573,8 +599,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-05`), pane id `keybinds`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-05.png",
+      "sha256": "26e5c184cdfab92c8e76ec99597cbfcff7f30d169f6b31a087c668220a10e847",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-06",
@@ -609,8 +648,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-06`), pane id `displays`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-06.png",
+      "sha256": "49342bfc09a5b453fc5a6b141c319b1a681d40cb4d186b6b35c4b63df2aebcb9",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-07",
@@ -732,8 +784,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-09`), pane id `accessibility`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-09.png",
+      "sha256": "f5b69ff081e43819b10e79c3be873b51af71f505b3f69c1588f70938d43ac972",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-10",
@@ -768,8 +833,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-10`), pane id `updates`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-10.png",
+      "sha256": "eaf7ce4f9200a0b8db05a236106ef8d00ecab96536208f3e76f09d057331cf7c",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-11",
@@ -804,8 +882,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-11`), pane id `notifications`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-11.png",
+      "sha256": "718b2805c2c3507a675a77664e099ad99630783a5c55e3e38db2dd97f24a987c",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-12",
@@ -840,8 +931,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-12`), pane id `lockscreen`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-12.png",
+      "sha256": "3ef570ef36decadeb3e66dd43e6f322062c6a9cd520d3e30460a6f0f4ca161b0",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-13",
@@ -876,8 +980,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-13`), pane id `studio`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-13.png",
+      "sha256": "a1f95abbf393d76c7cf972c5abce3c39353fdf506ec78be5b197a44ff33a5e98",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-14",
@@ -912,8 +1029,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-14`), pane id `gaming`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-14.png",
+      "sha256": "9fe840bb6a96dbe8883c1ec73315fce9ad67c5ef404b071d0cfdaa2ea9cf2f6e",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CC-15",
@@ -948,8 +1078,21 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-15`), pane id `system`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-cc-15.png",
+      "sha256": "69a0e8da00032f0eb6d7c8e5f9e6424469ad6af3d975b39425b4305b57583f05",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CHROMA-01",
@@ -1329,8 +1472,8 @@
         "es": "Loop de 8 s: el fondo cambia de Pampa a Fin del Mundo y shell, terminal y GTK se recolorean en una pasada suave, con el control de contraste en verde."
       },
       "alt": {
-        "en": "8 s loop: the wallpaper changes from Pampa to Fin del Mundo and shell, terminal and GTK recolour in one smooth pass, the contrast gate staying green.",
-        "es": "Loop de 8 s: el fondo cambia de Pampa a Fin del Mundo y shell, terminal y GTK se recolorean en una pasada suave, con el control de contraste en verde."
+        "es": "Loop corto: el wallpaper cambia y Hornero Chromatic recolorea la shell en vivo.",
+        "en": "Short loop: the wallpaper changes and Hornero Chromatic recolours the shell live."
       },
       "pages": [
         "/chromatic"
@@ -1351,8 +1494,22 @@
         "Trim so the loop starts and ends on the same state is NOT needed: end on state B, the site crossfades."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-clip-01.mp4",
+      "poster": "cap-clip-01-poster.png",
+      "sha256": "9f92c92ed371d7493cdf463b46e1104431daddda4371fd291d1e5cb2ac9eb8cc",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CLIP-02",
@@ -1368,8 +1525,8 @@
         "es": "6 s: Javi duerme en el nido, lo convocan, cruza el escritorio volando y aterriza junto al cursor."
       },
       "alt": {
-        "en": "6 s: Javi sleeping in the nest is summoned, flies across the desktop and lands next to the cursor.",
-        "es": "6 s: Javi duerme en el nido, lo convocan, cruza el escritorio volando y aterriza junto al cursor."
+        "es": "Loop corto: Javi aparece en su rincón sobre el escritorio Signal.",
+        "en": "Short loop: Javi flies into his corner over the Signal desktop."
       },
       "pages": [
         "/companion"
@@ -1388,8 +1545,22 @@
         "Start the clip with Javi sleeping; summon with the Javi shortcut; stop after landing."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-clip-02.mp4",
+      "poster": "cap-clip-02-poster.png",
+      "sha256": "e4fc4dfcbe923fa74c542ef141e4569103893ae60e1152b9e18702f31370180b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CLIP-03",
@@ -1405,8 +1576,8 @@
         "es": "8 s: de Everyday a Signal y a Focus desde el launcher; la barra, el deck y el movimiento cambian cada vez."
       },
       "alt": {
-        "en": "8 s: Everyday to Signal to Focus from the launcher; the bar, deck and motion change each time.",
-        "es": "8 s: de Everyday a Signal y a Focus desde el launcher; la barra, el deck y el movimiento cambian cada vez."
+        "es": "Loop corto: cambio de modo Everyday a Signal y de vuelta.",
+        "en": "Short loop: switching from Everyday to Signal mode and back."
       },
       "pages": [
         "/modes"
@@ -1425,8 +1596,22 @@
         "Use the launcher entries \"Signal mode\", \"Focus mode\"."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-clip-03.mp4",
+      "poster": "cap-clip-03-poster.png",
+      "sha256": "0773ec17c10f44d51407a3f560d0c104dfb5237d25e26ed08149a801766edd78",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CLIP-04",
@@ -1477,8 +1662,8 @@
         "es": "8 s: de Cockpit a Hornero Left y a Dock Bottom desde el selector de layouts."
       },
       "alt": {
-        "en": "8 s: Cockpit to Hornero Left to Dock Bottom through the Layout Picker.",
-        "es": "8 s: de Cockpit a Hornero Left y a Dock Bottom desde el selector de layouts."
+        "es": "Loop corto: cambio de layout de Cockpit a Islands en vivo.",
+        "en": "Short loop: live layout change from Cockpit to Islands."
       },
       "pages": [],
       "section": "Desktop, motion",
@@ -1495,8 +1680,22 @@
         "Super+Shift+B, pick each preset with the keyboard."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-clip-05.mp4",
+      "poster": "cap-clip-05-poster.png",
+      "sha256": "7a53b1230a3ce207c913812d031d2c447ab6bdca808eb91f252ed8549252024b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CLIP-06",
@@ -1512,8 +1711,8 @@
         "es": "5 s: Ctrl+Espacio, escribir «term» y abrir kitty."
       },
       "alt": {
-        "en": "5 s: Ctrl+Space, typing \"term\", launching kitty.",
-        "es": "5 s: Ctrl+Espacio, escribir «term» y abrir kitty."
+        "es": "Loop corto: búsqueda en el launcher escribiendo «reaper».",
+        "en": "Short loop: launcher search typing “reaper”."
       },
       "pages": [],
       "section": "Desktop, motion",
@@ -1530,8 +1729,22 @@
         "Type at a natural pace."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-clip-06.mp4",
+      "poster": "cap-clip-06-poster.png",
+      "sha256": "26dac56e9f3dcf4bad5ca09e1b7935f661bae8810b523adc6dbacaa37257d883",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-CLIP-07",
@@ -1639,8 +1852,21 @@
         "Do NOT move the windows between this shot and CAP-COMPARE-02: they must overlay pixel for pixel."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-compare-01.png",
+      "sha256": "1bf860762cb880c3d87fec8fee00b9062a6d9af7d3f9d3ed323e224b0313888d",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-COMPARE-02",
@@ -1677,8 +1903,21 @@
         "Use `capture-helper.sh shot CAP-COMPARE-02` without touching any window."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-compare-02.png",
+      "sha256": "75c0cd2028f57b0463bb11ff90336e28f93cda51b011451487fd1ca24f4fec1b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-DECK-01",
@@ -1881,8 +2120,8 @@
         "es": "Una franja recortada a 2x de la barra superior de Cockpit (marca del launcher, acciones rápidas, reloj, bandeja, energía) con la franja de espacios, mostrando el detalle de glifos y medidores."
       },
       "alt": {
-        "en": "A tight 2x crop strip of the Cockpit top rail (launcher mark, quick actions, clock, tray, power) with the workspace strip, showing glyph and meter detail.",
-        "es": "Una franja recortada a 2x de la barra superior de Cockpit (marca del launcher, acciones rápidas, reloj, bandeja, energía) con la franja de espacios, mostrando el detalle de glifos y medidores."
+        "es": "Franja superior del Cockpit: marca, acciones rápidas, reloj, clima y bandeja.",
+        "en": "Cockpit top rail strip: mark, quick actions, clock, weather and tray."
       },
       "pages": [],
       "section": "Desktop, anatomy (planned)",
@@ -1900,8 +2139,21 @@
         "Telemetry meters must be mid-range, not pinned at 0 or 100 %."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-desktop-03.png",
+      "sha256": "257b55fbdb3bb350e9cd641bd0f9275938b89a415b490436795f36f8992367d7",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-DESKTOP-04",
@@ -1917,8 +2169,8 @@
         "es": "Vista cercana de la franja inferior con la aguja de espacios sobre el espacio 2 y ventanas en tres espacios."
       },
       "alt": {
-        "en": "Close view of the bottom strip with the workspace needle resting on workspace 2 and windows on three workspaces.",
-        "es": "Vista cercana de la franja inferior con la aguja de espacios sobre el espacio 2 y ventanas en tres espacios."
+        "es": "Franja inferior del Cockpit con la aguja de workspaces y medidores CPU/MEM/DSK/TMP.",
+        "en": "Cockpit bottom strip with the workspace needle and CPU/MEM/DSK/TMP meters."
       },
       "pages": [],
       "section": "Desktop, workspaces (planned)",
@@ -1936,8 +2188,21 @@
         "Capture the bottom 600 px strip."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-desktop-04.png",
+      "sha256": "7e6623a803dcaac2f6ccbb7e12c124fa3b8db95fbe95585125ea27eb7f7e4462",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-EXT-01",
@@ -2057,8 +2322,21 @@
         "Enable the four extensions; crop the top 600 px of a 2x capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-ext-03.png",
+      "sha256": "40c6754b818523bb2a353ab17e151841eb12d6dd33dc956dfa05bb1a4ba9e785",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-EXT-04",
@@ -2074,8 +2352,8 @@
         "es": "Un escritorio limpio con las extensiones de escritorio Calendar, Moon Phase y Network Scope."
       },
       "alt": {
-        "en": "A clean desktop carrying Calendar, Moon Phase and Network Scope desktop extensions.",
-        "es": "Un escritorio limpio con las extensiones de escritorio Calendar, Moon Phase y Network Scope."
+        "es": "Widgets de extensiones en el escritorio Signal: network scope, fase lunar, audio deck e insight de sistema.",
+        "en": "Extension desktop widgets in Signal mode: network scope, moon phase, audio deck and system insight."
       },
       "pages": [],
       "section": "Extensions, desktop",
@@ -2092,8 +2370,21 @@
         "Enable the three; close all windows; capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-ext-04.png",
+      "sha256": "8a1af244827a5999dd3da6e15b7b1356cb80603f9074af82b6e022273e0aff45",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-GAMING-01",
@@ -2432,7 +2723,7 @@
       "privacy": "Editor tab names, git branch, window titles and the terminal prompt must show the demo user and the demo repo.",
       "status": "captured",
       "file": "cap-hero-01.png",
-      "sha256": "99fdc13245bdc425626c74c042c955cb6c3ed5ae70b436444d13ee6737a36e03",
+      "sha256": "24b89443a2974acadfcc6a223ba0f8544e78485724d20e4cf86c8d61f19fd0ea",
       "capturedAt": "2026-11-19",
       "source": {
         "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
@@ -2858,8 +3149,8 @@
         "es": "Javi descansando en el nido, con los ojos entrecerrados, en el escritorio real a escala 1:1."
       },
       "alt": {
-        "en": "Javi resting in the nest, eyes half closed, on the real desktop at 1:1.",
-        "es": "Javi descansando en el nido, con los ojos entrecerrados, en el escritorio real a escala 1:1."
+        "es": "Javi descansando en su Nest en la esquina inferior derecha del escritorio neón.",
+        "en": "Javi resting in his Nest at the lower right of the neon desktop."
       },
       "pages": [
         "/companion"
@@ -2880,8 +3171,21 @@
         "Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder."
       ],
       "privacy": "Assistant activity traces and bubbles must hold only demo prompts.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-javi-02.png",
+      "sha256": "6b66204f2c554c8f4fa8c00f5fb5b840a16f4563243b7c5ba6897727b06c3065",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-JAVI-03",
@@ -3132,8 +3436,21 @@
         "Run a harmless demo task that requests an approval (for example listing a demo folder)."
       ],
       "privacy": "No file paths from a real home directory, no model/API keys.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-javi-08.png",
+      "sha256": "eb2d27a51e2c069a35d56ca9a2b2281d833fc9b4e5a357de9e76795beab9c7dc",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-JAVI-09",
@@ -3462,8 +3779,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-05.png",
+      "sha256": "45d8c7cf890712585f1ac0636778c83e7d788c41bd18e60509e79d3b65b01b2a",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-06",
@@ -3549,8 +3879,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-07.png",
+      "sha256": "45c0d93cdc923dbee557ff45a6aa8882781deb9eff11ace502b78368b05a80ca",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-08",
@@ -3586,8 +3929,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-08.png",
+      "sha256": "385968707ac97a6d79d5063ab0e749e3c0ca872080cfa7236a95bdfc384bfd74",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-09",
@@ -3623,8 +3979,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-09.png",
+      "sha256": "38ac1bb674047c079960faa6275494d8ef5d9b2e890b2849dcb3b5c7e37ad329",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-10",
@@ -3660,8 +4029,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-10.png",
+      "sha256": "65c4fdff9126d1f01ab06c6bfcc77e2d577dc947a546cdc5ba1acf03f5abe2b6",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-11",
@@ -3697,8 +4079,21 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-layout-11.png",
+      "sha256": "b1649e21eb1e12bdfea51b18d2aba086b045229a04adc0cae7ed43e2f461aef0",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-LAYOUT-12",
@@ -3884,8 +4279,21 @@
         "Never type a password on camera; unlock afterwards."
       ],
       "privacy": "No real user name, avatar, notification preview or media metadata on the lock screen.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-lock-01.png",
+      "sha256": "342655e180958535a9514cf87967adcbf46bb20d1d39c5730ac0f267490c0a21",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-MODE-01",
@@ -3975,8 +4383,21 @@
         "Verify the bar indicator reads (none in Everyday)."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-mode-02.png",
+      "sha256": "28e49de9852fefe65eedfccd922aaa9e9dbbe4739778eeb45e4aafdce909e561",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-MODE-03",
@@ -4148,8 +4569,8 @@
         "es": "El indicador de modo FOC, SIG, GAM y STU en la barra, en cuatro recortes."
       },
       "alt": {
-        "en": "The FOC, SIG, GAM and STU mode indicator on the bar in four crops.",
-        "es": "El indicador de modo FOC, SIG, GAM y STU en la barra, en cuatro recortes."
+        "es": "Primer plano de la franja inferior con el indicador de modo y los medidores.",
+        "en": "Close-up of the bottom strip with the mode indicator and meters."
       },
       "pages": [],
       "section": "Modes",
@@ -4166,8 +4587,21 @@
         "Capture the bar in each mode; crop around the indicator (-focus, -signal, -gaming, -studio suffixes)."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-mode-06.png",
+      "sha256": "9a955262b35fefe3e24840c197bd7674be5286d04d6484272411dc90438de952",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-MULTI-01",
@@ -4308,8 +4742,21 @@
         "Crop from the CAP-HERO-01 master with `capture-helper.sh crop`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-og-01.png",
+      "sha256": "efac7c18375cec6798d5986df3fee4429d4aed6c9643505d80b8f63437e6a96a",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-PHOTO-01",
@@ -4500,8 +4947,21 @@
         "Send with `notify-send -a Demo \"Build finished\" \"cargo build in 12 s\"`; repeat with a second."
       ],
       "privacy": "Only notify-send demo content; clear history first.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-02.png",
+      "sha256": "f5dd7ba040316b59047395dc539cc8ba78d7711bb4c422adf0f7b91f537e752d",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-03",
@@ -4535,8 +4995,21 @@
         "Open from the top rail quick-actions item."
       ],
       "privacy": "Wi-Fi network names and Bluetooth device names must be neutral or hidden.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-03.png",
+      "sha256": "40943399dbed82104a1cbc99d8eb6b892950ce6ca7c560d621f477bc67123f93",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-04",
@@ -4618,8 +5091,21 @@
         "Press the volume key once; capture within 1 s with `capture-helper.sh shot --delay 0`."
       ],
       "privacy": "None beyond global rules.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-05.png",
+      "sha256": "2cdcf992ffc90977fb2a38db354325a3e604de724f8f41ef23fbc2f5825dcfbf",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-06",
@@ -4653,8 +5139,21 @@
         "Copy three demo strings (`hornero`, a lorem line, a colour hex)."
       ],
       "privacy": "Clipboard must hold only demo strings, no tokens or URLs from real accounts.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-06.png",
+      "sha256": "780fd1ac88ba97a3f46c2fb6c504dbbf365b1348135936dcdd5b4fbdf5e190ce",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-07",
@@ -4787,8 +5286,21 @@
         "Only restart the shell when `qs ipc call lock isLocked` is false; capture with `shot --delay 0` immediately after triggering; may need a 2 s recording and a frame grab."
       ],
       "privacy": "None beyond global rules.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-09.png",
+      "sha256": "a65b5a4280d10a3d420112f956f747d69ed03c8479de72d6931a8e6dbd052df4",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-10",
@@ -4822,8 +5334,21 @@
         "Click the volume item on the top rail."
       ],
       "privacy": "Audio device names must be neutral (no personal headphones names).",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-shell-10.png",
+      "sha256": "4ed7e15e53ec3d98948ae50118206a30e6554c1dea8f9480124fdff7135d5e5a",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-SHELL-11",
@@ -4947,8 +5472,21 @@
         "Keep Signal mode on."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-signal-02.png",
+      "sha256": "a082b2c0d55e7a7aa37a97d66816a332ab8e2821f03d3680d3853d0da6560712",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-STUDIO-01",
@@ -5022,8 +5560,21 @@
         "Open a CC0 or Blender-demo scene."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-studio-02.png",
+      "sha256": "77cbce0e09f283188267a1ee7431dc934235989b017412ed92a11c318af459e8",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-STUDIO-03",
@@ -5057,8 +5608,21 @@
         "CC0 media only."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-studio-03.png",
+      "sha256": "f2a98b62f99c58fb41755d71f1dcfe448e71f9cb08729e25dbdecac4f6549f6b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-STUDIO-04",
@@ -5092,8 +5656,21 @@
         "Run `horneroctl studio mode audio` in kitty with Settings, Studio beside it."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-studio-04.png",
+      "sha256": "c3587b8fce9bf66e67f04803999990a7b0460ae789c52e97216751e55a753be2",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-TERM-01",
@@ -5132,7 +5709,7 @@
       "privacy": "Global rules only (see \"Privacy rules\").",
       "status": "captured",
       "file": "cap-term-01.png",
-      "sha256": "9d22940d3d8480bfbc205d4e648c72b8d72c61c17f1e75b2988be7a19db23af5",
+      "sha256": "98604cc27266b676a7ba071848dfc7ac60fb62938090d13a4c5db1b531c6838f",
       "capturedAt": "2026-11-19",
       "source": {
         "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
@@ -5180,8 +5757,21 @@
         "Tile both side by side."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-term-02.png",
+      "sha256": "91607d38c70125a81a1808d67f13f82f165b783042f1ad2fc8de1c0abb0da1b0",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-TERM-03",
@@ -5217,7 +5807,7 @@
       "privacy": "btop process list must contain only demo-user processes; no user paths.",
       "status": "captured",
       "file": "cap-term-03.png",
-      "sha256": "2101aadbd96169654450cac8b05ff59e04ed46cb106535fec83fa1aaa828d3c3",
+      "sha256": "94a96de8ff66929316e350706172950489f3768f3db6fc863c00039a17aaeb51",
       "capturedAt": "2026-11-19",
       "source": {
         "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
@@ -5263,8 +5853,21 @@
         "Run `horneroctl doctor` on a healthy demo install."
       ],
       "privacy": "Hostname and paths must be the demo ones.",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-term-04.png",
+      "sha256": "b84b72fcada85fe47d1d954c790871543c7aceb7de7a484ba85fb378ebbb0f62",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-TERM-05",
@@ -5298,8 +5901,21 @@
         "Run both commands in sequence in one kitty window."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-term-05.png",
+      "sha256": "d7b922827e215c83165f48f3a2afc5bd0545ca1df8846efeb6fa702a637b61e5",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-TERM-06",
@@ -5333,8 +5949,21 @@
         "Point both at the shipped wallpapers directory."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-term-06.png",
+      "sha256": "ea2f43075578e85c263d00a312220197806b909ad4e5a7fbe9522dddfcd9aaa9",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-01",
@@ -5371,8 +6000,21 @@
         "Open kitty, Thunar and Settings (Appearance) together to show consistency; capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-01.png",
+      "sha256": "d5d344c3e4048da50a52a6a12488432f899e02b69352180c4b1dc83a86a86cbd",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-02",
@@ -5408,8 +6050,21 @@
         "Same arrangement as CAP-THEME-01; `horneroctl appearance theme set hornero-signal-day --yes`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-02.png",
+      "sha256": "ad5c7c32989c31b894a4106599abfea9e0d2cbc185ca1c1152443bdb9a6c386b",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-03",
@@ -5445,8 +6100,21 @@
         "`horneroctl appearance theme apply hornero-signal-dusk --yes`; same arrangement."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-03.png",
+      "sha256": "00082e6dc0ce81c7816755ee908a493ffcb9de958094d0d6bf349d1b5b7b45f6",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-04",
@@ -5482,8 +6150,21 @@
         "`horneroctl appearance theme apply hornero-signal-contrast --yes`; same arrangement."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-04.png",
+      "sha256": "554ed4c694adfb7da5dbf7d780b72183ce950d90f6a892d1f33ac915993c8764",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-05",
@@ -5519,8 +6200,21 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-05.png",
+      "sha256": "07b4528a741d2050a02c415718441adf6c243dc260aefdb2b73533e6a5d7e978",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-06",
@@ -5556,8 +6250,21 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-06.png",
+      "sha256": "70a781ea8a93fe548376d18a3153afd8c80369e3fb4771570a7c0e989eddf7c2",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-07",
@@ -5593,8 +6300,21 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-07.png",
+      "sha256": "cecf0de1bd18ec13317d052b1e04d589ec14dbb983f9199488c98cb354aa5c91",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-08",
@@ -5630,8 +6350,21 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-08.png",
+      "sha256": "d46c57d433c37099888a834024d7e7a7b76956026210300ea20b1c78cde7634c",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-09",
@@ -5704,8 +6437,21 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-theme-10.png",
+      "sha256": "42570322cbfef0a6dd7daa82288cfd89d48bf3a082b434ef70d03d1d5da06cea",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-THEME-11",
@@ -5852,8 +6598,21 @@
         "Run on an installed demo system that has at least one pending update."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-update-01.png",
+      "sha256": "c9b8337cd75367707e0cb67caa0fddd53088581309b39453479846af68a6a3f9",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     },
     {
       "id": "CAP-UPDATE-02",
@@ -5887,8 +6646,21 @@
         "Create one snapshot with the documented command first."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "status": "captured",
+      "file": "cap-update-02.png",
+      "sha256": "040134cf1e75c371a1c70e468072834dc4e55f823dd6ca9e8cafd18d01c93757",
+      "capturedAt": "2026-11-19",
+      "source": {
+        "en": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)",
+        "es": "Real maintainer host capture 2026-11-19 (Hyprland ws5, staged demo content, maintainer-chosen wallpapers)"
+      },
+      "pins": {
+        "shell": "hornero-shell 1.3.3-1",
+        "config": "hornero-config 0.4.3-1",
+        "horneroctl": "0.2.0_preview49-1",
+        "hyprland": "0.57.2",
+        "quickshell": "0.3.2"
+      }
     }
   ]
 }
