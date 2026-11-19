@@ -227,8 +227,8 @@ Where: Host, demo user. About 90 minutes, 11 slots.
   1. Capture at output scale 2 (see helper `headless 3840 2160 2`) then crop the top 600 px with `capture-helper.sh crop`.
   2. Telemetry meters must be mid-range, not pinned at 0 or 100 %.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** A tight 2x crop strip of the Cockpit top rail (launcher mark, quick actions, clock, tray, power) with the workspace strip, showing glyph and meter detail.
-- **Alt text (ES):** Una franja recortada a 2x de la barra superior de Cockpit (marca del launcher, acciones rápidas, reloj, bandeja, energía) con la franja de espacios, mostrando el detalle de glifos y medidores.
+- **Alt text (EN):** Cockpit top rail strip: mark, quick actions, clock, weather and tray.
+- **Alt text (ES):** Franja superior del Cockpit: marca, acciones rápidas, reloj, clima y bandeja.
 
 ### CAP-DESKTOP-04 Workspace needle
 
@@ -241,8 +241,8 @@ Where: Host, demo user. About 90 minutes, 11 slots.
   1. Place one window on each of workspaces 1, 2, 3 and switch to 2.
   2. Capture the bottom 600 px strip.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** Close view of the bottom strip with the workspace needle resting on workspace 2 and windows on three workspaces.
-- **Alt text (ES):** Vista cercana de la franja inferior con la aguja de espacios sobre el espacio 2 y ventanas en tres espacios.
+- **Alt text (EN):** Cockpit bottom strip with the workspace needle and CPU/MEM/DSK/TMP meters.
+- **Alt text (ES):** Franja inferior del Cockpit con la aguja de workspaces y medidores CPU/MEM/DSK/TMP.
 
 ### CAP-OG-01 Social card photo crop
 
@@ -1391,8 +1391,8 @@ Where: Host, demo user. About 45 minutes, 6 slots.
 - **Setup:**
   1. Enable the three; close all windows; capture.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** A clean desktop carrying Calendar, Moon Phase and Network Scope desktop extensions.
-- **Alt text (ES):** Un escritorio limpio con las extensiones de escritorio Calendar, Moon Phase y Network Scope.
+- **Alt text (EN):** Extension desktop widgets in Signal mode: network scope, moon phase, audio deck and system insight.
+- **Alt text (ES):** Widgets de extensiones en el escritorio Signal: network scope, fase lunar, audio deck e insight de sistema.
 
 ## Session S08: Javi and the nest
 
@@ -1437,8 +1437,8 @@ Where: Host, demo user (after final art). About 60 minutes, 10 slots.
   2. Crop to a 1200x800 region around the corner with `capture-helper.sh region`.
   3. Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder.
 - **Privacy:** Assistant activity traces and bubbles must hold only demo prompts.
-- **Alt text (EN):** Javi resting in the nest, eyes half closed, on the real desktop at 1:1.
-- **Alt text (ES):** Javi descansando en el nido, con los ojos entrecerrados, en el escritorio real a escala 1:1.
+- **Alt text (EN):** Javi resting in his Nest at the lower right of the neon desktop.
+- **Alt text (ES):** Javi descansando en su Nest en la esquina inferior derecha del escritorio neón.
 
 ### CAP-JAVI-03 Javi: Working
 
@@ -1752,8 +1752,8 @@ Where: Host, demo user, Studio and Gaming installed. About 90 minutes, 14 slots.
 - **Setup:**
   1. Capture the bar in each mode; crop around the indicator (-focus, -signal, -gaming, -studio suffixes).
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** The FOC, SIG, GAM and STU mode indicator on the bar in four crops.
-- **Alt text (ES):** El indicador de modo FOC, SIG, GAM y STU en la barra, en cuatro recortes.
+- **Alt text (EN):** Close-up of the bottom strip with the mode indicator and meters.
+- **Alt text (ES):** Primer plano de la franja inferior con el indicador de modo y los medidores.
 
 ### CAP-STUDIO-04 Studio low-latency audio
 
@@ -2222,8 +2222,8 @@ Where: Host, demo user (recorder). About 90 minutes, 8 slots.
   2. Start `capture-helper.sh clip CAP-CLIP-01`; after 2 s switch the wallpaper; stop after 8 s.
   3. Trim so the loop starts and ends on the same state is NOT needed: end on state B, the site crossfades.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** 8 s loop: the wallpaper changes from Pampa to Fin del Mundo and shell, terminal and GTK recolour in one smooth pass, the contrast gate staying green.
-- **Alt text (ES):** Loop de 8 s: el fondo cambia de Pampa a Fin del Mundo y shell, terminal y GTK se recolorean en una pasada suave, con el control de contraste en verde.
+- **Alt text (EN):** Short loop: the wallpaper changes and Hornero Chromatic recolours the shell live.
+- **Alt text (ES):** Loop corto: el wallpaper cambia y Hornero Chromatic recolorea la shell en vivo.
 
 ### CAP-CLIP-02 Clip: Javi flies in
 
@@ -2235,8 +2235,8 @@ Where: Host, demo user (recorder). About 90 minutes, 8 slots.
 - **Setup:**
   1. Start the clip with Javi sleeping; summon with the Javi shortcut; stop after landing.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** 6 s: Javi sleeping in the nest is summoned, flies across the desktop and lands next to the cursor.
-- **Alt text (ES):** 6 s: Javi duerme en el nido, lo convocan, cruza el escritorio volando y aterriza junto al cursor.
+- **Alt text (EN):** Short loop: Javi flies into his corner over the Signal desktop.
+- **Alt text (ES):** Loop corto: Javi aparece en su rincón sobre el escritorio Signal.
 
 ### CAP-CLIP-03 Clip: switching modes
 
@@ -2248,8 +2248,8 @@ Where: Host, demo user (recorder). About 90 minutes, 8 slots.
 - **Setup:**
   1. Use the launcher entries "Signal mode", "Focus mode".
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** 8 s: Everyday to Signal to Focus from the launcher; the bar, deck and motion change each time.
-- **Alt text (ES):** 8 s: de Everyday a Signal y a Focus desde el launcher; la barra, el deck y el movimiento cambian cada vez.
+- **Alt text (EN):** Short loop: switching from Everyday to Signal mode and back.
+- **Alt text (ES):** Loop corto: cambio de modo Everyday a Signal y de vuelta.
 
 ### CAP-CLIP-04 Clip: workspace needle
 
@@ -2274,8 +2274,8 @@ Where: Host, demo user (recorder). About 90 minutes, 8 slots.
 - **Setup:**
   1. Super+Shift+B, pick each preset with the keyboard.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** 8 s: Cockpit to Hornero Left to Dock Bottom through the Layout Picker.
-- **Alt text (ES):** 8 s: de Cockpit a Hornero Left y a Dock Bottom desde el selector de layouts.
+- **Alt text (EN):** Short loop: live layout change from Cockpit to Islands.
+- **Alt text (ES):** Loop corto: cambio de layout de Cockpit a Islands en vivo.
 
 ### CAP-CLIP-07 Clip: boot to desktop
 
@@ -2300,8 +2300,8 @@ Where: Host, demo user (recorder). About 90 minutes, 8 slots.
 - **Setup:**
   1. Type at a natural pace.
 - **Privacy:** Global rules only (see "Privacy rules").
-- **Alt text (EN):** 5 s: Ctrl+Space, typing "term", launching kitty.
-- **Alt text (ES):** 5 s: Ctrl+Espacio, escribir «term» y abrir kitty.
+- **Alt text (EN):** Short loop: launcher search typing “reaper”.
+- **Alt text (ES):** Loop corto: búsqueda en el launcher escribiendo «reaper».
 
 ### CAP-CLIP-08 Clip: apply and undo
 
