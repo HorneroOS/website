@@ -5,11 +5,24 @@
 //   LICENSE, scripts/...      -> GitHub blob at the pinned docs commit
 // Only files under the docs checkout are touched; absolute URLs and anchors
 // are left alone. Images that pointed at the website's removed showcase
-// captures (`/images/apps/...`, deleted pending real host captures) are
-// replaced with a labelled pending-capture note naming their capture slot
-// (src/data/capture-slots.json) instead of a broken link; the docs
-// repository should point at the captured asset once the slot is filled.
+// captures (`/images/apps/...`, deleted pending real host captures) map to
+// a capture slot (src/data/capture-slots.json): once the slot is captured
+// they render the real asset served from /captures/<slot-file> (a copy of
+// src/assets/captures/<slot-file> kept for docs), keeping the slot id in
+// data-capture-slot; until then they render a labelled pending-capture
+// note instead of a broken link.
+import { readFileSync } from 'node:fs';
 import { posix, relative, resolve, sep } from 'node:path';
+
+const capturedFiles = (() => {
+  try {
+    const data = JSON.parse(readFileSync(resolve('src/data/capture-slots.json'), 'utf8'));
+    const slots = Array.isArray(data) ? data : data.slots;
+    return new Map(slots.filter((s) => s.status === 'captured' && s.file).map((s) => [s.id, s.file]));
+  } catch {
+    return new Map();
+  }
+})();
 
 export function docsRoute(relPath) {
   // Spanish translations mirror English paths under es/; they serve at
@@ -37,11 +50,14 @@ export default function remarkDocsLinks({ docsRoot, repo, sha }) {
       if (node.type === 'image' && typeof node.url === 'string' && node.url.startsWith('/images/apps/')) {
         const slot = pendingSlots[node.url];
         const label = spanish ? 'Pendiente — captura en el equipo' : 'Pending — host capture';
-        const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        const capturedFile = slot ? capturedFiles.get(slot) : undefined;
         node.type = 'html';
-        node.value = slot
-          ? `<span data-capture-slot="${slot}"><em>${label} (${slot}): ${alt}</em></span>`
-          : `<span><em>${label}: ${alt}</em></span>`;
+        node.value = capturedFile
+          ? `<img data-capture-slot="${slot}" src="/captures/${capturedFile}" alt="${alt}" loading="lazy" />`
+          : slot
+            ? `<span data-capture-slot="${slot}"><em>${label} (${slot}): ${alt}</em></span>`
+            : `<span><em>${label}: ${alt}</em></span>`;
         delete node.url;
         delete node.alt;
         delete node.title;

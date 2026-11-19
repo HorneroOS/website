@@ -139,6 +139,8 @@ function checkSource() {
   for (const slot of slots) {
     if (slot.status !== 'captured' || !slot.file) continue;
     slotFiles.add(`src/assets/captures/${slot.file}`);
+    // Docs pages serve stills from public/captures (remark-docs-links).
+    slotFiles.add(`public/captures/${slot.file}`);
     if (slot.poster) slotFiles.add(`src/assets/captures/${slot.poster}`);
     if (slot.kind === 'clip') for (const ext of ['webm', 'mp4']) slotFiles.add(`public/captures/${slot.file.replace(/\.[^.]+$/, '')}.${ext}`);
   }
