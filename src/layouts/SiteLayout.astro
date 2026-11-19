@@ -52,6 +52,7 @@ const enHref = localizePath(pathForSwitch, 'en');
 // get it), then the desktop experience, then the project. Hrefs are localized
 // for the current locale; labels come from the shared chrome dictionary.
 const systemLinks: NavLink[] = [
+  { href: L('/why-horneroos'), label: t(locale, 'navWhy') },
   { href: L('/editions'), label: t(locale, 'navEditionsOverview') },
   { href: L('/desktop'), label: t(locale, 'navDesktopEdition') },
   { href: L('/studio'), label: t(locale, 'navStudio') },

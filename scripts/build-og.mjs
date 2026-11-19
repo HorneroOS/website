@@ -84,6 +84,16 @@ const cards = {
       .map((g) => `<li><b>${g.priority} · ${priorityName[g.priority]}</b><span>${g.captured}/${g.total} captured</span></li>`)
       .join('')}</ul><p class="cap"><b>Capture slots</b> ${captureSlots.length} planned captures, from src/data/capture-slots.json</p>`,
   },
+  'why-horneroos': {
+    eyebrow: 'Why HorneroOS',
+    title: 'Why HorneroOS.',
+    line: 'What it does, how it compares with other operating systems and shells, its limits and its FAQ — with sources and a verification date.',
+    panel: `<ul class="ledger">${['desktop', 'studio', 'gaming', 'server', 'agents']
+      .map((id) => editionsData.editions.find((e) => e.id === id))
+      .filter(Boolean)
+      .map((e) => `<li><b>${e.title.replace('HorneroOS ', '')}</b><span>${meter(e.maturity)}${maturityName[e.maturity]}</span></li>`)
+      .join('')}</ul><p class="cap"><b>Edition catalogue</b> maturity from the pinned HorneroOS data</p>`,
+  },
   editions: {
     eyebrow: 'Editions',
     title: 'One base. One craft per edition.',

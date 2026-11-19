@@ -53,7 +53,7 @@ Navigation keeps the three groups plus Docs and Search.
 
 | Group | Routes |
 | --- | --- |
-| Sistema / System | `/editions`, **`/desktop`**, `/studio`, `/gaming`, `/install`, `/releases` |
+| Sistema / System | **`/why-horneroos`** (comparison + FAQ, no standalone `/faq/` route), `/editions`, **`/desktop`**, `/studio`, `/gaming`, `/install`, `/releases` |
 | Experiencia / Experience | `/showroom`, **`/modes`**, **`/chromatic`**, `/layouts`, `/themes`, `/extensions`, `/companion` (Javi), `/wallpapers`, `/terminals`, `/greeter` |
 | Proyecto / Project | `/roots`, `/releases`, design language |
 

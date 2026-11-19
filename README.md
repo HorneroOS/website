@@ -39,6 +39,9 @@ npm run build
 ## Pages
 
 - `/` — what HorneroOS is
+- `/why-horneroos` — what it does, comparison with other operating systems
+  and shells (primary sources, dated), limits and FAQ from
+  `src/data/compare.json` and `src/data/faq.json`
 - `/editions` — the composed product family and maturity
 - `/layouts`, `/themes`, `/releases` — generated from pinned product sources
   (see `docs/PRODUCT_DATA.md`)

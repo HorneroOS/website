@@ -28,7 +28,7 @@ const levers = [
   { id: 'modes', href: '/modes', stage: feature('experience-modes').stage, es: '5 modos', en: '5 modes', noteEs: 'Focus, Everyday, Signal, Gaming y Studio.', noteEn: 'Focus, Everyday, Signal, Gaming and Studio.' },
   { id: 'chromatic', href: '/chromatic', stage: feature('chromatic').stage, es: 'Chromatic', en: 'Chromatic', noteEs: 'Color dinámico desde tu fondo, opcional.', noteEn: 'Optional dynamic colour from your wallpaper.' },
   { id: 'extensions', href: '/extensions', stage: feature('pluginkit').stage, es: `${extensionCount} extensiones`, en: `${extensionCount} extensions`, noteEs: 'Widgets de barra, escritorio y Dashboard.', noteEn: 'Bar, desktop and Dashboard widgets.' },
-  { id: 'javi', href: '/companion', stage: feature('companion').stage, es: 'Javi', en: 'Javi', noteEs: 'El hornero que vive en el escritorio. Se puede apagar.', noteEn: 'The hornero that lives on the desktop. You can turn him off.' },
+  { id: 'javi', href: '/companion', stage: feature('companion').stage, es: 'Javi', en: 'Javi', noteEs: 'El hornero que vive en el escritorio. Se puede apagar.', noteEn: 'The hornero that lives on the desktop. You can turn it off.' },
 ];
 
 // Quick keys documented in HorneroOS/docs desktop/shortcuts.md and everyday-apps.md.
@@ -69,9 +69,9 @@ const keys = [
   </section>
 
   <section class="section" aria-labelledby="levers-title">
-    <h2 id="levers-title">{isEs ? 'Todo se puede cambiar' : 'Everything can be changed'}</h2>
+    <h2 id="levers-title">{isEs ? 'Ajustes del escritorio' : 'Desktop settings'}</h2>
     <p class="desk-copy">
-      {isEs ? 'HorneroOS trae los mejores valores por defecto y te deja cambiar el resto. Cada palanca muestra su estado real: lo lanzado, lo que está en main sin lanzar y lo experimental salen del registro del proyecto, no de este texto.' : 'HorneroOS ships the best defaults and lets you change the rest. Each lever shows its real status: what is released, what is on main but unreleased and what is experimental come from the project ledger, not from this text.'}
+      {isEs ? 'HorneroOS trae valores por defecto para el escritorio y cada ajuste de esta lista se puede cambiar. Cada palanca muestra su estado: lo lanzado, lo que está en main sin lanzar y lo experimental salen del registro del proyecto, no de este texto.' : 'HorneroOS ships defaults for the desktop and every setting in this list can be changed. Each lever shows its status: what is released, what is on main but unreleased and what is experimental come from the project ledger, not from this text.'}
     </p>
     <ul class="desk-levers" role="list">
       {

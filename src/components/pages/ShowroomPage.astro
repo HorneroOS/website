@@ -27,16 +27,16 @@ const priorityLabel: Record<string, string> = isEs
 
 <SiteLayout
   socialImage="/og/showroom.png"
-  socialImageAlt={isEs ? "Tarjeta de marca de HorneroOS con la cuenta de capturas pendientes por prioridad, junto a la línea 'Capturas reales, pendientes'." : "HorneroOS brand card with the count of pending captures by priority, beside the line 'Real captures, pending'."}
+  socialImageAlt={isEs ? 'Tarjeta de marca de HorneroOS con la cuenta de capturas tomadas y pendientes por prioridad.' : 'HorneroOS brand card with the count of captured and pending captures by priority.'}
   title="Showroom | HorneroOS"
-  description={isEs ? 'El muro de capturas de HorneroOS: cada imagen que va a mostrar cómo se ve el escritorio, con su proporción, tema y modo, pendiente de una captura real del host.' : 'The HorneroOS capture wall: every image that will show how the desktop looks, with its aspect, theme and mode, pending a real host capture.'}
+  description={isEs ? `El muro de capturas de HorneroOS: ${counts.captured} de ${counts.total} imágenes del escritorio ya salen de un host real, con su proporción, tema y modo; el resto sigue pendiente y dice qué falta tomar.` : `The HorneroOS capture wall: ${counts.captured} of ${counts.total} desktop images already come from a real host, with their aspect, theme and mode; the rest stay pending and say what is left to take.`}
 >
   <section class="showcase-hero section" id="capture-ledger">
     <div class="hero-copy">
       <p class="plate-id"><strong>{isEs ? 'Muro de capturas' : 'Capture wall'}</strong><span>{counts.captured} / {counts.total} {isEs ? 'listas' : 'ready'}</span></p>
       <h1>Showroom</h1>
       <p>
-        {isEs ? 'HorneroOS no muestra renders ni maquetas: cada imagen de este sitio sale de una captura real del host. Las capturas anteriores se retiraron y cada espacio reservado dice qué va a mostrar, cómo se va a tomar y con qué proporción.' : 'HorneroOS shows no renders or mock-ups: every image on this site comes from a real host capture. The earlier captures were withdrawn and each placeholder says what it will show, how it will be taken and at what aspect ratio.'}
+        {isEs ? `Las imágenes de escritorio en estos espacios salen de capturas de un host real (${counts.captured} de ${counts.total} ya tomadas) o quedan como espacios reservados que dicen qué falta tomar, cómo y con qué proporción. Los diagramas, las ilustraciones y las fotos de fondos en otras páginas están etiquetados como lo que son, junto a cada imagen.` : `Desktop images in these slots come from captures on a real host (${counts.captured} of ${counts.total} taken so far) or stay as placeholders that say what is left to take, how, and at what aspect ratio. Diagrams, illustrations and wallpaper photographs on other pages are labelled as what they are, next to each image.`}
       </p>
       <p>
         <a class="text-link" href={shotList}>{isEs ? 'Leé la lista completa de capturas' : 'Read the full shot list'} <span aria-hidden="true">↗</span></a>
