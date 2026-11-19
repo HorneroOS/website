@@ -20,7 +20,7 @@ Open `http://localhost:4321`.
 
 - Route composition lives in `src/pages/`; shared shell and interactions live
   in `src/layouts/SiteLayout.astro` and focused components in `src/components/`.
-- Real showroom captures and their provenance live in `src/content/showroom/`.
+- Real captures and their provenance live in `src/data/capture-slots.json` (assets in `src/assets/captures/`); public placement is curated in `src/data/editorial.json`. See `docs/CAPTURES.md`.
 - Theme, layout, edition and release facts are generated from full-SHA pins in
   `src/data/product/pins.json`. Do not edit generated catalogue JSON by hand.
 - User and technical documentation is authored in `HorneroOS/docs`; the site

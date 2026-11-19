@@ -105,7 +105,7 @@ const faqJsonLd = {
         {isEs ? 'Compará las ediciones' : 'Compare the editions'}
       </a>
     </p>
-    <CaptureFigure slot="CAP-HERO-01" locale={locale} eager />
+    <CaptureFigure slot="CAP-CC-04" locale={locale} eager />
   </section>
 
   <section class="section" aria-labelledby="pillars-title">
@@ -150,8 +150,8 @@ const faqJsonLd = {
       </li>
       <li>
         {isEs
-          ? `De las capturas previstas para mostrar el escritorio, ${counts.captured} de ${counts.total} están tomadas de un host real y el resto sigue pendiente en el showroom.`
-          : `Of the captures planned to show the desktop, ${counts.captured} of ${counts.total} are taken on a real host and the rest stay pending in the showroom.`}{' '}
+          ? `El sitio muestra una selección curada de ${counts.public} capturas tomadas de un host real; el resto del archivo queda guardado sin mostrarse.`
+          : `The site shows a curated selection of ${counts.public} captures taken on a real host; the rest of the archive stays kept, unshown.`}{' '}
         <a href={L('/showroom')}>{isEs ? 'Ver el showroom' : 'See the showroom'}</a>
       </li>
       <li>

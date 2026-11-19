@@ -19,9 +19,10 @@ Its search script is included only on `/search/`.
 
 ## Authored content
 
-`src/content/showroom/` contains Markdown entries for real captures. The Zod
-schema in `src/content.config.ts` validates image, alt text, order and
-provenance before pages can render them. Add new product facts to their
+Real captures are inventoried in `src/data/capture-slots.json` (provenance,
+checksums) and placed publicly only through the curated
+`src/data/editorial.json`; `scripts/check-capture-slots.mjs` validates both
+before pages render (see `docs/CAPTURES.md`). Add new product facts to their
 authoritative HorneroOS source first, then refresh the pins and generated data;
 do not create a second catalogue in page frontmatter.
 

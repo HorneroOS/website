@@ -29,6 +29,33 @@ const wallpaperMedia = {
   'warm-sunset': (await import('../../../assets/wallpapers/theme-wallpapers/warm-sunset.webp')).default,
 };
 const modes = (mode: string) => (mode === 'light' ? (isEs ? 'Claro' : 'Light') : (isEs ? 'Oscuro' : 'Dark'));
+// Theme descriptions arrive English-only in the pinned product data; the
+// Spanish page must not render them untranslated. Presentation-layer
+// translations by theme id (upstream data stays untouched).
+const themeDescriptionsEs: Record<string, string> = {
+  patagonia: 'El glaciar Perito Moreno como panel de instrumentos: superficies azul basalto, señal de hielo glaciar y un ámbar bajo',
+  quebrada: 'Los pliegues minerales del Hornocal sobre papel de dibujo: superficies piedra rosada, una señal ocre y un celeste profundo',
+  ibera: 'Los Esteros del Iberá al atardecer: superficies de agua oscura, señal dorada de totora, fósforo verde humedal y un celeste cielo',
+  'fin-del-mundo': 'La hora azul sobre el canal Beagle: superficies de agua fría, una señal cobre de última luz y un toque vidrio de mar',
+  'buenos-aires-nocturno': 'Buenos Aires de noche como sala de control: superficies grafito, señal ámbar sodio y un celeste ribereño',
+  pampa: 'Noche de pastizal tras un atardecer pampeano: superficies tierra oliva, señal dorada de caldén y un celeste de cielo alto',
+  cuyo: 'Nieve y piedra del Aconcagua: papel mineral frío, una señal siena de sol en la roca y un celeste de aire fino',
+  iguazu: 'Las cataratas del Iguazú de cerca: superficies de basalto mojado, tinta de agua blanca, fósforo subtropical y un celeste de bruma',
+  sierras: 'Las sierras doradas de Córdoba: papel de pasto seco, una señal dorada profunda, fósforo oliva de altura y un cielo de cóndores',
+  'catppuccin-latte': 'Catppuccin Latte llevado a los roles Signal: superficies base y manto Latte, señal Peach y toque Sapphire oscurecido para AA',
+  'catppuccin-mocha': 'Catppuccin Mocha llevado a los roles Signal: superficies base y manto Mocha, señal Peach y toque Sky (verificado AA)',
+  everforest: 'Everforest oscuro llevado a los roles Signal: superficies de bosque, señal naranja y toque aqua (verificado AA)',
+  gruvbox: 'Gruvbox oscuro llevado a los roles Signal: superficies retro cálidas, señal naranja y toque azul aqua, normales levantados para AA',
+  'hornero-signal-day': 'Papel cálido de dibujo técnico con texto tinta negra, una señal viva ámbar quemado y un foco celeste profundo',
+  'hornero-signal-dusk': 'Noche hackerpunk cálida y acogedora: paneles carbón berenjena iluminados como lámpara de taller, tinta crema, señal ámbar cobre, toque cian y verde fósforo; los mismos roles y controles Signal que Night',
+  'hornero-signal-contrast': 'Roles Signal a máxima legibilidad: fondo negro puro, tinta y reglas blancas, señal ámbar brillante y toque celeste',
+  'hornero-signal-night': 'El de fábrica: paneles de instrumento grafito frío con tinta crema fósforo cálida, una señal ámbar viva y un foco celeste',
+  landscape: 'Superficies de instrumento pizarra neutra para fotografía de paisajes cinematográfica, con los roles ámbar y celeste de Signal',
+  monochrome: 'Signal en escala de grises pura: roles solo de luminancia para concentrarse sin distracciones',
+  'nord-dreams': 'Nord llevado a los roles Signal: superficies Polar Night, tinta Snow Storm, señal naranja Aurora y toque Frost (verificado AA)',
+  'rose-pine': 'Rosé Pine llevado a los roles Signal: capas base y superficie, señal Gold y toque Foam (verificado AA)',
+};
+const themeDescription = (theme: { id: string; description: string }) => (isEs ? (themeDescriptionsEs[theme.id] ?? theme.description) : theme.description);
 const buenosAires = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
 if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pinned wallpaper catalogue');
 ---
@@ -74,7 +101,7 @@ if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pin
     locale={locale}
     id="desktop-gallery"
     heading={isEs ? 'Aspectos en un escritorio andando' : 'Looks on a running desktop'}
-    intro={isEs ? 'Cada aspecto, aplicado a la misma terminal, la misma app GTK y los mismos Ajustes, en capturas reales del host. Hasta que estén listas, cada espacio reservado dice qué va a mostrar.' : 'Each look applied to the same terminal, GTK app and Settings, in real host captures. Until they are ready, each placeholder says what it will show.'}
+    intro={isEs ? 'Aspectos reales sobre escritorios reales: el panel de apariencia con su contraste verificado y los fondos Originals con las barras Night y Day.' : 'Real looks on real desktops: the appearance pane with its checked contrast, and the Originals wallpapers under Night and Day bars.'}
   />
 
   <ThemePaletteStudy themes={paletteStudies} locale={locale} />
@@ -133,7 +160,7 @@ if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pin
           </div>
           <div class="look-copy">
             <h4>{theme.name}</h4>
-            <p>{theme.description}</p>
+            <p>{themeDescription(theme)}</p>
             {photosByTheme.get(theme.id) ? (
               <p class="look-credit">
                 {photosByTheme.get(theme.id)!.photographer} · <a href={photosByTheme.get(theme.id)!.licenseUrl}>{photosByTheme.get(theme.id)!.license}</a>
@@ -179,7 +206,7 @@ if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pin
           </div>
           <div class="look-copy">
             <h4>{theme.name}</h4>
-            <p>{theme.description}</p>
+            <p>{themeDescription(theme)}</p>
           </div>
         </li>
       ))}

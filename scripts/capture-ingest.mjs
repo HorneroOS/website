@@ -5,7 +5,8 @@
  *   node scripts/capture-ingest.mjs CAP-HERO-01 ~/Pictures/hornero-captures/CAP-HERO-01.png \
  *     [--source "Maintainer host"] [--pins shell=6e1874e,config=fb8bd68] [--credit "Wallpaper: ..."]
  *   node scripts/capture-ingest.mjs CAP-CLIP-01 --webm a.webm --mp4 a.mp4 --poster a.png
- *   node scripts/capture-ingest.mjs CAP-HERO-01 --reset      (back to a pending plate)
+ *   node scripts/capture-ingest.mjs CAP-HERO-01 --reset      (back to pending; deletes the file)
+ *   node scripts/capture-ingest.mjs CAP-HERO-01 --archive    (keep asset + record, stop rendering)
  *
  * It validates the size and aspect ratio against the slot, copies the file to
  * src/assets/captures/ (clips: public/captures/ plus a poster), records its
@@ -25,14 +26,14 @@ const flag = (name) => {
   const i = args.indexOf(`--${name}`);
   return i === -1 ? undefined : args[i + 1];
 };
-const positional = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--') && args[i - 1] !== '--reset'));
+const positional = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--') && !['--reset', '--archive'].includes(args[i - 1])));
 const [id, input] = positional;
 const die = (message) => {
   console.error(`capture-ingest: ${message}`);
   process.exit(1);
 };
 
-if (!id) die('usage: capture-ingest.mjs <SLOT-ID> <file> [--source text] [--pins a=b,c=d] [--credit text] | --reset');
+if (!id) die('usage: capture-ingest.mjs <SLOT-ID> <file> [--source text] [--pins a=b,c=d] [--credit text] | --reset | --archive');
 const data = JSON.parse(readFileSync(dataPath, 'utf8'));
 const slot = data.slots.find((s) => s.id === id);
 if (!slot) die(`${id} is not declared in src/data/capture-slots.json`);
@@ -40,6 +41,16 @@ if (!slot) die(`${id} is not declared in src/data/capture-slots.json`);
 const stem = id.toLowerCase();
 const sha = (file) => createHash('sha256').update(readFileSync(file)).digest('hex');
 const save = () => writeFileSync(dataPath, `${JSON.stringify(data, null, 2)}\n`);
+
+if (args.includes('--archive')) {
+  if (slot.status !== 'captured') die(`${id} is ${slot.status}; only captured slots can be archived`);
+  slot.status = 'archived';
+  slot.curation = 'ARCHIVE';
+  delete slot.docsOnly;
+  save();
+  console.log(`${id}: archived (asset kept; remove its editorial placements in src/data/editorial.json)`);
+  process.exit(0);
+}
 
 if (args.includes('--reset')) {
   const drop = (rel) => existsSync(join(root, rel)) && rmSync(join(root, rel));

@@ -7,7 +7,7 @@
 import type { Locale } from '../i18n/ui';
 
 interface Props {
-  state: 'pending' | 'captured';
+  state: 'captured';
   kind?: 'screenshot' | 'clip' | 'photo';
   locale?: Locale;
 }
@@ -15,11 +15,7 @@ interface Props {
 const { state, kind = 'screenshot', locale = 'es' } = Astro.props;
 const isEs = locale === 'es';
 const text =
-  state === 'pending'
-    ? isEs
-      ? 'Pendiente — captura del host'
-      : 'Pending — host capture'
-    : kind === 'photo'
+  kind === 'photo'
       ? isEs
         ? 'Fotografía real'
         : 'Real photograph'

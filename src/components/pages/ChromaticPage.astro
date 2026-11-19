@@ -137,8 +137,9 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
   <section class="section" aria-labelledby="pair-title">
     <h2 id="pair-title">{isEs ? 'Un escritorio, dos fondos' : 'One desktop, two wallpapers'}</h2>
     <p class="section-copy">
-      {isEs ? 'Un escritorio, dos fondos distintos y la paleta siguiéndolos: ese par lo muestran dos capturas reales del host. Hasta entonces, cada espacio reservado dice qué va a mostrar.' : 'One desktop, two different wallpapers and the palette following them: a pair of real host captures shows that. Until then each placeholder says what it will show.'}
+      {isEs ? 'La prueba está en el propio panel de Chromatic: lee el fondo, propone la paleta y verifica el contraste. Debajo, dos fondos de ejemplo que puede muestrear; en las barras solas el efecto no se lee, y esta página no finge que sí.' : 'The proof is in Chromatic’s own panel: it reads the wallpaper, proposes the palette and checks contrast. Below it, two sample wallpapers it can sample; the effect does not read from the bars alone, and this page does not pretend otherwise.'}
     </p>
+    <CaptureFigure slot="CAP-CHROMA-07" locale={locale} />
     <div class="chroma-pair">
       <CaptureFigure slot="CAP-CHROMA-01" locale={locale} />
       <CaptureFigure slot="CAP-CHROMA-02" locale={locale} />
@@ -156,7 +157,7 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
     </ul>
   </section>
 
-  <CaptureGallery route="/chromatic" locale={locale} exclude={['CAP-CHROMA-01', 'CAP-CHROMA-02']} />
+  <CaptureGallery route="/chromatic" locale={locale} exclude={['CAP-CHROMA-01', 'CAP-CHROMA-02', 'CAP-CHROMA-07']} />
 </SiteLayout>
 
 <style>

@@ -14,7 +14,14 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(join(root, 'src/data/capture-slots.json'), 'utf8'));
 const out = join(root, 'docs/CAPTURE-SHOT-LIST.md');
-const { slots, sessions } = data;
+const editorial = JSON.parse(readFileSync(join(root, 'src/data/editorial.json'), 'utf8'));
+const allSlots = data.slots;
+const { sessions } = data;
+// The shot list covers only deferred (pending) slots; captured/archive state
+// is reported as counts (docs/IMAGE_CURATION.md).
+const slots = allSlots.filter((s) => s.status === 'pending');
+const nStatus = (status) => allSlots.filter((s) => s.status === status).length;
+const publicIds = new Set([...Object.values(editorial.pages).flatMap((sections) => sections.flatMap((s) => s.slots)), ...editorial.showroom.flatMap((g) => g.slots)]);
 const order = ['P0', 'P1', 'P2'];
 const count = (p) => slots.filter((s) => s.priority === p).length;
 const minutes = sessions.reduce((n, s) => n + s.minutes, 0);
@@ -29,10 +36,12 @@ push(
   '> Generated from `src/data/capture-slots.json` by `node scripts/gen-shot-list.mjs`. Do not edit by hand:',
   '> change the data file and regenerate. `npm run check:captures` fails when this file is stale.',
   '',
-  `The site currently shows **no product imagery**. Every place that will show how HorneroOS looks is a`,
-  `pending-capture plate driven by one slot in the data file. This is the definitive list of what the best`,
-  `possible showcase needs: **${slots.length} slots** (${count('P0')} P0, ${count('P1')} P1, ${count('P2')} P2) in`,
-  `${sessions.length} capture sessions, roughly ${Math.round(minutes / 60)} hours of work if done in order.`,
+  `The site shows a curated selection of real captures (${publicIds.size} distinct images placed by`,
+  `\`src/data/editorial.json\`). Inventory: **${allSlots.length} slots** — ${nStatus('captured')} captured,`,
+  `${nStatus('archived')} archived (asset kept, never rendered), ${nStatus('pending')} pending. Pending slots`,
+  `never render publicly; this file is the definitive list of the **${slots.length} deferred captures**`,
+  `(${count('P0')} P0, ${count('P1')} P1, ${count('P2')} P2) still worth shooting, in ${sessions.filter((s) => slots.some((x) => x.session === s.id)).length} sessions.`,
+  `Cancelled slot declarations and every keep/archive decision are recorded in docs/IMAGE_CURATION.md.`,
   '',
   '| Priority | Meaning | Slots |',
   '| --- | --- | --- |',
@@ -47,7 +56,7 @@ push(
   '3. Fill the slot: `node scripts/capture-ingest.mjs CAP-ID file` (copies the file into `src/assets/captures/`,',
   '   records its checksum and flips `status` to `captured`). By hand it is exactly two edits: drop the file',
   '   in `src/assets/captures/` and set `status` and `file` on the slot.',
-  '4. `npm run build`; the plate becomes the real image in the same box, with no layout shift.',
+  '4. Add an editorial placement in `src/data/editorial.json`, then `npm run build`.',
   '',
   'Send the files to the maintainer who runs the ingest, or open a PR containing the ingest result.',
   '',
@@ -95,12 +104,14 @@ push(
 const anchor = (heading) => heading.toLowerCase().replace(/[^\p{L}\p{N} -]/gu, '').replace(/ /g, '-');
 for (const s of sessions) {
   const n = slots.filter((x) => x.session === s.id).length;
+  if (n === 0) continue;
   push(`| [${s.id} ${s.title.en}](#${anchor(`Session ${s.id}: ${s.title.en}`)}) | ${s.where} | ${n} | ${s.minutes} min |`);
 }
 push('', 'Run the sessions in order: S01 sets the arrangement and wallpapers that S02 to S09 reuse.', '');
 
 for (const s of sessions) {
   const list = slots.filter((x) => x.session === s.id).sort((a, b) => order.indexOf(a.priority) - order.indexOf(b.priority) || a.id.localeCompare(b.id));
+  if (list.length === 0) continue;
   push(`## Session ${s.id}: ${s.title.en}`, '', `Where: ${s.where}. About ${s.minutes} minutes, ${list.length} slots.`, '');
   push('| Slot | Priority | Kind | Shown on |', '| --- | --- | --- | --- |');
   for (const x of list) push(`| ${x.id} | ${x.priority} | ${kindLabel[x.kind]} | ${x.pages.length ? x.pages.join(', ') : 'Showroom only'} |`);
@@ -124,7 +135,7 @@ push(
   '',
   '- Javi and the nest (S08): shoot after the final Javi and nest art lands (feature ledger `javi-final-art` is planned).',
   '- Greeter and installer (S12) need the QA VM or a fresh install; the greeter cannot be captured from a running session.',
-  '- Social cards stay brand-only until `CAP-OG-01` exists; `scripts/build-og.mjs` then reads it.',
+  '- Social cards stay brand-only (`scripts/build-og.mjs`); the archived fastfetch crop must never become an OG image.',
   '',
 );
 

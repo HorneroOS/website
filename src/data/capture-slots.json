@@ -170,45 +170,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-APPEARANCE-02",
-      "priority": "P0",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Appearance: applied versus preview",
-        "es": "Apariencia: aplicado versus vista previa"
       },
-      "description": {
-        "en": "Appearance page with a theme card hovered for preview while the applied theme stays marked, showing the preview and applied states side by side.",
-        "es": "Página de Apariencia con una tarjeta de tema en vista previa mientras el tema aplicado sigue marcado, mostrando ambos estados a la vez."
-      },
-      "alt": {
-        "en": "Appearance page with a theme card hovered for preview while the applied theme stays marked, showing the preview and applied states side by side.",
-        "es": "Página de Apariencia con una tarjeta de tema en vista previa mientras el tema aplicado sigue marcado, mostrando ambos estados a la vez."
-      },
-      "pages": [
-        "/themes"
-      ],
-      "section": "Themes, apply and undo",
-      "aspect": "16:10",
-      "width": 1600,
-      "height": 1000,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Open Appearance with Signal Night applied.",
-        "Hover Signal Day (preview) without clicking; capture with `--delay 3`."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-APPEARANCE-03",
@@ -243,7 +206,7 @@
         "Only HorneroOS-shipped wallpapers may be in the folder the picker scans (remove personal folders from the picker first)."
       ],
       "privacy": "The picker must not list personal wallpaper folders or third-party images.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-appearance-03.png",
       "sha256": "e57fcb2efa63be2a47035b3d9d69dca2e2b00c94437c3b45f25317f8b200a2b6",
       "capturedAt": "2026-11-19",
@@ -257,114 +220,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-APPEARANCE-04",
-      "priority": "P2",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Fonts, icons and transparency",
-        "es": "Fuentes, íconos y transparencia"
       },
-      "description": {
-        "en": "Appearance controls for fonts, icon theme, transparency and animations, all with live values.",
-        "es": "Controles de Apariencia para fuentes, tema de íconos, transparencia y animaciones, con valores en vivo."
-      },
-      "alt": {
-        "en": "Appearance controls for fonts, icon theme, transparency and animations, all with live values.",
-        "es": "Controles de Apariencia para fuentes, tema de íconos, transparencia y animaciones, con valores en vivo."
-      },
-      "pages": [],
-      "section": "Customisation",
-      "aspect": "16:10",
-      "width": 1600,
-      "height": 1000,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Scroll the Appearance pane to the fonts and transparency block; capture."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-BOOT-01",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Boot menu",
-        "es": "Menú de arranque"
-      },
-      "description": {
-        "en": "The HorneroOS boot menu with its entries.",
-        "es": "El menú de arranque de HorneroOS con sus entradas."
-      },
-      "alt": {
-        "en": "The HorneroOS boot menu with its entries.",
-        "es": "El menú de arranque de HorneroOS con sus entradas."
-      },
-      "pages": [
-        "/install"
-      ],
-      "section": "Install, boot",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Boot",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "QA VM with the release ISO; capture the boot menu with the VM screenshot tool."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-BOOT-02",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Plymouth boot splash",
-        "es": "Pantalla de arranque Plymouth"
-      },
-      "description": {
-        "en": "The boot splash with the hornero mark and progress.",
-        "es": "La pantalla de arranque con la marca del hornero y el progreso."
-      },
-      "alt": {
-        "en": "The boot splash with the hornero mark and progress.",
-        "es": "La pantalla de arranque con la marca del hornero y el progreso."
-      },
-      "pages": [],
-      "section": "Install, boot",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Boot",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Capture from the VM during boot (`virsh screenshot` or the QA tool) every second and pick the best frame."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-CC-01",
@@ -380,8 +237,8 @@
         "es": "Centro de control, el Centro de control con Buscar un ajuste (Ctrl+,) abierto y una consulta como «wallpaper» resuelta."
       },
       "alt": {
-        "en": "Control Center, the Control Center with Find a setting (Ctrl+,) open and a query such as \"wallpaper\" matched.",
-        "es": "Centro de control, el Centro de control con Buscar un ajuste (Ctrl+,) abierto y una consulta como «wallpaper» resuelta."
+        "en": "Control Center appearance pane: theme, wallpaper toggles, a live preview and checked contrast ratios",
+        "es": "Panel de apariencia del Centro de control: tema, opciones de fondo, una vista previa en vivo y contrastes verificados"
       },
       "pages": [],
       "section": "Desktop, Control Center",
@@ -413,7 +270,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CC-02",
@@ -462,7 +320,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CC-03",
@@ -513,7 +372,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-04",
@@ -564,7 +425,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CC-05",
@@ -613,7 +475,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-06",
@@ -662,7 +526,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-07",
@@ -713,7 +579,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CC-08",
@@ -749,7 +616,8 @@
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
       "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-CC-09",
@@ -798,7 +666,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-CC-10",
@@ -847,7 +716,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-CC-11",
@@ -896,7 +766,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-12",
@@ -945,7 +817,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-13",
@@ -994,7 +868,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-CC-14",
@@ -1043,7 +919,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CC-15",
@@ -1078,7 +955,7 @@
         "Window geometry 1600x1000 (`capture-helper.sh window CAP-CC-15`), pane id `system`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-cc-15.png",
       "sha256": "69a0e8da00032f0eb6d7c8e5f9e6424469ad6af3d975b39425b4305b57583f05",
       "capturedAt": "2026-11-19",
@@ -1092,7 +969,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-CHROMA-01",
@@ -1108,8 +986,8 @@
         "es": "Hornero Chromatic activo sobre el fondo Pampa: Cockpit con una terminal y Ajustes, Apariencia, con la paleta cálida generada en shell, terminal y GTK."
       },
       "alt": {
-        "en": "Hornero Chromatic active over the Pampa wallpaper: Cockpit with a terminal and Settings, Appearance, the generated warm palette on shell, terminal and GTK.",
-        "es": "Hornero Chromatic activo sobre el fondo Pampa: Cockpit con una terminal y Ajustes, Apariencia, con la paleta cálida generada en shell, terminal y GTK."
+        "en": "Empty desktop with an alpine sunrise above a sea of clouds as wallpaper, shell bars and a small hornero bird at the bottom right",
+        "es": "Escritorio vacío con un amanecer alpino sobre un mar de nubes como fondo, barras del shell y un hornerito abajo a la derecha"
       },
       "pages": [
         "/chromatic"
@@ -1144,7 +1022,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-CHROMA-02",
@@ -1160,8 +1039,8 @@
         "es": "La misma disposición que CAP-CHROMA-01 sobre el fondo Fin del Mundo: la paleta fría en todas las superficies."
       },
       "alt": {
-        "en": "The same arrangement as CAP-CHROMA-01 over the Fin del Mundo wallpaper: the cool palette now on every surface.",
-        "es": "La misma disposición que CAP-CHROMA-01 sobre el fondo Fin del Mundo: la paleta fría en todas las superficies."
+        "en": "Empty desktop with an anime girl and butterflies as wallpaper, shell bars only; one of two wallpapers Chromatic can sample",
+        "es": "Escritorio vacío con una chica anime y mariposas como fondo, solo las barras del shell; uno de dos fondos que Chromatic puede muestrear"
       },
       "pages": [
         "/chromatic"
@@ -1194,147 +1073,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-CHROMA-03",
-      "priority": "P1",
-      "session": "S04",
-      "kind": "screenshot",
-      "title": {
-        "en": "Chromatic palette: Quebrada",
-        "es": "Paleta Chromatic: Quebrada"
       },
-      "description": {
-        "en": "Hornero Chromatic over Quebrada: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Quebrada: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "alt": {
-        "en": "Hornero Chromatic over Quebrada: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Quebrada: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "pages": [],
-      "section": "Chromatic, palette gallery",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Hornero Chromatic",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "quebrada",
-      "setup": [
-        "Change only the wallpaper to Quebrada; keep the pair arrangement."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-CHROMA-04",
-      "priority": "P1",
-      "session": "S04",
-      "kind": "screenshot",
-      "title": {
-        "en": "Chromatic palette: Iberá",
-        "es": "Paleta Chromatic: Iberá"
-      },
-      "description": {
-        "en": "Hornero Chromatic over Iberá: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Iberá: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "alt": {
-        "en": "Hornero Chromatic over Iberá: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Iberá: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "pages": [],
-      "section": "Chromatic, palette gallery",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Hornero Chromatic",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "ibera",
-      "setup": [
-        "Change only the wallpaper to Iberá; keep the pair arrangement."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-CHROMA-05",
-      "priority": "P1",
-      "session": "S04",
-      "kind": "screenshot",
-      "title": {
-        "en": "Chromatic palette: Iguazú",
-        "es": "Paleta Chromatic: Iguazú"
-      },
-      "description": {
-        "en": "Hornero Chromatic over Iguazú: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Iguazú: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "alt": {
-        "en": "Hornero Chromatic over Iguazú: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Iguazú: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "pages": [],
-      "section": "Chromatic, palette gallery",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Hornero Chromatic",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "iguazu",
-      "setup": [
-        "Change only the wallpaper to Iguazú; keep the pair arrangement."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-CHROMA-06",
-      "priority": "P1",
-      "session": "S04",
-      "kind": "screenshot",
-      "title": {
-        "en": "Chromatic palette: Sierras",
-        "es": "Paleta Chromatic: Sierras"
-      },
-      "description": {
-        "en": "Hornero Chromatic over Sierras: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Sierras: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "alt": {
-        "en": "Hornero Chromatic over Sierras: the same arrangement as the pair, a distinct palette family.",
-        "es": "Hornero Chromatic sobre Sierras: la misma disposición del par, con una familia de paleta distinta."
-      },
-      "pages": [],
-      "section": "Chromatic, palette gallery",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Hornero Chromatic",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "sierras",
-      "setup": [
-        "Change only the wallpaper to Sierras; keep the pair arrangement."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-CHROMA-07",
@@ -1384,43 +1124,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-CHROMA-08",
-      "priority": "P1",
-      "session": "S04",
-      "kind": "screenshot",
-      "title": {
-        "en": "Chromatic rejects a bad palette",
-        "es": "Chromatic rechaza una paleta mala"
       },
-      "description": {
-        "en": "Chromatic over a low-contrast wallpaper showing the fallback or the corrected roles with the contrast gate message.",
-        "es": "Chromatic sobre un fondo de bajo contraste mostrando el respaldo o los roles corregidos y el mensaje del control de contraste."
-      },
-      "alt": {
-        "en": "Chromatic over a low-contrast wallpaper showing the fallback or the corrected roles with the contrast gate message.",
-        "es": "Chromatic sobre un fondo de bajo contraste mostrando el respaldo o los roles corregidos y el mensaje del control de contraste."
-      },
-      "pages": [],
-      "section": "Chromatic, contrast gate",
-      "aspect": "16:10",
-      "width": 1600,
-      "height": 1000,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Hornero Chromatic",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Use a flat grey HorneroOS-licensed or self-made wallpaper (not third-party).",
-        "Capture the Appearance pane message."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-CHROMA-09",
@@ -1456,7 +1161,8 @@
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
       "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-CLIP-01",
@@ -1494,7 +1200,7 @@
         "Trim so the loop starts and ends on the same state is NOT needed: end on state B, the site crossfades."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-clip-01.mp4",
       "poster": "cap-clip-01-poster.png",
       "sha256": "9f92c92ed371d7493cdf463b46e1104431daddda4371fd291d1e5cb2ac9eb8cc",
@@ -1509,7 +1215,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-CLIP-02",
@@ -1545,7 +1252,7 @@
         "Start the clip with Javi sleeping; summon with the Javi shortcut; stop after landing."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-clip-02.mp4",
       "poster": "cap-clip-02-poster.png",
       "sha256": "e4fc4dfcbe923fa74c542ef141e4569103893ae60e1152b9e18702f31370180b",
@@ -1560,7 +1267,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-CLIP-03",
@@ -1611,42 +1319,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-CLIP-04",
-      "priority": "P1",
-      "session": "S13",
-      "kind": "clip",
-      "title": {
-        "en": "Clip: workspace needle",
-        "es": "Clip: aguja de espacios"
       },
-      "description": {
-        "en": "6 s: switching workspaces 1 to 2 to 3 with the workspace needle sweeping the bottom strip.",
-        "es": "6 s: cambio entre espacios 1, 2 y 3 con la aguja barriendo la franja inferior."
-      },
-      "alt": {
-        "en": "6 s: switching workspaces 1 to 2 to 3 with the workspace needle sweeping the bottom strip.",
-        "es": "6 s: cambio entre espacios 1, 2 y 3 con la aguja barriendo la franja inferior."
-      },
-      "pages": [],
-      "section": "Desktop, motion",
-      "aspect": "16:9",
-      "width": 1280,
-      "height": 720,
-      "scale2x": false,
-      "format": "WebM VP9 + MP4 H.264, no audio, poster PNG",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Super+1, Super+2, Super+3 at 1.5 s intervals."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-CLIP-05",
@@ -1680,7 +1354,7 @@
         "Super+Shift+B, pick each preset with the keyboard."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-clip-05.mp4",
       "poster": "cap-clip-05-poster.png",
       "sha256": "7a53b1230a3ce207c913812d031d2c447ab6bdca808eb91f252ed8549252024b",
@@ -1695,7 +1369,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-CLIP-06",
@@ -1729,7 +1404,7 @@
         "Type at a natural pace."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-clip-06.mp4",
       "poster": "cap-clip-06-poster.png",
       "sha256": "26dac56e9f3dcf4bad5ca09e1b7935f661bae8810b523adc6dbacaa37257d883",
@@ -1744,77 +1419,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-CLIP-07",
-      "priority": "P1",
-      "session": "S13",
-      "kind": "clip",
-      "title": {
-        "en": "Clip: boot to desktop",
-        "es": "Clip: del arranque al escritorio"
       },
-      "description": {
-        "en": "12 s: greeter, login, the shell appearing with the reload cover, Cockpit ready.",
-        "es": "12 s: greeter, inicio de sesión, la shell apareciendo con la cubierta de recarga y Cockpit listo."
-      },
-      "alt": {
-        "en": "12 s: greeter, login, the shell appearing with the reload cover, Cockpit ready.",
-        "es": "12 s: greeter, inicio de sesión, la shell apareciendo con la cubierta de recarga y Cockpit listo."
-      },
-      "pages": [],
-      "section": "Greeter, motion",
-      "aspect": "16:9",
-      "width": 1280,
-      "height": 720,
-      "scale2x": false,
-      "format": "WebM VP9 + MP4 H.264, no audio, poster PNG",
-      "theme": "Greeter to Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Record from the QA VM with a host-side recorder; no audio."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-CLIP-08",
-      "priority": "P2",
-      "session": "S13",
-      "kind": "clip",
-      "title": {
-        "en": "Clip: apply and undo",
-        "es": "Clip: aplicar y deshacer"
-      },
-      "description": {
-        "en": "6 s: apply a theme from Settings and press Undo on the toast.",
-        "es": "6 s: aplicar un tema desde Ajustes y pulsar Deshacer en el toast."
-      },
-      "alt": {
-        "en": "6 s: apply a theme from Settings and press Undo on the toast.",
-        "es": "6 s: aplicar un tema desde Ajustes y pulsar Deshacer en el toast."
-      },
-      "pages": [],
-      "section": "Themes, motion",
-      "aspect": "16:9",
-      "width": 1280,
-      "height": 720,
-      "scale2x": false,
-      "format": "WebM VP9 + MP4 H.264, no audio, poster PNG",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Signal Night to Signal Day and back."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-COMPARE-01",
@@ -1866,7 +1472,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-COMPARE-02",
@@ -1917,7 +1524,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-DECK-01",
@@ -1967,7 +1575,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-DECK-02",
@@ -2002,7 +1611,8 @@
       ],
       "privacy": "Track title, artist and cover art must be CC0 or HorneroOS-made.",
       "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-DESKTOP-01",
@@ -2053,7 +1663,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-DESKTOP-02",
@@ -2069,8 +1680,8 @@
         "es": "El selector de layouts (Super+Shift+B) abierto sobre Cockpit con otro preset en vista previa en vivo y las tarjetas legibles."
       },
       "alt": {
-        "en": "The Layout Picker (Super+Shift+B) open over Cockpit with a different preset previewing live, the preset cards readable.",
-        "es": "El selector de layouts (Super+Shift+B) abierto sobre Cockpit con otro preset en vista previa en vivo y las tarjetas legibles."
+        "en": "Layout picker grid naming the available bar layouts, with the Cockpit layout selected",
+        "es": "Grilla del selector de layouts con los nombres de los layouts de barras disponibles, con Cockpit seleccionado"
       },
       "pages": [
         "/desktop"
@@ -2104,7 +1715,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-DESKTOP-03",
@@ -2139,7 +1751,7 @@
         "Telemetry meters must be mid-range, not pinned at 0 or 100 %."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-desktop-03.png",
       "sha256": "257b55fbdb3bb350e9cd641bd0f9275938b89a415b490436795f36f8992367d7",
       "capturedAt": "2026-11-19",
@@ -2153,7 +1765,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-DESKTOP-04",
@@ -2188,7 +1801,7 @@
         "Capture the bottom 600 px strip."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-desktop-04.png",
       "sha256": "7e6623a803dcaac2f6ccbb7e12c124fa3b8db95fbe95585125ea27eb7f7e4462",
       "capturedAt": "2026-11-19",
@@ -2202,7 +1815,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-EXT-01",
@@ -2253,42 +1867,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-EXT-02",
-      "priority": "P1",
-      "session": "S07",
-      "kind": "screenshot",
-      "title": {
-        "en": "Extension install and permissions",
-        "es": "Instalación de extensión y permisos"
       },
-      "description": {
-        "en": "The extension detail with its checksum, source revision and declared permissions, and the explicit trust prompt before enabling.",
-        "es": "El detalle de una extensión con su checksum, revisión de código y permisos declarados, y el aviso explícito de confianza antes de activarla."
-      },
-      "alt": {
-        "en": "The extension detail with its checksum, source revision and declared permissions, and the explicit trust prompt before enabling.",
-        "es": "El detalle de una extensión con su checksum, revisión de código y permisos declarados, y el aviso explícito de confianza antes de activarla."
-      },
-      "pages": [],
-      "section": "Extensions, trust",
-      "aspect": "16:10",
-      "width": 1600,
-      "height": 1000,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Open an official extension in Settings, Extensions; scroll to permissions; capture before confirming."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-EXT-03",
@@ -2322,7 +1902,7 @@
         "Enable the four extensions; crop the top 600 px of a 2x capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-ext-03.png",
       "sha256": "40c6754b818523bb2a353ab17e151841eb12d6dd33dc956dfa05bb1a4ba9e785",
       "capturedAt": "2026-11-19",
@@ -2336,7 +1916,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-EXT-04",
@@ -2384,7 +1965,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-GAMING-01",
@@ -2423,112 +2005,8 @@
       ],
       "privacy": "Steam must show a demo account with a neutral name and no friends list.",
       "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GAMING-02",
-      "priority": "P1",
-      "session": "S09",
-      "kind": "screenshot",
-      "title": {
-        "en": "Gaming: Heroic and Lutris",
-        "es": "Gaming: Heroic y Lutris"
-      },
-      "description": {
-        "en": "Heroic Games Launcher and Lutris side by side with empty or demo libraries.",
-        "es": "Heroic Games Launcher y Lutris lado a lado con bibliotecas vacías o de demostración."
-      },
-      "alt": {
-        "en": "Heroic Games Launcher and Lutris side by side with empty or demo libraries.",
-        "es": "Heroic Games Launcher y Lutris lado a lado con bibliotecas vacías o de demostración."
-      },
-      "pages": [],
-      "section": "Gaming, launchers",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Gaming",
-      "layout": "Gaming",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Demo accounts only; no logged-in storefront identities visible."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GAMING-03",
-      "priority": "P1",
-      "session": "S09",
-      "kind": "screenshot",
-      "title": {
-        "en": "Gaming: queued notifications",
-        "es": "Gaming: notificaciones en cola"
-      },
-      "description": {
-        "en": "A fullscreen-adjacent Gaming session holding notification popups, then the queue shown once the mode ends.",
-        "es": "Una sesión Gaming casi a pantalla completa reteniendo popups, y la cola mostrada al salir del modo."
-      },
-      "alt": {
-        "en": "A fullscreen-adjacent Gaming session holding notification popups, then the queue shown once the mode ends.",
-        "es": "Una sesión Gaming casi a pantalla completa reteniendo popups, y la cola mostrada al salir del modo."
-      },
-      "pages": [],
-      "section": "Gaming, behaviour",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Gaming",
-      "layout": "Gaming",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Send two `notify-send` demo notifications while a game runs; revert the mode and capture the queue."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GAMING-04",
-      "priority": "P2",
-      "session": "S09",
-      "kind": "screenshot",
-      "title": {
-        "en": "Gaming: fullscreen",
-        "es": "Gaming: pantalla completa"
-      },
-      "description": {
-        "en": "A game fullscreen with no shell chrome overlapping, proving nothing steals focus.",
-        "es": "Un juego a pantalla completa sin ningún elemento de la shell encima, que demuestra que nada roba el foco."
-      },
-      "alt": {
-        "en": "A game fullscreen with no shell chrome overlapping, proving nothing steals focus.",
-        "es": "Un juego a pantalla completa sin ningún elemento de la shell encima, que demuestra que nada roba el foco."
-      },
-      "pages": [],
-      "section": "Gaming, behaviour",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Gaming",
-      "layout": "Gaming",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Fullscreen the demo game (Super+M)."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-GREETER-01",
@@ -2567,120 +2045,8 @@
       ],
       "privacy": "Demo user only.",
       "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GREETER-02",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Greeter: session list and power confirmation",
-        "es": "Greeter: lista de sesiones y confirmación de energía"
-      },
-      "description": {
-        "en": "The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.",
-        "es": "El greeter Signal con la lista de sesiones abierta (Desktop, Studio y Gaming, las experimentales al final) o la confirmación de reinicio con Cancelar enfocado."
-      },
-      "alt": {
-        "en": "The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.",
-        "es": "El greeter Signal con la lista de sesiones abierta (Desktop, Studio y Gaming, las experimentales al final) o la confirmación de reinicio con Cancelar enfocado."
-      },
-      "pages": [
-        "/greeter"
-      ],
-      "section": "Greeter, sessions and power",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night (greeter)",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "Generative horizon (no wallpaper)",
-      "setup": [
-        "In the QA VM or a fresh install, open the session selector without choosing; capture.",
-        "Then choose Restart and capture the confirmation dialog before confirming; cancel out of it."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GREETER-03",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Greeter palettes: Day and High Contrast",
-        "es": "Paletas del greeter: Day y Alto contraste"
-      },
-      "description": {
-        "en": "The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.",
-        "es": "El greeter Signal en Signal Day y en Alto contraste con texto grande, como dos capturas reales del mismo módulo de ingreso y horizonte generativo."
-      },
-      "alt": {
-        "en": "The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.",
-        "es": "El greeter Signal en Signal Day y en Alto contraste con texto grande, como dos capturas reales del mismo módulo de ingreso y horizonte generativo."
-      },
-      "pages": [
-        "/greeter"
-      ],
-      "section": "Greeter, palettes",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Day / High Contrast (greeter)",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "Generative horizon (no wallpaper)",
-      "setup": [
-        "In the QA VM, set colorScheme=day in theme.conf.user and capture (-day suffix).",
-        "Then set highContrast=true and largeText=true and capture again (-high-contrast suffix); restore theme.conf.user afterwards."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-GREETER-04",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Greeter on two monitors",
-        "es": "El greeter en dos monitores"
-      },
-      "description": {
-        "en": "The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.",
-        "es": "El greeter Signal en dos salidas: el módulo de ingreso en la pantalla principal y la placa tranquila (marca, hora y aviso de ingreso) en la secundaria."
-      },
-      "alt": {
-        "en": "The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.",
-        "es": "El greeter Signal en dos salidas: el módulo de ingreso en la pantalla principal y la placa tranquila (marca, hora y aviso de ingreso) en la secundaria."
-      },
-      "pages": [
-        "/greeter"
-      ],
-      "section": "Greeter, several displays",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night (greeter)",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "Generative horizon (no wallpaper)",
-      "setup": [
-        "In the QA VM with two virtual outputs, log out to SDDM and capture the secondary output's quiet plate; capture the primary output in the same session for the pair."
-      ],
-      "privacy": "Demo user only.",
-      "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-HERO-01",
@@ -2688,16 +2054,16 @@
       "session": "S01",
       "kind": "screenshot",
       "title": {
-        "en": "Home hero, Cockpit at work",
-        "es": "Hero del inicio, Cockpit trabajando"
+        "en": "System info in a terminal, on the maintainer's example machine",
+        "es": "Información del sistema en una terminal, en el equipo de ejemplo del maintainer"
       },
       "description": {
         "en": "Cockpit in Signal Night over Buenos Aires Nocturno: an editor and a terminal running a build side by side, the top rail and bottom strip fully visible, no popups.",
         "es": "Cockpit en Signal Night sobre Buenos Aires Nocturno: un editor y una terminal compilando lado a lado, con la barra superior y la franja inferior completas y sin popups."
       },
       "alt": {
-        "en": "Cockpit in Signal Night over Buenos Aires Nocturno: an editor and a terminal running a build side by side, the top rail and bottom strip fully visible, no popups.",
-        "es": "Cockpit en Signal Night sobre Buenos Aires Nocturno: un editor y una terminal compilando lado a lado, con la barra superior y la franja inferior completas y sin popups."
+        "en": "HorneroOS system information in a terminal on the maintainer's example machine, over a cyberpunk city wallpaper",
+        "es": "Información del sistema HorneroOS en una terminal del equipo de ejemplo del maintainer, sobre un fondo de ciudad cyberpunk"
       },
       "pages": [
         "/",
@@ -2735,7 +2101,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-HERO-02",
@@ -2771,7 +2138,7 @@
         "Wait for the theme apply to finish (no transition in flight), then capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-hero-02.png",
       "sha256": "ac48c6de149cf852da019daa1c4a93e038174c33c2e94ca193fea74b51b37b00",
       "capturedAt": "2026-11-19",
@@ -2785,7 +2152,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-INSTALL-01",
@@ -2823,7 +2191,8 @@
       ],
       "privacy": "Demo user, demo hostname; no real network name.",
       "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-INSTALL-02",
@@ -2861,189 +2230,8 @@
       ],
       "privacy": "Demo user, demo hostname; no real network name.",
       "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-INSTALL-03",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Installer: specializations",
-        "es": "Instalador: especializaciones"
-      },
-      "description": {
-        "en": "The the Studio and Gaming specialization picker.",
-        "es": "El selector de especializaciones de Studio y Gaming."
-      },
-      "alt": {
-        "en": "The the Studio and Gaming specialization picker.",
-        "es": "El selector de especializaciones de Studio y Gaming."
-      },
-      "pages": [
-        "/install"
-      ],
-      "section": "Install, steps",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Installer",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.",
-        "Use a throw-away virtual disk and the demo user name `demo`."
-      ],
-      "privacy": "Demo user, demo hostname; no real network name.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-INSTALL-04",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Installer: disk",
-        "es": "Instalador: disco"
-      },
-      "description": {
-        "en": "The the disk and partition step on a blank virtual disk.",
-        "es": "El paso de disco y particiones sobre un disco virtual en blanco."
-      },
-      "alt": {
-        "en": "The the disk and partition step on a blank virtual disk.",
-        "es": "El paso de disco y particiones sobre un disco virtual en blanco."
-      },
-      "pages": [],
-      "section": "Install, steps",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Installer",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.",
-        "Use a throw-away virtual disk and the demo user name `demo`."
-      ],
-      "privacy": "Demo user, demo hostname; no real network name.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-INSTALL-05",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Installer: summary",
-        "es": "Instalador: resumen"
-      },
-      "description": {
-        "en": "The the summary step before install.",
-        "es": "El paso de resumen antes de instalar."
-      },
-      "alt": {
-        "en": "The the summary step before install.",
-        "es": "El paso de resumen antes de instalar."
-      },
-      "pages": [],
-      "section": "Install, steps",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Installer",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.",
-        "Use a throw-away virtual disk and the demo user name `demo`."
-      ],
-      "privacy": "Demo user, demo hostname; no real network name.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-INSTALL-06",
-      "priority": "P2",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Installer: progress",
-        "es": "Instalador: progreso"
-      },
-      "description": {
-        "en": "The the install progress step.",
-        "es": "El paso de progreso de instalación."
-      },
-      "alt": {
-        "en": "The the install progress step.",
-        "es": "El paso de progreso de instalación."
-      },
-      "pages": [],
-      "section": "Install, steps",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Installer",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.",
-        "Use a throw-away virtual disk and the demo user name `demo`."
-      ],
-      "privacy": "Demo user, demo hostname; no real network name.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-INSTALL-07",
-      "priority": "P1",
-      "session": "S12",
-      "kind": "screenshot",
-      "title": {
-        "en": "Installer: finished",
-        "es": "Instalador: terminado"
-      },
-      "description": {
-        "en": "The the finished step with the restart option.",
-        "es": "El paso final con la opción de reiniciar."
-      },
-      "alt": {
-        "en": "The the finished step with the restart option.",
-        "es": "El paso final con la opción de reiniciar."
-      },
-      "pages": [],
-      "section": "Install, steps",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Installer",
-      "mode": "n/a",
-      "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.",
-        "Use a throw-away virtual disk and the demo user name `demo`."
-      ],
-      "privacy": "Demo user, demo hostname; no real network name.",
-      "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-INSTALL-08",
@@ -3081,7 +2269,8 @@
       ],
       "privacy": "Demo user, demo hostname; no real network name.",
       "status": "pending",
-      "file": null
+      "file": null,
+      "curation": "DEFER"
     },
     {
       "id": "CAP-JAVI-01",
@@ -3119,7 +2308,7 @@
         "Keep windows clear of the corner; wait for the resting idle animation."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-javi-01.png",
       "sha256": "ec3204e98a8ec13b5fc55ab519d36fa865f2b8016e454432bb1e14957e9f2a40",
       "capturedAt": "2026-11-19",
@@ -3133,7 +2322,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-JAVI-02",
@@ -3185,124 +2375,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-JAVI-03",
-      "priority": "P1",
-      "session": "S08",
-      "kind": "screenshot",
-      "title": {
-        "en": "Javi: Working",
-        "es": "Javi: Trabajando"
       },
-      "description": {
-        "en": "Javi at his little screen while an assistant task runs (real task, no private content), on the real desktop at 1:1.",
-        "es": "Javi frente a su pequeña pantalla mientras corre una tarea real del asistente (sin contenido privado), en el escritorio real a escala 1:1."
-      },
-      "alt": {
-        "en": "Javi at his little screen while an assistant task runs (real task, no private content), on the real desktop at 1:1.",
-        "es": "Javi frente a su pequeña pantalla mientras corre una tarea real del asistente (sin contenido privado), en el escritorio real a escala 1:1."
-      },
-      "pages": [
-        "/companion"
-      ],
-      "section": "Javi, states",
-      "aspect": "3:2",
-      "width": 1200,
-      "height": 800,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Trigger the working state (see Control Center, Javi, Behaviour; assistant tasks for Working).",
-        "Crop to a 1200x800 region around the corner with `capture-helper.sh region`.",
-        "Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder."
-      ],
-      "privacy": "Assistant activity traces and bubbles must hold only demo prompts.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-JAVI-04",
-      "priority": "P1",
-      "session": "S08",
-      "kind": "screenshot",
-      "title": {
-        "en": "Javi: Building",
-        "es": "Javi: Construyendo"
-      },
-      "description": {
-        "en": "Javi adding a component to the nest, a visible construction stage, on the real desktop at 1:1.",
-        "es": "Javi agregando un componente al nido, en una etapa de construcción visible, en el escritorio real a escala 1:1."
-      },
-      "alt": {
-        "en": "Javi adding a component to the nest, a visible construction stage, on the real desktop at 1:1.",
-        "es": "Javi agregando un componente al nido, en una etapa de construcción visible, en el escritorio real a escala 1:1."
-      },
-      "pages": [
-        "/companion"
-      ],
-      "section": "Javi, states",
-      "aspect": "3:2",
-      "width": 1200,
-      "height": 800,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Trigger the building state (see Control Center, Javi, Behaviour; assistant tasks for Working).",
-        "Crop to a 1200x800 region around the corner with `capture-helper.sh region`.",
-        "Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder."
-      ],
-      "privacy": "Assistant activity traces and bubbles must hold only demo prompts.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-JAVI-05",
-      "priority": "P1",
-      "session": "S08",
-      "kind": "screenshot",
-      "title": {
-        "en": "Javi: Sleeping",
-        "es": "Javi: Durmiendo"
-      },
-      "description": {
-        "en": "Javi curled up with the nest lights dimmed, on the real desktop at 1:1.",
-        "es": "Javi acurrucado con las luces del nido atenuadas, en el escritorio real a escala 1:1."
-      },
-      "alt": {
-        "en": "Javi curled up with the nest lights dimmed, on the real desktop at 1:1.",
-        "es": "Javi acurrucado con las luces del nido atenuadas, en el escritorio real a escala 1:1."
-      },
-      "pages": [
-        "/companion"
-      ],
-      "section": "Javi, states",
-      "aspect": "3:2",
-      "width": 1200,
-      "height": 800,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Trigger the sleeping state (see Control Center, Javi, Behaviour; assistant tasks for Working).",
-        "Crop to a 1200x800 region around the corner with `capture-helper.sh region`.",
-        "Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder."
-      ],
-      "privacy": "Assistant activity traces and bubbles must hold only demo prompts.",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-JAVI-06",
@@ -3340,7 +2414,7 @@
         "Shoot after the final Javi and nest art lands (ledger: javi-final-art is planned); until then the nest art is a marked placeholder."
       ],
       "privacy": "Assistant activity traces and bubbles must hold only demo prompts.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-javi-06.png",
       "sha256": "5014a1ffdef25eaf7006a0414bffda435de3103dcc5c029ce6a6643e4b16d94e",
       "capturedAt": "2026-11-19",
@@ -3354,7 +2428,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-JAVI-07",
@@ -3402,7 +2477,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-JAVI-08",
@@ -3450,42 +2526,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-JAVI-09",
-      "priority": "P1",
-      "session": "S08",
-      "kind": "screenshot",
-      "title": {
-        "en": "Nest, three build stages",
-        "es": "Nido, tres etapas"
       },
-      "description": {
-        "en": "The nest at an early, middle and complete construction stage as three crops of the corner.",
-        "es": "El nido en una etapa temprana, intermedia y completa de construcción, como tres recortes de la esquina."
-      },
-      "alt": {
-        "en": "The nest at an early, middle and complete construction stage as three crops of the corner.",
-        "es": "El nido en una etapa temprana, intermedia y completa de construcción, como tres recortes de la esquina."
-      },
-      "pages": [],
-      "section": "Javi, habitat",
-      "aspect": "3:2",
-      "width": 1200,
-      "height": 800,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Use the Control Center, Javi, Habitat stage control (or reset building progress); capture each stage as CAP-JAVI-09 a/b/c named in the filename suffix (-a, -b, -c)."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-JAVI-10",
@@ -3519,7 +2561,7 @@
         "Enable Javi Radio; tune a station that is licensed for display."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-javi-10.png",
       "sha256": "258ef0048bfecf941a0320aee5c41307cae4e296f83993fbd76a4ecd875d0cfa",
       "capturedAt": "2026-11-19",
@@ -3533,7 +2575,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-01",
@@ -3585,7 +2628,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-LAYOUT-02",
@@ -3637,7 +2681,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-LAYOUT-03",
@@ -3675,7 +2720,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-03.png",
       "sha256": "cde3c7d0e77dd3679ed12c4b28090e49fb721ba767b1c5a5cf725a09dd99a852",
       "capturedAt": "2026-11-19",
@@ -3689,7 +2734,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-04",
@@ -3741,7 +2787,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-LAYOUT-05",
@@ -3793,7 +2840,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-LAYOUT-06",
@@ -3829,7 +2877,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-06.png",
       "sha256": "abaad616fd1235d47c833debfb15475da2cbf22f46d04ef4f35799a6d539dfad",
       "capturedAt": "2026-11-19",
@@ -3843,7 +2891,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-07",
@@ -3879,7 +2928,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-07.png",
       "sha256": "45c0d93cdc923dbee557ff45a6aa8882781deb9eff11ace502b78368b05a80ca",
       "capturedAt": "2026-11-19",
@@ -3893,7 +2942,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-08",
@@ -3929,7 +2979,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-08.png",
       "sha256": "385968707ac97a6d79d5063ab0e749e3c0ca872080cfa7236a95bdfc384bfd74",
       "capturedAt": "2026-11-19",
@@ -3943,7 +2993,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-09",
@@ -3979,7 +3030,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-09.png",
       "sha256": "38ac1bb674047c079960faa6275494d8ef5d9b2e890b2849dcb3b5c7e37ad329",
       "capturedAt": "2026-11-19",
@@ -3993,7 +3044,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-10",
@@ -4029,7 +3081,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-10.png",
       "sha256": "65c4fdff9126d1f01ab06c6bfcc77e2d577dc947a546cdc5ba1acf03f5abe2b6",
       "capturedAt": "2026-11-19",
@@ -4043,7 +3095,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-11",
@@ -4093,7 +3146,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-LAYOUT-12",
@@ -4143,7 +3197,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-LAYOUT-13",
@@ -4179,7 +3234,7 @@
         "Wait 5 s for the bar to settle after the preset change."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-13.png",
       "sha256": "b77523431de8c644db20d8fb4509f0653cf5e6ffaa438f9d92954f9797bed0a4",
       "capturedAt": "2026-11-19",
@@ -4193,7 +3248,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LAYOUT-14",
@@ -4228,7 +3284,7 @@
         "Pick the brightest area of the wallpaper behind the rails."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-layout-14.png",
       "sha256": "7198b9bda6a4bb648039b3c37e7c09a996176dccdb312acf0b4546c80fe0ffb0",
       "capturedAt": "2026-11-19",
@@ -4242,7 +3298,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-LOCK-01",
@@ -4293,7 +3350,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-MODE-01",
@@ -4345,7 +3403,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-MODE-02",
@@ -4383,7 +3442,7 @@
         "Verify the bar indicator reads (none in Everyday)."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-mode-02.png",
       "sha256": "28e49de9852fefe65eedfccd922aaa9e9dbbe4739778eeb45e4aafdce909e561",
       "capturedAt": "2026-11-19",
@@ -4397,7 +3456,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-MODE-03",
@@ -4435,7 +3495,7 @@
         "Verify the bar indicator reads SIG."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-mode-03.png",
       "sha256": "9c9c0f8acb9f4e6176dc37440449ab3d9798a2ebcea2f948be6953c6875e06a0",
       "capturedAt": "2026-11-19",
@@ -4449,7 +3509,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-MODE-04",
@@ -4487,7 +3548,7 @@
         "Verify the bar indicator reads GAM."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-mode-04.png",
       "sha256": "c2e5cbc1e372aa32779485bc3039132f2514be97b4686f333859304209899314",
       "capturedAt": "2026-11-19",
@@ -4501,7 +3562,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-MODE-05",
@@ -4553,7 +3615,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-MODE-06",
@@ -4587,7 +3650,7 @@
         "Capture the bar in each mode; crop around the indicator (-focus, -signal, -gaming, -studio suffixes)."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-mode-06.png",
       "sha256": "9a955262b35fefe3e24840c197bd7674be5286d04d6484272411dc90438de952",
       "capturedAt": "2026-11-19",
@@ -4601,114 +3664,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-MULTI-01",
-      "priority": "P1",
-      "session": "S11",
-      "kind": "screenshot",
-      "title": {
-        "en": "Dual monitor Cockpit",
-        "es": "Cockpit en dos monitores"
       },
-      "description": {
-        "en": "Two 1920x1080 monitors side by side, each with its own Cockpit rails and one window, a single wallpaper spanning both.",
-        "es": "Dos monitores de 1920x1080 lado a lado, cada uno con sus barras Cockpit y una ventana, con un solo fondo extendido."
-      },
-      "alt": {
-        "en": "Two 1920x1080 monitors side by side, each with its own Cockpit rails and one window, a single wallpaper spanning both.",
-        "es": "Dos monitores de 1920x1080 lado a lado, cada uno con sus barras Cockpit y una ventana, con un solo fondo extendido."
-      },
-      "pages": [
-        "/desktop"
-      ],
-      "section": "Desktop, multi-monitor",
-      "aspect": "32:9",
-      "width": 3840,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Two outputs (or one physical plus one headless); `capture-helper.sh shot --all`."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-MULTI-02",
-      "priority": "P2",
-      "session": "S11",
-      "kind": "screenshot",
-      "title": {
-        "en": "Vertical monitor with a side rail",
-        "es": "Monitor vertical con riel lateral"
-      },
-      "description": {
-        "en": "A monitor rotated 90 degrees with Hornero Left and a tall terminal.",
-        "es": "Un monitor girado 90 grados con Hornero Left y una terminal alta."
-      },
-      "alt": {
-        "en": "A monitor rotated 90 degrees with Hornero Left and a tall terminal.",
-        "es": "Un monitor girado 90 grados con Hornero Left y una terminal alta."
-      },
-      "pages": [],
-      "section": "Desktop, multi-monitor",
-      "aspect": "9:16",
-      "width": 1080,
-      "height": 1920,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Hornero Left",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Rotate the output 90 degrees in Settings, Displays."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-MULTI-03",
-      "priority": "P2",
-      "session": "S11",
-      "kind": "screenshot",
-      "title": {
-        "en": "Ultrawide Cockpit",
-        "es": "Cockpit ultrawide"
-      },
-      "description": {
-        "en": "A 21:9 ultrawide with Cockpit, three windows tiled.",
-        "es": "Un ultrawide 21:9 con Cockpit y tres ventanas en mosaico."
-      },
-      "alt": {
-        "en": "A 21:9 ultrawide with Cockpit, three windows tiled.",
-        "es": "Un ultrawide 21:9 con Cockpit y tres ventanas en mosaico."
-      },
-      "pages": [],
-      "section": "Desktop, multi-monitor",
-      "aspect": "43:18",
-      "width": 3440,
-      "height": 1440,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Headless output at 3440x1440 if no ultrawide is available."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-OG-01",
@@ -4742,7 +3699,7 @@
         "Crop from the CAP-HERO-01 master with `capture-helper.sh crop`."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-og-01.png",
       "sha256": "efac7c18375cec6798d5986df3fee4429d4aed6c9643505d80b8f63437e6a96a",
       "capturedAt": "2026-11-19",
@@ -4756,113 +3713,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-PHOTO-01",
-      "priority": "P1",
-      "session": "S11",
-      "kind": "photo",
-      "title": {
-        "en": "Desk photo: HorneroOS at work",
-        "es": "Foto del escritorio físico: HorneroOS trabajando"
       },
-      "description": {
-        "en": "A real desk with a monitor running HorneroOS Cockpit in Signal Night, a keyboard and warm lamp light; the screen is the real capture, not a composite.",
-        "es": "Un escritorio real con un monitor ejecutando HorneroOS Cockpit en Signal Night, un teclado y luz cálida de lámpara; la pantalla es real, no un montaje."
-      },
-      "alt": {
-        "en": "A real desk with a monitor running HorneroOS Cockpit in Signal Night, a keyboard and warm lamp light; the screen is the real capture, not a composite.",
-        "es": "Un escritorio real con un monitor ejecutando HorneroOS Cockpit en Signal Night, un teclado y luz cálida de lámpara; la pantalla es real, no un montaje."
-      },
-      "pages": [],
-      "section": "Home, the machine",
-      "aspect": "3:2",
-      "width": 3000,
-      "height": 2000,
-      "scale2x": false,
-      "format": "AVIF or JPG master, sRGB",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Natural or warm lamp light, no direct glare on the screen; shoot at f/4 or smaller, 35 mm equivalent, ISO below 800.",
-        "Screen shows CAP-HERO-01 arrangement with no personal windows."
-      ],
-      "privacy": "No faces, no readable mail or documents, no brand-confusing logos in frame.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-PHOTO-02",
-      "priority": "P2",
-      "session": "S11",
-      "kind": "photo",
-      "title": {
-        "en": "Laptop with HorneroOS",
-        "es": "Notebook con HorneroOS"
-      },
-      "description": {
-        "en": "A laptop on a table showing the Hornero desktop, an angled close-up with a shallow depth of field.",
-        "es": "Una notebook sobre una mesa mostrando el escritorio Hornero, en primer plano angulado con poca profundidad de campo."
-      },
-      "alt": {
-        "en": "A laptop on a table showing the Hornero desktop, an angled close-up with a shallow depth of field.",
-        "es": "Una notebook sobre una mesa mostrando el escritorio Hornero, en primer plano angulado con poca profundidad de campo."
-      },
-      "pages": [],
-      "section": "Install, hardware",
-      "aspect": "3:2",
-      "width": 3000,
-      "height": 2000,
-      "scale2x": false,
-      "format": "AVIF or JPG master, sRGB",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Screen at 100 % brightness, anti-glare angle."
-      ],
-      "privacy": "No faces; no stickers with personal handles.",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-PHOTO-03",
-      "priority": "P2",
-      "session": "S11",
-      "kind": "photo",
-      "title": {
-        "en": "USB installer",
-        "es": "Instalador en USB"
-      },
-      "description": {
-        "en": "A USB stick plugged into a laptop with the HorneroOS boot menu on screen.",
-        "es": "Un pendrive conectado a una notebook con el menú de arranque de HorneroOS en pantalla."
-      },
-      "alt": {
-        "en": "A USB stick plugged into a laptop with the HorneroOS boot menu on screen.",
-        "es": "Un pendrive conectado a una notebook con el menú de arranque de HorneroOS en pantalla."
-      },
-      "pages": [],
-      "section": "Install",
-      "aspect": "3:2",
-      "width": 3000,
-      "height": 2000,
-      "scale2x": false,
-      "format": "AVIF or JPG master, sRGB",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Use a plain USB stick, no third-party brand visible."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-01",
@@ -4899,7 +3751,7 @@
         "Ctrl+Space, type `term`; capture."
       ],
       "privacy": "No personal apps (chat, mail, work tools) may be installed on the demo user.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-01.png",
       "sha256": "ec3204e98a8ec13b5fc55ab519d36fa865f2b8016e454432bb1e14957e9f2a40",
       "capturedAt": "2026-11-19",
@@ -4913,7 +3765,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-02",
@@ -4947,7 +3800,7 @@
         "Send with `notify-send -a Demo \"Build finished\" \"cargo build in 12 s\"`; repeat with a second."
       ],
       "privacy": "Only notify-send demo content; clear history first.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-02.png",
       "sha256": "f5dd7ba040316b59047395dc539cc8ba78d7711bb4c422adf0f7b91f537e752d",
       "capturedAt": "2026-11-19",
@@ -4961,7 +3814,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-03",
@@ -5009,7 +3863,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-SHELL-04",
@@ -5043,7 +3898,7 @@
         "Super+X; do not activate anything."
       ],
       "privacy": "None beyond global rules.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-04.png",
       "sha256": "4e0d7590714e45c4ca0be7dae16ffe0aae9d1d00dd92711a06fde31b18944978",
       "capturedAt": "2026-11-19",
@@ -5057,7 +3912,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-05",
@@ -5091,7 +3947,7 @@
         "Press the volume key once; capture within 1 s with `capture-helper.sh shot --delay 0`."
       ],
       "privacy": "None beyond global rules.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-05.png",
       "sha256": "2cdcf992ffc90977fb2a38db354325a3e604de724f8f41ef23fbc2f5825dcfbf",
       "capturedAt": "2026-11-19",
@@ -5105,7 +3961,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-06",
@@ -5139,7 +3996,7 @@
         "Copy three demo strings (`hornero`, a lorem line, a colour hex)."
       ],
       "privacy": "Clipboard must hold only demo strings, no tokens or URLs from real accounts.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-06.png",
       "sha256": "780fd1ac88ba97a3f46c2fb6c504dbbf365b1348135936dcdd5b4fbdf5e190ce",
       "capturedAt": "2026-11-19",
@@ -5153,7 +4010,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SHELL-07",
@@ -5204,7 +4062,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-SHELL-08",
@@ -5252,7 +4111,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-SHELL-09",
@@ -5300,7 +4160,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-SHELL-10",
@@ -5334,7 +4195,7 @@
         "Click the volume item on the top rail."
       ],
       "privacy": "Audio device names must be neutral (no personal headphones names).",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-shell-10.png",
       "sha256": "4ed7e15e53ec3d98948ae50118206a30e6554c1dea8f9480124fdff7135d5e5a",
       "capturedAt": "2026-11-19",
@@ -5348,42 +4209,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-SHELL-11",
-      "priority": "P1",
-      "session": "S06",
-      "kind": "screenshot",
-      "title": {
-        "en": "Shell: Apply and undo",
-        "es": "Shell: Aplicar y deshacer"
       },
-      "description": {
-        "en": "The the apply-and-undo toast after a theme change, with the Undo action visible.",
-        "es": "El toast de aplicar y deshacer tras cambiar de tema, con la acción Deshacer visible."
-      },
-      "alt": {
-        "en": "The the apply-and-undo toast after a theme change, with the Undo action visible.",
-        "es": "El toast de aplicar y deshacer tras cambiar de tema, con la acción Deshacer visible."
-      },
-      "pages": [],
-      "section": "Themes, apply and undo",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Apply any theme from Settings, then capture within the toast lifetime."
-      ],
-      "privacy": "None beyond global rules.",
-      "status": "pending",
-      "file": null
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-SIGNAL-01",
@@ -5435,7 +4262,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-SIGNAL-02",
@@ -5486,45 +4314,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-STUDIO-01",
-      "priority": "P0",
-      "session": "S09",
-      "kind": "screenshot",
-      "title": {
-        "en": "Studio hero, Ardour",
-        "es": "Hero de Studio, Ardour"
       },
-      "description": {
-        "en": "Studio mode with an Ardour session open on a demo project, the Studio top bar and the mode indicator visible.",
-        "es": "Modo Studio con una sesión de Ardour abierta sobre un proyecto de demostración, la barra superior de Studio y el indicador de modo visibles."
-      },
-      "alt": {
-        "en": "Studio mode with an Ardour session open on a demo project, the Studio top bar and the mode indicator visible.",
-        "es": "Modo Studio con una sesión de Ardour abierta sobre un proyecto de demostración, la barra superior de Studio y el indicador de modo visibles."
-      },
-      "pages": [
-        "/studio"
-      ],
-      "section": "Studio, hero",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": true,
-      "format": "PNG master (lossless)",
-      "theme": "Signal Night",
-      "mode": "Studio",
-      "layout": "Studio",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "Install the Studio specialization with Ardour; switch to Studio mode.",
-        "Open a demo session of 6 CC0 tracks; show the mixer."
-      ],
-      "privacy": "Project name and track names must be demo content.",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-STUDIO-02",
@@ -5574,7 +4365,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-STUDIO-03",
@@ -5622,7 +4415,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-STUDIO-04",
@@ -5670,7 +4464,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-TERM-01",
@@ -5721,7 +4517,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-TERM-02",
@@ -5757,7 +4555,7 @@
         "Tile both side by side."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-term-02.png",
       "sha256": "91607d38c70125a81a1808d67f13f82f165b783042f1ad2fc8de1c0abb0da1b0",
       "capturedAt": "2026-11-19",
@@ -5771,7 +4569,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-TERM-03",
@@ -5805,7 +4604,7 @@
         "Run btop under the demo user so only system processes appear."
       ],
       "privacy": "btop process list must contain only demo-user processes; no user paths.",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-term-03.png",
       "sha256": "94a96de8ff66929316e350706172950489f3768f3db6fc863c00039a17aaeb51",
       "capturedAt": "2026-11-19",
@@ -5819,7 +4618,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-TERM-04",
@@ -5867,7 +4667,9 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "docsOnly": true,
+      "curation": "DOCS"
     },
     {
       "id": "CAP-TERM-05",
@@ -5915,7 +4717,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-TERM-06",
@@ -5963,7 +4766,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-THEME-01",
@@ -6000,7 +4804,7 @@
         "Open kitty, Thunar and Settings (Appearance) together to show consistency; capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-theme-01.png",
       "sha256": "d5d344c3e4048da50a52a6a12488432f899e02b69352180c4b1dc83a86a86cbd",
       "capturedAt": "2026-11-19",
@@ -6014,7 +4818,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-THEME-02",
@@ -6064,7 +4869,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-THEME-03",
@@ -6100,7 +4906,7 @@
         "`horneroctl appearance theme apply hornero-signal-dusk --yes`; same arrangement."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-theme-03.png",
       "sha256": "00082e6dc0ce81c7816755ee908a493ffcb9de958094d0d6bf349d1b5b7b45f6",
       "capturedAt": "2026-11-19",
@@ -6114,7 +4920,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-THEME-04",
@@ -6150,7 +4957,7 @@
         "`horneroctl appearance theme apply hornero-signal-contrast --yes`; same arrangement."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-theme-04.png",
       "sha256": "554ed4c694adfb7da5dbf7d780b72183ce950d90f6a892d1f33ac915993c8764",
       "capturedAt": "2026-11-19",
@@ -6164,7 +4971,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-THEME-05",
@@ -6180,8 +4988,8 @@
         "es": "El Hornero Original Patagonia aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
       },
       "alt": {
-        "en": "The Patagonia Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Patagonia aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
+        "en": "Empty desktop over a Patagonian glacial lake and peaks at sunset, with dark shell bars",
+        "es": "Escritorio vacío sobre un lago glaciar patagónico y picos al atardecer, con barras oscuras del shell"
       },
       "pages": [],
       "section": "Themes, Hornero Originals",
@@ -6214,7 +5022,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-THEME-06",
@@ -6230,8 +5039,8 @@
         "es": "El Hornero Original Quebrada aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
       },
       "alt": {
-        "en": "The Quebrada Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Quebrada aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
+        "en": "Empty desktop over the multicoloured Quebrada ranges, with cream Day shell bars",
+        "es": "Escritorio vacío sobre los cerros multicolores de la Quebrada, con barras crema Day del shell"
       },
       "pages": [],
       "section": "Themes, Hornero Originals",
@@ -6264,7 +5073,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "FEATURE"
     },
     {
       "id": "CAP-THEME-07",
@@ -6300,7 +5110,7 @@
         "Credit line comes from the wallpaper catalogue; do not add one to the capture."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-theme-07.png",
       "sha256": "cecf0de1bd18ec13317d052b1e04d589ec14dbb983f9199488c98cb354aa5c91",
       "capturedAt": "2026-11-19",
@@ -6314,7 +5124,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-THEME-08",
@@ -6364,44 +5175,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-THEME-09",
-      "priority": "P2",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Hornero Original: Buenos Aires Nocturno",
-        "es": "Hornero Original: Buenos Aires Nocturno"
       },
-      "description": {
-        "en": "The Buenos Aires Nocturno Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Buenos Aires Nocturno aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "alt": {
-        "en": "The Buenos Aires Nocturno Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Buenos Aires Nocturno aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "pages": [],
-      "section": "Themes, Hornero Originals",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Buenos Aires Nocturno",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "buenos-aires-nocturno",
-      "setup": [
-        "`horneroctl appearance theme apply buenos-aires-nocturno --yes`.",
-        "Same three-window arrangement as CAP-THEME-01.",
-        "Credit line comes from the wallpaper catalogue; do not add one to the capture."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-THEME-10",
@@ -6451,118 +5226,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
-    },
-    {
-      "id": "CAP-THEME-11",
-      "priority": "P2",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Hornero Original: Cuyo",
-        "es": "Hornero Original: Cuyo"
       },
-      "description": {
-        "en": "The Cuyo Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Cuyo aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "alt": {
-        "en": "The Cuyo Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Cuyo aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "pages": [],
-      "section": "Themes, Hornero Originals",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Cuyo",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "cuyo",
-      "setup": [
-        "`horneroctl appearance theme apply cuyo --yes`.",
-        "Same three-window arrangement as CAP-THEME-01.",
-        "Credit line comes from the wallpaper catalogue; do not add one to the capture."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-THEME-12",
-      "priority": "P2",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Hornero Original: Iguazú",
-        "es": "Hornero Original: Iguazú"
-      },
-      "description": {
-        "en": "The Iguazú Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Iguazú aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "alt": {
-        "en": "The Iguazú Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Iguazú aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "pages": [],
-      "section": "Themes, Hornero Originals",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Iguazú",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "iguazu",
-      "setup": [
-        "`horneroctl appearance theme apply iguazu --yes`.",
-        "Same three-window arrangement as CAP-THEME-01.",
-        "Credit line comes from the wallpaper catalogue; do not add one to the capture."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
-    },
-    {
-      "id": "CAP-THEME-13",
-      "priority": "P2",
-      "session": "S03",
-      "kind": "screenshot",
-      "title": {
-        "en": "Hornero Original: Sierras",
-        "es": "Hornero Original: Sierras"
-      },
-      "description": {
-        "en": "The Sierras Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Sierras aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "alt": {
-        "en": "The Sierras Hornero Original applied: its regional palette on the shell, a terminal and a GTK window, over its credited photograph.",
-        "es": "El Hornero Original Sierras aplicado: su paleta regional en la shell, una terminal y una ventana GTK, sobre su fotografía acreditada."
-      },
-      "pages": [],
-      "section": "Themes, Hornero Originals",
-      "aspect": "16:9",
-      "width": 1920,
-      "height": 1080,
-      "scale2x": false,
-      "format": "PNG master (lossless)",
-      "theme": "Sierras",
-      "mode": "Everyday",
-      "layout": "Cockpit",
-      "wallpaper": "sierras",
-      "setup": [
-        "`horneroctl appearance theme apply sierras --yes`.",
-        "Same three-window arrangement as CAP-THEME-01.",
-        "Credit line comes from the wallpaper catalogue; do not add one to the capture."
-      ],
-      "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "pending",
-      "file": null
+      "curation": "SUPPORT"
     },
     {
       "id": "CAP-UPDATE-01",
@@ -6598,7 +5263,7 @@
         "Run on an installed demo system that has at least one pending update."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-update-01.png",
       "sha256": "c9b8337cd75367707e0cb67caa0fddd53088581309b39453479846af68a6a3f9",
       "capturedAt": "2026-11-19",
@@ -6612,7 +5277,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     },
     {
       "id": "CAP-UPDATE-02",
@@ -6646,7 +5312,7 @@
         "Create one snapshot with the documented command first."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
-      "status": "captured",
+      "status": "archived",
       "file": "cap-update-02.png",
       "sha256": "040134cf1e75c371a1c70e468072834dc4e55f823dd6ca9e8cafd18d01c93757",
       "capturedAt": "2026-11-19",
@@ -6660,7 +5326,8 @@
         "horneroctl": "0.2.0_preview49-1",
         "hyprland": "0.57.2",
         "quickshell": "0.3.2"
-      }
+      },
+      "curation": "ARCHIVE"
     }
   ]
 }
