@@ -56,11 +56,9 @@ const maturityName = { planned: 'Planned', experimental: 'Experimental', preview
 const level = { planned: 1, experimental: 2, preview: 3, supported: 4 };
 const meter = (m) => `<span class="meter">${[1, 2, 3, 4].map((i) => `<i class="${i <= level[m] ? 'on ' + m : ''}"></i>`).join('')}</span>`;
 
-// The only photographic panel is the greeter card's licensed scene photo,
-// labelled as a browser recreation, not a screenshot.
-const shot = (path, w, h, kind, label) => `
-  <div class="shot" style="width:${w}px;height:${h}px"><img src="${file(path)}" alt="" /></div>
-  <p class="cap"><b>${kind}</b> ${label}</p>`;
+// No card embeds a photograph or a screenshot: product captures live in
+// capture slots (docs/CAPTURES.md), so every panel is brand plus data.
+const greeterData = JSON.parse(readFileSync(join(root, 'src/data/product/greeter.json'), 'utf8'));
 // Capture-slot ledger for the showroom card: counts come from the data
 // file, so the card stays truthful as slots are filled.
 const captureSlots = JSON.parse(readFileSync(join(root, 'src/data/capture-slots.json'), 'utf8')).slots;
@@ -165,8 +163,15 @@ const cards = {
   greeter: {
     eyebrow: 'Greeter',
     title: 'The Hornero greeter.',
-    line: 'An interactive recreation of the login screen.',
-    panel: shot('public/media/greeter/ar-er-el-palmar-golden-hour.webp', 640, 360, 'Not a screenshot', 'browser recreation · El Palmar, Entre Ríos'),
+    line: 'An original Signal login screen: a generative Pampa horizon, Javi, and accounts as channels. No third-party media.',
+    panel: `<ul class="ledger">${[
+      ['Background', greeterData.defaults.background],
+      ['Palettes', greeterData.palettes.map((p) => p.name.replace('Signal ', '')).join(' · ')],
+      ['Languages', greeterData.languages.join(' · ')],
+      ['Bundled media', greeterData.bundledMedia ? 'yes' : 'none'],
+    ]
+      .map(([name, value]) => `<li><b>${name}</b><span>${value}</span></li>`)
+      .join('')}</ul><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'greeter-signal-original'))}</b> data from the pinned greeter, not a screenshot</p>`,
   },
 };
 

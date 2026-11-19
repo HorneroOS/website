@@ -45,8 +45,9 @@ npm run build
 - `/wallpapers` — location, theme, photographer and license gallery generated
   from HorneroOS/config's pinned photo provenance, with local responsive previews
 - `/showroom` — real captures with provenance plates
-- `/greeter` — interactive browser recreation of the offline SDDM greeter,
-  with local-time moods and a provenance-backed Argentina scene collection
+- `/greeter` — the original Hornero Signal SDDM greeter (generative horizon,
+  accounts as channels), its planned real captures, and the scene credits of
+  the still-published landscape release
 - `/docs/` — HorneroOS/docs rendered at its pinned commit
 - `/search/` — Pagefind search over site content
 - `/roots` — project history, contributor credits and repository ownership map

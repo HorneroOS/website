@@ -2089,32 +2089,33 @@
       "session": "S12",
       "kind": "screenshot",
       "title": {
-        "en": "The greeter, real screen",
-        "es": "El greeter, pantalla real"
+        "en": "The Signal greeter, real screen",
+        "es": "El greeter Signal, pantalla real"
       },
       "description": {
-        "en": "The real Hornero greeter on its default scene with the demo user, session picker and clock; no recreation.",
-        "es": "El greeter real de Hornero en su escena por defecto con el usuario de demostración, el selector de sesión y el reloj; sin recreación."
+        "en": "The real Hornero Signal greeter on Signal Night: the generative Pampa horizon, the centred clock, Javi's greeting and the sign-in module with accounts as channels and the demo user tuned; no recreation.",
+        "es": "El greeter real de Hornero Signal en Signal Night: el horizonte generativo de la pampa, el reloj al centro, el saludo de Javi y el módulo de ingreso con las cuentas como canales y el usuario de demostración sintonizado; sin recreación."
       },
       "alt": {
-        "en": "The real Hornero greeter on its default scene with the demo user, session picker and clock; no recreation.",
-        "es": "El greeter real de Hornero en su escena por defecto con el usuario de demostración, el selector de sesión y el reloj; sin recreación."
+        "en": "The real Hornero Signal greeter on Signal Night: the generative Pampa horizon, the centred clock, Javi's greeting and the sign-in module with accounts as channels and the demo user tuned; no recreation.",
+        "es": "El greeter real de Hornero Signal en Signal Night: el horizonte generativo de la pampa, el reloj al centro, el saludo de Javi y el módulo de ingreso con las cuentas como canales y el usuario de demostración sintonizado; sin recreación."
       },
       "pages": [
         "/greeter"
       ],
-      "section": "Greeter",
+      "section": "Greeter, Signal Night hero",
       "aspect": "16:9",
       "width": 1920,
       "height": 1080,
       "scale2x": true,
       "format": "PNG master (lossless)",
-      "theme": "Greeter default",
+      "theme": "Signal Night (greeter)",
       "mode": "n/a",
       "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
+      "wallpaper": "Generative horizon (no wallpaper)",
       "setup": [
-        "Preferred: the QA VM or a fresh install (`hornero-qa` images), log out to SDDM and capture from the host with the VM screenshot tool.",
+        "Preferred: the QA VM or a fresh install with the released Signal greeter (`hornero-qa` images), log out to SDDM and capture from the host with the VM screenshot tool.",
+        "Leave theme.conf at its defaults (colorScheme=auto on a dark platform, background=horizon, mascot=true); the demo user must be the tuned channel.",
         "On real hardware use a second TTY: `sudo -u sddm` environments differ; prefer the VM."
       ],
       "privacy": "Demo user only.",
@@ -2127,30 +2128,33 @@
       "session": "S12",
       "kind": "screenshot",
       "title": {
-        "en": "Greeter: session and power",
-        "es": "Greeter: sesión y energía"
+        "en": "Greeter: session list and power confirmation",
+        "es": "Greeter: lista de sesiones y confirmación de energía"
       },
       "description": {
-        "en": "The greeter with the session picker open (Hyprland, Niri) and the power menu.",
-        "es": "El greeter con el selector de sesión abierto (Hyprland, Niri) y el menú de energía."
+        "en": "The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.",
+        "es": "El greeter Signal con la lista de sesiones abierta (Desktop, Studio y Gaming, las experimentales al final) o la confirmación de reinicio con Cancelar enfocado."
       },
       "alt": {
-        "en": "The greeter with the session picker open (Hyprland, Niri) and the power menu.",
-        "es": "El greeter con el selector de sesión abierto (Hyprland, Niri) y el menú de energía."
+        "en": "The Signal greeter with the session list open (Desktop, Studio and Gaming, experimental last) or the restart confirmation with Cancel focused.",
+        "es": "El greeter Signal con la lista de sesiones abierta (Desktop, Studio y Gaming, las experimentales al final) o la confirmación de reinicio con Cancelar enfocado."
       },
-      "pages": [],
-      "section": "Greeter",
+      "pages": [
+        "/greeter"
+      ],
+      "section": "Greeter, sessions and power",
       "aspect": "16:9",
       "width": 1920,
       "height": 1080,
       "scale2x": false,
       "format": "PNG master (lossless)",
-      "theme": "Greeter default",
+      "theme": "Signal Night (greeter)",
       "mode": "n/a",
       "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
+      "wallpaper": "Generative horizon (no wallpaper)",
       "setup": [
-        "Open the session picker without choosing."
+        "In the QA VM or a fresh install, open the session selector without choosing; capture.",
+        "Then choose Restart and capture the confirmation dialog before confirming; cancel out of it."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
       "status": "pending",
@@ -2162,32 +2166,72 @@
       "session": "S12",
       "kind": "screenshot",
       "title": {
-        "en": "Greeter scenes",
-        "es": "Escenas del greeter"
+        "en": "Greeter palettes: Day and High Contrast",
+        "es": "Paletas del greeter: Day y Alto contraste"
       },
       "description": {
-        "en": "Three shipped greeter scenes (Iguazu, Perito Moreno, Ushuaia) as three real captures of the greeter.",
-        "es": "Tres escenas incluidas del greeter (Iguazú, Perito Moreno, Ushuaia) como tres capturas reales del greeter."
+        "en": "The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.",
+        "es": "El greeter Signal en Signal Day y en Alto contraste con texto grande, como dos capturas reales del mismo módulo de ingreso y horizonte generativo."
       },
       "alt": {
-        "en": "Three shipped greeter scenes (Iguazu, Perito Moreno, Ushuaia) as three real captures of the greeter.",
-        "es": "Tres escenas incluidas del greeter (Iguazú, Perito Moreno, Ushuaia) como tres capturas reales del greeter."
+        "en": "The Signal greeter in Signal Day and in High Contrast with large text, as two real captures of the same sign-in module and generative horizon.",
+        "es": "El greeter Signal en Signal Day y en Alto contraste con texto grande, como dos capturas reales del mismo módulo de ingreso y horizonte generativo."
       },
-      "pages": [],
-      "section": "Greeter",
+      "pages": [
+        "/greeter"
+      ],
+      "section": "Greeter, palettes",
       "aspect": "16:9",
       "width": 1920,
       "height": 1080,
       "scale2x": false,
       "format": "PNG master (lossless)",
-      "theme": "Greeter default",
+      "theme": "Signal Day / High Contrast (greeter)",
       "mode": "n/a",
       "layout": "n/a",
-      "wallpaper": "buenos-aires-nocturno",
+      "wallpaper": "Generative horizon (no wallpaper)",
       "setup": [
-        "Switch scene in the greeter settings and capture each (-iguazu, -perito-moreno, -ushuaia suffixes)."
+        "In the QA VM, set colorScheme=day in theme.conf.user and capture (-day suffix).",
+        "Then set highContrast=true and largeText=true and capture again (-high-contrast suffix); restore theme.conf.user afterwards."
       ],
       "privacy": "Global rules only (see \"Privacy rules\").",
+      "status": "pending",
+      "file": null
+    },
+    {
+      "id": "CAP-GREETER-04",
+      "priority": "P1",
+      "session": "S12",
+      "kind": "screenshot",
+      "title": {
+        "en": "Greeter on two monitors",
+        "es": "El greeter en dos monitores"
+      },
+      "description": {
+        "en": "The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.",
+        "es": "El greeter Signal en dos salidas: el módulo de ingreso en la pantalla principal y la placa tranquila (marca, hora y aviso de ingreso) en la secundaria."
+      },
+      "alt": {
+        "en": "The Signal greeter across two outputs: the sign-in module on the primary display and the quiet plate (mark, time and sign-in note) on the secondary one.",
+        "es": "El greeter Signal en dos salidas: el módulo de ingreso en la pantalla principal y la placa tranquila (marca, hora y aviso de ingreso) en la secundaria."
+      },
+      "pages": [
+        "/greeter"
+      ],
+      "section": "Greeter, several displays",
+      "aspect": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "scale2x": false,
+      "format": "PNG master (lossless)",
+      "theme": "Signal Night (greeter)",
+      "mode": "n/a",
+      "layout": "n/a",
+      "wallpaper": "Generative horizon (no wallpaper)",
+      "setup": [
+        "In the QA VM with two virtual outputs, log out to SDDM and capture the secondary output's quiet plate; capture the primary output in the same session for the pair."
+      ],
+      "privacy": "Demo user only.",
       "status": "pending",
       "file": null
     },

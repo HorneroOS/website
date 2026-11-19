@@ -6,7 +6,7 @@ import editionsJson from './editions.json';
 import pinsJson from './pins.json';
 import releasesJson from './releases.json';
 import themesJson from './themes.json';
-import greeterScenesJson from './greeter-scenes.json';
+import greeterJson from './greeter.json';
 import wallpapersJson from './wallpapers.json';
 import terminalsJson from './terminals.json';
 import paletteApplicationsJson from './palette-applications.json';
@@ -156,27 +156,42 @@ export interface EditionCatalogue {
 }
 
 
-export interface GreeterScene {
-  id: string;
-  title: string;
-  place: string;
-  province: string;
-  region: string;
-  daypart: 'day' | 'golden-hour' | 'night';
-  kind: 'video' | 'still';
-  preview: string | null;
-  poster: string;
-  creator: string;
-  license: string;
-  licenseUrl: string;
-  sourceUrl: string;
-  description: string;
+export interface GreeterPalette {
+  id: 'night' | 'day' | 'highContrast';
+  name: string;
 }
 
-export interface GreeterSceneCatalogue {
+export interface GreeterDefaults {
+  colorScheme: 'auto' | 'night' | 'day';
+  highContrast: boolean;
+  largeText: boolean;
+  reducedMotion: boolean;
+  language: string;
+  voice: 'cozy' | 'plain';
+  mascot: boolean;
+  background: 'horizon' | 'plain';
+  backgroundMotion: boolean;
+  backgroundDim: number;
+  showUserChannels: boolean;
+  allowOtherUser: boolean;
+  confirmPower: boolean;
+}
+
+export interface GreeterRender {
+  file: string;
+  width: number;
+  height: number;
+}
+
+export interface Greeter {
   version: number;
-  dayparts: { dayStart: number; dayEnd: number; goldenHourStart: number; goldenHourEnd: number };
-  scenes: GreeterScene[];
+  design: 'signal';
+  bundledMedia: boolean;
+  components: string[];
+  palettes: GreeterPalette[];
+  languages: string[];
+  defaults: GreeterDefaults;
+  renders: GreeterRender[];
 }
 
 export interface Wallpaper {
@@ -230,11 +245,10 @@ export const layouts = layoutsJson as Layout[];
 export const themes = themesJson as Theme[];
 export const releases = releasesJson as Release[];
 export const editionCatalogue = editionsJson as EditionCatalogue;
-export const greeterSceneCatalogue = greeterScenesJson as GreeterSceneCatalogue;
+export const greeter = greeterJson as Greeter;
 export const wallpapers = wallpapersJson as Wallpaper[];
 export const terminalCatalogue = terminalsJson as TerminalCatalogue;
 export const paletteApplications = paletteApplicationsJson as PaletteApplication[];
-export const greeterScenes = greeterSceneCatalogue.scenes;
 export const editions = editionCatalogue.editions;
 export const studioCatalogue = editionCatalogue.studio;
 export const gamingCatalogue = editionCatalogue.gaming;

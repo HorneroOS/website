@@ -23,8 +23,8 @@ src/
 └── styles/                # Global tokens, color modes, shared site styling
 
 public/
-├── images/                # Locally served product imagery
-├── media/greeter/         # Small browser-preview derivatives and posters
+├── captures/              # Captured clips only (capture slots)
+├── og/                    # Open Graph cards rendered by scripts/build-og.mjs
 └── wallpapers/            # Responsive licensed photography previews
 
 scripts/
@@ -45,7 +45,7 @@ are build artifacts. Do not commit them.
 | `src/pages/themes.astro`         | `/themes/`     | Themes, wallpapers and palette generation        |
 | `src/pages/wallpapers.astro`     | `/wallpapers/` | Licensed Argentina photography and credits       |
 | `src/pages/showroom.astro`       | `/showroom/`   | Curated visual stories using real captures       |
-| `src/pages/greeter.astro`        | `/greeter/`    | Interactive browser recreation and scene credits |
+| `src/pages/greeter.astro`        | `/greeter/`    | Signal greeter, planned captures, old credits    |
 | `src/pages/companion.astro`      | `/companion/`  | Companion experience                             |
 | `src/pages/install.astro`        | `/install/`    | Current installation availability and caveats    |
 | `src/pages/releases.astro`       | `/releases/`   | Product releases from pinned metadata            |
