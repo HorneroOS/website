@@ -28,15 +28,15 @@ const moods = isEs
     ];
 const title = 'Greeter | HorneroOS';
 const description = isEs
-  ? 'La pantalla de login de HorneroOS: un greeter de SDDM sin conexión cuyo fondo sigue la hora del día. Esta página es una recreación interactiva en tu navegador.'
-  : 'The HorneroOS login screen: an offline SDDM greeter whose background follows the time of day. This page is an interactive recreation in your browser.';
+  ? 'La pantalla de login de HorneroOS: un greeter de SDDM original en Hornero Signal, con un panel de instrumentos, el saludo de Javi y un fondo generativo dibujado en tu computadora, sin multimedia de terceros.'
+  : 'The HorneroOS login screen: an original SDDM greeter on Hornero Signal, with an instrument-panel layout, a greeting from Javi and a generative background drawn on your computer, with no third-party media.';
 ---
 
 <SiteLayout
   title={title}
   description={description}
   socialImage="/og/greeter.png"
-  socialImageAlt={isEs ? "Recreación del greeter de HorneroOS sobre una vista en la hora dorada del Parque Nacional El Palmar, etiquetada como no captura, junto a la línea 'El greeter de HorneroOS'." : "HorneroOS greeter recreation over a golden-hour view of El Palmar National Park, labelled as not a screenshot, beside the line 'The HorneroOS greeter'."}
+  socialImageAlt={isEs ? "Recreación del greeter de paisajes de la versión empaquetada actual, sobre una vista en la hora dorada del Parque Nacional El Palmar, etiquetada como no captura, junto a la línea 'El greeter de HorneroOS'." : "Recreation of the landscape greeter from the current packaged release, over a golden-hour view of El Palmar National Park, labelled as not a screenshot, beside the line 'The HorneroOS greeter'."}
 >
   <div class="greeter-page" data-locale={locale}>
     <div class="greeter-hero">
@@ -44,7 +44,10 @@ const description = isEs
         <p class="plate-id"><strong>Antes del escritorio</strong><span>Recreación en navegador · no es una captura</span></p>
         <h1>{isEs ? 'El greeter de HorneroOS' : 'The HorneroOS greeter'}</h1>
         <p class="intro-copy">
-          {isEs ? 'La pantalla de login es un tema de SDDM. Su fondo cambia con la hora y muestra paisajes argentinos y escenas urbanas guardados en tu computadora.' : 'The login screen is an SDDM theme. Its background changes with the hour and shows Argentine landscapes and city scenes stored on your computer.'}
+          {isEs ? 'La pantalla de login es un tema de SDDM del mismo universo que la pantalla de bloqueo de la shell: un panel de instrumentos en Signal Night con tipografía IBM Plex, el reloj al centro y el saludo de Javi. Las cuentas aparecen como canales, el selector de sesión lista las sesiones Desktop, Studio y Gaming que ofrece SDDM, y el fondo es un horizonte de la pampa con marcas de instrumento, dibujado en el momento y quieto salvo el reloj.' : 'The login screen is an SDDM theme from the same universe as the shell lock screen: an instrument panel on Signal Night in IBM Plex type, with the clock in the centre and a greeting from Javi. Accounts appear as channels, the session selector lists the Desktop, Studio and Gaming sessions SDDM offers, and the background is a quiet Pampa horizon with instrument ticks, drawn on the spot and still except for the clock.'}
+        </p>
+        <p class="intro-copy">
+          {isEs ? 'Estado: este diseño reemplaza a los paisajes argentinos y todavía no está en un paquete publicado. La recreación y las escenas de abajo muestran el greeter de paisajes de la versión empaquetada actual hasta que haya capturas reales del nuevo diseño.' : 'Status: this design replaces the Argentine landscapes and is not in a published package yet. The recreation and scenes below show the landscape greeter of the current packaged release until real captures of the new design are available.'}
         </p>
       </header>
 
@@ -235,10 +238,10 @@ const description = isEs
     <section class="scene-section" aria-labelledby="scenes-heading">
       <div class="scene-section-head">
         <div>
-          <h2 id="scenes-heading">{isEs ? 'Escenas' : 'Scenes'}</h2>
+          <h2 id="scenes-heading">{isEs ? 'Escenas de la versión empaquetada' : 'Scenes in the packaged release'}</h2>
         </div>
         <p>
-          {isEs ? 'Cada clip se revisa por composición, legibilidad detrás del panel de login, reproducción y derechos de redistribución. Las escenas de día son videos locales. Los demás ambientes usan imágenes fijas con licencia hasta que un video adecuado pase las mismas revisiones.' : 'Each clip is checked for composition, readability behind the login panel, playback and redistribution rights. The daytime scenes are local videos. The other moods use licensed stills until suitable video passes the same checks.'}
+          {isEs ? 'Estas son las escenas con licencia del greeter de paisajes que sigue empaquetado. El nuevo diseño no las usa ni incluye multimedia de terceros; quedan acá, con sus créditos, mientras esa versión siga publicada.' : 'These are the licensed scenes of the landscape greeter that is still packaged. The new design does not use them and bundles no third-party media; they stay here, with their credits, while that release is published.'}
         </p>
       </div>
       <div class="scene-grid">
@@ -302,25 +305,31 @@ const description = isEs
       </div>
       <ul>
         <li>
-          <strong>{isEs ? 'Legibilidad.' : 'Readability.'}</strong>
-          <span>{isEs ? 'Capas oscuras estables mantienen legibles el reloj y los controles de login mientras cambian las escenas.' : 'Stable dark overlays keep the clock and login controls legible as scenes change.'}</span>
+          <strong>{isEs ? 'Generativo y liviano.' : 'Generative and light.'}</strong>
+          <span>{isEs ? 'El fondo se dibuja una vez con los colores de Signal y queda quieto; solo el reloj cambia. Corre bien antes del login en cualquier equipo.' : 'The background is drawn once in Signal colours and stays still; only the clock changes. It runs well before login on any hardware.'}</span>
         </li>
         <li>
-          <strong>{isEs ? 'Sin conexión.' : 'Offline.'}</strong>
+          <strong>{isEs ? 'Sin conexión ni multimedia de terceros.' : 'Offline, no third-party media.'}</strong>
           <span>
-            {isEs ? 'Los fondos de video e imágenes fijas se instalan localmente. El login nunca espera un stream de red.' : 'Video and still backgrounds are installed locally. Login never waits for a network stream.'}
+            {isEs ? 'No hay fotos ni videos incluidos. Quien administra el equipo puede elegir su propia imagen o video en theme.conf.' : 'No photos or videos are bundled. An administrator can choose their own image or video in theme.conf.'}
           </span>
         </li>
         <li>
-          <strong>{isEs ? 'Transiciones.' : 'Transitions.'}</strong>
+          <strong>{isEs ? 'Teclado y accesibilidad.' : 'Keyboard and accessibility.'}</strong>
           <span>
-            {isEs ? 'Los clips aleatorios evitan repeticiones inmediatas, precargan la escena siguiente y hacen un fundido cruzado sobre una imagen fija local.' : 'Randomized clips avoid immediate repeats, preload the next scene and crossfade over a local still.'}
+            {isEs ? 'Todo se maneja con el teclado y tiene nombres para lectores de pantalla. Incluye alto contraste, movimiento reducido y texto grande, en español o inglés según el idioma del sistema.' : 'Everything works from the keyboard and has screen-reader names. It includes high contrast, reduced motion and large text, in Spanish or English by system locale.'}
           </span>
         </li>
         <li>
-          <strong>{isEs ? 'Respaldo.' : 'Fallback.'}</strong>
+          <strong>{isEs ? 'Errores honestos.' : 'Honest errors.'}</strong>
           <span>
-            {isEs ? 'Si falta un video o no se puede decodificar, el fondo estático queda en su lugar. El greeter es una pantalla de login, no un reproductor multimedia.' : 'If a video is missing or cannot be decoded, the static background stays in place. The greeter is a login screen, not a media player.'}
+            {isEs ? 'Una contraseña incorrecta, Bloq Mayús activo o la falta de sesiones se dicen con palabras. Apagar y reiniciar piden confirmación.' : 'A wrong password, Caps Lock or missing sessions are stated in words. Shut down and restart ask for confirmation.'}
+          </span>
+        </li>
+        <li>
+          <strong>{isEs ? 'Varias pantallas.' : 'Several displays.'}</strong>
+          <span>
+            {isEs ? 'El panel de login va en la pantalla principal; las demás muestran una placa tranquila.' : 'The sign-in panel sits on the primary display; the others show a quiet plate.'}
           </span>
         </li>
       </ul>
@@ -330,7 +339,7 @@ const description = isEs
       <div>
         <h2 id="technical-heading">{isEs ? 'Detalles técnicos' : 'Technical details'}</h2>
         <p>
-          {isEs ? 'El greeter de Hornero es un tema SDDM en Qt6/QML. Un pack multimedia instalado por separado contiene clips H.264; el tema incluye sus imágenes fijas de respaldo. Un catálogo local generado impulsa la reproducción aleatoria y consciente del momento del día sin acceso a la red al iniciar sesión.' : 'The Hornero greeter is a Qt6/QML SDDM theme. A separately installed media pack contains H.264 clips; the theme includes its fallback stills. A generated local catalog drives randomized, day-aware playback without login-time network access.'}
+          {isEs ? 'El greeter de Hornero es un tema SDDM en Qt6/QML. Corre como el usuario sddm antes de cualquier sesión, así que trae sus propias paletas Signal Night, Signal Day y Alto contraste, y sigue la preferencia clara u oscura del sistema solo cuando SDDM la expone. No necesita un pack multimedia ni acceso a la red.' : 'The Hornero greeter is a Qt6/QML SDDM theme. It runs as the sddm user before any session, so it carries its own Signal Night, Signal Day and High Contrast palettes, and follows the system light or dark preference only when SDDM exposes one. It needs no media pack and no network access.'}
         </p>
       </div>
       <div class="tech-facts">
@@ -339,12 +348,12 @@ const description = isEs
           <strong>SDDM · Qt6</strong>
         </p>
         <p>
-          <span>{isEs ? 'Reproducción' : 'Playback'}</span>
-          <strong>{isEs ? 'H.264 local, sin sonido' : 'Local H.264, muted'}</strong>
+          <span>{isEs ? 'Fondo' : 'Background'}</span>
+          <strong>{isEs ? 'Generativo, dibujado localmente' : 'Generative, drawn locally'}</strong>
         </p>
         <p>
-          <span>{isEs ? 'Ventanas del día' : 'Daypart windows'}</span>
-          <strong>{isEs ? '07:00–19:00 · 17:00–20:00 dorada' : '07:00–19:00 · 17:00–20:00 golden'}</strong>
+          <span>{isEs ? 'Idiomas' : 'Languages'}</span>
+          <strong>{isEs ? 'Español · inglés' : 'Spanish · English'}</strong>
         </p>
         <p>
           <span>{isEs ? 'Estado del proyecto' : 'Project status'}</span>
@@ -357,7 +366,7 @@ const description = isEs
       <div>
         <h2>{isEs ? 'Fuente y estado' : 'Source and status'}</h2>
         <p>
-          {isEs ? 'Esta página recrea el greeter en tu navegador. No autentica ni recopila credenciales. El tema real y el pack multimedia son de código abierto. HorneroOS es una preview de desarrollo.' : 'This page recreates the greeter in your browser. It does not authenticate or collect credentials. The real theme and media pack are open source. HorneroOS is a development preview.'}
+          {isEs ? 'Esta página recrea el greeter en tu navegador. No autentica ni recopila credenciales. El tema real es de código abierto. HorneroOS es una preview de desarrollo.' : 'This page recreates the greeter in your browser. It does not authenticate or collect credentials. The real theme is open source. HorneroOS is a development preview.'}
         </p>
       </div>
       <div class="get-links">
@@ -367,8 +376,8 @@ const description = isEs
         <a href={L('/install')}>
           {isEs ? 'Consultá el estado de instalación' : 'Check installation status'}
         </a>
-        <a href="https://github.com/HorneroOS/greeter/tree/main/media">
-          {isEs ? 'Procedencia multimedia y manifiestos' : 'Media provenance and manifests'} <span aria-hidden="true">↗</span>
+        <a href="https://github.com/HorneroOS/greeter#readme">
+          {isEs ? 'Diseño y configuración del greeter' : 'Greeter design and settings'} <span aria-hidden="true">↗</span>
         </a>
       </div>
     </section>

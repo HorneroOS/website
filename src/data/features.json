@@ -259,21 +259,21 @@
       ]
     },
     {
-      "id": "greeter-cinematic",
+      "id": "greeter-signal-original",
       "stage": "planned",
       "releasedIn": null,
       "title": {
-        "es": "Escenas cinematográficas del greeter",
-        "en": "Cinematic greeter scenes"
+        "es": "Greeter original en Hornero Signal",
+        "en": "Original Hornero Signal greeter"
       },
       "summary": {
-        "es": "Un catálogo nuevo de video argentino para el greeter. Está parado hasta resolver los derechos de redistribución; el greeter actual sigue con sus escenas.",
-        "en": "A new catalogue of Argentine video for the greeter. It is on hold until redistribution rights are cleared; the current greeter keeps its scenes."
+        "es": "Un greeter propio en el estilo de la pantalla de bloqueo, con fondo generativo y sin multimedia de terceros. Reemplaza el plan de video argentino, que se dejó de lado por las licencias.",
+        "en": "A greeter of its own in the lock screen's style, with a generative background and no third-party media. It replaces the Argentine video plan, set aside over licensing."
       },
       "evidence": [
         {
-          "label": "greeter#47",
-          "href": "https://github.com/HorneroOS/greeter/pull/47"
+          "label": "greeter README",
+          "href": "https://github.com/HorneroOS/greeter#readme"
         }
       ]
     },
