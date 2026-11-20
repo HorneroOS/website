@@ -10,7 +10,7 @@ import CaptureFigure from '../../components/CaptureFigure.astro';
 import StageBadge from '../../components/StageBadge.astro';
 import FaqList from '../../components/FaqList.astro';
 import { faqItems } from '../../data/why';
-import { slotCounts } from '../../data/captures';
+import { editorialForPage, slotCounts } from '../../data/captures';
 import { feature } from '../../data/features';
 import { modes } from '../../data/modes';
 import { featuredStory } from '../../data/story';
@@ -37,6 +37,7 @@ const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 
+const compareCaption = editorialForPage('/').find((section) => section.format === 'compare')?.caption[locale];
 const editionById = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const edition = (id: string) => {
   const found = editionById[id];
@@ -375,7 +376,7 @@ const description = isEs
 
     <div class="experience-grid">
       <div class="experience-compare">
-        <LookCompare dark="CAP-COMPARE-01" light="CAP-COMPARE-02" locale={locale} />
+        <LookCompare dark="CAP-COMPARE-01" light="CAP-COMPARE-02" locale={locale} caption={compareCaption} />
       </div>
       <ul class="index" role="list">
         <li>
