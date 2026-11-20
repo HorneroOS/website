@@ -4,7 +4,7 @@
     {
       "id": "desktop",
       "title": "HorneroOS Desktop",
-      "maturity": "preview",
+      "maturity": "supported",
       "role": "desktop",
       "extends": null,
       "packageSets": [
@@ -43,7 +43,7 @@
     {
       "id": "studio",
       "title": "HorneroOS Studio",
-      "maturity": "preview",
+      "maturity": "supported",
       "role": "creative-workstation",
       "extends": "desktop",
       "packageSets": [
@@ -56,7 +56,7 @@
     {
       "id": "gaming",
       "title": "HorneroOS Gaming",
-      "maturity": "preview",
+      "maturity": "supported",
       "role": "gaming-workstation",
       "extends": "desktop",
       "packageSets": [

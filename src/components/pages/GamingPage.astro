@@ -69,7 +69,7 @@ const stats = gamingCatalogue
   title={isEs ? 'Gaming: jugá a tu manera | HorneroOS' : 'Gaming: play on your terms | HorneroOS'}
   socialImage="/og/gaming.png"
   socialImageAlt={isEs ? 'Las aplicaciones del catálogo Gaming (Steam, propietaria y a elección; Lutris, Bottles, Wine y OBS Studio, a elección), junto a la frase «Gaming: play on your terms».' : "The Gaming catalogue applications (Steam, proprietary and opt-in; Lutris, Bottles, Wine and OBS Studio, opt-in), beside the line 'Gaming: play on your terms'."}
-  description={isEs ? 'HorneroOS Gaming es una edición Preview construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Se instala desde la misma ISO que Desktop y Studio.' : 'HorneroOS Gaming is a Preview edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It installs from the same ISO as Desktop and Studio.'}
+  description={isEs ? 'HorneroOS Gaming es una edición para uso diario construida sobre Desktop: Steam y Proton, Gamescope, GameMode y MangoHud, con perfiles combinables y diagnóstico honesto. Se instala desde la misma ISO que Desktop y Studio.' : 'HorneroOS Gaming is an everyday-use edition built on Desktop: Steam and Proton, Gamescope, GameMode and MangoHud, with composable profiles and honest diagnostics. It installs from the same ISO as Desktop and Studio.'}
 >
   <section class="section intro">
     <p class="plate-id">
@@ -80,7 +80,7 @@ const stats = gamingCatalogue
       <MaturityMeter maturity={gamingEdition.maturity} locale={locale} />
     </div>
     <p class="lede">
-      {isEs ? 'HorneroOS Gaming es la edición para jugar construida sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Es una edición Preview: se elige en el mismo instalador y la misma ISO que Desktop y Studio, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition built on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is a Preview edition: you pick it in the same installer and the same ISO as Desktop and Studio, nothing installs silently, and it makes no promise that any given game runs on any given hardware.'}
+      {isEs ? 'HorneroOS Gaming es la edición para jugar construida sobre Desktop: el mismo Hornero Shell, la misma configuración y el mismo horneroctl, más una capa de juego combinable (Steam con Proton, Gamescope, GameMode de Feral y MangoHud). Es una edición para uso diario: se elige en el mismo instalador y la misma ISO que Desktop y Studio, no instalamos nada en silencio y no prometemos que ningún juego funcione en ningún hardware.' : 'HorneroOS Gaming is the play edition built on top of Desktop: the same Hornero Shell, the same configuration and the same horneroctl, plus a composable gaming layer (Steam with Proton, Gamescope, Feral GameMode and MangoHud). It is an everyday-use edition: you pick it in the same installer and the same ISO as Desktop and Studio, nothing installs silently, and it makes no promise that any given game runs on any given hardware.'}
     </p>
 
     {
@@ -115,7 +115,7 @@ const stats = gamingCatalogue
       <strong>{isEs ? 'Hoy:' : 'Today:'}</strong>
       {isEs ? ' el catálogo canónico y ' : ' the canonical catalogue and '}
       <code>horneroctl gaming doctor</code>
-      {isEs ? ' ya te ayuda a chequear tu máquina, y Gaming se instala como Preview desde la ISO compartida (Desktop, Studio y Gaming). Sí se usa a diario en hardware real del equipo (por ejemplo un escritorio Ryzen 9 con RTX 3060); es uso real reportado, no una certificación: tu hardware puede comportarse distinto, y AMD, Intel, gráficas híbridas, handhelds y pantallas VRR/HDR todavía no están calificados.' : ' already helps you check your machine, and Gaming installs as Preview from the shared ISO (Desktop, Studio and Gaming). It is used daily on the team’s real hardware (for example a Ryzen 9 desktop with an RTX 3060); that is reported real use, not a certification: your hardware may behave differently, and AMD, Intel, hybrid graphics, handhelds and VRR/HDR displays are not qualified yet.'}
+      {isEs ? ' ya te ayuda a chequear tu máquina, y Gaming se instala desde la ISO actual compartida (Desktop, Studio y Gaming). Sí se usa a diario en hardware real del equipo (por ejemplo un escritorio Ryzen 9 con RTX 3060); es uso real reportado, no una certificación: tu hardware puede comportarse distinto, y AMD, Intel, gráficas híbridas, handhelds y pantallas VRR/HDR todavía no están calificados.' : ' already helps you check your machine, and Gaming installs from the shared current ISO (Desktop, Studio and Gaming). It is used daily on the team’s real hardware (for example a Ryzen 9 desktop with an RTX 3060); that is reported real use, not a certification: your hardware may behave differently, and AMD, Intel, hybrid graphics, handhelds and VRR/HDR displays are not qualified yet.'}
     </p>
   </section>
 
@@ -239,7 +239,7 @@ const stats = gamingCatalogue
       </article>
     </div>
     <p class="section-copy">
-      {isEs ? 'HorneroOS Desktop, Studio y Gaming Preview se descargan desde ' : 'HorneroOS Desktop, Studio and Gaming Preview are downloadable from '}
+      {isEs ? 'HorneroOS Desktop, Studio y Gaming se descargan desde ' : 'HorneroOS Desktop, Studio and Gaming are downloadable from '}
       <a href={L('/install')}>{isEs ? 'la página de instalación' : 'the install page'}</a>.
     </p>
   </section>

@@ -71,7 +71,7 @@ const priorityName = { P0: 'Launch-critical', P1: 'Important', P2: 'Complete the
 
 const cards = {
   default: {
-    eyebrow: `HorneroOS · ${latest ? latest.version : 'Preview'}`,
+    eyebrow: `HorneroOS · ${latest ? latest.version : 'current ISO'}`,
     title: 'A workstation for building, creating and playing.',
     line: 'Arch-based, with a desktop of its own. Desktop, Studio and Gaming on one signed ISO.',
     panel: `<ul class="ledger">${['signal', 'layouts', 'chromatic', 'pluginkit', 'companion'].map(featureLine).join('')}</ul><p class="cap"><b>Feature ledger</b> status from the project data</p>`,
@@ -127,9 +127,9 @@ const cards = {
     </ol><p class="cap"><b>Timeline</b> each date after 2018 links to a commit</p>`,
   },
   install: {
-    eyebrow: `Download · ${latest ? latest.version : 'Preview'}`,
+    eyebrow: `Download · ${latest ? latest.version : 'current ISO'}`,
     title: 'Download HorneroOS.',
-    line: 'One signed x86_64 ISO with Desktop, Studio and Gaming Preview. Checksum and GPG signature on the release.',
+    line: 'One signed x86_64 current ISO with Desktop, Studio and Gaming for everyday use. Checksum and GPG signature on the release.',
     panel: `<ol class="ledger steps">
       <li><b>01</b><span>Download the ISO (${download.iso.sizeLabel})</span></li>
       <li><b>02</b><span>Verify SHA-256 and signature</span></li>
@@ -139,7 +139,7 @@ const cards = {
   studio: {
     eyebrow: 'CH 02 · Studio',
     title: 'Studio: make something real.',
-    line: 'Preview creative edition: audio, video, streaming, design, photo and 3D. Not Supported yet.',
+    line: 'Everyday-use creative edition: audio, video, streaming, design, photo and 3D. Physical-hardware validation still pending.',
     panel: `<ul class="ledger">${['ardour', 'obs-studio', 'blender', 'krita', 'godot']
       .map((id) => `<li><b>${studioApps.get(id) ?? id}</b><span>Studio catalogue</span></li>`)
       .join('')}</ul><p class="cap"><b>Catalogue</b> generated from the pinned edition catalogue</p>`,
@@ -147,7 +147,7 @@ const cards = {
   gaming: {
     eyebrow: 'CH 03 · Gaming',
     title: 'Gaming: play on your terms.',
-    line: 'Preview gaming edition: Steam with Proton, Gamescope, GameMode and MangoHud, all opt-in.',
+    line: 'Everyday-use gaming edition: Steam with Proton, Gamescope, GameMode and MangoHud, all opt-in.',
     panel: `<ul class="ledger">${['steam', 'lutris', 'bottles', 'wine', 'obs-studio']
       .map((id) => `<li><b>${gamingApps.get(id) ?? id}</b><span>${id === 'steam' ? 'proprietary · opt-in' : 'opt-in'}</span></li>`)
       .join('')}</ul><p class="cap"><b>Catalogue</b> nothing installs silently</p>`,
