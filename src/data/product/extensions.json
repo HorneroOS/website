@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "59c7e8db432244f06e3ca976caaefa585b74c31f",
+  "generatedFrom": "9b14a40e64ef02cabcce4082fa3304314498a8a6",
   "plugins": [
     {
       "id": "hornero-agenda",
@@ -112,35 +112,6 @@
       }
     },
     {
-      "id": "hornero-base-converter",
-      "name": "Hornero Base Converter",
-      "version": "3.0.2",
-      "description": "Utility Tools 2.0 base converter: bar quick action (decimal or 0x hex) and compact dashboard detail converting decimal integers to binary/octal/hex and hex back. Invalid digits show errors.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-base-converter",
-      "sha256": "91a3af9818c950630754c92ab968e303f8e24eaebc87333b66d2d903da5ec022",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "uppercaseHex": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show hexadecimal output in uppercase (the 1.x behaviour)."
-        }
-      }
-    },
-    {
       "id": "hornero-battery",
       "name": "Hornero Battery",
       "version": "3.0.1",
@@ -182,41 +153,6 @@
           "minimum": 5,
           "maximum": 50,
           "description": "Charge percent at or below which, while on battery, a low-battery chip is shown. Adds a chip only; 1.x had no threshold."
-        }
-      }
-    },
-    {
-      "id": "hornero-calculator",
-      "name": "Hornero Calculator",
-      "version": "3.0.1",
-      "description": "Utility Tools 2.0 calculator: bar quick action and compact dashboard detail over a safe tokenizer/recursive-descent parser (+ - * / %, parentheses, decimals, unary minus). Division by zero shows Error.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "bar",
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.2.73",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-calculator",
-      "sha256": "2236bb3469dd7ae331ef757c3c13d1859305754150e212452934e49b1a711d59",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "showKeypad": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the keypad grid in the dashboard panel (the 1.x behaviour)."
-        },
-        "liveResult": {
-          "type": "boolean",
-          "default": false,
-          "description": "Recompute the bar quick action as you type; off keeps 1.x explicit compute on Enter or =."
         }
       }
     },
@@ -339,41 +275,6 @@
           "type": "boolean",
           "default": true,
           "description": "Skip copies that a password manager marks as secret (x-kde-passwordManagerHint)."
-        }
-      }
-    },
-    {
-      "id": "hornero-color-converter",
-      "name": "Hornero Color Converter",
-      "version": "3.1.1",
-      "description": "Utility Tools 2.0 color converter: bar quick hex action and compact dashboard detail converting validated #RGB/#RRGGBB to RGB and HSL and RGB back to hex. Invalid hex shows an error. Shows the current Hornero Chromatic seeds and renders a palette template.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.3.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-color-converter",
-      "sha256": "d081da53c8d95af2112c52c95d331e74e8e3bbf7a896b8d2909fee856a528620",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "defaultHex": {
-          "type": "string",
-          "default": "#336699",
-          "maxLength": 7,
-          "description": "Hex color pre-filled in the dashboard (#336699, the 1.x initial color)."
-        },
-        "showPreview": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the color preview swatch in the dashboard (the 1.x behaviour)."
         }
       }
     },
@@ -514,35 +415,6 @@
       }
     },
     {
-      "id": "hornero-date-calculator",
-      "name": "Hornero Date Calculator",
-      "version": "3.0.2",
-      "description": "Utility Tools 2.0 date calculator: bar quick action and compact dashboard detail for days-between and add-days on validated YYYY-MM-DD dates, using UTC math to avoid DST drift.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-date-calculator",
-      "sha256": "69c8595961ff3d7e5cdfb65a4a59efa7d2e5e2b2157ce627cd5c7180c3fc1086",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "showUtcNote": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the UTC-math note in the dashboard panel (the 1.x behaviour)."
-        }
-      }
-    },
-    {
       "id": "hornero-device-battery",
       "name": "Hornero Device Battery",
       "version": "1.0.0",
@@ -633,56 +505,6 @@
           "type": "boolean",
           "default": true,
           "description": "Show free space under each disk (additive in 2.0) and the nearly-full hint."
-        }
-      }
-    },
-    {
-      "id": "hornero-dual-clock",
-      "name": "Hornero Dual Clock",
-      "version": "3.0.3",
-      "description": "Dual Clock 2.0: local time next to a second zone (UTC by default, as in 1.x) in the bar, with a details popover. Pure-JS rule-based offsets, no processes or network.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [],
-      "manifestSchema": 3,
-      "minShellVersion": "1.2.74",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-dual-clock",
-      "sha256": "8f26d204ec914a0b81abacb978c83c1e171102f34140fa2c7244a4c36613f4cb",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "secondZone": {
-          "type": "enum",
-          "default": "utc",
-          "options": [
-            "utc",
-            "buenos-aires",
-            "new-york",
-            "chicago",
-            "los-angeles",
-            "london",
-            "madrid",
-            "berlin",
-            "new-delhi",
-            "tokyo",
-            "sydney",
-            "auckland"
-          ],
-          "description": "Zone shown on the second line (UTC in 1.x). Only zones with a built-in DST rule are offered."
-        },
-        "showSeconds": {
-          "type": "boolean",
-          "default": false,
-          "description": "Show seconds on both lines (1.x showed HH:mm only)."
-        },
-        "twentyFourHour": {
-          "type": "boolean",
-          "default": true,
-          "description": "Use 24-hour times (the 1.x behaviour); off shows 12-hour AM/PM."
         }
       }
     },
@@ -794,45 +616,6 @@
             "hide"
           ],
           "description": "glyph keeps the indicator button while silent; hide removes it until sound plays."
-        }
-      }
-    },
-    {
-      "id": "hornero-focus-card",
-      "name": "Hornero Focus Card",
-      "version": "3.0.1",
-      "description": "Focus Card 2.0: dashboard card with the locale date and a rotating original one-line focus reminder, from PluginKit Time. Keyboard Previous/Next and pause, optional own leading line, no processes or network.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [],
-      "manifestSchema": 3,
-      "minShellVersion": "1.2.72",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-focus-card",
-      "sha256": "73a72346857fce411c223e7098c471abca4db8026b0589231abb5ee1e052755b",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "rotateSeconds": {
-          "type": "integer",
-          "default": 30,
-          "minimum": 5,
-          "maximum": 600,
-          "description": "Seconds each focus line stays on screen (30 in 1.x)."
-        },
-        "showDate": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the date heading (shown in 1.x)."
-        },
-        "customLine": {
-          "type": "string",
-          "default": "",
-          "maxLength": 140,
-          "description": "Optional own focus line, shown first in the rotation. Empty (the 1.x behaviour) rotates the built-in lines only."
         }
       }
     },
@@ -958,46 +741,6 @@
           "type": "boolean",
           "default": true,
           "description": "Keep the last commit line on clean repositories; off gives a tighter board."
-        }
-      }
-    },
-    {
-      "id": "hornero-json-tools",
-      "name": "Hornero JSON Tools",
-      "version": "3.0.2",
-      "description": "Utility Tools 2.0 JSON tools: bar quick format/validate action and compact dashboard detail with Format and Minify using JSON parse/stringify only. Parser errors are shown.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-json-tools",
-      "sha256": "adb46b5e11d61c9532a5e003847094495d11c09bedbcc7dded65e35c0c3cce26",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "indentSpaces": {
-          "type": "integer",
-          "default": 2,
-          "minimum": 0,
-          "maximum": 8,
-          "description": "Spaces per indent level for Format (2, the 1.x formatting)."
-        },
-        "defaultAction": {
-          "type": "enum",
-          "default": "format",
-          "options": [
-            "format",
-            "minify"
-          ],
-          "description": "Action run by the bar quick action (Format, the 1.x primary button)."
         }
       }
     },
@@ -1129,39 +872,6 @@
             "south"
           ],
           "description": "Where you observe from. The waxing moon is lit on the right in the northern hemisphere and on the left in the southern one."
-        }
-      }
-    },
-    {
-      "id": "hornero-network-monitor",
-      "name": "Hornero Network Monitor",
-      "version": "3.0.1",
-      "description": "Network Monitor 3.0 on Hornero Signal: a download oscilloscope and upload trace from the shared Telemetry history with peak readouts, plus current speeds and session totals. Read-only.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [
-        "dashboard"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-network-monitor",
-      "sha256": "3418cc2cde9c074ec9f480b69cfba73e4b3965c84d65a3a00b97abd3f99f5b4d",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "showSessionTotals": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show downloaded/uploaded session totals from the Network service (the 1.x behaviour)."
-        },
-        "showHistory": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the download oscilloscope, upload trace and peak readouts from the shared telemetry history."
         }
       }
     },
@@ -1455,77 +1165,6 @@
       }
     },
     {
-      "id": "hornero-quiet-notes",
-      "name": "Hornero Quiet Notes",
-      "version": "3.0.1",
-      "description": "Quiet Notes 2.0: dashboard card for one short session-only intention. The line is never saved (in-memory only, as in 1.x) and the card says so. Keyboard-first capture, no processes or network.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [],
-      "manifestSchema": 3,
-      "minShellVersion": "1.2.72",
-      "category": "productivity",
-      "trust": "official",
-      "path": "plugins/hornero-quiet-notes",
-      "sha256": "6a48a60da4b131a2f65db05a15c48a2e504131bd802323209a0d98906e8e7534",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "maxLength": {
-          "type": "integer",
-          "default": 140,
-          "minimum": 20,
-          "maximum": 500,
-          "description": "Maximum characters for the session intention (140 in 1.x). Preference only: the intention itself is never stored."
-        },
-        "showCounter": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the remaining-characters hint while editing (shown in 1.x)."
-        }
-      }
-    },
-    {
-      "id": "hornero-stopwatch",
-      "name": "Hornero Stopwatch",
-      "version": "3.0.1",
-      "description": "Stopwatch 2.0: compact bar stopwatch with a popover, wall-clock-anchored elapsed time correct across sleep/reload and an optional tenths display. Pure QML, no processes or network.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [],
-      "manifestSchema": 3,
-      "minShellVersion": null,
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-stopwatch",
-      "sha256": "8bbeaa5cd1d162c32b7b6616e315723799d7a47ed349af82571161347b76d5d1",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "showTenths": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show tenths of a second in the elapsed time."
-        },
-        "accumulatedMs": {
-          "type": "integer",
-          "default": 0,
-          "minimum": 0,
-          "description": "Saved elapsed milliseconds while paused. Managed by the stopwatch; do not edit."
-        },
-        "startedEpochMs": {
-          "type": "integer",
-          "default": 0,
-          "minimum": 0,
-          "description": "Saved start anchor in epoch milliseconds (0 when paused). Managed by the stopwatch; do not edit."
-        }
-      }
-    },
-    {
       "id": "hornero-studio-audio",
       "name": "Hornero Studio Audio",
       "version": "3.0.2",
@@ -1611,102 +1250,6 @@
       }
     },
     {
-      "id": "hornero-sun-card",
-      "name": "Hornero Sun Card",
-      "version": "3.0.3",
-      "description": "Sun Card 2.0: dashboard astronomy card and contextual bar indicator with sunrise/sunset from PluginKit Weather plus derived day length, sun progress and next sun event. Approximations are labelled derived.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [
-        "bar",
-        "dashboard"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-sun-card",
-      "sha256": "a4975f6ee8a4c807c832197439bfa22b6eafdb4a3c56528d50643ce8d91e7463",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "showTemperature": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show temperature and description from the Weather facade (the 1.x behaviour)."
-        },
-        "showHumidity": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show relative humidity when the Weather facade reports it (the 1.x behaviour)."
-        },
-        "showAstronomy": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show astronomy detail derived from sunrise/sunset: day length, sun progress and the next sun event."
-        },
-        "dataDensity": {
-          "type": "enum",
-          "default": "standard",
-          "options": [
-            "compact",
-            "standard",
-            "detailed"
-          ],
-          "description": "compact shows only sunrise/sunset; standard keeps the 1.x rows plus astronomy; detailed adds the unavailable-fields note."
-        }
-      }
-    },
-    {
-      "id": "hornero-system-health",
-      "name": "Hornero System Health",
-      "version": "3.0.2",
-      "description": "System Health 3.0 on Hornero Signal: a health rack over the shared system, power and network providers: segmented meters that cross to signal at your thresholds, status chips and troubleshooting hints. Read-only.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [
-        "dashboard"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-system-health",
-      "sha256": "8874a2d7768125c9bbf20581f3e8d3dc92b6b05b9f20c55c1f56212887a6b2bc",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "warnPercent": {
-          "type": "integer",
-          "default": 90,
-          "minimum": 50,
-          "maximum": 100,
-          "description": "Usage percent at or above which a CPU, memory or storage row needs attention."
-        },
-        "batteryWarnPercent": {
-          "type": "integer",
-          "default": 20,
-          "minimum": 1,
-          "maximum": 50,
-          "description": "Battery percent at or below which a discharging battery needs attention."
-        },
-        "showNetwork": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the download/upload rows from the Network service (the 1.x behaviour)."
-        },
-        "showHints": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show a short troubleshooting hint under rows that need attention."
-        }
-      }
-    },
-    {
       "id": "hornero-system-insight",
       "name": "Hornero System Insight",
       "version": "1.1.1",
@@ -1762,86 +1305,6 @@
             "fahrenheit"
           ],
           "description": "Unit for the CPU and GPU temperatures. The provider reports Celsius; Fahrenheit is a display conversion."
-        }
-      }
-    },
-    {
-      "id": "hornero-system-monitor",
-      "name": "Hornero System Monitor",
-      "version": "3.0.1",
-      "description": "System Monitor 3.0 on Hornero Signal: a CPU oscilloscope from the shared Telemetry history, segmented meter rows for CPU, memory, GPU and storage with a user threshold, and peak/average readouts. Read-only.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "dashboard",
-      "surfaces": [
-        "dashboard"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-system-monitor",
-      "sha256": "c4b4405f73432bfec473c69a36b8a54612b2ea5f8b538f016081faead1847dba",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "warnPercent": {
-          "type": "integer",
-          "default": 90,
-          "minimum": 50,
-          "maximum": 100,
-          "description": "Usage percent at or above which a row is flagged as high. Adds an alert chip only; 1.x had no threshold."
-        },
-        "showTemperatures": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show CPU/GPU temperatures when the System service reports them (the 1.x behaviour)."
-        },
-        "showHistory": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show the CPU oscilloscope and peak/average readouts from the shared telemetry history."
-        }
-      }
-    },
-    {
-      "id": "hornero-text-tools",
-      "name": "Hornero Text Tools",
-      "version": "3.0.1",
-      "description": "Utility Tools 2.0 text tools: bar quick transform and compact dashboard detail with Uppercase, Lowercase, Title Case and Reverse plus character, word and line counts. Pure QML.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-text-tools",
-      "sha256": "fa46d9625b0b395b33b734bcb5f7389db052dad7500c10d252c71450a68fcad7",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "defaultMode": {
-          "type": "enum",
-          "default": "uppercase",
-          "options": [
-            "uppercase",
-            "lowercase",
-            "title-case",
-            "reverse"
-          ],
-          "description": "Transform preselected in the dashboard and used by the quick action (Uppercase, the 1.x default)."
-        },
-        "showCounts": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show character, word and line counts in the dashboard (the 1.x behaviour)."
         }
       }
     },
@@ -1942,47 +1405,6 @@
           "type": "boolean",
           "default": true,
           "description": "Show character, word and line counts in the Text tool."
-        }
-      }
-    },
-    {
-      "id": "hornero-unit-converter",
-      "name": "Hornero Unit Converter",
-      "version": "3.0.1",
-      "description": "Utility Tools 2.0 unit converter: bar quick action (10 km to mi) and compact dashboard detail for length (m, km, mi, ft), mass (kg, lb) and temperature (C, F, K). Pure JS, no processes or network.",
-      "author": "HorneroOS contributors",
-      "license": "MIT",
-      "homepage": "https://github.com/HorneroOS/plugins",
-      "placement": "bar",
-      "surfaces": [
-        "dashboard",
-        "launcher"
-      ],
-      "manifestSchema": 3,
-      "minShellVersion": "1.0.0",
-      "category": "utilities",
-      "trust": "official",
-      "path": "plugins/hornero-unit-converter",
-      "sha256": "771c7eb0d413336edbe54f7ebf23551fdaf11bf0c33e9eb727d6bbaa5a24c347",
-      "processCommands": [],
-      "networkHosts": [],
-      "settings": {
-        "defaultCategory": {
-          "type": "enum",
-          "default": "length",
-          "options": [
-            "length",
-            "mass",
-            "temperature"
-          ],
-          "description": "Dashboard category shown first (Length, the 1.x initial category)."
-        },
-        "precision": {
-          "type": "integer",
-          "default": 6,
-          "minimum": 0,
-          "maximum": 10,
-          "description": "Decimal places kept when rounding results (6, the 1.x rounding)."
         }
       }
     },
