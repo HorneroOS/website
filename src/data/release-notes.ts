@@ -3,6 +3,10 @@
 // engineering record; ReleasesPage renders these first and keeps the full
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
+  '0.2.0-preview36': {
+    es: 'Más Hornero Signal, también como actualización de paquetes y sin ISO nueva: hornero-shell 1.3.5 renueva el panel de Extensiones del Centro de control, hornero-config 0.4.6 instala la colección definitiva de 57 fondos de pantalla elegidos a mano, y hornero-greeter 1.2.0. horneroctl-bin firmado sigue en 0.2.0_preview49; la ISO de instalación sigue siendo la Preview 32.',
+    en: 'More Hornero Signal, again as a package update with no new ISO: hornero-shell 1.3.5 refreshes the Control Center Extensions pane, hornero-config 0.4.6 installs the hand-picked 57-wallpaper collection, and hornero-greeter 1.2.0. Signed horneroctl-bin stays at 0.2.0_preview49; the install ISO is still Preview 32.',
+  },
   '0.2.0-preview33': {
     es: 'Hornero Signal llega como actualización de paquetes, sin ISO nueva: hornero-shell 1.3.0, hornero-config 0.4.0, hornero-greeter 1.1.0 y horneroctl-bin 0.2.0_preview46 firmado. Las instalaciones existentes lo reciben actualizando los paquetes del AUR; la ISO de instalación sigue siendo la Preview 32.',
     en: 'Hornero Signal arrives as a package update, with no new ISO: hornero-shell 1.3.0, hornero-config 0.4.0, hornero-greeter 1.1.0 and signed horneroctl-bin 0.2.0_preview46. Existing installs get it by updating their AUR packages; the install ISO is still Preview 32.',
