@@ -21,10 +21,20 @@ interface Props {
   sizes?: string;
   /** Human editorial caption; falls back to the slot title. */
   caption?: string;
+  /** Set to false when the parent renders one caption for several figures. */
+  showCaption?: boolean;
   crop?: Crop;
 }
 
-const { slot: slotId, locale = 'es', eager = false, sizes = '(min-width: 1100px) 1000px, calc(100vw - 2rem)', caption, crop } = Astro.props;
+const {
+  slot: slotId,
+  locale = 'es',
+  eager = false,
+  sizes = '(min-width: 1100px) 1000px, calc(100vw - 2rem)',
+  caption,
+  showCaption = true,
+  crop,
+} = Astro.props;
 const slot = getSlot(slotId);
 if (slot.status !== 'captured' || !slot.file) {
   throw new Error(`Capture slot ${slot.id} is ${slot.status}: only captured slots placed in src/data/editorial.json may render publicly`);
@@ -94,11 +104,15 @@ const captionText = caption ?? editorialCaption(slot.id, locale) ?? slot.title[l
       )
     }
   </div>
-  <figcaption>
-    <CaptureLabel state="captured" kind={slot.kind} locale={locale} />
-    <span class="capture-caption">{captionText}</span>
-    {slot.credit && <span class="capture-meta">{slot.credit[locale]}</span>}
-  </figcaption>
+  {
+    showCaption && (
+      <figcaption>
+        <CaptureLabel state="captured" kind={slot.kind} locale={locale} />
+        <span class="capture-caption">{captionText}</span>
+        {slot.credit && <span class="capture-meta">{slot.credit[locale]}</span>}
+      </figcaption>
+    )
+  }
 </figure>
 
 <script>
