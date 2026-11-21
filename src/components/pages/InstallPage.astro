@@ -49,7 +49,7 @@ const statusName = (
     <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>{downloadTag}</span><span>x86_64 · {download.iso.sizeLabel}</span></p>
     <h1>{isEs ? 'Descargá HorneroOS' : 'Download HorneroOS'}</h1>
     <p class="lede">
-      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub release. HorneroOS is used daily, with those limitations declared.'}
+      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como pre-release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub pre-release. HorneroOS is used daily, with those limitations declared.'}
     </p>
     <p class="cta-row download-row">
       <a class="cta primary" href={download.iso.url}>
@@ -140,6 +140,7 @@ horneroctl package check
 yay -Syu</code></pre>
         <p>{isEs ? 'horneroctl package upgrade corre pacman -Syu: actualiza los repositorios de Arch, no los paquetes del AUR. Ningún comando hace rollback del sistema; el snapshot guarda solo la configuración de Hornero.' : 'horneroctl package upgrade runs pacman -Syu: it updates the Arch repositories, not AUR packages. No command rolls the system back; the snapshot keeps Hornero configuration only.'}</p>
         <p><a href={L('/docs/desktop/updates-and-rollback/')}>{isEs ? 'Leé la guía de actualizaciones y rollback (el rollback de SO sigue planificado)' : 'Read the updates and rollback guide (OS rollback is still planned)'}</a></p>
+        <p>{isEs ? 'Guías oficiales: ' : 'Official guides: '}<a href={L('/docs/getting-started/install-step-by-step/')}>{isEs ? 'instalación paso a paso' : 'step-by-step installation'}</a>{', '}<a href={L('/docs/applications/post-install-first-steps/')}>{isEs ? 'primeros pasos tras instalar' : 'first steps after installing'}</a>{isEs ? ' y ' : ' and '}<a href={L('/docs/troubleshooting/by-symptom/')}>{isEs ? 'problemas por síntoma' : 'troubleshooting by symptom'}</a>.</p>
         {packageRelease && (
           <p>{isEs ? `La actualización en el lugar a la ${packageTag} todavía figura como pendiente de verificación en su checklist.` : `The in-place upgrade to ${packageTag} is still listed as pending verification in its checklist.`}</p>
         )}
@@ -176,7 +177,7 @@ yay -Syu</code></pre>
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">{downloadTag}</span> {isEs ? 'ISO actual publicada como release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'Current ISO published as a signed release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">{downloadTag}</span> {isEs ? 'ISO actual publicada como pre-release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'Current ISO published as a signed pre-release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
