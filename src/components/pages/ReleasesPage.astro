@@ -13,18 +13,17 @@ const { locale } = Astro.props;
 const isEs = locale === 'es';
 const L = (path: string) => localizePath(path, locale);
 const title = (r: Release) => {
-  const n = /preview(\d+)$/.exec(r.version);
-  return n ? `Development Preview ${n[1]}` : r.version.replace(/-draft$/, isEs ? ' borrador' : ' draft');
+  return r.version.replace(/-draft$/, isEs ? ' borrador' : ' draft');
 };
 const statusText: Record<Release['status'], string> = isEs
   ? {
-      tagged: 'Pre-release etiquetada',
+      tagged: 'Etiquetada en git',
       published: 'Publicada como paquetes, sin etiqueta git',
       candidate: 'Candidata a release',
       untagged: 'Registro de composición, sin etiquetar',
     }
   : {
-      tagged: 'Tagged pre-release',
+      tagged: 'Tagged in git',
       published: 'Published as packages, no git tag yet',
       candidate: 'Release candidate',
       untagged: 'Composition record, not tagged',
@@ -36,14 +35,14 @@ const config = pins.config.repo;
 
 <SiteLayout
   title={isEs ? 'Releases | HorneroOS' : 'Releases | HorneroOS'}
-  description={isEs ? `Cada release de HorneroOS: qué cambió para quienes lo usan y el registro técnico completo. La última es ${latestTagged?.name ?? 'la Preview actual'}, con Desktop, Studio y Gaming en una ISO firmada.` : `Every HorneroOS release: what changed for the people using it, and the full technical record. The latest is ${latestTagged?.name ?? 'the current Preview'}, with Desktop, Studio and Gaming on one signed ISO.`}
+  description={isEs ? `Cada release de HorneroOS: qué cambió para quienes lo usan y el registro técnico completo. La última es ${latestTagged?.name ?? 'la release actual'}, con Desktop, Studio y Gaming en una ISO firmada.` : `Every HorneroOS release: what changed for the people using it, and the full technical record. The latest is ${latestTagged?.name ?? 'the current release'}, with Desktop, Studio and Gaming on one signed ISO.`}
 >
   <section class="section">
-    <p class="plate-id"><strong>Archivo de transmisiones</strong><span>{isEs ? 'Historial de pre-releases' : 'Pre-release history'}</span></p>
+    <p class="plate-id"><strong>Archivo de transmisiones</strong><span>{isEs ? 'Historial de releases' : 'Release history'}</span></p>
     <h1>Releases</h1>
     <p>
       {isEs ? 'Cada release cuenta qué cambió para quienes usan HorneroOS y deja el registro técnico completo a un clic: el manifiesto fija las versiones exactas de shell y config que salen juntas, y ' : 'Each release says what changed for the people using HorneroOS and keeps the full technical record one click away: the manifest pins the exact shell and config versions that ship together, and '}
-      <code>horneroctl</code> {isEs ? 'se compila desde el mismo árbol. Todas son Preview: usables hoy, todavía puliéndose. Mirá ' : ' is built from the same tree. All of them are Preview: usable today, still being polished. See '}
+      <code>horneroctl</code> {isEs ? 'se compila desde el mismo árbol. HorneroOS se usa a diario; los nombres previewNN son nombres de artefacto publicados y se conservan. Mirá ' : ' is built from the same tree. HorneroOS is used daily; the previewNN names are published artifact names and are kept. See '}
       <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a> {isEs ? 'para el checksum, la firma y las instrucciones de verificación.' : 'for the checksum, signature and verification instructions.'}
     </p>
     <dl class="now">

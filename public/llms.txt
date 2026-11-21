@@ -4,7 +4,7 @@
 
 ## Status
 
-HorneroOS is pre-release. Desktop, Studio and Gaming Preview install from the signed v0.2.0-preview32 ISO (one x86_64 image, VM-validated; see https://www.horneroos.com/install). The Desktop is also available as Arch packages for existing Arch systems. Hornero Signal (hornero-shell 1.3.0, hornero-config 0.4.0, hornero-greeter 1.1.0, horneroctl-bin 0.2.0_preview46) shipped as the package-only release v0.2.0-preview33: it is not in the preview32 ISO, and installs get it by updating the AUR packages (for example `yay -Syu`). Server and Agents are defined as composable editions with planned maturity and no installable image.
+HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming (Supported maturity) install from the signed current ISO, 0.2.0-preview32 (a published artifact name; one x86_64 image, VM-validated; LUKS, legacy BIOS and Niri are not validated on it, hardware is not qualified as a whole, and OS rollback is still planned; see https://www.horneroos.com/install). The Desktop is also available as Arch packages for existing Arch systems. Newer package-only releases (currently v0.2.0-preview36, a published artifact name) are not in the current ISO, and installs get them by updating the AUR packages (for example `yay -Syu`). Server and Agents are defined as composable editions with planned maturity and no installable image.
 
 The default language is Spanish (Argentina); English lives under /en/.
 
@@ -31,11 +31,11 @@ The default language is Spanish (Argentina); English lives under /en/.
 - `/why-horneroos` — what it does, comparison with other operating systems
   and shells, limits and FAQ
 - `/install` — download the signed ISO, verification and requirements
-- `/editions` — Desktop, Studio and Gaming Preview; Server and Agents planned
+- `/editions` — Desktop, Studio and Gaming for everyday use (Supported); Server and Agents planned
 - `/desktop` — the Desktop edition and its settings
 - `/studio` — creative workflows and applications
 - `/gaming` — gaming capabilities and tools
-- `/releases` — Preview history and verification links
+- `/releases` — release history (previewNN names are published artifact names) and verification links
 - `/modes` — the five experience modes
 - `/chromatic` — optional dynamic colour
 - `/themes` — the coordinated look catalogue and palette generation

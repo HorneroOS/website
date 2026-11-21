@@ -5,8 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Official website for HorneroOS, the Arch-based workstation operating-system
-family (Desktop · Studio · Gaming): what it is, what it looks like, how to
-install it, and where it comes from.
+family (Desktop · Studio · Gaming) for everyday use — used and maintained
+daily, with concrete, declared limitations: what it is, what it looks like,
+how to install it, and where it comes from. Published artifact names such
+as the current ISO `0.2.0-preview32` and package release `0.2.0-preview36`
+keep their real names; they are not a product-stage label.
 
 <p align="center">
   <img src="https://www.horneroos.com/captures/cap-signal-01.png" alt="Hornero Shell Dashboard Performance tab over a cyberpunk wallpaper: CPU, GPU, memory, storage and network instruments" width="960">
@@ -68,7 +71,7 @@ npm run build
 - `/docs/` — HorneroOS/docs rendered at its pinned commit
 - `/search/` — Pagefind search over site content
 - `/roots` — project history, contributor credits and repository ownership map
-- `/install` — package availability and provisional installer acceptance status
+- `/install` — current ISO, package availability and provisional installer acceptance status
 - `/companion` — the Hornero Companion experience
 
 Technical documentation is written in

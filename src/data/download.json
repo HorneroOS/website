@@ -1,5 +1,5 @@
 {
-  "$comment": "The one published ISO the site offers. `version` must be a tagged release in product/releases.json (scripts/check-release-truth.mjs). Update this record in the same PR that publishes a new ISO; never point it at a candidate or an unpublished build. `packageRelease` (optional) names a newer package-only release (AUR updates, no new ISO): existing installs get it by updating; the ISO above stays the install medium. scripts/release-bump.mjs --package-only writes it and a new ISO bump drops it.",
+  "$comment": "The current published ISO the site offers (its preview32 name is the published artifact name, not a product-stage label). `version` must be a tagged release in product/releases.json (scripts/check-release-truth.mjs). Update this record in the same PR that publishes a new ISO; never point it at a candidate or an unpublished build. `packageRelease` (optional) names a newer package-only release (AUR updates, no new ISO): existing installs get it by updating; the ISO above stays the install medium. scripts/release-bump.mjs --package-only writes it and a new ISO bump drops it.",
   "version": "0.2.0-preview32",
   "iso": {
     "name": "horneroos-2026.10-preview32-x86_64.iso",
