@@ -1,5 +1,5 @@
 {
-  "$comment": "The one published ISO the site offers. `version` must be a tagged release in product/releases.json (scripts/check-release-truth.mjs). Update this record in the same PR that publishes a new ISO; never point it at a candidate or an unpublished build. `packageRelease` (optional) names a newer package-only release (AUR updates, no new ISO): existing installs get it by updating; the ISO above stays the install medium. scripts/release-bump.mjs --package-only writes it and a new ISO bump drops it.",
+  "$comment": "The current published ISO the site offers (its preview32 name is the published artifact name, not a product-stage label). `version` must be a tagged release in product/releases.json (scripts/check-release-truth.mjs). Update this record in the same PR that publishes a new ISO; never point it at a candidate or an unpublished build. `packageRelease` (optional) names a newer package-only release (AUR updates, no new ISO): existing installs get it by updating; the ISO above stays the install medium. scripts/release-bump.mjs --package-only writes it and a new ISO bump drops it.",
   "version": "0.2.0-preview32",
   "iso": {
     "name": "horneroos-2026.10-preview32-x86_64.iso",
@@ -13,25 +13,25 @@
   "keyFingerprint": "FCFBEE43925AB5429362278AE59EAB44AA2498DC",
   "keyPath": "packaging/keys/hornero-release.pub.asc",
   "packageRelease": {
-    "version": "0.2.0-preview33",
-    "recordUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview33.yaml",
-    "checklistUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview33-checklist.md",
+    "version": "0.2.0-preview36",
+    "recordUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview36.yaml",
+    "checklistUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview36-checklist.md",
     "packages": [
       {
         "name": "hornero-shell",
-        "version": "1.3.0-1"
+        "version": "1.3.5-1"
       },
       {
         "name": "hornero-config",
-        "version": "0.4.0-1"
+        "version": "0.4.6-1"
       },
       {
         "name": "hornero-greeter",
-        "version": "1.1.0-1"
+        "version": "1.2.0-1"
       },
       {
         "name": "horneroctl-bin",
-        "version": "0.2.0_preview46-1"
+        "version": "0.2.0_preview49-1"
       }
     ]
   }

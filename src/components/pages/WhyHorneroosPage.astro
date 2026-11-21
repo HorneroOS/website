@@ -89,17 +89,17 @@ const faqJsonLd = {
   <section class="section why-intro" aria-labelledby="why-title">
     <p class="plate-id">
       <strong>{isEs ? 'Por qué HorneroOS' : 'Why HorneroOS'}</strong>
-      <span>Preview</span>
+      <span>{isEs ? 'Uso diario' : 'Everyday use'}</span>
     </p>
     <h1 id="why-title">{isEs ? 'Por qué HorneroOS' : 'Why HorneroOS'}</h1>
     <p class="lede">
       {isEs
-        ? 'HorneroOS es un sistema operativo basado en Arch que se compone por oficio (Desktop, Studio y Gaming), con una shell propia adaptada de Caelestia Shell y ajustes en el Centro de control. Está en Preview: esta página dice qué hace hoy, qué falta y en qué se diferencia de otros proyectos, sin cifras de rendimiento ni testimonios.'
-        : 'HorneroOS is an Arch-based operating system composed by craft (Desktop, Studio and Gaming), with a shell of its own adapted from Caelestia Shell and settings in the Control Center. It is in Preview: this page says what it does today, what is missing and how it differs from other projects, with no performance figures and no testimonials.'}
+        ? 'HorneroOS es un sistema operativo basado en Arch que se compone por oficio (Desktop, Studio y Gaming), con una shell propia adaptada de Caelestia Shell y ajustes en el Centro de control. Es un sistema para uso diario: esta página dice qué hace hoy, qué limitaciones concretas tiene y en qué se diferencia de otros proyectos, sin cifras de rendimiento ni testimonios.'
+        : 'HorneroOS is an Arch-based operating system composed by craft (Desktop, Studio and Gaming), with a shell of its own adapted from Caelestia Shell and settings in the Control Center. It is an everyday-use system: this page says what it does today, which concrete limitations it has and how it differs from other projects, with no performance figures and no testimonials.'}
     </p>
     <p class="why-ctas">
       <a class="cta primary" href={L('/install')}>
-        {isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}
+        {isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}
       </a>
       <a class="cta secondary" href={L('/editions')}>
         {isEs ? 'Compará las ediciones' : 'Compare the editions'}
@@ -145,8 +145,8 @@ const faqJsonLd = {
     <ul class="why-limits">
       <li>
         {isEs
-          ? `La ISO publicada es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview33. Ninguna edición es Soportada todavía.`
-          : `The published ISO is 0.2.0-preview32 and the packages reached 0.2.0-preview33. No edition is Supported yet.`}
+          ? `La ISO actual es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview36. Desktop, Studio y Gaming tienen madurez Supported; LUKS, BIOS heredado y Niri no están validados en esa ISO y el rollback de SO sigue planificado.`
+          : `The current ISO is 0.2.0-preview32 and packages reached 0.2.0-preview36. Desktop, Studio and Gaming carry Supported maturity; LUKS, legacy BIOS and Niri are not validated on that ISO and OS rollback is still planned.`}
       </li>
       <li>
         {isEs

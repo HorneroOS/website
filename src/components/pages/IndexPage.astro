@@ -67,8 +67,7 @@ const gamingSpec = (id: string) => {
 const audioDefault = studioCatalogue.audioModes.find((mode) => mode.isDefault)?.title;
 const audioOptIn = studioCatalogue.audioModes.filter((mode) => mode.explicitOptIn).map((mode) => mode.title);
 const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.trust === 'official');
-const previewNumber = (version: string) => /preview(\d+)$/.exec(version)?.[1] ?? version;
-const previewLabel = latestTagged ? `Development Preview ${previewNumber(latestTagged.version)}` : 'Development Preview';
+const previewLabel = isEs ? 'Uso diario' : 'Everyday use';
 const hyprland = compositor('hyprland');
 // Javi: a real frame from HorneroOS/shell assets/companion at the shell pin.
 const javiFrames = import.meta.glob<ImageMetadata>('../../../.cache/product-src/shell/assets/companion/frames/default-greet-01.png', {
@@ -144,7 +143,7 @@ const readouts = [
   { label: isEs ? 'Versión' : 'Release', value: latestTagged?.version ?? '—', href: L('/releases') },
   {
     label: isEs ? 'Ediciones' : 'Editions',
-    value: isEs ? `${shipping.length} Preview · ${planned.length} planificadas` : `${shipping.length} Preview · ${planned.length} planned`,
+    value: isEs ? `${shipping.length} para uso diario · ${planned.length} planificadas` : `${shipping.length} for everyday use · ${planned.length} planned`,
     href: L('/editions'),
   },
   {
@@ -192,12 +191,12 @@ const system = [
 
 const journey = isEs
   ? [
-      { title: 'Descargá', text: `La ISO ${latestTagged?.version ?? 'Preview'} para x86_64 trae Desktop, Studio y Gaming en una sola imagen.` },
+      { title: 'Descargá', text: `La ISO ${latestTagged?.version ?? '0.2.0-preview32'} para x86_64 trae Desktop, Studio y Gaming en una sola imagen.` },
       { title: 'Verificá', text: 'Compará el checksum SHA-256 y la firma GPG publicados en la release antes de grabarla.' },
       { title: 'Instalá', text: 'Elegí la edición, las especializaciones y el compositor durante la instalación.' },
     ]
   : [
-      { title: 'Download', text: `The ${latestTagged?.version ?? 'Preview'} x86_64 ISO carries Desktop, Studio and Gaming in one image.` },
+      { title: 'Download', text: `The ${latestTagged?.version ?? '0.2.0-preview32'} x86_64 ISO carries Desktop, Studio and Gaming in one image.` },
       { title: 'Verify', text: 'Check the SHA-256 checksum and GPG signature published on the release before you write it.' },
       { title: 'Install', text: 'Pick the edition, the specializations and the compositor during installation.' },
     ];
@@ -207,8 +206,8 @@ const title = isEs
   : 'HorneroOS | An Arch-based workstation for building, creating and playing';
 const counts = slotCounts();
 const description = isEs
-  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar: ediciones Desktop, Studio y Gaming, Hornero Shell y horneroctl, en una ISO firmada (${latestTagged?.version ?? 'Preview'}).`
-  : `HorneroOS is an Arch-based workstation for building, creating and playing: Desktop, Studio and Gaming editions, Hornero Shell and horneroctl, on one signed ISO (${latestTagged?.version ?? 'Preview'}).`;
+  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar: ediciones Desktop, Studio y Gaming, Hornero Shell y horneroctl, en una ISO firmada (${latestTagged?.version ?? '0.2.0-preview32'}).`
+  : `HorneroOS is an Arch-based workstation for building, creating and playing: Desktop, Studio and Gaming editions, Hornero Shell and horneroctl, on one signed ISO (${latestTagged?.version ?? '0.2.0-preview32'}).`;
 ---
 
 <SiteLayout
@@ -241,7 +240,7 @@ const description = isEs
         }
       </p>
       <div class="cta-row">
-        <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+        <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
         <a href={L('/editions')} class="cta secondary">{isEs ? 'Elegí tu edición' : 'Choose your edition'}</a>
       </div>
     </div>
@@ -445,8 +444,8 @@ const description = isEs
       <p>
         {
           isEs
-            ? `Es una preview: usable hoy, todavía puliéndose${candidate ? `, con la Preview ${previewNumber(candidate.version)} en preparación` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`
-            : `It is a preview: usable today, still being polished${candidate ? `, with Preview ${previewNumber(candidate.version)} in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`
+            ? `Es un sistema para uso diario, con limitaciones concretas y declaradas: LUKS, BIOS heredado y Niri no están validados en la ISO actual y el rollback de SO sigue planificado${candidate ? `; ${candidate.version} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`
+            : `It is an everyday-use system with concrete, declared limitations: LUKS, legacy BIOS and Niri are not validated on the current ISO and OS rollback is still planned${candidate ? `; ${candidate.version} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`
         }
       </p>
     </header>
@@ -462,7 +461,7 @@ const description = isEs
       }
     </ol>
     <div class="cta-row">
-      <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+      <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
       <a href={L('/docs/getting-started/')} class="cta secondary">{isEs ? 'Leé la guía de inicio' : 'Read the getting-started guide'}</a>
     </div>
   </section>

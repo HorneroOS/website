@@ -19,8 +19,8 @@
         "en": "Is it ready for daily use?"
       },
       "answer": {
-        "es": "Está en Preview. La ISO publicada es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview33. Desktop, Studio y Gaming tienen madurez Preview en el catálogo fijado: se pueden probar e instalar, y todavía no son una edición Soportada. Las páginas de cada edición dicen qué validación en hardware falta.",
-        "en": "It is in Preview. The published ISO is 0.2.0-preview32 and the packages reached 0.2.0-preview33. Desktop, Studio and Gaming carry Preview maturity in the pinned catalogue: they can be tried and installed, and they are not a Supported edition yet. Each edition page says which hardware validation is still missing."
+        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Supported en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview36. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
+        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Supported maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview36. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
       }
     },
     {
@@ -30,8 +30,8 @@
         "en": "Which editions exist, and which are missing?"
       },
       "answer": {
-        "es": "Desktop, Studio y Gaming se instalan desde la misma ISO en Preview. Server y Agents están definidas en el catálogo con madurez Planificada: no tienen imagen instalable.",
-        "en": "Desktop, Studio and Gaming install from the same ISO in Preview. Server and Agents are defined in the catalogue with Planned maturity: they have no installable image."
+        "es": "Desktop, Studio y Gaming se instalan desde la misma ISO actual. Server y Agents están definidas en el catálogo con madurez Planificada: no tienen imagen instalable.",
+        "en": "Desktop, Studio and Gaming install from the same current ISO. Server and Agents are defined in the catalogue with Planned maturity: they have no installable image."
       }
     },
     {

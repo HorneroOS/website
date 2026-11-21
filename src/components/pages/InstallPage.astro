@@ -27,7 +27,6 @@ const packages = isEs
       { name: 'hornero-config', what: 'the desktop defaults and theme packs' },
       { name: 'hornero-greeter', what: 'the SDDM login screen' },
     ];
-const preview = (v: string) => /preview(\d+)$/.exec(v)?.[1];
 const packageVersion = packageRelease?.version;
 const packageRecord = packageVersion ? releases.find((r) => r.version === packageVersion) : undefined;
 const packaged = features.filter((f) => f.stage === 'packaged');
@@ -43,18 +42,18 @@ const statusName = (
 <SiteLayout
   socialImage="/og/install.png"
   socialImageAlt={isEs ? 'Descargá HorneroOS: tres pasos (descargar la ISO de 2.7 GB, verificar SHA-256 y firma, elegir edición y compositor).' : 'Download HorneroOS: three steps (download the 2.7 GB ISO, verify SHA-256 and signature, pick edition and compositor).'}
-  title={isEs ? 'Descargá HorneroOS | ISO Preview firmada para x86_64' : 'Download HorneroOS | Signed x86_64 Preview ISO'}
-  description={isEs ? 'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming Preview, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.' : 'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming Preview editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.'}
+  title={isEs ? 'Descargá HorneroOS | ISO actual firmada para x86_64' : 'Download HorneroOS | Signed current x86_64 ISO'}
+  description={isEs ? 'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming para uso diario, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.' : 'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming everyday-use editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.'}
 >
   <section class="section">
     <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>{downloadTag}</span><span>x86_64 · {download.iso.sizeLabel}</span></p>
     <h1>{isEs ? 'Descargá HorneroOS' : 'Download HorneroOS'}</h1>
     <p class="lede">
-      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio Preview con especializaciones creativas a elección, o la nueva edición Gaming Preview. Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS y Niri no se ejecutaron sobre esta ISO) y está publicada como pre-release firmada en GitHub. Es una preview, no una versión estable.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio Preview edition with selectable creative specializations, or the new Gaming Preview edition. It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO) and is published as a signed GitHub pre-release. This is a preview, not a stable release.'}
+      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como pre-release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub pre-release. HorneroOS is used daily, with those limitations declared.'}
     </p>
     <p class="cta-row download-row">
       <a class="cta primary" href={download.iso.url}>
-        {isEs ? `Descargar la ISO Preview (${download.iso.sizeLabel})` : `Download the Preview ISO (${download.iso.sizeLabel})`}
+        {isEs ? `Descargar la ISO actual (${download.iso.sizeLabel})` : `Download the current ISO (${download.iso.sizeLabel})`}
       </a>
       <a class="cta secondary" href={L('/editions')}>{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
     </p>
@@ -70,14 +69,14 @@ const statusName = (
       <a href={download.signatureUrl}>{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>{download.iso.name}</code><span>{isEs ? 'la imagen de instalación (Desktop + Studio + Gaming Preview)' : 'the install image (Desktop + Studio + Gaming Preview)'}</span></li>
+      <li><code>{download.iso.name}</code><span>{isEs ? 'la imagen de instalación actual (Desktop + Studio + Gaming)' : 'the current install image (Desktop + Studio + Gaming)'}</span></li>
       <li><code>SHA-256</code><span>{download.iso.sha256}</span></li>
       <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS ' + download.keyFingerprint + '; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key ' + download.keyFingerprint + '; verify with the public key in the hornero repository ('}<code>{download.keyPath}</code>)</span></li>
     </ul>
     {packageRelease && (
       <div class="package-release" aria-labelledby="pkg-release-title">
         <h2 id="pkg-release-title">
-          {isEs ? `Paquetes más nuevos que la ISO: Preview ${preview(packageRelease.version)}` : `Packages newer than the ISO: Preview ${preview(packageRelease.version)}`}
+          {isEs ? `Paquetes más nuevos que la ISO: ${packageRelease.version}` : `Packages newer than the ISO: ${packageRelease.version}`}
         </h2>
         <p>
           {isEs
@@ -105,10 +104,10 @@ const statusName = (
         <>
           {isEs ? 'La última etiquetada es ' : 'The latest tagged one is '}
           {' '}
-          <a href={L(`/releases#${latestTagged.name}`)}>Development Preview {preview(latestTagged.version)}</a>
+          <a href={L(`/releases#${latestTagged.name}`)}>{latestTagged.version}</a>
           {candidate && (
             <>
-              {isEs ? ', y ' : ', and '}<a href={L(`/releases#${candidate.name}`)}>Development Preview {preview(candidate.version)}</a> {isEs ? 'se está preparando' : 'is being prepared'}
+              {isEs ? ', y ' : ', and '}<a href={L(`/releases#${candidate.name}`)}>{candidate.version}</a> {isEs ? 'se está preparando' : 'is being prepared'}
             </>
           )}
           .
@@ -130,7 +129,7 @@ gpg --verify {download.iso.name}.sig</code></pre>
       <li>
         <span class="journey-n" aria-hidden="true">02</span>
         <h3>{isEs ? 'Instalá' : 'Install'}</h3>
-        <p>{isEs ? 'Elegí la edición, las especializaciones y el compositor. Es una preview: probala en una máquina virtual o en un equipo que puedas reinstalar.' : 'Pick the edition, specializations and compositor. It is a preview: try it in a virtual machine or on a machine you can reinstall.'}</p>
+        <p>{isEs ? 'Elegí la edición, las especializaciones y el compositor. Tené en cuenta las limitaciones declaradas (LUKS, BIOS heredado y Niri no validados en esta ISO): si tu caso depende de eso, probala primero en una máquina virtual o en un equipo que puedas reinstalar.' : 'Pick the edition, specializations and compositor. Note the declared limitations (LUKS, legacy BIOS and Niri not validated on this ISO): if your case depends on those, try it first in a virtual machine or on a machine you can reinstall.'}</p>
       </li>
       <li id="update">
         <span class="journey-n" aria-hidden="true">03</span>
@@ -140,6 +139,8 @@ gpg --verify {download.iso.name}.sig</code></pre>
 horneroctl package check
 yay -Syu</code></pre>
         <p>{isEs ? 'horneroctl package upgrade corre pacman -Syu: actualiza los repositorios de Arch, no los paquetes del AUR. Ningún comando hace rollback del sistema; el snapshot guarda solo la configuración de Hornero.' : 'horneroctl package upgrade runs pacman -Syu: it updates the Arch repositories, not AUR packages. No command rolls the system back; the snapshot keeps Hornero configuration only.'}</p>
+        <p><a href={L('/docs/desktop/updates-and-rollback/')}>{isEs ? 'Leé la guía de actualizaciones y rollback (el rollback de SO sigue planificado)' : 'Read the updates and rollback guide (OS rollback is still planned)'}</a></p>
+        <p>{isEs ? 'Guías oficiales: ' : 'Official guides: '}<a href={L('/docs/getting-started/install-step-by-step/')}>{isEs ? 'instalación paso a paso' : 'step-by-step installation'}</a>{', '}<a href={L('/docs/applications/post-install-first-steps/')}>{isEs ? 'primeros pasos tras instalar' : 'first steps after installing'}</a>{isEs ? ' y ' : ' and '}<a href={L('/docs/troubleshooting/by-symptom/')}>{isEs ? 'problemas por síntoma' : 'troubleshooting by symptom'}</a>.</p>
         {packageRelease && (
           <p>{isEs ? `La actualización en el lugar a la ${packageTag} todavía figura como pendiente de verificación en su checklist.` : `The in-place upgrade to ${packageTag} is still listed as pending verification in its checklist.`}</p>
         )}
@@ -176,7 +177,7 @@ yay -Syu</code></pre>
     <dl class="readiness-ledger">
       <div class="state-available">
         <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">Preview</span> {isEs ? 'ISO publicada como pre-release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'ISO published as a signed pre-release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dd><span class="state">{downloadTag}</span> {isEs ? 'ISO actual publicada como pre-release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'Current ISO published as a signed pre-release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
       </div>
       <div class="state-provisional">
         <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
@@ -192,7 +193,7 @@ yay -Syu</code></pre>
   <section class="section">
     <h2>{isEs ? 'Qué existe hoy' : 'What exists today'}</h2>
     <p>
-      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO Preview firmada de arriba (Desktop, Studio o Gaming Preview), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed Preview ISO above (Desktop, Studio or Gaming Preview), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
+      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO actual firmada de arriba (Desktop, Studio o Gaming), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed current ISO above (Desktop, Studio or Gaming), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
     </p>
     <ul role="list" class="packages">
       {packages.map((p) => (
@@ -223,7 +224,7 @@ yay -Syu</code></pre>
       ))}
     </ul>
     <p>
-      {isEs ? 'Desktop es la preview actual. Studio y Gaming se instalan desde la misma ISO Preview con especializaciones y perfiles a elección, y pasaron su validación de instalación en VM en esta ISO; son ediciones ' : 'Desktop is the current preview. Studio and Gaming install from the same Preview ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are '}<strong>Preview</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
+      {isEs ? 'Desktop es la edición base para uso diario. Studio y Gaming se instalan desde la misma ISO actual con especializaciones y perfiles a elección, y pasaron su validación de instalación en VM en esta ISO; son ediciones ' : 'Desktop is the everyday-use base edition. Studio and Gaming install from the same current ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are '}<strong>Supported</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
       <code>hornero-qa studio-gate</code> {isEs ? ' todavía está pendiente, así que los resultados en VM no son prueba en hardware físico y Studio todavía no es Supported. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Niri sigue siendo experimental dentro de Desktop.' : ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.'}{' '}
       <a href={L('/editions')}>{isEs ? 'Cómo encajan las ediciones.' : 'How the editions fit together.'}</a>
     </p>
@@ -243,7 +244,7 @@ yay -Syu</code></pre>
   <section class="section">
     <h2>{isEs ? 'El instalador' : 'The installer'}</h2>
     <p>
-      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. La ISO Preview de arriba ya instala Desktop, Studio y Gaming con este Calamares.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. The Preview ISO above already installs Desktop, Studio and Gaming with this Calamares build."}
+      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. La ISO actual de arriba ya instala Desktop, Studio y Gaming con este Calamares.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. The current ISO above already installs Desktop, Studio and Gaming with this Calamares build."}
     </p>
     <p>
       {isEs ? 'Quienes contribuyen pueden seguir el ' : 'Contributors can follow the '}<a href={L('/docs/development/design-language/')}>{isEs ? 'lenguaje de diseño de HorneroOS' : 'HorneroOS design language'}</a>{isEs ? ', que apunta a las fuentes de diseño autoritativas para el escritorio, el sitio web, el greeter y el instalador.' : ', which points to the authoritative design sources for the desktop, website, greeter and installer.'}

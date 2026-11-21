@@ -65,9 +65,9 @@ const matrix = [
 
 <SiteLayout
   socialImage="/og/editions.png"
-  socialImageAlt={isEs ? 'Las ediciones de HorneroOS con su madurez: Desktop, Studio y Gaming en Preview; Server y Agents planificadas.' : 'The HorneroOS editions with their maturity: Desktop, Studio and Gaming in Preview; Server and Agents planned.'}
+  socialImageAlt={isEs ? 'Las ediciones de HorneroOS con su madurez: Desktop, Studio y Gaming para uso diario (Supported); Server y Agents planificadas.' : 'The HorneroOS editions with their maturity: Desktop, Studio and Gaming for everyday use (Supported); Server and Agents planned.'}
   title={isEs ? 'Ediciones: Desktop, Studio y Gaming | HorneroOS' : 'Editions: Desktop, Studio and Gaming | HorneroOS'}
-  description={isEs ? 'HorneroOS es una base con ediciones para cada oficio: Desktop, Studio y Gaming en Preview desde la misma ISO firmada, y Server y Agents planificadas. La madurez sale del catálogo de ediciones fijado.' : 'HorneroOS is one base with editions for each craft: Desktop, Studio and Gaming in Preview from the same signed ISO, plus Server and Agents planned. Maturity comes from the pinned edition catalogue.'}
+  description={isEs ? 'HorneroOS es una base con ediciones para cada oficio: Desktop, Studio y Gaming para uso diario desde la misma ISO actual firmada, y Server y Agents planificadas. La madurez sale del catálogo de ediciones fijado.' : 'HorneroOS is one base with editions for each craft: Desktop, Studio and Gaming for everyday use from the same signed current ISO, plus Server and Agents planned. Maturity comes from the pinned edition catalogue.'}
 >
   <section class="intro section">
     <p class="plate-id"><strong>{isEs ? 'Ediciones' : 'Editions'}</strong><span>{isEs ? 'Madurez desde el catálogo fijado' : 'Maturity from the pinned catalogue'}</span></p>
@@ -76,7 +76,7 @@ const matrix = [
       {isEs ? 'Desktop, Studio y Gaming son perfiles del mismo sistema operativo, no distribuciones separadas. Se instalan desde la misma ISO firmada: elegís la edición, las especializaciones y el compositor durante la instalación.' : 'Desktop, Studio and Gaming are profiles of the same operating system, not separate distributions. They install from the same signed ISO: you pick the edition, the specializations and the compositor during installation.'}
     </p>
     <div class="cta-row">
-      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO Preview' : 'Download the Preview ISO'}</a>
+      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
       <a class="cta secondary" href="#matrix-title">{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
     </div>
   </section>
@@ -160,7 +160,7 @@ const matrix = [
       {isEs ? 'Studio y Gaming se basan en Desktop; Agents se basa en Server. El compositor es una elección de backend de Desktop: Hyprland es el predeterminado validado, Niri es experimental y tiene brechas de capacidad documentadas.' : 'Studio and Gaming build on Desktop; Agents builds on Server. The compositor is a Desktop backend choice: Hyprland is the validated default, Niri is experimental and has documented capability gaps.'}
     </p>
     <p>
-      {isEs ? 'Los estados de esta página vienen del catálogo de composición fijado de Hornero, el mismo modelo que usan la CLI, el instalador y las herramientas de aceptación. La ISO Preview se instala mediante el camino provisorio con Calamares; el instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : 'The states on this page come from the pinned Hornero composition catalogue, the same model used by the CLI, the installer and acceptance tooling. The Preview ISO installs via the provisional Calamares path; Panda Foss’s custom installer remains the future official path.'}
+      {isEs ? 'Los estados de esta página vienen del catálogo de composición fijado de Hornero, el mismo modelo que usan la CLI, el instalador y las herramientas de aceptación. La ISO actual se instala mediante el camino provisorio con Calamares; el instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : 'The states on this page come from the pinned Hornero composition catalogue, the same model used by the CLI, the installer and acceptance tooling. The current ISO installs via the provisional Calamares path; Panda Foss’s custom installer remains the future official path.'}
     </p>
   </section>
 </SiteLayout>
