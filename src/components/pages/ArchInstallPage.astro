@@ -3,66 +3,74 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import { packageRelease } from '../../data/download';
 
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/arch-install';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const pkg = packageRelease?.version ?? '';
 ---
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt={isEs ? 'Instalar HorneroOS sobre Arch Linux: paquetes del AUR, configuración inicial segura y arranque de sesión.' : 'Install HorneroOS on Arch Linux: AUR packages, safe first-time setup and session start.'}
-  title={isEs ? 'HorneroOS sobre Arch Linux | Instalación por paquetes' : 'HorneroOS on Arch Linux | Package installation'}
-  description={isEs ? '¿Ya usás Arch? Instalá el escritorio HorneroOS como paquetes del AUR, sin reinstalar el sistema: requisitos, comandos verificados, configuración inicial que no pisa tus dotfiles y cómo volver atrás.' : 'Already running Arch? Install the HorneroOS desktop as AUR packages without reinstalling your system: requirements, verified commands, first-time setup that never overwrites your dotfiles, and how to roll back.'}
+  socialImageAlt={m.instalarHorneroosSobreArchLinux}
+  title={m.horneroosSobreArchLinuxInstalacion}
+  description={m.yaUsasArchInstalaEl}
 >
   <section class="section">
-    <p class="plate-id"><strong>{isEs ? 'Instalación' : 'Install'}</strong><span>Arch Linux</span><span>AUR</span></p>
-    <h1>{isEs ? '¿Ya usás Arch? Convertilo en tu workstation HorneroOS' : 'Already run Arch? Make it your HorneroOS workstation'}</h1>
-    <p class="lede">
-      {isEs ? 'La ISO no es la única puerta de entrada. El escritorio completo —shell, defaults, greeter y la CLI del sistema— se publica como paquetes del AUR y se instala sobre tu Arch actual, sin reinstalar nada y sin tocar los archivos de configuración que ya son tuyos. Esta guía es ese camino, de principio a fin.' : 'The ISO is not the only way in. The full desktop — shell, defaults, greeter and the system CLI — is published as AUR packages and installs on top of your current Arch system, without reinstalling anything and without touching configuration files that are already yours. This guide is that path, end to end.'}
+    <p class="plate-id">
+      <strong>{m.instalacion}</strong>
+      <span>Arch Linux</span>
+      <span>AUR</span>
     </p>
+    <h1>{m.yaUsasArchConvertiloEn}</h1>
+    <p class="lede">{m.laIsoNoEsLa}</p>
     <p class="cta-row download-row">
-      <a class="cta primary" href="#install">{isEs ? 'Ir a los comandos' : 'Skip to the commands'}</a>
-      <a class="cta secondary" href={L('/install')}>{isEs ? 'Prefiero la ISO completa' : 'I would rather use the full ISO'}</a>
+      <a class="cta primary" href="#install">
+        {m.irALosComandos}
+      </a>
+      <a class="cta secondary" href={L('/install')}>
+        {m.prefieroLaIsoCompleta}
+      </a>
     </p>
-    <h2>{isEs ? 'Tres caminos, un mismo escritorio' : 'Three paths, one desktop'}</h2>
+    <h2>{m.tresCaminosUnMismoEscritorio}</h2>
     <ul role="list" class="packages">
       <li>
-        <code>{isEs ? 'A · ISO' : 'A · ISO'}</code>
-        <span>{isEs ? 'La experiencia completa desde cero, con ediciones Desktop, Studio y Gaming y los defaults de fábrica. Es la ruta de la ' : 'The complete from-scratch experience, with the Desktop, Studio and Gaming editions and factory defaults. It lives on the '}<a href={L('/install')}>{isEs ? 'página de descarga' : 'download page'}</a>.</span>
+        <code>{m.aIso}</code>
+        <span>
+          {m.laExperienciaCompletaDesdeCero}
+          <a href={L('/install')}>{m.paginaDeDescarga}</a>.
+        </span>
       </li>
       <li>
-        <code>{isEs ? 'B · Arch' : 'B · Arch'}</code>
-        <span>{isEs ? 'Esta guía: paquetes sobre tu Arch actual. El escritorio, el Centro de control, los temas, PluginKit y horneroctl, conviviendo con lo que ya tenés.' : 'This guide: packages on your current Arch. The desktop, Control Center, themes, PluginKit and horneroctl, living alongside what you already have.'}</span>
+        <code>{m.bArch}</code>
+        <span>{m.estaGuiaPaquetesSobreTu}</span>
       </li>
       <li>
-        <code>{isEs ? 'C · Solo la shell' : 'C · Shell only'}</code>
-        <span>{isEs ? 'Si ya corre Hyprland y solo querés probar la shell: instalás hornero-shell y la arrancás a mano dentro de tu sesión actual, sin adoptar la configuración de HorneroOS. Abajo está la variante.' : 'If Hyprland is already running and you only want to try the shell: install hornero-shell and start it by hand inside your current session, without adopting HorneroOS configuration. The variant is below.'}</span>
+        <code>{m.cSoloLaShell}</code>
+        <span>{m.siYaCorreHyprlandY}</span>
       </li>
     </ul>
   </section>
 
   <section class="section" aria-labelledby="req-title">
-    <h2 id="req-title">{isEs ? 'Requisitos' : 'Requirements'}</h2>
-    <h3>{isEs ? 'Obligatorios' : 'Required'}</h3>
+    <h2 id="req-title">{m.requisitos}</h2>
+    <h3>{m.obligatorios}</h3>
     <ul>
-      <li>{isEs ? 'Arch Linux x86_64 actualizado (`pacman -Syu` al día). Otras distros basadas en Arch no están verificadas oficialmente.' : 'Arch Linux x86_64, fully updated (`pacman -Syu`). Other Arch-based distributions are not officially verified.'}</li>
-      <li>{isEs ? 'Una sesión Wayland con Hyprland para la experiencia completa (la variante C también lo necesita). Si todavía no tenés compositor, el paso de paquetes lo instala.' : 'A Wayland session with Hyprland for the full experience (variant C needs it too). If you have no compositor yet, the package step installs one.'}</li>
-      <li>{isEs ? '`git` y `base-devel` para construir paquetes del AUR, y un ayudante como yay (abajo).' : '`git` and `base-devel` to build AUR packages, plus a helper such as yay (below).'}</li>
+      <li>{m.archLinuxX8664Actualizado}</li>
+      <li>{m.unaSesionWaylandConHyprland}</li>
+      <li>{m.gitYBaseDevelPara}</li>
     </ul>
-    <h3>{isEs ? 'Recomendados' : 'Recommended'}</h3>
+    <h3>{m.recomendados}</h3>
     <ul>
-      <li>{isEs ? 'PipeWire + WirePlumber para audio completo, xdg-desktop-portal-gtk además del portal de Hyprland, y los drivers de tu GPU según la wiki de Arch (en NVIDIA, el driver propietario y su modeset quedan a tu cargo: HorneroOS no los instala por vos en esta ruta).' : 'PipeWire + WirePlumber for complete audio, xdg-desktop-portal-gtk next to the Hyprland portal, and your GPU drivers per the Arch wiki (on NVIDIA, the proprietary driver and its modeset stay yours: HorneroOS does not install them for you on this path).'}</li>
-      <li>{isEs ? 'Un respaldo de tu configuración actual. El paso de configuración inicial nunca sobrescribe archivos tuyos, pero un respaldo sigue siendo gratis.' : 'A backup of your current configuration. The first-time setup step never overwrites your files, but a backup is still free.'}</li>
+      <li>{m.pipewireWireplumberParaAudioCompleto}</li>
+      <li>{m.unRespaldoDeTuConfiguracion}</li>
     </ul>
-    <h3>{isEs ? 'Si no tenés yay' : 'If you do not have yay yet'}</h3>
-    <p>
-      {isEs ? 'El AUR es mantenido por la comunidad: antes de instalar cualquier paquete, leé su PKGBUILD. Yay se construye como tu usuario, nunca como root:' : 'The AUR is community-maintained: read every PKGBUILD before installing. Yay itself is built as your user, never as root:'}
-    </p>
+    <h3>{m.siNoTenesYay}</h3>
+    <p>{m.elAurEsMantenidoPor}</p>
     <pre tabindex="0"><code>sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -70,62 +78,78 @@ makepkg -si</code></pre>
   </section>
 
   <section class="section" id="install" aria-labelledby="journey-title">
-    <h2 id="journey-title">{isEs ? 'De Arch a HorneroOS, paso a paso' : 'From Arch to HorneroOS, step by step'}</h2>
+    <h2 id="journey-title">{m.deArchAHorneroosPaso}</h2>
     <ol class="journey-steps" role="list">
       <li>
-        <span class="journey-n" aria-hidden="true">01</span>
-        <h3>{isEs ? 'Actualizá e instalá los paquetes' : 'Update and install the packages'}</h3>
-        <p>{isEs ? '`hornero-shell` trae como dependencias `hornero-config` (los defaults) y `horneroctl-bin` (la CLI firmada). El segundo grupo es el soporte de sesión: salteá lo que ya tengas.' : '`hornero-shell` pulls in `hornero-config` (the defaults) and `horneroctl-bin` (the signed CLI). The second group is session support: skip whatever you already have.'}</p>
+        <span class="journey-n" aria-hidden="true">
+          01
+        </span>
+        <h3>{m.actualizaEInstalaLosPaquetes}</h3>
+        <p>{m.horneroShellTraeComoDependencias}</p>
         <pre tabindex="0"><code>yay -Syu hornero-shell
 yay -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kitty dex hypridle cliphist wl-clipboard</code></pre>
-        <p>{isEs ? 'El greeter es opcional y solo si ya usás SDDM: `yay -S hornero-greeter` instala el tema sin cambiar tu display manager ni activarlo por vos. No hace falta reiniciar todavía.' : 'The greeter is optional and only if you already use SDDM: `yay -S hornero-greeter` installs the theme without switching your display manager or enabling it for you. No reboot needed yet.'}</p>
+        <p>{m.elGreeterEsOpcionalY}</p>
       </li>
       <li>
-        <span class="journey-n" aria-hidden="true">02</span>
-        <h3>{isEs ? 'Respaldá y sembrá tu configuración' : 'Back up and seed your configuration'}</h3>
-        <p>{isEs ? 'Tu cuenta ya existe, así que el esqueleto de fábrica (`/etc/skel`) nunca te llegó. El sembrado copia únicamente los archivos que te faltan —nunca sobrescribe uno tuyo— y el `--dry-run` te muestra la lista exacta antes de tocar nada:' : 'Your account already exists, so the factory skeleton (`/etc/skel`) never reached you. Seeding copies only the files you are missing — it never overwrites one of yours — and `--dry-run` shows the exact list before touching anything:'}</p>
+        <span class="journey-n" aria-hidden="true">
+          02
+        </span>
+        <h3>{m.respaldaYSembraTuConfiguracion}</h3>
+        <p>{m.tuCuentaYaExisteAsi}</p>
         <pre tabindex="0"><code>tar -czf ~/hornero-pre-adopt-$(date +%F).tar.gz ~/.config/hypr ~/.config/ghostty ~/.config/environment.d 2&gt;/dev/null
 /usr/share/hornero/seed-user.sh --dest "$HOME" --dry-run
 /usr/share/hornero/seed-user.sh --dest "$HOME"
 horneroctl doctor</code></pre>
-        <p>{isEs ? 'Si tu `~/.config/hypr/hyprland.lua` ya es tuyo, queda intacto: los módulos de fábrica se siembran al lado y el sistema sigue usando tu entrada. Para adoptar la entrada de fábrica con tus overrides en `hyprland.lua.d/*-user.lua`, mové la tuya a un lado y volvé a sembrar; `horneroctl config refresh-hypr` mantiene esa entrada al día sin tocar tus archivos de usuario.' : 'If your `~/.config/hypr/hyprland.lua` is already yours, it stays intact: factory modules are seeded next to it and the system keeps using your entrypoint. To adopt the factory entrypoint with your overrides in `hyprland.lua.d/*-user.lua`, move yours aside and seed again; `horneroctl config refresh-hypr` then keeps that entrypoint current without touching your user files.'}</p>
+        <p>{m.siTuConfigHyprHyprland}</p>
       </li>
       <li>
-        <span class="journey-n" aria-hidden="true">03</span>
-        <h3>{isEs ? 'Entrá por tu sesión Hyprland de siempre' : 'Log in through your usual Hyprland session'}</h3>
-        <p>{isEs ? 'No hay una sesión nueva que elegir: HorneroOS vive dentro de Hyprland. Con la configuración sembrada, la shell arranca sola al entrar. Sin sembrar nada, tu Hyprland usa los defaults de sistema de HorneroOS que trae el paquete. Para probar solo la shell (camino C), arrancala a mano en tu sesión actual:' : 'There is no new session to pick: HorneroOS lives inside Hyprland. With the seeded configuration the shell starts on login. With nothing seeded, your Hyprland falls back to the packaged HorneroOS system defaults. To try only the shell (path C), start it by hand inside your current session:'}</p>
+        <span class="journey-n" aria-hidden="true">
+          03
+        </span>
+        <h3>{m.entraPorTuSesionHyprland}</h3>
+        <p>{m.noHayUnaSesionNueva}</p>
         <pre tabindex="0"><code>horneroctl shell start --yes</code></pre>
       </li>
       <li>
-        <span class="journey-n" aria-hidden="true">04</span>
-        <h3>{isEs ? 'Personalizá' : 'Make it yours'}</h3>
-        <p>{isEs ? 'El Centro de control concentra layouts, temas, Hornero Chromatic, modos de experiencia y extensiones de PluginKit desde el catálogo. Los compañeros se instalan desde el mismo catálogo como paquetes de datos. Todo eso ya viene en los paquetes que instalaste: no hay un segundo paso de instalación.' : 'Control Center holds layouts, themes, Hornero Chromatic, experience modes and PluginKit extensions from the catalogue. Companions install from that same catalogue as data packages. It all ships in the packages you just installed: there is no second installation step.'}</p>
-        <p><a href={L('/docs/applications/post-install-first-steps/')}>{isEs ? 'Primeros pasos tras instalar' : 'First steps after installing'}</a>{isEs ? ' y la ' : ' and the '}<a href={L('/docs/getting-started/install-step-by-step/')}>{isEs ? 'guía paso a paso completa' : 'complete step-by-step guide'}</a>.</p>
+        <span class="journey-n" aria-hidden="true">
+          04
+        </span>
+        <h3>{m.personaliza}</h3>
+        <p>{m.elCentroDeControlConcentra}</p>
+        <p>
+          <a href={L('/docs/applications/post-install-first-steps/')}>{m.primerosPasosTrasInstalar}</a>
+          {m.yLa}
+          <a href={L('/docs/getting-started/install-step-by-step/')}>{m.guiaPasoAPasoCompleta}</a>.
+        </p>
       </li>
     </ol>
   </section>
 
   <section class="section" aria-labelledby="keep-title">
-    <h2 id="keep-title">{isEs ? 'Qué pasa con lo que ya tenés' : 'What happens to what you already have'}</h2>
+    <h2 id="keep-title">{m.quePasaConLoQue}</h2>
     <ul>
-      <li>{isEs ? '**Tu Hyprland**: tu `hyprland.lua` (o `.conf`) manda. El sembrado solo agrega los archivos que te faltan y nunca pisa los tuyos; los defaults del paquete viven en `/etc/xdg` como fallback.' : '**Your Hyprland**: your `hyprland.lua` (or `.conf`) wins. Seeding only adds the files you are missing and never overwrites yours; packaged defaults live in `/etc/xdg` as fallback.'}</li>
-      <li>{isEs ? '**Otros escritorios**: KDE, GNOME u otra sesión quedan instalados y elegibles en tu display manager de siempre. Nada se desinstala ni se deshabilita.' : '**Other desktops**: KDE, GNOME or another session stay installed and selectable in your usual display manager. Nothing is removed or disabled.'}</li>
-      <li>{isEs ? '**Barras y notificaciones**: si otra shell o daemon de notificaciones ya corre en tu sesión, van a convivir hasta que decidas. La shell de Hornero no mata procesos ajenos; apagá el autostart del otro cuando quieras quedarte con uno.' : '**Bars and notifications**: if another shell or notification daemon already runs in your session, they will coexist until you decide. The Hornero shell kills no foreign processes; turn the other autostart off when you want only one.'}</li>
-      <li>{isEs ? '**Tus dotfiles**: GTK/Qt, terminal y shell de login solo cambian donde no tenías nada. Lo que el sembrado creó queda listado en su salida; borrar esos archivos te devuelve exactamente al estado anterior.' : '**Your dotfiles**: GTK/Qt, terminal and login shell only change where you had nothing. Whatever seeding created is listed in its output; deleting those files returns you exactly to the previous state.'}</li>
+      <li>{m.tuHyprlandTuHyprlandLua}</li>
+      <li>{m.otrosEscritoriosKdeGnomeU}</li>
+      <li>{m.barrasYNotificacionesSiOtra}</li>
+      <li>{m.tusDotfilesGtkQtTerminal}</li>
     </ul>
-    <h3>{isEs ? 'Volver atrás' : 'Rolling back'}</h3>
-    <p>{isEs ? 'Desinstalar es quitar paquetes: tu configuración y tus datos quedan donde estaban, y tu sesión anterior sigue arrancando como siempre.' : 'Uninstalling is removing packages: your configuration and data stay where they were, and your previous session keeps starting as always.'}</p>
+    <h3>{m.volverAtras}</h3>
+    <p>{m.desinstalarEsQuitarPaquetesTu}</p>
     <pre tabindex="0"><code>yay -Rns hornero-shell hornero-config horneroctl-bin</code></pre>
-    <p>{isEs ? 'Si sembraste configuración, los únicos archivos nuevos son los que el sembrado listó al correr: borrarlos es opcional y seguro si no los editaste.' : 'If you seeded configuration, the only new files are the ones seeding listed when it ran: deleting them is optional and safe if you never edited them.'}</p>
+    <p>{m.siSembrasteConfiguracionLosUnicos}</p>
   </section>
 
   <section class="section" aria-labelledby="scope-title">
-    <h2 id="scope-title">{isEs ? 'Alcance honesto' : 'Honest scope'}</h2>
+    <h2 id="scope-title">{m.alcanceHonesto}</h2>
     <ul>
-      <li>{isEs ? 'Los paquetes traen el escritorio completo y los modos de experiencia. Las aplicaciones de cada edición (el stack creativo de Studio, Steam y compañía en Gaming) se instalan con pacman/yay como en cualquier Arch: cambiar de modo no instala aplicaciones por vos. La ISO sigue siendo el camino que provisiona una edición entera.' : 'The packages bring the full desktop and the experience modes. Each edition’s applications (the Studio creative stack, Steam and friends on Gaming) install with pacman/yay like on any Arch: switching modes does not install applications for you. The ISO remains the path that provisions a whole edition.'}</li>
-      <li>{isEs ? `El escritorio por paquetes puede ir por delante de la ISO publicada${pkg ? ` (hoy: paquetes ${pkg})` : ''}: actualizar es el yay -Syu de siempre, con un snapshot antes si querés (horneroctl config snapshot create --yes).` : `The packaged desktop can run ahead of the published ISO${pkg ? ` (today: packages ${pkg})` : ''}: updating is the usual yay -Syu, with a snapshot first if you want one (horneroctl config snapshot create --yes).`}</li>
-      <li>{isEs ? 'Derivados de Arch (CachyOS, EndeavourOS y otros) no están verificados oficialmente: los paquetes son los mismos, pero tratá esa ruta como experimental.' : 'Arch derivatives (CachyOS, EndeavourOS and others) are not officially verified: the packages are the same, but treat that path as experimental.'}</li>
+      <li>{m.losPaquetesTraenElEscritorio}</li>
+      <li>{m.packagesAhead(pkg)}</li>
+      <li>{m.derivadosDeArchCachyosEndeavouros}</li>
     </ul>
-    <p><a href={L('/why-horneroos#faq')}>{isEs ? 'Preguntas frecuentes' : 'FAQ'}</a> · <a href={L('/docs/troubleshooting/by-symptom/')}>{isEs ? 'Problemas por síntoma' : 'Troubleshooting by symptom'}</a> · <a href={L('/releases')}>{isEs ? 'Releases y paquetes vigentes' : 'Current releases and packages'}</a></p>
+    <p>
+      <a href={L('/why-horneroos#faq')}>{m.preguntasFrecuentes}</a> ·{' '}
+      <a href={L('/docs/troubleshooting/by-symptom/')}>{m.problemasPorSintoma}</a> ·{' '}
+      <a href={L('/releases')}>{m.releasesYPaquetesVigentes}</a>
+    </p>
   </section>
 </SiteLayout>

@@ -3,61 +3,63 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import CaptureFigure from '../../components/CaptureFigure.astro';
-import { editions, editionCatalogue, studioCatalogue, gamingCatalogue, layouts, themes, type Maturity } from '../../data/product';
+import {
+  editions,
+  editionCatalogue,
+  studioCatalogue,
+  gamingCatalogue,
+  layouts,
+  themes,
+  type Maturity,
+} from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/editions';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
-const maturityLabels: Record<Maturity, string> = isEs
-  ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
-  : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+const maturityLabels: Record<Maturity, string> = m.maturityLabels;
 type EditionId = 'desktop' | 'server' | 'agents' | 'studio' | 'gaming';
-const copy: Record<EditionId, { channel: string; tagline: string; body: string; href: string; link: string }> = isEs
-  ? {
-      desktop: { channel: 'CH 01', tagline: 'Construí tu mundo', body: `La base de todas las ediciones de escritorio: Hornero Shell con ${layouts.length} layouts y ${themes.length} temas, Centro de control, lanzador, dashboard, horneroctl y extensiones.`, href: '/showroom', link: 'Mirá el escritorio' },
-      studio: { channel: 'CH 02', tagline: 'Hacé algo real', body: 'Desktop más aplicaciones y política de audio para música, video, streaming, diseño, foto y 3D, elegidas por especialización al instalar.', href: '/studio', link: 'Conocé Studio' },
-      gaming: { channel: 'CH 03', tagline: 'Jugá a tu manera', body: 'Desktop más una capa de juego combinable: Steam con Proton, Gamescope, GameMode y MangoHud, todo a elección.', href: '/gaming', link: 'Conocé Gaming' },
-      server: { channel: 'CH 04', tagline: 'Sistema sin pantalla', body: 'Para homelabs, máquinas virtuales y servicios autoalojados. Se opera de forma remota y no tiene sesión gráfica.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
-      agents: { channel: 'CH 05', tagline: 'Alojamiento de agentes', body: 'Basado en Server, con identidades aisladas, servicios restringidos y ciclos de vida de agentes inspeccionables.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Leé el modelo de composición' },
-    }
-  : {
-      desktop: { channel: 'CH 01', tagline: 'Build your world', body: `The base of every desktop edition: Hornero Shell with ${layouts.length} layouts and ${themes.length} themes, Control Center, launcher, dashboard, horneroctl and extensions.`, href: '/showroom', link: 'See the desktop' },
-      studio: { channel: 'CH 02', tagline: 'Make something real', body: 'Desktop plus applications and audio policy for music, video, streaming, design, photo and 3D, picked by specialization at install time.', href: '/studio', link: 'Explore Studio' },
-      gaming: { channel: 'CH 03', tagline: 'Play on your terms', body: 'Desktop plus a composable gaming layer: Steam with Proton, Gamescope, GameMode and MangoHud, all opt-in.', href: '/gaming', link: 'Explore Gaming' },
-      server: { channel: 'CH 04', tagline: 'Headless system', body: 'For homelabs, virtual machines and self-hosted services. Operated remotely, with no graphical session.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
-      agents: { channel: 'CH 05', tagline: 'Agent hosting', body: 'Built on Server, with isolated identities, constrained services and inspectable agent lifecycles.', href: 'https://github.com/HorneroOS/hornero/tree/main/editions', link: 'Read the composition model' },
-    };
+const copy: Record<EditionId, { channel: string; tagline: string; body: string; href: string; link: string }> = m.copy(
+  layouts.length,
+  themes.length,
+);
 const familyOrder: EditionId[] = ['desktop', 'studio', 'gaming', 'server', 'agents'];
 const byId = Object.fromEntries(editions.map((edition) => [edition.id, edition]));
 const rows = familyOrder.map((id) => {
   const edition = byId[id];
   if (!edition) throw new Error(`Edition ${id} is missing from the pinned catalogue`);
   const parent = edition.extends ? byId[edition.extends] : undefined;
-  const inherited = edition.compositor?.supported ?? (parent?.compositor?.supported ?? []);
+  const inherited = edition.compositor?.supported ?? parent?.compositor?.supported ?? [];
   const compositors = inherited.map((backend) => ({
     id: backend,
     maturity: (editionCatalogue.compositors.find((item) => item.id === backend)?.maturity ?? 'planned') as Maturity,
   }));
-  return { ...edition, ...copy[id], name: edition.title.replace('HorneroOS ', ''), parent: parent?.title.replace('HorneroOS ', ''), compositors };
+  return {
+    ...edition,
+    ...copy[id],
+    name: edition.title.replace('HorneroOS ', ''),
+    parent: parent?.title.replace('HorneroOS ', ''),
+    compositors,
+  };
 });
 const compositorName = (id: string) => (id === 'hyprland' ? 'Hyprland' : id === 'niri' ? 'Niri' : id);
 
-const yes = isEs ? 'Sí' : 'Yes';
+const yes = m.si;
 const no = '—';
 const studioSpecs = studioCatalogue.specializations.length;
 const gamingSpecs = gamingCatalogue?.specializations.length ?? 0;
 const matrix = [
-  { label: isEs ? 'Base HorneroOS y horneroctl' : 'HorneroOS base and horneroctl', cells: [yes, yes, yes, yes, yes] },
-  { label: isEs ? 'Hornero Shell y Centro de control' : 'Hornero Shell and Control Center', cells: [yes, yes, yes, no, no] },
-  { label: isEs ? 'Especializaciones creativas' : 'Creative specializations', cells: [no, String(studioSpecs), no, no, no] },
-  { label: isEs ? 'Perfiles de juego' : 'Gaming profiles', cells: [no, no, String(gamingSpecs), no, no] },
+  { label: m.baseHorneroosYHorneroctl, cells: [yes, yes, yes, yes, yes] },
+  { label: m.horneroShellYCentroDe, cells: [yes, yes, yes, no, no] },
+  { label: m.especializacionesCreativas, cells: [no, String(studioSpecs), no, no, no] },
+  { label: m.perfilesDeJuego, cells: [no, no, String(gamingSpecs), no, no] },
   {
-    label: isEs ? 'Se instala hoy desde la ISO' : 'Installs today from the ISO',
+    label: m.seInstalaHoyDesdeLa,
     cells: rows.map((row) => (row.maturity === 'planned' ? no : yes)),
   },
 ];
@@ -65,88 +67,112 @@ const matrix = [
 
 <SiteLayout
   socialImage="/og/editions.png"
-  socialImageAlt={isEs ? 'Las ediciones de HorneroOS con su madurez: Desktop, Studio y Gaming para uso diario (Supported); Server y Agents planificadas.' : 'The HorneroOS editions with their maturity: Desktop, Studio and Gaming for everyday use (Supported); Server and Agents planned.'}
-  title={isEs ? 'Ediciones: Desktop, Studio y Gaming | HorneroOS' : 'Editions: Desktop, Studio and Gaming | HorneroOS'}
-  description={isEs ? 'HorneroOS es una base con ediciones para cada oficio: Desktop, Studio y Gaming para uso diario desde la misma ISO actual firmada, y Server y Agents planificadas. La madurez sale del catálogo de ediciones fijado.' : 'HorneroOS is one base with editions for each craft: Desktop, Studio and Gaming for everyday use from the same signed current ISO, plus Server and Agents planned. Maturity comes from the pinned edition catalogue.'}
+  socialImageAlt={m.lasEdicionesDeHorneroosCon}
+  title={m.edicionesDesktopStudioYGaming}
+  description={m.horneroosEsUnaBaseCon}
 >
   <section class="intro section">
-    <p class="plate-id"><strong>{isEs ? 'Ediciones' : 'Editions'}</strong><span>{isEs ? 'Madurez desde el catálogo fijado' : 'Maturity from the pinned catalogue'}</span></p>
-    <h1>{isEs ? 'Una base. Un oficio por edición.' : 'One base. One craft per edition.'}</h1>
-    <p class="lede">
-      {isEs ? 'Desktop, Studio y Gaming son perfiles del mismo sistema operativo, no distribuciones separadas. Se instalan desde la misma ISO firmada: elegís la edición, las especializaciones y el compositor durante la instalación.' : 'Desktop, Studio and Gaming are profiles of the same operating system, not separate distributions. They install from the same signed ISO: you pick the edition, the specializations and the compositor during installation.'}
+    <p class="plate-id">
+      <strong>{m.ediciones}</strong>
+      <span>{m.madurezDesdeElCatalogoFijado}</span>
     </p>
+    <h1>{m.unaBaseUnOficioPor}</h1>
+    <p class="lede">{m.desktopStudioYGamingSon}</p>
     <div class="cta-row">
-      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
-      <a class="cta secondary" href="#matrix-title">{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
+      <a class="cta primary" href={L('/install')}>
+        {m.descargaLaIsoActual}
+      </a>
+      <a class="cta secondary" href="#matrix-title">
+        {m.comparaLasEdiciones}
+      </a>
     </div>
   </section>
 
   <section class="section family" aria-labelledby="family-title">
-    <h2 id="family-title" class="sr-only">{isEs ? 'Las ediciones de HorneroOS' : 'The HorneroOS editions'}</h2>
+    <h2 id="family-title" class="sr-only">
+      {m.lasEdicionesDeHorneroos}
+    </h2>
     <ol class="rows" role="list">
-      {
-        rows.map((row) => (
-          <li class:list={['row', `maturity-${row.maturity}`]} id={row.id}>
-            <div class="row-id">
-              <p class="eyebrow">
-                <b>{row.channel}</b>
-                <span>{row.name}</span>
+      {rows.map((row) => (
+        <li class:list={['row', `maturity-${row.maturity}`]} id={row.id}>
+          <div class="row-id">
+            <p class="eyebrow">
+              <b>{row.channel}</b>
+              <span>{row.name}</span>
+            </p>
+            <h2>{row.tagline}</h2>
+            <MaturityMeter maturity={row.maturity} locale={locale} />
+          </div>
+          <div class="row-body">
+            <p>{row.body}</p>
+            {row.parent && (
+              <p class="extends">
+                {m.seBasaEn}
+                <a href={`#${row.extends}`}>{row.parent}</a>
               </p>
-              <h2>{row.tagline}</h2>
-              <MaturityMeter maturity={row.maturity} locale={locale} />
-            </div>
-            <div class="row-body">
-              <p>{row.body}</p>
-              {row.parent && (
-                <p class="extends">
-                  {isEs ? 'Se basa en ' : 'Builds on '}
-                  <a href={`#${row.extends}`}>{row.parent}</a>
-                </p>
-              )}
-              {row.compositors.length > 0 && (
-                <ul class="backends" role="list" aria-label={isEs ? 'Compositores Wayland' : 'Wayland compositors'}>
-                  {row.compositors.map((backend) => (
-                    <li>
-                      <AppLogo id={backend.id} />
-                      <strong>{compositorName(backend.id)}</strong>
-                      <span class="maturity" data-maturity={backend.maturity}>{maturityLabels[backend.maturity]}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <a class="row-link" href={row.href.startsWith('/') ? L(row.href) : row.href}>{row.link}</a>
-            </div>
-            {row.id === 'desktop' && (
-              <div class="row-shot">
-                <CaptureFigure slot="CAP-HERO-01" crop="top" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
-              </div>
             )}
-          </li>
-        ))
-      }
+            {row.compositors.length > 0 && (
+              <ul class="backends" role="list" aria-label={m.compositoresWayland}>
+                {row.compositors.map((backend) => (
+                  <li>
+                    <AppLogo id={backend.id} />
+                    <strong>{compositorName(backend.id)}</strong>
+                    <span class="maturity" data-maturity={backend.maturity}>
+                      {maturityLabels[backend.maturity]}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <a class="row-link" href={row.href.startsWith('/') ? L(row.href) : row.href}>
+              {row.link}
+            </a>
+          </div>
+          {row.id === 'desktop' && (
+            <div class="row-shot">
+              <CaptureFigure
+                slot="CAP-HERO-01"
+                crop="top"
+                locale={locale}
+                sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)"
+              />
+            </div>
+          )}
+        </li>
+      ))}
     </ol>
   </section>
 
   <section class="section matrix" aria-labelledby="matrix-title">
-    <h2 id="matrix-title">{isEs ? 'Qué trae cada edición' : 'What each edition includes'}</h2>
+    <h2 id="matrix-title">{m.queTraeCadaEdicion}</h2>
     <div class="table-scroll">
       <table>
-        <caption>{isEs ? 'Composición de las ediciones según el catálogo fijado de HorneroOS.' : 'Edition composition from the pinned HorneroOS catalogue.'}</caption>
+        <caption>{m.composicionDeLasEdicionesSegun}</caption>
         <thead>
           <tr>
-            <th scope="col">{isEs ? 'Capacidad' : 'Capability'}</th>
-            {rows.map((row) => <th scope="col">{row.name}</th>)}
+            <th scope="col">{m.capacidad}</th>
+            {rows.map((row) => (
+              <th scope="col">{row.name}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">{isEs ? 'Madurez' : 'Maturity'}</th>
-            {rows.map((row) => <td><span class="maturity" data-maturity={row.maturity}>{maturityLabels[row.maturity]}</span></td>)}
+            <th scope="row">{m.madurez}</th>
+            {rows.map((row) => (
+              <td>
+                <span class="maturity" data-maturity={row.maturity}>
+                  {maturityLabels[row.maturity]}
+                </span>
+              </td>
+            ))}
           </tr>
           {matrix.map((line) => (
             <tr>
               <th scope="row">{line.label}</th>
-              {line.cells.map((cell) => <td>{cell}</td>)}
+              {line.cells.map((cell) => (
+                <td>{cell}</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -155,13 +181,9 @@ const matrix = [
   </section>
 
   <section class="section composition-note">
-    <h2>{isEs ? 'Cómo se relacionan las ediciones' : 'How the editions relate'}</h2>
-    <p>
-      {isEs ? 'Studio y Gaming se basan en Desktop; Agents se basa en Server. El compositor es una elección de backend de Desktop: Hyprland es el predeterminado validado, Niri es experimental y tiene brechas de capacidad documentadas.' : 'Studio and Gaming build on Desktop; Agents builds on Server. The compositor is a Desktop backend choice: Hyprland is the validated default, Niri is experimental and has documented capability gaps.'}
-    </p>
-    <p>
-      {isEs ? 'Los estados de esta página vienen del catálogo de composición fijado de Hornero, el mismo modelo que usan la CLI, el instalador y las herramientas de aceptación. La ISO actual se instala mediante el camino provisorio con Calamares; el instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : 'The states on this page come from the pinned Hornero composition catalogue, the same model used by the CLI, the installer and acceptance tooling. The current ISO installs via the provisional Calamares path; Panda Foss’s custom installer remains the future official path.'}
-    </p>
+    <h2>{m.comoSeRelacionanLasEdiciones}</h2>
+    <p>{m.studioYGamingSeBasan}</p>
+    <p>{m.losEstadosDeEstaPagina}</p>
   </section>
 </SiteLayout>
 

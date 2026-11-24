@@ -4,17 +4,16 @@
 // visible, and the script only hides rows outside the chosen category.
 import { compareRows, compareVerifiedOn, type CompareCategory } from '../data/why';
 import type { Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/compare-table';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
-const categoryLabel: Record<CompareCategory, string> = isEs
-  ? { os: 'Sistema operativo', shell: 'Shell de escritorio' }
-  : { os: 'Operating system', shell: 'Desktop shell' };
+const m = messages[locale];
+const categoryLabel: Record<CompareCategory, string> = m.categoryLabel;
 const filters = [
-  { value: 'all', label: isEs ? 'Todo' : 'All' },
+  { value: 'all', label: m.todo },
   { value: 'os', label: categoryLabel.os },
   { value: 'shell', label: categoryLabel.shell },
 ];
@@ -22,7 +21,7 @@ const filters = [
 
 <div class="compare" data-compare>
   <fieldset class="compare-filter">
-    <legend>{isEs ? 'Mostrar por tipo' : 'Show by type'}</legend>
+    <legend>{m.mostrarPorTipo}</legend>
     {filters.map((filter, index) => (
       <label>
         <input type="radio" name="compare-type" value={filter.value} checked={index === 0} data-compare-filter />
@@ -32,18 +31,14 @@ const filters = [
   </fieldset>
   <div class="table-scroll">
     <table>
-      <caption>
-        {isEs
-          ? `Sistemas operativos y shells, verificados el ${compareVerifiedOn} contra su fuente primaria.`
-          : `Operating systems and shells, checked on ${compareVerifiedOn} against their primary source.`}
-      </caption>
+      <caption>{m.sistemasOperativosYShellsVerificados(compareVerifiedOn)}</caption>
       <thead>
         <tr>
-          <th scope="col">{isEs ? 'Proyecto' : 'Project'}</th>
-          <th scope="col">{isEs ? 'Tipo' : 'Type'}</th>
-          <th scope="col">{isEs ? 'Qué es' : 'What it is'}</th>
-          <th scope="col">{isEs ? 'Instalación' : 'Install'}</th>
-          <th scope="col">{isEs ? 'Relación con HorneroOS' : 'Relation to HorneroOS'}</th>
+          <th scope="col">{m.proyecto}</th>
+          <th scope="col">{m.tipo}</th>
+          <th scope="col">{m.queEs}</th>
+          <th scope="col">{m.instalacion}</th>
+          <th scope="col">{m.relacionConHorneroos}</th>
         </tr>
       </thead>
       <tbody>
@@ -62,11 +57,7 @@ const filters = [
       </tbody>
     </table>
   </div>
-  <p class="compare-note">
-    {isEs
-      ? 'Una shell no es un sistema operativo, y unos dotfiles no son ninguno de los dos: la columna Tipo dice qué se instala en cada caso. Lo que esta revisión no verificó queda dicho en la fila, no adivinado.'
-      : 'A shell is not an operating system, and dotfiles are neither: the Type column says what gets installed in each case. What this pass did not verify is stated in the row, not guessed.'}
-  </p>
+  <p class="compare-note">{m.unaShellNoEsUn}</p>
 </div>
 
 <script is:inline>

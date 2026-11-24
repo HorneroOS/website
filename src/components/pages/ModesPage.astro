@@ -8,12 +8,13 @@ import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { modes, type Motion, type BarDensity, type DesktopContent } from '../../data/modes';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/modes';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const ledger = feature('experience-modes');
 
@@ -38,16 +39,17 @@ const docs = ledger.evidence[0].href;
 
 <SiteLayout
   socialImage="/og/modes.png"
-  socialImageAlt={isEs ? 'Los cinco modos de HorneroOS (Focus, Everyday, Signal, Gaming y Studio) listados como canales, con su estado en el registro del proyecto.' : 'The five HorneroOS modes (Focus, Everyday, Signal, Gaming and Studio) listed as channels, with their status in the project ledger.'}
-  title={isEs ? 'Atmósferas: modos de experiencia | HorneroOS' : 'Atmospheres: experience modes | HorneroOS'}
-  description={isEs ? 'Focus, Everyday, Signal, Gaming y Studio: cinco modos que cambian cómo se comporta el escritorio de HorneroOS sin tocar tu layout ni tu tema.' : 'Focus, Everyday, Signal, Gaming and Studio: five modes that change how the HorneroOS desktop behaves without touching your layout or theme.'}
+  socialImageAlt={m.losCincoModosDeHorneroos}
+  title={m.atmosferasModosDeExperienciaHorneroos}
+  description={m.focusEverydaySignalGamingY}
 >
   <section class="section modes-intro" aria-labelledby="modes-title">
-    <p class="plate-id"><strong>{isEs ? 'Atmósferas' : 'Atmospheres'}</strong><span>{isEs ? 'Modos de experiencia' : 'Experience modes'}</span></p>
-    <h1 id="modes-title">{isEs ? 'Un escritorio, cinco climas.' : 'One desktop, five atmospheres.'}</h1>
-    <p class="lede">
-      {isEs ? 'Un modo cambia cómo se comporta el escritorio ahora mismo: cuánto se mueve, qué tan densa es la barra, qué widgets hay y si las notificaciones te interrumpen. Nunca reemplaza tu layout ni tu tema.' : 'A mode changes how the desktop behaves right now: how much it moves, how dense the bar is, which widgets sit on the desktop and whether notifications interrupt you. It never replaces your layout or your theme.'}
+    <p class="plate-id">
+      <strong>{m.atmosferas}</strong>
+      <span>{m.modosDeExperiencia}</span>
     </p>
+    <h1 id="modes-title">{m.unEscritorioCincoClimas}</h1>
+    <p class="lede">{m.unModoCambiaComoSe}</p>
     <p class="modes-status">
       <StageBadge stage={ledger.stage} locale={locale} />
       <ReleaseChannelNote feature={ledger} locale={locale} />
@@ -55,70 +57,108 @@ const docs = ledger.evidence[0].href;
   </section>
 
   <section class="section" aria-labelledby="five-title">
-    <h2 id="five-title">{isEs ? 'Los cinco modos' : 'The five modes'}</h2>
-    <p class="section-copy">
-      {isEs ? 'Cada esquema dibuja los campos del modo (movimiento, barra, escritorio) tal como los documenta el proyecto. Son dibujos, no capturas: debajo van las capturas reales de cada modo.' : 'Each schematic draws the mode’s fields (motion, bar, desktop) as the project documents them. They are drawings, not screenshots: real captures of each mode follow below.'}
-    </p>
+    <h2 id="five-title">{m.losCincoModos}</h2>
+    <p class="section-copy">{m.cadaEsquemaDibujaLosCampos}</p>
     <ol class="mode-list" role="list">
-      {
-        modes.map((mode) => (
-          <li class="mode-row" id={mode.id}>
-            <div class="mode-copy">
-              <p class="eyebrow"><b>{mode.channel}</b> · {isEs ? 'Layout preferido' : 'Preferred layout'}: {mode.layout}</p>
-              <h3>{mode.name}</h3>
-              <p class="mode-line">{mode.line[locale]}</p>
-              <ul class="mode-points">
-                {mode.behaviours.map((b) => <li>{b[locale]}</li>)}
-              </ul>
-              <dl class="mode-fields">
-                <div><dt>{isEs ? 'Movimiento' : 'Motion'}</dt><dd>{motionName[mode.motion][locale]}</dd></div>
-                <div><dt>{isEs ? 'Barra' : 'Bar'}</dt><dd>{barName[mode.bar][locale]}</dd></div>
-                <div><dt>{isEs ? 'Escritorio' : 'Desktop'}</dt><dd>{desktopName[mode.desktop][locale]}</dd></div>
-              </dl>
-            </div>
-            <ModeSchematic mode={mode} locale={locale} />
-          </li>
-        ))
-      }
+      {modes.map((mode) => (
+        <li class="mode-row" id={mode.id}>
+          <div class="mode-copy">
+            <p class="eyebrow">
+              <b>{mode.channel}</b> · {m.layoutPreferido}: {mode.layout}
+            </p>
+            <h3>{mode.name}</h3>
+            <p class="mode-line">{mode.line[locale]}</p>
+            <ul class="mode-points">
+              {mode.behaviours.map((b) => (
+                <li>{b[locale]}</li>
+              ))}
+            </ul>
+            <dl class="mode-fields">
+              <div>
+                <dt>{m.movimiento}</dt>
+                <dd>{motionName[mode.motion][locale]}</dd>
+              </div>
+              <div>
+                <dt>{m.barra}</dt>
+                <dd>{barName[mode.bar][locale]}</dd>
+              </div>
+              <div>
+                <dt>{m.escritorio}</dt>
+                <dd>{desktopName[mode.desktop][locale]}</dd>
+              </div>
+            </dl>
+          </div>
+          <ModeSchematic mode={mode} locale={locale} />
+        </li>
+      ))}
     </ol>
   </section>
 
   <section class="section" aria-labelledby="compose-title">
-    <h2 id="compose-title">{isEs ? 'Cómo se combinan' : 'How they compose'}</h2>
+    <h2 id="compose-title">{m.comoSeCombinan}</h2>
     <div class="table-scroll">
       <table>
-        <caption class="sr-only">{isEs ? 'Cuatro elecciones independientes' : 'Four independent choices'}</caption>
+        <caption class="sr-only">{m.cuatroEleccionesIndependientes}</caption>
         <thead>
-          <tr><th scope="col">{isEs ? 'Elección' : 'Choice'}</th><th scope="col">{isEs ? 'Qué decide' : 'What it decides'}</th><th scope="col">{isEs ? 'Dónde se cambia' : 'Where you change it'}</th></tr>
+          <tr>
+            <th scope="col">{m.eleccion}</th>
+            <th scope="col">{m.queDecide}</th>
+            <th scope="col">{m.dondeSeCambia}</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><th scope="row"><a href={L('/editions')}>{isEs ? 'Edición' : 'Edition'}</a></th><td>{isEs ? 'Qué software y capacidades hay instalados' : 'Which software and capabilities are installed'}</td><td>{isEs ? 'La instalación' : 'Installation'}</td></tr>
-          <tr><th scope="row">{isEs ? 'Modo de experiencia' : 'Experience mode'}</th><td>{isEs ? 'Cómo se comporta el sistema ahora' : 'How the system behaves right now'}</td><td>{isEs ? 'Ajustes → Experiencia, launcher, indicador de la barra' : 'Settings → Experience, launcher, bar indicator'}</td></tr>
-          <tr><th scope="row"><a href={L('/layouts')}>Layout</a></th><td>{isEs ? 'Qué barras y rieles existen' : 'Which bars and rails exist'}</td><td>{isEs ? 'Selector de layouts' : 'Layout picker'}</td></tr>
-          <tr><th scope="row"><a href={L('/themes')}>{isEs ? 'Tema' : 'Theme'}</a></th><td>{isEs ? 'Colores y fondo' : 'Colours and wallpaper'}</td><td>{isEs ? 'Apariencia' : 'Appearance'}</td></tr>
+          <tr>
+            <th scope="row">
+              <a href={L('/editions')}>{m.edicion}</a>
+            </th>
+            <td>{m.queSoftwareYCapacidadesHay}</td>
+            <td>{m.laInstalacion}</td>
+          </tr>
+          <tr>
+            <th scope="row">{m.modoDeExperiencia}</th>
+            <td>{m.comoSeComportaElSistema}</td>
+            <td>{m.ajustesExperienciaLauncherIndicadorDe}</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <a href={L('/layouts')}>Layout</a>
+            </th>
+            <td>{m.queBarrasYRielesExisten}</td>
+            <td>{m.selectorDeLayouts}</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <a href={L('/themes')}>{m.tema}</a>
+            </th>
+            <td>{m.coloresYFondo}</td>
+            <td>{m.apariencia}</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <p class="section-copy">
-      {isEs ? 'Un modo solo activa capacidades que tu edición tiene instaladas: si falta una, el ajuste aparece como no disponible, nunca simulado. Cada modo nombra un layout preferido, pero cambiar de modo no reescribe tus barras salvo que actives “Aplicar el layout preferido al cambiar”. Dos reglas no se pueden anular: el brillo y las líneas de barrido siempre están apagados en Focus y Gaming, y Gaming nunca anima.' : 'A mode only switches on capabilities your edition has installed: a missing one shows as unavailable, never faked. Every mode names a preferred layout, but switching mode does not rewrite your bars unless you turn on “Apply preferred layout on switch”. Two guardrails cannot be overridden: glow and scanlines are always off in Focus and Gaming, and Gaming never animates.'}
-    </p>
+    <p class="section-copy">{m.unModoSoloActivaCapacidades}</p>
   </section>
 
   <section class="section" aria-labelledby="captures-title">
-    <h2 id="captures-title">{isEs ? 'Los cinco modos, en un escritorio real' : 'The five modes on a real desktop'}</h2>
-    <p class="section-copy">
-      {isEs ? 'Capturas reales del mismo host: el selector de los cinco modos, Focus y el deck Signal. Los esquemas de arriba están rotulados como esquemas; esto de abajo es el escritorio tal cual.' : 'Real captures from the same host: the five-mode switcher, Focus and the Signal deck. The diagrams above are labelled as diagrams; below is the desktop as it is.'}
-    </p>
+    <h2 id="captures-title">{m.losCincoModosEnUn}</h2>
+    <p class="section-copy">{m.capturasRealesDelMismoHost}</p>
     <div class="mode-captures">
-      {['CAP-CC-04', 'CAP-MODE-01', 'CAP-DECK-01'].map((id) => <CaptureFigure slot={id} locale={locale} />)}
+      {['CAP-CC-04', 'CAP-MODE-01', 'CAP-DECK-01'].map((id) => (
+        <CaptureFigure slot={id} locale={locale} />
+      ))}
     </div>
   </section>
 
   <section class="section modes-end">
     <p class="section-copy">
-      {isEs ? 'Cada modo es un paquete de campos que podés inspeccionar y cambiar uno por uno.' : 'Each mode is a bundle of fields you can inspect and change one by one.'}
-      <a class="text-link" href={docs}>{isEs ? 'Leé la documentación de los modos' : 'Read the modes documentation'} <span aria-hidden="true">↗</span></a>
-      · <a class="text-link" href={L('/chromatic')}>Hornero Chromatic</a>
+      {m.cadaModoEsUnPaquete}
+      <a class="text-link" href={docs}>
+        {m.leeLaDocumentacionDeLos} <span aria-hidden="true">↗</span>
+      </a>
+      ·{' '}
+      <a class="text-link" href={L('/chromatic')}>
+        Hornero Chromatic
+      </a>
     </p>
   </section>
 

@@ -1,62 +1,61 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import SourcePlate from '../../components/SourcePlate.astro';
-import { candidate, commitUrl, latestReleased, latestTagged, pins, releases, short, type Release } from '../../data/product';
+import {
+  candidate,
+  commitUrl,
+  latestReleased,
+  latestTagged,
+  pins,
+  releases,
+  short,
+  type Release,
+} from '../../data/product';
 import { download } from '../../data/download';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { releaseNotes } from '../../data/release-notes';
+import { messages } from '../../i18n/messages/releases';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const title = (r: Release) => {
-  return r.version.replace(/-draft$/, isEs ? ' borrador' : ' draft');
+  return r.version.replace(/-draft$/, m.borrador);
 };
-const statusText: Record<Release['status'], string> = isEs
-  ? {
-      tagged: 'Etiquetada en git',
-      published: 'Publicada como paquetes, sin etiqueta git',
-      candidate: 'Candidata a release',
-      untagged: 'Registro de composición, sin etiquetar',
-    }
-  : {
-      tagged: 'Tagged in git',
-      published: 'Published as packages, no git tag yet',
-      candidate: 'Release candidate',
-      untagged: 'Composition record, not tagged',
-    };
+const statusText: Record<Release['status'], string> = m.statusText;
 const hornero = (path: string) => `${pins.hornero.repo}/blob/${pins.hornero.sha}/${path}`;
 const shell = pins.shell.repo;
 const config = pins.config.repo;
 ---
 
-<SiteLayout
-  title={isEs ? 'Releases | HorneroOS' : 'Releases | HorneroOS'}
-  description={isEs ? `Cada release de HorneroOS: qué cambió para quienes lo usan y el registro técnico completo. La última es ${latestTagged?.name ?? 'la release actual'}, con Desktop, Studio y Gaming en una ISO firmada.` : `Every HorneroOS release: what changed for the people using it, and the full technical record. The latest is ${latestTagged?.name ?? 'the current release'}, with Desktop, Studio and Gaming on one signed ISO.`}
->
+<SiteLayout title={m.releasesHorneroos} description={m.releasesDescription(latestTagged?.name)}>
   <section class="section">
-    <p class="plate-id"><strong>Archivo de transmisiones</strong><span>{isEs ? 'Historial de releases' : 'Release history'}</span></p>
+    <p class="plate-id">
+      <strong>Archivo de transmisiones</strong>
+      <span>{m.historialDeReleases}</span>
+    </p>
     <h1>Releases</h1>
     <p>
-      {isEs ? 'Cada release cuenta qué cambió para quienes usan HorneroOS y deja el registro técnico completo a un clic: el manifiesto fija las versiones exactas de shell y config que salen juntas, y ' : 'Each release says what changed for the people using HorneroOS and keeps the full technical record one click away: the manifest pins the exact shell and config versions that ship together, and '}
-      <code>horneroctl</code> {isEs ? 'se compila desde el mismo árbol. HorneroOS se usa a diario; los nombres previewNN son nombres de artefacto publicados y se conservan. Mirá ' : ' is built from the same tree. HorneroOS is used daily; the previewNN names are published artifact names and are kept. See '}
-      <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a> {isEs ? 'para el checksum, la firma y las instrucciones de verificación.' : 'for the checksum, signature and verification instructions.'}
+      {m.cadaReleaseCuentaQueCambio}
+      <code>horneroctl</code> {m.seCompilaDesdeElMismo}
+      <a href={L('/install')}>{m.instalar}</a> {m.paraElChecksumLaFirma}
     </p>
     <dl class="now">
       {latestReleased && latestReleased !== latestTagged && (
         <div>
-          <dt>{isEs ? 'Última publicada' : 'Latest published'}</dt>
+          <dt>{m.ultimaPublicada}</dt>
           <dd>
-            <a href={`#${latestReleased.name}`}>{title(latestReleased)}</a>, {latestReleased.date} ({isEs ? `paquetes; la ISO sigue en v${download.version}` : `packages; the ISO stays at v${download.version}`})
+            <a href={`#${latestReleased.name}`}>{title(latestReleased)}</a>, {latestReleased.date} (
+            {m.paquetesLaIsoSigueEn(download.version)})
           </dd>
         </div>
       )}
       {latestTagged && (
         <div>
-          <dt>{isEs ? 'Última etiquetada' : 'Latest tagged'}</dt>
+          <dt>{m.ultimaEtiquetada}</dt>
           <dd>
             <a href={`#${latestTagged.name}`}>{title(latestTagged)}</a>, {latestTagged.date}
           </dd>
@@ -64,9 +63,9 @@ const config = pins.config.repo;
       )}
       {candidate && (
         <div>
-          <dt>{isEs ? 'En preparación' : 'In preparation'}</dt>
+          <dt>{m.enPreparacion}</dt>
           <dd>
-            <a href={`#${candidate.name}`}>{title(candidate)}</a> ({isEs ? 'candidata a release' : 'release candidate'})
+            <a href={`#${candidate.name}`}>{title(candidate)}</a> ({m.candidataARelease})
           </dd>
         </div>
       )}
@@ -86,9 +85,9 @@ const config = pins.config.repo;
         </p>
         {releaseNotes[r.version] ? (
           <>
-            <p class="summary">{isEs ? releaseNotes[r.version].es : releaseNotes[r.version].en}</p>
+            <p class="summary">{releaseNotes[r.version][locale]}</p>
             <details class="tech-summary">
-              <summary>{isEs ? 'Resumen técnico' : 'Technical summary'}</summary>
+              <summary>{m.resumenTecnico}</summary>
               <p class="summary">{r.summary}</p>
             </details>
           </>

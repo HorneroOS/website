@@ -7,12 +7,13 @@ import CaptureGallery from '../CaptureGallery.astro';
 import { feature, stageFromMaturity } from '../../data/features';
 import { editionCatalogue, editions, extensionCatalogue, layouts, themes } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/desktop';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const desktop = editions.find((e) => e.id === 'desktop');
 if (!desktop) throw new Error('The pinned edition catalogue has no desktop edition');
@@ -23,17 +24,66 @@ const extensionCount = extensionCatalogue.plugins.length;
 
 // What you can change, each with its ledger stage. Stages are never typed here.
 const levers = [
-  { id: 'layouts', href: '/layouts', stage: feature('layouts').stage, es: `${layoutCount} layouts`, en: `${layoutCount} layouts`, noteEs: 'Barras, rieles, islas y docks intercambiables.', noteEn: 'Swappable bars, rails, islands and docks.' },
-  { id: 'themes', href: '/themes', stage: feature('themes').stage, es: `${themeCount} temas`, en: `${themeCount} themes`, noteEs: 'Apariencias coordinadas con sus fondos.', noteEn: 'Coordinated appearances with their wallpapers.' },
-  { id: 'modes', href: '/modes', stage: feature('experience-modes').stage, es: '5 modos', en: '5 modes', noteEs: 'Focus, Everyday, Signal, Gaming y Studio.', noteEn: 'Focus, Everyday, Signal, Gaming and Studio.' },
-  { id: 'chromatic', href: '/chromatic', stage: feature('chromatic').stage, es: 'Chromatic', en: 'Chromatic', noteEs: 'Color dinámico desde tu fondo, opcional.', noteEn: 'Optional dynamic colour from your wallpaper.' },
-  { id: 'extensions', href: '/extensions', stage: feature('pluginkit').stage, es: `${extensionCount} extensiones`, en: `${extensionCount} extensions`, noteEs: 'Widgets de barra, escritorio y Dashboard.', noteEn: 'Bar, desktop and Dashboard widgets.' },
-  { id: 'javi', href: '/companion', stage: feature('companion').stage, es: 'Javi', en: 'Javi', noteEs: 'El hornero que vive en el escritorio. Se puede apagar.', noteEn: 'The hornero that lives on the desktop. You can turn it off.' },
+  {
+    id: 'layouts',
+    href: '/layouts',
+    stage: feature('layouts').stage,
+    es: `${layoutCount} layouts`,
+    en: `${layoutCount} layouts`,
+    note: { es: 'Barras, rieles, islas y docks intercambiables.', en: 'Swappable bars, rails, islands and docks.' },
+  },
+  {
+    id: 'themes',
+    href: '/themes',
+    stage: feature('themes').stage,
+    es: `${themeCount} temas`,
+    en: `${themeCount} themes`,
+    note: { es: 'Apariencias coordinadas con sus fondos.', en: 'Coordinated appearances with their wallpapers.' },
+  },
+  {
+    id: 'modes',
+    href: '/modes',
+    stage: feature('experience-modes').stage,
+    es: '5 modos',
+    en: '5 modes',
+    note: { es: 'Focus, Everyday, Signal, Gaming y Studio.', en: 'Focus, Everyday, Signal, Gaming and Studio.' },
+  },
+  {
+    id: 'chromatic',
+    href: '/chromatic',
+    stage: feature('chromatic').stage,
+    es: 'Chromatic',
+    en: 'Chromatic',
+    note: { es: 'Color dinámico desde tu fondo, opcional.', en: 'Optional dynamic colour from your wallpaper.' },
+  },
+  {
+    id: 'extensions',
+    href: '/extensions',
+    stage: feature('pluginkit').stage,
+    es: `${extensionCount} extensiones`,
+    en: `${extensionCount} extensions`,
+    note: { es: 'Widgets de barra, escritorio y Dashboard.', en: 'Bar, desktop and Dashboard widgets.' },
+  },
+  {
+    id: 'javi',
+    href: '/companion',
+    stage: feature('companion').stage,
+    es: 'Javi',
+    en: 'Javi',
+    note: {
+      es: 'El hornero que vive en el escritorio. Se puede apagar.',
+      en: 'The hornero that lives on the desktop. You can turn it off.',
+    },
+  },
 ];
 
 // Quick keys documented in HorneroOS/docs desktop/shortcuts.md and everyday-apps.md.
 const keys = [
-  { k: 'Ctrl + Space', es: 'Abrir el launcher: aplicaciones y comandos', en: 'Open the launcher: applications and commands' },
+  {
+    k: 'Ctrl + Space',
+    es: 'Abrir el launcher: aplicaciones y comandos',
+    en: 'Open the launcher: applications and commands',
+  },
   { k: 'Super + T', es: 'Terminal', en: 'Terminal' },
   { k: 'Super + W', es: 'Navegador', en: 'Browser' },
   { k: 'Super + F', es: 'Archivos (gráfico)', en: 'Files (graphical)' },
@@ -44,103 +94,113 @@ const keys = [
 ---
 
 <SiteLayout
-  title={isEs ? 'Desktop: la base de HorneroOS | HorneroOS' : 'Desktop: the HorneroOS base | HorneroOS'}
+  title={m.desktopLaBaseDeHorneroos}
   socialImage="/og/desktop.png"
-  socialImageAlt={isEs ? 'HorneroOS Desktop con el estado de cada función (layouts, temas, modos, Chromatic y PluginKit) tomado del registro del proyecto.' : 'HorneroOS Desktop with the status of each feature (layouts, themes, modes, Chromatic and PluginKit) taken from the project ledger.'}
-  description={isEs ? 'HorneroOS Desktop es la edición base: un escritorio Wayland sobre Arch con Hyprland, shell propio, layouts, temas y extensiones, pensado para trabajar horas sin estorbar.' : 'HorneroOS Desktop is the base edition: a Wayland desktop on Arch with Hyprland, its own shell, layouts, themes and extensions, made for working long hours without getting in the way.'}
+  socialImageAlt={m.horneroosDesktopConElEstado}
+  description={m.horneroosDesktopEsLaEdicion}
 >
   <section class="section desk-intro" aria-labelledby="desk-title">
-    <p class="plate-id"><strong>CH 01</strong><span>{isEs ? 'Edición Desktop' : 'Desktop edition'}</span><span>{isEs ? 'La base de las tres' : 'The base of all three'}</span></p>
+    <p class="plate-id">
+      <strong>CH 01</strong>
+      <span>{m.edicionDesktop}</span>
+      <span>{m.laBaseDeLasTres}</span>
+    </p>
     <div class="hero-head">
-      <h1 id="desk-title">Desktop <span class="tagline">{isEs ? 'Tu escritorio, a tu manera.' : 'Your desktop, your way.'}</span></h1>
+      <h1 id="desk-title">
+        Desktop <span class="tagline">{m.tuEscritorioATuManera}</span>
+      </h1>
       <MaturityMeter maturity={desktop.maturity} locale={locale} />
     </div>
-    <p class="lede">
-      {isEs ? 'Desktop es el escritorio sobre el que se apoyan Studio y Gaming: shell propio sobre Quickshell, un launcher, un Dashboard, un Centro de control y un compositor Wayland. Todo lo que ves tiene un ajuste, con vista previa y vuelta atrás.' : 'Desktop is the desktop that Studio and Gaming build on: its own shell on Quickshell, a launcher, a Dashboard, a Control Center and a Wayland compositor. Everything you see has a setting, with a preview and a way back.'}
-    </p>
+    <p class="lede">{m.desktopEsElEscritorioSobre}</p>
     <p class="hero-ctas">
-      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
-      <a class="cta secondary" href={L('/showroom')}>{isEs ? 'Ver el showroom' : 'See the showroom'}</a>
+      <a class="cta primary" href={L('/install')}>
+        {m.descargaLaIsoActual}
+      </a>
+      <a class="cta secondary" href={L('/showroom')}>
+        {m.verElShowroom}
+      </a>
     </p>
   </section>
 
-  <section class="section desk-capture" aria-label={isEs ? 'El escritorio trabajando' : 'The desktop at work'}>
+  <section class="section desk-capture" aria-label={m.elEscritorioTrabajando}>
     <CaptureFigure slot="CAP-DESKTOP-01" locale={locale} eager />
   </section>
 
   <section class="section" aria-labelledby="levers-title">
-    <h2 id="levers-title">{isEs ? 'Ajustes del escritorio' : 'Desktop settings'}</h2>
-    <p class="desk-copy">
-      {isEs ? 'HorneroOS trae valores por defecto para el escritorio y cada ajuste de esta lista se puede cambiar. Cada palanca muestra su estado: lo lanzado, lo que está en main sin lanzar y lo experimental salen del registro del proyecto, no de este texto.' : 'HorneroOS ships defaults for the desktop and every setting in this list can be changed. Each lever shows its status: what is released, what is on main but unreleased and what is experimental come from the project ledger, not from this text.'}
-    </p>
+    <h2 id="levers-title">{m.ajustesDelEscritorio}</h2>
+    <p class="desk-copy">{m.horneroosTraeValoresPorDefecto}</p>
     <ul class="desk-levers" role="list">
-      {
-        levers.map((l) => (
-          <li>
-            <a href={L(l.href)}>
-              <strong>{isEs ? l.es : l.en}</strong>
-              <span>{isEs ? l.noteEs : l.noteEn}</span>
-              <StageBadge stage={l.stage} locale={locale} />
-            </a>
-          </li>
-        ))
-      }
+      {levers.map((l) => (
+        <li>
+          <a href={L(l.href)}>
+            <strong>{l[locale]}</strong>
+            <span>{l.note[locale]}</span>
+            <StageBadge stage={l.stage} locale={locale} />
+          </a>
+        </li>
+      ))}
     </ul>
   </section>
 
   <section class="section" aria-labelledby="flow-title">
-    <h2 id="flow-title">{isEs ? 'Un día de trabajo, con el teclado' : 'A working day, from the keyboard'}</h2>
+    <h2 id="flow-title">{m.unDiaDeTrabajoCon}</h2>
     <p class="desk-copy">
-      {isEs ? 'Los atajos de la configuración por defecto de Hyprland. Pueden variar con tu versión y tu configuración.' : 'The default Hyprland configuration’s shortcuts. They can vary with your version and configuration.'}{' '}
-      <a class="text-link" href={L('/docs/desktop/shortcuts/')}>{isEs ? 'Todos los atajos' : 'All shortcuts'}</a>
+      {m.losAtajosDeLaConfiguracion}{' '}
+      <a class="text-link" href={L('/docs/desktop/shortcuts/')}>
+        {m.todosLosAtajos}
+      </a>
     </p>
     <dl class="desk-keys">
-      {
-        keys.map((key) => (
-          <div>
-            <dt><kbd>{key.k}</kbd></dt>
-            <dd>{isEs ? key.es : key.en}</dd>
-          </div>
-        ))
-      }
+      {keys.map((key) => (
+        <div>
+          <dt>
+            <kbd>{key.k}</kbd>
+          </dt>
+          <dd>{key[locale]}</dd>
+        </div>
+      ))}
     </dl>
   </section>
 
   <section class="section desk-split" aria-labelledby="custom-title">
     <div>
-      <h2 id="custom-title">{isEs ? 'Cambiá la forma, no el sistema' : 'Change the shape, not the system'}</h2>
-      <p class="desk-copy">
-        {isEs ? 'El selector de layouts reordena barras y rieles sin tocar tus aplicaciones ni tu tema. ' : 'The layout picker rearranges bars and rails without touching your applications or theme. '}
-      </p>
+      <h2 id="custom-title">{m.cambiaLaFormaNoEl}</h2>
+      <p class="desk-copy">{m.elSelectorDeLayoutsReordena}</p>
     </div>
     <CaptureFigure slot="CAP-DESKTOP-02" locale={locale} />
   </section>
 
   <section class="section" aria-labelledby="comp-title">
-    <h2 id="comp-title">{isEs ? 'Compositores' : 'Compositors'}</h2>
+    <h2 id="comp-title">{m.compositores}</h2>
     <ul class="desk-comps" role="list">
-      {
-        compositors.map((c) => (
-          <li>
-            <strong>{c.id === 'hyprland' ? 'Hyprland' : 'Niri'}</strong>
-            <StageBadge stage={stageFromMaturity(c.maturity)} locale={locale} />
-            <span>{isEs ? (c.id === 'hyprland' ? 'El compositor por defecto.' : 'Disponible para quien quiera probarlo; todavía experimental.') : (c.id === 'hyprland' ? 'The default compositor.' : 'Available for those who want to try it; still experimental.')}</span>
-          </li>
-        ))
-      }
+      {compositors.map((c) => (
+        <li>
+          <strong>{c.id === 'hyprland' ? 'Hyprland' : 'Niri'}</strong>
+          <StageBadge stage={stageFromMaturity(c.maturity)} locale={locale} />
+          <span>{c.id === 'hyprland' ? m.defaultCompositor : m.experimentalCompositor}</span>
+        </li>
+      ))}
     </ul>
-    <p class="desk-copy"><a class="text-link" href={L('/docs/desktop/compositors/')}>{isEs ? 'Elegir o resolver problemas con un compositor' : 'Choose or troubleshoot a compositor'}</a></p>
+    <p class="desk-copy">
+      <a class="text-link" href={L('/docs/desktop/compositors/')}>
+        {m.elegirOResolverProblemasCon}
+      </a>
+    </p>
   </section>
 
   <section class="section" aria-labelledby="more-title">
-    <h2 id="more-title">{isEs ? 'Y después, Studio o Gaming' : 'And then Studio or Gaming'}</h2>
-    <p class="desk-copy">
-      {isEs ? 'Studio y Gaming son Desktop con un oficio: se eligen al instalar desde la misma ISO.' : 'Studio and Gaming are Desktop with a craft: you choose them when installing from the same ISO.'}
-    </p>
+    <h2 id="more-title">{m.yDespuesStudioOGaming}</h2>
+    <p class="desk-copy">{m.studioYGamingSonDesktop}</p>
     <p class="hero-ctas">
-      <a class="cta secondary" href={L('/studio')}>Studio</a>
-      <a class="cta secondary" href={L('/gaming')}>Gaming</a>
-      <a class="cta secondary" href={L('/editions')}>{isEs ? 'Todas las ediciones' : 'All editions'}</a>
+      <a class="cta secondary" href={L('/studio')}>
+        Studio
+      </a>
+      <a class="cta secondary" href={L('/gaming')}>
+        Gaming
+      </a>
+      <a class="cta secondary" href={L('/editions')}>
+        {m.todasLasEdiciones}
+      </a>
     </p>
   </section>
 

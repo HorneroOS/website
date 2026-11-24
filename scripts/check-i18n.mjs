@@ -2,12 +2,20 @@
 /**
  * i18n parity gate (node scripts/check-i18n.mjs).
  *
- * Fails when:
- *  - src/i18n/ui.ts es/en key sets diverge.
- *  - src/data/story.ts has a title/summary/label without both es and en.
- *  - a capture slot (src/data/capture-slots.json) lacks ES or EN title/description/alt.
+ * Copy lives in typed catalogs under src/i18n/messages/*.ts: Spanish is
+ * the source shape and `en: Messages` makes key parity a type error, so
+ * this gate covers what types cannot:
+ *  - every catalog's es/en top-level key sets match (belt & braces for
+ *    files edited outside `astro check`),
+ *  - chrome strings (messages/ui.ts) do not carry identical es/en
+ *    values (the classic untranslated-copy smell),
+ *  - the old `isEs ? '…' : '…'` boolean-ternary pattern never returns:
+ *    the identifier `isEs` is banned under src/ — copy goes in catalogs
+ *    keyed by Locale (docs/I18N.md),
+ *  - src/data/story.ts localized fields carry both es and en,
+ *  - capture slots carry ES and EN title/description/alt.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,25 +23,81 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const failures = [];
 const read = (rel) => readFileSync(join(root, rel), 'utf8');
 
-// --- ui.ts key parity ---
-const ui = read('src/i18n/ui.ts');
-const keysOf = (block) => [...block.matchAll(/^\s+(\w+):/gm)].map((m) => m[1]);
-const esBlock = ui.split(/^\s*es:\s*\{/m)[1]?.split(/^\s*en:\s*\{/m)[0] ?? '';
-const enBlock = ui.split(/^\s*en:\s*\{/m)[1] ?? '';
-const esKeys = new Set(keysOf(esBlock));
-const enKeys = new Set(keysOf(enBlock));
-for (const k of esKeys) if (!enKeys.has(k)) failures.push(`src/i18n/ui.ts: key '${k}' missing in en`);
-// Identical values across locales are only acceptable for product names.
+// --- catalog key parity (src/i18n/messages/*.ts) ---
+function localeBlock(source, pattern) {
+  const m = source.match(pattern);
+  return m ? m[1] : null;
+}
+function topKeys(block) {
+  if (!block) return null;
+  // Top-level keys share the indent of the first key line.
+  const first = block.match(/^(\s+)\w+:/m);
+  if (!first) return new Set();
+  const indent = first[1].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new Set([...block.matchAll(new RegExp(`^${indent}(\\w+):`, 'gm'))].map((m) => m[1]));
+}
+
+const messagesDir = join(root, 'src/i18n/messages');
+const catalogFiles = readdirSync(messagesDir)
+  .filter((f) => f.endsWith('.ts'))
+  .sort();
+if (!catalogFiles.length) failures.push('src/i18n/messages/: no catalogs found');
+const identicalChecks = [];
+for (const file of catalogFiles) {
+  const rel = `src/i18n/messages/${file}`;
+  const source = read(rel);
+  const esBlock = localeBlock(source, /const es = \{([\s\S]*?)\n\s{0,2}\};/);
+  const enBlock = localeBlock(source, /const en(?::[^=]+)? = \{([\s\S]*?)\n\s{0,2}\};/);
+  const esKeys = topKeys(esBlock);
+  const enKeys = topKeys(enBlock);
+  if (!esKeys || !enKeys) {
+    failures.push(`${rel}: could not locate es/en catalog blocks`);
+    continue;
+  }
+  for (const k of esKeys) if (!enKeys.has(k)) failures.push(`${rel}: key '${k}' missing in en`);
+  for (const k of enKeys) if (!esKeys.has(k)) failures.push(`${rel}: key '${k}' missing in es`);
+  if (file === 'ui.ts') identicalChecks.push([rel, esBlock, enBlock]);
+}
+
+// Identical es/en plain-string values are only acceptable for product names.
 const valueOf = (block, key) => block.match(new RegExp(`^\\s+${key}:\\s*'([^']*)'`, 'm'))?.[1];
-const ALLOW_IDENTICAL = new Set(['HorneroOS', 'Studio', 'Gaming', 'Showroom', 'Layouts', 'Greeter', 'Companion', 'Discord', 'GitHub', 'Feedback', 'Bugs']);
-for (const k of esKeys) {
-  const esv = valueOf(esBlock, k);
-  const env = valueOf(enBlock, k);
-  if (esv && env && esv === env && esv.length > 2 && !ALLOW_IDENTICAL.has(esv) && /[A-Za-z]{3,}/.test(esv)) {
-    failures.push(`src/i18n/ui.ts: key '${k}' has identical es/en value '${esv}'`);
+const ALLOW_IDENTICAL = new Set([
+  'HorneroOS',
+  'Studio',
+  'Gaming',
+  'Showroom',
+  'Layouts',
+  'Greeter',
+  'Companion',
+  'Discord',
+  'GitHub',
+  'Feedback',
+  'Bugs',
+]);
+for (const [rel, esBlock, enBlock] of identicalChecks) {
+  for (const k of topKeys(esBlock) ?? []) {
+    const esv = valueOf(esBlock, k);
+    const env = valueOf(enBlock, k);
+    if (esv && env && esv === env && esv.length > 2 && !ALLOW_IDENTICAL.has(esv) && /[A-Za-z]{3,}/.test(esv)) {
+      failures.push(`${rel}: key '${k}' has identical es/en value '${esv}'`);
+    }
   }
 }
-for (const k of enKeys) if (!esKeys.has(k)) failures.push(`src/i18n/ui.ts: key '${k}' missing in es`);
+
+// --- isEs ban under src/ (copy belongs in catalogs) ---
+function walk(dir) {
+  for (const entry of readdirSync(dir)) {
+    const path = join(dir, entry);
+    if (statSync(path).isDirectory()) walk(path);
+    else if (/\.(astro|ts|tsx|js|mjs)$/.test(entry)) {
+      const text = readFileSync(path, 'utf8');
+      if (/\bisEs\b/.test(text)) {
+        failures.push(`${path.slice(root.length + 1)}: uses 'isEs' — move copy into src/i18n/messages/ (docs/I18N.md)`);
+      }
+    }
+  }
+}
+walk(join(root, 'src'));
 
 // --- story.ts localized fields ---
 const story = read('src/data/story.ts');
@@ -59,7 +123,8 @@ for (const slot of slotData.slots) {
 }
 for (const session of slotData.sessions) {
   for (const lang of ['es', 'en']) {
-    if (!session.title?.[lang]) failures.push(`src/data/capture-slots.json: session ${session.id} title.${lang} is missing`);
+    if (!session.title?.[lang])
+      failures.push(`src/data/capture-slots.json: session ${session.id} title.${lang} is missing`);
   }
 }
 
@@ -68,4 +133,4 @@ if (failures.length) {
   for (const f of failures) console.error(`  - ${f}`);
   process.exit(1);
 }
-console.log('check-i18n: OK (ui keys, story, capture-slot copy parity)');
+console.log(`check-i18n: OK (${catalogFiles.length} catalogs at parity, no isEs, story + capture-slot copy parity)`);

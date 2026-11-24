@@ -2,6 +2,7 @@
 import type { Theme } from '../data/product';
 
 import { localizePath, type Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/theme-palette-study';
 
 interface Props {
   themes: Theme[];
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const { themes, locale = 'es' } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const [initialTheme] = themes;
 
 if (!initialTheme) {
@@ -48,15 +49,13 @@ const colorRoles = [
 
 <section class="palette-study" aria-labelledby="palette-study-title" data-palette-playground>
   <div class="palette-intro">
-    <p class="eyebrow">{isEs ? 'Una paleta, en contexto' : 'A palette, in context'}</p>
-    <h2 id="palette-study-title">{isEs ? 'Mirá cómo trabajan juntos los colores.' : 'See the colors work together.'}</h2>
-    <p>
-      {isEs ? 'Cambiá entre las paletas semánticas catalogadas de Hornero. Este pequeño estudio de color web usa los mismos roles publicados de fondo, superficie, texto y acento; no es una captura de escritorio.' : 'Switch between Hornero’s catalogued semantic palettes. This small web color study uses the same published background, surface, text and accent roles; it is not a desktop screenshot.'}
-    </p>
-    <p class="palette-mode-note">{isEs ? 'El ajuste Sistema, Claro y Oscuro de la página sigue siendo independiente.' : 'The page’s System, Light and Dark setting remains independent.'}</p>
+    <p class="eyebrow">{m.unaPaletaEnContexto}</p>
+    <h2 id="palette-study-title">{m.miraComoTrabajanJuntosLos}</h2>
+    <p>{m.cambiaEntreLasPaletasSemanticas}</p>
+    <p class="palette-mode-note">{m.elAjusteSistemaClaroY}</p>
   </div>
 
-  <div class="palette-controls" role="group" aria-label={isEs ? 'Elegí una paleta de colores de Hornero' : 'Choose a Hornero color palette'} data-palette-options hidden>
+  <div class="palette-controls" role="group" aria-label={m.elegiUnaPaletaDeColores} data-palette-options hidden>
     {themes.map((theme, index) => (
       <button
         class="palette-choice"
@@ -81,7 +80,7 @@ const colorRoles = [
         </span>
         <span class="choice-copy">
           <strong>{theme.name}</strong>
-          <small>{isEs ? `paleta ${theme.mode}` : `${theme.mode} palette`}</small>
+          <small>{m.paleta(theme.mode)}</small>
         </span>
         <span class="choice-check" aria-hidden="true">
           ✓
@@ -90,7 +89,7 @@ const colorRoles = [
     ))}
   </div>
   <p class="palette-fallback" data-palette-fallback>
-    {isEs ? `Estudio de color estático · ${initialTheme.name}. El catálogo completo de temas y las capturas reales de escritorio siguen disponibles abajo.` : `Static color study · ${initialTheme.name}. The complete theme catalog and real desktop captures remain available below.`}
+    {m.estudioDeColorEstaticoEl(initialTheme.name)}
   </p>
 
   <article
@@ -101,25 +100,25 @@ const colorRoles = [
   >
     <div class="specimen-heading">
       <span>
-        HorneroOS <span aria-hidden="true">/</span> {isEs ? 'Apariencia' : 'Appearance'}
+        HorneroOS <span aria-hidden="true">/</span> {m.apariencia}
       </span>
-      <span data-specimen-mode>{isEs ? `paleta ${initialTheme.mode}` : `${initialTheme.mode} palette`}</span>
+      <span data-specimen-mode>{m.paleta2(initialTheme.mode)}</span>
     </div>
     <div class="specimen-content">
       <p class="specimen-kicker">
-        {isEs ? 'Roles de color' : 'Color roles'} · <span data-specimen-id>{initialTheme.id}</span>
+        {m.rolesDeColor} · <span data-specimen-id>{initialTheme.id}</span>
       </p>
       <h3 data-specimen-name>{initialTheme.name}</h3>
       <p data-specimen-description>{initialTheme.description}</p>
       <a class="specimen-link" href={`${localizePath('/themes', locale)}#${initialTheme.id}`}>
-        {isEs ? 'Explorá este look' : 'Explore this look'} <span aria-hidden="true">↗</span>
+        {m.exploraEsteLook} <span aria-hidden="true">↗</span>
       </a>
     </div>
-    <div class="specimen-roles" role="group" aria-label={isEs ? 'Roles de color de la paleta' : 'Palette color roles'}>
+    <div class="specimen-roles" role="group" aria-label={m.rolesDeColorDeLa}>
       {colorRoles.map((role) => (
         <div class="role-swatch" data-role={role.key}>
           <span aria-hidden="true"></span>
-          <small>{isEs ? (({ Primary: 'Primario', Accent: 'Acento', Surface: 'Superficie', Canvas: 'Lienzo', Text: 'Texto', Muted: 'Apagado' }) as Record<string, string>)[role.label] ?? role.label : role.label}</small>
+          <small>{m.roleLabels[role.label] ?? role.label}</small>
           <code data-role-value>{paletteFor(initialTheme)[role.key]}</code>
         </div>
       ))}
@@ -163,7 +162,10 @@ const colorRoles = [
       name.textContent = choice.dataset.themeName ?? '';
       description.textContent = choice.dataset.themeDescription ?? '';
       identifier.textContent = choice.dataset.themeId ?? '';
-      mode.textContent = document.documentElement.lang === 'es' ? `paleta ${choice.dataset.themeMode ?? 'dark'}` : `${choice.dataset.themeMode ?? 'dark'} palette`;
+      mode.textContent =
+        document.documentElement.lang === 'es'
+          ? `paleta ${choice.dataset.themeMode ?? 'dark'}`
+          : `${choice.dataset.themeMode ?? 'dark'} palette`;
 
       roles.forEach((swatch) => {
         const value = values[swatch.dataset.role as keyof typeof values];
@@ -172,7 +174,10 @@ const colorRoles = [
       });
 
       choices.forEach((item) => item.setAttribute('aria-pressed', String(item === choice)));
-      status.textContent = document.documentElement.lang === 'es' ? `Paleta ${choice.dataset.themeName ?? 'Hornero'} seleccionada para el estudio de color.` : `${choice.dataset.themeName ?? 'Hornero'} palette selected for the color study.`;
+      status.textContent =
+        document.documentElement.lang === 'es'
+          ? `Paleta ${choice.dataset.themeName ?? 'Hornero'} seleccionada para el estudio de color.`
+          : `${choice.dataset.themeName ?? 'Hornero'} palette selected for the color study.`;
     };
 
     choices.forEach((choice) => choice.addEventListener('click', () => applyPalette(choice)));

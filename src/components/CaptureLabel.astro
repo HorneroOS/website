@@ -5,6 +5,7 @@
  * a render, a mock-up or an older appearance (docs/CAPTURES.md).
  */
 import type { Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/capture-label';
 
 interface Props {
   state: 'captured';
@@ -13,19 +14,11 @@ interface Props {
 }
 
 const { state, kind = 'screenshot', locale = 'es' } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const text =
-  kind === 'photo'
-      ? isEs
-        ? 'Fotografía real'
-        : 'Real photograph'
-      : kind === 'clip'
-        ? isEs
-          ? 'Clip real · Hornero Signal'
-          : 'Real clip · Hornero Signal'
-        : isEs
-          ? 'Captura real · Hornero Signal'
-          : 'Real capture · Hornero Signal';
+  kind === 'photo' ? m.fotografiaReal : kind === 'clip' ? m.clipRealHorneroSignal : m.capturaRealHorneroSignal;
 ---
 
-<span class="capture-label" data-state={state}>{text}</span>
+<span class="capture-label" data-state={state}>
+  {text}
+</span>

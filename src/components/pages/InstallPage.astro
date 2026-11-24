@@ -7,108 +7,103 @@ import { features } from '../../data/features';
 import StageBadge from '../StageBadge.astro';
 
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/install';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
-const packages = isEs
-  ? [
-      { name: 'horneroctl-bin', what: 'la CLI del sistema (binario nativo)' },
-      { name: 'hornero-shell', what: 'la shell de escritorio Quickshell y sus presets de layout' },
-      { name: 'hornero-config', what: 'los defaults del escritorio y los packs de temas' },
-      { name: 'hornero-greeter', what: 'la pantalla de login de SDDM' },
-    ]
-  : [
-      { name: 'horneroctl-bin', what: 'the system CLI (native binary)' },
-      { name: 'hornero-shell', what: 'the Quickshell desktop shell and its layout presets' },
-      { name: 'hornero-config', what: 'the desktop defaults and theme packs' },
-      { name: 'hornero-greeter', what: 'the SDDM login screen' },
-    ];
+const packages = m.packages;
 const packageVersion = packageRelease?.version;
 const packageRecord = packageVersion ? releases.find((r) => r.version === packageVersion) : undefined;
 const packaged = features.filter((f) => f.stage === 'packaged');
 const unreleased = features.filter((f) => f.stage === 'unreleased');
 const planned = features.filter((f) => f.stage === 'planned');
-const statusName = (
-  isEs
-    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
-    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' }
-) as Record<'planned' | 'experimental' | 'preview' | 'supported', string>;
+const statusName = m.plannedPlanificadoExperimentalExperimentalPrevie as Record<
+  'planned' | 'experimental' | 'preview' | 'supported',
+  string
+>;
 ---
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt={isEs ? 'Descargá HorneroOS: tres pasos (descargar la ISO de 2.7 GB, verificar SHA-256 y firma, elegir edición y compositor).' : 'Download HorneroOS: three steps (download the 2.7 GB ISO, verify SHA-256 and signature, pick edition and compositor).'}
-  title={isEs ? 'Descargá HorneroOS | ISO actual firmada para x86_64' : 'Download HorneroOS | Signed current x86_64 ISO'}
-  description={isEs ? 'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming para uso diario, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.' : 'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming everyday-use editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.'}
+  socialImageAlt={m.descargaHorneroosTresPasosDescargar}
+  title={m.descargaHorneroosIsoActualFirmada}
+  description={m.descargaHorneroosUnaIsoX86}
 >
   <section class="section">
-    <p class="plate-id"><strong>{isEs ? 'Descarga' : 'Download'}</strong><span>{downloadTag}</span><span>x86_64 · {download.iso.sizeLabel}</span></p>
-    <h1>{isEs ? 'Descargá HorneroOS' : 'Download HorneroOS'}</h1>
-    <p class="lede">
-      {isEs ? 'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como pre-release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.' : 'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub pre-release. HorneroOS is used daily, with those limitations declared.'}
+    <p class="plate-id">
+      <strong>{m.descarga}</strong>
+      <span>{downloadTag}</span>
+      <span>x86_64 · {download.iso.sizeLabel}</span>
     </p>
+    <h1>{m.descargaHorneroos}</h1>
+    <p class="lede">{m.unaIsoX8664Instala}</p>
     <p class="cta-row download-row">
       <a class="cta primary" href={download.iso.url}>
-        {isEs ? `Descargar la ISO actual (${download.iso.sizeLabel})` : `Download the current ISO (${download.iso.sizeLabel})`}
+        {m.descargarLaIsoActual(download.iso.sizeLabel)}
       </a>
-      <a class="cta secondary" href={L('/editions')}>{isEs ? 'Compará las ediciones' : 'Compare the editions'}</a>
-      <a class="cta secondary" href={L('/install/arch')}>{isEs ? 'Ya usás Arch? Instalá los paquetes' : 'Already run Arch? Install the packages'}</a>
+      <a class="cta secondary" href={L('/editions')}>
+        {m.comparaLasEdiciones}
+      </a>
+      <a class="cta secondary" href={L('/install/arch')}>
+        {m.yaUsasArchInstalaLos}
+      </a>
     </p>
     <p>
-      {isEs ? 'También anunciada en la ' : 'Also announced on the '}
-      {' '}
-      <a href={download.releaseUrl}>{isEs ? `página de la release ${downloadTag}` : `${downloadTag} release page`}</a>.{' '}
-      {isEs ? 'Verificá cada copia con el ' : 'Verify every copy with the '}
-      {' '}
-      <a href={download.checksumUrl}>{isEs ? 'checksum SHA-256' : 'SHA-256 checksum'}</a>{' '}
-      {isEs ? 'y la ' : 'and the '}
-      {' '}
-      <a href={download.signatureUrl}>{isEs ? 'firma GPG desacoplada' : 'detached GPG signature'}</a>:
+      {m.tambienAnunciadaEnLa} <a href={download.releaseUrl}>{m.paginaDeLaRelease(downloadTag)}</a>.{' '}
+      {m.verificaCadaCopiaConEl} <a href={download.checksumUrl}>{m.checksumSha256}</a> {m.yLa}{' '}
+      <a href={download.signatureUrl}>{m.firmaGpgDesacoplada}</a>:
     </p>
     <ul role="list" class="packages">
-      <li><code>{download.iso.name}</code><span>{isEs ? 'la imagen de instalación actual (Desktop + Studio + Gaming)' : 'the current install image (Desktop + Studio + Gaming)'}</span></li>
-      <li><code>SHA-256</code><span>{download.iso.sha256}</span></li>
-      <li><code>{isEs ? 'Firma' : 'Signature'}</code><span>{isEs ? 'Clave de releases de HorneroOS ' + download.keyFingerprint + '; verificá con la clave pública en el repositorio hornero (' : 'HorneroOS releases key ' + download.keyFingerprint + '; verify with the public key in the hornero repository ('}<code>{download.keyPath}</code>)</span></li>
+      <li>
+        <code>{download.iso.name}</code>
+        <span>{m.laImagenDeInstalacionActual}</span>
+      </li>
+      <li>
+        <code>SHA-256</code>
+        <span>{download.iso.sha256}</span>
+      </li>
+      <li>
+        <code>{m.firma}</code>
+        <span>
+          {m.releasesKey(download.keyFingerprint)}
+          <code>{download.keyPath}</code>)
+        </span>
+      </li>
     </ul>
     {packageRelease && (
       <div class="package-release" aria-labelledby="pkg-release-title">
-        <h2 id="pkg-release-title">
-          {isEs ? `Paquetes más nuevos que la ISO: ${packageRelease.version}` : `Packages newer than the ISO: ${packageRelease.version}`}
-        </h2>
-        <p>
-          {isEs
-            ? `La ISO de arriba sigue siendo la ${downloadTag}: no hay ISO nueva. La ${packageTag}${packageRecord ? ` (${packageRecord.date})` : ''} es una release de paquetes del AUR que trae Hornero Signal. Una instalación hecha con la ISO, o una existente, la recibe actualizando esos paquetes:`
-            : `The ISO above is still ${downloadTag}: there is no new ISO. ${packageTag}${packageRecord ? ` (${packageRecord.date})` : ''} is an AUR package release that brings Hornero Signal. An install made from the ISO, or an existing one, gets it by updating those packages:`}
-        </p>
+        <h2 id="pkg-release-title">{m.paquetesMasNuevosQueLa(packageRelease.version)}</h2>
+        <p>{m.laIsoDeArribaSigue(downloadTag, packageTag, packageRecord ? ` (${packageRecord.date})` : '')}</p>
         <ul role="list" class="packages">
           {packageRelease.packages.map((p) => (
             <li>
-              <a href={`https://aur.archlinux.org/packages/${p.name}`}><code>{p.name}</code></a>
+              <a href={`https://aur.archlinux.org/packages/${p.name}`}>
+                <code>{p.name}</code>
+              </a>
               <span>{p.version}</span>
             </li>
           ))}
         </ul>
         <p>
-          <a href={packageRelease.recordUrl}>{isEs ? 'Registro de la release' : 'Release record'}</a> ·{' '}
-          <a href={packageRelease.checklistUrl}>{isEs ? 'Checklist y evidencia' : 'Checklist and evidence'}</a> ·{' '}
-          <a href={L(`/releases#${packageTag}`)}>{isEs ? 'En el historial de releases' : 'In the release history'}</a>
+          <a href={packageRelease.recordUrl}>{m.registroDeLaRelease}</a> ·{' '}
+          <a href={packageRelease.checklistUrl}>{m.checklistYEvidencia}</a> ·{' '}
+          <a href={L(`/releases#${packageTag}`)}>{m.enElHistorialDeReleases}</a>
         </p>
       </div>
     )}
     <p>
-      {isEs ? 'Las releases hasta ahora son composiciones: commits exactos de shell y config probados en conjunto.' : 'Releases so far are compositions: exact shell and config commits tested together.'}{' '}
+      {m.lasReleasesHastaAhoraSon}{' '}
       {latestTagged && (
         <>
-          {isEs ? 'La última etiquetada es ' : 'The latest tagged one is '}
-          {' '}
-          <a href={L(`/releases#${latestTagged.name}`)}>{latestTagged.version}</a>
+          {m.laUltimaEtiquetadaEs} <a href={L(`/releases#${latestTagged.name}`)}>{latestTagged.version}</a>
           {candidate && (
             <>
-              {isEs ? ', y ' : ', and '}<a href={L(`/releases#${candidate.name}`)}>{candidate.version}</a> {isEs ? 'se está preparando' : 'is being prepared'}
+              {m.y}
+              <a href={L(`/releases#${candidate.name}`)}>{candidate.version}</a> {m.seEstaPreparando}
             </>
           )}
           .
@@ -118,50 +113,60 @@ const statusName = (
   </section>
 
   <section class="section journey" aria-labelledby="journey-title">
-    <h2 id="journey-title">{isEs ? 'Del archivo al escritorio, y después' : 'From file to desktop, and after'}</h2>
+    <h2 id="journey-title">{m.delArchivoAlEscritorioY}</h2>
     <ol class="journey-steps" role="list">
       <li>
-        <span class="journey-n" aria-hidden="true">01</span>
-        <h3>{isEs ? 'Verificá' : 'Verify'}</h3>
-        <p>{isEs ? 'Antes de grabar la ISO, compará el resultado de sha256sum con el checksum publicado y verificá la firma.' : 'Before you write the ISO, compare the sha256sum output with the published checksum and verify the signature.'}</p>
+        <span class="journey-n" aria-hidden="true">
+          01
+        </span>
+        <h3>{m.verifica}</h3>
+        <p>{m.antesDeGrabarLaIso}</p>
         <pre tabindex="0"><code>sha256sum {download.iso.name}
 gpg --verify {download.iso.name}.sig</code></pre>
       </li>
       <li>
-        <span class="journey-n" aria-hidden="true">02</span>
-        <h3>{isEs ? 'Instalá' : 'Install'}</h3>
-        <p>{isEs ? 'Elegí la edición, las especializaciones y el compositor. Tené en cuenta las limitaciones declaradas (LUKS, BIOS heredado y Niri no validados en esta ISO): si tu caso depende de eso, probala primero en una máquina virtual o en un equipo que puedas reinstalar.' : 'Pick the edition, specializations and compositor. Note the declared limitations (LUKS, legacy BIOS and Niri not validated on this ISO): if your case depends on those, try it first in a virtual machine or on a machine you can reinstall.'}</p>
+        <span class="journey-n" aria-hidden="true">
+          02
+        </span>
+        <h3>{m.instala}</h3>
+        <p>{m.elegiLaEdicionLasEspecializaciones}</p>
       </li>
       <li id="update">
-        <span class="journey-n" aria-hidden="true">03</span>
-        <h3>{isEs ? 'Actualizá' : 'Update'}</h3>
-        <p>{isEs ? 'Después de instalar, las novedades llegan como paquetes, no como una ISO nueva. Los paquetes de HorneroOS vienen del AUR, así que se actualizan con un ayudante de AUR como yay (la ISO no instala ninguno). Antes, guardá tu configuración y mirá qué hay pendiente:' : 'After installing, new work arrives as packages, not as a new ISO. HorneroOS packages come from the AUR, so you update them with an AUR helper such as yay (the ISO does not install one). First save your configuration and see what is pending:'}</p>
+        <span class="journey-n" aria-hidden="true">
+          03
+        </span>
+        <h3>{m.actualiza}</h3>
+        <p>{m.despuesDeInstalarLasNovedades}</p>
         <pre tabindex="0"><code>horneroctl config snapshot create --yes
 horneroctl package check
 yay -Syu</code></pre>
-        <p>{isEs ? 'horneroctl package upgrade corre pacman -Syu: actualiza los repositorios de Arch, no los paquetes del AUR. Ningún comando hace rollback del sistema; el snapshot guarda solo la configuración de Hornero.' : 'horneroctl package upgrade runs pacman -Syu: it updates the Arch repositories, not AUR packages. No command rolls the system back; the snapshot keeps Hornero configuration only.'}</p>
-        <p><a href={L('/docs/desktop/updates-and-rollback/')}>{isEs ? 'Leé la guía de actualizaciones y rollback (el rollback de SO sigue planificado)' : 'Read the updates and rollback guide (OS rollback is still planned)'}</a></p>
-        <p>{isEs ? 'Guías oficiales: ' : 'Official guides: '}<a href={L('/docs/getting-started/install-step-by-step/')}>{isEs ? 'instalación paso a paso' : 'step-by-step installation'}</a>{', '}<a href={L('/docs/applications/post-install-first-steps/')}>{isEs ? 'primeros pasos tras instalar' : 'first steps after installing'}</a>{isEs ? ' y ' : ' and '}<a href={L('/docs/troubleshooting/by-symptom/')}>{isEs ? 'problemas por síntoma' : 'troubleshooting by symptom'}</a>.</p>
-        {packageRelease && (
-          <p>{isEs ? `La actualización en el lugar a la ${packageTag} todavía figura como pendiente de verificación en su checklist.` : `The in-place upgrade to ${packageTag} is still listed as pending verification in its checklist.`}</p>
-        )}
+        <p>{m.horneroctlPackageUpgradeCorrePacman}</p>
+        <p>
+          <a href={L('/docs/desktop/updates-and-rollback/')}>{m.leeLaGuiaDeActualizaciones}</a>
+        </p>
+        <p>
+          {m.guiasOficiales}
+          <a href={L('/docs/getting-started/install-step-by-step/')}>{m.instalacionPasoAPaso}</a>
+          {', '}
+          <a href={L('/docs/applications/post-install-first-steps/')}>{m.primerosPasosTrasInstalar}</a>
+          {m.y2}
+          <a href={L('/docs/troubleshooting/by-symptom/')}>{m.problemasPorSintoma}</a>.
+        </p>
+        {packageRelease && <p>{m.laActualizacionEnElLugar(packageTag)}</p>}
       </li>
     </ol>
-    <h3>{isEs ? 'Lo que todavía no está en esta ISO' : 'What is not in this ISO yet'}</h3>
+    <h3>{m.loQueTodaviaNoEsta}</h3>
     <p class="journey-note">
-      {isEs ? `La ISO ${downloadTag} es la última publicada. Lo que sigue no está en esa imagen.` : `The ${downloadTag} ISO is the latest published. What follows is not in that image.`}{' '}
-      {packaged.length > 0 && (isEs ? 'Lo lanzado como paquetes se obtiene actualizando (paso 03). ' : 'What was released as packages arrives by updating (step 03). ')}
-      {isEs ? 'Lo que está en main llega con una release futura, cuando el registro del proyecto lo marque como lanzado; lo planificado todavía no existe.' : 'What is on main arrives with a future release, when the project ledger marks it as released; what is planned does not exist yet.'}
+      {m.laIsoEsLaUltima(downloadTag)} {packaged.length > 0 && m.loLanzadoComoPaquetesSe}
+      {m.loQueEstaEnMain}
     </p>
     <ul class="journey-next" role="list">
-      {
-        [...packaged, ...unreleased, ...planned].map((f) => (
-          <li>
-            <StageBadge stage={f.stage} locale={locale} />
-            <strong>{f.title[locale]}</strong>
-          </li>
-        ))
-      }
+      {[...packaged, ...unreleased, ...planned].map((f) => (
+        <li>
+          <StageBadge stage={f.stage} locale={locale} />
+          <strong>{f.title[locale]}</strong>
+        </li>
+      ))}
     </ul>
   </section>
 
@@ -169,33 +174,37 @@ yay -Syu</code></pre>
     route="/install"
     locale={locale}
     id="install-captures"
-    heading={isEs ? 'Cómo se ve instalar HorneroOS' : 'What installing HorneroOS looks like'}
-    intro={isEs ? 'Todavía no publicamos capturas del instalador: los pasos quedan en texto hasta que exista una captura real de Calamares. Lo que sí se ve es el día después: actualizaciones y rollback.' : 'We do not publish installer captures yet: the steps stay as text until a real Calamares capture exists. What you can see is the day after: updates and rollback.'}
+    heading={m.comoSeVeInstalarHorneroos}
+    intro={m.todaviaNoPublicamosCapturasDel}
   />
 
   <section class="section readiness" aria-labelledby="readiness-title">
-    <h2 id="readiness-title">{isEs ? 'Cómo está la instalación' : 'Where installation stands'}</h2>
+    <h2 id="readiness-title">{m.comoEstaLaInstalacion}</h2>
     <dl class="readiness-ledger">
       <div class="state-available">
-        <dt>{isEs ? 'Imagen de instalación' : 'Install image'}</dt>
-        <dd><span class="state">{downloadTag}</span> {isEs ? 'ISO actual publicada como pre-release firmada (' + downloadTag + '), verificada en guest y en host; una copia alterada falla la verificación de checksum y de firma.' : 'Current ISO published as a signed pre-release (' + downloadTag + '), verified in guest and on host; a tampered copy fails checksum and signature verification.'}</dd>
+        <dt>{m.imagenDeInstalacion}</dt>
+        <dd>
+          <span class="state">{downloadTag}</span> {m.currentIsoNote(downloadTag)}
+        </dd>
       </div>
       <div class="state-provisional">
-        <dt>{isEs ? 'Instalador' : 'Installer'}</dt>
-        <dd><span class="state">{isEs ? 'Provisorio' : 'Provisional'}</span> {isEs ? 'La build de Calamares pasó la validación en VM de esta ISO (Desktop, Studio y Gaming, UEFI, sin cifrado); LUKS, BIOS y Niri no se ejecutaron sobre esta ISO. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.' : "The Calamares build passed this ISO's VM validation (Desktop, Studio and Gaming, UEFI, unencrypted); LUKS, legacy BIOS and Niri were not run against this ISO. Panda Foss's custom installer remains the future official path."}</dd>
+        <dt>{m.instalador}</dt>
+        <dd>
+          <span class="state">{m.provisorio}</span> {m.laBuildDeCalamaresPaso}
+        </dd>
       </div>
       <div class="state-available">
-        <dt>{isEs ? 'Paquetes de escritorio' : 'Desktop packages'}</dt>
-        <dd><span class="state">{isEs ? 'Disponible' : 'Available'}</span> {isEs ? 'Cuatro paquetes de AUR, para quienes ya corren Arch Linux.' : 'Four AUR packages, for people who already run Arch Linux.'}</dd>
+        <dt>{m.paquetesDeEscritorio}</dt>
+        <dd>
+          <span class="state">{m.disponible}</span> {m.cuatroPaquetesDeAurPara}
+        </dd>
       </div>
     </dl>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Qué existe hoy' : 'What exists today'}</h2>
-    <p>
-      {isEs ? 'Hoy HorneroOS se instala de dos maneras: la ISO actual firmada de arriba (Desktop, Studio o Gaming), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.' : 'Today HorneroOS installs two ways: the signed current ISO above (Desktop, Studio or Gaming), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.'}
-    </p>
+    <h2>{m.queExisteHoy}</h2>
+    <p>{m.hoyHorneroosSeInstalaDe}</p>
     <ul role="list" class="packages">
       {packages.map((p) => (
         <li>
@@ -206,16 +215,12 @@ yay -Syu</code></pre>
         </li>
       ))}
     </ul>
-    <p>
-      {isEs ? 'El paquete del greeter es opcional y necesita SDDM. El paquete publicado actual (el greeter de paisajes) también necesita Qt 6 Multimedia; el greeter Signal que está en la rama principal lo va a necesitar solo para un video que elija quien administra el equipo. Otros compositores no están soportados salvo que el catálogo de ediciones y la evidencia de aceptación digan lo contrario.' : 'The greeter package is optional and needs SDDM. The current published package (the landscape greeter) also needs Qt 6 Multimedia; the Signal greeter on the main branch will need Qt 6 Multimedia only for an administrator-chosen video. Other compositors are not supported unless the edition catalogue and acceptance evidence say so.'}
-    </p>
+    <p>{m.elPaqueteDelGreeterEs}</p>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Estado de las ediciones' : 'Edition readiness'}</h2>
-    <p>
-      {isEs ? 'Las ediciones comparten un solo modelo de composición. Los niveles de madurez reflejan lo que se probó; no significan que toda edición se pueda instalar.' : 'Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every edition can be installed.'}
-    </p>
+    <h2>{m.estadoDeLasEdiciones}</h2>
+    <p>{m.lasEdicionesCompartenUnSolo}</p>
     <ul class="edition-status" role="list">
       {editions.map((edition) => (
         <li>
@@ -225,34 +230,43 @@ yay -Syu</code></pre>
       ))}
     </ul>
     <p>
-      {isEs ? 'Desktop es la edición base para uso diario. Studio y Gaming se instalan desde la misma ISO actual con especializaciones y perfiles a elección, y pasaron su validación de instalación en VM en esta ISO; son ediciones ' : 'Desktop is the everyday-use base edition. Studio and Gaming install from the same current ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are '}<strong>Supported</strong>{isEs ? '. La evidencia de hardware de ' : ' edition. The '}
-      <code>hornero-qa studio-gate</code> {isEs ? ' todavía está pendiente, así que los resultados en VM no son prueba en hardware físico y Studio todavía no es Supported. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Niri sigue siendo experimental dentro de Desktop.' : ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.'}{' '}
-      <a href={L('/editions')}>{isEs ? 'Cómo encajan las ediciones.' : 'How the editions fit together.'}</a>
+      {m.desktopEsLaEdicionBase}
+      <strong>Supported</strong>
+      {m.laEvidenciaDeHardwareDe}
+      <code>hornero-qa studio-gate</code> {m.todaviaEstaPendienteAsiQue}{' '}
+      <a href={L('/editions')}>{m.comoEncajanLasEdiciones}</a>
     </p>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Pruebas y reportes' : 'Testing and reports'}</h2>
+    <h2>{m.pruebasYReportes}</h2>
+    <p>{m.siAlgoSaleMalEn}</p>
     <p>
-      {isEs ? 'Si algo sale mal en tu computadora, los reportes desde hardware real son lo más útil que podés enviar. Incluí el nombre de la ISO, tu tipo de firmware, si el disco está cifrado y el paso donde falló.' : 'If something goes wrong on your machine, reports from real hardware are the most useful thing you can send. Include the ISO name, your firmware type, whether the disk is encrypted, and the step where it failed.'}
-    </p>
-    <p>
-      <a href="https://github.com/HorneroOS/installer/issues/new/choose">{isEs ? 'Reportar un problema de instalación' : 'Report an install problem'}</a> ·{' '}
-      <a href={download.releaseUrl}>{isEs ? 'Notas de la release y checksums' : 'Release notes and checksums'}</a>
+      <a href="https://github.com/HorneroOS/installer/issues/new/choose">{m.reportarUnProblemaDeInstalacion}</a> ·{' '}
+      <a href={download.releaseUrl}>{m.notasDeLaReleaseY}</a>
     </p>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'El instalador' : 'The installer'}</h2>
+    <h2>{m.elInstalador}</h2>
     <p>
-      {isEs ? 'La build de Calamares en ' : 'The Calamares build in '}<a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>{isEs ? ' es un puente provisorio para probar composiciones y flujos de instalación. ' : ' is a provisional bridge for testing compositions and install flows. '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ' está desarrollando el instalador a medida de HorneroOS que debería convertirse en el camino oficial, y va a ser suyo. La build de Calamares no es ese instalador y sigue siendo provisoria hasta que el instalador a medida esté listo para publicar y pase la aceptación. Usa el contrato de ediciones y compositores en vez de definir su propio modelo de paquetes. La ISO actual de arriba ya instala Desktop, Studio y Gaming con este Calamares.' : " is developing the custom HorneroOS installer that is meant to become the official path, and will own it. The Calamares build is not that installer and stays provisional until the custom one is ready to publish and passes acceptance. It uses the edition and compositor contract instead of defining its own package model. The current ISO above already installs Desktop, Studio and Gaming with this Calamares build."}
+      {m.laBuildDeCalamaresEn}
+      <a href="https://github.com/HorneroOS/installer">HorneroOS/installer</a>
+      {m.esUnPuenteProvisorioPara}
+      <a href="https://github.com/PandaFoss">Panda Foss</a>
+      {m.estaDesarrollandoElInstaladorA}
     </p>
     <p>
-      {isEs ? 'Quienes contribuyen pueden seguir el ' : 'Contributors can follow the '}<a href={L('/docs/development/design-language/')}>{isEs ? 'lenguaje de diseño de HorneroOS' : 'HorneroOS design language'}</a>{isEs ? ', que apunta a las fuentes de diseño autoritativas para el escritorio, el sitio web, el greeter y el instalador.' : ', which points to the authoritative design sources for the desktop, website, greeter and installer.'}
+      {m.quienesContribuyenPuedenSeguirEl}
+      <a href={L('/docs/development/design-language/')}>{m.lenguajeDeDisenoDeHorneroos}</a>
+      {m.queApuntaALasFuentes}
     </p>
     <p>
-      {isEs ? 'Para seguir las composiciones etiquetadas, mirá ' : 'To follow tagged compositions, see '}<a href={L('/releases')}>Releases</a>{isEs ? ' o la ' : ' or the '}
-      <a href="https://github.com/HorneroOS">{isEs ? 'organización HorneroOS' : 'HorneroOS organization'}</a>{isEs ? ' en GitHub.' : ' on GitHub.'}
+      {m.paraSeguirLasComposicionesEtiquetadas}
+      <a href={L('/releases')}>Releases</a>
+      {m.oLa}
+      <a href="https://github.com/HorneroOS">{m.organizacionHorneroos}</a>
+      {m.enGithub}
     </p>
   </section>
 </SiteLayout>
@@ -346,20 +360,61 @@ yay -Syu</code></pre>
       grid-template-columns: 1fr;
     }
   }
-  .readiness-ledger { max-width: 58rem; border-top: 1px solid var(--rule); }
-  .readiness-ledger > div { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr); gap: 0.4rem 1.5rem; padding-block: 1rem; border-bottom: 1px solid var(--rule); }
-  .readiness-ledger dt { font: 700 1.1rem var(--font-display); }
-  .readiness-ledger dd { color: var(--ink-muted); }
-  .state { display: inline-block; margin-right: 0.7rem; padding: 0.1rem 0.5rem; border: 1px solid var(--rule); color: var(--ink); font: 600 0.7rem var(--font-mono); font-stretch: 87.5%; text-transform: uppercase; }
-  .state-none { border-bottom-style: dashed; }
-  .state-none .state { border-style: dashed; color: var(--ink-muted); }
-  .state-provisional .state { border-color: var(--cue); color: var(--cue); }
-  .state-available .state { border-color: var(--signal); color: var(--signal); }
-  @media (max-width: 560px) { .readiness-ledger > div { grid-template-columns: 1fr; } }
+  .readiness-ledger {
+    max-width: 58rem;
+    border-top: 1px solid var(--rule);
+  }
+  .readiness-ledger > div {
+    display: grid;
+    grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr);
+    gap: 0.4rem 1.5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .readiness-ledger dt {
+    font: 700 1.1rem var(--font-display);
+  }
+  .readiness-ledger dd {
+    color: var(--ink-muted);
+  }
+  .state {
+    display: inline-block;
+    margin-right: 0.7rem;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font: 600 0.7rem var(--font-mono);
+    font-stretch: 87.5%;
+    text-transform: uppercase;
+  }
+  .state-none {
+    border-bottom-style: dashed;
+  }
+  .state-none .state {
+    border-style: dashed;
+    color: var(--ink-muted);
+  }
+  .state-provisional .state {
+    border-color: var(--cue);
+    color: var(--cue);
+  }
+  .state-available .state {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+  @media (max-width: 560px) {
+    .readiness-ledger > div {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* Per-page direction: install as an honest status board. */
-  .edition-status { border: 1px solid var(--rule); }
-  .packages > * { border-radius: 2px; }
+  .edition-status {
+    border: 1px solid var(--rule);
+  }
+  .packages > * {
+    border-radius: 2px;
+  }
 
   .journey-steps {
     display: grid;

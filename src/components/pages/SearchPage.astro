@@ -1,30 +1,34 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/search';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 ---
 
-<SiteLayout title={isEs ? 'Buscar | HorneroOS' : 'Search | HorneroOS'} description={isEs ? 'Buscá en el sitio de HorneroOS y en la documentación.' : 'Search the HorneroOS site and documentation.'} noindex>
+<SiteLayout title={m.buscarHorneroos} description={m.buscaEnElSitioDe} noindex>
   <section class="section">
-    <p class="plate-id"><strong>Índice local</strong><span>Pagefind · en tu navegador</span></p>
-    <h1>{isEs ? 'Buscar' : 'Search'}</h1>
-    <p>
-      {isEs ? 'Buscá en este sitio y en la documentación. El índice se construye con el sitio y corre en tu navegador: nada de lo que escribas sale de esta página.' : 'Searches this site and the documentation. The index is built with the site and runs in your browser: nothing you type leaves this page.'}
+    <p class="plate-id">
+      <strong>Índice local</strong>
+      <span>Pagefind · en tu navegador</span>
     </p>
+    <h1>{m.buscar}</h1>
+    <p>{m.buscaEnEsteSitioY}</p>
     <div class="search" data-pagefind-ignore>
-      <pagefind-input placeholder={isEs ? 'Buscar en HorneroOS' : 'Search HorneroOS'}></pagefind-input>
-      <pagefind-summary default-message={isEs ? 'Buscá temas, layouts, comandos y documentación.' : 'Search themes, layouts, commands, and documentation.'}></pagefind-summary>
+      <pagefind-input placeholder={m.buscarEnHorneroos}></pagefind-input>
+      <pagefind-summary default-message={m.buscaTemasLayoutsComandosY}></pagefind-summary>
       <pagefind-results></pagefind-results>
     </div>
     <noscript>
       <p>
-        {isEs ? 'La búsqueda necesita JavaScript. Explorá la ' : 'Search needs JavaScript. Browse the '}<a href={L('/docs/')}>{isEs ? 'documentación' : 'documentation'}</a>{isEs ? ' en su lugar.' : ' instead.'}
+        {m.laBusquedaNecesitaJavascriptExplora}
+        <a href={L('/docs/')}>{m.documentacion}</a>
+        {m.enSuLugar}
       </p>
     </noscript>
   </section>
