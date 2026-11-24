@@ -3,12 +3,13 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaptureFigure from '../CaptureFigure.astro';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { editorial, getSlot, showroomGroups, slotCounts } from '../../data/captures';
+import { messages } from '../../i18n/messages/showroom';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const counts = slotCounts();
 const groups = showroomGroups();
@@ -17,48 +18,58 @@ const curationDoc = 'https://github.com/HorneroOS/website/blob/main/docs/IMAGE_C
 
 <SiteLayout
   socialImage="/og/showroom.png"
-  socialImageAlt={isEs ? 'Tarjeta de marca de HorneroOS para el showroom de capturas seleccionadas.' : 'HorneroOS brand card for the selected-captures showroom.'}
+  socialImageAlt={m.tarjetaDeMarcaDeHorneroos}
   title="Showroom | HorneroOS"
-  description={isEs ? `El showroom de HorneroOS: ${counts.public} capturas reales seleccionadas, agrupadas por tema. El resto del archivo queda guardado sin mostrarse.` : `The HorneroOS showroom: ${counts.public} selected real captures, grouped by theme. The rest of the archive stays kept, unshown.`}
+  description={m.elShowroomDeHorneroosCapturas(counts.public)}
 >
   <section class="showcase-hero section" id="capture-ledger">
     <div class="hero-copy">
-      <p class="plate-id"><strong>{isEs ? 'Capturas seleccionadas' : 'Selected captures'}</strong><span>{counts.public} {isEs ? 'en público' : 'public'}</span></p>
-      <h1>Showroom</h1>
-      <p>
-        {isEs ? `Una selección curada de capturas reales, no el archivo entero: ${counts.public} imágenes elegidas porque cada una demuestra algo. Las demás quedan archivadas en el repositorio, sin mostrarse.` : `A curated selection of real captures, not the whole archive: ${counts.public} images chosen because each one demonstrates something. The rest stay archived in the repository, unshown.`}
+      <p class="plate-id">
+        <strong>{m.capturasSeleccionadas}</strong>
+        <span>
+          {counts.public} {m.enPublico}
+        </span>
       </p>
+      <h1>Showroom</h1>
+      <p>{m.unaSeleccionCuradaDeCapturas(counts.public)}</p>
       <p>{editorial.provenance[locale]}</p>
       <p>
-        <a class="text-link" href={curationDoc}>{isEs ? 'Cómo se curó esta selección' : 'How this selection was curated'} <span aria-hidden="true">↗</span></a>
-        · <a class="text-link" href={L('/wallpapers')}>{isEs ? 'Los fondos con licencia' : 'The licensed wallpapers'}</a>
+        <a class="text-link" href={curationDoc}>
+          {m.comoSeCuroEstaSeleccion} <span aria-hidden="true">↗</span>
+        </a>
+        ·{' '}
+        <a class="text-link" href={L('/wallpapers')}>
+          {m.losFondosConLicencia}
+        </a>
       </p>
-      <nav class="hero-links" aria-label={isEs ? 'Grupos del showroom' : 'Showroom groups'}>
-        {groups.map((group, i) => <a href={`#group-${i + 1}`}>{group.group[locale]}</a>)}
+      <nav class="hero-links" aria-label={m.gruposDelShowroom}>
+        {groups.map((group, i) => (
+          <a href={`#group-${i + 1}`}>{group.group[locale]}</a>
+        ))}
       </nav>
     </div>
   </section>
 
-  {
-    groups.map((group, i) => (
-      <section class="section session" id={`group-${i + 1}`} aria-labelledby={`title-group-${i + 1}`}>
-        <header class="session-head">
-          <h2 id={`title-group-${i + 1}`}>{group.group[locale]}</h2>
-          <p>{group.slots.length} {isEs ? 'capturas' : 'captures'}</p>
-        </header>
-        <div class="wall">
-          {group.slots.map((sid) => {
-            const slot = getSlot(sid);
-            return (
-              <div class="cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined} id={sid.toLowerCase()}>
-                <CaptureFigure slot={sid} locale={locale} caption={group.captions?.[sid]?.[locale]} />
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    ))
-  }
+  {groups.map((group, i) => (
+    <section class="section session" id={`group-${i + 1}`} aria-labelledby={`title-group-${i + 1}`}>
+      <header class="session-head">
+        <h2 id={`title-group-${i + 1}`}>{group.group[locale]}</h2>
+        <p>
+          {group.slots.length} {m.capturas}
+        </p>
+      </header>
+      <div class="wall">
+        {group.slots.map((sid) => {
+          const slot = getSlot(sid);
+          return (
+            <div class="cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined} id={sid.toLowerCase()}>
+              <CaptureFigure slot={sid} locale={locale} caption={group.captions?.[sid]?.[locale]} />
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  ))}
 </SiteLayout>
 
 <style>

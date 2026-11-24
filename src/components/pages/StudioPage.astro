@@ -6,12 +6,13 @@ import AppLogo from '../../components/AppLogo.astro';
 import MaturityMeter from '../../components/MaturityMeter.astro';
 import { studioCatalogue, editions, pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/studio';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
 const studio = editions.find((edition) => edition.id === 'studio');
@@ -21,12 +22,12 @@ const appById = Object.fromEntries(studioCatalogue.applications.map((app) => [ap
 const appTitle = (id: string) => appById[id]?.title ?? id;
 type StudioApp = (typeof studioCatalogue.applications)[number];
 const statusTag = (app: StudioApp) => {
-  if (app.availability === 'reference-only') return isEs ? 'Solo de referencia' : 'Reference only';
-  if (app.licenseClass === 'proprietary') return isEs ? 'Propietario · a elección' : 'Proprietary · opt-in';
+  if (app.availability === 'reference-only') return m.soloDeReferencia;
+  if (app.licenseClass === 'proprietary') return m.propietarioAEleccion;
   if (app.experimental) return 'Experimental';
-  if (app.licenseClass === 'open-source') return isEs ? 'Código abierto' : 'Open source';
-  if (app.optional) return isEs ? 'Opcional' : 'Optional';
-  return isEs ? 'Catalogado' : 'Catalogued';
+  if (app.licenseClass === 'open-source') return m.codigoAbierto;
+  if (app.optional) return m.opcional;
+  return m.catalogado;
 };
 type TagKind = 'reference' | 'proprietary' | 'experimental' | 'open' | 'optional' | 'catalogued';
 const tagKind = (app: StudioApp): TagKind => {
@@ -42,197 +43,191 @@ const tagKind = (app: StudioApp): TagKind => {
 const heroLineup = ['ardour', 'obs-studio', 'blender', 'krita', 'godot']
   .map((id) => appById[id])
   .filter((app): app is StudioApp => Boolean(app));
-const stats = isEs
-  ? [
-      { value: String(studioCatalogue.specializations.length), label: 'especializaciones en el catálogo' },
-      { value: String(studioCatalogue.applications.length), label: 'aplicaciones en el catálogo' },
-      { value: String(studioCatalogue.audioModes.length), label: 'modos de audio, todos reversibles' },
-    ]
-  : [
-      { value: String(studioCatalogue.specializations.length), label: 'specializations in the catalogue' },
-      { value: String(studioCatalogue.applications.length), label: 'applications in the catalogue' },
-      { value: String(studioCatalogue.audioModes.length), label: 'audio modes, all reversible' },
-    ];
+const stats = m.stats(
+  studioCatalogue.specializations.length,
+  studioCatalogue.applications.length,
+  studioCatalogue.audioModes.length,
+);
 ---
 
 <SiteLayout
-  title={isEs ? 'Studio: hacé algo real | HorneroOS' : 'Studio: make something real | HorneroOS'}
+  title={m.studioHaceAlgoRealHorneroos}
   socialImage="/og/studio.png"
-  socialImageAlt={isEs ? 'Las aplicaciones insignia de HorneroOS Studio (Ardour, OBS Studio, Blender, Krita y Godot) listadas por nombre, junto a la frase sobre la edición creativa para uso diario.' : 'The flagship HorneroOS Studio applications (Ardour, OBS Studio, Blender, Krita and Godot) listed by name, beside the line about the everyday-use creative edition.'}
-  description={isEs ? 'HorneroOS Studio es una edición para uso diario y trabajo creativo: audio, video, streaming, diseño, foto y 3D. Se instala desde la ISO actual de HorneroOS con especializaciones a elección.' : 'HorneroOS Studio is an everyday-use edition for creative work: audio, video, streaming, design, photo and 3D. It installs from the current HorneroOS ISO with selectable specializations.'}
+  socialImageAlt={m.lasAplicacionesInsigniaDeHorneroos}
+  description={m.horneroosStudioEsUnaEdicion}
 >
   <section class="section intro">
     <p class="plate-id">
-      <strong>CH 02</strong><span>{isEs ? 'Edición Studio' : 'Studio edition'}</span><span>{isEs ? 'Estación de trabajo creativa' : 'Creative workstation'}</span>
+      <strong>CH 02</strong>
+      <span>{m.edicionStudio}</span>
+      <span>{m.estacionDeTrabajoCreativa}</span>
     </p>
     <div class="hero-head">
-      <h1>Studio <span class="tagline">{isEs ? 'Hacé algo real.' : 'Make something real.'}</span></h1>
+      <h1>
+        Studio <span class="tagline">{m.haceAlgoReal}</span>
+      </h1>
       <MaturityMeter maturity={studio.maturity} locale={locale} />
     </div>
-    <p class="lede">
-      {isEs ? 'HorneroOS Studio es una edición creativa para uso diario construida sobre Desktop, y hoy se instala desde la ISO actual de HorneroOS. Elegís especializaciones (audio, video, streaming, diseño, fotografía, 3D) y el sistema configura las aplicaciones, la política de audio y el espacio de trabajo para ellas.' : 'HorneroOS Studio is an everyday-use creative edition built on the Desktop, and it installs today from the current HorneroOS ISO. You pick specializations (audio, video, streaming, design, photography, 3D) and the system sets up the applications, audio policy and workspace for them.'}
-    </p>
+    <p class="lede">{m.horneroosStudioEsUnaEdicion2}</p>
 
-    <div class="lineup" aria-label={isEs ? 'Aplicaciones insignia de Studio' : 'Flagship Studio applications'}>
-      {
-        heroLineup.map((app) => (
-          <span class="lineup-item">
-            <AppLogo id={app.id} name={app.title} />
-            <span>{app.title}</span>
-          </span>
-        ))
-      }
+    <div class="lineup" aria-label={m.aplicacionesInsigniaDeStudio}>
+      {heroLineup.map((app) => (
+        <span class="lineup-item">
+          <AppLogo id={app.id} name={app.title} />
+          <span>{app.title}</span>
+        </span>
+      ))}
     </div>
 
     <p class="hero-ctas">
-      <a class="cta primary" href={L('/install')}>{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
-      <a class="cta secondary" href="#apps-title">{isEs ? 'Ver aplicaciones' : 'Browse applications'}</a>
+      <a class="cta primary" href={L('/install')}>
+        {m.descargaLaIsoActual}
+      </a>
+      <a class="cta secondary" href="#apps-title">
+        {m.verAplicaciones}
+      </a>
     </p>
-    <nav class="section-nav" aria-label={isEs ? 'Secciones de Studio' : 'Studio sections'}>
-      <a href="#workloads-title">{isEs ? 'Especializaciones' : 'Specializations'}</a>
-      <a href="#apps-title">{isEs ? 'Aplicaciones' : 'Applications'}</a>
-      <a href="#audio-title">{isEs ? 'Audio y rendimiento' : 'Audio & performance'}</a>
-      <a href="#today-title">{isEs ? 'Estado' : 'Status'}</a>
+    <nav class="section-nav" aria-label={m.seccionesDeStudio}>
+      <a href="#workloads-title">{m.especializaciones}</a>
+      <a href="#apps-title">{m.aplicaciones}</a>
+      <a href="#audio-title">{m.audioYRendimiento}</a>
+      <a href="#today-title">{m.estado}</a>
     </nav>
 
     <dl class="stats">
-      {
-        stats.map((stat) => (
-          <div>
-            <dt>{stat.label}</dt>
-            <dd>{stat.value}</dd>
-          </div>
-        ))
-      }
+      {stats.map((stat) => (
+        <div>
+          <dt>{stat.label}</dt>
+          <dd>{stat.value}</dd>
+        </div>
+      ))}
     </dl>
 
     <p class="availability" role="note">
-      <strong>{isEs ? 'Studio ya está disponible para uso diario.' : 'Studio is available now for everyday use.'}</strong> {isEs ? 'Se instala desde la misma ISO actual firmada que Desktop y Gaming, y elegís tus especializaciones durante la instalación. Después del primer inicio, ' : 'It installs from the same signed current ISO as Desktop and Gaming, and you choose your specializations during installation. After first boot, '}<code>horneroctl studio doctor</code>{isEs ? ' chequea tu stack creativo cuando quieras. Mirá ' : ' checks your creative stack whenever you want. See '}
-      <a href={L('/install')}>{isEs ? 'Instalar' : 'Install'}</a>{isEs ? ' para descargarla. Limitación concreta: la validación en hardware físico (interfaces de audio, MIDI, codificación por GPU) todavía está pendiente; eso no es una certificación para tu hardware.' : ' to download it. Concrete limitation: physical-hardware validation (audio interfaces, MIDI, GPU encode) is still pending; that is not a certification for your hardware.'}
+      <strong>{m.studioYaEstaDisponiblePara}</strong> {m.seInstalaDesdeLaMisma}
+      <code>horneroctl studio doctor</code>
+      {m.chequeaTuStackCreativoCuando}
+      <a href={L('/install')}>{m.instalar}</a>
+      {m.paraDescargarlaLimitacionConcretaLa}
     </p>
   </section>
 
-  <section class="section" aria-label={isEs ? 'Una sesión real' : 'A real session'}>
+  <section class="section" aria-label={m.unaSesionReal}>
     <CaptureFigure slot="CAP-MODE-05" locale={locale} />
   </section>
 
   <section class="section" aria-labelledby="workloads-title">
-    <h2 id="workloads-title">{isEs ? 'Especializaciones' : 'Specializations'}</h2>
+    <h2 id="workloads-title">{m.especializaciones}</h2>
     <p class="section-copy">
-      {isEs ? 'Las especializaciones y las aplicaciones individuales se eligen desde un único catálogo canónico, el mismo modelo que usan el diseño del instalador, ' : 'Specializations and individual applications are selected from one canonical catalogue, the same model used by the installer design, by '}<code>horneroctl studio selection</code>{isEs ? ' y el Centro de Control. Las selecciones pueden cambiar después de la instalación; registrar una selección nunca borra proyectos, configuraciones ni archivos.' : ' and by the Control Center. Selections can change after installation; recording a selection never deletes projects, settings or files.'}
+      {m.lasEspecializacionesYLasAplicaciones}
+      <code>horneroctl studio selection</code>
+      {m.yElCentroDeControl}
     </p>
     <ol class="tracks" role="list">
-      {
-        studioCatalogue.specializations.map((spec, index) => (
-          <li class="track">
-            <h3><span class="track-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{spec.title}</h3>
-            {spec.applications.length > 0 ? (
-              <ul class="chips" role="list">
-                {spec.applications.map((id) => (
-                  <li class="chip">
-                    <AppLogo id={id} name={appTitle(id)} />
-                    <span>{appTitle(id)}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p class="muted">{isEs ? 'Empezá vacío y agregá aplicaciones individuales.' : 'Start empty and add individual applications.'}</p>
-            )}
-          </li>
-        ))
-      }
+      {studioCatalogue.specializations.map((spec, index) => (
+        <li class="track">
+          <h3>
+            <span class="track-index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            {spec.title}
+          </h3>
+          {spec.applications.length > 0 ? (
+            <ul class="chips" role="list">
+              {spec.applications.map((id) => (
+                <li class="chip">
+                  <AppLogo id={id} name={appTitle(id)} />
+                  <span>{appTitle(id)}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="muted">{m.empezaVacioYAgregaAplicaciones}</p>
+          )}
+        </li>
+      ))}
     </ol>
   </section>
 
   <section class="section" aria-labelledby="apps-title">
-    <h2 id="apps-title">{isEs ? 'Aplicaciones, fuentes y licencias' : 'Applications, sources and licenses'}</h2>
-    <p class="section-copy">
-      {isEs ? `Este catálogo se genera desde el catálogo pineado de Hornero (HorneroOS/hornero en ${short(pins.hornero.sha)}); los logos son los íconos oficiales de cada proyecto, mostrados a modo de identificación. El software propietario nunca se instala en silencio: REAPER es una opción explícita bajo la EULA de su proveedor, Penpot es solo de referencia (herramienta de navegador, sin paquete), y las entradas experimentales están marcadas. ArtCraft Launcher es experimental y de instalación manual con opt-in explícito: ninguna especialización lo instala. yabridge, Graphite, Penpot y ArtCraft Launcher no tienen un ícono oficial incorporado, así que llevan una insignia de texto propia del sitio (iniciales), nunca presentada como su logo.` : `This catalogue is generated from the pinned Hornero catalogue (HorneroOS/hornero at ${short(pins.hornero.sha)}); logos are the official upstream icons, shown for identification. Proprietary software is never installed silently: REAPER is an explicit opt-in under its vendor EULA, Penpot is reference-only (browser tool, no package), and experimental entries are marked. ArtCraft Launcher is experimental and manual-install with explicit opt-in only: no specialization installs it. yabridge, Graphite, Penpot and ArtCraft Launcher have no official icon vendored, so they carry an in-house initials text badge, never presented as their logo.`}
-    </p>
+    <h2 id="apps-title">{m.aplicacionesFuentesYLicencias}</h2>
+    <p class="section-copy">{m.esteCatalogoSeGeneraDesde(short(pins.hornero.sha))}</p>
     <ul class="app-grid" role="list">
-      {
-        studioCatalogue.applications.map((app) => (
-          <li class="app-tile">
-            <div class="app-head">
-              <AppLogo id={app.id} name={app.title} />
-              <h3>{app.title}</h3>
-              <span class:list={['tag', `tag-${tagKind(app)}`]}>{statusTag(app)}</span>
+      {studioCatalogue.applications.map((app) => (
+        <li class="app-tile">
+          <div class="app-head">
+            <AppLogo id={app.id} name={app.title} />
+            <h3>{app.title}</h3>
+            <span class:list={['tag', `tag-${tagKind(app)}`]}>{statusTag(app)}</span>
+          </div>
+          <dl class="app-meta">
+            <div>
+              <dt>{m.paquetes}</dt>
+              <dd>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</dd>
             </div>
-            <dl class="app-meta">
-              <div>
-                <dt>{isEs ? 'Paquetes' : 'Packages'}</dt>
-                <dd>{app.packages.length > 0 ? app.packages.join(', ') : '—'}</dd>
-              </div>
-              <div>
-                <dt>{isEs ? 'Fuente' : 'Source'}</dt>
-                <dd>{app.source ?? '—'}</dd>
-              </div>
-              <div>
-                <dt>{isEs ? 'Licencia' : 'License'}</dt>
-                <dd>{app.licenses.length > 0 ? app.licenses.join(', ') : (isEs ? 'Ver el paquete' : 'See package')}</dd>
-              </div>
-            </dl>
-            {app.notes ? <p class="note">{app.notes}</p> : null}
-          </li>
-        ))
-      }
+            <div>
+              <dt>{m.fuente}</dt>
+              <dd>{app.source ?? '—'}</dd>
+            </div>
+            <div>
+              <dt>{m.licencia}</dt>
+              <dd>{app.licenses.length > 0 ? app.licenses.join(', ') : m.verElPaquete}</dd>
+            </div>
+          </dl>
+          {app.notes ? <p class="note">{app.notes}</p> : null}
+        </li>
+      ))}
     </ul>
   </section>
 
   <section class="section" aria-labelledby="audio-title">
-    <h2 id="audio-title">{isEs ? 'Modos de audio y rendimiento' : 'Audio and performance modes'}</h2>
-    <p class="section-copy">
-      {isEs ? 'Los modos de audio de Studio son reversibles y responden a un solo contrato: Balanced mantiene los valores por defecto del dispositivo; los demás son opciones explícitas, y el estado anterior queda registrado para poder restaurarlo exactamente. Quantum es un período de planificación, no una latencia de ida y vuelta medida, y ningún modo fuerza kernels de tiempo real, ajustes de IRQ ni cambios de privilegios.' : 'Studio audio modes are reversible and owned by one contract: Balanced keeps device defaults; the others are explicit opt-ins, and the previous state is recorded so it can be restored exactly. Quantum is a scheduling period, not a measured round-trip latency, and no mode forces realtime kernels, IRQ tuning or privilege changes.'}
-    </p>
+    <h2 id="audio-title">{m.modosDeAudioYRendimiento}</h2>
+    <p class="section-copy">{m.losModosDeAudioDe}</p>
     <ul class="modes" role="list">
-      {
-        studioCatalogue.audioModes.map((mode) => (
-          <li class="mode">
-            <strong>{mode.title}</strong>
-            <span>{mode.isDefault ? (isEs ? 'Predeterminado — tasa y quantum del dispositivo.' : 'Default — device rate and quantum.') : (isEs ? 'Opt-in explícito, reversible.' : 'Explicit opt-in, reversible.')}</span>
-            <span class="tag">{mode.isDefault ? (isEs ? 'Predeterminado' : 'Default') : (isEs ? 'A elección' : 'Opt-in')}</span>
-          </li>
-        ))
-      }
-      {
-        studioCatalogue.performanceMode && (
-          <li class="mode">
-            <strong>{studioCatalogue.performanceMode.title}</strong>
-            <span>{isEs ? 'Opt-in explícito vía power-profiles-daemon; el perfil anterior se restaura cuando lo pedís.' : 'Explicit opt-in via power-profiles-daemon; the previous profile is restored on demand.'}</span>
-            <span class="tag">{isEs ? 'A elección' : 'Opt-in'}</span>
-          </li>
-        )
-      }
+      {studioCatalogue.audioModes.map((mode) => (
+        <li class="mode">
+          <strong>{mode.title}</strong>
+          <span>{mode.isDefault ? m.predeterminadoTasaYQuantumDel : m.optInExplicitoReversible}</span>
+          <span class="tag">{mode.isDefault ? m.predeterminado : m.aEleccion}</span>
+        </li>
+      ))}
+      {studioCatalogue.performanceMode && (
+        <li class="mode">
+          <strong>{studioCatalogue.performanceMode.title}</strong>
+          <span>{m.optInExplicitoViaPower}</span>
+          <span class="tag">{m.aEleccion}</span>
+        </li>
+      )}
     </ul>
   </section>
 
   <section class="section" aria-labelledby="today-title">
-    <h2 id="today-title">{isEs ? 'Estado' : 'Status'}</h2>
+    <h2 id="today-title">{m.estado}</h2>
     <div class="status-grid">
       <article>
-        <h3>{isEs ? 'En los repositorios' : 'In the repositories'}</h3>
+        <h3>{m.enLosRepositorios}</h3>
         <ul>
-          <li>{isEs ? 'Catálogo canónico de ediciones, resolver y matriz de aplicaciones y licencias.' : 'Canonical edition catalogue, resolver and application/license matrix.'}</li>
+          <li>{m.catalogoCanonicoDeEdicionesResolver}</li>
           <li>
-            <code>horneroctl studio</code> {isEs ? 'contratos de selección, modo, trabajos de render y doctor, con tests.' : 'selection, mode, render jobs and doctor contracts, with tests.'}
+            <code>horneroctl studio</code> {m.contratosDeSeleccionModoTrabajos}
           </li>
-          <li>{isEs ? 'Panel Studio del Centro de Control: cargas de trabajo, audio, rendimiento y trabajos de render.' : 'Control Center Studio pane: workloads, audio, performance and render jobs.'}</li>
-          <li>{isEs ? 'Políticas de PipeWire, presets y almacenamiento a cargo de la configuración; definiciones de escenarios de QA.' : 'Config-owned PipeWire, preset and storage policies; QA scenario definitions.'}</li>
+          <li>{m.panelStudioDelCentroDe}</li>
+          <li>{m.politicasDePipewirePresetsY}</li>
         </ul>
         <p>
-          <a href={L('/docs/applications/studio/')}>{isEs ? 'Documentación de Studio' : 'Studio documentation'}</a> ·{' '}
-          <a href={L('/docs/applications/studio-audio/')}>{isEs ? 'Configuración y recuperación de audio' : 'Audio setup & recovery'}</a> ·{' '}
-          <a href={L('/docs/applications/studio-getting-started/')}>{isEs ? 'Guía de inicio' : 'Getting started guide'}</a>
+          <a href={L('/docs/applications/studio/')}>{m.documentacionDeStudio}</a> ·{' '}
+          <a href={L('/docs/applications/studio-audio/')}>{m.configuracionYRecuperacionDeAudio}</a> ·{' '}
+          <a href={L('/docs/applications/studio-getting-started/')}>{m.guiaDeInicio}</a>
         </p>
       </article>
       <article>
-        <h3>{isEs ? 'Todavía no disponible' : 'Not available yet'}</h3>
+        <h3>{m.todaviaNoDisponible}</h3>
         <ul>
-          <li>{isEs ? 'Validación de hardware: las interfaces de audio, MIDI, la codificación por GPU y las pantallas esperan fixtures físicos de QA.' : 'Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.'}</li>
-          <li>{isEs ? 'Cualquier afirmación de certificación de hardware: la validación física sigue pendiente, así que no se afirma soporte para hardware concreto hasta que la evidencia pase la puerta de QA.' : 'Any hardware-certification claim: physical validation is still pending, so no specific hardware is claimed as certified until hardware evidence passes the QA gate.'}</li>
+          <li>{m.validacionDeHardwareLasInterfaces}</li>
+          <li>{m.cualquierAfirmacionDeCertificacionDe}</li>
         </ul>
         <p>
-          <a href="https://github.com/HorneroOS/hornero/issues/283">{isEs ? 'Seguí la hoja de ruta de preparación de Studio' : 'Follow the Studio readiness roadmap'}</a>
+          <a href="https://github.com/HorneroOS/hornero/issues/283">{m.seguiLaHojaDeRuta}</a>
         </p>
       </article>
     </div>
@@ -263,12 +258,26 @@ const stats = isEs
     font-size: var(--step--1);
     letter-spacing: 0.1em;
   }
-  .tag-proprietary { border-color: var(--signal); color: var(--signal); }
-  .tag-reference { border-style: dashed; }
-  .tag-experimental { border-color: var(--cue); color: var(--cue); }
-  .app-tile { border-top: 3px solid var(--rule); }
-  .app-tile:has(.tag-proprietary) { border-top-color: var(--signal); }
-  .app-tile:has(.tag-reference) { border-top-style: dashed; }
+  .tag-proprietary {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+  .tag-reference {
+    border-style: dashed;
+  }
+  .tag-experimental {
+    border-color: var(--cue);
+    color: var(--cue);
+  }
+  .app-tile {
+    border-top: 3px solid var(--rule);
+  }
+  .app-tile:has(.tag-proprietary) {
+    border-top-color: var(--signal);
+  }
+  .app-tile:has(.tag-reference) {
+    border-top-style: dashed;
+  }
   .lede {
     max-width: 54ch;
     font-size: var(--step-1);

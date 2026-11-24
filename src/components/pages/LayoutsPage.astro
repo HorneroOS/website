@@ -5,94 +5,60 @@ import LayoutDiagram from '../../components/LayoutDiagram.astro';
 import CaptureFigure from '../../components/CaptureFigure.astro';
 import CaptureGallery from '../../components/CaptureGallery.astro';
 import { layouts } from '../../data/product';
+import { messages } from '../../i18n/messages/layouts';
 
-interface Props { locale: Locale }
+interface Props {
+  locale: Locale;
+}
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
-const styleNames: Record<string, string> = isEs
-  ? { attached: 'barra al borde', floating: 'barra flotante', dock: 'dock', islands: 'islas', inset: 'barra encajada' }
-  : { attached: 'edge bar', floating: 'floating bar', dock: 'dock', islands: 'islands', inset: 'inset bar' };
+const styleNames: Record<string, string> = m.styleNames;
 const groupLine = (g: { start: string[]; center: string[]; end: string[] }) =>
   [g.start, g.center, g.end]
     .filter((x) => x.length)
     .map((x) => x.join(', '))
     .join(' · ');
-const selectedEn = [
-  {
-    id: 'hornero-left',
-    slot: 'CAP-LAYOUT-01',
-    text: 'A side rail with the main controls close by and the workspace left open.',
-  },
-  {
-    id: 'cockpit-clear',
-    slot: 'CAP-LAYOUT-02',
-    text: 'A full-width line with no backdrop, so the wallpaper shows through.',
-  },
-  {
-    id: 'studio',
-    slot: 'CAP-LAYOUT-12',
-    text: 'A top bar with a full-width audio visualiser along the bottom.',
-  },
-  {
-    id: 'minimal-float',
-    slot: 'CAP-LAYOUT-11',
-    text: 'A single floating pill, inset from the edges.',
-  },
-  {
-    id: 'islands',
-    slot: 'CAP-LAYOUT-04',
-    text: 'Separate floating islands group the controls.',
-  },
-  {
-    id: 'dock-bottom',
-    slot: 'CAP-LAYOUT-05',
-    text: 'A dock along the bottom edge.',
-  },
-];
-const selectedEs = [
-  { id: 'hornero-left', slot: 'CAP-LAYOUT-01', text: 'Un riel lateral con los controles principales a mano y el área de trabajo libre.' },
-  { id: 'cockpit-clear', slot: 'CAP-LAYOUT-02', text: 'Una línea de borde a borde sin fondo, para que se vea el fondo de pantalla.' },
-  { id: 'studio', slot: 'CAP-LAYOUT-12', text: 'Una barra superior con un visualizador de audio a todo lo ancho abajo.' },
-  { id: 'minimal-float', slot: 'CAP-LAYOUT-11', text: 'Una sola píldora flotante, separada de los bordes.' },
-  { id: 'islands', slot: 'CAP-LAYOUT-04', text: 'Islas flotantes separadas que agrupan los controles.' },
-  { id: 'dock-bottom', slot: 'CAP-LAYOUT-05', text: 'Un dock sobre el borde inferior.' },
-];
-const selected = isEs ? selectedEs : selectedEn;
+
+const selected = m.selected;
 ---
 
-<SiteLayout
-  title={isEs ? 'Layouts | HorneroOS' : 'Layouts | HorneroOS'}
-  description={isEs ? `${layouts.length} layouts de la shell de Hornero, cada uno con su captura real del escritorio: rieles laterales, barras de a dos, barras transparentes, islas y docks.` : `${layouts.length} Hornero shell layouts, each with its real desktop capture: side rails, paired bars, clear bars, islands and docks.`}
->
+<SiteLayout title={m.layoutsHorneroos} description={m.layoutsDeLaShellDe(layouts.length)}>
   <section class="intro section">
-    <p class="plate-id"><strong>Catálogo de formas</strong><span>{layouts.length} layouts</span></p>
-    <h1>Layouts</h1>
-    <p>
-      {isEs ? 'Poné la shell sobre un borde, en un par de barras, como islas flotantes o abajo de todo en la pantalla. El lanzador, las notificaciones y los ajustes son los mismos en todos.' : 'Put the shell along an edge, in a pair of bars, as floating islands or at the bottom of the screen. The launcher, notifications and settings are shared by all of them.'}
+    <p class="plate-id">
+      <strong>Catálogo de formas</strong>
+      <span>{layouts.length} layouts</span>
     </p>
+    <h1>Layouts</h1>
+    <p>{m.poneLaShellSobreUn}</p>
     <div class="intro-actions">
       <a class="cta primary" href={L('/showroom')}>
-        {isEs ? 'Mirá cómo anda' : 'See it running'}
+        {m.miraComoAnda}
       </a>
       <span>
-        {isEs ? 'Cambiá desde el selector de layouts con ' : 'Switch from the Layout Picker with '}<kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
+        {m.cambiaDesdeElSelectorDe}
+        <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd>
       </span>
     </div>
   </section>
 
-  <section class="section gallery" aria-label={isEs ? 'Layouts destacados en el escritorio en uso' : 'Selected layouts in the running desktop'}>
+  <section class="section gallery" aria-label={m.layoutsDestacadosEnElEscritorio}>
     {selected.map((entry, index) => {
       const layout = layouts.find((item) => item.id === entry.id);
       return (
         <article class:list={['layout-showcase', `showcase-${index + 1}`]} id={entry.id}>
-          <CaptureFigure slot={entry.slot} locale={locale} eager={index < 2} sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)" />
+          <CaptureFigure
+            slot={entry.slot}
+            locale={locale}
+            eager={index < 2}
+            sizes="(min-width: 1180px) 680px, (min-width: 900px) 50vw, calc(100vw - 2rem)"
+          />
           <div class="showcase-copy">
             <h2>{layout?.name}</h2>
             <p>{entry.text}</p>
             <a href={`#catalog-${entry.id}`} class="text-link">
-              {isEs ? 'Detalles del layout' : 'Layout details'}
+              {m.detallesDelLayout}
             </a>
           </div>
         </article>
@@ -103,11 +69,9 @@ const selected = isEs ? selectedEs : selectedEn;
   <section class="section catalog" id="all-layouts">
     <div class="catalog-heading">
       <div>
-        <h2>{isEs ? `Los ${layouts.length} layouts` : `All ${layouts.length} layouts`}</h2>
+        <h2>{m.losLayouts(layouts.length)}</h2>
       </div>
-      <p>
-        {isEs ? 'Todos los layouts salen de la misma shell. Los mapitas muestran dónde van las barras; cada layout tiene su topología y el nombre de preset que podés usar en scripts.' : 'Every layout comes from the same shell. The small maps show bar placement; each layout page has its topology and scriptable preset name.'}
-      </p>
+      <p>{m.todosLosLayoutsSalenDe}</p>
     </div>
     <ul class="layout-grid" role="list">
       {layouts.map((layout) => (
@@ -116,20 +80,20 @@ const selected = isEs ? selectedEs : selectedEn;
           <div class="layout-title">
             <h3>{layout.name}</h3>
             <span>
-              {layout.bars.length} {layout.bars.length === 1 ? (isEs ? 'superficie' : 'surface') : (isEs ? 'superficies' : 'surfaces')}
+              {layout.bars.length} {layout.bars.length === 1 ? m.superficie : m.superficies}
             </span>
           </div>
           <p>{layout.description}</p>
           <details>
-            <summary>{isEs ? 'Ver cómo se ordena' : 'See arrangement'}</summary>
+            <summary>{m.verComoSeOrdena}</summary>
             <dl class="bars">
               {layout.bars.map((bar) => (
                 <>
                   <dt>
                     {bar.edge} · {styleNames[bar.style] ?? bar.style}
-                    {bar.clear && (isEs ? ' · transparente' : ' · transparent')}
+                    {bar.clear && m.transparente}
                   </dt>
-                  <dd>{groupLine(bar.groups) || (isEs ? 'Sin módulos' : 'No modules')}</dd>
+                  <dd>{groupLine(bar.groups) || m.sinModulos}</dd>
                 </>
               ))}
             </dl>
@@ -139,7 +103,11 @@ const selected = isEs ? selectedEs : selectedEn;
     </ul>
   </section>
 
-  <CaptureGallery route="/layouts" locale={locale} exclude={['CAP-LAYOUT-01', 'CAP-LAYOUT-02', 'CAP-LAYOUT-04', 'CAP-LAYOUT-05', 'CAP-LAYOUT-11', 'CAP-LAYOUT-12']} />
+  <CaptureGallery
+    route="/layouts"
+    locale={locale}
+    exclude={['CAP-LAYOUT-01', 'CAP-LAYOUT-02', 'CAP-LAYOUT-04', 'CAP-LAYOUT-05', 'CAP-LAYOUT-11', 'CAP-LAYOUT-12']}
+  />
 </SiteLayout>
 
 <style>
@@ -330,7 +298,14 @@ const selected = isEs ? selectedEs : selectedEn;
 
 <style>
   /* Per-page direction: layouts as mechanical shape specimens. */
-  .layout-card { border-radius: 2px; }
-  .layout-title { font-family: var(--font-display); }
-  .catalog-heading { border-bottom: 3px solid var(--signal); padding-bottom: 0.6rem; }
+  .layout-card {
+    border-radius: 2px;
+  }
+  .layout-title {
+    font-family: var(--font-display);
+  }
+  .catalog-heading {
+    border-bottom: 3px solid var(--signal);
+    padding-bottom: 0.6rem;
+  }
 </style>

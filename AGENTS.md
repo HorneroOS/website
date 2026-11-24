@@ -36,6 +36,10 @@ contracts are in [`docs/`](docs/).
   alternatives.
 - `src/content.config.ts` validates showroom and documentation collections.
   Update schemas and their consumers together.
+- All copy lives in typed message catalogs under `src/i18n/messages/`
+  (one per page/component, Spanish as source shape). Never write
+  `isEs ? '…' : '…'` ternaries — `scripts/check-i18n.mjs` bans the
+  identifier under `src/`. See [docs/I18N.md](docs/I18N.md).
 
 ## Commands
 

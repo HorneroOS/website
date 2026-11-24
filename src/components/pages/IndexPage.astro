@@ -29,12 +29,13 @@ import {
   type Maturity,
 } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/index';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
 const compareCaption = editorialForPage('/').find((section) => section.format === 'compare')?.caption[locale];
@@ -45,10 +46,7 @@ const edition = (id: string) => {
   return found;
 };
 const compositor = (id: string) => editionCatalogue.compositors.find((item) => item.id === id);
-const maturityName = (maturity: Maturity) =>
-  (isEs
-    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
-    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' })[maturity];
+const maturityName = (maturity: Maturity) => m.plannedPlanificadoExperimentalExperimentalPrevie[maturity];
 
 const studioApp = (id: string) => studioCatalogue.applications.find((app) => app.id === id)?.title ?? id;
 const studioSpec = (id: string) => {
@@ -67,20 +65,25 @@ const gamingSpec = (id: string) => {
 const audioDefault = studioCatalogue.audioModes.find((mode) => mode.isDefault)?.title;
 const audioOptIn = studioCatalogue.audioModes.filter((mode) => mode.explicitOptIn).map((mode) => mode.title);
 const officialPlugins = extensionCatalogue.plugins.filter((plugin) => plugin.trust === 'official');
-const previewLabel = isEs ? 'Uso diario' : 'Everyday use';
+const previewLabel = m.usoDiario;
 const hyprland = compositor('hyprland');
 // Javi: a real frame from HorneroOS/shell assets/companion at the shell pin.
-const javiFrames = import.meta.glob<ImageMetadata>('../../../.cache/product-src/shell/assets/companion/frames/default-greet-01.png', {
-  eager: true,
-  import: 'default',
-});
+const javiFrames = import.meta.glob<ImageMetadata>(
+  '../../../.cache/product-src/shell/assets/companion/frames/default-greet-01.png',
+  {
+    eager: true,
+    import: 'default',
+  },
+);
 const javiFrame = Object.values(javiFrames)[0];
 if (!javiFrame) throw new Error('Javi greet frame is missing at the shell pin');
 const modesFeature = feature('experience-modes');
 const chromaticFeature = feature('chromatic');
 const javiFeature = feature('companion');
 const niri = compositor('niri');
-const planned = editions.filter((item) => item.maturity === 'planned').map((item) => item.title.replace('HorneroOS ', ''));
+const planned = editions
+  .filter((item) => item.maturity === 'planned')
+  .map((item) => item.title.replace('HorneroOS ', ''));
 const shipping = editions.filter((item) => item.maturity !== 'planned');
 
 const channels = [
@@ -88,33 +91,19 @@ const channels = [
     id: 'desktop',
     channel: 'CH 01',
     name: 'Desktop',
-    title: isEs ? 'Construí tu mundo' : 'Build your world',
+    title: m.construiTuMundo,
     href: L('/desktop'),
-    summary: isEs
-      ? `La base de todas las ediciones: Hyprland por defecto (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell con ${layouts.length} layouts y ${themes.length} temas, un Centro de control propio y horneroctl.`
-      : `The base of every edition: Hyprland by default (Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}), Hornero Shell with ${layouts.length} layouts and ${themes.length} themes, its own Control Center and horneroctl.`,
-    workflows: isEs
-      ? [
-          { lead: 'Programá', text: 'en kitty, con yazi y btop, en espacios de trabajo por proyecto.' },
-          { lead: 'Ordená', text: `el escritorio con uno de ${layouts.length} layouts, desde el selector o con horneroctl.` },
-          { lead: 'Extendé', text: `la shell con ${officialPlugins.length} extensiones oficiales que declaran sus permisos.` },
-        ]
-      : [
-          { lead: 'Code', text: 'in kitty, with yazi and btop, in a workspace per project.' },
-          { lead: 'Arrange', text: `the desktop with one of ${layouts.length} layouts, from the picker or with horneroctl.` },
-          { lead: 'Extend', text: `the shell with ${officialPlugins.length} official extensions that declare their permissions.` },
-        ],
+    summary: m.laBaseDeTodasLas(maturityName(niri?.maturity ?? 'planned').toLowerCase(), layouts.length, themes.length),
+    workflows: m.workflows(layouts.length, officialPlugins.length),
     maturity: edition('desktop').maturity,
   },
   {
     id: 'studio',
     channel: 'CH 02',
     name: 'Studio',
-    title: isEs ? 'Hacé algo real' : 'Make something real',
+    title: m.haceAlgoReal,
     href: L('/studio'),
-    summary: isEs
-      ? `Desktop más ${studioCatalogue.specializations.length - 2} especializaciones creativas que elegís al instalar. Audio en modo ${audioDefault ?? 'Balanced'} por defecto; ${audioOptIn.join(' y ')} solo si los activás.`
-      : `Desktop plus ${studioCatalogue.specializations.length - 2} creative specializations you pick at install time. Audio runs ${audioDefault ?? 'Balanced'} by default; ${audioOptIn.join(' and ')} only when you opt in.`,
+    summary: m.studioSummary(studioCatalogue.specializations.length - 2, audioDefault ?? 'Balanced', audioOptIn),
     workflows: [
       studioSpec('audio-music-production'),
       studioSpec('video-editing-post-production'),
@@ -126,28 +115,26 @@ const channels = [
     id: 'gaming',
     channel: 'CH 03',
     name: 'Gaming',
-    title: isEs ? 'Jugá a tu manera' : 'Play on your terms',
+    title: m.jugaATuManera,
     href: L('/gaming'),
-    summary: isEs
-      ? 'Desktop más una capa de juego combinable: Mesa y Vulkan, GameMode, Gamescope y MangoHud. Steam es propietario y se instala solo si lo elegís; nada se instala en silencio.'
-      : 'Desktop plus a composable gaming layer: Mesa and Vulkan, GameMode, Gamescope and MangoHud. Steam is proprietary and installs only if you choose it; nothing installs silently.',
+    summary: m.desktopMasUnaCapaDe,
     workflows: [gamingSpec('desktop-gaming'), gamingSpec('multi-launcher'), gamingSpec('streaming')].map((spec) => ({
       lead: spec.title,
-      text: spec.apps.join(', ') + (spec.isDefault ? (isEs ? ' · selección por defecto' : ' · default selection') : ''),
+      text: spec.apps.join(', ') + (spec.isDefault ? m.seleccionPorDefecto : ''),
     })),
     maturity: edition('gaming').maturity,
   },
 ];
 
 const readouts = [
-  { label: isEs ? 'Versión' : 'Release', value: latestTagged?.version ?? '—', href: L('/releases') },
+  { label: m.version, value: latestTagged?.version ?? '—', href: L('/releases') },
   {
-    label: isEs ? 'Ediciones' : 'Editions',
-    value: isEs ? `${shipping.length} para uso diario · ${planned.length} planificadas` : `${shipping.length} for everyday use · ${planned.length} planned`,
+    label: m.ediciones,
+    value: m.paraUsoDiarioPlanificadas(shipping.length, planned.length),
     href: L('/editions'),
   },
   {
-    label: isEs ? 'Compositor' : 'Compositor',
+    label: m.compositor,
     value: `Hyprland ${maturityName(hyprland?.maturity ?? 'planned').toLowerCase()} · Niri ${maturityName(niri?.maturity ?? 'planned').toLowerCase()}`,
     href: L('/docs/desktop/compositors/'),
   },
@@ -158,56 +145,34 @@ const system = [
   {
     id: 'horneroctl',
     title: 'horneroctl',
-    text: isEs
-      ? 'Una herramienta de sistema para el escritorio, los temas, los paquetes y el diagnóstico. Salida --json para scripts; todo cambio muestra un --dry-run antes de pedir --yes.'
-      : 'One system tool for the desktop, themes, packages and diagnostics. --json output for scripts; every change shows a --dry-run before it asks for --yes.',
+    text: m.unaHerramientaDeSistemaPara,
     command: 'horneroctl doctor',
   },
   {
     id: 'updates',
-    title: isEs ? 'Actualizaciones' : 'Updates',
-    text: isEs
-      ? 'Las consultas de actualización solo miran: listan repositorios y AUR por separado y no instalan nada. Actualizar el sistema es un paso explícito.'
-      : 'Update checks only look: they list repository and AUR packages separately and install nothing. Upgrading the system is an explicit step.',
+    title: m.actualizaciones,
+    text: m.lasConsultasDeActualizacionSolo,
     command: 'horneroctl package check',
   },
   {
     id: 'configuration',
-    title: isEs ? 'Configuración' : 'Configuration',
-    text: isEs
-      ? 'El Centro de control y la CLI cambian la misma configuración. Lo que instala un paquete es de solo lectura; tus cambios viven en tu usuario y las actualizaciones no los pisan.'
-      : 'Control Center and the CLI change the same configuration. Package-shipped defaults are read-only; your changes live in your user configuration and updates do not overwrite them.',
+    title: m.configuracion,
+    text: m.elCentroDeControlY,
     command: 'horneroctl config validate',
   },
   {
     id: 'reliability',
-    title: isEs ? 'Confiabilidad' : 'Reliability',
-    text: isEs
-      ? 'Cada versión fija los commits exactos de la shell y la configuración, la ISO llega firmada con su checksum, y un laboratorio de QA instala en máquinas virtuales desechables antes de publicar.'
-      : 'Every release pins the exact shell and configuration commits, the ISO ships signed with its checksum, and a QA lab installs into disposable virtual machines before anything is published.',
+    title: m.confiabilidad,
+    text: m.cadaVersionFijaLosCommits,
     command: 'horneroctl system info',
   },
 ];
 
-const journey = isEs
-  ? [
-      { title: 'Descargá', text: `La ISO ${latestTagged?.version ?? '0.2.0-preview32'} para x86_64 trae Desktop, Studio y Gaming en una sola imagen.` },
-      { title: 'Verificá', text: 'Compará el checksum SHA-256 y la firma GPG publicados en la release antes de grabarla.' },
-      { title: 'Instalá', text: 'Elegí la edición, las especializaciones y el compositor durante la instalación.' },
-    ]
-  : [
-      { title: 'Download', text: `The ${latestTagged?.version ?? '0.2.0-preview32'} x86_64 ISO carries Desktop, Studio and Gaming in one image.` },
-      { title: 'Verify', text: 'Check the SHA-256 checksum and GPG signature published on the release before you write it.' },
-      { title: 'Install', text: 'Pick the edition, the specializations and the compositor during installation.' },
-    ];
+const journey = m.journey(latestTagged?.version ?? '0.2.0-preview32');
 
-const title = isEs
-  ? 'HorneroOS | Una estación de trabajo basada en Arch para construir, crear y jugar'
-  : 'HorneroOS | An Arch-based workstation for building, creating and playing';
+const title = m.horneroosUnaEstacionDeTrabajo;
 const counts = slotCounts();
-const description = isEs
-  ? `HorneroOS es una estación de trabajo basada en Arch para construir, crear y jugar: ediciones Desktop, Studio y Gaming, Hornero Shell y horneroctl, en una ISO firmada (${latestTagged?.version ?? '0.2.0-preview32'}).`
-  : `HorneroOS is an Arch-based workstation for building, creating and playing: Desktop, Studio and Gaming editions, Hornero Shell and horneroctl, on one signed ISO (${latestTagged?.version ?? '0.2.0-preview32'}).`;
+const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-preview32');
 ---
 
 <SiteLayout
@@ -228,139 +193,126 @@ const description = isEs
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-field" aria-hidden="true"></div>
     <div class="hero-copy">
-      <p class="eyebrow"><b>HorneroOS</b><span>{previewLabel}</span><span>x86_64 · Arch Linux</span></p>
-      <h1 id="hero-title">
-        {isEs ? 'Una estación de trabajo para construir, crear y jugar.' : 'A workstation for building, creating and playing.'}
-      </h1>
-      <p class="lede">
-        {
-          isEs
-            ? 'HorneroOS es un sistema operativo basado en Arch: tres ediciones, una herramienta de sistema (horneroctl) y Hornero Shell para el escritorio.'
-            : 'HorneroOS is an Arch-based operating system: three editions, one system tool (horneroctl) and Hornero Shell for the desktop.'
-        }
+      <p class="eyebrow">
+        <b>HorneroOS</b>
+        <span>{previewLabel}</span>
+        <span>x86_64 · Arch Linux</span>
       </p>
+      <h1 id="hero-title">{m.unaEstacionDeTrabajoPara}</h1>
+      <p class="lede">{m.horneroosEsUnSistemaOperativo}</p>
       <div class="cta-row">
-        <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
-        <a href={L('/editions')} class="cta secondary">{isEs ? 'Elegí tu edición' : 'Choose your edition'}</a>
+        <a href={L('/install')} class="cta primary">
+          {m.descargaLaIsoActual}
+        </a>
+        <a href={L('/editions')} class="cta secondary">
+          {m.elegiTuEdicion}
+        </a>
       </div>
     </div>
-    <dl class="telemetry" aria-label={isEs ? 'Estado actual, desde los datos de producto fijados' : 'Current status, from the pinned product data'}>
-      {
-        readouts.map((item) => (
-          <div>
-            <dt>{item.label}</dt>
-            <dd>
-              <a href={item.href}>{item.value}</a>
-            </dd>
-          </div>
-        ))
-      }
+    <dl class="telemetry" aria-label={m.estadoActualDesdeLosDatos}>
+      {readouts.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd>
+            <a href={item.href}>{item.value}</a>
+          </dd>
+        </div>
+      ))}
     </dl>
   </section>
 
   <section class="monitor" aria-labelledby="monitor-title">
-    <h2 id="monitor-title" class="visually-hidden">{isEs ? 'El escritorio trabajando' : 'The desktop at work'}</h2>
+    <h2 id="monitor-title" class="visually-hidden">
+      {m.elEscritorioTrabajando}
+    </h2>
     <div class="monitor-frame">
       <div class="monitor-strip">
         <span class="channel">MON 01</span>
-        <a href={L('/showroom')}>{isEs ? 'Todas las capturas seleccionadas' : 'Every selected capture'}</a>
+        <a href={L('/showroom')}>{m.todasLasCapturasSeleccionadas}</a>
       </div>
-      <CaptureFigure slot="CAP-SIGNAL-01" locale={locale} eager sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)" />
+      <CaptureFigure
+        slot="CAP-SIGNAL-01"
+        locale={locale}
+        eager
+        sizes="(min-width: 1500px) 1400px, calc(100vw - 2rem)"
+      />
     </div>
   </section>
 
   <section class="section editions" aria-labelledby="editions-title">
     <header class="section-head">
-      <p class="eyebrow"><b>{isEs ? 'Ediciones' : 'Editions'}</b><span>{isEs ? 'Una base, tres oficios' : 'One base, three crafts'}</span></p>
-      <h2 id="editions-title">{isEs ? 'Elegí para qué es tu computadora.' : 'Choose what your computer is for.'}</h2>
-      <p>
-        {
-          isEs
-            ? 'Las tres ediciones comparten base, shell y herramientas, y se arman al instalar desde la misma ISO. La madurez sale del catálogo de ediciones fijado, no de este texto.'
-            : 'All three editions share the base, the shell and the tools, and are composed at install time from the same ISO. Maturity comes from the pinned edition catalogue, not from this copy.'
-        }
+      <p class="eyebrow">
+        <b>{m.ediciones}</b>
+        <span>{m.unaBaseTresOficios}</span>
       </p>
+      <h2 id="editions-title">{m.elegiParaQueEsTu}</h2>
+      <p>{m.lasTresEdicionesCompartenBase}</p>
     </header>
     <ol class="channels" role="list">
-      {
-        channels.map((item) => (
-          <li class="channel-row" id={`edition-${item.id}`}>
-            <div class="channel-id">
-              <p class="eyebrow">
-                <b>{item.channel}</b>
-                <span>{item.name}</span>
-              </p>
-              <h3>{item.title}</h3>
-              <MaturityMeter maturity={item.maturity} locale={locale} />
-            </div>
-            <p class="channel-summary">{item.summary}</p>
-            <div class="channel-work">
-              <h4>{isEs ? 'Flujos de trabajo' : 'Workflows'}</h4>
-              <ul role="list">
-                {item.workflows.map((flow) => (
-                  <li>
-                    <strong>{flow.lead}</strong> {flow.text}
-                  </li>
-                ))}
-              </ul>
-              <a href={item.href}>{isEs ? `Conocé ${item.name}` : `Explore ${item.name}`}</a>
-            </div>
-          </li>
-        ))
-      }
+      {channels.map((item) => (
+        <li class="channel-row" id={`edition-${item.id}`}>
+          <div class="channel-id">
+            <p class="eyebrow">
+              <b>{item.channel}</b>
+              <span>{item.name}</span>
+            </p>
+            <h3>{item.title}</h3>
+            <MaturityMeter maturity={item.maturity} locale={locale} />
+          </div>
+          <p class="channel-summary">{item.summary}</p>
+          <div class="channel-work">
+            <h4>{m.flujosDeTrabajo}</h4>
+            <ul role="list">
+              {item.workflows.map((flow) => (
+                <li>
+                  <strong>{flow.lead}</strong> {flow.text}
+                </li>
+              ))}
+            </ul>
+            <a href={item.href}>{m.conoce(item.name)}</a>
+          </div>
+        </li>
+      ))}
     </ol>
     <p class="editions-foot">
-      {
-        isEs
-          ? `${planned.join(' y ')} están planificadas: todavía no tienen imagen instalable.`
-          : `${planned.join(' and ')} are planned: they have no installable image yet.`
-      }{' '}
-      <a href={L('/editions')}>{isEs ? 'Compará todas las ediciones' : 'Compare every edition'}</a>
+      {m.plannedNote(planned)} <a href={L('/editions')}>{m.comparaTodasLasEdiciones}</a>
     </p>
   </section>
 
   <section class="section system" aria-labelledby="system-title">
     <header class="section-head">
-      <p class="eyebrow"><b>{isEs ? 'Sistema' : 'System'}</b><span>{isEs ? 'Debajo del escritorio' : 'Beneath the desktop'}</span></p>
-      <h2 id="system-title">{isEs ? 'El sistema operativo' : 'The operating system'}</h2>
-      <p>
-        {
-          isEs
-            ? 'Lo que hace confiable a una estación de trabajo pasa lejos de los colores: cómo se configura, cómo se actualiza y qué se verifica antes de publicar.'
-            : 'What makes a workstation dependable happens far from its colours: how it is configured, how it updates and what is verified before anything ships.'
-        }
+      <p class="eyebrow">
+        <b>{m.sistema}</b>
+        <span>{m.debajoDelEscritorio}</span>
       </p>
+      <h2 id="system-title">{m.elSistemaOperativo}</h2>
+      <p>{m.loQueHaceConfiableA}</p>
     </header>
     <dl class="spec">
-      {
-        system.map((item) => (
-          <div class="spec-row">
-            <dt>{item.title}</dt>
-            <dd>
-              <p>{item.text}</p>
-              <code>{item.command}</code>
-            </dd>
-          </div>
-        ))
-      }
+      {system.map((item) => (
+        <div class="spec-row">
+          <dt>{item.title}</dt>
+          <dd>
+            <p>{item.text}</p>
+            <code>{item.command}</code>
+          </dd>
+        </div>
+      ))}
     </dl>
     <p class="section-foot">
-      <a href={L('/docs/desktop/horneroctl/')}>{isEs ? 'Leé la guía de horneroctl' : 'Read the horneroctl guide'}</a>
-      <a href={L('/docs/architecture/updates-delivery/')}>{isEs ? 'Cómo se entregan los paquetes' : 'How packages are delivered'}</a>
+      <a href={L('/docs/desktop/horneroctl/')}>{m.leeLaGuiaDeHorneroctl}</a>
+      <a href={L('/docs/architecture/updates-delivery/')}>{m.comoSeEntreganLosPaquetes}</a>
     </p>
   </section>
 
   <section class="section experience" aria-labelledby="experience-title">
     <header class="section-head">
-      <p class="eyebrow"><b>{isEs ? 'Experiencia' : 'Experience'}</b><span>Hornero Shell</span></p>
-      <h2 id="experience-title">{isEs ? 'Un escritorio propio, que se adapta a vos.' : 'A desktop of its own, shaped around you.'}</h2>
-      <p>
-        {
-          isEs
-            ? `Hornero Shell es la capa visible: ${layouts.length} layouts, ${themes.length} temas, ${officialPlugins.length} extensiones oficiales y el Companion, un hornero que vive en tu escritorio. Hornero Left y Hornero Right se inspiran en el layout de Caelestia Shell, de donde se adaptó la shell, con crédito y licencia.`
-            : `Hornero Shell is the visible layer: ${layouts.length} layouts, ${themes.length} themes, ${officialPlugins.length} official extensions and the Companion, a hornero that lives on your desktop. The shell was adapted from Caelestia Shell (GPL-3.0); Hornero Left and Hornero Right follow its layout, with the upstream credit and licence kept in the repository.`
-        }
+      <p class="eyebrow">
+        <b>{m.experiencia}</b>
+        <span>Hornero Shell</span>
       </p>
+      <h2 id="experience-title">{m.unEscritorioPropioQueSe}</h2>
+      <p>{m.horneroShellEsLaCapa(layouts.length, themes.length, officialPlugins.length)}</p>
     </header>
     <div class="concept">
       <div class="concept-pair">
@@ -368,8 +320,11 @@ const description = isEs
         <CaptureFigure slot="CAP-SIGNAL-02" locale={locale} />
       </div>
       <p class="concept-note">
-        {isEs ? 'La dirección Signal Bezel, tal como se ve en un escritorio real. ' : 'The Signal Bezel direction as it looks on a real desktop. '}
-        <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">{isEs ? 'Leé el lenguaje visual Signal' : 'Read the Signal visual language'}</a>.
+        {m.laDireccionSignalBezelTal}
+        <a href="https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md">
+          {m.leeElLenguajeVisualSignal}
+        </a>
+        .
       </p>
     </div>
 
@@ -379,59 +334,76 @@ const description = isEs
       </div>
       <ul class="index" role="list">
         <li>
-          <a href={L('/layouts')}><b>{layouts.length}</b><span>{isEs ? 'Layouts' : 'Layouts'}</span></a>
+          <a href={L('/layouts')}>
+            <b>{layouts.length}</b>
+            <span>{m.layouts}</span>
+          </a>
         </li>
         <li>
-          <a href={L('/themes')}><b>{themes.length}</b><span>{isEs ? 'Temas' : 'Themes'}</span></a>
+          <a href={L('/themes')}>
+            <b>{themes.length}</b>
+            <span>{m.temas}</span>
+          </a>
         </li>
         <li>
-          <a href={L('/extensions')}><b>{officialPlugins.length}</b><span>{isEs ? 'Extensiones oficiales' : 'Official extensions'}</span></a>
+          <a href={L('/extensions')}>
+            <b>{officialPlugins.length}</b>
+            <span>{m.extensionesOficiales}</span>
+          </a>
         </li>
         <li>
-          <a href={L('/companion')}><b>1</b><span>Javi</span></a>
+          <a href={L('/companion')}>
+            <b>1</b>
+            <span>Javi</span>
+          </a>
         </li>
       </ul>
     </div>
     <div class="modes">
       <div class="modes-head">
-        <h3>{isEs ? 'Atmósferas: modos de experiencia' : 'Atmospheres: experience modes'}</h3>
+        <h3>{m.atmosferasModosDeExperiencia}</h3>
         <StageBadge stage={modesFeature.stage} locale={locale} />
       </div>
-      <p>
-        {
-          isEs
-            ? 'Cinco modos que cambian cómo se comporta el escritorio ahora mismo, sin tocar tu layout ni tu tema. Los activás vos; nada cambia solo.'
-            : 'Five modes that change how the desktop behaves right now, without touching your layout or theme. You switch them; nothing changes on its own.'
-        }
-      </p>
+      <p>{m.cincoModosQueCambianComo}</p>
       <ul role="list">
-        {
-          modes.map((mode) => (
-            <li>
-              <strong>{mode.name}</strong>
-              <span>{mode.line[locale]}</span>
-            </li>
-          ))
-        }
+        {modes.map((mode) => (
+          <li>
+            <strong>{mode.name}</strong>
+            <span>{mode.line[locale]}</span>
+          </li>
+        ))}
       </ul>
-      <a href={L('/modes')}>{isEs ? 'Conocé las cinco atmósferas' : 'Meet the five atmospheres'}</a>
+      <a href={L('/modes')}>{m.conoceLasCincoAtmosferas}</a>
     </div>
     <ul class="world" role="list">
       <li>
         <StageBadge stage={chromaticFeature.stage} locale={locale} />
-        <h3><a href={L('/chromatic')}>Hornero Chromatic</a></h3>
+        <h3>
+          <a href={L('/chromatic')}>Hornero Chromatic</a>
+        </h3>
         <p>{chromaticFeature.summary[locale]}</p>
       </li>
       <li class="world-art">
-        <Image class="world-javi" src={javiFrame} alt={isEs ? 'Javi, el hornero del escritorio, saludando.' : 'Javi, the desktop hornero, waving hello.'} height={112} densities={[1, 2]} loading="lazy" />
+        <Image
+          class="world-javi"
+          src={javiFrame}
+          alt={m.javiElHorneroDelEscritorio}
+          height={112}
+          densities={[1, 2]}
+          loading="lazy"
+        />
         <StageBadge stage={javiFeature.stage} locale={locale} />
-        <h3><a href={L('/companion')}>{isEs ? 'Javi, el hornero del escritorio' : 'Javi, the desktop hornero'}</a></h3>
+        <h3>
+          <a href={L('/companion')}>{m.javiElHorneroDelEscritorio2}</a>
+        </h3>
         <p>{javiFeature.summary[locale]}</p>
         <CaptureFigure slot="CAP-JAVI-08" locale={locale} sizes="(min-width: 1100px) 420px, calc(100vw - 2rem)" />
       </li>
       <li>
         <StageBadge stage={feature('pluginkit').stage} locale={locale} />
-        <h3><a href={L('/extensions')}>{isEs ? 'Extensiones y PluginKit' : 'Extensions and PluginKit'}</a></h3>
+        <h3>
+          <a href={L('/extensions')}>{m.extensionesYPluginkit}</a>
+        </h3>
         <p>{feature('pluginkit').summary[locale]}</p>
       </li>
     </ul>
@@ -439,82 +411,94 @@ const description = isEs
 
   <section class="section get" aria-labelledby="get-title">
     <header class="section-head">
-      <p class="eyebrow"><b>{isEs ? 'Instalación' : 'Install'}</b><span>{previewLabel}</span></p>
-      <h2 id="get-title">{isEs ? 'De la descarga al primer arranque.' : 'From download to first boot.'}</h2>
-      <p>
-        {
-          isEs
-            ? `Es un sistema para uso diario, con limitaciones concretas y declaradas: LUKS, BIOS heredado y Niri no están validados en la ISO actual y el rollback de SO sigue planificado${candidate ? `; ${candidate.version} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`
-            : `It is an everyday-use system with concrete, declared limitations: LUKS, legacy BIOS and Niri are not validated on the current ISO and OS rollback is still planned${candidate ? `; ${candidate.version} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`
-        }
+      <p class="eyebrow">
+        <b>{m.instalacion}</b>
+        <span>{previewLabel}</span>
       </p>
+      <h2 id="get-title">{m.deLaDescargaAlPrimer}</h2>
+      <p>{m.limitsNote(candidate?.version)}</p>
     </header>
     <ol class="journey" role="list">
-      {
-        journey.map((step, index) => (
-          <li>
-            <span class="step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-          </li>
-        ))
-      }
+      {journey.map((step, index) => (
+        <li>
+          <span class="step" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
     </ol>
     <div class="cta-row">
-      <a href={L('/install')} class="cta primary">{isEs ? 'Descargá la ISO actual' : 'Download the current ISO'}</a>
-      <a href={L('/docs/getting-started/')} class="cta secondary">{isEs ? 'Leé la guía de inicio' : 'Read the getting-started guide'}</a>
+      <a href={L('/install')} class="cta primary">
+        {m.descargaLaIsoActual}
+      </a>
+      <a href={L('/docs/getting-started/')} class="cta secondary">
+        {m.leeLaGuiaDeInicio}
+      </a>
     </div>
   </section>
 
   <section class="section open" aria-labelledby="open-title">
     <header class="section-head">
-      <p class="eyebrow"><b>{isEs ? 'Código abierto' : 'Open source'}</b><span>{isEs ? 'Evidencia e historia' : 'Evidence and history'}</span></p>
-      <h2 id="open-title">{isEs ? 'De dotfiles a HorneroOS, en público.' : 'From dotfiles to HorneroOS, in public.'}</h2>
-      <p>
-        {
-          isEs
-            ? 'Hornero empezó en 2018 como el escritorio diario de una persona, se publicó como dotfiles en 2019 y hoy son proyectos separados con su propio instalador, QA y documentación. Cada paso después del primero enlaza al commit o tag que lo fecha.'
-            : 'Hornero began in 2018 as one person’s daily desktop, went public as dotfiles in 2019 and is now separate projects with their own installer, QA and documentation. Every step after the first links to the commit or tag that dates it.'
-        }
+      <p class="eyebrow">
+        <b>{m.codigoAbierto}</b>
+        <span>{m.evidenciaEHistoria}</span>
       </p>
+      <h2 id="open-title">{m.deDotfilesAHorneroosEn}</h2>
+      <p>{m.horneroEmpezoEn2018Como}</p>
     </header>
-    <StoryTimeline entries={featuredStory} label={isEs ? 'Línea de tiempo de HorneroOS, 2018 a 2026' : 'HorneroOS timeline, 2018 to 2026'} locale={locale} />
+    <StoryTimeline entries={featuredStory} label={m.lineaDeTiempoDeHorneroos} locale={locale} />
     <dl class="ledger">
       <div>
-        <dt>{isEs ? 'Evidencia' : 'Evidence'}</dt>
+        <dt>{m.evidencia}</dt>
         <dd>
-          {isEs ? `El sitio muestra una selección curada de ${counts.public} capturas de un host real, cada una con su fuente; el ` : `The site shows a curated selection of ${counts.public} captures from a real host, each listing its source; the `}<a href={L('/showroom#capture-ledger')}>{isEs ? 'showroom' : 'showroom'}</a>{isEs ? ' muestra la selección completa' : ' shows the full selection'}{isEs ? '. Los datos de producto salen de shell ' : '. Product data comes from shell '}<a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}><code>{short(pins.shell.sha)}</code></a>{isEs ? ' y config ' : ' and config '}<a href={`${pins.config.repo}/commit/${pins.config.sha}`}><code>{short(pins.config.sha)}</code></a>.
+          {m.elSitioMuestraUnaSeleccion(counts.public)}
+          <a href={L('/showroom#capture-ledger')}>{m.showroom}</a>
+          {m.muestraLaSeleccionCompleta}
+          {m.losDatosDeProductoSalen}
+          <a href={`${pins.shell.repo}/commit/${pins.shell.sha}`}>
+            <code>{short(pins.shell.sha)}</code>
+          </a>
+          {m.yConfig}
+          <a href={`${pins.config.repo}/commit/${pins.config.sha}`}>
+            <code>{short(pins.config.sha)}</code>
+          </a>
+          .
         </dd>
       </div>
       <div>
-        <dt>{isEs ? 'Uso diario' : 'Daily use'}</dt>
-        <dd>
-          {
-            isEs
-              ? 'Según cuenta su maintainer, su computadora de todos los días corre HorneroOS: una ASUS ROG Strix G16 y una Lenovo Legion con Studio, y un desktop AMD Ryzen 9 con RTX 3060. Es el relato del maintainer, no una medición.'
-              : 'By the maintainer’s account, their everyday computers run HorneroOS: an ASUS ROG Strix G16 and a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060. That is the maintainer’s account, not a measurement.'
-          }
-        </dd>
+        <dt>{m.usoDiario2}</dt>
+        <dd>{m.segunCuentaSuMaintainerSu}</dd>
       </div>
       <div>
-        <dt>{isEs ? 'Personas' : 'People'}</dt>
+        <dt>{m.personas}</dt>
         <dd>
-          <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>{isEs ? ' mantiene el proyecto; ' : ' maintains the project; '}<a href="https://github.com/PandaFoss">Panda Foss</a>{isEs ? ', mantenedor de ' : ', a maintainer of '}<a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>{isEs ? ', desarrolla el instalador. La shell se adaptó de ' : ', is developing the installer. The shell is adapted from '}<a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>{isEs ? '; su ' : '; its '}<a href={`${pins.shell.repo}/blob/${pins.shell.sha}/NOTICE`}>{isEs ? 'crédito y licencia' : 'credit and licence'}</a>{isEs ? ' quedan en el repositorio.' : ' stay in the repository.'}
+          <a href="https://github.com/ulises-jeremias">Ulises Jeremías</a>
+          {m.mantieneElProyecto}
+          <a href="https://github.com/PandaFoss">Panda Foss</a>
+          {m.mantenedorDe}
+          <a href="https://gitlab.com/anarchyinstaller/installer">Anarchy Linux</a>
+          {m.desarrollaElInstaladorLaShell}
+          <a href="https://github.com/caelestia-dots/shell">Caelestia Shell</a>
+          {m.su}
+          <a href={`${pins.shell.repo}/blob/${pins.shell.sha}/NOTICE`}>{m.creditoYLicencia}</a>
+          {m.quedanEnElRepositorio}
         </dd>
       </div>
     </dl>
     <p class="section-foot">
-      <a href={L('/roots')}>{isEs ? 'Leé la historia completa' : 'Read the whole story'}</a>
-      <a href="https://github.com/HorneroOS">{isEs ? 'Explorá el código fuente' : 'Browse the source'}</a>
-      <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{isEs ? 'Contribuí' : 'Contribute'}</a>
+      <a href={L('/roots')}>{m.leeLaHistoriaCompleta}</a>
+      <a href="https://github.com/HorneroOS">{m.exploraElCodigoFuente}</a>
+      <a href="https://github.com/HorneroOS/.github/blob/main/CONTRIBUTING.md">{m.contribui}</a>
     </p>
   </section>
 
   <section class="section" aria-labelledby="faq-teaser-title">
     <header class="section-head">
-      <h2 id="faq-teaser-title">{isEs ? 'Preguntas frecuentes' : 'Frequently asked questions'}</h2>
+      <h2 id="faq-teaser-title">{m.preguntasFrecuentes}</h2>
       <p>
-        <a href={L('/why-horneroos#faq')}>{isEs ? 'Todas las preguntas, la comparación y los límites están en Por qué HorneroOS' : 'Every question, the comparison and the limits are on Why HorneroOS'}</a>.
+        <a href={L('/why-horneroos#faq')}>{m.todasLasPreguntasLaComparacion}</a>.
       </p>
     </header>
     <FaqList items={faqItems.slice(0, 3)} locale={locale} />
@@ -663,9 +647,7 @@ const description = isEs
     gap: 0.35rem 1rem;
     padding: 0.5rem 0.8rem;
     border-bottom: 1px solid var(--rule);
-    background:
-      repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px),
-      var(--panel);
+    background: repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px), var(--panel);
     color: var(--ink-muted);
     font: 500 0.72rem var(--font-mono);
     letter-spacing: 0.04em;

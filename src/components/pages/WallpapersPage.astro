@@ -2,12 +2,25 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { themes, wallpapers } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/wallpapers';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
+// Subset of the catalog the client script needs (plain template strings;
+// {placeholders} are filled in the browser via fill()).
+const clientMsgs = {
+  nounOne: m.clientPhotoNounOne,
+  nounMany: m.clientPhotoNounMany,
+  showingAll: m.clientShowingAll,
+  showingFor: m.clientShowingFor,
+  thisFilter: m.clientThisFilter,
+  photographBy: m.clientPhotographBy,
+  unknownPhotographer: m.clientUnknownPhotographer,
+  licenseDetails: m.clientLicenseDetails,
+};
 const L = (path: string) => localizePath(path, locale);
 
 const featuredWallpaper = wallpapers.find((wallpaper) => wallpaper.id === 'buenos-aires-nocturno');
@@ -16,27 +29,7 @@ const featuredTheme = themes.find((theme) => theme.id === featuredWallpaper.them
 if (!featuredTheme) throw new Error(`Theme ${featuredWallpaper.themeId} is missing from the pinned catalogue`);
 const galleryWallpapers = wallpapers.filter((wallpaper) => wallpaper.id !== featuredWallpaper.id);
 
-const filters = (
-  isEs
-    ? [
-        { id: 'all', label: 'Todas las escenas' },
-        { id: 'urban-night', label: 'Noche urbana' },
-        { id: 'blue-hour', label: 'Hora azul' },
-        { id: 'wetlands', label: 'Humedales' },
-        { id: 'grassland', label: 'Pastizal' },
-        { id: 'glacier', label: 'Glaciar' },
-        { id: 'mineral', label: 'Luz mineral' },
-      ]
-    : [
-        { id: 'all', label: 'All scenes' },
-        { id: 'urban-night', label: 'Urban night' },
-        { id: 'blue-hour', label: 'Blue hour' },
-        { id: 'wetlands', label: 'Wetlands' },
-        { id: 'grassland', label: 'Grassland' },
-        { id: 'glacier', label: 'Glacier' },
-        { id: 'mineral', label: 'Mineral light' },
-      ]
-).map((filter) => ({
+const filters = m.idAllLabelTodasLas.map((filter) => ({
   ...filter,
   count:
     filter.id === 'all'
@@ -45,28 +38,30 @@ const filters = (
 }));
 ---
 
-<SiteLayout
-  title={isEs ? 'Fondos | HorneroOS' : 'Wallpapers | HorneroOS'}
-  description={isEs ? 'Nueve fotografías hechas en Argentina, usadas como escenas por defecto de los temas Hornero Originals, con ubicación, fotógrafo, fuente y licencia Creative Commons.' : 'Nine photographs made in Argentina, used as the default scenes of the Hornero Originals themes, with location, photographer, source and Creative Commons license.'}
->
+<SiteLayout title={m.fondosHorneroos} description={m.nueveFotografiasHechasEnArgentina}>
   <main class="wallpapers-page" data-locale={locale}>
     <header class="wallpaper-intro">
       <div class="wallpaper-intro-copy">
-        <p class="plate-id"><strong>Fotografía argentina</strong><span>Autor y licencia en cada obra</span></p>
-        <h1>{isEs ? 'Fondos' : 'Wallpapers'}</h1>
-        <p>
-          {isEs ? 'Fotografías hechas en Argentina, combinadas con los temas regionales Hornero Originals: el canal Beagle en la hora azul, los Esteros del Iberá, Buenos Aires de noche.' : 'Photographs made in Argentina, paired with the regional Hornero Originals themes: the Beagle Channel at blue hour, the Iberá wetlands, Buenos Aires at night.'}
+        <p class="plate-id">
+          <strong>Fotografía argentina</strong>
+          <span>Autor y licencia en cada obra</span>
         </p>
+        <h1>{m.fondos}</h1>
+        <p>{m.fotografiasHechasEnArgentinaCombinadas}</p>
         <p class="collection-facts">
-          <span>{wallpapers.length} {isEs ? 'fotografías' : 'photographs'}</span>
-          <span>{new Set(wallpapers.map((wallpaper) => wallpaper.themeId)).size} {isEs ? 'looks de Hornero' : 'Hornero looks'}</span>
+          <span>
+            {wallpapers.length} {m.fotografias}
+          </span>
+          <span>
+            {new Set(wallpapers.map((wallpaper) => wallpaper.themeId)).size} {m.looksDeHornero}
+          </span>
           <span>CC BY / CC BY-SA</span>
         </p>
       </div>
       <figure class="wallpaper-feature" data-tags={featuredWallpaper.aestheticTags.join(' ')}>
         <a
           href={featuredWallpaper.preview}
-          aria-label={isEs ? `Abrí la fotografía completa: ${featuredWallpaper.title}` : `Open full photograph: ${featuredWallpaper.title}`}
+          aria-label={m.abriLaFotografiaCompleta(featuredWallpaper.title)}
           data-lightbox-image={featuredWallpaper.preview}
           data-lightbox-alt={featuredWallpaper.previewAlt}
           data-lightbox-title={featuredWallpaper.title}
@@ -96,12 +91,14 @@ const filters = (
             <strong>{featuredWallpaper.title}</strong>
           </div>
           <div class="feature-credit">
-            <span>{isEs ? 'Fotografía de' : 'Photograph by'} {featuredWallpaper.photographer}</span>
+            <span>
+              {m.fotografiaDe} {featuredWallpaper.photographer}
+            </span>
             <div class="feature-links">
-              <a href={featuredWallpaper.sourcePage}>{isEs ? 'Fuente' : 'Source'}</a>
+              <a href={featuredWallpaper.sourcePage}>{m.fuente}</a>
               <a href={featuredWallpaper.licenseUrl}>{featuredWallpaper.license}</a>
               <a href={`${L('/themes')}#${featuredTheme.id}`}>
-                {isEs ? 'Ver' : 'See'} {featuredTheme.name} <span aria-hidden="true">↗</span>
+                {m.ver} {featuredTheme.name} <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -112,11 +109,11 @@ const filters = (
     <section class="gallery" aria-labelledby="gallery-heading">
       <div class="gallery-heading">
         <div>
-          <h2 id="gallery-heading">{isEs ? 'Todas las fotografías' : 'All photographs'}</h2>
+          <h2 id="gallery-heading">{m.todasLasFotografias}</h2>
         </div>
-        <p>{isEs ? 'Cada fotografía es la escena por defecto de su tema de Hornero correspondiente.' : 'Each photograph is the default scene of its matching Hornero theme.'}</p>
+        <p>{m.cadaFotografiaEsLaEscena}</p>
       </div>
-      <div class="filters" role="group" aria-label={isEs ? 'Filtrá los fondos por ambiente' : 'Filter wallpapers by atmosphere'}>
+      <div class="filters" role="group" aria-label={m.filtraLosFondosPorAmbiente}>
         {filters.map((filter, index) => (
           <button
             type="button"
@@ -132,7 +129,7 @@ const filters = (
         ))}
       </div>
       <p class="filter-status" aria-live="polite" aria-atomic="true">
-        {isEs ? `Mostrando las ${wallpapers.length} fotografías.` : `Showing all ${wallpapers.length} photographs.`}
+        {m.mostrandoLasFotografias(wallpapers.length)}
       </p>
       <ul class="wallpaper-grid" role="list">
         {galleryWallpapers.map((wallpaper, index) => (
@@ -144,7 +141,7 @@ const filters = (
             <a
               class="wallpaper-image"
               href={wallpaper.preview}
-              aria-label={isEs ? `Abrí la vista previa completa: ${wallpaper.title}` : `Open full preview: ${wallpaper.title}`}
+              aria-label={m.abriLaVistaPreviaCompleta(wallpaper.title)}
               data-lightbox-image={wallpaper.preview}
               data-lightbox-alt={wallpaper.previewAlt}
               data-lightbox-title={wallpaper.title}
@@ -170,7 +167,7 @@ const filters = (
                 />
               </picture>
               <span>
-                {isEs ? 'Abrí la imagen' : 'Open image'} <span aria-hidden="true">↗</span>
+                {m.abriLaImagen} <span aria-hidden="true">↗</span>
               </span>
             </a>
             <div class="wallpaper-caption">
@@ -180,50 +177,52 @@ const filters = (
                   <h3>{wallpaper.title}</h3>
                 </div>
                 <a class="theme-link" href={`${L('/themes')}#${wallpaper.themeId}`}>
-                  {isEs ? `Ver el tema ${wallpaper.themeId}` : `View ${wallpaper.themeId} theme`}
+                  {m.verElTema(wallpaper.themeId)}
                 </a>
               </div>
               <dl class="credits">
                 <div>
-                  <dt>{isEs ? 'Fotógrafo' : 'Photographer'}</dt>
+                  <dt>{m.fotografo}</dt>
                   <dd>{wallpaper.photographer}</dd>
                 </div>
                 <div>
-                  <dt>{isEs ? 'Licencia' : 'License'}</dt>
+                  <dt>{m.licencia}</dt>
                   <dd>
                     <a href={wallpaper.licenseUrl}>{wallpaper.license}</a>
                   </dd>
                 </div>
               </dl>
               <a class="source-link" href={wallpaper.sourcePage}>
-                {isEs ? 'Fuente y atribución completa' : 'Source and full attribution'}
+                {m.fuenteYAtribucionCompleta}
               </a>
             </div>
           </li>
         ))}
       </ul>
       <p class="no-results" hidden>
-        {isEs ? 'Ninguna escena coincide con ese filtro.' : 'No scenes match that filter.'}
+        {m.ningunaEscenaCoincideConEse}
       </p>
       <dialog class="wallpaper-lightbox" aria-labelledby="lightbox-title">
         <form method="dialog" class="lightbox-close-row">
-          <button type="submit" class="lightbox-close" aria-label={isEs ? 'Cerrá la vista previa del fondo' : 'Close wallpaper preview'}>
-            {isEs ? 'Cerrar' : 'Close'} <span aria-hidden="true">×</span>
+          <button type="submit" class="lightbox-close" aria-label={m.cerraLaVistaPreviaDel}>
+            {m.cerrar} <span aria-hidden="true">×</span>
           </button>
         </form>
         <figure>
           <img class="lightbox-image" src="" alt="" width="1280" height="720" />
           <figcaption>
             <p class="lightbox-place"></p>
-            <h2 id="lightbox-title">{isEs ? 'Vista previa del fondo' : 'Wallpaper preview'}</h2>
+            <h2 id="lightbox-title">{m.vistaPreviaDelFondo}</h2>
             <p class="lightbox-credit"></p>
             <div class="lightbox-links">
-              <a class="lightbox-license" href="#">{isEs ? 'Detalles de la licencia' : 'License details'}</a>
+              <a class="lightbox-license" href="#">
+                {m.detallesDeLaLicencia}
+              </a>
               <a class="lightbox-source" href="">
-                {isEs ? 'Fuente y atribución ↗' : 'Source and attribution ↗'}
+                {m.fuenteYAtribucion}
               </a>
               <a class="lightbox-original" href="">
-                {isEs ? 'Abrí la imagen completa ↗' : 'Open full image ↗'}
+                {m.abriLaImagenCompleta}
               </a>
             </div>
           </figcaption>
@@ -232,23 +231,20 @@ const filters = (
     </section>
 
     <section class="photo-note" aria-labelledby="photo-note-title">
-      <h2 id="photo-note-title">{isEs ? 'Sobre las fotografías' : 'About the photographs'}</h2>
-      <p>
-        {isEs ? 'Son fotografías con licencia y ubicaciones verificadas, recortadas y redimensionadas para uso de escritorio. La imagen fuente, el fotógrafo, la licencia y la modificación quedan registrados en el paquete del producto. No se generaron ni reconstruyeron edificios, cielos, luces ni detalles del paisaje.' : 'These are licensed photographs with verified locations, cropped and resized for desktop use. The source image, photographer, license and modification are recorded in the product package. No buildings, skies, lights or landscape details were generated or reconstructed.'}
-      </p>
+      <h2 id="photo-note-title">{m.sobreLasFotografias}</h2>
+      <p>{m.sonFotografiasConLicenciaY}</p>
       <div class="note-links">
-        <a href="https://github.com/HorneroOS/config/blob/main/docs/WALLPAPERS.md">
-          {isEs ? 'Cómo se seleccionan y empaquetan los fondos' : 'How wallpapers are selected and packaged'}
-        </a>
+        <a href="https://github.com/HorneroOS/config/blob/main/docs/WALLPAPERS.md">{m.comoSeSeleccionanYEmpaquetan}</a>
         <a href="https://github.com/HorneroOS/config/blob/main/profiles/themes/WALLPAPER-CREDITS.md">
-          {isEs ? 'Todos los créditos y licencias de las fotos' : 'All photo credits and licenses'}
+          {m.todosLosCreditosYLicencias}
         </a>
-        <a href={L('/themes')}>{isEs ? 'Explorá todos los temas' : 'Browse all themes'}</a>
+        <a href={L('/themes')}>{m.exploraTodosLosTemas}</a>
       </div>
     </section>
   </main>
 </SiteLayout>
 
+<script type="application/json" id="wallpaper-msgs" set:html={JSON.stringify(clientMsgs)} />
 <script>
   const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
   const cards = [...document.querySelectorAll<HTMLElement>('.wallpaper-card')];
@@ -257,7 +253,9 @@ const filters = (
   const empty = document.querySelector<HTMLElement>('.no-results');
   const filterIds = buttons.map((button) => button.dataset.filter ?? 'all');
   const filterStatus = document.querySelector<HTMLElement>('.filter-status');
-  const isEs = document.querySelector<HTMLElement>('.wallpapers-page')?.dataset.locale === 'es';
+  const msgs = JSON.parse(document.getElementById('wallpaper-msgs')?.textContent ?? '{}') as Record<string, string>;
+  const fill = (template: string, values: Record<string, string | number>): string =>
+    Object.entries(values).reduce((text, [key, value]) => text.replace(`{${key}}`, String(value)), template);
 
   function applyFilter(tag: string): void {
     const button = buttons.find((candidate) => candidate.dataset.filter === tag);
@@ -275,16 +273,16 @@ const filters = (
     }
     buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
     if (empty) empty.hidden = visible !== 0;
-    const noun = isEs ? (visible === 1 ? 'fotografía' : 'fotografías') : visible === 1 ? 'photograph' : 'photographs';
+    const noun = visible === 1 ? msgs.nounOne : msgs.nounMany;
     if (filterStatus)
       filterStatus.textContent =
         tag === 'all'
-          ? isEs
-            ? `Mostrando las ${visible} ${noun}.`
-            : `Showing all ${visible} ${noun}.`
-          : isEs
-            ? `Mostrando ${visible} ${noun} para ${(button.dataset.label ?? 'este filtro').toLowerCase()}.`
-            : `Showing ${visible} ${noun} for ${(button.dataset.label ?? 'this filter').toLowerCase()}.`;
+          ? fill(msgs.showingAll, { count: visible, noun })
+          : fill(msgs.showingFor, {
+              count: visible,
+              noun,
+              label: (button.dataset.label ?? msgs.thisFilter).toLowerCase(),
+            });
   }
 
   for (const button of buttons) {
@@ -326,10 +324,12 @@ const filters = (
       lightboxImage.alt = data.lightboxAlt ?? '';
       lightboxTitle.textContent = data.lightboxTitle ?? '';
       lightboxPlace.textContent = data.lightboxPlace ?? '';
-      lightboxCredit.textContent = isEs ? `Fotografía de ${data.lightboxPhotographer ?? 'fotógrafo desconocido'}` : `Photograph by ${data.lightboxPhotographer ?? 'unknown photographer'}`;
+      lightboxCredit.textContent = fill(msgs.photographBy, {
+        name: data.lightboxPhotographer ?? msgs.unknownPhotographer,
+      });
       if (lightboxLicense) {
         lightboxLicense.href = data.lightboxLicenseUrl ?? '#';
-        lightboxLicense.textContent = data.lightboxLicense ?? (isEs ? 'Detalles de la licencia' : 'License details');
+        lightboxLicense.textContent = data.lightboxLicense ?? msgs.licenseDetails;
       }
       if (lightboxSource) lightboxSource.href = data.lightboxSource ?? link.href;
       if (lightboxOriginal) lightboxOriginal.href = link.href;
@@ -815,8 +815,19 @@ const filters = (
 
 <style>
   /* Per-page direction: photography as a printed contact sheet. */
-  .gallery figure, .gallery .photo-card { border-radius: 2px; }
-  .feature-index { font-family: var(--font-mono); color: var(--signal); }
-  :root[data-color-mode='light'] .feature-index { color: var(--ink); }
-  .credits { border-top: 3px solid var(--signal); padding-top: 0.6rem; }
+  .gallery figure,
+  .gallery .photo-card {
+    border-radius: 2px;
+  }
+  .feature-index {
+    font-family: var(--font-mono);
+    color: var(--signal);
+  }
+  :root[data-color-mode='light'] .feature-index {
+    color: var(--ink);
+  }
+  .credits {
+    border-top: 3px solid var(--signal);
+    padding-top: 0.6rem;
+  }
 </style>

@@ -7,6 +7,7 @@
  */
 import type { Mode } from '../data/modes';
 import type { Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/mode-schematic';
 
 interface Props {
   mode: Mode;
@@ -14,12 +15,10 @@ interface Props {
 }
 
 const { mode, locale = 'es' } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const barTicks = mode.bar === 'icons' ? 7 : mode.bar === 'values' ? 5 : 4;
 const barLabelWidth = mode.bar === 'icons' ? 0 : mode.bar === 'values' ? 5 : 10;
-const label = isEs
-  ? `Esquema del modo ${mode.name}: movimiento ${mode.motion}, barra ${mode.bar}, escritorio ${mode.desktop}. Es un dibujo, no una captura.`
-  : `Schematic of ${mode.name} mode: motion ${mode.motion}, bar ${mode.bar}, desktop ${mode.desktop}. A drawing, not a screenshot.`;
+const label = m.esquemaDelModoMovimientoBarra(mode.name, mode.motion, mode.bar, mode.desktop);
 ---
 
 <figure class="mode-schematic" data-motion={mode.motion}>
@@ -27,39 +26,48 @@ const label = isEs
     <rect class="screen" x="1" y="1" width="158" height="88" rx="3" />
     <g class="bar">
       <line x1="1" y1="9" x2="159" y2="9" />
-      {
-        Array.from({ length: barTicks }, (_, i) => (
-          <g>
-            <circle cx={9 + i * (barLabelWidth + 11)} cy="5" r="1.6" />
-            {barLabelWidth > 0 && <rect x={12 + i * (barLabelWidth + 11)} y="4" width={barLabelWidth - 3} height="2" />}
-          </g>
-        ))
-      }
+      {Array.from({ length: barTicks }, (_, i) => (
+        <g>
+          <circle cx={9 + i * (barLabelWidth + 11)} cy="5" r="1.6" />
+          {barLabelWidth > 0 && <rect x={12 + i * (barLabelWidth + 11)} y="4" width={barLabelWidth - 3} height="2" />}
+        </g>
+      ))}
     </g>
-    {
-      mode.desktop === 'widgets' && (
-        <g class="widgets">
-          <rect x="108" y="16" width="44" height="20" rx="2" />
-          <rect x="108" y="40" width="44" height="12" rx="2" />
-        </g>
-      )
-    }
-    {
-      mode.desktop === 'deck' && (
-        <g class="deck">
-          <rect x="86" y="16" width="66" height="22" rx="2" />
-          <rect x="86" y="42" width="31" height="20" rx="2" />
-          <rect x="121" y="42" width="31" height="20" rx="2" />
-          <polyline class="trace" points="90,32 96,26 102,30 108,22 114,28 120,24 126,31 132,21 138,27 148,23" />
-          <polyline class="trace t2" points="90,58 97,52 104,56 111,48 119,54" />
-        </g>
-      )
-    }
-    <rect class="window" x="10" y="20" width={mode.desktop === 'empty' ? 140 : mode.desktop === 'deck' ? 68 : 90} height="62" rx="2" />
-    <line class="window-bar" x1="10" y1="26" x2={mode.desktop === 'empty' ? 150 : mode.desktop === 'deck' ? 78 : 100} y2="26" />
+    {mode.desktop === 'widgets' && (
+      <g class="widgets">
+        <rect x="108" y="16" width="44" height="20" rx="2" />
+        <rect x="108" y="40" width="44" height="12" rx="2" />
+      </g>
+    )}
+    {mode.desktop === 'deck' && (
+      <g class="deck">
+        <rect x="86" y="16" width="66" height="22" rx="2" />
+        <rect x="86" y="42" width="31" height="20" rx="2" />
+        <rect x="121" y="42" width="31" height="20" rx="2" />
+        <polyline class="trace" points="90,32 96,26 102,30 108,22 114,28 120,24 126,31 132,21 138,27 148,23" />
+        <polyline class="trace t2" points="90,58 97,52 104,56 111,48 119,54" />
+      </g>
+    )}
+    <rect
+      class="window"
+      x="10"
+      y="20"
+      width={mode.desktop === 'empty' ? 140 : mode.desktop === 'deck' ? 68 : 90}
+      height="62"
+      rx="2"
+    />
+    <line
+      class="window-bar"
+      x1="10"
+      y1="26"
+      x2={mode.desktop === 'empty' ? 150 : mode.desktop === 'deck' ? 78 : 100}
+      y2="26"
+    />
   </svg>
   <figcaption>
-    <span class="capture-label" data-appearance="placeholder">{isEs ? 'Esquema — no es una captura' : 'Schematic — not a screenshot'}</span>
+    <span class="capture-label" data-appearance="placeholder">
+      {m.esquemaNoEsUnaCaptura}
+    </span>
   </figcaption>
 </figure>
 

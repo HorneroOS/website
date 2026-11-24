@@ -6,12 +6,13 @@ import CaptureGallery from '../CaptureGallery.astro';
 import ReleaseChannelNote from '../ReleaseChannelNote.astro';
 import { feature } from '../../data/features';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/chromatic';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const ledger = feature('chromatic');
 const rfc = ledger.evidence[0].href;
@@ -19,21 +20,81 @@ const rfc = ledger.evidence[0].href;
 // Variants as specified in RFC 0002 §6. Automatic choice is limited to the
 // first four; neon is only ever suggested.
 const variants = [
-  { id: 'balanced', auto: true, es: 'Quieto: superficies suaves y un solo acento firme. El valor por defecto.', en: 'Quiet surfaces and one confident accent. The default.' },
-  { id: 'vibrant', auto: true, es: 'Acentos más fuertes y un marco con tinte.', en: 'Stronger accents and tinted chrome.' },
-  { id: 'expressive', auto: true, es: 'Un segundo tono cuando la imagen lo tiene; estados más armonizados.', en: 'A second hue when the image has one; more harmonised status colours.' },
+  {
+    id: 'balanced',
+    auto: true,
+    es: 'Quieto: superficies suaves y un solo acento firme. El valor por defecto.',
+    en: 'Quiet surfaces and one confident accent. The default.',
+  },
+  {
+    id: 'vibrant',
+    auto: true,
+    es: 'Acentos más fuertes y un marco con tinte.',
+    en: 'Stronger accents and tinted chrome.',
+  },
+  {
+    id: 'expressive',
+    auto: true,
+    es: 'Un segundo tono cuando la imagen lo tiene; estados más armonizados.',
+    en: 'A second hue when the image has one; more harmonised status colours.',
+  },
   { id: 'muted', auto: true, es: 'Marco casi neutro y acentos suaves.', en: 'Near-neutral chrome and soft accents.' },
-  { id: 'faithful', auto: false, es: 'El acento es el color de la imagen, si pasa los controles de contraste.', en: 'The accent is the image’s own colour when it passes the contrast gates.' },
-  { id: 'monochrome', auto: false, es: 'Marco y tinta neutros; los acentos susurran el tono. Sin brillo.', en: 'Neutral chrome and ink; accents whisper the hue. No glow.' },
-  { id: 'high-contrast', auto: false, es: 'Controles máximos, base más profunda, sin brillo ni transparencia.', en: 'Maximum gates, deeper ground, no glow and no translucency.' },
-  { id: 'neon', auto: false, es: 'Solo oscuro. Se sugiere para imágenes muy oscuras y saturadas, nunca se aplica solo.', en: 'Dark only. Suggested for very dark, saturated images, never applied on its own.' },
+  {
+    id: 'faithful',
+    auto: false,
+    es: 'El acento es el color de la imagen, si pasa los controles de contraste.',
+    en: 'The accent is the image’s own colour when it passes the contrast gates.',
+  },
+  {
+    id: 'monochrome',
+    auto: false,
+    es: 'Marco y tinta neutros; los acentos susurran el tono. Sin brillo.',
+    en: 'Neutral chrome and ink; accents whisper the hue. No glow.',
+  },
+  {
+    id: 'high-contrast',
+    auto: false,
+    es: 'Controles máximos, base más profunda, sin brillo ni transparencia.',
+    en: 'Maximum gates, deeper ground, no glow and no translucency.',
+  },
+  {
+    id: 'neon',
+    auto: false,
+    es: 'Solo oscuro. Se sugiere para imágenes muy oscuras y saturadas, nunca se aplica solo.',
+    en: 'Dark only. Suggested for very dark, saturated images, never applied on its own.',
+  },
 ];
 const steps = [
-  { n: '01', es: 'Imagen', en: 'Image', note: { es: 'Fondo, imagen o un color a elección', en: 'Wallpaper, an image or a chosen colour' } },
-  { n: '02', es: 'Semillas', en: 'Seeds', note: { es: 'Cuantización y puntaje de color', en: 'Quantisation and seed scoring' } },
-  { n: '03', es: 'Roles Signal', en: 'Signal roles', note: { es: 'Los mismos roles que Signal Night y Day', en: 'The same roles as Signal Night and Day' } },
-  { n: '04', es: 'Contraste', en: 'Contrast gate', note: { es: 'Una paleta que no pasa no se aplica', en: 'A palette that fails is never applied' } },
-  { n: '05', es: 'Todo el sistema', en: 'Whole system', note: { es: 'Shell, terminales, apps, extensiones', en: 'Shell, terminals, apps, extensions' } },
+  {
+    n: '01',
+    es: 'Imagen',
+    en: 'Image',
+    note: { es: 'Fondo, imagen o un color a elección', en: 'Wallpaper, an image or a chosen colour' },
+  },
+  {
+    n: '02',
+    es: 'Semillas',
+    en: 'Seeds',
+    note: { es: 'Cuantización y puntaje de color', en: 'Quantisation and seed scoring' },
+  },
+  {
+    n: '03',
+    es: 'Roles Signal',
+    en: 'Signal roles',
+    note: { es: 'Los mismos roles que Signal Night y Day', en: 'The same roles as Signal Night and Day' },
+  },
+  {
+    n: '04',
+    es: 'Contraste',
+    en: 'Contrast gate',
+    note: { es: 'Una paleta que no pasa no se aplica', en: 'A palette that fails is never applied' },
+  },
+  {
+    n: '05',
+    es: 'Todo el sistema',
+    en: 'Whole system',
+    note: { es: 'Shell, terminales, apps, extensiones', en: 'Shell, terminals, apps, extensions' },
+  },
 ];
 const curated = [
   { name: 'Signal Night', es: 'Oscuro, grafito con tinta crema', en: 'Dark, graphite with cream ink' },
@@ -45,17 +106,18 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
 
 <SiteLayout
   socialImage="/og/chromatic.png"
-  socialImageAlt={isEs ? 'Diagrama de Hornero Chromatic en cuatro pasos: imagen, semillas, roles de Signal y control de contraste. No es una captura.' : 'Hornero Chromatic diagram in four steps: image, seeds, Signal roles and contrast gate. Not a screenshot.'}
-  title={isEs ? 'Hornero Chromatic: color desde tu fondo | HorneroOS' : 'Hornero Chromatic: colour from your wallpaper | HorneroOS'}
-  description={isEs ? 'Hornero Chromatic es color dinámico opcional para HorneroOS: la paleta de Signal sale de tu fondo de pantalla, con garantías de contraste. Signal Night y Day siguen siendo el valor de fábrica.' : 'Hornero Chromatic is optional dynamic colour for HorneroOS: the Signal palette comes from your wallpaper, with contrast guarantees. Signal Night and Day stay the factory default.'}
+  socialImageAlt={m.diagramaDeHorneroChromaticEn}
+  title={m.horneroChromaticColorDesdeTu}
+  description={m.horneroChromaticEsColorDinamico}
 >
   <section class="section chroma-intro" aria-labelledby="chroma-title">
-    <p class="plate-id"><strong>RFC 0002</strong><span>{isEs ? 'Color dinámico' : 'Dynamic colour'}</span></p>
-    <h1 id="chroma-title">Hornero Chromatic</h1>
-    <p class="chroma-tag">{isEs ? 'Tu fondo, tu paleta. Sin perder la legibilidad.' : 'Your wallpaper, your palette. Without losing legibility.'}</p>
-    <p class="lede">
-      {isEs ? 'Chromatic es una opción: genera los roles de Signal directamente desde una imagen y los aplica al shell, las terminales, las aplicaciones y las extensiones. Signal Night, Signal Day y Alto contraste siguen siendo el valor de fábrica y el respaldo de cualquier falla.' : 'Chromatic is an option: it generates the Signal roles directly from an image and applies them to the shell, terminals, applications and extensions. Signal Night, Signal Day and High Contrast stay the factory default and the fallback for any failure.'}
+    <p class="plate-id">
+      <strong>RFC 0002</strong>
+      <span>{m.colorDinamico}</span>
     </p>
+    <h1 id="chroma-title">Hornero Chromatic</h1>
+    <p class="chroma-tag">{m.tuFondoTuPaletaSin}</p>
+    <p class="lede">{m.chromaticEsUnaOpcionGenera}</p>
     <p class="chroma-status">
       <StageBadge stage={ledger.stage} locale={locale} />
       <ReleaseChannelNote feature={ledger} locale={locale} />
@@ -63,82 +125,89 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
   </section>
 
   <section class="section" aria-labelledby="flow-title">
-    <h2 id="flow-title">{isEs ? 'De la imagen a todo el sistema' : 'From image to whole system'}</h2>
+    <h2 id="flow-title">{m.deLaImagenATodo}</h2>
     <ol class="chroma-flow" role="list">
-      {
-        steps.map((step) => (
-          <li>
-            <span class="chroma-n" aria-hidden="true">{step.n}</span>
-            <strong>{isEs ? step.es : step.en}</strong>
-            <span>{step.note[locale]}</span>
-          </li>
-        ))
-      }
+      {steps.map((step) => (
+        <li>
+          <span class="chroma-n" aria-hidden="true">
+            {step.n}
+          </span>
+          <strong>{step[locale]}</strong>
+          <span>{step.note[locale]}</span>
+        </li>
+      ))}
     </ol>
-    <p class="section-copy">
-      {isEs ? 'Es un esquema del proceso descrito en la RFC, no una captura. La paleta se valida contra la tabla de controles de HorneroOS/config antes de escribirse; ahí no hay Material Design ni Python.' : 'This is a diagram of the process described in the RFC, not a screenshot. The palette is validated against the gate table in HorneroOS/config before it is written; there is no Material Design and no Python in that path.'}
-    </p>
+    <p class="section-copy">{m.esUnEsquemaDelProceso}</p>
   </section>
 
   <section class="section" aria-labelledby="promises-title">
-    <h2 id="promises-title">{isEs ? 'Lo que Chromatic se compromete a no romper' : 'What Chromatic promises not to break'}</h2>
+    <h2 id="promises-title">{m.loQueChromaticSeCompromete}</h2>
     <ul class="chroma-promises" role="list">
       <li>
-        <h3>{isEs ? 'Siempre legible' : 'Always readable'}</h3>
-        <p>{isEs ? 'Tres niveles de contraste (estándar, reforzado y máximo). Si una paleta no pasa los controles, no se aplica. Sobre superficies translúcidas se respeta una opacidad mínima calculada contra los píxeles más claros y más oscuros del fondo.' : 'Three contrast levels (standard, boosted and maximum). A palette that fails the gates is never applied. Translucent surfaces keep a minimum opacity computed against the wallpaper’s lightest and darkest pixels.'}</p>
+        <h3>{m.siempreLegible}</h3>
+        <p>{m.tresNivelesDeContrasteEstandar}</p>
       </li>
       <li>
-        <h3>{isEs ? 'Las barras claras siguen claras' : 'Clear bars stay clear'}</h3>
-        <p>{isEs ? 'Chromatic puede cambiar la tinta de Cockpit Clear, nunca agregarle fondo, tinte, velo ni desenfoque.' : 'Chromatic may change the ink of Cockpit Clear, never add a fill, tint, scrim or blur.'}</p>
+        <h3>{m.lasBarrasClarasSiguenClaras}</h3>
+        <p>{m.chromaticPuedeCambiarLaTinta}</p>
       </li>
       <li>
-        <h3>{isEs ? 'Alto contraste está protegido' : 'High contrast is protected'}</h3>
-        <p>{isEs ? 'El interruptor de alto contraste siempre muestra la tabla curada y apaga la translucidez, haga lo que haga Chromatic.' : 'The high-contrast switch always shows the curated table and disables translucency, whatever Chromatic produces.'}</p>
+        <h3>{m.altoContrasteEstaProtegido}</h3>
+        <p>{m.elInterruptorDeAltoContraste}</p>
       </li>
       <li>
-        <h3>{isEs ? 'Movimiento con permiso' : 'Motion with permission'}</h3>
-        <p>{isEs ? 'Con movimiento reducido, las transiciones de paleta se desactivan. El estado nunca depende solo del tono.' : 'With reduced motion, palette transitions are disabled. Status never depends on hue alone.'}</p>
+        <h3>{m.movimientoConPermiso}</h3>
+        <p>{m.conMovimientoReducidoLasTransiciones}</p>
       </li>
     </ul>
   </section>
 
   <section class="section" aria-labelledby="variants-title">
-    <h2 id="variants-title">{isEs ? 'Ocho variantes' : 'Eight variants'}</h2>
-    <p class="section-copy">
-      {isEs ? 'La elección automática se limita a cuatro; las otras son decisión tuya. Además podés ajustar la profundidad de superficie, la escala de croma y el corrimiento de tono.' : 'Automatic choice is limited to four; the rest are your call. You can also tune surface depth, chroma scale and hue shift.'}
-    </p>
+    <h2 id="variants-title">{m.ochoVariantes}</h2>
+    <p class="section-copy">{m.laEleccionAutomaticaSeLimita}</p>
     <dl class="chroma-variants">
-      {
-        variants.map((v) => (
-          <div>
-            <dt><code>{v.id}</code>{v.auto && <span class="chroma-auto">{isEs ? 'automática' : 'auto'}</span>}</dt>
-            <dd>{isEs ? v.es : v.en}</dd>
-          </div>
-        ))
-      }
+      {variants.map((v) => (
+        <div>
+          <dt>
+            <code>{v.id}</code>
+            {v.auto && <span class="chroma-auto">{m.automatica}</span>}
+          </dt>
+          <dd>{v[locale]}</dd>
+        </div>
+      ))}
     </dl>
   </section>
 
   <section class="section" aria-labelledby="default-title">
-    <h2 id="default-title">{isEs ? 'El valor de fábrica no cambia' : 'The factory default does not change'}</h2>
-    <p class="section-copy">
-      {isEs ? 'Chromatic está apagado hasta que lo elegís. Estos son los temas curados de Signal:' : 'Chromatic is off until you pick it. These are the curated Signal themes:'}
-    </p>
+    <h2 id="default-title">{m.elValorDeFabricaNo}</h2>
+    <p class="section-copy">{m.chromaticEstaApagadoHastaQue}</p>
     <ul class="chroma-curated" role="list">
-      {curated.map((t) => <li><strong>{t.name}</strong><span class="chroma-mode">{isEs ? t.es : t.en}</span></li>)}
+      {curated.map((t) => (
+        <li>
+          <strong>{t.name}</strong>
+          <span class="chroma-mode">{t[locale]}</span>
+        </li>
+      ))}
     </ul>
-    <p class="section-copy">{isEs ? 'Los roles de Signal en este sitio, con los valores del modo de color que estás viendo:' : 'The Signal roles on this site, at the values of the colour mode you are viewing:'}</p>
+    <p class="section-copy">{m.losRolesDeSignalEn}</p>
     <ul class="chroma-swatches" role="list">
-      {roles.map((r) => <li><i style={`background:var(--${r})`} aria-hidden="true" /><code>{r}</code></li>)}
+      {roles.map((r) => (
+        <li>
+          <i style={`background:var(--${r})`} aria-hidden="true" />
+          <code>{r}</code>
+        </li>
+      ))}
     </ul>
-    <p class="section-copy"><a class="text-link" href={L('/themes')}>{isEs ? 'Ver todos los temas' : 'See all themes'}</a></p>
+    <p class="section-copy">
+      <a class="text-link" href={L('/themes')}>
+        {m.verTodosLosTemas}
+      </a>
+    </p>
   </section>
 
   <section class="section" aria-labelledby="pair-title">
-    <h2 id="pair-title">{isEs ? 'Un escritorio, dos fondos' : 'One desktop, two wallpapers'}</h2>
-    <p class="section-copy">
-      {isEs ? 'La prueba está en el propio panel de Chromatic: lee el fondo, propone la paleta y verifica el contraste. Debajo, dos fondos de ejemplo que puede muestrear; en las barras solas el efecto no se lee, y esta página no finge que sí.' : 'The proof is in Chromatic’s own panel: it reads the wallpaper, proposes the palette and checks contrast. Below it, two sample wallpapers it can sample; the effect does not read from the bars alone, and this page does not pretend otherwise.'}
-    </p>
+    <h2 id="pair-title">{m.unEscritorioDosFondos}</h2>
+    <p class="section-copy">{m.laPruebaEstaEnEl}</p>
     <CaptureFigure slot="CAP-CHROMA-07" locale={locale} />
     <div class="chroma-pair">
       <CaptureFigure slot="CAP-CHROMA-01" locale={locale} />
@@ -147,13 +216,19 @@ const roles = ['ground', 'panel', 'ink', 'signal', 'cue', 'phosphor', 'alert'];
   </section>
 
   <section class="section" aria-labelledby="lineage-title">
-    <h2 id="lineage-title">{isEs ? 'Linaje y créditos' : 'Lineage and credit'}</h2>
+    <h2 id="lineage-title">{m.linajeYCreditos}</h2>
     <p class="section-copy">
-      {isEs ? 'La idea (semillas desde el fondo, variantes, sabores, modo inteligente) viene de Caelestia (GPL-3.0). Chromatic es una implementación nueva: no copia código ni tablas de Caelestia y no usa roles ni widgets de Material.' : 'The idea (wallpaper seeds, variants, flavours, smart mode) comes from Caelestia (GPL-3.0). Chromatic is a new implementation: it copies no Caelestia code or tables and uses no Material roles or widgets.'}
-      <a class="text-link" href={rfc}>{isEs ? 'Leé la RFC 0002' : 'Read RFC 0002'} <span aria-hidden="true">↗</span></a>
+      {m.laIdeaSemillasDesdeEl}
+      <a class="text-link" href={rfc}>
+        {m.leeLaRfc0002} <span aria-hidden="true">↗</span>
+      </a>
     </p>
-    <ul class="chroma-evidence" role="list" aria-label={isEs ? 'Evidencia' : 'Evidence'}>
-      {ledger.evidence.map((e) => <li><a href={e.href}>{e.label}</a></li>)}
+    <ul class="chroma-evidence" role="list" aria-label={m.evidencia}>
+      {ledger.evidence.map((e) => (
+        <li>
+          <a href={e.href}>{e.label}</a>
+        </li>
+      ))}
     </ul>
   </section>
 

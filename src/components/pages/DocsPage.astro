@@ -6,6 +6,7 @@ import AppLogo from '../../components/AppLogo.astro';
 import { docsAreas } from '../../data/docs-nav';
 import { docsApps } from '../../data/docs-apps';
 import { pins, short } from '../../data/product';
+import { messages } from '../../i18n/messages/docs';
 
 interface Props {
   entry: CollectionEntry<'docs'>;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const { entry, locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 const { Content, headings } = await render(entry);
 const allRaw = await getCollection('docs');
@@ -21,7 +22,7 @@ const allRaw = await getCollection('docs');
 // under es/ (es/README.md -> 'es', the Spanish docs home).
 const canonicalOf = (id: string) => (id === 'es' ? 'index' : id.startsWith('es/') ? id.slice(3) : id);
 const isSpanishEntry = entry.id === 'es' || entry.id.startsWith('es/');
-const translated = isEs && isSpanishEntry;
+const translated = locale === 'es' && isSpanishEntry;
 const canonicalId = canonicalOf(entry.id);
 // Navigation lists each canonical page once, preferring this locale's
 // entry so Spanish pages show Spanish titles where translations exist.
@@ -30,7 +31,7 @@ for (const e of allRaw) {
   const canonical = canonicalOf(e.id);
   const spanish = e.id === 'es' || e.id.startsWith('es/');
   const existing = byCanonicalNav.get(canonical);
-  if (!existing || (isEs && spanish) || (!isEs && !spanish)) byCanonicalNav.set(canonical, e);
+  if (!existing || (locale === 'es') === spanish) byCanonicalNav.set(canonical, e);
 }
 const all = [...byCanonicalNav.values()];
 
@@ -53,10 +54,7 @@ const englishDescription = firstLine
 // Untranslated docs are English upstream: say so in Spanish metadata
 // instead of shipping an English description under an es-AR page.
 // Translated pages use their own (Spanish) first line.
-const description =
-  isEs && !translated
-    ? `Documentación de HorneroOS en inglés: ${title}. Traducción al español pendiente.`
-    : englishDescription;
+const description = locale === 'es' && !translated ? m.untranslatedDescription(title) : englishDescription;
 
 const featuredApps = docsApps[canonicalId] ?? [];
 const sourcePath = (entry.filePath ?? '').replace(/^\.?\/?\.cache\/product-src\/docs\//, '');
@@ -75,18 +73,20 @@ const areaLabelsEs: Record<string, string> = {
 };
 const areas = docsAreas.map((a) => ({
   ...a,
-  label: isEs ? (areaLabelsEs[a.id] ?? a.label) : a.label,
+  label: locale === 'es' ? (areaLabelsEs[a.id] ?? a.label) : a.label,
   index: all.find((e) => canonicalOf(e.id) === a.id),
-  pages: all.filter((e) => canonicalOf(e.id).startsWith(`${a.id}/`)).sort((x, y) => titleOf(x).localeCompare(titleOf(y))),
+  pages: all
+    .filter((e) => canonicalOf(e.id).startsWith(`${a.id}/`))
+    .sort((x, y) => titleOf(x).localeCompare(titleOf(y))),
 }));
 const current = canonicalId;
 ---
 
-<SiteLayout title={isEs ? `${title} — Documentación de Hornero OS` : `${title} — Hornero OS docs`} description={description || (isEs ? `${title}, documentación de Hornero OS.` : `${title}, Hornero OS documentation.`)}>
+<SiteLayout title={m.documentacionDeHorneroOs(title)} description={description || m.documentacionDeHorneroOs2(title)}>
   <div class="docs">
-    <nav class="docs-nav" aria-label={isEs ? 'Documentación' : 'Documentation'}>
+    <nav class="docs-nav" aria-label={m.documentacion}>
       <a href={L('/docs/')} aria-current={current === 'index' ? 'page' : undefined} class="docs-home">
-        {isEs ? 'Resumen' : 'Overview'}
+        {m.resumen}
       </a>
       {areas.map((a) => (
         <div class="area">
@@ -111,14 +111,18 @@ const current = canonicalId;
         </div>
       ))}
       <a href={L('/search/')} class="docs-search">
-        {isEs ? 'Buscar en el sitio' : 'Search the site'}
+        {m.buscarEnElSitio}
       </a>
     </nav>
 
-    <article lang={isEs && !translated ? 'en' : undefined} data-pagefind-ignore={isEs && !translated ? '' : undefined} class="prose">
+    <article
+      lang={locale === 'es' && !translated ? 'en' : undefined}
+      data-pagefind-ignore={locale === 'es' && !translated ? '' : undefined}
+      class="prose"
+    >
       {featuredApps.length > 0 && (
-        <div class="doc-tools" role="group" aria-label={isEs ? 'Herramientas destacadas en esta página' : 'Featured tools on this page'}>
-          <span class="doc-tools-label">{isEs ? 'Herramientas destacadas' : 'Featured tools'}</span>
+        <div class="doc-tools" role="group" aria-label={m.herramientasDestacadasEnEstaPagina}>
+          <span class="doc-tools-label">{m.herramientasDestacadas}</span>
           <ul role="list">
             {featuredApps.map((app) => (
               <li>
@@ -129,32 +133,31 @@ const current = canonicalId;
           </ul>
         </div>
       )}
-      {isEs && !translated && (
+      {locale === 'es' && !translated && (
         <p class="docs-lang-note">
-          Esta documentación todavía está en inglés. Sale del repositorio HorneroOS/docs y su traducción al español está pendiente ahí. La navegación del sitio ya está en español.
+          Esta documentación todavía está en inglés. Sale del repositorio HorneroOS/docs y su traducción al español está
+          pendiente ahí. La navegación del sitio ya está en español.
         </p>
       )}
       <Content />
       <footer class="doc-foot">
         <p>
-          {isEs ? 'Desde ' : 'From '}
-          {' '}
+          {m.desde}{' '}
           <a href={`${docsPin.repo}/blob/${docsPin.sha}/${sourcePath}`}>
             <code>HorneroOS/docs/{sourcePath}</code>
           </a>
-          {isEs ? 'en el commit ' : 'at commit '}
-          {' '}
+          {m.enElCommit}{' '}
           <a href={`${docsPin.repo}/commit/${docsPin.sha}`}>
             <code>{short(docsPin.sha)}</code>
           </a>
-          . <a href={`${docsPin.repo}/edit/main/${sourcePath}`}>{isEs ? 'Sugerí un cambio en GitHub' : 'Suggest a change on GitHub'}</a>.
+          . <a href={`${docsPin.repo}/edit/main/${sourcePath}`}>{m.sugeriUnCambioEnGithub}</a>.
         </p>
       </footer>
     </article>
 
     {toc.length > 1 && (
-      <nav class="toc" aria-label={isEs ? 'En esta página' : 'On this page'}>
-        <p class="eyebrow">{isEs ? 'En esta página' : 'On this page'}</p>
+      <nav class="toc" aria-label={m.enEstaPagina}>
+        <p class="eyebrow">{m.enEstaPagina}</p>
         <ul role="list">
           {toc.map((h) => (
             <li>

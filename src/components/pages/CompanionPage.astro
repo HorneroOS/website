@@ -7,12 +7,13 @@ import CaptureFigure from '../CaptureFigure.astro';
 import CaptureGallery from '../CaptureGallery.astro';
 import { pins, short } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/companion';
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
 // Real companion frames from HorneroOS/shell assets/companion at the shell
@@ -22,10 +23,11 @@ const frames = import.meta.glob<ImageMetadata>('../../../.cache/product-src/shel
   import: 'default',
 });
 const byBase = new Map<string, ImageMetadata>();
-for (const [path, meta] of Object.entries(frames))
-  byBase.set(path.split('/').pop() ?? path, meta);
+for (const [path, meta] of Object.entries(frames)) byBase.set(path.split('/').pop() ?? path, meta);
 
-interface FrameEntry { file: string }
+interface FrameEntry {
+  file: string;
+}
 interface SkinEntry {
   label?: string;
   palette?: Record<string, string>;
@@ -51,38 +53,36 @@ const assets = `${shell.repo}/tree/${shell.sha}/assets/companion`;
 const paletteOf = (s: string) => Object.entries(manifest.skins[s]?.palette ?? {}).slice(0, 5);
 ---
 
-<SiteLayout
-  title={isEs ? 'Javi, el compañero del escritorio | HorneroOS' : 'Javi, the desktop companion | HorneroOS'}
-  description={isEs ? 'Javi, el hornero que vive en el escritorio de HorneroOS: descansa, saluda, vuela, arma su nido de a poco y actúa los estados del asistente.' : 'Javi, the hornero that lives on the HorneroOS desktop: it rests, greets, flies, slowly builds its nest and acts out the assistant states.'}
->
+<SiteLayout title={m.javiElCompaneroDelEscritorio} description={m.javiElHorneroQueVive}>
   <section class="section">
-    <p class="plate-id"><strong>{isEs ? 'Compañero Hornero' : 'Hornero Companion'}</strong><span>{isEs ? 'Parte del shell' : 'Part of the shell'}</span></p>
-    <h1>{isEs ? 'Javi, el compañero' : 'Javi, the companion'}</h1>
-    <p class="lede">
-      {isEs ? 'Javi es un hornero que vive en tu escritorio. Descansa en su rincón, pestañea, se despereza, junta ramitas para su nido y vuela hacia vos cuando lo llamás. No te saca el foco ni los clics de las ventanas que estás usando.' : 'Javi is a hornero that lives on your desktop. It rests in its corner, blinks, stretches, gathers twigs for its nest and flies in when you call it. It does not take focus or clicks away from the windows you are using.'}
+    <p class="plate-id">
+      <strong>{m.companeroHornero}</strong>
+      <span>{m.parteDelShell}</span>
     </p>
+    <h1>{m.javiElCompanero}</h1>
+    <p class="lede">{m.javiEsUnHorneroQue}</p>
     <CompanionStage locale={locale} />
   </section>
 
-  <section class="section" aria-label={isEs ? 'Javi en un escritorio real' : 'Javi on a real desktop'}>
+  <section class="section" aria-label={m.javiEnUnEscritorioReal}>
     <CaptureFigure slot="CAP-JAVI-08" locale={locale} />
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Personajes' : 'Characters'}</h2>
+    <h2>{m.personajes}</h2>
     <ul class="skins" role="list">
       {skinOrder.map((s) => (
         <li>
           <div class="skin-frames">
             <Image
               src={firstFrame(s, 'idle')}
-              alt={isEs ? `El companion ${manifest.skins[s].label} en reposo` : `The ${manifest.skins[s].label} companion at rest`}
+              alt={m.elCompanionEnReposo(manifest.skins[s].label)}
               height={140}
               densities={[1, 2]}
             />
             <Image
               src={firstFrame(s, 'fly')}
-              alt={isEs ? `El companion ${manifest.skins[s].label} volando` : `The ${manifest.skins[s].label} companion flying`}
+              alt={m.elCompanionVolando(manifest.skins[s].label)}
               height={140}
               densities={[1, 2]}
             />
@@ -90,15 +90,15 @@ const paletteOf = (s: string) => Object.entries(manifest.skins[s]?.palette ?? {}
           <span>{manifest.skins[s].label}</span>
           {paletteOf(s).length > 0 && (
             <span class="swatches" aria-hidden="true">
-              {paletteOf(s).map(([, hex]) => <span style={`background:${hex}`}></span>)}
+              {paletteOf(s).map(([, hex]) => (
+                <span style={`background:${hex}`}></span>
+              ))}
             </span>
           )}
         </li>
       ))}
     </ul>
-    <p>
-      {isEs ? 'Cada personaje es la misma pose con su propia paleta y vestimenta — también al volar. Elegilo en Centro de control › Companion, o desde una terminal:' : 'Every character is the same pose with its own palette and clothing — in flight too. Pick one in Control Center › Companion, or from a terminal:'}
-    </p>
+    <p>{m.cadaPersonajeEsLaMisma}</p>
     <pre><code>qs ipc call companion summon
 qs ipc call companion setSkin gaucho
 qs ipc call companion play celebrate
@@ -106,102 +106,101 @@ qs ipc call companion say "Back in five minutes" 5000</code></pre>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Comportamiento' : 'Behavior'}</h2>
+    <h2>{m.comportamiento}</h2>
     <dl class="rows">
       <div>
-        <dt>{isEs ? 'Descansa' : 'Rests'}</dt>
-        <dd>{isEs ? 'Respira tranquilo, pestañea, mira alrededor y de vez en cuando se acicala o pega un saltito. Tras diez minutos de quietud se duerme con la cabeza bajo el ala; cualquier interacción lo despierta desperezándose.' : 'It breathes quietly, blinks, looks around and now and then preens or hops. After ten quiet minutes it sleeps with its head tucked in; any interaction wakes it with a stretch.'}</dd>
+        <dt>{m.descansa}</dt>
+        <dd>{m.respiraTranquiloPestaneaMiraAlrededor}</dd>
       </div>
       <div>
-        <dt>{isEs ? 'Arma su nido' : 'Builds its nest'}</dt>
-        <dd>{isEs ? 'Cada tanto trae una ramita en el pico y el nido crece de a poco: ramitas, copa de barro, horno con entrada. Queda guardado entre sesiones y se puede reiniciar cuando quieras.' : 'Now and then it carries a twig in its beak and the nest grows a little: twigs, mud cup, oven dome with entrance. It is kept between sessions and can be reset whenever you want.'}</dd>
+        <dt>{m.armaSuNido}</dt>
+        <dd>{m.cadaTantoTraeUnaRamita}</dd>
       </div>
       <div>
-        <dt>{isEs ? 'No molesta' : 'Stays out of the way'}</dt>
-        <dd>{isEs ? 'Vive en su propia capa sin foco de teclado. Se oculta solo en la pantalla de bloqueo, sobre ventanas a pantalla completa, en modo juego y mientras Ajustes está abierto, y vuelve después.' : 'It sits on its own layer without keyboard focus. It hides by itself on the lock screen, over fullscreen windows, in game mode and while Settings is open, and comes back afterwards.'}</dd>
+        <dt>{m.noMolesta}</dt>
+        <dd>{m.viveEnSuPropiaCapa}</dd>
       </div>
       <div>
-        <dt>{isEs ? 'Vos lo ubicás' : 'You place it'}</dt>
-        <dd>{isEs ? 'Arrastralo a cualquier lado; recuerda el lugar en cada monitor. Por defecto no se mueve solo: los vuelos de paseo son opcionales. Cuando lo apagás, se descargan todos sus temporizadores y superficies.' : 'Drag it anywhere; it remembers the spot on each monitor. It does not move on its own by default: wandering flights are opt-in. When switched off, every timer and surface is unloaded.'}</dd>
+        <dt>{m.vosLoUbicas}</dt>
+        <dd>{m.arrastraloACualquierLadoRecuerda}</dd>
       </div>
       <div>
-        <dt>{isEs ? 'Movimiento' : 'Motion'}</dt>
-        <dd>{isEs ? 'Con el movimiento reducido activado, los frames quedan fijos y los vuelos se convierten en cortes simples. La intensidad de sus animaciones en reposo se ajusta entre tranquilo, normal y vivaz.' : 'With reduced motion turned on, frames hold still and flights become simple cuts. Its idle animation intensity adjusts between calm, normal and lively.'}</dd>
+        <dt>{m.movimiento}</dt>
+        <dd>{m.conElMovimientoReducidoActivado}</dd>
       </div>
     </dl>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Controles' : 'Controls'}</h2>
-    <p>
-      {isEs ? 'Todo se ajusta en Centro de control › Companion: personaje, tamaño, borde desde el que se asoma, consejos, tema del globo, animaciones en reposo e intensidad, vuelos de paseo, construcción del nido y dormir en el nido. Nada de esto necesita tocar archivos.' : 'Everything adjusts in Control Center › Companion: character, size, the edge it peeks from, tips, bubble theme, idle animations and intensity, wandering flights, nest building and sleeping at the nest. None of it needs file editing.'}
-    </p>
+    <h2>{m.controles}</h2>
+    <p>{m.todoSeAjustaEnCentro}</p>
   </section>
 
   <section class="section optional-band" aria-labelledby="assistant-title">
-    <h2 id="assistant-title">{isEs ? 'Asistente opcional (experimental, desactivado por defecto)' : 'Optional assistant (experimental, off by default)'}</h2>
+    <h2 id="assistant-title">{m.asistenteOpcionalExperimentalDesactivadoPor}</h2>
     <p>
-      {isEs ? 'El companion es solo presentación. Detrás puede haber un asistente opcional y experimental:' : 'The companion is presentation only. An optional, experimental assistant can sit behind it:'}{' '}
-      <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> {isEs ? 'de Nous Research, al que se accede con' : 'by Nous Research, reached through'}{' '}
-      <code>horneroctl assistant</code>. {isEs ? 'Está' : 'It is'} <strong>{isEs ? 'desactivado por defecto' : 'disabled by default'}</strong> {isEs ? 'y nunca corre como root. Cuando está activo, el gateway corre aislado del resto de tu sesión y cada acción pasa por permisos que vos controlás. El escritorio funciona igual con el asistente apagado o sin instalar.' : 'and never runs as root. When enabled, the gateway runs isolated from the rest of your session and every action passes through permissions you control. The desktop works the same with it off or not installed.'}
+      {m.elCompanionEsSoloPresentacion} <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>{' '}
+      {m.deNousResearchAlQue} <code>horneroctl assistant</code>. {m.esta} <strong>{m.desactivadoPorDefecto}</strong>{' '}
+      {m.yNuncaCorreComoRoot}
     </p>
-    <p>{isEs ? 'Activalo desde una terminal:' : 'Enable it from a terminal:'}</p>
+    <p>{m.activaloDesdeUnaTerminal}</p>
     <pre><code>horneroctl assistant enable
 horneroctl assistant status
 horneroctl assistant ask "what updates are available?"</code></pre>
-    <p>
-      {isEs ? 'Mientras una ejecución está en curso, Javi actúa el estado sin que tengas que leer nada:' : 'While a run is in progress, Javi acts out the state before you read anything:'}
-    </p>
+    <p>{m.mientrasUnaEjecucionEstaEn}</p>
     <ul>
       {Object.entries(manifest.assistantStates ?? {}).map(([state, anim]) => (
-        <li><code>{state}</code> → <code>{anim}</code></li>
+        <li>
+          <code>{state}</code> → <code>{anim}</code>
+        </li>
       ))}
     </ul>
     <ul>
-      <li>{isEs ? 'La información del sistema viene de herramientas tipadas con permisos ABAC. El asistente no puede correr comandos arbitrarios.' : 'System information comes from typed tools behind ABAC permissions. The assistant cannot run arbitrary commands.'}</li>
+      <li>{m.laInformacionDelSistemaViene}</li>
       <li>
-        {isEs ? 'Cuando una ejecución necesita aprobación o una respuesta, el companion muestra el pedido preocupado y espera. Respondés con' : 'When a run needs approval or an answer, the companion shows the request looking worried and waits. You answer with'}
-        <code>qs ipc call companion approve &lt;run-id&gt; approve|deny</code>{isEs ? '. Nada se aprueba automáticamente; si negás, niega con la cabeza.' : '. Nothing is approved automatically; on deny it shakes its head.'}
+        {m.cuandoUnaEjecucionNecesitaAprobacion}
+        <code>qs ipc call companion approve &lt;run-id&gt; approve|deny</code>
+        {m.nadaSeApruebaAutomaticamenteSi}
       </li>
-      <li>{isEs ? 'El gateway escucha solo en loopback, detrás de una clave por usuario que la shell no puede leer.' : 'The gateway listens on loopback only, behind a per-user key the shell cannot read.'}</li>
+      <li>{m.elGatewayEscuchaSoloEn}</li>
     </ul>
   </section>
 
   <section class="section" aria-labelledby="platform-title">
-    <h2 id="platform-title">{isEs ? 'Una plataforma de compañeros vivos' : 'A living companion platform'}</h2>
+    <h2 id="platform-title">{m.unaPlataformaDeCompanerosVivos}</h2>
+    <p>{m.javiEsElPrimerPersonaje}</p>
     <p>
-      {isEs ? 'Javi es el primer personaje de una plataforma extensible: cualquier artista puede empaquetar un compañero solo-datos (arte + JSON, sin código ejecutable) e instalarlo como una extensión más. Capi, un carpincho tranquilo con su montículo de pasto, y Bitín, un CRT retro con expresiones de fósforo y su base de carga, ya vienen en el catálogo oficial. Cada compañero tiene instancias independientes — apariencia, monitor, hábitat, reacciones — y la IA es siempre opcional: un compañero decorativo no consume inferencia.' : 'Javi is the first character on an extensible platform: any artist can package a data-only companion (artwork + JSON, no executable code) and install it like any other extension. Capi, a calm capybara with a grass-mound habitat, and Bitín, a retro CRT with phosphor expressions and a charging dock, already ship in the official catalogue. Every companion has independent instances — skin, monitor, habitat, reactions — and AI is always optional: a decorative companion uses no inference.'}
-    </p>
-    <p>
-      <a class="text-link" href={L('/editions')}>{isEs ? 'Ver el estado de cada edición' : 'See the status of each edition'}</a>
+      <a class="text-link" href={L('/editions')}>
+        {m.verElEstadoDeCada}
+      </a>
     </p>
   </section>
 
   <section class="section" aria-labelledby="agents-title">
-    <h2 id="agents-title">{isEs ? 'Agentes: edición planificada' : 'Agents: a planned edition'}</h2>
+    <h2 id="agents-title">{m.agentesEdicionPlanificada}</h2>
+    <p>{m.laEdicionAgentsFiguraComo}</p>
     <p>
-      {isEs ? 'La edición Agents figura como planificada en el catálogo de ediciones: no tiene imagen instalable y este sitio no la anuncia como una capacidad actual. Lo que existe hoy es lo de arriba: Javi como presentación y un asistente opcional y experimental, desactivado por defecto. Los agentes de programación externos (Codex, Claude Code, Muse, OpenCode) son runtimes independientes que instalás y corrés vos, cada uno con su propio modelo de seguridad y permisos; no heredan las políticas del asistente.' : 'The Agents edition is listed as planned in the edition catalogue: it has no installable image and this site does not announce it as a current capability. What exists today is what is above: Javi as presentation and an optional, experimental assistant, off by default. External coding agents (Codex, Claude Code, Muse, OpenCode) are independent runtimes that you install and run yourself, each with its own security and permission model; they do not inherit the assistant’s policies.'}
-    </p>
-    <p>
-      <a class="text-link" href={L('/editions')}>{isEs ? 'Ver el estado de cada edición' : 'See the status of each edition'}</a>
+      <a class="text-link" href={L('/editions')}>
+        {m.verElEstadoDeCada}
+      </a>
     </p>
   </section>
 
   <section class="section">
-    <h2>{isEs ? 'Límites' : 'Limits'}</h2>
+    <h2>{m.limites}</h2>
     <p>
-      {isEs ? 'El companion no lee lo que escribís y no toma decisiones. Sus estados' : 'The companion does not read what you type and makes no decisions. Its'} <em>{isEs ? 'escuchando' : 'listening'}</em> {isEs ? 'y' : 'and'} <em>{isEs ? 'pensando' : 'thinking'}</em> {isEs ? 'son animaciones accionadas por IPC. El asistente detrás de ellos es opcional, experimental y está apagado hasta que lo activás. El vuelo entre monitores todavía no existe: cambiar de pantalla se hace arrastrando.' : 'states are animations driven over IPC. The assistant behind them is optional, experimental and off until you enable it. Cross-monitor flight does not exist yet: moving screens is done by dragging.'}
+      {m.elCompanionNoLeeLo} <em>{m.escuchando}</em> {m.y} <em>{m.pensando}</em> {m.sonAnimacionesAccionadasPorIpc}
     </p>
     <p class="source">
-      {isEs ? 'Frames de' : 'Frames from'}{' '}
+      {m.framesDe}{' '}
       <a href={assets}>
         <code>HorneroOS/shell/assets/companion</code>
       </a>{' '}
-      {isEs ? 'en el commit' : 'at commit'}{' '}
+      {m.enElCommit}{' '}
       <a href={`${shell.repo}/commit/${shell.sha}`}>
         <code>{short(shell.sha)}</code>
       </a>
-      {isEs ? ', los assets que dibuja la shell, generados desde masters SVG parametrizados.' : ', the assets the shell draws, generated from parameterized SVG masters.'}
+      {m.losAssetsQueDibujaLa}
     </p>
   </section>
 
@@ -303,5 +302,8 @@ horneroctl assistant ask "what updates are available?"</code></pre>
     }
   }
 
-  .optional-band { padding: clamp(1.1rem, 3vw, 2rem); border: 1px dashed var(--phosphor); }
+  .optional-band {
+    padding: clamp(1.1rem, 3vw, 2rem);
+    border: 1px dashed var(--phosphor);
+  }
 </style>

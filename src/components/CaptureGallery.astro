@@ -7,6 +7,7 @@
 import { editorial, editorialForPage, getSlot } from '../data/captures';
 import CaptureFigure from './CaptureFigure.astro';
 import type { Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/capture-gallery';
 
 interface Props {
   route: string;
@@ -19,37 +20,41 @@ interface Props {
 }
 
 const { route, locale = 'es', exclude = [], heading, intro, id } = Astro.props;
-const isEs = locale === 'es';
+const m = messages[locale];
 const sections = editorialForPage(route)
   .filter((section) => section.render === 'gallery')
   .map((section) => ({ ...section, slots: section.slots.filter((sid) => !exclude.includes(sid)) }))
   .filter((section) => section.slots.length > 0);
-const title = heading ?? (isEs ? 'Capturas seleccionadas' : 'Selected captures');
+const title = heading ?? m.capturasSeleccionadas;
 const lead = intro ?? editorial.provenance[locale];
 ---
 
-{
-  sections.length > 0 && (
-    <section class="section capture-gallery" id={id} aria-labelledby={`${id ?? 'capture-gallery'}-title`}>
-      <header class="section-head">
-        <h2 id={`${id ?? 'capture-gallery'}-title`}>{title}</h2>
-        <p>{lead}</p>
-      </header>
-      {sections.map((section) => (
-        <div class:list={['capture-grid', `is-${section.format}`]}>
-          {section.slots.map((sid) => {
-            const slot = getSlot(sid);
-            return (
-              <div class="capture-cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined}>
-                <CaptureFigure slot={sid} locale={locale} caption={section.captions?.[sid]?.[locale] ?? section.caption[locale]} crop={section.crop} eager={section.eager} />
-              </div>
-            );
-          })}
-        </div>
-      ))}
-    </section>
-  )
-}
+{sections.length > 0 && (
+  <section class="section capture-gallery" id={id} aria-labelledby={`${id ?? 'capture-gallery'}-title`}>
+    <header class="section-head">
+      <h2 id={`${id ?? 'capture-gallery'}-title`}>{title}</h2>
+      <p>{lead}</p>
+    </header>
+    {sections.map((section) => (
+      <div class:list={['capture-grid', `is-${section.format}`]}>
+        {section.slots.map((sid) => {
+          const slot = getSlot(sid);
+          return (
+            <div class="capture-cell" data-wide={slot.width / slot.height >= 2 ? 'true' : undefined}>
+              <CaptureFigure
+                slot={sid}
+                locale={locale}
+                caption={section.captions?.[sid]?.[locale] ?? section.caption[locale]}
+                crop={section.crop}
+                eager={section.eager}
+              />
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </section>
+)}
 
 <style>
   .capture-grid {
