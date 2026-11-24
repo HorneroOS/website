@@ -13,17 +13,17 @@
   "keyFingerprint": "FCFBEE43925AB5429362278AE59EAB44AA2498DC",
   "keyPath": "packaging/keys/hornero-release.pub.asc",
   "packageRelease": {
-    "version": "0.2.0-preview36",
-    "recordUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview36.yaml",
-    "checklistUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview36-checklist.md",
+    "version": "0.2.0-preview40",
+    "recordUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview40.yaml",
+    "checklistUrl": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview40-checklist.md",
     "packages": [
       {
         "name": "hornero-shell",
-        "version": "1.3.5-1"
+        "version": "1.3.8-2"
       },
       {
         "name": "hornero-config",
-        "version": "0.4.6-1"
+        "version": "0.4.9-1"
       },
       {
         "name": "hornero-greeter",
@@ -31,7 +31,7 @@
       },
       {
         "name": "horneroctl-bin",
-        "version": "0.2.0_preview49-1"
+        "version": "0.2.0_preview52-1"
       }
     ]
   }

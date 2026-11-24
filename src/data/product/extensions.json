@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "9b14a40e64ef02cabcce4082fa3304314498a8a6",
+  "generatedFrom": "3f47cf4132faef270c31c4fe63375dfaf3751f04",
   "plugins": [
     {
       "id": "hornero-agenda",
@@ -42,32 +42,53 @@
     {
       "id": "hornero-ai-usage",
       "name": "Hornero AI Usage",
-      "version": "3.0.1",
-      "description": "Bar indicator, provider switcher popover and dashboard card over the normalized horneroctl agent usage records. Quota is shown only when a provider record carries it; otherwise it is unknown.",
+      "version": "4.2.1",
+      "description": "Agent Deck: every discovered coding-agent subscription in one place - provider-reported quota windows with resets, plans, and local activity. Unavailable quotas are labelled unknown, never guessed.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
       "placement": "dashboard",
       "surfaces": [
-        "bar"
+        "bar",
+        "dashboardTab"
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-ai-usage",
-      "sha256": "e6efe3bd4888e71abf3f486ad52b6f4cac5b35030beb66ec588273b6d5d4ac11",
+      "sha256": "0d29ca5f3e9e9c8940792f37184da9b5d9dcae7d916d60af1e2589af518451a4",
       "processCommands": [
-        "horneroctl"
+        "horneroctl",
+        "qs"
       ],
       "networkHosts": [],
       "settings": {
         "refreshSeconds": {
           "type": "integer",
-          "default": 60,
-          "minimum": 15,
+          "default": 180,
+          "minimum": 30,
           "maximum": 3600,
           "description": "Seconds between AI usage refreshes."
+        },
+        "warningPercent": {
+          "type": "integer",
+          "default": 80,
+          "minimum": 50,
+          "maximum": 99,
+          "description": "Quota used percent that counts as approaching a limit."
+        },
+        "statsWindow": {
+          "type": "enum",
+          "default": "30",
+          "options": [
+            "7",
+            "30",
+            "60",
+            "90",
+            "all"
+          ],
+          "description": "Activity window for Agent Deck daily statistics."
         }
       }
     },
@@ -157,6 +178,26 @@
       }
     },
     {
+      "id": "hornero-bitin",
+      "name": "Hornero Bitín",
+      "version": "1.0.0",
+      "description": "A tiny retro CRT companion for warm hacker desktops.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "",
+      "placement": "background",
+      "surfaces": [],
+      "manifestSchema": 3,
+      "minShellVersion": null,
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-bitin",
+      "sha256": "77338f0fdffbb3ef072958267ab92eae3cf2dae846ec2120dae1b4cf6ff8df1e",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
+    },
+    {
       "id": "hornero-calendar",
       "name": "Hornero Calendar",
       "version": "3.1.1",
@@ -212,6 +253,26 @@
           "description": "Date line format: long (17 November 2026), short (17 Nov 2026) or iso (2026-11-17)."
         }
       }
+    },
+    {
+      "id": "hornero-capi",
+      "name": "Hornero Capi",
+      "version": "1.0.0",
+      "description": "A calm Argentine carpincho for a quiet desktop.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "",
+      "placement": "background",
+      "surfaces": [],
+      "manifestSchema": 3,
+      "minShellVersion": null,
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-capi",
+      "sha256": "401a41a82f1469bc1750a14b8c05179a30c17f0c6baa93f88e7fc48c55fc4f74",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {}
     },
     {
       "id": "hornero-clipboard",

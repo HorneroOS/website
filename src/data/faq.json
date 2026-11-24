@@ -19,8 +19,8 @@
         "en": "Is it ready for daily use?"
       },
       "answer": {
-        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Supported en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview36. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
-        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Supported maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview36. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
+        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Supported en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview40. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
+        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Supported maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview40. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
       }
     },
     {
@@ -52,8 +52,8 @@
         "en": "How do I install it?"
       },
       "answer": {
-        "es": "Descargás la ISO x86_64 firmada de la página de instalación, verificás el SHA-256 y la firma GPG publicados, y elegís edición y compositor durante la instalación. En un Arch ya instalado, el Desktop también está como paquetes.",
-        "en": "You download the signed x86_64 ISO from the install page, verify the published SHA-256 and GPG signature, and pick the edition and compositor during installation. On an existing Arch system, the Desktop is also available as packages."
+        "es": "Descargás la ISO x86_64 firmada de la página de instalación, verificás el SHA-256 y la firma GPG publicados, y elegís edición y compositor durante la instalación. Si ya usás Arch, no hace falta reinstalar: la guía de instalación sobre Arch instala el mismo escritorio como paquetes del AUR.",
+        "en": "You download the signed x86_64 ISO from the install page, verify the published SHA-256 and GPG signature, and pick the edition and compositor during installation. If you already run Arch, there is no need to reinstall: the install-on-Arch guide installs the same desktop as AUR packages."
       }
     },
     {
@@ -87,6 +87,61 @@
       "answer": {
         "es": "HorneroOS no publica benchmarks ni cifras de rendimiento, así que este sitio no afirma que sea más rápido que otra distribución. Si una cifra aparece en el futuro, va a decir en qué hardware y con qué método se midió.",
         "en": "HorneroOS publishes no benchmarks or performance figures, so this site does not claim it is faster than another distribution. If a figure appears in the future, it will say on which hardware and by what method it was measured."
+      }
+    },
+    {
+      "id": "existing-arch",
+      "question": {
+        "es": "¿Puedo instalar HorneroOS sin reinstalar Arch?",
+        "en": "Can I install HorneroOS without reinstalling Arch?"
+      },
+      "answer": {
+        "es": "Sí. La guía de instalación sobre Arch instala hornero-shell (con hornero-config y horneroctl-bin como dependencias) más el soporte de sesión desde los repositorios. Después, el sembrado de configuración agrega solo los archivos que te faltan y tu sesión Hyprland actual sigue siendo la puerta de entrada. KDE, GNOME u otra sesión que ya tengas quedan instalados y elegibles.",
+        "en": "Yes. The install-on-Arch guide installs hornero-shell (with hornero-config and horneroctl-bin as dependencies) plus session support from the repositories. First-time setup then adds only the files you are missing, and your current Hyprland session stays the way in. KDE, GNOME or another session you already have stays installed and selectable."
+      }
+    },
+    {
+      "id": "shell-only",
+      "question": {
+        "es": "¿Puedo probar solo Hornero Shell?",
+        "en": "Can I try only Hornero Shell?"
+      },
+      "answer": {
+        "es": "Sí, si ya corre Hyprland: instalás el paquete hornero-shell y la arrancás a mano con horneroctl shell start --yes dentro de tu sesión actual, sin sembrar la configuración de HorneroOS. Es una prueba acotada: la experiencia completa (autostart, defaults, Centro de control integrado) llega con el camino de paquetes completo.",
+        "en": "Yes, if Hyprland is already running: install the hornero-shell package and start it by hand with horneroctl shell start --yes inside your current session, without seeding HorneroOS configuration. It is a bounded trial: the full experience (autostart, defaults, integrated Control Center) comes with the complete package path."
+      }
+    },
+    {
+      "id": "dotfiles-preserved",
+      "question": {
+        "es": "¿Instalarlo sobre Arch reemplaza mis dotfiles?",
+        "en": "Will installing it on Arch replace my dotfiles?"
+      },
+      "answer": {
+        "es": "No. Los defaults del paquete viven en /etc/xdg como fallback del sistema y el paso de configuración inicial copia únicamente los archivos que no existen en tu cuenta, listándolos antes con --dry-run. Tu hyprland.lua, tu terminal y tu shell de login quedan como están; los archivos sembrados se pueden borrar para volver exactamente al estado anterior.",
+        "en": "No. Packaged defaults live in /etc/xdg as the system fallback, and the first-time setup step copies only files your account does not have, listing them first with --dry-run. Your hyprland.lua, terminal and login shell stay as they are; seeded files can be deleted to return exactly to the previous state."
+      }
+    },
+    {
+      "id": "editions-on-arch",
+      "question": {
+        "es": "¿Puedo tener Studio o Gaming sobre mi Arch?",
+        "en": "Can I get Studio or Gaming on my Arch?"
+      },
+      "answer": {
+        "es": "Los modos de experiencia y las integraciones del escritorio llegan con los paquetes. Las aplicaciones de cada edición (el stack creativo de Studio, Steam en Gaming) se instalan con pacman/yay como en cualquier Arch: cambiar de modo no las instala por vos. La ISO sigue siendo el único camino que provisiona una edición entera de una vez.",
+        "en": "The experience modes and desktop integrations arrive with the packages. Each edition's applications (the Studio creative stack, Steam on Gaming) install with pacman/yay like on any Arch: switching modes does not install them for you. The ISO remains the only path that provisions a whole edition at once."
+      }
+    },
+    {
+      "id": "update-uninstall-arch",
+      "question": {
+        "es": "¿Cómo actualizo o desinstalo la instalación por paquetes?",
+        "en": "How do I update or uninstall the packaged installation?"
+      },
+      "answer": {
+        "es": "Actualizar es el yay -Syu de siempre (con un snapshot de configuración antes si querés: horneroctl config snapshot create --yes). Desinstalar es quitar los paquetes (yay -Rns hornero-shell hornero-config horneroctl-bin): tu configuración y tus datos quedan donde estaban y tu sesión anterior sigue arrancando. Las derivadas de Arch (CachyOS, EndeavourOS) usan los mismos paquetes pero no están verificadas oficialmente.",
+        "en": "Updating is the usual yay -Syu (with a configuration snapshot first if you want one: horneroctl config snapshot create --yes). Uninstalling is removing the packages (yay -Rns hornero-shell hornero-config horneroctl-bin): your configuration and data stay in place and your previous session keeps starting. Arch derivatives (CachyOS, EndeavourOS) use the same packages but are not officially verified."
       }
     },
     {

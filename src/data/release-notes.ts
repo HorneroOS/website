@@ -3,6 +3,18 @@
 // engineering record; ReleasesPage renders these first and keeps the full
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
+  '0.2.0-preview40': {
+    es: 'Actualización de paquetes sin ISO nueva: hornero-shell 1.3.8 con la auditoría del Centro de control (los guardados ya no pierden secciones de tu shell.json), hornero-config 0.4.9 y horneroctl-bin 0.2.0_preview52 firmados. La ISO de instalación sigue siendo la actual (0.2.0-preview32).',
+    en: 'A package update with no new ISO: hornero-shell 1.3.8 with the Control Center audit (saves no longer drop sections of your shell.json), hornero-config 0.4.9 and signed horneroctl-bin 0.2.0_preview52. The install ISO is still the current one (0.2.0-preview32).',
+  },
+  '0.2.0-preview39': {
+    es: 'Llega la Plataforma de compañeros con hornero-shell 1.3.7: Capi y Bitín oficiales como paquetes data-only (sin ejecutar código), instalables desde el catálogo. Sin ISO nueva; la actual sigue siendo la de preview32.',
+    en: 'The Companion Platform arrives with hornero-shell 1.3.7: the official Capi and Bitín as data-only packages (no code execution), installable from the catalogue. No new ISO; the current one is still preview32.',
+  },
+  '0.2.0-preview38': {
+    es: 'Agent Deck desembarca con PluginKit 5 (hornero-shell 1.3.6): el uso de tus agentes de IA como página propia del dashboard, con hornero-ai-usage 4.2.0 desde el catálogo y el esquema de uso v2 de horneroctl. Sin ISO nueva.',
+    en: 'Agent Deck lands with PluginKit 5 (hornero-shell 1.3.6): your AI agents usage as a first-class dashboard page, with hornero-ai-usage 4.2.0 from the catalogue and horneroctl usage schema v2. No new ISO.',
+  },
   '0.2.0-preview36': {
     es: 'Actualización de paquetes sin ISO nueva: hornero-shell 1.3.5 con el panel Extensiones del Centro de control, hornero-config 0.4.6 con la colección de 57 fondos y hornero-greeter 1.2.0 en Hornero Signal. Las instalaciones existentes lo reciben actualizando los paquetes del AUR; la ISO de instalación sigue siendo la actual (0.2.0-preview32).',
     en: 'A package update with no new ISO: hornero-shell 1.3.5 with the Control Center Extensions pane, hornero-config 0.4.6 with the 57-wallpaper collection and hornero-greeter 1.2.0 in Hornero Signal. Existing installs get it by updating their AUR packages; the install ISO is still the current one (0.2.0-preview32).',

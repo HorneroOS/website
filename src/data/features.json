@@ -1,6 +1,6 @@
 {
   "$comment": "Feature ledger. Hand-authored claims live here, never in page copy. `stage` is what the project asserts: shipping (in a published release; needs releasedIn naming a released (tagged, or recorded as published) release in product/releases.json), main (merged to main, in no published release), experimental (merged and flagged experimental) or planned. scripts/check-feature-ledger.mjs fails the build when a 'shipping' feature names a release that does not exist or is not released. When a release is cut, the release PR flips the matching entries; edition and compositor maturity is derived from the pinned catalogue (src/data/features.ts), not listed here. System rollback stays planned: do not promote it without a shipped backend.",
-  "reviewedAgainst": "0.2.0-preview36",
+  "reviewedAgainst": "0.2.0-preview40",
   "features": [
     {
       "id": "signal",
@@ -373,6 +373,52 @@
         {
           "label": "docs: appearance",
           "href": "https://github.com/HorneroOS/docs/blob/main/desktop/appearance.md"
+        }
+      ]
+    },
+    {
+      "id": "agent-deck",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview38",
+      "title": {
+        "es": "Agent Deck",
+        "en": "Agent Deck"
+      },
+      "summary": {
+        "es": "El uso de tus agentes de IA (cuotas y actividad local de cada harness) en el dashboard, con ventanas de 7 a 90 días.",
+        "en": "Your AI agents' usage (per-harness quotas and local activity) on the dashboard, over 7-to-90-day windows."
+      },
+      "evidence": [
+        {
+          "label": "plugins: hornero-ai-usage",
+          "href": "https://github.com/HorneroOS/plugins"
+        },
+        {
+          "label": "release: preview38",
+          "href": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview38.yaml"
+        }
+      ]
+    },
+    {
+      "id": "companion-platform",
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview39",
+      "title": {
+        "es": "Plataforma de compañeros",
+        "en": "Companion Platform"
+      },
+      "summary": {
+        "es": "Compañeros de escritorio data-only (sin ejecutar código de paquetes): Capi y Bitín oficiales, y paquetes de la comunidad vía el catálogo.",
+        "en": "Data-only desktop companions (packages never execute code): the official Capi and Bitín, plus community packages through the catalogue."
+      },
+      "evidence": [
+        {
+          "label": "release: preview39",
+          "href": "https://github.com/HorneroOS/hornero/blob/main/releases/v0.2.0-preview39.yaml"
+        },
+        {
+          "label": "docs: companion authoring",
+          "href": "https://github.com/HorneroOS/docs"
         }
       ]
     }
