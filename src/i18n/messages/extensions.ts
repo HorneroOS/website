@@ -4,6 +4,9 @@
 import type { Locale } from '../ui';
 
 const es = {
+  devPulseTitulo: 'Dev Pulse: tu actividad en GitHub',
+  devPulseTexto:
+    'La extensión oficial Hornero Dev Pulse (hornero-github-stats) muestra contribuciones que GitHub reconoce, pull requests, revisiones y una bandeja accionable, junto a Agent Deck. Reusa tu sesión de gh: nunca pide un token. Los números son reales o no están, y la actividad de IA solo se compara en el mismo período, sin atribuir pull requests a agentes por coincidencia temporal.',
   ningunoDeclarado: 'Ninguno declarado',
   lasExtensionesOficialesDeHorneroos:
     "Las extensiones oficiales de HorneroOS listadas por nombre y ubicación, junto a la línea 'Official extensions'.",
@@ -98,6 +101,9 @@ const es = {
 export type Messages = typeof es;
 
 const en: Messages = {
+  devPulseTitulo: 'Dev Pulse: your GitHub activity',
+  devPulseTexto:
+    'The official Hornero Dev Pulse extension (hornero-github-stats) shows contributions GitHub recognizes, pull requests, reviews and an actionable inbox, beside Agent Deck. It reuses your gh session: it never asks for a token. Numbers are real or absent, and AI activity is only compared over the same period, never attributing pull requests to agents from timing alone.',
   ningunoDeclarado: 'None declared',
   lasExtensionesOficialesDeHorneroos:
     "The official HorneroOS extensions listed by name and placement, beside the line 'Official extensions'.",
