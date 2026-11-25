@@ -15,7 +15,7 @@ const es = {
   ],
   fondosHorneroos: 'Fondos | HorneroOS',
   nueveFotografiasHechasEnArgentina:
-    'Nueve fotografías hechas en Argentina, usadas como escenas por defecto de los temas Hornero Originals, con ubicación, fotógrafo, fuente y licencia Creative Commons.',
+    'Nueve fotografías hechas en Argentina, usadas como escenas por defecto de los temas Hornero Originals, con ubicación, fotógrafo, fuente y licencia Creative Commons. El paquete trae además la colección completa de fondos de los demás temas (unas 50 imágenes).',
   fondos: 'Fondos',
   fotografiasHechasEnArgentinaCombinadas:
     'Fotografías hechas en Argentina, combinadas con los temas regionales Hornero Originals: el canal Beagle en la hora azul, los Esteros del Iberá, Buenos Aires de noche.',
@@ -73,7 +73,7 @@ const en: Messages = {
   ],
   fondosHorneroos: 'Wallpapers | HorneroOS',
   nueveFotografiasHechasEnArgentina:
-    'Nine photographs made in Argentina, used as the default scenes of the Hornero Originals themes, with location, photographer, source and Creative Commons license.',
+    'Nine photographs made in Argentina, used as the default scenes of the Hornero Originals themes, with location, photographer, source and Creative Commons license. The package also ships the full wallpaper collection of the other themes (about 50 images).',
   fondos: 'Wallpapers',
   fotografiasHechasEnArgentinaCombinadas:
     'Photographs made in Argentina, paired with the regional Hornero Originals themes: the Beagle Channel at blue hour, the Iberá wetlands, Buenos Aires at night.',
