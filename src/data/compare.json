@@ -9,8 +9,8 @@
       "version": "ISO actual 0.2.0-preview32 · paquetes 0.2.0-preview36",
       "href": "https://github.com/HorneroOS/hornero",
       "what": {
-        "es": "Sistema operativo basado en Arch para uso diario, con ediciones Desktop, Studio y Gaming con madurez Supported. Server y Agents están planificadas, sin imagen instalable.",
-        "en": "An Arch-based operating system for everyday use, with Desktop, Studio and Gaming editions at Supported maturity. Server and Agents are planned, with no installable image."
+        "es": "Sistema operativo basado en Arch para uso diario, con ediciones Desktop, Studio y Gaming con madurez Preview. Server y Agents están planificadas, sin imagen instalable.",
+        "en": "An Arch-based operating system for everyday use, with Desktop, Studio and Gaming editions at Preview maturity. Server and Agents are planned, with no installable image."
       },
       "install": {
         "es": "Una ISO x86_64 firmada (la actual, 0.2.0-preview32) o paquetes para sistemas Arch existentes; 0.2.0-preview36 llega como actualización de paquetes.",

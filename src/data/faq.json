@@ -19,8 +19,8 @@
         "en": "Is it ready for daily use?"
       },
       "answer": {
-        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Supported en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview40. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
-        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Supported maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview40. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
+        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Preview en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview40. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
+        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Preview maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview40. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
       }
     },
     {
