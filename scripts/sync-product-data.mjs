@@ -635,7 +635,11 @@ function extensions(pluginsDir) {
   const catalog = readJson(join(pluginsDir, 'catalog.json'));
   if (!Array.isArray(catalog.plugins)) fail('plugins catalog.json has no plugins array');
   return {
-    generatedFrom: catalog.generatedFrom ?? '',
+    // Provenance is the pinned plugins revision these entries were
+    // actually read from, not the catalogue's internal stamp (which
+    // records the commit that last regenerated it and can predate the
+    // entries it lists after squash merges).
+    generatedFrom: pins.sources.plugins.sha,
     plugins: catalog.plugins.map((e) => {
       const manifestPath = join(pluginsDir, e.path ?? '', 'manifest.json');
       if (!e.path || !existsSync(manifestPath)) fail(`plugins catalog entry ${e.id} has no manifest at ${e.path}/manifest.json`);
