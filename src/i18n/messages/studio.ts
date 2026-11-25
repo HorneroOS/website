@@ -32,7 +32,7 @@ const es = {
   aplicaciones: 'Aplicaciones',
   audioYRendimiento: 'Audio y rendimiento',
   estado: 'Estado',
-  studioYaEstaDisponiblePara: 'Studio ya está disponible para uso diario.',
+  studioYaEstaDisponiblePara: 'Studio está disponible hoy con madurez Preview: para uso diario, con las limitaciones declaradas.',
   seInstalaDesdeLaMisma:
     'Se instala desde la misma ISO actual firmada que Desktop y Gaming, y elegís tus especializaciones durante la instalación. Después del primer inicio, ',
   chequeaTuStackCreativoCuando: ' chequea tu stack creativo cuando quieras. Mirá ',
@@ -109,7 +109,7 @@ const en: Messages = {
   aplicaciones: 'Applications',
   audioYRendimiento: 'Audio & performance',
   estado: 'Status',
-  studioYaEstaDisponiblePara: 'Studio is available now for everyday use.',
+  studioYaEstaDisponiblePara: 'Studio is available today at Preview maturity: everyday use, with the declared limitations.',
   seInstalaDesdeLaMisma:
     'It installs from the same signed current ISO as Desktop and Gaming, and you choose your specializations during installation. After first boot, ',
   chequeaTuStackCreativoCuando: ' checks your creative stack whenever you want. See ',

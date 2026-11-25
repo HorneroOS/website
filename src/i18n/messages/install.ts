@@ -93,7 +93,7 @@ const es = {
   hoyHorneroosSeInstalaDe:
     'Hoy HorneroOS se instala de dos maneras: la ISO actual firmada de arriba (Desktop, Studio o Gaming), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.',
   elPaqueteDelGreeterEs:
-    'El paquete del greeter es opcional y necesita SDDM. El paquete publicado actual (el greeter de paisajes) también necesita Qt 6 Multimedia; el greeter Signal que está en la rama principal lo va a necesitar solo para un video que elija quien administra el equipo. Otros compositores no están soportados salvo que el catálogo de ediciones y la evidencia de aceptación digan lo contrario.',
+    'Los paquetes del greeter son opcionales: hornero-greeter es el tema Signal para SDDM (Qt 6 Multimedia solo hace falta para un video que elija quien administra el equipo) y hornero-greeter-greetd es el mismo diseño como programa nativo para greetd. Otros compositores no están soportados salvo que el catálogo de ediciones y la evidencia de aceptación digan lo contrario.',
   estadoDeLasEdiciones: 'Estado de las ediciones',
   lasEdicionesCompartenUnSolo:
     'Las ediciones comparten un solo modelo de composición. Los niveles de madurez reflejan lo que se probó; no significan que toda edición se pueda instalar.',
@@ -218,7 +218,7 @@ const en: Messages = {
   hoyHorneroosSeInstalaDe:
     'Today HorneroOS installs two ways: the signed current ISO above (Desktop, Studio or Gaming), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.',
   elPaqueteDelGreeterEs:
-    'The greeter package is optional and needs SDDM. The current published package (the landscape greeter) also needs Qt 6 Multimedia; the Signal greeter on the main branch will need Qt 6 Multimedia only for an administrator-chosen video. Other compositors are not supported unless the edition catalogue and acceptance evidence say so.',
+    'The greeter packages are optional: hornero-greeter is the Signal theme for SDDM (Qt 6 Multimedia is only needed for an administrator-chosen video) and hornero-greeter-greetd is the same design as a native greetd program. Other compositors are not supported unless the edition catalogue and acceptance evidence say so.',
   estadoDeLasEdiciones: 'Edition readiness',
   lasEdicionesCompartenUnSolo:
     'Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every edition can be installed.',

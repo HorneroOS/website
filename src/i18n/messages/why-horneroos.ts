@@ -37,7 +37,7 @@ const es = {
     'Los proyectos de esta tabla no son todos la misma clase de cosa. Omarchy, CachyOS y Ryoku son sistemas operativos; Caelestia Shell y Dux Modular Shell son shells de escritorio que corren sobre un sistema ya instalado. Cada fila enlaza a su fuente primaria.',
   limitesYEstado: 'Límites y estado',
   laIsoActualEsLa:
-    'La ISO actual es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview36. Desktop, Studio y Gaming tienen madurez Supported; LUKS, BIOS heredado y Niri no están validados en esa ISO y el rollback de SO sigue planificado.',
+    'La ISO actual es la 0.2.0-preview32 y los paquetes llegaron a 0.2.0-preview40. Desktop, Studio y Gaming tienen madurez Preview; LUKS, BIOS heredado y Niri no están validados en esa ISO y el rollback de SO sigue planificado.',
   elSitioMuestraUnaSeleccion: (v0: string | number | null | undefined): string =>
     `El sitio muestra una selección curada de ${v0} capturas tomadas de un host real; el resto del archivo queda guardado sin mostrarse.`,
   verElShowroom: 'Ver el showroom',
@@ -83,7 +83,7 @@ const en: Messages = {
     'The projects in this table are not all the same kind of thing. Omarchy, CachyOS and Ryoku are operating systems; Caelestia Shell and Dux Modular Shell are desktop shells that run on an already installed system. Every row links to its primary source.',
   limitesYEstado: 'Limits and status',
   laIsoActualEsLa:
-    'The current ISO is 0.2.0-preview32 and packages reached 0.2.0-preview36. Desktop, Studio and Gaming carry Supported maturity; LUKS, legacy BIOS and Niri are not validated on that ISO and OS rollback is still planned.',
+    'The current ISO is 0.2.0-preview32 and packages reached 0.2.0-preview40. Desktop, Studio and Gaming carry Preview maturity; LUKS, legacy BIOS and Niri are not validated on that ISO and OS rollback is still planned.',
   elSitioMuestraUnaSeleccion: (v0: string | number | null | undefined): string =>
     `The site shows a curated selection of ${v0} captures taken on a real host; the rest of the archive stays kept, unshown.`,
   verElShowroom: 'See the showroom',
