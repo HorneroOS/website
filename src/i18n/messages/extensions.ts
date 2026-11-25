@@ -84,7 +84,7 @@ const es = {
   alternativaPorTerminal: 'Alternativa por terminal:',
   requiere: 'Requiere ',
   horneroctlEnEstaRevision: 'horneroctl en esta revisión',
-  oPosteriorPreview29NoSoporta: 'o posterior; Preview29 no soporta ',
+  oPosteriorPreview29NoSoporta: 'o posterior; el horneroctl de la ISO preview32 es el mínimo con ',
   ningunaExtensionCoincideProbaCon: 'Ninguna extensión coincide. Probá con otra búsqueda o ajustá los filtros.',
   escribiUnaExtension: 'Escribí una extensión',
   lasSuperficiesYLaCompatibilidad:
@@ -178,7 +178,7 @@ const en: Messages = {
   alternativaPorTerminal: 'Terminal alternative:',
   requiere: 'Requires ',
   horneroctlEnEstaRevision: 'horneroctl at this revision',
-  oPosteriorPreview29NoSoporta: 'or later; Preview29 does not support ',
+  oPosteriorPreview29NoSoporta: 'or later; the preview32 ISO horneroctl is the minimum with ',
   ningunaExtensionCoincideProbaCon: 'No extensions match. Try another search or adjust the filters.',
   escribiUnaExtension: 'Write an extension',
   lasSuperficiesYLaCompatibilidad:

@@ -192,14 +192,14 @@ Where: QA VM or a fresh install. About 120 minutes, 4 slots.
 
 - **Priority:** P0 (launch-critical).
 - **Page and section:** /install · Install, steps.
-- **On screen:** The the installer welcome step in the chosen language.
+- **On screen:** The installer welcome step in the chosen language.
 - **Spec:** 16:9, 1920x1080 (also a 2x master), PNG master (lossless).
 - **State:** theme Installer, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
 - **Setup:**
   1. Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.
   2. Use a throw-away virtual disk and the demo user name `demo`.
 - **Privacy:** Demo user, demo hostname; no real network name.
-- **Alt text (EN):** The the installer welcome step in the chosen language.
+- **Alt text (EN):** The installer welcome step in the chosen language.
 - **Alt text (ES):** El paso de bienvenida del instalador en el idioma elegido.
 
 ### CAP-INSTALL-02 Installer: edition and compositor

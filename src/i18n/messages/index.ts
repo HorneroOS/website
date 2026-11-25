@@ -84,7 +84,7 @@ const es = {
     v1: string | number | null | undefined,
     v2: string | number | null | undefined,
   ): string =>
-    `Hornero Shell es la capa visible: ${v0} layouts, ${v1} temas, ${v2} extensiones oficiales y el Companion, un hornero que vive en tu escritorio. Hornero Left y Hornero Right se inspiran en el layout de Caelestia Shell, de donde se adaptó la shell, con crédito y licencia.`,
+    `Hornero Shell es la capa visible: ${v0} layouts, ${v1} temas, ${v2} extensiones oficiales (entre ellas Agent Deck) y la plataforma de companions: Javi, Capi, Bitín y los personajes que cree la comunidad viven en tu escritorio. Hornero Left y Hornero Right se inspiran en el layout de Caelestia Shell, de donde se adaptó la shell, con crédito y licencia.`,
   laDireccionSignalBezelTal: 'La dirección Signal Bezel, tal como se ve en un escritorio real. ',
   leeElLenguajeVisualSignal: 'Leé el lenguaje visual Signal',
   layouts: 'Layouts',
@@ -219,7 +219,7 @@ const en: Messages = {
     v1: string | number | null | undefined,
     v2: string | number | null | undefined,
   ): string =>
-    `Hornero Shell is the visible layer: ${v0} layouts, ${v1} themes, ${v2} official extensions and the Companion, a hornero that lives on your desktop. The shell was adapted from Caelestia Shell (GPL-3.0); Hornero Left and Hornero Right follow its layout, with the upstream credit and licence kept in the repository.`,
+    `Hornero Shell is the visible layer: ${v0} layouts, ${v1} themes, ${v2} official extensions (Agent Deck among them) and the companion platform: Javi, Capi, Bitín and community-created characters live on your desktop. The shell was adapted from Caelestia Shell (GPL-3.0); Hornero Left and Hornero Right follow its layout, with the upstream credit and licence kept in the repository.`,
   laDireccionSignalBezelTal: 'The Signal Bezel direction as it looks on a real desktop. ',
   leeElLenguajeVisualSignal: 'Read the Signal visual language',
   layouts: 'Layouts',

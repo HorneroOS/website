@@ -2165,11 +2165,11 @@
         "es": "Instalador: bienvenida"
       },
       "description": {
-        "en": "The the installer welcome step in the chosen language.",
+        "en": "The installer welcome step in the chosen language.",
         "es": "El paso de bienvenida del instalador en el idioma elegido."
       },
       "alt": {
-        "en": "The the installer welcome step in the chosen language.",
+        "en": "The installer welcome step in the chosen language.",
         "es": "El paso de bienvenida del instalador en el idioma elegido."
       },
       "pages": [

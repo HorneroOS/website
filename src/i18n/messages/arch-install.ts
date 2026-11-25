@@ -46,10 +46,10 @@ const es = {
   horneroShellTraeComoDependencias:
     '`hornero-shell` trae como dependencias `hornero-config` (los defaults) y `horneroctl-bin` (la CLI firmada). El segundo grupo es el soporte de sesión: salteá lo que ya tengas.',
   elGreeterEsOpcionalY:
-    'El greeter es opcional y solo si ya usás SDDM: `yay -S hornero-greeter` instala el tema sin cambiar tu display manager ni activarlo por vos. No hace falta reiniciar todavía.',
+    'El greeter es opcional: con SDDM, `yay -S hornero-greeter` instala el tema Signal; con greetd, `yay -S hornero-greeter-greetd` instala el mismo diseño como programa nativo. Ninguno cambia tu display manager ni se activa solo. No hace falta reiniciar todavía.',
   respaldaYSembraTuConfiguracion: 'Respaldá y sembrá tu configuración',
   tuCuentaYaExisteAsi:
-    'Tu cuenta ya existe, así que el esqueleto de fábrica (`/etc/skel`) nunca te llegó. El sembrado copia únicamente los archivos que te faltan —nunca sobrescribe uno tuyo— y el `--dry-run` te muestra la lista exacta antes de tocar nada:',
+    'Tu cuenta ya existe, así que el esqueleto de fábrica (`/etc/skel`) nunca te llegó. El sembrado (requiere hornero-config 0.4.10 o posterior, que trae `/usr/share/hornero/seed-user.sh`) copia únicamente los archivos que te faltan —nunca sobrescribe uno tuyo— y el `--dry-run` te muestra la lista exacta antes de tocar nada:',
   siTuConfigHyprHyprland:
     'Si tu `~/.config/hypr/hyprland.lua` ya es tuyo, queda intacto: los módulos de fábrica se siembran al lado y el sistema sigue usando tu entrada. Para adoptar la entrada de fábrica con tus overrides en `hyprland.lua.d/*-user.lua`, mové la tuya a un lado y volvé a sembrar; `horneroctl config refresh-hypr` mantiene esa entrada al día sin tocar tus archivos de usuario.',
   entraPorTuSesionHyprland: 'Entrá por tu sesión Hyprland de siempre',
@@ -132,10 +132,10 @@ const en: Messages = {
   horneroShellTraeComoDependencias:
     '`hornero-shell` pulls in `hornero-config` (the defaults) and `horneroctl-bin` (the signed CLI). The second group is session support: skip whatever you already have.',
   elGreeterEsOpcionalY:
-    'The greeter is optional and only if you already use SDDM: `yay -S hornero-greeter` installs the theme without switching your display manager or enabling it for you. No reboot needed yet.',
+    'The greeter is optional: on SDDM, `yay -S hornero-greeter` installs the Signal theme; on greetd, `yay -S hornero-greeter-greetd` installs the same design as a native program. Neither switches your display manager nor enables itself. No reboot needed yet.',
   respaldaYSembraTuConfiguracion: 'Back up and seed your configuration',
   tuCuentaYaExisteAsi:
-    'Your account already exists, so the factory skeleton (`/etc/skel`) never reached you. Seeding copies only the files you are missing — it never overwrites one of yours — and `--dry-run` shows the exact list before touching anything:',
+    'Your account already exists, so the factory skeleton (`/etc/skel`) never reached you. Seeding (requires hornero-config 0.4.10 or later, which ships `/usr/share/hornero/seed-user.sh`) copies only the files you are missing — it never overwrites one of yours — and `--dry-run` shows the exact list before touching anything:',
   siTuConfigHyprHyprland:
     'If your `~/.config/hypr/hyprland.lua` is already yours, it stays intact: factory modules are seeded next to it and the system keeps using your entrypoint. To adopt the factory entrypoint with your overrides in `hyprland.lua.d/*-user.lua`, move yours aside and seed again; `horneroctl config refresh-hypr` then keeps that entrypoint current without touching your user files.',
   entraPorTuSesionHyprland: 'Log in through your usual Hyprland session',
