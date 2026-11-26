@@ -1,176 +1,372 @@
-// Message catalog for ArchInstallPage.astro — extracted by scripts/i18n-codemod.mjs.
+// Message catalog for ArchInstallPage.astro.
 // Spanish is the source shape; every other locale must satisfy it exactly
 // (Record<Locale, Messages>), so adding a locale is a compile-time checklist.
 import type { Locale } from '../ui';
 
 const es = {
-  instalarHorneroosSobreArchLinux:
-    'Instalar HorneroOS sobre Arch Linux: paquetes del AUR, configuración inicial segura y arranque de sesión.',
-  horneroosSobreArchLinuxInstalacion: 'HorneroOS sobre Arch Linux | Instalación por paquetes',
-  yaUsasArchInstalaEl:
-    '¿Ya usás Arch? Instalá el escritorio HorneroOS como paquetes del AUR, sin reinstalar el sistema: requisitos, comandos verificados, configuración inicial que no pisa tus dotfiles y cómo volver atrás.',
-  instalacion: 'Instalación',
-  yaUsasArchConvertiloEn: '¿Ya usás Arch? Convertilo en tu workstation HorneroOS',
-  laIsoNoEsLa:
-    'La ISO no es la única puerta de entrada. El escritorio completo —shell, defaults, greeter y la CLI del sistema— se publica como paquetes del AUR y se instala sobre tu Arch actual, sin reinstalar nada y sin tocar los archivos de configuración que ya son tuyos. Esta guía es ese camino, de principio a fin.',
-  irALosComandos: 'Ir a los comandos',
-  prefieroLaIsoCompleta: 'Prefiero la ISO completa',
-  tresCaminosUnMismoEscritorio: 'Tres caminos, un mismo escritorio',
-  aIso: 'A · ISO',
-  laExperienciaCompletaDesdeCero:
-    'La experiencia completa desde cero, con ediciones Desktop, Studio y Gaming y los defaults de fábrica. Es la ruta de la ',
-  paginaDeDescarga: 'página de descarga',
-  bArch: 'B · Arch',
-  estaGuiaPaquetesSobreTu:
-    'Esta guía: paquetes sobre tu Arch actual. El escritorio, el Centro de control, los temas, PluginKit y horneroctl, conviviendo con lo que ya tenés.',
-  cSoloLaShell: 'C · Solo la shell',
-  siYaCorreHyprlandY:
-    'Si ya corre Hyprland y solo querés probar la shell: instalás hornero-shell y la arrancás a mano dentro de tu sesión actual, sin adoptar la configuración de HorneroOS. Abajo está la variante.',
-  requisitos: 'Requisitos',
-  obligatorios: 'Obligatorios',
-  archLinuxX8664Actualizado:
-    'Arch Linux x86_64 actualizado (`pacman -Syu` al día). Otras distros basadas en Arch no están verificadas oficialmente.',
-  unaSesionWaylandConHyprland:
-    'Una sesión Wayland con Hyprland para la experiencia completa (la variante C también lo necesita). Si todavía no tenés compositor, el paso de paquetes lo instala.',
-  gitYBaseDevelPara: '`git` y `base-devel` para construir paquetes del AUR, y un ayudante como yay (abajo).',
-  recomendados: 'Recomendados',
-  pipewireWireplumberParaAudioCompleto:
-    'PipeWire + WirePlumber para audio completo, xdg-desktop-portal-gtk además del portal de Hyprland, y los drivers de tu GPU según la wiki de Arch (en NVIDIA, el driver propietario y su modeset quedan a tu cargo: HorneroOS no los instala por vos en esta ruta).',
-  unRespaldoDeTuConfiguracion:
-    'Un respaldo de tu configuración actual. El paso de configuración inicial nunca sobrescribe archivos tuyos, pero un respaldo sigue siendo gratis.',
-  siNoTenesYay: 'Si no tenés yay',
-  elAurEsMantenidoPor:
-    'El AUR es mantenido por la comunidad: antes de instalar cualquier paquete, leé su PKGBUILD. Yay se construye como tu usuario, nunca como root:',
-  deArchAHorneroosPaso: 'De Arch a HorneroOS, paso a paso',
-  actualizaEInstalaLosPaquetes: 'Actualizá e instalá los paquetes',
-  horneroShellTraeComoDependencias:
-    '`hornero-shell` trae como dependencias `hornero-config` (los defaults) y `horneroctl-bin` (la CLI firmada). El segundo grupo es el soporte de sesión: salteá lo que ya tengas.',
-  elGreeterEsOpcionalY:
-    'El greeter es opcional: con SDDM, `yay -S hornero-greeter` instala el tema Signal; con greetd, `yay -S hornero-greeter-greetd` instala el mismo diseño como programa nativo. Ninguno cambia tu display manager ni se activa solo. No hace falta reiniciar todavía.',
-  respaldaYSembraTuConfiguracion: 'Respaldá y sembrá tu configuración',
-  tuCuentaYaExisteAsi:
-    'Tu cuenta ya existe, así que el esqueleto de fábrica (`/etc/skel`) nunca te llegó. El sembrado (requiere hornero-config 0.4.10 o posterior, que trae `/usr/share/hornero/seed-user.sh`) copia únicamente los archivos que te faltan —nunca sobrescribe uno tuyo— y el `--dry-run` te muestra la lista exacta antes de tocar nada:',
-  siTuConfigHyprHyprland:
-    'Si tu `~/.config/hypr/hyprland.lua` ya es tuyo, queda intacto: los módulos de fábrica se siembran al lado y el sistema sigue usando tu entrada. Para adoptar la entrada de fábrica con tus overrides en `hyprland.lua.d/*-user.lua`, mové la tuya a un lado y volvé a sembrar; `horneroctl config refresh-hypr` mantiene esa entrada al día sin tocar tus archivos de usuario.',
-  entraPorTuSesionHyprland: 'Entrá por tu sesión Hyprland de siempre',
-  noHayUnaSesionNueva:
-    'No hay una sesión nueva que elegir: HorneroOS vive dentro de Hyprland. Con la configuración sembrada, la shell arranca sola al entrar. Sin sembrar nada, tu Hyprland usa los defaults de sistema de HorneroOS que trae el paquete. Para probar solo la shell (camino C), arrancala a mano en tu sesión actual:',
-  personaliza: 'Personalizá',
-  elCentroDeControlConcentra:
-    'El Centro de control concentra layouts, temas, Hornero Chromatic, modos de experiencia y extensiones de PluginKit desde el catálogo. Los compañeros se instalan desde el mismo catálogo como paquetes de datos. Todo eso ya viene en los paquetes que instalaste: no hay un segundo paso de instalación.',
-  primerosPasosTrasInstalar: 'Primeros pasos tras instalar',
-  yLa: ' y la ',
-  guiaPasoAPasoCompleta: 'guía paso a paso completa',
-  quePasaConLoQue: 'Qué pasa con lo que ya tenés',
-  tuHyprlandTuHyprlandLua:
-    '**Tu Hyprland**: tu `hyprland.lua` (o `.conf`) manda. El sembrado solo agrega los archivos que te faltan y nunca pisa los tuyos; los defaults del paquete viven en `/etc/xdg` como fallback.',
-  otrosEscritoriosKdeGnomeU:
-    '**Otros escritorios**: KDE, GNOME u otra sesión quedan instalados y elegibles en tu display manager de siempre. Nada se desinstala ni se deshabilita.',
-  barrasYNotificacionesSiOtra:
-    '**Barras y notificaciones**: si otra shell o daemon de notificaciones ya corre en tu sesión, van a convivir hasta que decidas. La shell de Hornero no mata procesos ajenos; apagá el autostart del otro cuando quieras quedarte con uno.',
-  tusDotfilesGtkQtTerminal:
-    '**Tus dotfiles**: GTK/Qt, terminal y shell de login solo cambian donde no tenías nada. Lo que el sembrado creó queda listado en su salida; borrar esos archivos te devuelve exactamente al estado anterior.',
-  volverAtras: 'Volver atrás',
-  desinstalarEsQuitarPaquetesTu:
-    'Desinstalar es quitar paquetes: tu configuración y tus datos quedan donde estaban, y tu sesión anterior sigue arrancando como siempre.',
-  siSembrasteConfiguracionLosUnicos:
-    'Si sembraste configuración, los únicos archivos nuevos son los que el sembrado listó al correr: borrarlos es opcional y seguro si no los editaste.',
-  alcanceHonesto: 'Alcance honesto',
-  losPaquetesTraenElEscritorio:
-    'Los paquetes traen el escritorio completo y los modos de experiencia. Las aplicaciones de cada edición (el stack creativo de Studio, Steam y compañía en Gaming) se instalan con pacman/yay como en cualquier Arch: cambiar de modo no instala aplicaciones por vos. La ISO sigue siendo el camino que provisiona una edición entera.',
-  derivadosDeArchCachyosEndeavouros:
+  // Meta
+  socialAlt: 'Instalar HorneroOS sobre Arch Linux: paquetes del AUR, configuración inicial segura y arranque de sesión.',
+  pageTitle: 'HorneroOS sobre Arch Linux | Instalación por paquetes',
+  pageDescription:
+    '¿Ya usás Arch? Instalá el escritorio HorneroOS como paquetes del AUR, sin reinstalar el sistema: requisitos, comandos listos para copiar, configuración segura y cómo volver atrás.',
+
+  // Hero
+  eyebrowInstall: 'Instalación',
+  heroTitle: '¿Ya usás Arch? Convertilo en tu workstation HorneroOS',
+  heroLede:
+    'La ISO no es la única puerta de entrada. El escritorio completo —shell, defaults, greeter y la CLI del sistema— se publica en el AUR y se instala sobre tu Arch actual, sin reinstalar nada y sin pisar tus dotfiles.',
+  ctaStartSteps: 'Ir a los pasos',
+  ctaPreferIso: 'Prefiero la ISO completa',
+
+  // Choose Your Path
+  choosePathTitle: 'Elegí tu camino',
+  choosePathIntro:
+    'Dos puertas hacia el mismo escritorio Hornero Signal. Elegí la ISO si arrancás desde cero, o instalá los paquetes sobre tu Arch existente.',
+  pathIsoBadge: 'Camino A · Instalación limpia',
+  pathIsoTitle: 'ISO completa de HorneroOS',
+  pathIsoDesc:
+    'La experiencia lista de fábrica desde cero, con ediciones Desktop, Studio y Gaming, particionado Btrfs y defaults preconfigurados.',
+  pathIsoBullets: [
+    'Ideal para equipos nuevos o particiones limpias',
+    'Provisiona las apps de Desktop, Studio o Gaming en un solo paso',
+    'Imagen x86_64 firmada con SHA-256 y GPG',
+  ],
+  pathIsoCta: 'Ir a la descarga de la ISO',
+
+  pathArchBadge: 'Camino B · Estás aquí',
+  pathArchTitle: 'Sobre tu Arch Linux actual',
+  pathArchDesc:
+    'Instalás los 4 paquetes principales desde el AUR sobre tu sistema actual. Tu kernel, tus drivers, tus dotfiles y otros escritorios siguen intactos.',
+  pathArchBullets: [
+    'Sin reinstalar ni perder tu entorno actual',
+    'El sembrado de configuración nunca sobrescribe archivos tuyos',
+    'Actualizás con paru o yay como cualquier paquete de Arch',
+  ],
+  pathArchCta: 'Empezar con el paso 01',
+
+  shellOnlyLabel: '¿Solo querés probar la shell?',
+  shellOnlyText:
+    'Si ya corrés Hyprland y querés evaluar la shell sin adoptar la configuración de HorneroOS, instalá solo',
+  shellOnlySuffix: 'y ejecutá el comando de arranque manual del paso 03.',
+
+  // Copy button
+  copyLabel: 'Copiar',
+  copiedLabel: 'Copiado',
+  copyAria: 'Copiar comandos al portapapeles',
+
+  // Steps section
+  stepsEyebrow: 'Guía paso a paso',
+  stepsTitle: 'De Arch a HorneroOS en 4 pasos',
+  stepsIntro: 'Cada bloque está listo para copiar y pegar. Ningún paso borra tus archivos ni reemplaza tu display manager sin que vos lo pidas.',
+
+  // Step 01: Prerequisites
+  step1Title: 'Requisitos previos',
+  step1Lead:
+    'Antes de instalar los paquetes, asegurate de tener una base Arch actualizada y un ayudante del AUR.',
+  step1Items: [
+    {
+      label: 'Arch Linux x86_64 al día',
+      detail: 'Sistema actualizado con pacman -Syu. Derivados de Arch funcionan como ruta experimental.',
+    },
+    {
+      label: 'Wayland + Hyprland o Niri',
+      detail: 'Hyprland es el compositor soportado; Niri está disponible en modo experimental.',
+    },
+    {
+      label: 'Ayudante del AUR (paru o yay)',
+      detail: 'Necesitás git y base-devel para compilar paquetes del AUR como tu usuario normal.',
+    },
+    {
+      label: 'Audio y GPU recomendados',
+      detail: 'PipeWire + WirePlumber para audio completo y los drivers de tu GPU según la Arch Wiki.',
+    },
+  ],
+  step1HelperSummary: '¿No tenés paru ni yay instalado? Instalá yay en 4 comandos',
+  step1HelperNote:
+    'El AUR es mantenido por la comunidad: revisá siempre el PKGBUILD antes de construir. Ejecutalo como tu usuario, nunca como root:',
+
+  // Step 02: Install 4 core packages
+  step2Title: 'Instalá los 4 paquetes principales',
+  step2Lead:
+    'El escritorio HorneroOS se compone de cuatro paquetes del AUR. Podés instalarlos con paru o yay junto con el soporte base de sesión:',
+  corePackages: [
+    { name: 'hornero-shell', role: 'Shell Quickshell, barra, centro de control y presets de layout' },
+    { name: 'hornero-config', role: 'Defaults del escritorio, packs de temas Signal y script de sembrado' },
+    { name: 'hornero-greeter', role: 'Pantalla de login Hornero Signal para SDDM (opcional)' },
+    { name: 'horneroctl-bin', role: 'CLI nativa del sistema para diagnóstico, snapshots y hardware' },
+  ],
+  step2CmdPrimaryLabel: 'Con paru o yay (paquetes principales + soporte de sesión)',
+  step2GreeterNote:
+    '¿Usás greetd en lugar de SDDM? Reemplazá hornero-greeter por hornero-greeter-greetd (mismo diseño Signal como binario nativo). Ningún paquete cambia tu display manager automáticamente.',
+
+  // Step 03: Initialize & verify
+  step3Title: 'Inicializá, verificá y entrá a tu sesión',
+  step3Lead:
+    'Respaldá tus configs actuales, sembrá solo los archivos de fábrica que te falten (sin pisar los tuyos) y verificá el estado del sistema con horneroctl:',
+  step3CmdSeedLabel: '1. Respaldo, simulación (--dry-run) y sembrado seguro',
+  step3CmdVerifyLabel: '2. Diagnóstico del sistema, hardware y servicios opcionales',
+  step3SessionNote:
+    'Al terminar, cerrá sesión y elegí tu sesión Hyprland (o Hornero) en tu display manager: la shell arranca sola. Si estás probando solo la shell sin sembrar configuración, lanzala dentro de tu sesión actual con:',
+
+  // Step 04: Power-user extras
+  step4Title: 'Extras para usuarios avanzados',
+  step4Lead:
+    'Con el escritorio andando, explorá las herramientas que convierten a tu Arch en una estación de trabajo completa:',
+  extras: [
+    {
+      title: 'Hornero Chromatic',
+      desc: 'Cambiá paletas Signal Night, Signal Day y temas completos en vivo desde el Centro de control, sincronizando shell, terminal y apps.',
+      cmd: 'horneroctl theme list',
+    },
+    {
+      title: 'Webapps nativas',
+      desc: 'Convertí cualquier herramienta web en una aplicación aislada con ventana propia, ícono y atajo desde la CLI.',
+      cmd: 'horneroctl apps webapp',
+    },
+    {
+      title: '35+ plugins con PluginKit 3',
+      desc: 'Sumá integraciones oficiales desde el catálogo del Centro de control, como hornero-tailscale para tu red mesh o hornero-elsewhen para zonas horarias.',
+      cmd: 'horneroctl plugin list',
+    },
+  ],
+  step4LinksLead: 'Seguí explorando:',
+  step4LinkFirstSteps: 'Primeros pasos tras instalar',
+  step4LinkStepByStep: 'Guía paso a paso completa',
+  step4LinkExtensions: 'Catálogo de extensiones',
+
+  // Coexistence
+  keepTitle: 'Qué pasa con lo que ya tenés',
+  keepItems: [
+    {
+      title: 'Tu Hyprland manda',
+      body: 'Si ya tenés ~/.config/hypr/hyprland.lua (o .conf), queda intacto. Los defaults del paquete viven en /etc/xdg como fallback; podés adoptar la entrada de fábrica y usar horneroctl config refresh-hypr cuando quieras.',
+    },
+    {
+      title: 'Otros escritorios intactos',
+      body: 'KDE, GNOME o cualquier otra sesión siguen instalados y seleccionables en tu display manager de siempre. Nada se desinstala ni se deshabilita.',
+    },
+    {
+      title: 'Barras y notificaciones',
+      body: 'La shell de Hornero no mata procesos ajenos. Si ya corrés otra barra o daemon de notificaciones, van a convivir hasta que apagues su autostart.',
+    },
+    {
+      title: 'Tus dotfiles a salvo',
+      body: 'GTK/Qt, terminal y shell de login solo se completan donde no tenías nada. Cada archivo creado por seed-user.sh queda listado en su salida.',
+    },
+  ],
+
+  // Troubleshooting & Rollback
+  rollbackTitle: 'Solución de problemas y rollback',
+  rollbackIntro:
+    'Si algo no se comporta como esperás o querés volver exactamente a tu estado anterior, tenés herramientas integradas y desinstalación limpia:',
+  rollbackCards: [
+    {
+      title: 'Recuperación rápida y snapshots Btrfs',
+      body: 'Creá un snapshot de configuración antes de cambios grandes y usá horneroctl recovery si necesitás restaurar un estado sano o inspeccionar snapshots Btrfs del sistema.',
+      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery',
+    },
+    {
+      title: 'Desinstalar por completo',
+      body: 'Quitar HorneroOS es desinstalar los paquetes. Tus datos y tu sesión anterior siguen funcionando como siempre.',
+      cmd: 'paru -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
+    },
+  ],
+
+  // Honest scope
+  scopeTitle: 'Alcance honesto',
+  scopeItems: [
+    'Los paquetes traen el escritorio completo y los modos de experiencia. Las apps de Studio o Gaming se instalan con pacman/paru/yay como en cualquier Arch; la ISO sigue siendo la ruta que provisiona una edición entera.',
     'Derivados de Arch (CachyOS, EndeavourOS y otros) no están verificados oficialmente: los paquetes son los mismos, pero tratá esa ruta como experimental.',
-  preguntasFrecuentes: 'Preguntas frecuentes',
-  problemasPorSintoma: 'Problemas por síntoma',
-  releasesYPaquetesVigentes: 'Releases y paquetes vigentes',
+  ],
   packagesAhead: (pkg: string | null | undefined): string =>
-    `El escritorio por paquetes puede ir por delante de la ISO publicada${pkg ? ` (hoy: paquetes ${pkg})` : ''}: actualizar es el yay -Syu de siempre, con un snapshot antes si querés (horneroctl config snapshot create --yes).`,
+    `El escritorio por paquetes puede ir por delante de la ISO publicada${pkg ? ` (hoy: paquetes ${pkg})` : ''}: actualizar es el paru -Syu / yay -Syu de siempre.`,
+  linkFaq: 'Preguntas frecuentes',
+  linkTroubleshooting: 'Problemas por síntoma',
+  linkReleases: 'Releases y paquetes vigentes',
 };
 
 export type Messages = typeof es;
 
 const en: Messages = {
-  instalarHorneroosSobreArchLinux:
-    'Install HorneroOS on Arch Linux: AUR packages, safe first-time setup and session start.',
-  horneroosSobreArchLinuxInstalacion: 'HorneroOS on Arch Linux | Package installation',
-  yaUsasArchInstalaEl:
-    'Already running Arch? Install the HorneroOS desktop as AUR packages without reinstalling your system: requirements, verified commands, first-time setup that never overwrites your dotfiles, and how to roll back.',
-  instalacion: 'Install',
-  yaUsasArchConvertiloEn: 'Already run Arch? Make it your HorneroOS workstation',
-  laIsoNoEsLa:
-    'The ISO is not the only way in. The full desktop — shell, defaults, greeter and the system CLI — is published as AUR packages and installs on top of your current Arch system, without reinstalling anything and without touching configuration files that are already yours. This guide is that path, end to end.',
-  irALosComandos: 'Skip to the commands',
-  prefieroLaIsoCompleta: 'I would rather use the full ISO',
-  tresCaminosUnMismoEscritorio: 'Three paths, one desktop',
-  aIso: 'A · ISO',
-  laExperienciaCompletaDesdeCero:
-    'The complete from-scratch experience, with the Desktop, Studio and Gaming editions and factory defaults. It lives on the ',
-  paginaDeDescarga: 'download page',
-  bArch: 'B · Arch',
-  estaGuiaPaquetesSobreTu:
-    'This guide: packages on your current Arch. The desktop, Control Center, themes, PluginKit and horneroctl, living alongside what you already have.',
-  cSoloLaShell: 'C · Shell only',
-  siYaCorreHyprlandY:
-    'If Hyprland is already running and you only want to try the shell: install hornero-shell and start it by hand inside your current session, without adopting HorneroOS configuration. The variant is below.',
-  requisitos: 'Requirements',
-  obligatorios: 'Required',
-  archLinuxX8664Actualizado:
-    'Arch Linux x86_64, fully updated (`pacman -Syu`). Other Arch-based distributions are not officially verified.',
-  unaSesionWaylandConHyprland:
-    'A Wayland session with Hyprland for the full experience (variant C needs it too). If you have no compositor yet, the package step installs one.',
-  gitYBaseDevelPara: '`git` and `base-devel` to build AUR packages, plus a helper such as yay (below).',
-  recomendados: 'Recommended',
-  pipewireWireplumberParaAudioCompleto:
-    'PipeWire + WirePlumber for complete audio, xdg-desktop-portal-gtk next to the Hyprland portal, and your GPU drivers per the Arch wiki (on NVIDIA, the proprietary driver and its modeset stay yours: HorneroOS does not install them for you on this path).',
-  unRespaldoDeTuConfiguracion:
-    'A backup of your current configuration. The first-time setup step never overwrites your files, but a backup is still free.',
-  siNoTenesYay: 'If you do not have yay yet',
-  elAurEsMantenidoPor:
-    'The AUR is community-maintained: read every PKGBUILD before installing. Yay itself is built as your user, never as root:',
-  deArchAHorneroosPaso: 'From Arch to HorneroOS, step by step',
-  actualizaEInstalaLosPaquetes: 'Update and install the packages',
-  horneroShellTraeComoDependencias:
-    '`hornero-shell` pulls in `hornero-config` (the defaults) and `horneroctl-bin` (the signed CLI). The second group is session support: skip whatever you already have.',
-  elGreeterEsOpcionalY:
-    'The greeter is optional: on SDDM, `yay -S hornero-greeter` installs the Signal theme; on greetd, `yay -S hornero-greeter-greetd` installs the same design as a native program. Neither switches your display manager nor enables itself. No reboot needed yet.',
-  respaldaYSembraTuConfiguracion: 'Back up and seed your configuration',
-  tuCuentaYaExisteAsi:
-    'Your account already exists, so the factory skeleton (`/etc/skel`) never reached you. Seeding (requires hornero-config 0.4.10 or later, which ships `/usr/share/hornero/seed-user.sh`) copies only the files you are missing — it never overwrites one of yours — and `--dry-run` shows the exact list before touching anything:',
-  siTuConfigHyprHyprland:
-    'If your `~/.config/hypr/hyprland.lua` is already yours, it stays intact: factory modules are seeded next to it and the system keeps using your entrypoint. To adopt the factory entrypoint with your overrides in `hyprland.lua.d/*-user.lua`, move yours aside and seed again; `horneroctl config refresh-hypr` then keeps that entrypoint current without touching your user files.',
-  entraPorTuSesionHyprland: 'Log in through your usual Hyprland session',
-  noHayUnaSesionNueva:
-    'There is no new session to pick: HorneroOS lives inside Hyprland. With the seeded configuration the shell starts on login. With nothing seeded, your Hyprland falls back to the packaged HorneroOS system defaults. To try only the shell (path C), start it by hand inside your current session:',
-  personaliza: 'Make it yours',
-  elCentroDeControlConcentra:
-    'Control Center holds layouts, themes, Hornero Chromatic, experience modes and PluginKit extensions from the catalogue. Companions install from that same catalogue as data packages. It all ships in the packages you just installed: there is no second installation step.',
-  primerosPasosTrasInstalar: 'First steps after installing',
-  yLa: ' and the ',
-  guiaPasoAPasoCompleta: 'complete step-by-step guide',
-  quePasaConLoQue: 'What happens to what you already have',
-  tuHyprlandTuHyprlandLua:
-    '**Your Hyprland**: your `hyprland.lua` (or `.conf`) wins. Seeding only adds the files you are missing and never overwrites yours; packaged defaults live in `/etc/xdg` as fallback.',
-  otrosEscritoriosKdeGnomeU:
-    '**Other desktops**: KDE, GNOME or another session stay installed and selectable in your usual display manager. Nothing is removed or disabled.',
-  barrasYNotificacionesSiOtra:
-    '**Bars and notifications**: if another shell or notification daemon already runs in your session, they will coexist until you decide. The Hornero shell kills no foreign processes; turn the other autostart off when you want only one.',
-  tusDotfilesGtkQtTerminal:
-    '**Your dotfiles**: GTK/Qt, terminal and login shell only change where you had nothing. Whatever seeding created is listed in its output; deleting those files returns you exactly to the previous state.',
-  volverAtras: 'Rolling back',
-  desinstalarEsQuitarPaquetesTu:
-    'Uninstalling is removing packages: your configuration and data stay where they were, and your previous session keeps starting as always.',
-  siSembrasteConfiguracionLosUnicos:
-    'If you seeded configuration, the only new files are the ones seeding listed when it ran: deleting them is optional and safe if you never edited them.',
-  alcanceHonesto: 'Honest scope',
-  losPaquetesTraenElEscritorio:
-    'The packages bring the full desktop and the experience modes. Each edition’s applications (the Studio creative stack, Steam and friends on Gaming) install with pacman/yay like on any Arch: switching modes does not install applications for you. The ISO remains the path that provisions a whole edition.',
-  derivadosDeArchCachyosEndeavouros:
-    'Arch derivatives (CachyOS, EndeavourOS and others) are not officially verified: the packages are the same, but treat that path as experimental.',
-  preguntasFrecuentes: 'FAQ',
-  problemasPorSintoma: 'Troubleshooting by symptom',
-  releasesYPaquetesVigentes: 'Current releases and packages',
+  // Meta
+  socialAlt: 'Install HorneroOS on Arch Linux: AUR packages, safe first-time setup and session start.',
+  pageTitle: 'HorneroOS on Arch Linux | Package installation',
+  pageDescription:
+    'Already running Arch? Install the HorneroOS desktop from the AUR without reinstalling your system: prerequisites, copy-paste commands, safe dotfile seeding, and clean rollback.',
+
+  // Hero
+  eyebrowInstall: 'Install',
+  heroTitle: 'Already run Arch? Make it your HorneroOS workstation',
+  heroLede:
+    'The ISO is not the only way in. The complete desktop — shell, defaults, greeter and the system CLI — ships as AUR packages and installs right on top of your current Arch system without touching your dotfiles.',
+  ctaStartSteps: 'Jump to the steps',
+  ctaPreferIso: 'I prefer the full ISO',
+
+  // Choose Your Path
+  choosePathTitle: 'Choose your path',
+  choosePathIntro:
+    'Two ways into the same Hornero Signal desktop. Pick the ISO for a fresh machine, or layer the packages onto your existing Arch installation.',
+  pathIsoBadge: 'Path A · Fresh install',
+  pathIsoTitle: 'Full HorneroOS ISO',
+  pathIsoDesc:
+    'The complete from-scratch experience with Desktop, Studio and Gaming editions, Btrfs layout, and factory defaults ready out of the box.',
+  pathIsoBullets: [
+    'Best for new machines or clean partitions',
+    'Provisions Desktop, Studio or Gaming apps in one pass',
+    'Signed x86_64 image with SHA-256 and GPG verification',
+  ],
+  pathIsoCta: 'Go to ISO download',
+
+  pathArchBadge: 'Path B · You are here',
+  pathArchTitle: 'Existing Arch Linux',
+  pathArchDesc:
+    'Install the 4 core HorneroOS packages from the AUR on top of your current system. Your kernel, drivers, dotfiles and other desktops stay untouched.',
+  pathArchBullets: [
+    'Zero reinstallation and zero dotfile overwrites',
+    'First-time config seeding only fills in missing files',
+    'Updates alongside your system via paru or yay',
+  ],
+  pathArchCta: 'Start with step 01',
+
+  shellOnlyLabel: 'Just want to try the shell?',
+  shellOnlyText:
+    'If Hyprland is already running and you want to test the shell without adopting HorneroOS defaults, install only',
+  shellOnlySuffix: 'and run the manual start command in step 03.',
+
+  // Copy button
+  copyLabel: 'Copy',
+  copiedLabel: 'Copied',
+  copyAria: 'Copy commands to clipboard',
+
+  // Steps section
+  stepsEyebrow: 'Step-by-step guide',
+  stepsTitle: 'From Arch to HorneroOS in 4 steps',
+  stepsIntro: 'Every command block is copy-paste ready. Nothing deletes your files or switches your display manager behind your back.',
+
+  // Step 01: Prerequisites
+  step1Title: 'Prerequisites',
+  step1Lead:
+    'Before installing the packages, make sure you have an up-to-date Arch base and an AUR helper.',
+  step1Items: [
+    {
+      label: 'Updated Arch Linux x86_64',
+      detail: 'Run pacman -Syu first. Arch derivatives work as an experimental path.',
+    },
+    {
+      label: 'Wayland + Hyprland or Niri',
+      detail: 'Hyprland is the supported compositor; Niri is available as an experimental option.',
+    },
+    {
+      label: 'AUR helper (paru or yay)',
+      detail: 'Requires git and base-devel to build AUR packages as your regular user.',
+    },
+    {
+      label: 'Recommended audio & GPU',
+      detail: 'PipeWire + WirePlumber for full audio and your GPU drivers per the Arch Wiki.',
+    },
+  ],
+  step1HelperSummary: 'Need an AUR helper? Install yay in 4 commands',
+  step1HelperNote:
+    'The AUR is community-maintained: always review the PKGBUILD before building. Run this as your regular user, never as root:',
+
+  // Step 02: Install 4 core packages
+  step2Title: 'Install the 4 core packages',
+  step2Lead:
+    'The HorneroOS desktop is built from four AUR packages. Install them with paru or yay alongside base session support:',
+  corePackages: [
+    { name: 'hornero-shell', role: 'Quickshell desktop shell, bar, Control Center and layout presets' },
+    { name: 'hornero-config', role: 'Desktop defaults, Signal theme packs and user seeding script' },
+    { name: 'hornero-greeter', role: 'Hornero Signal login screen for SDDM (optional)' },
+    { name: 'horneroctl-bin', role: 'Native system CLI for diagnostics, snapshots and hardware' },
+  ],
+  step2CmdPrimaryLabel: 'With paru or yay (core packages + session support)',
+  step2GreeterNote:
+    'Using greetd instead of SDDM? Swap hornero-greeter for hornero-greeter-greetd (same Signal design as a native binary). Neither package changes your display manager automatically.',
+
+  // Step 03: Initialize & verify
+  step3Title: 'Initialize, verify & launch your session',
+  step3Lead:
+    'Back up your existing configs, seed only the factory files you are missing (never overwriting yours), and verify system health with horneroctl:',
+  step3CmdSeedLabel: '1. Backup, dry-run preview & safe config seeding',
+  step3CmdVerifyLabel: '2. System diagnostics, hardware rollcall & optional services',
+  step3SessionNote:
+    'When done, log out and select your Hyprland (or Hornero) session in your display manager — the shell starts automatically. If you are testing the shell only without seeding config, launch it in your current session with:',
+
+  // Step 04: Power-user extras
+  step4Title: 'Power-user extras',
+  step4Lead:
+    'Once your desktop is running, unlock the tools that turn your Arch install into a complete workstation:',
+  extras: [
+    {
+      title: 'Hornero Chromatic',
+      desc: 'Switch between Signal Night, Signal Day and curated palettes live from Control Center, keeping shell, terminal and apps in sync.',
+      cmd: 'horneroctl theme list',
+    },
+    {
+      title: 'Native webapps',
+      desc: 'Turn any web tool into an isolated desktop app with its own window, icon and launcher entry straight from the CLI.',
+      cmd: 'horneroctl apps webapp',
+    },
+    {
+      title: '35+ PluginKit 3 plugins',
+      desc: 'Add official integrations from the Control Center catalogue, including hornero-tailscale for your mesh network and hornero-elsewhen for time zones.',
+      cmd: 'horneroctl plugin list',
+    },
+  ],
+  step4LinksLead: 'Keep exploring:',
+  step4LinkFirstSteps: 'First steps after installing',
+  step4LinkStepByStep: 'Complete step-by-step guide',
+  step4LinkExtensions: 'Extensions catalogue',
+
+  // Coexistence
+  keepTitle: 'What happens to what you already have',
+  keepItems: [
+    {
+      title: 'Your Hyprland wins',
+      body: 'If you already have ~/.config/hypr/hyprland.lua (or .conf), it stays intact. Packaged defaults live in /etc/xdg as fallback; you can adopt the factory entrypoint and run horneroctl config refresh-hypr anytime.',
+    },
+    {
+      title: 'Other desktops stay intact',
+      body: 'KDE, GNOME or any other session remain installed and selectable in your display manager. Nothing is removed or disabled.',
+    },
+    {
+      title: 'Bars & notifications',
+      body: 'The Hornero shell never kills foreign processes. If another bar or notification daemon is running, they coexist until you disable its autostart.',
+    },
+    {
+      title: 'Your dotfiles stay safe',
+      body: 'GTK/Qt, terminal and login shell settings are only filled in where you had nothing. Every file created by seed-user.sh is printed in its output.',
+    },
+  ],
+
+  // Troubleshooting & Rollback
+  rollbackTitle: 'Troubleshooting & rollback',
+  rollbackIntro:
+    'If anything behaves unexpectedly or you want to return to your exact previous setup, built-in recovery tools and clean package removal have you covered:',
+  rollbackCards: [
+    {
+      title: 'Quick recovery & Btrfs snapshots',
+      body: 'Create a config snapshot before major changes and use horneroctl recovery to restore a healthy state or inspect Btrfs system snapshots.',
+      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery',
+    },
+    {
+      title: 'Clean uninstall',
+      body: 'Removing HorneroOS is just removing the packages. Your data and previous desktop session keep working as before.',
+      cmd: 'paru -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
+    },
+  ],
+
+  // Honest scope
+  scopeTitle: 'Honest scope',
+  scopeItems: [
+    'The packages deliver the full desktop and experience modes. Studio or Gaming edition apps install with pacman/paru/yay like on any Arch; the ISO remains the path that provisions an entire edition at once.',
+    'Arch derivatives (CachyOS, EndeavourOS and others) are not officially verified: the packages are identical, but treat that path as experimental.',
+  ],
   packagesAhead: (pkg: string | null | undefined): string =>
-    `The packaged desktop can run ahead of the published ISO${pkg ? ` (today: packages ${pkg})` : ''}: updating is the usual yay -Syu, with a snapshot first if you want one (horneroctl config snapshot create --yes).`,
+    `The packaged desktop can run ahead of the published ISO${pkg ? ` (today: packages ${pkg})` : ''}: updating is the usual paru -Syu / yay -Syu.`,
+  linkFaq: 'FAQ',
+  linkTroubleshooting: 'Troubleshooting by symptom',
+  linkReleases: 'Current releases & packages',
 };
 
 export const messages: Record<Locale, Messages> = { es, en };
