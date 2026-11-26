@@ -145,6 +145,73 @@ const es = {
     `${names.join(' y ')} están planificadas: todavía no tienen imagen instalable.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
     `Es un sistema para uso diario, con limitaciones concretas y declaradas: LUKS, BIOS heredado y Niri no están validados en la ISO actual y el rollback de SO sigue planificado${candidateVersion ? `; ${candidateVersion} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`,
+  terminalDeck: {
+    heading: 'Consola interactiva horneroctl',
+    tablistLabel: 'Comandos de horneroctl',
+    copyLabel: 'Copiar',
+    copiedLabel: 'Copiado',
+    copyAria: 'Copiar comando actual al portapapeles',
+    runtimeBadge: 'V 0.5.2 · <5ms',
+    tabs: [
+      {
+        id: 'hardware',
+        label: 'hardware rollcall',
+        command: 'horneroctl hardware rollcall',
+        summary: 'Diagnóstico instantáneo y privado en V nativo (<5 ms), listo para pegar en reportes sin filtrar datos sensibles.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // HARDWARE ROLLCALL  [3.8 ms · privacy-safe]' },
+          { tone: 'phosphor', text: '  [OK] CPU       AMD Ryzen 9 7950X · microcode loaded' },
+          { tone: 'phosphor', text: '  [OK] GPU       NVIDIA RTX 3060 · Vulkan 1.4 / Wayland DRM' },
+          { tone: 'phosphor', text: '  [OK] SESSION   Hyprland + Quickshell (Signal Night · 144 Hz)' },
+          { tone: 'signal', text: '  [OK] STORAGE   Btrfs + Zram 16G · LUKS2 verified' },
+          { tone: 'muted', text: '  host-id & serials redacted · --json ready' },
+        ],
+      },
+      {
+        id: 'webapp',
+        label: 'apps webapp',
+        command: 'horneroctl apps webapp --list',
+        summary: 'Convertí sitios y herramientas TUI en aplicaciones nativas integradas al lanzador y a los espacios de trabajo.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // MANAGED WEBAPPS & TUIS' },
+          { tone: 'phosphor', text: '  ● linear       webapp   isolated profile   [ACTIVE]' },
+          { tone: 'phosphor', text: '  ● excalidraw   webapp   chromeless window  [ACTIVE]' },
+          { tone: 'phosphor', text: '  ● lazygit      tui      kitty --class tui  [READY]' },
+          { tone: 'signal', text: '  ● btop         tui      app-monitor.slice  [READY]' },
+          { tone: 'muted', text: '  4 entries · horneroctl apps webapp add <url> --name <id>' },
+        ],
+      },
+      {
+        id: 'plugins',
+        label: 'plugins',
+        command: 'horneroctl plugins list --verified',
+        summary: 'Extensiones PluginKit 3 con firmas Ed25519 verificadas por vlib y permisos declarados de forma explícita.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // PLUGINKIT 3 CATALOG  [Ed25519 + SHA256]' },
+          { tone: 'phosphor', text: '  ✓ hornero-tailscale      bar-right   net.status      SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-elsewhen       bar-center  clock.tz        SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-containers     drawer      podman.read     SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-ai-usage       bar-right   slice.metrics   SIGNED' },
+          { tone: 'signal', text: '  ✓ hornero-github-stats   widget      gh.readonly     SIGNED' },
+          { tone: 'muted', text: '  35 official plugins verified · zero silent permissions' },
+        ],
+      },
+      {
+        id: 'recovery',
+        label: 'recovery',
+        command: 'horneroctl boot-trial status',
+        summary: 'Snapshots Btrfs arrancables con prueba de arranque y auto-rollback automático si el nuevo kernel no confirma.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // BTRFS BOOT TRIAL & RECOVERY' },
+          { tone: 'phosphor', text: '  [ARMED] HOOK     95-hornero-boot-trial.hook (pacman)' },
+          { tone: 'phosphor', text: '  [OK]    SERVICE  hornero-boot-confirm.service (verified)' },
+          { tone: 'signal', text: '  [SNAP]  CURRENT  @hornero-2026-11-26_pre-upgrade (ro)' },
+          { tone: 'cue', text: '  [SAFE]  FALLBACK auto-rollback enabled · 180s watchdog' },
+          { tone: 'muted', text: '  run `horneroctl boot-trial confirm` or reboot to revert' },
+        ],
+      },
+    ],
+  },
 };
 
 export type Messages = typeof es;
@@ -290,6 +357,73 @@ const en: Messages = {
   plannedNote: (names: string[]): string => `${names.join(' and ')} are planned: they have no installable image yet.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
     `It is an everyday-use system with concrete, declared limitations: LUKS, legacy BIOS and Niri are not validated on the current ISO and OS rollback is still planned${candidateVersion ? `; ${candidateVersion} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`,
+  terminalDeck: {
+    heading: 'Interactive horneroctl deck',
+    tablistLabel: 'horneroctl commands',
+    copyLabel: 'Copy',
+    copiedLabel: 'Copied',
+    copyAria: 'Copy current command to clipboard',
+    runtimeBadge: 'V 0.5.2 · <5ms',
+    tabs: [
+      {
+        id: 'hardware',
+        label: 'hardware rollcall',
+        command: 'horneroctl hardware rollcall',
+        summary: 'Sub-5ms privacy-safe hardware diagnostics in native V, ready to paste in issue reports without leaking identifiers.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // HARDWARE ROLLCALL  [3.8 ms · privacy-safe]' },
+          { tone: 'phosphor', text: '  [OK] CPU       AMD Ryzen 9 7950X · microcode loaded' },
+          { tone: 'phosphor', text: '  [OK] GPU       NVIDIA RTX 3060 · Vulkan 1.4 / Wayland DRM' },
+          { tone: 'phosphor', text: '  [OK] SESSION   Hyprland + Quickshell (Signal Night · 144 Hz)' },
+          { tone: 'signal', text: '  [OK] STORAGE   Btrfs + Zram 16G · LUKS2 verified' },
+          { tone: 'muted', text: '  host-id & serials redacted · --json ready' },
+        ],
+      },
+      {
+        id: 'webapp',
+        label: 'apps webapp',
+        command: 'horneroctl apps webapp --list',
+        summary: 'Turn web tools and TUI utilities into first-class desktop apps wired into the launcher and workspaces.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // MANAGED WEBAPPS & TUIS' },
+          { tone: 'phosphor', text: '  ● linear       webapp   isolated profile   [ACTIVE]' },
+          { tone: 'phosphor', text: '  ● excalidraw   webapp   chromeless window  [ACTIVE]' },
+          { tone: 'phosphor', text: '  ● lazygit      tui      kitty --class tui  [READY]' },
+          { tone: 'signal', text: '  ● btop         tui      app-monitor.slice  [READY]' },
+          { tone: 'muted', text: '  4 entries · horneroctl apps webapp add <url> --name <id>' },
+        ],
+      },
+      {
+        id: 'plugins',
+        label: 'plugins',
+        command: 'horneroctl plugins list --verified',
+        summary: 'Signed PluginKit 3 extensions verified with native vlib Ed25519 signatures and explicit permission declarations.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // PLUGINKIT 3 CATALOG  [Ed25519 + SHA256]' },
+          { tone: 'phosphor', text: '  ✓ hornero-tailscale      bar-right   net.status      SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-elsewhen       bar-center  clock.tz        SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-containers     drawer      podman.read     SIGNED' },
+          { tone: 'phosphor', text: '  ✓ hornero-ai-usage       bar-right   slice.metrics   SIGNED' },
+          { tone: 'signal', text: '  ✓ hornero-github-stats   widget      gh.readonly     SIGNED' },
+          { tone: 'muted', text: '  35 official plugins verified · zero silent permissions' },
+        ],
+      },
+      {
+        id: 'recovery',
+        label: 'recovery',
+        command: 'horneroctl boot-trial status',
+        summary: 'Bootable Btrfs snapshots with Boot Trial and automatic rollback if a new upgrade fails to confirm.',
+        lines: [
+          { tone: 'cue', text: 'HORNEROCTL // BTRFS BOOT TRIAL & RECOVERY' },
+          { tone: 'phosphor', text: '  [ARMED] HOOK     95-hornero-boot-trial.hook (pacman)' },
+          { tone: 'phosphor', text: '  [OK]    SERVICE  hornero-boot-confirm.service (verified)' },
+          { tone: 'signal', text: '  [SNAP]  CURRENT  @hornero-2026-11-26_pre-upgrade (ro)' },
+          { tone: 'cue', text: '  [SAFE]  FALLBACK auto-rollback enabled · 180s watchdog' },
+          { tone: 'muted', text: '  run `horneroctl boot-trial confirm` or reboot to revert' },
+        ],
+      },
+    ],
+  },
 };
 
 export const messages: Record<Locale, Messages> = { es, en };

@@ -11,6 +11,7 @@ import StageBadge from '../../components/StageBadge.astro';
 import FaqList from '../../components/FaqList.astro';
 import PixelArt from '../../components/PixelArt.astro';
 import CyberTelemetry from '../../components/CyberTelemetry.astro';
+import CyberTerminalDeck from '../../components/CyberTerminalDeck.astro';
 import { faqItems } from '../../data/why';
 import { editorialForPage, slotCounts } from '../../data/captures';
 import { feature } from '../../data/features';
@@ -245,9 +246,15 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     <h2 id="monitor-title" class="visually-hidden">
       {m.elEscritorioTrabajando}
     </h2>
-    <div class="monitor-frame">
+    <div class="monitor-frame cyber-chassis">
       <div class="monitor-strip">
-        <span class="channel">MON 01</span>
+        <span class="monitor-leds" aria-hidden="true">
+          <i class="led-amber"></i>
+          <i class="led-celeste"></i>
+          <i class="led-gold"></i>
+        </span>
+        <span class="channel">HORNERO-OS // HYPRLAND + QUICKSHELL</span>
+        <span class="monitor-coords">-34.6037° S, 58.3816° W // AR</span>
         <a href={L('/showroom')}>{m.todasLasCapturasSeleccionadas}</a>
       </div>
       <CaptureFigure
@@ -312,6 +319,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
       <h2 id="system-title">{m.elSistemaOperativo}</h2>
       <p>{m.loQueHaceConfiableA}</p>
     </header>
+    <CyberTerminalDeck locale={locale} />
     <dl class="spec">
       {system.map((item) => (
         <div class="spec-row">
@@ -699,24 +707,106 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
   }
 
   .monitor-frame {
+    position: relative;
     margin: 0;
     padding: 0;
     border: 1px solid var(--rule-strong);
     border-radius: var(--radius);
     background: var(--sunken);
+    box-shadow:
+      var(--elevation),
+      0 0 0 1px color-mix(in srgb, var(--ar-celeste) 22%, transparent),
+      0 18px 44px -18px color-mix(in srgb, var(--signal) 26%, transparent),
+      0 0 36px -12px color-mix(in srgb, var(--ar-celeste) 20%, transparent);
+  }
+
+  .monitor-frame::before,
+  .monitor-frame::after {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    content: '';
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .monitor-frame::before {
+    top: -6px;
+    left: -6px;
+    border-top: 2px solid var(--signal);
+    border-left: 2px solid var(--signal);
+  }
+
+  .monitor-frame::after {
+    right: -6px;
+    bottom: -6px;
+    border-right: 2px solid var(--ar-celeste);
+    border-bottom: 2px solid var(--ar-celeste);
+  }
+
+  :global(:root[data-color-mode='light']) .monitor-frame,
+  :global(:root[data-crt='off']) .monitor-frame {
+    box-shadow: var(--elevation);
   }
 
   .monitor-strip {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.35rem 1rem;
-    padding: 0.5rem 0.8rem;
+    gap: 0.45rem 1rem;
+    padding: 0.6rem 0.95rem;
     border-bottom: 1px solid var(--rule);
-    background: repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px), var(--panel);
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--signal) 10%, transparent) 0%,
+        transparent 38%,
+        color-mix(in srgb, var(--ar-celeste) 10%, transparent) 100%
+      ),
+      repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px),
+      var(--panel);
     color: var(--ink-muted);
     font: 500 0.72rem var(--font-mono);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+  }
+
+  .monitor-leds {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .monitor-leds i {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+  }
+
+  .monitor-leds .led-amber {
+    background: var(--signal);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--signal) 55%, transparent);
+  }
+
+  .monitor-leds .led-celeste {
+    background: var(--ar-celeste);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--ar-celeste) 55%, transparent);
+  }
+
+  .monitor-leds .led-gold {
+    background: var(--ar-gold);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--ar-gold) 55%, transparent);
+  }
+
+  :global(:root[data-color-mode='light']) .monitor-leds i,
+  :global(:root[data-crt='off']) .monitor-leds i {
+    box-shadow: none;
+  }
+
+  .monitor-coords {
+    color: var(--cue);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
   }
 
   .monitor-strip a {

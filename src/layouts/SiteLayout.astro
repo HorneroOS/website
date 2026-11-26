@@ -254,6 +254,17 @@ const community = {
           <span>EN</span>
         </a>
       </nav>
+      <button
+        type="button"
+        class="crt-toggle"
+        data-crt-toggle
+        aria-pressed="true"
+        aria-label={t(locale, 'crtToggleAria')}
+        title={t(locale, 'crtToggleTitle')}
+      >
+        <span class="crt-led" aria-hidden="true"></span>
+        <span>CRT</span>
+      </button>
       <fieldset class="color-switch" data-color-switch>
         <legend>{t(locale, 'colorMode')}</legend>
         <label title={t(locale, 'colorSystem')}>
@@ -404,8 +415,40 @@ const community = {
             const next = ['system', 'light', 'dark'].includes(event.newValue) ? event.newValue : 'system';
             apply(next, false);
           }
+          if (event.key === 'hornero-crt' || event.key === null) {
+            const nextCrt = event.newValue === 'off' ? 'off' : 'on';
+            applyCrt(nextCrt, false);
+          }
         });
         apply(preference, false);
+
+        const crtKey = 'hornero-crt';
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+        const crtToggle = document.querySelector('[data-crt-toggle]');
+        const applyCrt = (next, persist = true) => {
+          const resolved = reducedMotion.matches ? 'off' : next === 'off' ? 'off' : 'on';
+          document.documentElement.dataset.crt = resolved;
+          if (crtToggle) {
+            crtToggle.setAttribute('aria-pressed', resolved === 'on' ? 'true' : 'false');
+          }
+          if (persist) {
+            try {
+              localStorage.setItem(crtKey, resolved);
+            } catch {
+              // Storage unavailable; keep session state.
+            }
+          }
+        };
+        if (crtToggle) {
+          crtToggle.addEventListener('click', () => {
+            const currentCrt = document.documentElement.dataset.crt === 'off' ? 'off' : 'on';
+            applyCrt(currentCrt === 'on' ? 'off' : 'on');
+          });
+        }
+        reducedMotion.addEventListener('change', (event) => {
+          if (event.matches) applyCrt('off', false);
+        });
+        applyCrt(document.documentElement.dataset.crt || 'on', false);
       })();
     </script>
   </body>
