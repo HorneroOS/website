@@ -71,10 +71,7 @@ const priorityName = { P0: 'Launch-critical', P1: 'Important', P2: 'Complete the
 
 const cards = {
   default: {
-    eyebrow: `HorneroOS · ${latest ? latest.version : 'current ISO'}`,
-    title: 'A workstation for building, creating and playing.',
-    line: 'Arch-based, with a desktop of its own. Desktop, Studio and Gaming on one signed ISO.',
-    panel: `<ul class="ledger">${['signal', 'layouts', 'chromatic', 'pluginkit', 'companion'].map(featureLine).join('')}</ul><p class="cap"><b>Feature ledger</b> status from the project data</p>`,
+    fullBleedImage: file('src/assets/captures/cap-hero-01.png'),
   },
   showroom: {
     eyebrow: 'Showroom',
@@ -186,7 +183,10 @@ const cards = {
 };
 
 // Hornero Signal Bezel, Signal Night values (RFC 0001 §3.2, amendment 2).
-const page = ({ eyebrow, title, line, panel }) => `<!doctype html><html><head><meta charset="utf-8"><style>
+const page = ({ eyebrow, title, line, panel, fullBleedImage }) =>
+  fullBleedImage
+    ? `<!doctype html><html><head><meta charset="utf-8"><style>*{box-sizing:border-box;margin:0;padding:0}body{width:1200px;height:630px;overflow:hidden;background:#0c0f13}img{display:block;width:1200px;height:630px;object-fit:cover;object-position:center}</style></head><body><img src="${fullBleedImage}" alt="" /></body></html>`
+    : `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:D;src:url(${fonts('ibm-plex-sans-condensed', 'ibm-plex-sans-condensed-latin-700-normal.woff2')});font-weight:700}
 @font-face{font-family:S;src:url(${fonts('ibm-plex-sans', 'ibm-plex-sans-latin-400-normal.woff2')});font-weight:400}
 @font-face{font-family:S;src:url(${fonts('ibm-plex-sans', 'ibm-plex-sans-latin-600-normal.woff2')});font-weight:600}

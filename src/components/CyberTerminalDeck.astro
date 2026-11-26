@@ -1,0 +1,443 @@
+---
+import type { Locale } from '../i18n/ui';
+import { messages } from '../i18n/messages/index';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const deck = messages[locale].terminalDeck;
+---
+
+<div class="cyber-deck cyber-bezel" data-cyber-deck aria-label={deck.heading}>
+  <div class="deck-bar">
+    <div class="deck-leds" aria-hidden="true">
+      <span class="deck-led led-amber"></span>
+      <span class="deck-led led-celeste"></span>
+      <span class="deck-led led-phosphor"></span>
+    </div>
+    <span class="deck-title">HORNEROCTL // DECK</span>
+    <span class="deck-badge">{deck.runtimeBadge}</span>
+    <button
+      type="button"
+      class="deck-copy"
+      data-deck-copy
+      data-copy-label={deck.copyLabel}
+      data-copied-label={deck.copiedLabel}
+      aria-label={deck.copyAria}
+    >
+      <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none">
+        <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+        <path d="M11 3.5V3a1.5 1.5 0 0 0-1.5-1.5H3A1.5 1.5 0 0 0 1.5 3v6.5A1.5 1.5 0 0 0 3 11h.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </svg>
+      <span data-deck-copy-text>{deck.copyLabel}</span>
+    </button>
+  </div>
+
+  <div class="deck-tabs" role="tablist" aria-label={deck.tablistLabel}>
+    {deck.tabs.map((tab, index) => (
+      <button
+        type="button"
+        role="tab"
+        id={`deck-tab-${tab.id}`}
+        class="deck-tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`deck-panel-${tab.id}`}
+        tabindex={index === 0 ? '0' : '-1'}
+        data-deck-tab={tab.id}
+        data-command={tab.command}
+      >
+        <span class="deck-tab-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <span>{tab.label}</span>
+      </button>
+    ))}
+  </div>
+
+  <div class="deck-screen">
+    {deck.tabs.map((tab, index) => (
+      <div
+        role="tabpanel"
+        id={`deck-panel-${tab.id}`}
+        aria-labelledby={`deck-tab-${tab.id}`}
+        class="deck-panel"
+        hidden={index !== 0}
+        data-deck-panel={tab.id}
+      >
+        <p class="deck-summary">{tab.summary}</p>
+        <div class="deck-terminal" aria-live="polite">
+          <div class="deck-prompt">
+            <span class="deck-user">hornero@pampa-ar</span><span class="deck-sep">:</span><span class="deck-path">~</span><span class="deck-sigil">$</span>
+            <code class="deck-cmd">{tab.command}</code>
+          </div>
+          <div class="deck-output">
+            {tab.lines.map((line) => (
+              <div class="deck-line" data-tone={line.tone}>
+                <code>{line.text}</code>
+              </div>
+            ))}
+          </div>
+          <div class="deck-prompt deck-prompt-end" aria-hidden="true">
+            <span class="deck-user">hornero@pampa-ar</span><span class="deck-sep">:</span><span class="deck-path">~</span><span class="deck-sigil">$</span>
+            <span class="deck-cursor">█</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll('[data-cyber-deck]').forEach((deck) => {
+      if (deck.dataset.deckReady === 'true') return;
+      deck.dataset.deckReady = 'true';
+
+      const tabs = [...deck.querySelectorAll('[data-deck-tab]')];
+      const panels = [...deck.querySelectorAll('[data-deck-panel]')];
+      const copyBtn = deck.querySelector('[data-deck-copy]');
+      const copyText = deck.querySelector('[data-deck-copy-text]');
+      let activeCommand = tabs[0]?.dataset.command || '';
+      let copyTimer = null;
+
+      const activate = (nextTab, moveFocus = false) => {
+        const id = nextTab.dataset.deckTab;
+        activeCommand = nextTab.dataset.command || '';
+        tabs.forEach((tab) => {
+          const selected = tab === nextTab;
+          tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tab.setAttribute('tabindex', selected ? '0' : '-1');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.dataset.deckPanel !== id;
+        });
+        if (moveFocus) nextTab.focus();
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          else if (event.key === 'Home') nextIndex = 0;
+          else if (event.key === 'End') nextIndex = tabs.length - 1;
+          if (nextIndex === null) return;
+          event.preventDefault();
+          activate(tabs[nextIndex], true);
+        });
+      });
+
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', async () => {
+          if (!activeCommand) return;
+          const copiedLabel = copyBtn.dataset.copiedLabel || 'Copied';
+          const copyLabel = copyBtn.dataset.copyLabel || 'Copy';
+          let ok = false;
+          try {
+            if (navigator.clipboard?.writeText) {
+              await navigator.clipboard.writeText(activeCommand);
+              ok = true;
+            }
+          } catch {
+            ok = false;
+          }
+          if (!ok) {
+            try {
+              const area = document.createElement('textarea');
+              area.value = activeCommand;
+              area.setAttribute('readonly', '');
+              area.style.position = 'fixed';
+              area.style.opacity = '0';
+              document.body.appendChild(area);
+              area.select();
+              document.execCommand('copy');
+              area.remove();
+              ok = true;
+            } catch {
+              ok = false;
+            }
+          }
+          if (ok) {
+            copyBtn.dataset.copied = 'true';
+            copyText.textContent = copiedLabel;
+            if (copyTimer) clearTimeout(copyTimer);
+            copyTimer = setTimeout(() => {
+              delete copyBtn.dataset.copied;
+              copyText.textContent = copyLabel;
+            }, 1800);
+          }
+        });
+      }
+    });
+  })();
+</script>
+
+<style>
+  .cyber-deck {
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--sunken);
+    overflow: hidden;
+    box-shadow: var(--elevation);
+  }
+
+  .deck-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.9rem;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    background: repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px), var(--panel);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .deck-leds {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .deck-led {
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+  }
+
+  .led-amber {
+    background: var(--signal);
+    box-shadow: 0 0 4px color-mix(in srgb, var(--signal) 40%, transparent);
+  }
+
+  .led-celeste {
+    background: var(--cue);
+    box-shadow: 0 0 4px color-mix(in srgb, var(--cue) 40%, transparent);
+  }
+
+  .led-phosphor {
+    background: var(--phosphor);
+    box-shadow: 0 0 4px color-mix(in srgb, var(--phosphor) 40%, transparent);
+  }
+
+  :global(:root[data-color-mode='light']) .deck-led,
+  :global(:root[data-crt='off']) .deck-led {
+    box-shadow: none;
+  }
+
+  .deck-title {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .deck-badge {
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    color: var(--cue);
+    font-size: 0.68rem;
+  }
+
+  .deck-copy {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2rem;
+    padding: 0 0.7rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-small);
+    background: var(--raised);
+    color: var(--ink);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-short) var(--ease-standard),
+      background-color var(--dur-short) var(--ease-standard),
+      color var(--dur-short) var(--ease-standard);
+  }
+
+  .deck-copy:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .deck-copy[data-copied='true'] {
+    border-color: var(--phosphor);
+    background: var(--phosphor-well);
+    color: var(--on-phosphor-well);
+  }
+
+  .deck-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+    background: var(--base);
+  }
+
+  .deck-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.4rem 1rem;
+    border: 0;
+    border-right: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-muted);
+    font: 500 0.78rem var(--font-mono);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background-color var(--dur-quick) var(--ease-standard),
+      color var(--dur-quick) var(--ease-standard);
+  }
+
+  .deck-tab:hover {
+    background: var(--panel);
+    color: var(--ink);
+  }
+
+  .deck-tab[aria-selected='true'] {
+    background: var(--sunken);
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--signal);
+  }
+
+  .deck-tab-index {
+    color: var(--signal);
+    font-size: 0.68rem;
+  }
+
+  .deck-screen {
+    padding: clamp(0.9rem, 2vw, 1.35rem);
+    background: repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px), var(--ground);
+  }
+
+  .deck-summary {
+    margin-bottom: 0.9rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+    max-width: 72ch;
+  }
+
+  .deck-terminal {
+    padding: 0.95rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-inline-start: 2px solid var(--cue);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-family: var(--font-mono);
+    font-size: clamp(0.76rem, 0.72rem + 0.2vw, 0.86rem);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .deck-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .deck-prompt-end {
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+  }
+
+  .deck-user {
+    color: var(--phosphor);
+    font-weight: 500;
+  }
+
+  .deck-sep {
+    color: var(--ink-muted);
+  }
+
+  .deck-path {
+    color: var(--cue);
+    font-weight: 500;
+  }
+
+  .deck-sigil {
+    margin-right: 0.45rem;
+    color: var(--signal);
+    font-weight: 600;
+  }
+
+  .deck-cmd {
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .deck-output {
+    display: grid;
+    gap: 0.12rem;
+  }
+
+  .deck-line code {
+    display: block;
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    white-space: pre;
+    color: var(--ink);
+  }
+
+  .deck-line[data-tone='phosphor'] code {
+    color: var(--phosphor);
+  }
+
+  .deck-line[data-tone='cue'] code {
+    color: var(--cue);
+    font-weight: 500;
+  }
+
+  .deck-line[data-tone='signal'] code {
+    color: var(--signal);
+  }
+
+  .deck-line[data-tone='muted'] code {
+    color: var(--ink-muted);
+  }
+
+  .deck-cursor {
+    display: inline-block;
+    color: var(--signal);
+    line-height: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .deck-cursor {
+      animation: deck-cursor-blink 1.05s steps(2, end) infinite;
+    }
+  }
+
+  @keyframes deck-cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .deck-tab {
+      flex: 1 1 48%;
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+</style>

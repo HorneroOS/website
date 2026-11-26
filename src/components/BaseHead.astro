@@ -29,7 +29,7 @@ const altEn = new URL(localizePath(basePath, 'en'), site);
 // its own card from /og/. The licensed Buenos Aires photographs stay in the
 // greeter and wallpaper galleries, where their credits live next to them.
 const defaultAlt =
-  "HorneroOS social card: the line 'A workstation for building, creating and playing' beside a real Hornero Signal desktop capture.";
+  'HorneroOS live desktop hero capture: Signal Night Hyprland and Quickshell workspace with the pixel-art hornero terminal, telemetry bar, and Argentine retrofuturistic styling.';
 const socialUrlValue = new URL(socialImage ?? '/og/default.png', site).toString();
 const socialAltValue = socialImageAlt ?? defaultAlt;
 ---
@@ -96,6 +96,18 @@ const socialAltValue = socialImageAlt ?? defaultAlt;
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
       meta.content = mode === 'light' ? '#f2eee5' : '#13171d';
     });
+
+    // CRT / phosphor mode: defaults to 'on' unless reduced motion is requested
+    // or the visitor turned it off explicitly.
+    let crt = 'on';
+    try {
+      const savedCrt = localStorage.getItem('hornero-crt');
+      if (savedCrt === 'on' || savedCrt === 'off') crt = savedCrt;
+    } catch {
+      // Storage unavailable; keep default.
+    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) crt = 'off';
+    document.documentElement.dataset.crt = crt;
   })();
 </script>
 <title>{title}</title>
