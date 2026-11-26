@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "0d67225b6390545ae2fe22d2276681c76550c740",
+  "generatedFrom": "ba988dd01f5a28bb7082016a9e3c4afd0885f96a",
   "plugins": [
     {
       "id": "hornero-agenda",
@@ -15,7 +15,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-agenda",
       "sha256": "2ff1be168bdca9ac81d31f215c088fcb0802f56e9c59632f848f70f39c5ae02d",
@@ -42,7 +42,7 @@
     {
       "id": "hornero-ai-usage",
       "name": "Hornero AI Usage",
-      "version": "4.2.1",
+      "version": "4.2.2",
       "description": "Agent Deck: every discovered coding-agent subscription in one place - provider-reported quota windows with resets, plans, and local activity. Unavailable quotas are labelled unknown, never guessed.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -54,10 +54,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-ai-usage",
-      "sha256": "0d29ca5f3e9e9c8940792f37184da9b5d9dcae7d916d60af1e2589af518451a4",
+      "sha256": "bf51b66249b4f40256b082351f0ca9487c5b5420498725b8ce107c4320a235ec",
       "processCommands": [
         "horneroctl",
         "qs"
@@ -146,7 +146,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "system",
       "trust": "official",
       "path": "plugins/hornero-battery",
       "sha256": "89f889bbfdbb51f9f8bc56ad2f0a61fbab48141a657ef2ccdd70edff4372249b",
@@ -211,7 +211,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-calendar",
       "sha256": "a701d71d320a8419b3102eee810cbe0ff42345567c6ca1067e7e78c94fd0bc4d",
@@ -342,7 +342,7 @@
     {
       "id": "hornero-containers",
       "name": "Hornero Containers",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "A read-only roster of your Podman and Docker containers: state, image, uptime and published ports. Never starts, stops or pulls anything. Says so plainly when no runtime answers.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -354,10 +354,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-containers",
-      "sha256": "08df1fb9f1e714b5ef78a4bfb0f8c063a0debc29e9a45a4926aa5deacba4f5dd",
+      "sha256": "e401a72809b62546ad56242b673cad1b2b30771a893abdd78ebd20406e41b5d9",
       "processCommands": [
         "podman",
         "docker"
@@ -404,7 +404,7 @@
     {
       "id": "hornero-countdown",
       "name": "Hornero Countdown",
-      "version": "3.1.1",
+      "version": "3.1.2",
       "description": "Bar timers: a countdown with 5/10/25 minute presets and a stopwatch behind one indicator, deadline and anchor based so sleep never loses time.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -413,10 +413,10 @@
       "surfaces": [],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-countdown",
-      "sha256": "0eaa266a1c89d0a3feee4c1d8ec68b6956e87e5aa9cf920deb1f8a8d631014b7",
+      "sha256": "73d3f251fb866555a3faf5dd3284b2fb26528942f2a8b79c2076dfc281fcdc72",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -478,7 +478,7 @@
     {
       "id": "hornero-device-battery",
       "name": "Hornero Device Battery",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Charge of the wireless things on your desk: game controllers, mice, keyboards, headsets, pens and phones, from UPower. Honest about devices that report no percentage.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -490,10 +490,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "system",
       "trust": "official",
       "path": "plugins/hornero-device-battery",
-      "sha256": "0553fc6ad207ace3464e73b8625b32fabc3d99fb0c1219b730cf96963685ce66",
+      "sha256": "ce0af2d7637b59663df50349bb88234ce4d838aeda1975ea90792614436a3a3c",
       "processCommands": [
         "upower"
       ],
@@ -548,7 +548,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "system",
       "trust": "official",
       "path": "plugins/hornero-disk-usage",
       "sha256": "d2f84baa699caef3a8549df340c64f767d391d87e0a0d155be48cf6e5489f883",
@@ -566,6 +566,53 @@
           "type": "boolean",
           "default": true,
           "description": "Show free space under each disk (additive in 2.0) and the nearly-full hint."
+        }
+      }
+    },
+    {
+      "id": "hornero-elsewhen",
+      "name": "Hornero Elsewhen",
+      "version": "1.0.0",
+      "description": "World timezone converter panel for distributed teams: scrub hours forward or back to compare meeting times and working-hour overlap across UTC, Americas, Europe and Asia. Pure-JS, no processes or network.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "dashboard",
+      "surfaces": [
+        "dashboard"
+      ],
+      "manifestSchema": 3,
+      "minShellVersion": "1.0.0",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-elsewhen",
+      "sha256": "3c50d5c4fa1777164e752d943c1e09346660535faf232df5d22ccf4196267441",
+      "processCommands": [],
+      "networkHosts": [],
+      "settings": {
+        "twentyFourHour": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use 24-hour times; off shows 12-hour AM/PM."
+        },
+        "workStartHour": {
+          "type": "integer",
+          "default": 9,
+          "minimum": 0,
+          "maximum": 23,
+          "description": "Start of working hours for team overlap highlights."
+        },
+        "workEndHour": {
+          "type": "integer",
+          "default": 18,
+          "minimum": 1,
+          "maximum": 24,
+          "description": "End of working hours for team overlap highlights."
+        },
+        "showOffHours": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show cities currently outside working hours."
         }
       }
     },
@@ -634,7 +681,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.3.0",
-      "category": "utilities",
+      "category": "media",
       "trust": "official",
       "path": "plugins/hornero-equalizer",
       "sha256": "aac98882d099c995b3a414f90aa4e0049f27e670a9a69327776cd2c1d03d9d8b",
@@ -683,7 +730,7 @@
     {
       "id": "hornero-forge-board",
       "name": "Hornero Forge Board",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "CI and pull-request status for the GitHub repositories you name, through the gh CLI session you already signed in. Read-only; stores and sees no token.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -695,10 +742,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-forge-board",
-      "sha256": "f333a4d7c70f3f60ce7e2aafcbce9c4a8f4704cdbec186e31aa1012f954ad033",
+      "sha256": "0871072b2317450c05d0b2a7c27c1fc3339d0010a3d4781c04b67b42ed7619d0",
       "processCommands": [
         "gh"
       ],
@@ -755,7 +802,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-git-board",
       "sha256": "03ff19d4a97aa14108d6ebba94e155972c5c764946d9683fa5545dfac4c5ede8",
@@ -808,7 +855,7 @@
     {
       "id": "hornero-github-stats",
       "name": "Hornero Dev Pulse",
-      "version": "1.0.0",
+      "version": "1.0.3",
       "description": "Dev Pulse: GitHub development activity through your existing gh sign-in - contributions, pull requests, reviews, an actionable inbox, and an optional side-by-side with Agent Deck AI usage. Local-first; unknown metrics stay unknown.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -820,16 +867,18 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-github-stats",
-      "sha256": "8617ad1ced32d7eac13f3b3f5e4eb3fea7b864fe75ebe5b27f948c63f2251749",
+      "sha256": "10540c7e2a0370ee23ed458614091250fe6f370381ca2aa1f8ae51829ab444a0",
       "processCommands": [
         "horneroctl",
         "qs",
         "xdg-open"
       ],
-      "networkHosts": [],
+      "networkHosts": [
+        "api.github.com"
+      ],
       "settings": {
         "refreshSeconds": {
           "type": "integer",
@@ -872,7 +921,7 @@
     {
       "id": "hornero-metronome",
       "name": "Hornero Metronome",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "description": "Compact bar metronome with a popover (BPM slider plus minus/plus), deadline-scheduled beats that skip missed beats after sleep, and optional first-beat accent. No processes, no network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -881,10 +930,10 @@
       "surfaces": [],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-metronome",
-      "sha256": "96368e1c3ef3a6a250ef364bc803998e21126b08a40df1c054ff755afcf62119",
+      "sha256": "b9eb78ea4110f50661db0a70396beb4aad57ee256391bbd077dc2efc4fa7c38d",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -923,7 +972,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "media",
       "trust": "official",
       "path": "plugins/hornero-microphone",
       "sha256": "7a738c07b17b23059d20fb704b437bc755463c630667c2373b394ce5a7acb4e8",
@@ -1058,7 +1107,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "media",
       "trust": "official",
       "path": "plugins/hornero-now-playing",
       "sha256": "97151ea6c69c9b31dc8fa71a27b948925e08df3c51b73b9dcb8c099d165d3e77",
@@ -1087,7 +1136,7 @@
     {
       "id": "hornero-pomodoro",
       "name": "Hornero Pomodoro",
-      "version": "4.0.0",
+      "version": "4.0.2",
       "description": "Pomodoro: a bar focus timer with short and long breaks, deadline-correct timing across sleep and reload, and an optional hook that switches the shell to the Focus experience while you focus and puts your mode back afterwards.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1099,7 +1148,7 @@
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-pomodoro",
-      "sha256": "2eb5803a81875f72f4c8cb5b385dafd7878195f4f21c5a80f38be6dd803aeaaa",
+      "sha256": "9ff141f597b5d55314bf0a600f75e04b8d2c8856dcd779e8d99589c0a8126072",
       "processCommands": [
         "horneroctl"
       ],
@@ -1194,7 +1243,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-port-watch",
       "sha256": "ecd4d2ea549c1ac6b22becc69532f03cbf1a6cc13f2b38dd8dbc110b2252f75b",
@@ -1262,7 +1311,7 @@
       "surfaces": [],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-quick-notes",
       "sha256": "3359df83af21b5616d47d1e850891a71978b1fa13fda3031e563ba42b51bbba0",
@@ -1304,7 +1353,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "media",
       "trust": "official",
       "path": "plugins/hornero-studio-audio",
       "sha256": "b91ea1c78aa1203048b36b430120c2ee9a236507c44d9784283aef2d457f41a0",
@@ -1339,7 +1388,7 @@
       "surfaces": [],
       "manifestSchema": 3,
       "minShellVersion": "1.2.72",
-      "category": "utilities",
+      "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-studio-jobs",
       "sha256": "16cfa7afec56e5cbe63ec04e309fdeab4ce61176a85896ccffd3af39d731e50f",
@@ -1430,6 +1479,51 @@
             "fahrenheit"
           ],
           "description": "Unit for the CPU and GPU temperatures. The provider reports Celsius; Fahrenheit is a display conversion."
+        }
+      }
+    },
+    {
+      "id": "hornero-tailscale",
+      "name": "Hornero Tailscale",
+      "version": "1.0.0",
+      "description": "Tailscale VPN status pill and dashboard card: connection state, tailnet IP, active exit node, online peers and one-click connect/disconnect toggle.",
+      "author": "HorneroOS contributors",
+      "license": "MIT",
+      "homepage": "https://github.com/HorneroOS/plugins",
+      "placement": "dashboard",
+      "surfaces": [
+        "bar",
+        "dashboard"
+      ],
+      "manifestSchema": 3,
+      "minShellVersion": "1.0.0",
+      "category": "utilities",
+      "trust": "official",
+      "path": "plugins/hornero-tailscale",
+      "sha256": "1ede67cb50bc48b1694f89bb4ad3d8327555d8937971ea72fda8a9a0759c204b",
+      "processCommands": [
+        "tailscale"
+      ],
+      "networkHosts": [],
+      "settings": {
+        "refreshSeconds": {
+          "type": "integer",
+          "default": 15,
+          "minimum": 5,
+          "maximum": 300,
+          "description": "Seconds between Tailscale status checks. Querying pauses in the Gaming experience."
+        },
+        "showPeers": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show online peers in the dashboard card."
+        },
+        "maxPeers": {
+          "type": "integer",
+          "default": 6,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum number of peers to list in the dashboard card."
         }
       }
     },
@@ -1536,7 +1630,7 @@
     {
       "id": "hornero-uptime",
       "name": "Hornero Uptime",
-      "version": "3.0.2",
+      "version": "3.0.3",
       "description": "Bar indicator plus popover/dashboard session detail (uptime, boot time, idle time) from /proc/uptime with the declared cat command. No PluginKit uptime facade exists; error state instead of a fabricated zero.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1547,10 +1641,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.2.79",
-      "category": "utilities",
+      "category": "system",
       "trust": "official",
       "path": "plugins/hornero-uptime",
-      "sha256": "04caccfc3886c60ef38cbbe5efe49f9b3547d0fd338c8b988c608dea3c3cbc91",
+      "sha256": "507f809f27d3ed8d9e8c297a10012a53c92c54b5377115ae26f03f16fc3985b1",
       "processCommands": [
         "cat"
       ],
@@ -1589,7 +1683,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "media",
       "trust": "official",
       "path": "plugins/hornero-volume",
       "sha256": "d566b2ddcc8fb36d96f63245cc5f76b4ecd1fdc8667a5166846a8eab26e33ce3",
@@ -1700,7 +1794,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-world-clock",
       "sha256": "a99af4bc47d8cfe8e2fb0199e6c191bce3af5014d5cc84eee3b6c56a9aecfdc8",

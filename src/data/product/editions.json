@@ -134,8 +134,7 @@
           "krita",
           "gimp",
           "inkscape",
-          "scribus",
-          "graphite"
+          "scribus"
         ]
       },
       {
@@ -191,7 +190,6 @@
           "gimp",
           "inkscape",
           "scribus",
-          "graphite",
           "darktable",
           "rawtherapee",
           "godot",
@@ -455,25 +453,6 @@
         "source": "arch-extra",
         "licenses": [
           "GPL-3.0-or-later"
-        ],
-        "licenseClass": "open-source",
-        "optional": true,
-        "support": "planned"
-      },
-      {
-        "id": "graphite",
-        "title": "Graphite",
-        "packages": [
-          "graphite"
-        ],
-        "experimental": true,
-        "availability": null,
-        "notes": null,
-        "source": "arch-extra",
-        "licenses": [
-          "LGPL-2.1-or-later",
-          "MPL-2.0",
-          "GPL-2.0-or-later"
         ],
         "licenseClass": "open-source",
         "optional": true,
