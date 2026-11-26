@@ -6,7 +6,10 @@
       "id": "horneroos",
       "name": "HorneroOS",
       "category": "os",
-      "version": "ISO actual 0.2.0-preview32 · paquetes 0.2.0-preview36",
+      "version": {
+        "es": "ISO actual 0.2.0-preview32 · paquetes 0.2.0-preview36",
+        "en": "Current ISO 0.2.0-preview32 · packages 0.2.0-preview36"
+      },
       "href": "https://github.com/HorneroOS/hornero",
       "what": {
         "es": "Sistema operativo basado en Arch para uso diario, con ediciones Desktop, Studio y Gaming con madurez Preview. Server y Agents están planificadas, sin imagen instalable.",
@@ -44,7 +47,10 @@
       "id": "cachyos",
       "name": "CachyOS",
       "category": "os",
-      "version": "checked 2026-11-19",
+      "version": {
+        "es": "verificado 2026-11-19",
+        "en": "checked 2026-11-19"
+      },
       "href": "https://cachyos.org/",
       "what": {
         "es": "Un sistema operativo basado en Arch. Su sitio lo presenta centrado en rendimiento, con paquetes compilados por CPU y un kernel propio: son afirmaciones de su proyecto, no mediciones de HorneroOS.",

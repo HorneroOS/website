@@ -2204,11 +2204,11 @@
         "es": "Instalador: edición y compositor"
       },
       "description": {
-        "en": "The the edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.",
+        "en": "The edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.",
         "es": "El selector de edición y compositor con Desktop, Studio y Gaming e Hyprland seleccionado."
       },
       "alt": {
-        "en": "The the edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.",
+        "en": "The edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.",
         "es": "El selector de edición y compositor con Desktop, Studio y Gaming e Hyprland seleccionado."
       },
       "pages": [
@@ -2243,11 +2243,11 @@
         "es": "Escritorio de la ISO en vivo"
       },
       "description": {
-        "en": "The the live ISO desktop on first boot with the installer launcher visible.",
+        "en": "The live ISO desktop on first boot with the installer launcher visible.",
         "es": "El escritorio de la ISO en vivo en el primer arranque con el lanzador del instalador visible."
       },
       "alt": {
-        "en": "The the live ISO desktop on first boot with the installer launcher visible.",
+        "en": "The live ISO desktop on first boot with the installer launcher visible.",
         "es": "El escritorio de la ISO en vivo en el primer arranque con el lanzador del instalador visible."
       },
       "pages": [
@@ -3726,11 +3726,11 @@
         "es": "Shell: Launcher"
       },
       "description": {
-        "en": "The the launcher (Ctrl+Space) open over Cockpit with a search typed and the first result highlighted; only HorneroOS-shipped apps listed.",
+        "en": "The launcher (Ctrl+Space) open over Cockpit with a search typed and the first result highlighted; only HorneroOS-shipped apps listed.",
         "es": "El launcher (Ctrl+Espacio) abierto sobre Cockpit con una búsqueda escrita y el primer resultado resaltado; solo apps incluidas en HorneroOS."
       },
       "alt": {
-        "en": "The the launcher (Ctrl+Space) open over Cockpit with a search typed and the first result highlighted; only HorneroOS-shipped apps listed.",
+        "en": "The launcher (Ctrl+Space) open over Cockpit with a search typed and the first result highlighted; only HorneroOS-shipped apps listed.",
         "es": "El launcher (Ctrl+Espacio) abierto sobre Cockpit con una búsqueda escrita y el primer resultado resaltado; solo apps incluidas en HorneroOS."
       },
       "pages": [
@@ -3827,11 +3827,11 @@
         "es": "Shell: Ajustes rápidos"
       },
       "description": {
-        "en": "The the quick settings panel with Wi-Fi, Bluetooth, microphone, Keep Awake and the screen recorder.",
+        "en": "The quick settings panel with Wi-Fi, Bluetooth, microphone, Keep Awake and the screen recorder.",
         "es": "El panel de ajustes rápidos con Wi-Fi, Bluetooth, micrófono, Keep Awake y el grabador de pantalla."
       },
       "alt": {
-        "en": "The the quick settings panel with Wi-Fi, Bluetooth, microphone, Keep Awake and the screen recorder.",
+        "en": "The quick settings panel with Wi-Fi, Bluetooth, microphone, Keep Awake and the screen recorder.",
         "es": "El panel de ajustes rápidos con Wi-Fi, Bluetooth, micrófono, Keep Awake y el grabador de pantalla."
       },
       "pages": [],
@@ -3876,11 +3876,11 @@
         "es": "Shell: Menú de sesión"
       },
       "description": {
-        "en": "The the session and power menu (Super+X) with its actions and no pending confirmation.",
+        "en": "The session and power menu (Super+X) with its actions and no pending confirmation.",
         "es": "El menú de sesión y energía (Super+X) con sus acciones y sin confirmaciones pendientes."
       },
       "alt": {
-        "en": "The the session and power menu (Super+X) with its actions and no pending confirmation.",
+        "en": "The session and power menu (Super+X) with its actions and no pending confirmation.",
         "es": "El menú de sesión y energía (Super+X) con sus acciones y sin confirmaciones pendientes."
       },
       "pages": [],
@@ -3925,11 +3925,11 @@
         "es": "Shell: OSD de volumen"
       },
       "description": {
-        "en": "The the volume on-screen display after a change, over a clean desktop.",
+        "en": "The volume on-screen display after a change, over a clean desktop.",
         "es": "El OSD de volumen tras un cambio, sobre un escritorio limpio."
       },
       "alt": {
-        "en": "The the volume on-screen display after a change, over a clean desktop.",
+        "en": "The volume on-screen display after a change, over a clean desktop.",
         "es": "El OSD de volumen tras un cambio, sobre un escritorio limpio."
       },
       "pages": [],
@@ -4023,11 +4023,11 @@
         "es": "Shell: Dashboard, vista general"
       },
       "description": {
-        "en": "The the Dashboard (Super+D) overview tab with its five tabs visible and demo-safe cards.",
+        "en": "The Dashboard (Super+D) overview tab with its five tabs visible and demo-safe cards.",
         "es": "El Dashboard (Super+D) en la pestaña general con sus cinco pestañas visibles y tarjetas aptas para demostración."
       },
       "alt": {
-        "en": "The the Dashboard (Super+D) overview tab with its five tabs visible and demo-safe cards.",
+        "en": "The Dashboard (Super+D) overview tab with its five tabs visible and demo-safe cards.",
         "es": "El Dashboard (Super+D) en la pestaña general con sus cinco pestañas visibles y tarjetas aptas para demostración."
       },
       "pages": [
@@ -4075,11 +4075,11 @@
         "es": "Shell: Superposición de atajos"
       },
       "description": {
-        "en": "The the keybind help overlay (Super+/) with the shell and workspace shortcut tables.",
+        "en": "The keybind help overlay (Super+/) with the shell and workspace shortcut tables.",
         "es": "La superposición de ayuda de atajos (Super+/) con las tablas de atajos de shell y espacios."
       },
       "alt": {
-        "en": "The the keybind help overlay (Super+/) with the shell and workspace shortcut tables.",
+        "en": "The keybind help overlay (Super+/) with the shell and workspace shortcut tables.",
         "es": "La superposición de ayuda de atajos (Super+/) con las tablas de atajos de shell y espacios."
       },
       "pages": [],
@@ -4124,11 +4124,11 @@
         "es": "Shell: Cubierta de recarga"
       },
       "description": {
-        "en": "The the shell reload cover shown while the shell restarts, brand-only.",
+        "en": "The shell reload cover shown while the shell restarts, brand-only.",
         "es": "La cubierta de recarga que se ve mientras la shell reinicia, solo con la marca."
       },
       "alt": {
-        "en": "The the shell reload cover shown while the shell restarts, brand-only.",
+        "en": "The shell reload cover shown while the shell restarts, brand-only.",
         "es": "La cubierta de recarga que se ve mientras la shell reinicia, solo con la marca."
       },
       "pages": [],
