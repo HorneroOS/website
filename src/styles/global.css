@@ -1524,3 +1524,126 @@ tbody tr:hover {
   font-style: normal;
 }
 
+/* ------------------------------------ retrofuturistic cyberpunk ar --- */
+
+/* Subtle chromatic-aberration / phosphor glow on primary CTA hover (Night). */
+.cta.primary:hover {
+  box-shadow:
+    var(--elevation),
+    -1px 0 0 color-mix(in srgb, var(--cue) 55%, transparent),
+    1px 0 0 color-mix(in srgb, var(--signal) 55%, transparent),
+    0 0 12px color-mix(in srgb, var(--glow) 28%, transparent);
+}
+
+:root[data-color-mode='light'] .cta.primary:hover {
+  box-shadow: var(--elevation);
+}
+
+/* Crisp chamfered/bezel corner brackets for featured cards. */
+.cyber-bezel {
+  position: relative;
+  transition:
+    border-color var(--dur-short) var(--ease-standard),
+    box-shadow var(--dur-short) var(--ease-standard),
+    transform var(--dur-settle-fast) var(--ease-settle-fast);
+}
+
+.cyber-bezel::after {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--cue);
+  border-bottom: 2px solid var(--cue);
+  content: '';
+  opacity: 0.65;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-short) var(--ease-standard),
+    border-color var(--dur-short) var(--ease-standard);
+}
+
+.cyber-bezel:hover {
+  border-color: var(--rule-strong);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cue) 28%, transparent);
+}
+
+.cyber-bezel:hover::after {
+  opacity: 1;
+  border-color: var(--signal);
+}
+
+:root[data-color-mode='light'] .cyber-bezel:hover {
+  box-shadow: none;
+}
+
+/* Buenos Aires / Obelisco retro horizon divider strip between homepage bands. */
+.cyber-horizon-divider {
+  position: relative;
+  margin-block: clamp(2rem, 1rem + 3vw, 3.5rem);
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cue) 8%, transparent) 65%,
+    color-mix(in srgb, var(--signal) 10%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+.cyber-horizon-divider::after {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px);
+  content: '';
+  pointer-events: none;
+}
+
+/* Footer Argentine pixel-art signature (Mate + Sol de Mayo). */
+.footer-ar-sig {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-small);
+  background: var(--sunken);
+  color: var(--ink-muted);
+  font: 500 0.68rem var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* Staggered fade-up entrance animations (disabled under prefers-reduced-motion). */
+@media (prefers-reduced-motion: no-preference) {
+  .cyber-stagger {
+    animation: cyber-fade-up var(--dur-long) var(--ease-enter) both;
+  }
+
+  .cyber-stagger-delay-1 {
+    animation-delay: 80ms;
+  }
+
+  .cyber-stagger-delay-2 {
+    animation-delay: 160ms;
+  }
+
+  @keyframes cyber-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+

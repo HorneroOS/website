@@ -1,0 +1,343 @@
+---
+interface Props {
+  kind: 'hornero' | 'mate' | 'sol' | 'skyline';
+  size?: number;
+  class?: string;
+  label?: string;
+}
+
+const { kind, size, class: className = '', label } = Astro.props;
+const a11y = label
+  ? { role: 'img' as const, 'aria-label': label }
+  : { 'aria-hidden': 'true' as const, focusable: 'false' as const };
+---
+
+{
+  kind === 'hornero' && (
+    <svg
+      class:list={['pixel-art', 'pixel-hornero', className]}
+      viewBox="0 0 24 20"
+      width={size ?? 36}
+      height={Math.round(((size ?? 36) * 20) / 24)}
+      shape-rendering="crispEdges"
+      {...a11y}
+    >
+      {/* Clay nest (horno) base */}
+      <g class="pa-nest">
+        <rect x="4" y="13" width="16" height="2" fill="var(--signal-well)" />
+        <rect x="3" y="15" width="18" height="3" fill="var(--signal-well)" />
+        <rect x="4" y="18" width="16" height="2" fill="var(--rule-strong)" />
+        {/* Nest clay highlights & entrance arch */}
+        <rect x="6" y="13" width="12" height="1" fill="var(--signal)" opacity="0.65" />
+        <rect x="5" y="15" width="2" height="1" fill="var(--signal)" opacity="0.45" />
+        <rect x="16" y="16" width="3" height="1" fill="var(--signal)" opacity="0.45" />
+        <rect x="10" y="15" width="4" height="4" fill="var(--ground)" />
+        <rect x="11" y="14" width="2" height="1" fill="var(--ground)" />
+      </g>
+      {/* Hornero bird perched on top of nest */}
+      <g class="pa-bird">
+        {/* Tail */}
+        <rect x="4" y="8" width="3" height="2" fill="var(--signal)" />
+        <rect x="3" y="7" width="2" height="2" fill="var(--signal)" />
+        {/* Body */}
+        <rect x="7" y="7" width="8" height="4" fill="var(--signal)" />
+        <rect x="8" y="6" width="6" height="1" fill="var(--signal)" />
+        {/* Wing highlight */}
+        <rect x="8" y="8" width="5" height="2" fill="var(--on-signal-well)" opacity="0.55" />
+        {/* Belly */}
+        <rect x="9" y="11" width="5" height="1" fill="var(--ink)" opacity="0.85" />
+        {/* Head */}
+        <rect x="13" y="3" width="5" height="4" fill="var(--signal)" />
+        <rect x="14" y="2" width="3" height="1" fill="var(--signal)" />
+        {/* Beak */}
+        <rect x="18" y="4" width="3" height="1" fill="var(--cue)" />
+        <rect x="18" y="5" width="2" height="1" fill="var(--ink-muted)" />
+        {/* Eye (blinks) */}
+        <rect class="pa-eye" x="16" y="4" width="1" height="1" fill="var(--on-signal)" />
+        {/* Legs */}
+        <rect x="10" y="12" width="1" height="1" fill="var(--ink-muted)" />
+        <rect x="13" y="12" width="1" height="1" fill="var(--ink-muted)" />
+      </g>
+    </svg>
+  )
+}
+
+{
+  kind === 'mate' && (
+    <svg
+      class:list={['pixel-art', 'pixel-mate', className]}
+      viewBox="0 0 18 22"
+      width={size ?? 26}
+      height={Math.round(((size ?? 26) * 22) / 18)}
+      shape-rendering="crispEdges"
+      {...a11y}
+    >
+      {/* Rising pixel steam wisps */}
+      <g class="pa-steam">
+        <rect class="pa-steam-1" x="6" y="3" width="1" height="2" fill="var(--cue)" opacity="0.85" />
+        <rect class="pa-steam-1" x="7" y="1" width="1" height="2" fill="var(--cue)" opacity="0.6" />
+        <rect class="pa-steam-2" x="10" y="4" width="1" height="2" fill="var(--phosphor)" opacity="0.85" />
+        <rect class="pa-steam-2" x="9" y="2" width="1" height="2" fill="var(--phosphor)" opacity="0.55" />
+      </g>
+      {/* Bombilla (metallic straw) */}
+      <rect x="12" y="4" width="2" height="1" fill="var(--ink)" />
+      <rect x="11" y="5" width="2" height="1" fill="var(--ink-muted)" />
+      <rect x="10" y="6" width="2" height="1" fill="var(--ink)" />
+      <rect x="9" y="7" width="2" height="1" fill="var(--ink-muted)" />
+      <rect x="8" y="8" width="2" height="1" fill="var(--ink)" />
+      {/* Yerba top */}
+      <rect x="5" y="9" width="8" height="1" fill="var(--phosphor)" />
+      {/* Virola (Argentine celeste + silver rim) */}
+      <rect x="4" y="10" width="10" height="2" fill="var(--cue)" />
+      <rect x="5" y="10" width="8" height="1" fill="var(--on-cue-well)" opacity="0.5" />
+      {/* Mate gourd body */}
+      <rect x="3" y="12" width="12" height="5" fill="var(--signal)" />
+      <rect x="4" y="17" width="10" height="2" fill="var(--signal)" />
+      <rect x="5" y="19" width="8" height="1" fill="var(--signal-well)" />
+      {/* Pixel shading & highlight */}
+      <rect x="4" y="13" width="2" height="3" fill="var(--on-signal-well)" opacity="0.45" />
+      <rect x="12" y="13" width="2" height="4" fill="var(--signal-well)" opacity="0.7" />
+      {/* Base */}
+      <rect x="6" y="20" width="6" height="1" fill="var(--rule-strong)" />
+    </svg>
+  )
+}
+
+{
+  kind === 'sol' && (
+    <svg
+      class:list={['pixel-art', 'pixel-sol', className]}
+      viewBox="0 0 20 20"
+      width={size ?? 24}
+      height={size ?? 24}
+      shape-rendering="crispEdges"
+      {...a11y}
+    >
+      {/* Cardinal rays */}
+      <g class="pa-sol-rays">
+        <rect x="9" y="1" width="2" height="3" fill="var(--signal)" />
+        <rect x="9" y="16" width="2" height="3" fill="var(--signal)" />
+        <rect x="1" y="9" width="3" height="2" fill="var(--signal)" />
+        <rect x="16" y="9" width="3" height="2" fill="var(--signal)" />
+        {/* Diagonal rays */}
+        <rect x="3" y="3" width="2" height="2" fill="var(--signal)" opacity="0.8" />
+        <rect x="15" y="3" width="2" height="2" fill="var(--signal)" opacity="0.8" />
+        <rect x="3" y="15" width="2" height="2" fill="var(--signal)" opacity="0.8" />
+        <rect x="15" y="15" width="2" height="2" fill="var(--signal)" opacity="0.8" />
+        {/* Secondary telemetry ticks */}
+        <rect x="5" y="5" width="1" height="1" fill="var(--cue)" />
+        <rect x="14" y="5" width="1" height="1" fill="var(--cue)" />
+        <rect x="5" y="14" width="1" height="1" fill="var(--cue)" />
+        <rect x="14" y="14" width="1" height="1" fill="var(--cue)" />
+      </g>
+      {/* Sun disc */}
+      <rect x="7" y="6" width="6" height="8" fill="var(--signal)" />
+      <rect x="6" y="7" width="8" height="6" fill="var(--signal)" />
+      {/* Retro pixel face detail */}
+      <rect x="8" y="9" width="1" height="1" fill="var(--on-signal)" />
+      <rect x="11" y="9" width="1" height="1" fill="var(--on-signal)" />
+      <rect x="9" y="11" width="2" height="1" fill="var(--on-signal)" />
+    </svg>
+  )
+}
+
+{
+  kind === 'skyline' && (
+    <svg
+      class:list={['pixel-art', 'pixel-skyline', className]}
+      viewBox="0 0 320 44"
+      preserveAspectRatio="xMidYMax slice"
+      shape-rendering="crispEdges"
+      {...a11y}
+    >
+      {/* Horizon pixel glow band */}
+      <rect x="0" y="32" width="320" height="2" fill="var(--signal)" opacity="0.18" />
+      <rect x="0" y="34" width="320" height="1" fill="var(--cue)" opacity="0.45" />
+
+      {/* Pixel Sol de Mayo rising behind Obelisco */}
+      <g opacity="0.35">
+        <rect x="146" y="18" width="28" height="16" fill="var(--signal)" />
+        <rect x="150" y="15" width="20" height="3" fill="var(--signal)" />
+        <rect x="154" y="13" width="12" height="2" fill="var(--signal)" />
+        {/* Synthwave scan slices through the sun */}
+        <rect x="146" y="24" width="28" height="1" fill="var(--base)" />
+        <rect x="146" y="28" width="28" height="2" fill="var(--base)" />
+      </g>
+
+      {/* Left Porteño blocks & Art Deco Kavanagh-style stepped tower */}
+      <rect x="8" y="24" width="14" height="10" fill="var(--panel)" />
+      <rect x="11" y="26" width="2" height="2" fill="var(--cue)" opacity="0.7" />
+      <rect x="16" y="26" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+      <rect x="26" y="19" width="18" height="15" fill="var(--panel)" />
+      <rect x="30" y="15" width="10" height="4" fill="var(--panel)" />
+      <rect x="33" y="12" width="4" height="3" fill="var(--panel)" />
+      <rect class="pa-beacon" x="34" y="10" width="2" height="2" fill="var(--signal)" />
+      <rect x="29" y="22" width="2" height="2" fill="var(--signal)" opacity="0.6" />
+      <rect x="35" y="22" width="2" height="2" fill="var(--cue)" opacity="0.6" />
+      <rect x="39" y="26" width="2" height="2" fill="var(--phosphor)" opacity="0.65" />
+
+      {/* Congreso-inspired dome silhouette */}
+      <rect x="52" y="25" width="24" height="9" fill="var(--panel)" />
+      <rect x="58" y="20" width="12" height="5" fill="var(--panel)" />
+      <rect x="61" y="17" width="6" height="3" fill="var(--panel)" />
+      <rect x="63" y="14" width="2" height="3" fill="var(--cue)" opacity="0.8" />
+      <rect x="56" y="28" width="2" height="2" fill="var(--signal)" opacity="0.6" />
+      <rect x="63" y="28" width="2" height="2" fill="var(--signal)" opacity="0.6" />
+      <rect x="70" y="28" width="2" height="2" fill="var(--signal)" opacity="0.6" />
+
+      {/* Mid-left modernist towers */}
+      <rect x="84" y="21" width="16" height="13" fill="var(--panel)" />
+      <rect x="88" y="23" width="2" height="2" fill="var(--cue)" opacity="0.7" />
+      <rect x="94" y="27" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+      <rect x="106" y="26" width="18" height="8" fill="var(--panel)" />
+      <rect x="128" y="23" width="14" height="11" fill="var(--panel)" />
+      <rect x="131" y="25" width="2" height="2" fill="var(--phosphor)" opacity="0.75" />
+
+      {/* CENTERPIECE: El Obelisco de Buenos Aires */}
+      <rect x="157" y="9" width="6" height="25" fill="var(--raised)" />
+      <rect x="158" y="6" width="4" height="3" fill="var(--raised)" />
+      <rect x="159" y="4" width="2" height="2" fill="var(--signal)" />
+      <rect class="pa-beacon" x="159" y="2" width="2" height="2" fill="var(--cue)" />
+      {/* Obelisco vertical edge highlight */}
+      <rect x="157" y="9" width="1" height="25" fill="var(--cue)" opacity="0.55" />
+      <rect x="162" y="9" width="1" height="25" fill="var(--signal)" opacity="0.55" />
+      {/* Obelisco top windows */}
+      <rect x="159" y="10" width="2" height="2" fill="var(--signal)" />
+
+      {/* Mid-right broadcast tower & blocks */}
+      <rect x="178" y="23" width="16" height="11" fill="var(--panel)" />
+      <rect x="182" y="25" width="2" height="2" fill="var(--cue)" opacity="0.7" />
+      <rect x="188" y="25" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+      <rect x="200" y="18" width="14" height="16" fill="var(--panel)" />
+      <rect x="206" y="11" width="2" height="7" fill="var(--rule-strong)" />
+      <rect class="pa-beacon" x="206" y="9" width="2" height="2" fill="var(--phosphor)" />
+      <rect x="203" y="21" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+      <rect x="209" y="25" width="2" height="2" fill="var(--cue)" opacity="0.7" />
+
+      {/* Right Puerto Madero / La Plata diagonal grid towers */}
+      <rect x="222" y="25" width="20" height="9" fill="var(--panel)" />
+      <rect x="248" y="20" width="16" height="14" fill="var(--panel)" />
+      <rect x="252" y="22" width="2" height="2" fill="var(--cue)" opacity="0.7" />
+      <rect x="258" y="26" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+      <rect x="270" y="24" width="18" height="10" fill="var(--panel)" />
+      <rect x="294" y="22" width="18" height="12" fill="var(--panel)" />
+      <rect x="298" y="24" width="2" height="2" fill="var(--phosphor)" opacity="0.7" />
+      <rect x="304" y="27" width="2" height="2" fill="var(--signal)" opacity="0.7" />
+
+      {/* Perspective synth-grid ground */}
+      <rect x="0" y="34" width="320" height="10" fill="var(--sunken)" />
+      <rect x="0" y="34" width="320" height="1" fill="var(--cue)" opacity="0.65" />
+      <rect x="0" y="37" width="320" height="1" fill="var(--cue)" opacity="0.3" />
+      <rect x="0" y="41" width="320" height="1" fill="var(--signal)" opacity="0.25" />
+      {/* Vertical perspective grid ticks */}
+      <rect x="20" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+      <rect x="60" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+      <rect x="100" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+      <rect x="140" y="34" width="1" height="10" fill="var(--cue)" opacity="0.35" />
+      <rect x="160" y="34" width="1" height="10" fill="var(--signal)" opacity="0.55" />
+      <rect x="180" y="34" width="1" height="10" fill="var(--cue)" opacity="0.35" />
+      <rect x="220" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+      <rect x="260" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+      <rect x="300" y="34" width="1" height="10" fill="var(--cue)" opacity="0.25" />
+    </svg>
+  )
+}
+
+<style>
+  .pixel-art {
+    display: inline-block;
+    flex: none;
+    image-rendering: pixelated;
+  }
+
+  .pixel-skyline {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 2.75rem;
+    max-height: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pixel-hornero .pa-bird {
+      animation: pixel-bob 2.4s steps(2, end) infinite;
+    }
+
+    .pixel-hornero .pa-eye {
+      transform-origin: 16.5px 4.5px;
+      animation: pixel-blink 4.6s steps(1, end) infinite;
+    }
+
+    .pixel-mate .pa-steam-1 {
+      animation: pixel-steam 2.2s steps(3, end) infinite;
+    }
+
+    .pixel-mate .pa-steam-2 {
+      animation: pixel-steam 2.2s steps(3, end) 0.9s infinite;
+    }
+
+    .pixel-sol .pa-sol-rays {
+      animation: pixel-pulse 3.6s ease-in-out infinite;
+    }
+
+    .pixel-skyline .pa-beacon {
+      animation: pixel-beacon 1.8s steps(2, end) infinite;
+    }
+  }
+
+  @keyframes pixel-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-1px);
+    }
+  }
+
+  @keyframes pixel-blink {
+    0%,
+    92%,
+    100% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pixel-steam {
+    0% {
+      transform: translateY(1px);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(-2px);
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes pixel-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.65;
+    }
+  }
+
+  @keyframes pixel-beacon {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+</style>
