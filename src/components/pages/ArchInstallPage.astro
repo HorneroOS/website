@@ -16,140 +16,708 @@ const pkg = packageRelease?.version ?? '';
 
 <SiteLayout
   socialImage="/og/install.png"
-  socialImageAlt={m.instalarHorneroosSobreArchLinux}
-  title={m.horneroosSobreArchLinuxInstalacion}
-  description={m.yaUsasArchInstalaEl}
+  socialImageAlt={m.socialAlt}
+  title={m.pageTitle}
+  description={m.pageDescription}
 >
-  <section class="section">
+  <section class="section arch-hero">
     <p class="plate-id">
-      <strong>{m.instalacion}</strong>
+      <strong>{m.eyebrowInstall}</strong>
       <span>Arch Linux</span>
       <span>AUR</span>
     </p>
-    <h1>{m.yaUsasArchConvertiloEn}</h1>
-    <p class="lede">{m.laIsoNoEsLa}</p>
-    <p class="cta-row download-row">
-      <a class="cta primary" href="#install">
-        {m.irALosComandos}
+    <h1>{m.heroTitle}</h1>
+    <p class="lede">{m.heroLede}</p>
+    <p class="cta-row">
+      <a class="cta primary" href="#steps">
+        {m.ctaStartSteps}
       </a>
       <a class="cta secondary" href={L('/install')}>
-        {m.prefieroLaIsoCompleta}
+        {m.ctaPreferIso}
       </a>
     </p>
-    <h2>{m.tresCaminosUnMismoEscritorio}</h2>
-    <ul role="list" class="packages">
-      <li>
-        <code>{m.aIso}</code>
-        <span>
-          {m.laExperienciaCompletaDesdeCero}
-          <a href={L('/install')}>{m.paginaDeDescarga}</a>.
-        </span>
-      </li>
-      <li>
-        <code>{m.bArch}</code>
-        <span>{m.estaGuiaPaquetesSobreTu}</span>
-      </li>
-      <li>
-        <code>{m.cSoloLaShell}</code>
-        <span>{m.siYaCorreHyprlandY}</span>
-      </li>
-    </ul>
   </section>
 
-  <section class="section" aria-labelledby="req-title">
-    <h2 id="req-title">{m.requisitos}</h2>
-    <h3>{m.obligatorios}</h3>
-    <ul>
-      <li>{m.archLinuxX8664Actualizado}</li>
-      <li>{m.unaSesionWaylandConHyprland}</li>
-      <li>{m.gitYBaseDevelPara}</li>
-    </ul>
-    <h3>{m.recomendados}</h3>
-    <ul>
-      <li>{m.pipewireWireplumberParaAudioCompleto}</li>
-      <li>{m.unRespaldoDeTuConfiguracion}</li>
-    </ul>
-    <h3>{m.siNoTenesYay}</h3>
-    <p>{m.elAurEsMantenidoPor}</p>
-    <pre tabindex="0"><code>sudo pacman -S --needed git base-devel
+  <section class="section" aria-labelledby="paths-title">
+    <div class="rule-head">
+      <h2 id="paths-title">{m.choosePathTitle}</h2>
+      <p class="section-intro">{m.choosePathIntro}</p>
+    </div>
+
+    <div class="path-grid">
+      <article class="path-card">
+        <p class="eyebrow">{m.pathIsoBadge}</p>
+        <h3>{m.pathIsoTitle}</h3>
+        <p>{m.pathIsoDesc}</p>
+        <ul class="path-list">
+          {m.pathIsoBullets.map((item) => <li>{item}</li>)}
+        </ul>
+        <a class="cta secondary path-cta" href={L('/install')}>
+          {m.pathIsoCta}
+        </a>
+      </article>
+
+      <article class="path-card path-card-active">
+        <p class="eyebrow"><b>{m.pathArchBadge}</b></p>
+        <h3>{m.pathArchTitle}</h3>
+        <p>{m.pathArchDesc}</p>
+        <ul class="path-list">
+          {m.pathArchBullets.map((item) => <li>{item}</li>)}
+        </ul>
+        <a class="cta primary path-cta" href="#steps">
+          {m.pathArchCta}
+        </a>
+      </article>
+    </div>
+
+    <p class="shell-only-note">
+      <strong>{m.shellOnlyLabel}</strong>{' '}
+      {m.shellOnlyText} <code>hornero-shell</code> {m.shellOnlySuffix}
+    </p>
+  </section>
+
+  <section class="section" id="steps" aria-labelledby="steps-title">
+    <div class="rule-head">
+      <p class="eyebrow"><b>{m.stepsEyebrow}</b></p>
+      <h2 id="steps-title">{m.stepsTitle}</h2>
+      <p class="section-intro">{m.stepsIntro}</p>
+    </div>
+
+    <ol class="step-cards" role="list">
+      <li class="step-card" id="step-1">
+        <div class="step-header">
+          <span class="step-badge" aria-hidden="true">01</span>
+          <h3>{m.step1Title}</h3>
+        </div>
+        <p class="step-lead">{m.step1Lead}</p>
+        <ul class="req-grid" role="list">
+          {m.step1Items.map((item) => (
+            <li>
+              <strong>{item.label}</strong>
+              <span>{item.detail}</span>
+            </li>
+          ))}
+        </ul>
+        <details class="helper-details">
+          <summary>{m.step1HelperSummary}</summary>
+          <div class="helper-body">
+            <p>{m.step1HelperNote}</p>
+            <div class="code-box">
+              <button
+                type="button"
+                class="copy-btn"
+                data-copy-btn
+                data-label-copy={m.copyLabel}
+                data-label-copied={m.copiedLabel}
+                aria-label={m.copyAria}
+              >
+                {m.copyLabel}
+              </button>
+              <pre tabindex="0"><code>sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si</code></pre>
-  </section>
+cd yay && makepkg -si</code></pre>
+            </div>
+          </div>
+        </details>
+      </li>
 
-  <section class="section" id="install" aria-labelledby="journey-title">
-    <h2 id="journey-title">{m.deArchAHorneroosPaso}</h2>
-    <ol class="journey-steps" role="list">
-      <li>
-        <span class="journey-n" aria-hidden="true">
-          01
-        </span>
-        <h3>{m.actualizaEInstalaLosPaquetes}</h3>
-        <p>{m.horneroShellTraeComoDependencias}</p>
-        <pre tabindex="0"><code>yay -Syu hornero-shell
-yay -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kitty dex hypridle cliphist wl-clipboard</code></pre>
-        <p>{m.elGreeterEsOpcionalY}</p>
+      <li class="step-card" id="step-2">
+        <div class="step-header">
+          <span class="step-badge" aria-hidden="true">02</span>
+          <h3>{m.step2Title}</h3>
+        </div>
+        <p class="step-lead">{m.step2Lead}</p>
+        <ul class="pkg-grid" role="list">
+          {m.corePackages.map((item) => (
+            <li>
+              <a href={`https://aur.archlinux.org/packages/${item.name}`}>
+                <code>{item.name}</code>
+              </a>
+              <span>{item.role}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="cmd-label">{m.step2CmdPrimaryLabel}</p>
+        <div class="code-box">
+          <button
+            type="button"
+            class="copy-btn"
+            data-copy-btn
+            data-label-copy={m.copyLabel}
+            data-label-copied={m.copiedLabel}
+            aria-label={m.copyAria}
+          >
+            {m.copyLabel}
+          </button>
+          <pre tabindex="0"><code>paru -Syu hornero-shell hornero-config hornero-greeter horneroctl-bin
+paru -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kitty dex hypridle cliphist wl-clipboard</code></pre>
+        </div>
+        <p class="step-note">{m.step2GreeterNote}</p>
       </li>
-      <li>
-        <span class="journey-n" aria-hidden="true">
-          02
-        </span>
-        <h3>{m.respaldaYSembraTuConfiguracion}</h3>
-        <p>{m.tuCuentaYaExisteAsi}</p>
-        <pre tabindex="0"><code>tar -czf ~/hornero-pre-adopt-$(date +%F).tar.gz ~/.config/hypr ~/.config/ghostty ~/.config/environment.d 2&gt;/dev/null
+
+      <li class="step-card" id="step-3">
+        <div class="step-header">
+          <span class="step-badge" aria-hidden="true">03</span>
+          <h3>{m.step3Title}</h3>
+        </div>
+        <p class="step-lead">{m.step3Lead}</p>
+        <p class="cmd-label">{m.step3CmdSeedLabel}</p>
+        <div class="code-box">
+          <button
+            type="button"
+            class="copy-btn"
+            data-copy-btn
+            data-label-copy={m.copyLabel}
+            data-label-copied={m.copiedLabel}
+            aria-label={m.copyAria}
+          >
+            {m.copyLabel}
+          </button>
+          <pre tabindex="0"><code>tar -czf ~/hornero-pre-adopt-$(date +%F).tar.gz ~/.config/hypr ~/.config/ghostty ~/.config/environment.d 2&gt;/dev/null
 /usr/share/hornero/seed-user.sh --dest "$HOME" --dry-run
-/usr/share/hornero/seed-user.sh --dest "$HOME"
-horneroctl doctor</code></pre>
-        <p>{m.siTuConfigHyprHyprland}</p>
+/usr/share/hornero/seed-user.sh --dest "$HOME"</code></pre>
+        </div>
+        <p class="cmd-label">{m.step3CmdVerifyLabel}</p>
+        <div class="code-box">
+          <button
+            type="button"
+            class="copy-btn"
+            data-copy-btn
+            data-label-copy={m.copyLabel}
+            data-label-copied={m.copiedLabel}
+            aria-label={m.copyAria}
+          >
+            {m.copyLabel}
+          </button>
+          <pre tabindex="0"><code>horneroctl doctor
+horneroctl hardware rollcall
+# Optional: enable greetd &amp; inspect AI/model isolation slice
+# sudo systemctl enable --now greetd
+# systemctl status app-models.slice</code></pre>
+        </div>
+        <p class="step-note">{m.step3SessionNote}</p>
+        <div class="code-box">
+          <button
+            type="button"
+            class="copy-btn"
+            data-copy-btn
+            data-label-copy={m.copyLabel}
+            data-label-copied={m.copiedLabel}
+            aria-label={m.copyAria}
+          >
+            {m.copyLabel}
+          </button>
+          <pre tabindex="0"><code>horneroctl shell start --yes</code></pre>
+        </div>
       </li>
-      <li>
-        <span class="journey-n" aria-hidden="true">
-          03
-        </span>
-        <h3>{m.entraPorTuSesionHyprland}</h3>
-        <p>{m.noHayUnaSesionNueva}</p>
-        <pre tabindex="0"><code>horneroctl shell start --yes</code></pre>
-      </li>
-      <li>
-        <span class="journey-n" aria-hidden="true">
-          04
-        </span>
-        <h3>{m.personaliza}</h3>
-        <p>{m.elCentroDeControlConcentra}</p>
-        <p>
-          <a href={L('/docs/applications/post-install-first-steps/')}>{m.primerosPasosTrasInstalar}</a>
-          {m.yLa}
-          <a href={L('/docs/getting-started/install-step-by-step/')}>{m.guiaPasoAPasoCompleta}</a>.
+
+      <li class="step-card" id="step-4">
+        <div class="step-header">
+          <span class="step-badge" aria-hidden="true">04</span>
+          <h3>{m.step4Title}</h3>
+        </div>
+        <p class="step-lead">{m.step4Lead}</p>
+        <div class="extras-grid">
+          {m.extras.map((extra) => (
+            <article class="extra-card">
+              <h4>{extra.title}</h4>
+              <p>{extra.desc}</p>
+              <code class="extra-cmd">{extra.cmd}</code>
+            </article>
+          ))}
+        </div>
+        <p class="step-links">
+          <span>{m.step4LinksLead}</span>{' '}
+          <a href={L('/docs/applications/post-install-first-steps/')}>{m.step4LinkFirstSteps}</a> ·{' '}
+          <a href={L('/docs/getting-started/install-step-by-step/')}>{m.step4LinkStepByStep}</a> ·{' '}
+          <a href={L('/extensions')}>{m.step4LinkExtensions}</a>
         </p>
       </li>
     </ol>
   </section>
 
   <section class="section" aria-labelledby="keep-title">
-    <h2 id="keep-title">{m.quePasaConLoQue}</h2>
-    <ul>
-      <li>{m.tuHyprlandTuHyprlandLua}</li>
-      <li>{m.otrosEscritoriosKdeGnomeU}</li>
-      <li>{m.barrasYNotificacionesSiOtra}</li>
-      <li>{m.tusDotfilesGtkQtTerminal}</li>
+    <div class="rule-head">
+      <h2 id="keep-title">{m.keepTitle}</h2>
+    </div>
+    <ul class="keep-grid" role="list">
+      {m.keepItems.map((item) => (
+        <li>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </li>
+      ))}
     </ul>
-    <h3>{m.volverAtras}</h3>
-    <p>{m.desinstalarEsQuitarPaquetesTu}</p>
-    <pre tabindex="0"><code>yay -Rns hornero-shell hornero-config horneroctl-bin</code></pre>
-    <p>{m.siSembrasteConfiguracionLosUnicos}</p>
+  </section>
+
+  <section class="section" id="rollback" aria-labelledby="rollback-title">
+    <div class="rule-head">
+      <h2 id="rollback-title">{m.rollbackTitle}</h2>
+      <p class="section-intro">{m.rollbackIntro}</p>
+    </div>
+    <div class="rollback-grid">
+      {m.rollbackCards.map((card) => (
+        <article class="rollback-card">
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+          <div class="code-box">
+            <button
+              type="button"
+              class="copy-btn"
+              data-copy-btn
+              data-label-copy={m.copyLabel}
+              data-label-copied={m.copiedLabel}
+              aria-label={m.copyAria}
+            >
+              {m.copyLabel}
+            </button>
+            <pre tabindex="0"><code>{card.cmd}</code></pre>
+          </div>
+        </article>
+      ))}
+    </div>
   </section>
 
   <section class="section" aria-labelledby="scope-title">
-    <h2 id="scope-title">{m.alcanceHonesto}</h2>
-    <ul>
-      <li>{m.losPaquetesTraenElEscritorio}</li>
+    <div class="rule-head">
+      <h2 id="scope-title">{m.scopeTitle}</h2>
+    </div>
+    <ul class="scope-list">
+      {m.scopeItems.map((item) => <li>{item}</li>)}
       <li>{m.packagesAhead(pkg)}</li>
-      <li>{m.derivadosDeArchCachyosEndeavouros}</li>
     </ul>
-    <p>
-      <a href={L('/why-horneroos#faq')}>{m.preguntasFrecuentes}</a> ·{' '}
-      <a href={L('/docs/troubleshooting/by-symptom/')}>{m.problemasPorSintoma}</a> ·{' '}
-      <a href={L('/releases')}>{m.releasesYPaquetesVigentes}</a>
+    <p class="scope-links">
+      <a href={L('/why-horneroos#faq')}>{m.linkFaq}</a> ·{' '}
+      <a href={L('/docs/troubleshooting/by-symptom/')}>{m.linkTroubleshooting}</a> ·{' '}
+      <a href={L('/releases')}>{m.linkReleases}</a>
     </p>
   </section>
 </SiteLayout>
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll('[data-copy-btn]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const code = btn.parentElement?.querySelector('pre code')?.textContent;
+        if (!code) return;
+        try {
+          await navigator.clipboard.writeText(code.trim());
+          btn.textContent = btn.dataset.labelCopied || 'Copied';
+          btn.dataset.copied = 'true';
+          setTimeout(() => {
+            btn.textContent = btn.dataset.labelCopy || 'Copy';
+            delete btn.dataset.copied;
+          }, 1800);
+        } catch {
+          // Clipboard API may be unavailable in restricted contexts.
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .section-intro {
+    max-width: var(--measure);
+    color: var(--ink-muted);
+  }
+
+  /* ------------------------------------------------ Choose Your Path --- */
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .path-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+    transition:
+      border-color var(--dur-short) var(--ease-standard),
+      background-color var(--dur-short) var(--ease-standard);
+  }
+
+  .path-card:hover {
+    border-color: var(--rule-strong);
+  }
+
+  .path-card-active {
+    border-color: var(--signal);
+    background: color-mix(in srgb, var(--signal) 5%, var(--panel));
+  }
+
+  .path-card-active::before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 3px;
+    height: 22px;
+    background: var(--signal);
+    content: '';
+  }
+
+  .path-card h3 {
+    font-size: var(--step-1);
+  }
+
+  .path-card > p:not(.eyebrow) {
+    color: var(--ink-muted);
+  }
+
+  .path-list {
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1.15rem;
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+  }
+
+  .path-cta {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+
+  .shell-only-note {
+    margin-top: 1.25rem;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-inline-start: 2px solid var(--cue);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+    max-width: none;
+  }
+
+  .shell-only-note strong {
+    color: var(--ink);
+  }
+
+  /* ----------------------------------------------------- Step Cards --- */
+  .step-cards {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .step-card {
+    position: relative;
+    display: grid;
+    gap: 0.9rem;
+    padding: clamp(1.25rem, 2.8vw, 1.85rem);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .step-card::before {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 2px;
+    height: 14px;
+    background: var(--signal);
+    content: '';
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.3rem;
+    height: 2.1rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--signal);
+    border-radius: var(--radius-small);
+    background: var(--signal-well);
+    color: var(--on-signal-well);
+    font: 600 0.8rem var(--font-mono);
+    letter-spacing: 0.06em;
+  }
+
+  .step-lead,
+  .step-note {
+    max-width: var(--measure);
+    color: var(--ink-muted);
+  }
+
+  .step-note {
+    font-size: 0.94rem;
+  }
+
+  .cmd-label {
+    margin-top: 0.25rem;
+    color: var(--ink-muted);
+    font: 500 0.72rem var(--font-mono);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  /* ---------------------------------------------- Code Box + Copy --- */
+  .code-box {
+    position: relative;
+  }
+
+  .code-box pre {
+    padding-right: 5.5rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 2;
+    min-height: 1.9rem;
+    padding: 0.2rem 0.65rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-small);
+    background: var(--panel);
+    color: var(--ink-muted);
+    font: 500 0.7rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color var(--dur-short) var(--ease-standard),
+      background-color var(--dur-short) var(--ease-standard),
+      color var(--dur-short) var(--ease-standard);
+  }
+
+  .copy-btn:hover {
+    border-color: var(--signal);
+    background: var(--raised);
+    color: var(--ink);
+  }
+
+  .copy-btn[data-copied='true'] {
+    border-color: var(--phosphor);
+    background: var(--phosphor-well);
+    color: var(--on-phosphor-well);
+  }
+
+  /* --------------------------------------------- Prerequisites Grid --- */
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .req-grid li {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+  }
+
+  .req-grid strong {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .req-grid span {
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+  }
+
+  .helper-details {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+  }
+
+  .helper-details summary {
+    padding: 0.75rem 1rem;
+    color: var(--cue);
+    font-weight: 500;
+    font-size: 0.94rem;
+    cursor: pointer;
+  }
+
+  .helper-body {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0 1rem 1rem;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ------------------------------------------------- Packages Grid --- */
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .pkg-grid li {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    transition: border-color var(--dur-short) var(--ease-standard);
+  }
+
+  .pkg-grid li:hover {
+    border-color: var(--rule-strong);
+  }
+
+  .pkg-grid a {
+    justify-self: start;
+    text-decoration: none;
+  }
+
+  .pkg-grid a:hover code {
+    border-color: var(--signal);
+    color: var(--ink);
+  }
+
+  .pkg-grid span {
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+  }
+
+  /* --------------------------------------------------- Extras Grid --- */
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .extra-card {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+  }
+
+  .extra-card h4 {
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .extra-card p {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .extra-cmd {
+    justify-self: start;
+    margin-top: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    border-left: 2px solid var(--signal);
+    color: var(--ink);
+    font-size: 0.8rem;
+  }
+
+  .step-links {
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+  }
+
+  /* ------------------------------------------- Coexistence & Rollback --- */
+  .keep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .keep-grid li {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .keep-grid h3 {
+    font-size: 1.1rem;
+  }
+
+  .keep-grid p {
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+  }
+
+  .rollback-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .rollback-card {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+    padding: 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .rollback-card h3 {
+    font-size: 1.12rem;
+  }
+
+  .rollback-card p {
+    color: var(--ink-muted);
+    font-size: 0.94rem;
+  }
+
+  .scope-list {
+    margin-top: 1rem;
+  }
+
+  .scope-links {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 900px) {
+    .path-grid,
+    .extras-grid,
+    .rollback-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .req-grid,
+    .pkg-grid,
+    .keep-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
