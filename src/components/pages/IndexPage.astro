@@ -9,6 +9,8 @@ import MaturityMeter from '../../components/MaturityMeter.astro';
 import CaptureFigure from '../../components/CaptureFigure.astro';
 import StageBadge from '../../components/StageBadge.astro';
 import FaqList from '../../components/FaqList.astro';
+import PixelArt from '../../components/PixelArt.astro';
+import CyberTelemetry from '../../components/CyberTelemetry.astro';
 import { faqItems } from '../../data/why';
 import { editorialForPage, slotCounts } from '../../data/captures';
 import { feature } from '../../data/features';
@@ -203,8 +205,11 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
   }}
 >
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-field" aria-hidden="true"></div>
-    <div class="hero-copy">
+    <div class="hero-field" aria-hidden="true">
+      <div class="hero-crt-grid"></div>
+    </div>
+    <CyberTelemetry locale={locale} />
+    <div class="hero-copy cyber-stagger">
       <p class="eyebrow">
         <b>HorneroOS</b>
         <span>{previewLabel}</span>
@@ -236,7 +241,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     </dl>
   </section>
 
-  <section class="monitor" aria-labelledby="monitor-title">
+  <section class="monitor cyber-stagger cyber-stagger-delay-1" aria-labelledby="monitor-title">
     <h2 id="monitor-title" class="visually-hidden">
       {m.elEscritorioTrabajando}
     </h2>
@@ -254,6 +259,10 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     </div>
   </section>
 
+  <div class="cyber-horizon-divider" aria-hidden="true">
+    <PixelArt kind="skyline" />
+  </div>
+
   <section class="section editions" aria-labelledby="editions-title">
     <header class="section-head">
       <p class="eyebrow">
@@ -265,7 +274,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     </header>
     <ol class="channels" role="list">
       {channels.map((item) => (
-        <li class="channel-row" id={`edition-${item.id}`}>
+        <li class="channel-row cyber-bezel" id={`edition-${item.id}`}>
           <div class="channel-id">
             <p class="eyebrow">
               <b>{item.channel}</b>
@@ -425,6 +434,10 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     </ul>
   </section>
 
+  <div class="cyber-horizon-divider" aria-hidden="true">
+    <PixelArt kind="skyline" />
+  </div>
+
   <section class="section get" aria-labelledby="get-title">
     <header class="section-head">
       <p class="eyebrow">
@@ -561,6 +574,43 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     background: var(--signal);
     clip-path: polygon(92% 0, calc(92% + 2px) 0, calc(72% + 2px) 100%, 72% 100%);
     opacity: 0.55;
+  }
+
+  /* Subtle CRT scanline + perspective synth-grid atmosphere (non-intrusive). */
+  .hero-crt-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(0deg, var(--scanline) 0 1px, transparent 1px 3px),
+      linear-gradient(
+        180deg,
+        transparent 55%,
+        color-mix(in srgb, var(--cue) 6%, transparent) 100%
+      );
+  }
+
+  .hero-crt-grid::after {
+    position: absolute;
+    inset: 60% 0 0 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--cue) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--cue) 8%, transparent) 1px, transparent 1px);
+    background-size: 32px 18px;
+    mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+    content: '';
+  }
+
+  :global(:root[data-color-mode='light']) .hero-crt-grid::after {
+    opacity: 0.35;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-crt-grid {
+      display: none;
+    }
   }
 
   .hero-copy {

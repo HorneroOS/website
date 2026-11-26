@@ -10,6 +10,7 @@ import '@fontsource/ibm-plex-sans-condensed/latin-500.css';
 import '@fontsource/ibm-plex-sans-condensed/latin-600.css';
 import '@fontsource/ibm-plex-sans-condensed/latin-700.css';
 import BaseHead from '../components/BaseHead.astro';
+import PixelArt from '../components/PixelArt.astro';
 // Bird marks: HorneroOS/config assets/brand (MIT). logo-dark.svg @5df8300,
 // logo-light.svg @39c2bd8. Dark surfaces get the cream bird, light ones the adobe bird.
 import LogoDark from '../assets/brand/logo-dark.svg';
@@ -296,6 +297,11 @@ const community = {
           <p>HorneroOS</p>
           <p>{t(locale, 'footerPositioning')}</p>
           <a href={L('/install')} class="cta primary">{t(locale, 'getHorneroOS')}</a>
+          <div class="footer-ar-sig" aria-hidden="true">
+            <PixelArt kind="sol" size={18} />
+            <span>AR // BUENOS AIRES · LA PLATA</span>
+            <PixelArt kind="mate" size={16} />
+          </div>
         </div>
         <nav aria-labelledby="footer-system">
           <h2 id="footer-system">{t(locale, 'footerSystem')}</h2>
