@@ -46,7 +46,7 @@ const edition = (id: string) => {
   return found;
 };
 const compositor = (id: string) => editionCatalogue.compositors.find((item) => item.id === id);
-const maturityName = (maturity: Maturity) => m.plannedPlanificadoExperimentalExperimentalPrevie[maturity];
+const maturityName = (maturity: Maturity) => m.maturityLabels[maturity];
 
 const studioApp = (id: string) => studioCatalogue.applications.find((app) => app.id === id)?.title ?? id;
 const studioSpec = (id: string) => {
@@ -144,9 +144,27 @@ const readouts = [
 const system = [
   {
     id: 'horneroctl',
-    title: 'horneroctl',
+    title: 'horneroctl (V 0.5.2)',
     text: m.unaHerramientaDeSistemaPara,
-    command: 'horneroctl doctor',
+    command: 'horneroctl hardware rollcall',
+  },
+  {
+    id: 'installer-rollback',
+    title: m.instaladorYRollback,
+    text: m.instaladorYRollbackDesc,
+    command: 'horneroctl system info',
+  },
+  {
+    id: 'ai-isolation',
+    title: m.iaLocalYSeguridad,
+    text: m.iaLocalYSeguridadDesc,
+    command: 'systemctl status app-models.slice app-agents.slice',
+  },
+  {
+    id: 'ecosystem-theming',
+    title: m.ecosistemaYChromatic,
+    text: m.ecosistemaYChromaticDesc,
+    command: 'horneroctl apps webapp',
   },
   {
     id: 'updates',
@@ -159,12 +177,6 @@ const system = [
     title: m.configuracion,
     text: m.elCentroDeControlY,
     command: 'horneroctl config validate',
-  },
-  {
-    id: 'reliability',
-    title: m.confiabilidad,
-    text: m.cadaVersionFijaLosCommits,
-    command: 'horneroctl system info',
   },
 ];
 
@@ -305,6 +317,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     <p class="section-foot">
       <a href={L('/docs/desktop/horneroctl/')}>{m.leeLaGuiaDeHorneroctl}</a>
       <a href={L('/docs/architecture/updates-delivery/')}>{m.comoSeEntreganLosPaquetes}</a>
+      <a href={L('/why-horneroos#capability-matrix')}>{m.verMatrizComparativa}</a>
     </p>
   </section>
 
@@ -472,7 +485,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
       </div>
       <div>
         <dt>{m.usoDiario2}</dt>
-        <dd>{m.segunCuentaSuMaintainerSu}</dd>
+        <dd>{m.dailyUseAccount}</dd>
       </div>
       <div>
         <dt>{m.personas}</dt>
