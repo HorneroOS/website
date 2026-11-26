@@ -16,6 +16,15 @@ export interface CompareRow {
   note: Localized;
 }
 
+export interface CompareMatrixRow {
+  id: string;
+  dimension: Localized;
+  horneroos: Localized;
+  omarchy: Localized;
+  cachyos: Localized;
+  ryoku: Localized;
+}
+
 export interface FaqItem {
   id: string;
   question: Localized;
@@ -24,4 +33,5 @@ export interface FaqItem {
 
 export const compareVerifiedOn: string = compareData.verifiedOn;
 export const compareRows: CompareRow[] = compareData.rows as CompareRow[];
+export const compareMatrix: CompareMatrixRow[] = compareData.matrix as CompareMatrixRow[];
 export const faqItems: FaqItem[] = faqData.items as FaqItem[];

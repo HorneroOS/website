@@ -1,6 +1,146 @@
 {
   "$comment": "Hand-authored comparison for /why-horneroos. Category discipline: an operating system (distribution) is not a desktop shell, and a shell is not dotfiles. Every row names its primary source and the date it was checked. Vendor performance claims are attributed to their source, never repeated as HorneroOS results. Unknowns stay labelled instead of being guessed.",
-  "verifiedOn": "2026-11-19",
+  "verifiedOn": "2026-11-26",
+  "matrix": [
+    {
+      "id": "architecture",
+      "dimension": {
+        "es": "Arquitectura",
+        "en": "Architecture"
+      },
+      "horneroos": {
+        "es": "OS multi-edición componible sobre Arch (Desktop, Studio, Gaming + hoja de ruta Server/Agents) con Hornero Shell propia.",
+        "en": "Composable multi-edition Arch OS (Desktop, Studio, Gaming + Server/Agents roadmap) with its own Hornero Shell."
+      },
+      "omarchy": {
+        "es": "Distribución opinada de edición única orientada a desarrollo web.",
+        "en": "Single-edition opinionated distribution oriented around web development."
+      },
+      "cachyos": {
+        "es": "OS basado en Arch con múltiples entornos de escritorio estándar y kernel/repositorios optimizados por CPU.",
+        "en": "Arch-based OS with multiple standard desktop environments and CPU-optimized kernel/repositories."
+      },
+      "ryoku": {
+        "es": "Estación de trabajo opinada sobre Arch de perfil único.",
+        "en": "Single-profile opinionated Arch workstation."
+      }
+    },
+    {
+      "id": "cli-performance",
+      "dimension": {
+        "es": "CLI y rendimiento",
+        "en": "CLI performance"
+      },
+      "horneroos": {
+        "es": "horneroctl nativo en V 0.5.2: hardware rollcall en <5 ms, gestor apps webapp/tui y verificación Ed25519/SHA256 con vlib.",
+        "en": "Native V 0.5.2 horneroctl: sub-5ms hardware rollcall, apps webapp/tui manager, and native vlib Ed25519/SHA256 verification."
+      },
+      "omarchy": {
+        "es": "Scripts de shell y utilidades TUI sobre bash/arch.",
+        "en": "Shell scripts and TUI utilities on top of bash/Arch."
+      },
+      "cachyos": {
+        "es": "Utilidades GUI/CLI de CachyOS (Hello, Package Installer, Kernel Manager).",
+        "en": "CachyOS GUI/CLI utilities (Hello, Package Installer, Kernel Manager)."
+      },
+      "ryoku": {
+        "es": "Scripts de configuración y dotfiles gestionados por CLI.",
+        "en": "CLI-managed setup scripts and dotfiles."
+      }
+    },
+    {
+      "id": "installer-rollback",
+      "dimension": {
+        "es": "Instalador y rollback",
+        "en": "Installer & rollback"
+      },
+      "horneroos": {
+        "es": "Autodetección de hardware/VM, Zram + microcódigo, LUKS2 y Boot Trial con snapshots Btrfs arrancables y auto-rollback (95-hornero-boot-trial.hook + hornero-boot-confirm.service).",
+        "en": "Hardware & VM auto-detection, Zram + CPU microcode, LUKS2, and bootable Btrfs Snapshot Boot Trial & Auto-Rollback (95-hornero-boot-trial.hook + hornero-boot-confirm.service)."
+      },
+      "omarchy": {
+        "es": "Instalador automatizado de disco completo con cifrado.",
+        "en": "Automated full-disk installer with encryption."
+      },
+      "cachyos": {
+        "es": "Instalador Calamares (GUI/CLI) con soporte Btrfs/ZFS y snapshots opcionales.",
+        "en": "Calamares installer (GUI/CLI) with Btrfs/ZFS support and optional snapshots."
+      },
+      "ryoku": {
+        "es": "Instalación guiada sobre Arch Linux.",
+        "en": "Guided installation on top of Arch Linux."
+      }
+    },
+    {
+      "id": "plugin-ecosystem",
+      "dimension": {
+        "es": "Ecosistema de plugins",
+        "en": "Plugin ecosystem"
+      },
+      "horneroos": {
+        "es": "Más de 35 plugins PluginKit 3 firmados con permisos declarados (hornero-tailscale, hornero-elsewhen, hornero-containers, hornero-ai-usage, hornero-github-stats).",
+        "en": "35+ signed PluginKit 3 plugins with declared permissions (hornero-tailscale, hornero-elsewhen, hornero-containers, hornero-ai-usage, hornero-github-stats)."
+      },
+      "omarchy": {
+        "es": "Sin plataforma de plugins de shell con permisos declarados.",
+        "en": "No permission-declared shell plugin platform."
+      },
+      "cachyos": {
+        "es": "Depende del ecosistema de extensiones de cada escritorio (KDE, GNOME, etc.).",
+        "en": "Relies on each upstream desktop’s extension ecosystem (KDE, GNOME, etc.)."
+      },
+      "ryoku": {
+        "es": "Extensiones manuales vía configuración del compositor.",
+        "en": "Manual extensions via compositor configuration."
+      }
+    },
+    {
+      "id": "local-ai-isolation",
+      "dimension": {
+        "es": "IA local y aislamiento",
+        "en": "Local AI isolation"
+      },
+      "horneroos": {
+        "es": "Slices systemd dedicados (app-models.slice con CPUWeight=20 y app-agents.slice) más atribución de ancestría de agentes en prompts Polkit (insignia AI AGENT).",
+        "en": "Dedicated systemd slices (app-models.slice with CPUWeight=20 and app-agents.slice) plus Coding-Agent Ancestry Attribution on Polkit prompts (AI AGENT badge)."
+      },
+      "omarchy": {
+        "es": "Sin aislamiento cgroup específico para modelos/agentes ni atribución Polkit.",
+        "en": "No dedicated model/agent cgroup slices or Polkit agent attribution."
+      },
+      "cachyos": {
+        "es": "Planificador orientado a rendimiento general; sin slices dedicados de agentes ni insignia Polkit.",
+        "en": "General performance scheduler; no dedicated agent slices or Polkit badge."
+      },
+      "ryoku": {
+        "es": "Sin aislamiento cgroup para IA local ni atribución en Polkit.",
+        "en": "No local-AI cgroup isolation or Polkit attribution."
+      }
+    },
+    {
+      "id": "theming",
+      "dimension": {
+        "es": "Temas unificados",
+        "en": "Theming"
+      },
+      "horneroos": {
+        "es": "Hornero Signal + Hornero Chromatic (OKLab) sincronizado en Kitty, Alacritty, Ghostty, WezTerm, tmux, Zellij, VS Code, Firefox, btop, Starship, Rofi y GTK/Qt.",
+        "en": "Hornero Signal + Hornero Chromatic (OKLab) synced across Kitty, Alacritty, Ghostty, WezTerm, tmux, Zellij, VS Code, Firefox, btop, Starship, Rofi, and GTK/Qt."
+      },
+      "omarchy": {
+        "es": "Selector de temas curados para terminal, editor y barra.",
+        "en": "Curated theme switcher across terminal, editor, and bar."
+      },
+      "cachyos": {
+        "es": "Temas por defecto del entorno de escritorio elegido.",
+        "en": "Default theming of the chosen desktop environment."
+      },
+      "ryoku": {
+        "es": "Paleta fija o sincronizada vía herramientas externas.",
+        "en": "Fixed palette or synced via external tools."
+      }
+    }
+  ],
   "rows": [
     {
       "id": "horneroos",

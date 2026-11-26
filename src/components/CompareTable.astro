@@ -2,7 +2,7 @@
 // Comparison table with a native radio-group filter. Radios are keyboard
 // and touch operable by default; without JavaScript every row stays
 // visible, and the script only hides rows outside the chosen category.
-import { compareRows, compareVerifiedOn, type CompareCategory } from '../data/why';
+import { compareMatrix, compareRows, compareVerifiedOn, type CompareCategory } from '../data/why';
 import type { Locale } from '../i18n/ui';
 import { messages } from '../i18n/messages/compare-table';
 
@@ -58,6 +58,33 @@ const filters = [
     </table>
   </div>
   <p class="compare-note">{m.unaShellNoEsUn}</p>
+
+  <h3 class="compare-matrix-title" id="capability-matrix">{m.matrizCapacidades}</h3>
+  <div class="table-scroll">
+    <table class="compare-matrix">
+      <caption>{m.matrizCapacidadesCaption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{m.capacidad}</th>
+          <th scope="col" class="compare-hornero">HorneroOS</th>
+          <th scope="col">Omarchy</th>
+          <th scope="col">CachyOS</th>
+          <th scope="col">Ryoku</th>
+        </tr>
+      </thead>
+      <tbody>
+        {compareMatrix.map((row) => (
+          <tr id={`matrix-${row.id}`}>
+            <th scope="row">{row.dimension[locale]}</th>
+            <td class="compare-hornero">{row.horneroos[locale]}</td>
+            <td>{row.omarchy[locale]}</td>
+            <td>{row.cachyos[locale]}</td>
+            <td>{row.ryoku[locale]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script is:inline>
@@ -114,5 +141,16 @@ const filters = [
     max-width: 68ch;
     color: var(--ink-muted);
     font-size: var(--step--1);
+  }
+
+  .compare-matrix-title {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .compare-matrix .compare-hornero {
+    border-inline-start: 2px solid var(--signal);
+    background: color-mix(in oklab, var(--signal) 7%, transparent);
+    font-weight: 500;
   }
 </style>

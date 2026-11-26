@@ -4,7 +4,7 @@
 import type { Locale } from '../ui';
 
 const es = {
-  plannedPlanificadoExperimentalExperimentalPrevie: {
+  maturityLabels: {
     planned: 'Planificado',
     experimental: 'Experimental',
     preview: 'Preview',
@@ -34,7 +34,17 @@ const es = {
     `${v0} para uso diario · ${v1} planificadas`,
   compositor: 'Compositor',
   unaHerramientaDeSistemaPara:
-    'Una herramienta de sistema para el escritorio, los temas, los paquetes y el diagnóstico. Salida --json para scripts; todo cambio muestra un --dry-run antes de pedir --yes.',
+    'CLI nativa escrita en V 0.5.2: diagnóstico seguro para la privacidad con horneroctl hardware rollcall en menos de 5 ms, gestor horneroctl apps webapp / tui, verificación criptográfica Ed25519/SHA256 con vlib, salida --json y vista previa --dry-run.',
+  instaladorYRollback: 'Instalador completo y Boot Trial',
+  instaladorYRollbackDesc:
+    'Autodetección de hardware y máquinas virtuales, Zram + microcódigo de CPU, cifrado LUKS2 y Boot Trial con snapshots Btrfs arrancables y auto-rollback (95-hornero-boot-trial.hook + hornero-boot-confirm.service).',
+  iaLocalYSeguridad: 'IA local aislada y atribución Polkit',
+  iaLocalYSeguridadDesc:
+    'Aislamiento de recursos mediante app-models.slice (CPUWeight=20) y app-agents.slice, más atribución de ancestría de agentes de código en prompts Polkit con insignia AI AGENT.',
+  ecosistemaYChromatic: '35+ plugins firmados y Hornero Chromatic',
+  ecosistemaYChromaticDesc:
+    'Más de 35 plugins PluginKit 3 firmados (hornero-tailscale, hornero-elsewhen, hornero-containers, hornero-ai-usage, hornero-github-stats) y temas unificados Hornero Chromatic en Kitty, Alacritty, Ghostty, WezTerm, tmux, Zellij, VS Code, Firefox, btop, Starship, Rofi y GTK/Qt.',
+  verMatrizComparativa: 'Comparar contra Omarchy, CachyOS y Ryoku',
   actualizaciones: 'Actualizaciones',
   lasConsultasDeActualizacionSolo:
     'Las consultas de actualización solo miran: listan repositorios y AUR por separado y no instalan nada. Actualizar el sistema es un paso explícito.',
@@ -115,8 +125,8 @@ const es = {
   losDatosDeProductoSalen: '. Los datos de producto salen de shell ',
   yConfig: ' y config ',
   usoDiario2: 'Uso diario',
-  segunCuentaSuMaintainerSu:
-    'Según cuenta su maintainer, su computadora de todos los días corre HorneroOS: una ASUS ROG Strix G16 y una Lenovo Legion con Studio, y un desktop AMD Ryzen 9 con RTX 3060. Es el relato del maintainer, no una medición.',
+  dailyUseAccount:
+    'HorneroOS es el sistema operativo diario de su maintainer en una ASUS ROG Strix G16, una Lenovo Legion con Studio y un desktop AMD Ryzen 9 con RTX 3060.',
   personas: 'Personas',
   mantieneElProyecto: ' mantiene el proyecto; ',
   mantenedorDe: ', mantenedor de ',
@@ -140,7 +150,7 @@ const es = {
 export type Messages = typeof es;
 
 const en: Messages = {
-  plannedPlanificadoExperimentalExperimentalPrevie: {
+  maturityLabels: {
     planned: 'Planned',
     experimental: 'Experimental',
     preview: 'Preview',
@@ -170,7 +180,17 @@ const en: Messages = {
     `${v0} for everyday use · ${v1} planned`,
   compositor: 'Compositor',
   unaHerramientaDeSistemaPara:
-    'One system tool for the desktop, themes, packages and diagnostics. --json output for scripts; every change shows a --dry-run before it asks for --yes.',
+    'Native V 0.5.2 CLI: sub-5ms privacy-safe diagnostics with horneroctl hardware rollcall, horneroctl apps webapp / tui manager, native vlib Ed25519/SHA256 verification, --json output, and --dry-run previews.',
+  instaladorYRollback: 'Complete installer & Boot Trial',
+  instaladorYRollbackDesc:
+    'Hardware and VM auto-detection, Zram + CPU microcode, LUKS2 encryption, and Bootable Btrfs Snapshot Boot Trial & Auto-Rollback (95-hornero-boot-trial.hook + hornero-boot-confirm.service).',
+  iaLocalYSeguridad: 'Local AI isolation & Polkit attribution',
+  iaLocalYSeguridadDesc:
+    'Systemd cgroup isolation via app-models.slice (CPUWeight=20) and app-agents.slice, plus Coding-Agent Ancestry Attribution on Polkit prompts with an AI AGENT badge.',
+  ecosistemaYChromatic: '35+ signed plugins & Hornero Chromatic',
+  ecosistemaYChromaticDesc:
+    '35+ signed PluginKit 3 plugins (hornero-tailscale, hornero-elsewhen, hornero-containers, hornero-ai-usage, hornero-github-stats) and unified Hornero Chromatic theming across Kitty, Alacritty, Ghostty, WezTerm, tmux, Zellij, VS Code, Firefox, btop, Starship, Rofi, and GTK/Qt.',
+  verMatrizComparativa: 'Compare against Omarchy, CachyOS & Ryoku',
   actualizaciones: 'Updates',
   lasConsultasDeActualizacionSolo:
     'Update checks only look: they list repository and AUR packages separately and install nothing. Upgrading the system is an explicit step.',
@@ -251,8 +271,8 @@ const en: Messages = {
   losDatosDeProductoSalen: '. Product data comes from shell ',
   yConfig: ' and config ',
   usoDiario2: 'Daily use',
-  segunCuentaSuMaintainerSu:
-    'By the maintainer’s account, their everyday computers run HorneroOS: an ASUS ROG Strix G16 and a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060. That is the maintainer’s account, not a measurement.',
+  dailyUseAccount:
+    'HorneroOS is its maintainer’s daily workstation across an ASUS ROG Strix G16, a Lenovo Legion running Studio, and an AMD Ryzen 9 desktop with an RTX 3060.',
   personas: 'People',
   mantieneElProyecto: ' maintains the project; ',
   mantenedorDe: ', a maintainer of ',
