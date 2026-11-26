@@ -206,28 +206,28 @@ Where: QA VM or a fresh install. About 120 minutes, 4 slots.
 
 - **Priority:** P0 (launch-critical).
 - **Page and section:** /install · Install, steps.
-- **On screen:** The the edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.
+- **On screen:** The edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.
 - **Spec:** 16:9, 1920x1080 (also a 2x master), PNG master (lossless).
 - **State:** theme Installer, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
 - **Setup:**
   1. Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.
   2. Use a throw-away virtual disk and the demo user name `demo`.
 - **Privacy:** Demo user, demo hostname; no real network name.
-- **Alt text (EN):** The the edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.
+- **Alt text (EN):** The edition and compositor picker with Desktop, Studio and Gaming and Hyprland selected.
 - **Alt text (ES):** El selector de edición y compositor con Desktop, Studio y Gaming e Hyprland seleccionado.
 
 ### CAP-INSTALL-08 Live ISO desktop
 
 - **Priority:** P0 (launch-critical).
 - **Page and section:** /install · Install, live session.
-- **On screen:** The the live ISO desktop on first boot with the installer launcher visible.
+- **On screen:** The live ISO desktop on first boot with the installer launcher visible.
 - **Spec:** 16:9, 1920x1080 (also a 2x master), PNG master (lossless).
 - **State:** theme Installer, mode n/a, layout n/a, wallpaper buenos-aires-nocturno.
 - **Setup:**
   1. Run the current release ISO in the QA VM (`uv run hornero-qa ...`, one VM at a time) at 1920x1080 and capture with the QA screenshot tool.
   2. Use a throw-away virtual disk and the demo user name `demo`.
 - **Privacy:** Demo user, demo hostname; no real network name.
-- **Alt text (EN):** The the live ISO desktop on first boot with the installer launcher visible.
+- **Alt text (EN):** The live ISO desktop on first boot with the installer launcher visible.
 - **Alt text (ES):** El escritorio de la ISO en vivo en el primer arranque con el lanzador del instalador visible.
 
 ## Notes for the maintainer

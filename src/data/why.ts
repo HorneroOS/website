@@ -9,7 +9,7 @@ export interface CompareRow {
   id: string;
   name: string;
   category: CompareCategory;
-  version: string;
+  version: string | Localized;
   href: string;
   what: Localized;
   install: Localized;

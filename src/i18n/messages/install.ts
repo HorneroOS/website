@@ -224,7 +224,7 @@ const en: Messages = {
     'Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every edition can be installed.',
   desktopEsLaEdicionBase:
     'Desktop is the everyday-use base edition. Studio and Gaming install from the same current ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are ',
-  laEvidenciaDeHardwareDe: ' edition. The ',
+  laEvidenciaDeHardwareDe: ' editions. The ',
   todaviaEstaPendienteAsiQue:
     ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.',
   comoEncajanLasEdiciones: 'How the editions fit together.',

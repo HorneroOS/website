@@ -46,7 +46,7 @@ const filters = [
           <tr data-category={row.category}>
             <th scope="row">
               <a href={row.href}>{row.name}</a>
-              <span class="compare-version">{row.version}</span>
+              <span class="compare-version">{typeof row.version === 'string' ? row.version : row.version[locale]}</span>
             </th>
             <td>{categoryLabel[row.category]}</td>
             <td>{row.what[locale]}</td>
