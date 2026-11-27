@@ -51,8 +51,8 @@
     "gtkTheme": "Hornero-Ibera",
     "iconTheme": "Papirus-Dark",
     "palette": {
-      "background": "#0B110F",
-      "surface": "#17211D",
+      "background": "#080E08",
+      "surface": "#172118",
       "text": "#E7ECE1",
       "primary": "#E3A548",
       "secondary": "#7FC6DD",
@@ -91,8 +91,8 @@
     "gtkTheme": "Hornero-Nocturno",
     "iconTheme": "Papirus-Dark",
     "palette": {
-      "background": "#0D0D11",
-      "surface": "#1C1C23",
+      "background": "#0C0C16",
+      "surface": "#1D1D2A",
       "text": "#EDE7DF",
       "primary": "#F0A832",
       "secondary": "#86C2EC",
@@ -131,12 +131,12 @@
     "gtkTheme": "Hornero-Cuyo",
     "iconTheme": "Papirus",
     "palette": {
-      "background": "#E1E2E1",
-      "surface": "#F4F5F4",
-      "text": "#1C1F22",
-      "primary": "#8F4A1A",
-      "secondary": "#1C638D",
-      "accent": "#276A3C"
+      "background": "#E0DCD6",
+      "surface": "#F2EFEB",
+      "text": "#23201C",
+      "primary": "#8E4919",
+      "secondary": "#1A618B",
+      "accent": "#25683A"
     }
   },
   {
@@ -180,6 +180,66 @@
     }
   },
   {
+    "id": "jacaranda",
+    "name": "Jacarandá",
+    "mode": "light",
+    "description": "Buenos Aires spring in bloom: cool porcelain-lavender ceramic panels, deep indigo-slate ink, lavender-rose and celeste accents",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 10,
+    "paletteModel": "semantic",
+    "gtkTheme": "Hornero-Jacaranda",
+    "iconTheme": "Papirus",
+    "palette": {
+      "background": "#EAE7F3",
+      "surface": "#F8F6FC",
+      "text": "#2B2640",
+      "primary": "#6538A6",
+      "secondary": "#185E8A",
+      "accent": "#1E664C"
+    }
+  },
+  {
+    "id": "glaciar",
+    "name": "Glaciar",
+    "mode": "light",
+    "description": "Patagonian glacier ice: cool ice-white ceramic panels, deep fjord-slate ink, celeste and turquoise-mint accents",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 11,
+    "paletteModel": "semantic",
+    "gtkTheme": "Hornero-Glaciar",
+    "iconTheme": "Papirus",
+    "palette": {
+      "background": "#E3EFF5",
+      "surface": "#F5FAFD",
+      "text": "#1F3240",
+      "primary": "#0E5D7E",
+      "secondary": "#0F6466",
+      "accent": "#1B6649"
+    }
+  },
+  {
+    "id": "ceibo",
+    "name": "Ceibo",
+    "mode": "light",
+    "description": "National blossom in daylight: clean neutral porcelain surfaces, deep plum-slate ink, coral-rose signal and botanical mint",
+    "official": false,
+    "collection": "hornero-originals",
+    "collectionOrder": 12,
+    "paletteModel": "semantic",
+    "gtkTheme": "Hornero-Ceibo",
+    "iconTheme": "Papirus",
+    "palette": {
+      "background": "#ECE9EE",
+      "surface": "#F9F8FA",
+      "text": "#2E2630",
+      "primary": "#9E2A48",
+      "secondary": "#185E85",
+      "accent": "#1F6644"
+    }
+  },
+  {
     "id": "catppuccin-latte",
     "name": "Catppuccin Latte",
     "mode": "light",
@@ -191,12 +251,12 @@
     "gtkTheme": "Hornero-Signal-Day",
     "iconTheme": "Papirus",
     "palette": {
-      "background": "#DCE0E8",
+      "background": "#E6E9EF",
       "surface": "#F4F5F8",
       "text": "#4C4F69",
-      "primary": "#B24608",
-      "secondary": "#177283",
-      "accent": "#307720"
+      "primary": "#AC4000",
+      "secondary": "#0B6C7D",
+      "accent": "#2A7119"
     }
   },
   {
@@ -263,7 +323,7 @@
     "id": "hornero-signal-day",
     "name": "Hornero Signal Day",
     "mode": "light",
-    "description": "Warm technical-drawing paper with ink-black text, a burnt-amber live signal and a deep celeste focus cue",
+    "description": "Flagship Light: white ceramic and pale aluminum instrument panels, dark slate ink, amber live signal and celeste focus cue",
     "official": true,
     "collection": "hornero-signal",
     "collectionOrder": 2,
@@ -271,12 +331,12 @@
     "gtkTheme": "Hornero-Signal-Day",
     "iconTheme": "Papirus",
     "palette": {
-      "background": "#E6E1D5",
-      "surface": "#F7F4EE",
-      "text": "#1B1E22",
-      "primary": "#8F4B00",
-      "secondary": "#1A5F88",
-      "accent": "#256A3B"
+      "background": "#E8EDF4",
+      "surface": "#F5F8FC",
+      "text": "#283344",
+      "primary": "#864700",
+      "secondary": "#145D86",
+      "accent": "#1E6448"
     }
   },
   {
@@ -323,7 +383,7 @@
     "id": "hornero-signal-night",
     "name": "Hornero Signal Night",
     "mode": "dark",
-    "description": "Factory default: cool graphite instrument panels with warm phosphor-cream ink, an amber live signal and a celeste focus cue",
+    "description": "Factory default: cool blue-hour graphite instrument panels, crisp off-white ink, amber live signal and celeste focus cue",
     "official": true,
     "collection": "hornero-signal",
     "collectionOrder": 1,
@@ -331,12 +391,12 @@
     "gtkTheme": "Hornero-Signal",
     "iconTheme": "Papirus-Dark",
     "palette": {
-      "background": "#0C0F13",
-      "surface": "#181D24",
-      "text": "#ECE6DA",
-      "primary": "#F2A33A",
-      "secondary": "#7EC1EA",
-      "accent": "#8BD49A"
+      "background": "#0C1016",
+      "surface": "#1B2430",
+      "text": "#E6EBF1",
+      "primary": "#F2AC52",
+      "secondary": "#8BCEF0",
+      "accent": "#8DDBAF"
     }
   },
   {

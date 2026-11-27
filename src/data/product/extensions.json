@@ -1,10 +1,10 @@
 {
-  "generatedFrom": "ba988dd01f5a28bb7082016a9e3c4afd0885f96a",
+  "generatedFrom": "80405297137d18111a17494a46cdaeae16dee19f",
   "plugins": [
     {
       "id": "hornero-agenda",
       "name": "Hornero Agenda",
-      "version": "3.0.2",
+      "version": "3.0.3",
       "description": "A desktop widget of date facts (day, ISO week, quarter, day of year, days remaining) with a year partition bar, from the shared time provider. Dates only; no events source.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -18,7 +18,7 @@
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-agenda",
-      "sha256": "2ff1be168bdca9ac81d31f215c088fcb0802f56e9c59632f848f70f39c5ae02d",
+      "sha256": "6fe40f6074582ead4373a45530325c547291f3bb9621d88857976cd62e4a94b7",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -42,7 +42,7 @@
     {
       "id": "hornero-ai-usage",
       "name": "Hornero AI Usage",
-      "version": "4.2.2",
+      "version": "4.2.4",
       "description": "Agent Deck: every discovered coding-agent subscription in one place - provider-reported quota windows with resets, plans, and local activity. Unavailable quotas are labelled unknown, never guessed.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -57,7 +57,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-ai-usage",
-      "sha256": "bf51b66249b4f40256b082351f0ca9487c5b5420498725b8ce107c4320a235ec",
+      "sha256": "628952a017df856dda24128933675af2235fc729ae8d051b021d1fded56a7d63",
       "processCommands": [
         "horneroctl",
         "qs"
@@ -200,7 +200,7 @@
     {
       "id": "hornero-calendar",
       "name": "Hornero Calendar",
-      "version": "3.1.1",
+      "version": "3.1.3",
       "description": "A desktop widget with a display clock, the full date and a square-celled month grid over the shared time provider. Dates only; no events source.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -214,7 +214,7 @@
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-calendar",
-      "sha256": "a701d71d320a8419b3102eee810cbe0ff42345567c6ca1067e7e78c94fd0bc4d",
+      "sha256": "1c9e217ab6749a9cf54823271f21010a98b8946aa0b77f1383723d6d0f9f7541",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -342,7 +342,7 @@
     {
       "id": "hornero-containers",
       "name": "Hornero Containers",
-      "version": "1.0.1",
+      "version": "1.0.3",
       "description": "A read-only roster of your Podman and Docker containers: state, image, uptime and published ports. Never starts, stops or pulls anything. Says so plainly when no runtime answers.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -357,7 +357,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-containers",
-      "sha256": "e401a72809b62546ad56242b673cad1b2b30771a893abdd78ebd20406e41b5d9",
+      "sha256": "68021bf39aa8a2f32291c159573378847283de2d6af4d0e9180e03b74a9a79b8",
       "processCommands": [
         "podman",
         "docker"
@@ -478,7 +478,7 @@
     {
       "id": "hornero-device-battery",
       "name": "Hornero Device Battery",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Charge of the wireless things on your desk: game controllers, mice, keyboards, headsets, pens and phones, from UPower. Honest about devices that report no percentage.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -493,7 +493,7 @@
       "category": "system",
       "trust": "official",
       "path": "plugins/hornero-device-battery",
-      "sha256": "ce0af2d7637b59663df50349bb88234ce4d838aeda1975ea90792614436a3a3c",
+      "sha256": "244714a7fd96ba4836632e673f1672c7a9f48c885c32b0bbcb808ea38298e747",
       "processCommands": [
         "upower"
       ],
@@ -537,7 +537,7 @@
     {
       "id": "hornero-disk-usage",
       "name": "Hornero Disk Usage",
-      "version": "3.0.2",
+      "version": "3.0.3",
       "description": "Every physical disk as a partition bar with a dimension line, free space and a near-full flag from the shared system provider. Read-only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -551,7 +551,7 @@
       "category": "system",
       "trust": "official",
       "path": "plugins/hornero-disk-usage",
-      "sha256": "d2f84baa699caef3a8549df340c64f767d391d87e0a0d155be48cf6e5489f883",
+      "sha256": "961dfd06603c4b165edb35e880da0e50865a0b517661c6f83300ff66355c5bbd",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -583,7 +583,7 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-elsewhen",
       "sha256": "3c50d5c4fa1777164e752d943c1e09346660535faf232df5d22ccf4196267441",
@@ -730,7 +730,7 @@
     {
       "id": "hornero-forge-board",
       "name": "Hornero Forge Board",
-      "version": "1.0.2",
+      "version": "1.0.4",
       "description": "CI and pull-request status for the GitHub repositories you name, through the gh CLI session you already signed in. Read-only; stores and sees no token.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -745,7 +745,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-forge-board",
-      "sha256": "0871072b2317450c05d0b2a7c27c1fc3339d0010a3d4781c04b67b42ed7619d0",
+      "sha256": "41a57bc49c80a8504dfa28976458f29576071046e525a0df2eb02debf641a6af",
       "processCommands": [
         "gh"
       ],
@@ -790,7 +790,7 @@
     {
       "id": "hornero-git-board",
       "name": "Hornero Git Board",
-      "version": "1.0.0",
+      "version": "1.0.3",
       "description": "A read-only status board for the repositories you name: branch, ahead/behind, staged, changed, untracked and conflicted counts and the last commit. Local git only, no network, never writes.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -805,7 +805,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-git-board",
-      "sha256": "03ff19d4a97aa14108d6ebba94e155972c5c764946d9683fa5545dfac4c5ede8",
+      "sha256": "06db53f265d06b0c8fc09933d046bd90e2d72b1da3effbe7945db08924e3f929",
       "processCommands": [
         "git"
       ],
@@ -855,7 +855,7 @@
     {
       "id": "hornero-github-stats",
       "name": "Hornero Dev Pulse",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "description": "Dev Pulse: GitHub development activity through your existing gh sign-in - contributions, pull requests, reviews, an actionable inbox, and an optional side-by-side with Agent Deck AI usage. Local-first; unknown metrics stay unknown.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -870,7 +870,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-github-stats",
-      "sha256": "10540c7e2a0370ee23ed458614091250fe6f370381ca2aa1f8ae51829ab444a0",
+      "sha256": "7024e8fd2de7b8f2065c3af69447e66912b0164d5a5517ab70e0551809aef689",
       "processCommands": [
         "horneroctl",
         "qs",
@@ -1231,7 +1231,7 @@
     {
       "id": "hornero-port-watch",
       "name": "Hornero Port Watch",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "description": "What is listening on this machine, and what is free: ports, protocol, how far each bind reaches and the owning process when the kernel lets you see it. Watch the ports your projects need. Read-only, local.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1246,7 +1246,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-port-watch",
-      "sha256": "ecd4d2ea549c1ac6b22becc69532f03cbf1a6cc13f2b38dd8dbc110b2252f75b",
+      "sha256": "67e61ea4b0b509b5a31ff2460b0146b120aecfe7c65460474a11d88c3c41f2fe",
       "processCommands": [
         "ss"
       ],
@@ -1302,7 +1302,7 @@
     {
       "id": "hornero-quick-notes",
       "name": "Hornero Quick Notes",
-      "version": "3.0.2",
+      "version": "3.0.3",
       "description": "Dashboard card with one persistent note saved through PluginKit Settings. Debounced autosave, Ctrl+S, flush on unload, clear confirmation, no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1314,7 +1314,7 @@
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-quick-notes",
-      "sha256": "3359df83af21b5616d47d1e850891a71978b1fa13fda3031e563ba42b51bbba0",
+      "sha256": "7de3026980b0286b3f97a7264803091b099f55555477ab10fdefbbba764a4ba4",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1341,7 +1341,7 @@
     {
       "id": "hornero-studio-audio",
       "name": "Hornero Studio Audio",
-      "version": "3.0.2",
+      "version": "3.0.4",
       "description": "Bar indicator, popover and dashboard card for the Studio audio mode and Temporary Performance state from the typed horneroctl contract. Read-only; mode changes stay in the CLI and Control Center.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1356,7 +1356,7 @@
       "category": "media",
       "trust": "official",
       "path": "plugins/hornero-studio-audio",
-      "sha256": "b91ea1c78aa1203048b36b430120c2ee9a236507c44d9784283aef2d457f41a0",
+      "sha256": "3989d1a77d7e06baca97a54645afd1aa2c51da55986282217d47000c07daa6b1",
       "processCommands": [
         "horneroctl"
       ],
@@ -1379,7 +1379,7 @@
     {
       "id": "hornero-studio-jobs",
       "name": "Hornero Studio Jobs",
-      "version": "2.1.0",
+      "version": "2.1.2",
       "description": "Render and export job monitor for HorneroOS Studio: shows queued, running, finished and interrupted jobs from the typed horneroctl studio jobs contract. Read-only; jobs are submitted and cancelled from the CLI or Control Center.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1391,7 +1391,7 @@
       "category": "developer",
       "trust": "official",
       "path": "plugins/hornero-studio-jobs",
-      "sha256": "16cfa7afec56e5cbe63ec04e309fdeab4ce61176a85896ccffd3af39d731e50f",
+      "sha256": "3842cc9e31aa23d833ae875e56eebedb2559bbe44577ca3a3bfe80f02880fbf1",
       "processCommands": [
         "horneroctl"
       ],
@@ -1485,7 +1485,7 @@
     {
       "id": "hornero-tailscale",
       "name": "Hornero Tailscale",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Tailscale VPN status pill and dashboard card: connection state, tailnet IP, active exit node, online peers and one-click connect/disconnect toggle.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1497,10 +1497,10 @@
       ],
       "manifestSchema": 3,
       "minShellVersion": "1.0.0",
-      "category": "utilities",
+      "category": "system",
       "trust": "official",
       "path": "plugins/hornero-tailscale",
-      "sha256": "1ede67cb50bc48b1694f89bb4ad3d8327555d8937971ea72fda8a9a0759c204b",
+      "sha256": "bdeafbc82ea57e08d88c040e76533446352effbac4b4ae2de3c6dfb8b0c0e607",
       "processCommands": [
         "tailscale"
       ],
@@ -1530,7 +1530,7 @@
     {
       "id": "hornero-toolbox",
       "name": "Hornero Toolbox",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Seven everyday tools in one Signal card: calculator, unit converter (with data sizes), base converter, colour with WCAG contrast, date maths, JSON format/minify and text transforms. Local arithmetic only.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1544,7 +1544,7 @@
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-toolbox",
-      "sha256": "5b0378f74c97f575a4a2bd97d1294648b68091db35752c1b46896dbfe1ddf5af",
+      "sha256": "0c68e15993729ddaf16f250671bfd52e45793a85596c7884204eafb25ae30587",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1630,8 +1630,8 @@
     {
       "id": "hornero-uptime",
       "name": "Hornero Uptime",
-      "version": "3.0.3",
-      "description": "Bar indicator plus popover/dashboard session detail (uptime, boot time, idle time) from /proc/uptime with the declared cat command. No PluginKit uptime facade exists; error state instead of a fabricated zero.",
+      "version": "3.0.4",
+      "description": "Bar indicator plus popover and dashboard session detail (live uptime and derived boot time) over the shared PluginKit system provider. Zero subprocesses; unavailable state instead of a fabricated zero.",
       "author": "HorneroOS contributors",
       "license": "MIT",
       "homepage": "https://github.com/HorneroOS/plugins",
@@ -1640,23 +1640,14 @@
         "dashboard"
       ],
       "manifestSchema": 3,
-      "minShellVersion": "1.2.79",
+      "minShellVersion": "1.3.10",
       "category": "system",
       "trust": "official",
       "path": "plugins/hornero-uptime",
-      "sha256": "507f809f27d3ed8d9e8c297a10012a53c92c54b5377115ae26f03f16fc3985b1",
-      "processCommands": [
-        "cat"
-      ],
+      "sha256": "c40d547f34ee9355b3ae1db821254e12d623bf3d4c194f4feff7dced1f15be21",
+      "processCommands": [],
       "networkHosts": [],
       "settings": {
-        "refreshSeconds": {
-          "type": "integer",
-          "default": 60,
-          "minimum": 15,
-          "maximum": 600,
-          "description": "Seconds between /proc/uptime reads (the 1.x fixed 60-second cadence by default)."
-        },
         "showLabel": {
           "type": "boolean",
           "default": true,
@@ -1665,7 +1656,7 @@
         "showWhenUnavailable": {
           "type": "boolean",
           "default": true,
-          "description": "Keep the bar indicator visible, labelled unavailable, when /proc/uptime cannot be read (the 1.x behaviour); off hides it until a read succeeds."
+          "description": "Keep the bar indicator visible, labelled unavailable, when uptime is not yet reported; off hides it until a reading arrives."
         }
       }
     },
@@ -1705,7 +1696,7 @@
     {
       "id": "hornero-weather",
       "name": "Hornero Weather",
-      "version": "3.1.1",
+      "version": "3.1.2",
       "description": "Dashboard card and contextual bar indicator complementing native Weather with configurable density, a local wind-threshold alert and forecast detail from the PluginKit Weather facade only",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1720,7 +1711,7 @@
       "category": "utilities",
       "trust": "official",
       "path": "plugins/hornero-weather",
-      "sha256": "441da7a9e9560ed7833b75e2f0832629202c14d6b7998210ad534712f489ebc7",
+      "sha256": "d3636a3df4e6b17e7e4f34a3ec516e88a33be3e923f23d3251aab5a13be30131",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
@@ -1782,7 +1773,7 @@
     {
       "id": "hornero-world-clock",
       "name": "Hornero World Clock",
-      "version": "3.2.1",
+      "version": "3.2.2",
       "description": "Dashboard card with local, UTC and three selectable cities. Pure-JS rule-based offsets (fixed, EU, US and southern DST rules) labelled per row; no processes or network.",
       "author": "HorneroOS contributors",
       "license": "MIT",
@@ -1797,7 +1788,7 @@
       "category": "productivity",
       "trust": "official",
       "path": "plugins/hornero-world-clock",
-      "sha256": "a99af4bc47d8cfe8e2fb0199e6c191bce3af5014d5cc84eee3b6c56a9aecfdc8",
+      "sha256": "d4b847fd8516c08b39e8adb78f48aa2dc6b8d4a3dcb619c6d0071220324ba92b",
       "processCommands": [],
       "networkHosts": [],
       "settings": {
