@@ -43,15 +43,70 @@ if (slot.docsOnly) {
   throw new Error(`Capture slot ${slot.id} is docs-only and must not be placed on the website`);
 }
 
-const images = import.meta.glob<{ default: ImageMetadata }>('../assets/captures/*.{png,jpg,jpeg,webp,avif}', { eager: true });
-const resolveImage = (file: string | null | undefined): ImageMetadata | undefined => {
+// Lazy glob excluding archived and docs-only captures (served via /captures/
+// for docs) so Vite does not bundle ~89 MB of unrendered PNGs into dist/.
+// Newly ingested slots match the positive pattern automatically.
+const images = import.meta.glob<{ default: ImageMetadata }>([
+  '../assets/captures/*.{png,jpg,jpeg,webp,avif}',
+  '!../assets/captures/cap-appearance-03.png',
+  '!../assets/captures/cap-cc-03.png',
+  '!../assets/captures/cap-cc-05.png',
+  '!../assets/captures/cap-cc-06.png',
+  '!../assets/captures/cap-cc-11.png',
+  '!../assets/captures/cap-cc-12.png',
+  '!../assets/captures/cap-cc-13.png',
+  '!../assets/captures/cap-cc-15.png',
+  '!../assets/captures/cap-clip-01-poster.png',
+  '!../assets/captures/cap-clip-02-poster.png',
+  '!../assets/captures/cap-clip-05-poster.png',
+  '!../assets/captures/cap-clip-06-poster.png',
+  '!../assets/captures/cap-desktop-03.png',
+  '!../assets/captures/cap-desktop-04.png',
+  '!../assets/captures/cap-ext-03.png',
+  '!../assets/captures/cap-hero-02.png',
+  '!../assets/captures/cap-javi-01.png',
+  '!../assets/captures/cap-javi-06.png',
+  '!../assets/captures/cap-javi-10.png',
+  '!../assets/captures/cap-layout-03.png',
+  '!../assets/captures/cap-layout-06.png',
+  '!../assets/captures/cap-layout-07.png',
+  '!../assets/captures/cap-layout-08.png',
+  '!../assets/captures/cap-layout-09.png',
+  '!../assets/captures/cap-layout-10.png',
+  '!../assets/captures/cap-layout-13.png',
+  '!../assets/captures/cap-layout-14.png',
+  '!../assets/captures/cap-mode-02.png',
+  '!../assets/captures/cap-mode-03.png',
+  '!../assets/captures/cap-mode-04.png',
+  '!../assets/captures/cap-mode-06.png',
+  '!../assets/captures/cap-og-01.png',
+  '!../assets/captures/cap-shell-01.png',
+  '!../assets/captures/cap-shell-02.png',
+  '!../assets/captures/cap-shell-04.png',
+  '!../assets/captures/cap-shell-05.png',
+  '!../assets/captures/cap-shell-06.png',
+  '!../assets/captures/cap-shell-10.png',
+  '!../assets/captures/cap-studio-02.png',
+  '!../assets/captures/cap-studio-04.png',
+  '!../assets/captures/cap-term-01.png',
+  '!../assets/captures/cap-term-02.png',
+  '!../assets/captures/cap-term-03.png',
+  '!../assets/captures/cap-term-04.png',
+  '!../assets/captures/cap-theme-01.png',
+  '!../assets/captures/cap-theme-03.png',
+  '!../assets/captures/cap-theme-04.png',
+  '!../assets/captures/cap-theme-07.png',
+  '!../assets/captures/cap-update-01.png',
+  '!../assets/captures/cap-update-02.png',
+]);
+const resolveImage = async (file: string | null | undefined): Promise<ImageMetadata | undefined> => {
   if (!file) return undefined;
-  const hit = Object.entries(images).find(([path]) => path.endsWith(`/${file}`));
-  return hit?.[1].default;
+  const loader = images[`../assets/captures/${file}`];
+  return loader ? (await loader()).default : undefined;
 };
 const isClip = slot.kind === 'clip';
-const image = !isClip ? resolveImage(slot.file) : undefined;
-const poster = isClip ? resolveImage(slot.poster) : undefined;
+const image = !isClip ? await resolveImage(slot.file) : undefined;
+const poster = isClip ? await resolveImage(slot.poster) : undefined;
 if (!isClip && !image) throw new Error(`Capture slot ${slot.id} is captured but src/assets/captures/${slot.file} is missing`);
 if (isClip && !poster) throw new Error(`Capture slot ${slot.id} is a clip but its poster ${slot.poster} is missing`);
 
