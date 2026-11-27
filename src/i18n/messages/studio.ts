@@ -31,6 +31,7 @@ const es = {
   especializaciones: 'Especializaciones',
   aplicaciones: 'Aplicaciones',
   audioYRendimiento: 'Audio y rendimiento',
+  perfilesYSnapshots: 'Perfiles y snapshots',
   estado: 'Estado',
   studioYaEstaDisponiblePara: 'Studio está disponible hoy con madurez Preview: para uso diario, con las limitaciones declaradas.',
   seInstalaDesdeLaMisma:
@@ -71,6 +72,43 @@ const es = {
   configuracionYRecuperacionDeAudio: 'Configuración y recuperación de audio',
   guiaDeInicio: 'Guía de inicio',
   ruteoDeAudioEnVivo: 'Ruteo en vivo (DAW + llamadas)',
+  perfilesYSnapshotsEyebrow: 'Espacio de usuario · 5 dominios',
+  espacioDeUsuarioReversible: '100 % reversible, sin root',
+  perfilesYSnapshotsDeTrabajo: 'Perfiles y snapshots de trabajo',
+  perfilesYSnapshotsIntro:
+    'Capturá el estado vivo de tu escritorio en cinco dominios y alterná entre configuraciones como Everyday, Guitar + Calls o Recording con vista previa de diferencias, confirmación Keep/Revert de 15 segundos y reversión instantánea al baseline.',
+  cincoDominiosYSnapshotBaseline: '5 dominios composables y red de seguridad',
+  capturaTuEstadoEnVivo:
+    'horneroctl profile guarda solo configuración en espacio de usuario, sin requerir root, sin kernel de tiempo real personalizado y sin tocar bases de datos privadas de tus apps.',
+  profileDomains: [
+    { name: 'Experiencia', detail: 'Modo visual, variantes Signal, layouts de Hyprland y perfiles de animación.' },
+    { name: 'Audio y ruteo PipeWire', detail: 'Modo de Studio, quantum, dispositivos por defecto con aviso si falta hardware, drop-ins y reglas por app.' },
+    { name: 'Energía', detail: 'Perfil de energía activo (balanced, performance, power-saver) y reglas de inhibición o caffeine.' },
+    { name: 'Extensiones', detail: 'Extensiones de Hornero PluginKit y plugins de Hyprland habilitados.' },
+    { name: 'Companion Apps', detail: 'Apps de usuario detectadas al capturar, con oferta opt-in de 1 clic para lanzar las faltantes.' },
+  ],
+  baselineInmutableYRespaldoPrevio:
+    'Snapshot baseline inmutable automático en la primera captura o aplicación, más respaldo previous antes de cada cambio.',
+  cambioConDiffYConfirmacion15s:
+    'Vista previa de diferencias contra el estado vivo y barra de seguridad de 15 segundos (Keep / Revert) en el Centro de Control.',
+  lanzamientoOpcionalDeCompanionApps:
+    'Exportación e importación portátil en JSON (--portable) para guardar tus setups en dotfiles o moverlos entre máquinas.',
+  profileCliCommands: `horneroctl profile capture guitar-calls --name "Guitar + Calls" --yes\nhorneroctl profile diff guitar-calls\nhorneroctl profile revert --to baseline --yes`,
+  kitsDeRuteoDeAudioEnVivo: 'Kits de ruteo en vivo y audio por app',
+  desdeCentroDeControlStudioYAudio:
+    'Activá kits virtuales reversibles de PipeWire/WirePlumber en 1 clic desde Control Center → Studio o desde la CLI, y enrutá flujos individuales desde Control Center → Audio.',
+  routingKits: [
+    { id: 'live-call', detail: 'Ruteo sin eco para Discord/Zoom con retornos aislados (REAPER Lesson Mic y Discord Call).' },
+    { id: 'browser-backing', detail: 'Sink aislado Browser Backing para mandar audio del navegador a las entradas de tu DAW.' },
+    { id: 'reaper-low-latency', detail: 'Regla JACK por aplicación a 256 frames para REAPER manteniendo Balanced como base.' },
+  ],
+  selectorPorAppYCeroVolumen:
+    'Selector de salida por flujo en Control Center → Audio (sin necesitar pavucontrol) y alerta de volumen en 0 % o mute con Restaurar 100 % en 1 clic.',
+  qpwgraphYControlCenterEnUnClic:
+    'Botón directo para abrir qpwgraph y volver al estado previo cuando terminás la sesión.',
+  routingCliCommands: `horneroctl studio routing enable live-call --yes\nhorneroctl studio routing status --json`,
+  verGuiaDePerfilesYSnapshots: 'Guía de perfiles y snapshots',
+  verGuiaDeRuteoEnVivo: 'Guía de ruteo de audio en vivo',
   todaviaNoDisponible: 'Todavía no disponible',
   validacionDeHardwareLasInterfaces:
     'Validación de hardware: las interfaces de audio, MIDI, la codificación por GPU y las pantallas esperan fixtures físicos de QA.',
@@ -109,6 +147,7 @@ const en: Messages = {
   especializaciones: 'Specializations',
   aplicaciones: 'Applications',
   audioYRendimiento: 'Audio & performance',
+  perfilesYSnapshots: 'Profiles & snapshots',
   estado: 'Status',
   studioYaEstaDisponiblePara: 'Studio is available today at Preview maturity: everyday use, with the declared limitations.',
   seInstalaDesdeLaMisma:
@@ -147,6 +186,43 @@ const en: Messages = {
   configuracionYRecuperacionDeAudio: 'Audio setup & recovery',
   guiaDeInicio: 'Getting started guide',
   ruteoDeAudioEnVivo: 'Live audio routing (DAW + calls)',
+  perfilesYSnapshotsEyebrow: 'User-space · 5 domains',
+  espacioDeUsuarioReversible: '100% reversible, no root',
+  perfilesYSnapshotsDeTrabajo: 'Workspace profiles & snapshots',
+  perfilesYSnapshotsIntro:
+    'Capture your live desktop state across five domains and switch between setups like Everyday, Guitar + Calls, or Recording with diff preview, 15-second Keep/Revert confirmation, and instant rollback to baseline.',
+  cincoDominiosYSnapshotBaseline: '5 composable domains & safety net',
+  capturaTuEstadoEnVivo:
+    'horneroctl profile stores user-space configuration only—requiring no root privileges, no custom realtime kernel, and never touching private application databases.',
+  profileDomains: [
+    { name: 'Experience', detail: 'Visual mode, Signal theme variants, Hyprland window layouts, and animation profiles.' },
+    { name: 'Audio & PipeWire routing', detail: 'Studio audio mode, PipeWire quantum, default devices with missing-hardware warnings, drop-ins, and per-app stream rules.' },
+    { name: 'Power', detail: 'Active power profile (balanced, performance, power-saver) and idle inhibitor / keep-awake rules.' },
+    { name: 'Extensions', detail: 'Enabled Hornero PluginKit extensions and Hyprland plugin states.' },
+    { name: 'Companion Apps', detail: 'Auto-detected user apps during capture, with an opt-in 1-click launch prompt for missing apps.' },
+  ],
+  baselineInmutableYRespaldoPrevio:
+    'Automatic immutable baseline snapshot on first capture or apply, plus an automatic previous snapshot before every switch.',
+  cambioConDiffYConfirmacion15s:
+    'Live-state diff preview and a 15-second Keep/Revert confirmation banner in Control Center with automatic rollback on timeout.',
+  lanzamientoOpcionalDeCompanionApps:
+    'Portable JSON bundle export and import (--portable) to commit setups to dotfiles or share across machines.',
+  profileCliCommands: `horneroctl profile capture guitar-calls --name "Guitar + Calls" --yes\nhorneroctl profile diff guitar-calls\nhorneroctl profile revert --to baseline --yes`,
+  kitsDeRuteoDeAudioEnVivo: '1-click Live Audio Routing Kits & per-app routing',
+  desdeCentroDeControlStudioYAudio:
+    'Enable reversible user-space PipeWire/WirePlumber routing kits in 1 click from Control Center → Studio or the CLI, and route individual streams from Control Center → Audio.',
+  routingKits: [
+    { id: 'live-call', detail: 'Discord/Zoom zero-feedback routing with isolated hardware loopbacks (REAPER Lesson Mic & Discord Call).' },
+    { id: 'browser-backing', detail: 'Isolated Browser Backing sink to feed browser audio straight into your DAW inputs.' },
+    { id: 'reaper-low-latency', detail: 'Scoped 256-frame JACK scheduling rule for REAPER while keeping Balanced as baseline.' },
+  ],
+  selectorPorAppYCeroVolumen:
+    'Per-app stream sink selector in Control Center → Audio (no pavucontrol needed) and muted/0% volume alert with 1-click Restore 100%.',
+  qpwgraphYControlCenterEnUnClic:
+    'One-click qpwgraph launch to inspect links visually and full rollback when your session wraps up.',
+  routingCliCommands: `horneroctl studio routing enable live-call --yes\nhorneroctl studio routing status --json`,
+  verGuiaDePerfilesYSnapshots: 'Profiles & snapshots guide',
+  verGuiaDeRuteoEnVivo: 'Live audio routing guide',
   todaviaNoDisponible: 'Not available yet',
   validacionDeHardwareLasInterfaces:
     'Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.',
