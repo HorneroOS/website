@@ -65,6 +65,18 @@ const items = [
     letter-spacing: 0.05em;
   }
 
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .cyber-telemetry {
+      background: var(--lifted);
+      box-shadow: var(--elevation);
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .cyber-telemetry {
+    background: var(--lifted);
+    box-shadow: var(--elevation);
+  }
+
   .cyber-telemetry::before,
   .cyber-telemetry::after {
     position: absolute;
@@ -133,6 +145,12 @@ const items = [
   .cyber-pill[data-tone='cue'] .cyber-led {
     background: var(--cue);
     box-shadow: 0 0 4px color-mix(in srgb, var(--cue) 40%, transparent);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .cyber-led {
+      box-shadow: none;
+    }
   }
 
   :global(:root[data-color-mode='light']) .cyber-led {

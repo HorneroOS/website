@@ -53,8 +53,8 @@ const socialAltValue = socialImageAlt ?? defaultAlt;
     </>
   )
 }
-<meta name="theme-color" content="#13171d" media="(prefers-color-scheme: dark)" />
-<meta name="theme-color" content="#f2eee5" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#141b24" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#eef2f7" media="(prefers-color-scheme: light)" />
 <script is:inline>
   (() => {
     // Resolve preferred locale without cookies or loops:
@@ -111,7 +111,7 @@ const socialAltValue = socialImageAlt ?? defaultAlt;
     document.documentElement.dataset.colorPreference = preference;
     document.documentElement.dataset.colorMode = mode;
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
-      meta.content = mode === 'light' ? '#f2eee5' : '#13171d';
+      meta.content = mode === 'light' ? '#eef2f7' : '#141b24';
     });
 
     // CRT / phosphor mode: defaults to 'on' unless reduced motion is requested

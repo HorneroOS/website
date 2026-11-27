@@ -26,20 +26,27 @@ kebab-case: `--ground --sunken --base --panel --raised --lifted --ink
 --on-alert --alert-well --on-alert-well --inverse --on-inverse
 --inverse-signal --scrim --shadow --focus`.
 
-Values are the RFC §3.2 flagship palettes as amended (amendment 2 tightens
-Night `ruleStrong` and the Day `ruleStrong`, `signal`, `cue`/`focus`,
-`phosphor` and `alert` so every role passes on `sunken` wells too):
+Values are the RFC §3.2 flagship palettes as amended (amendment 3 — Hornero
+Signal Design Renaissance — moves Night to cool blue-hour graphite, moves Day
+to white ceramic and pale aluminum with zero warm/yellow cast, and synchronises
+Signal High Contrast across all roles):
 
-- **Signal Night** (`:root`) — cool graphite instrument panels, warm
-  phosphor-cream ink.
+- **Signal Night** (`:root`) — cool blue-hour graphite instrument panels
+  (`#141b24` base), crisp off-white ink (`#e6ebf1`), amber live signal
+  (`#f2ac52`), celeste focus cue (`#8bcef0`), mint phosphor (`#8ddbaf`).
 - **Signal Day** (`prefers-color-scheme: light`, or the Light choice) —
-  warm technical-drawing paper with ink-black text.
-- **Signal High Contrast** values apply at night under
-  `prefers-contrast: more`.
+  white ceramic and pale aluminum instrument panels (`#eef2f7` base, `#f5f8fc`
+  panel, `#ffffff` lifted) with dark slate ink (`#283344`), amber live signal
+  (`#864700`), celeste focus cue (`#145d86`), mint phosphor (`#1e6448`).
+- **Signal High Contrast** (`prefers-contrast: more`) — complete
+  `hornero-signal-contrast` palette at night (`#000000` ground, `#0a0c0f` base,
+  `#ffffff` ink, `#ffc247` signal, `#8fd3ff` cue) and matching Light High
+  Contrast (`#ffffff` base, `#0a0f17` ink) when Light mode is active, with
+  translucency and glow disabled.
 
-`--glow` (Night `#FFB650`) is the optional emission role: a halo of at most
+`--glow` (Night `#ffc06b`) is the optional emission role: a halo of at most
 40 % alpha and 4 px blur on live items only, never text, never animated, and
-never rendered in Signal Day.
+never rendered in Signal Day or Signal High Contrast.
 
 The visual direction is **Signal Bezel**
 ([`development/signal-visual-language.md`](https://github.com/HorneroOS/docs/blob/main/development/signal-visual-language.md)):

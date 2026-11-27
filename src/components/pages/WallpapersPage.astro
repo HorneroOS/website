@@ -521,7 +521,7 @@ const filters = m.idAllLabelTodasLas.map((filter) => ({
     font: 0.66rem var(--font-mono);
   }
   .filters button[aria-pressed='true'] {
-    color: var(--panel);
+    color: var(--on-signal);
     background: var(--signal);
     border-color: var(--signal);
   }
@@ -821,10 +821,7 @@ const filters = m.idAllLabelTodasLas.map((filter) => ({
   }
   .feature-index {
     font-family: var(--font-mono);
-    color: var(--signal);
-  }
-  :root[data-color-mode='light'] .feature-index {
-    color: var(--ink);
+    color: white;
   }
   .credits {
     border-top: 3px solid var(--signal);

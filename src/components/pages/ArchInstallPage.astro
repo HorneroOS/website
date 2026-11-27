@@ -353,6 +353,16 @@ horneroctl hardware rollcall
     background: color-mix(in srgb, var(--signal) 5%, var(--panel));
   }
 
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .path-card-active {
+      background: var(--lifted);
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .path-card-active {
+    background: var(--lifted);
+  }
+
   .path-card-active::before {
     position: absolute;
     top: -1px;
