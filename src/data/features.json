@@ -421,6 +421,33 @@
           "href": "https://github.com/HorneroOS/docs"
         }
       ]
+    },
+    {
+      "id": "profiles-snapshots",
+      "stage": "main",
+      "releasedIn": null,
+      "title": {
+        "es": "Perfiles y snapshots de trabajo",
+        "en": "Workspace profiles & snapshots"
+      },
+      "summary": {
+        "es": "Capturá y alterná tu escritorio completo en 5 dominios (Experiencia, Audio y PipeWire, Energía, Extensiones y Companion Apps), con baseline inmutable, confirmación en 15 s y reversión en un clic.",
+        "en": "Capture and switch your full desktop across 5 domains (Experience, Audio & PipeWire, Power, Extensions, Companion Apps), with an immutable baseline, 15s confirmation, and one-click rollback."
+      },
+      "evidence": [
+        {
+          "label": "docs#165",
+          "href": "https://github.com/HorneroOS/docs/pull/165"
+        },
+        {
+          "label": "hornero#505",
+          "href": "https://github.com/HorneroOS/hornero/pull/505"
+        },
+        {
+          "label": "shell#749",
+          "href": "https://github.com/HorneroOS/shell/pull/749"
+        }
+      ]
     }
   ]
 }

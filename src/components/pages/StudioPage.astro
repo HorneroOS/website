@@ -91,6 +91,7 @@ const stats = m.stats(
       <a href="#workloads-title">{m.especializaciones}</a>
       <a href="#apps-title">{m.aplicaciones}</a>
       <a href="#audio-title">{m.audioYRendimiento}</a>
+      <a href="#profiles-title">{m.perfilesYSnapshots}</a>
       <a href="#today-title">{m.estado}</a>
     </nav>
 
@@ -201,6 +202,63 @@ const stats = m.stats(
     </ul>
   </section>
 
+  <section class="section" aria-labelledby="profiles-title">
+    <p class="eyebrow">
+      <b>{m.perfilesYSnapshotsEyebrow}</b>
+      <span>{m.espacioDeUsuarioReversible}</span>
+    </p>
+    <h2 id="profiles-title">{m.perfilesYSnapshotsDeTrabajo}</h2>
+    <p class="section-copy">{m.perfilesYSnapshotsIntro}</p>
+
+    <div class="profiles-grid">
+      <article class="profile-panel">
+        <h3>{m.cincoDominiosYSnapshotBaseline}</h3>
+        <p class="profile-lead">{m.capturaTuEstadoEnVivo}</p>
+        <dl class="domain-list">
+          {m.profileDomains.map((domain) => (
+            <div>
+              <dt>{domain.name}</dt>
+              <dd>{domain.detail}</dd>
+            </div>
+          ))}
+        </dl>
+        <ul class="profile-points">
+          <li>{m.baselineInmutableYRespaldoPrevio}</li>
+          <li>{m.cambioConDiffYConfirmacion15s}</li>
+          <li>{m.lanzamientoOpcionalDeCompanionApps}</li>
+        </ul>
+        <pre class="profile-cmd"><code set:text={m.profileCliCommands} /></pre>
+      </article>
+
+      <article class="profile-panel">
+        <h3>{m.kitsDeRuteoDeAudioEnVivo}</h3>
+        <p class="profile-lead">{m.desdeCentroDeControlStudioYAudio}</p>
+        <ul class="kit-list" role="list">
+          {m.routingKits.map((kit) => (
+            <li class="kit-item">
+              <code>{kit.id}</code>
+              <span>{kit.detail}</span>
+            </li>
+          ))}
+        </ul>
+        <ul class="profile-points">
+          <li>{m.selectorPorAppYCeroVolumen}</li>
+          <li>{m.qpwgraphYControlCenterEnUnClic}</li>
+        </ul>
+        <pre class="profile-cmd"><code set:text={m.routingCliCommands} /></pre>
+      </article>
+    </div>
+
+    <p class="hero-ctas">
+      <a class="cta primary" href={L('/docs/desktop/profiles-snapshots/')}>
+        {m.verGuiaDePerfilesYSnapshots}
+      </a>
+      <a class="cta secondary" href={L('/docs/applications/studio-live-routing/')}>
+        {m.verGuiaDeRuteoEnVivo}
+      </a>
+    </p>
+  </section>
+
   <section class="section" aria-labelledby="today-title">
     <h2 id="today-title">{m.estado}</h2>
     <div class="status-grid">
@@ -218,7 +276,8 @@ const stats = m.stats(
           <a href={L('/docs/applications/studio/')}>{m.documentacionDeStudio}</a> ·{' '}
           <a href={L('/docs/applications/studio-audio/')}>{m.configuracionYRecuperacionDeAudio}</a> ·{' '}
           <a href={L('/docs/applications/studio-getting-started/')}>{m.guiaDeInicio}</a> ·{' '}
-          <a href={L('/docs/applications/studio-live-routing/')}>{m.ruteoDeAudioEnVivo}</a>
+          <a href={L('/docs/applications/studio-live-routing/')}>{m.ruteoDeAudioEnVivo}</a> ·{' '}
+          <a href={L('/docs/desktop/profiles-snapshots/')}>{m.perfilesYSnapshots}</a>
         </p>
       </article>
       <article>
@@ -475,8 +534,92 @@ const stats = m.stats(
     padding-left: 1.1rem;
     color: var(--ink-muted);
   }
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.4rem;
+  }
+  .profile-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.15rem 1.2rem;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+  .profile-panel h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+  .profile-lead {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+  .domain-list {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.75rem;
+  }
+  .domain-list div {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 0.35rem 0.9rem;
+    font-size: var(--step--1);
+  }
+  .domain-list dt {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .domain-list dd {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+  .kit-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--rule);
+    list-style: none;
+  }
+  .kit-item {
+    display: grid;
+    gap: 0.2rem;
+    justify-items: start;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--cue);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: var(--step--1);
+  }
+  .kit-item span {
+    color: var(--ink-muted);
+  }
+  .profile-points {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+  .profile-points li + li {
+    margin-top: 0.3rem;
+  }
+  .profile-cmd {
+    margin: auto 0 0;
+    padding: 0.75rem 0.9rem;
+    border-inline-start-color: var(--signal);
+    font-size: 0.82rem;
+  }
   @media (max-width: 40rem) {
-    .track {
+    .track,
+    .domain-list div {
       grid-template-columns: 1fr;
     }
   }

@@ -81,6 +81,7 @@ const javiFrames = import.meta.glob<ImageMetadata>(
 const javiFrame = Object.values(javiFrames)[0];
 if (!javiFrame) throw new Error('Javi greet frame is missing at the shell pin');
 const modesFeature = feature('experience-modes');
+const profilesFeature = feature('profiles-snapshots');
 const chromaticFeature = feature('chromatic');
 const javiFeature = feature('companion');
 const niri = compositor('niri');
@@ -407,6 +408,25 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
         ))}
       </ul>
       <a href={L('/modes')}>{m.conoceLasCincoAtmosferas}</a>
+    </div>
+    <div class="modes profiles-highlight">
+      <div class="modes-head">
+        <h3>{m.perfilesYSnapshotsReversibles}</h3>
+        <StageBadge stage={profilesFeature.stage} locale={locale} />
+      </div>
+      <p>{profilesFeature.summary[locale]}</p>
+      <ul role="list">
+        {m.profileDomains.map((domain) => (
+          <li>
+            <strong>{domain.name}</strong>
+            <span>{domain.detail}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="profiles-links">
+        <a href={L('/docs/desktop/profiles-snapshots/')}>{m.conocePerfilesYSnapshots}</a>
+        <a href={L('/studio#profiles-title')}>{m.verPerfilesEnStudio}</a>
+      </div>
     </div>
     <ul class="world" role="list">
       <li>
@@ -1188,6 +1208,19 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
   .modes strong {
     color: var(--ink);
     font: 600 1.05rem var(--font-display);
+  }
+
+  .profiles-highlight {
+    margin-top: 1.5rem;
+    border-style: solid;
+    border-left: 3px solid var(--signal);
+    background: var(--panel);
+  }
+
+  .profiles-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
   }
 
   /* ------------------------------------------------------------- get --- */

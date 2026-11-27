@@ -105,6 +105,16 @@ const es = {
   cincoModosQueCambianComo:
     'Cinco modos que cambian cómo se comporta el escritorio ahora mismo, sin tocar tu layout ni tu tema. Los activás vos; nada cambia solo.',
   conoceLasCincoAtmosferas: 'Conocé las cinco atmósferas',
+  perfilesYSnapshotsReversibles: 'Perfiles y snapshots de trabajo reversibles',
+  conocePerfilesYSnapshots: 'Leé la guía de perfiles y snapshots',
+  verPerfilesEnStudio: 'Mirá perfiles y ruteo en Studio',
+  profileDomains: [
+    { name: 'Experiencia', detail: 'Modo visual, variantes Signal y layouts.' },
+    { name: 'Audio y PipeWire', detail: 'Modo de Studio, quantum, sinks y ruteo por app.' },
+    { name: 'Energía', detail: 'Perfil de energía y reglas de inhibición.' },
+    { name: 'Extensiones', detail: 'Plugins de Hornero y Hyprland habilitados.' },
+    { name: 'Companion Apps', detail: 'Apps activas con lanzamiento opt-in en 1 clic.' },
+  ],
   javiElHorneroDelEscritorio: 'Javi, el hornero del escritorio, saludando.',
   javiElHorneroDelEscritorio2: 'Javi, el hornero del escritorio',
   extensionesYPluginkit: 'Extensiones y PluginKit',
@@ -318,6 +328,16 @@ const en: Messages = {
   cincoModosQueCambianComo:
     'Five modes that change how the desktop behaves right now, without touching your layout or theme. You switch them; nothing changes on its own.',
   conoceLasCincoAtmosferas: 'Meet the five atmospheres',
+  perfilesYSnapshotsReversibles: 'Reversible workspace profiles & snapshots',
+  conocePerfilesYSnapshots: 'Read the profiles & snapshots guide',
+  verPerfilesEnStudio: 'See profiles & routing on Studio',
+  profileDomains: [
+    { name: 'Experience', detail: 'Visual mode, Signal variants, and layouts.' },
+    { name: 'Audio & PipeWire', detail: 'Studio mode, quantum, sinks, and per-app routing.' },
+    { name: 'Power', detail: 'Power profile and idle / keep-awake rules.' },
+    { name: 'Extensions', detail: 'Enabled Hornero and Hyprland plugins.' },
+    { name: 'Companion Apps', detail: 'Detected user apps with 1-click opt-in launch.' },
+  ],
   javiElHorneroDelEscritorio: 'Javi, the desktop hornero, waving hello.',
   javiElHorneroDelEscritorio2: 'Javi, the desktop hornero',
   extensionesYPluginkit: 'Extensions and PluginKit',
