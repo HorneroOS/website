@@ -27,10 +27,6 @@ const wallpaperMedia = {
   gruvbox: (await import('../../../assets/wallpapers/theme-wallpapers/gruvbox.webp')).default,
   landscape: (await import('../../../assets/wallpapers/theme-wallpapers/landscape.webp')).default,
   monochrome: (await import('../../../assets/wallpapers/theme-wallpapers/monochrome.webp')).default,
-  'neon-city': (await import('../../../assets/wallpapers/theme-wallpapers/neon-city.webp')).default,
-  'soft-morning': (await import('../../../assets/wallpapers/theme-wallpapers/soft-morning.webp')).default,
-  'vapor-dreams': (await import('../../../assets/wallpapers/theme-wallpapers/vapor-dreams.webp')).default,
-  'warm-sunset': (await import('../../../assets/wallpapers/theme-wallpapers/warm-sunset.webp')).default,
 };
 const modes = (mode: string) => (mode === 'light' ? m.claro : m.oscuro);
 // Theme descriptions arrive English-only in the pinned product data; the
@@ -699,6 +695,16 @@ if (!buenosAires) throw new Error('Buenos Aires Original is missing from the pin
     font: 0.72rem/1.55 var(--font-mono);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .terminal-card pre {
+      background: var(--lifted);
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .terminal-card pre {
+    background: var(--lifted);
   }
   .terminal-note {
     margin-top: 1rem;

@@ -614,6 +614,12 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     content: '';
   }
 
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .hero-crt-grid::after {
+      opacity: 0.35;
+    }
+  }
+
   :global(:root[data-color-mode='light']) .hero-crt-grid::after {
     opacity: 0.35;
   }
@@ -700,6 +706,12 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     vertical-align: 0.1em;
   }
 
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .telemetry > div:first-child dt::before {
+      box-shadow: none;
+    }
+  }
+
   :global(:root[data-color-mode='light']) .telemetry > div:first-child dt::before {
     box-shadow: none;
   }
@@ -747,7 +759,18 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     border-bottom: 2px solid var(--ar-celeste);
   }
 
-  :global(:root[data-color-mode='light']) .monitor-frame,
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .monitor-frame {
+      background: var(--lifted);
+      box-shadow: var(--elevation);
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .monitor-frame {
+    background: var(--lifted);
+    box-shadow: var(--elevation);
+  }
+
   :global(:root[data-crt='off']) .monitor-frame {
     box-shadow: var(--elevation);
   }
@@ -771,6 +794,16 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     color: var(--ink-muted);
     font: 500 0.72rem var(--font-mono);
     letter-spacing: 0.05em;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .monitor-strip {
+      background: var(--panel);
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .monitor-strip {
+    background: var(--panel);
   }
 
   .monitor-leds {
@@ -799,6 +832,12 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
   .monitor-leds .led-gold {
     background: var(--ar-gold);
     box-shadow: 0 0 6px color-mix(in srgb, var(--ar-gold) 55%, transparent);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .monitor-leds i {
+      box-shadow: none;
+    }
   }
 
   :global(:root[data-color-mode='light']) .monitor-leds i,

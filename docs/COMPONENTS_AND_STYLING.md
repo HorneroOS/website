@@ -3,10 +3,11 @@
 The website is built with Astro components and plain CSS. Most routes render
 to static HTML and need no client-side framework. Its visual language is
 Hornero Signal, the HorneroOS design language (RFC 0001; see
-[`DESIGN_SYSTEM_SIGNAL.md`](./DESIGN_SYSTEM_SIGNAL.md)): graphite instrument
-panels at night, technical-drawing paper by day, amber for live/primary,
-celeste for focus/information, hairline rules, segmented meters and IBM Plex
-type. Real Hornero captures provide the strongest visual statements.
+[`DESIGN_SYSTEM_SIGNAL.md`](./DESIGN_SYSTEM_SIGNAL.md)): blue-hour graphite
+instrument panels at night, white ceramic and pale aluminum by day, amber for
+live/primary, celeste for focus/information, hairline rules, segmented meters
+and IBM Plex type. Real Hornero captures provide the strongest visual
+statements.
 
 ## Component boundaries
 

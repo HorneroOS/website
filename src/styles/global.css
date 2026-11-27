@@ -10,7 +10,9 @@
  *
  * Colour custom properties are the RFC §3.1 roles in kebab-case
  * (`inkMuted` -> `--ink-muted`). Values are the flagship palettes from
- * RFC §3.2 as amended (amendment 2): Signal Night (default) and Signal Day.
+ * RFC §3.2 as amended (amendment 3 — Hornero Signal Design Renaissance):
+ * Signal Night (default, blue-hour graphite), Signal Day (white ceramic
+ * and pale aluminum), and Signal High Contrast.
  * The visual direction is Signal Bezel (docs development/signal-visual-language.md).
  * Pages use roles only.
  * See docs/DESIGN_SYSTEM_SIGNAL.md.
@@ -22,51 +24,51 @@
 :root {
   color-scheme: dark;
 
-  /* Signal Night — cool graphite instrument panels, warm phosphor-cream ink. */
-  --ground: #0c0f13;
-  --sunken: #101419;
-  --base: #13171d;
-  --panel: #181d24;
-  --raised: #1f252e;
-  --lifted: #283039;
-  --ink: #ece6da;
-  --ink-muted: #a8abad;
-  --ink-faint: #737980;
-  --rule: #2c333c;
-  --rule-strong: #707a85;
-  --focus: #7ec1ea;
-  --signal: #f2a33a;
-  --on-signal: #1a1205;
-  --signal-well: #3a2a12;
-  --on-signal-well: #ffd9a3;
-  --cue: #7ec1ea;
-  --on-cue: #06151f;
-  --cue-well: #16303f;
-  --on-cue-well: #cde8f8;
-  --phosphor: #8bd49a;
-  --on-phosphor: #07170c;
-  --phosphor-well: #173222;
-  --on-phosphor-well: #cdefd4;
-  --alert: #f0705a;
-  --on-alert: #1e0905;
-  --alert-well: #3d1a14;
-  --on-alert-well: #ffd3ca;
-  --inverse: #ece6da;
-  --on-inverse: #181d24;
-  --inverse-signal: #8a5200;
+  /* Signal Night — cool blue-hour graphite instrument panels, crisp off-white ink. */
+  --ground: #0c1016;
+  --sunken: #10151c;
+  --base: #141b24;
+  --panel: #1b2430;
+  --raised: #24303d;
+  --lifted: #2c3947;
+  --ink: #e6ebf1;
+  --ink-muted: #a9b7c6;
+  --ink-faint: #8999ab;
+  --rule: #2d3b4b;
+  --rule-strong: #8393a6;
+  --focus: #8bcef0;
+  --signal: #f2ac52;
+  --on-signal: #1e1304;
+  --signal-well: #3d2b12;
+  --on-signal-well: #ffe0b0;
+  --cue: #8bcef0;
+  --on-cue: #071a26;
+  --cue-well: #163345;
+  --on-cue-well: #d6effc;
+  --phosphor: #8ddbaf;
+  --on-phosphor: #071d12;
+  --phosphor-well: #153425;
+  --on-phosphor-well: #d1f5e0;
+  --alert: #ff8494;
+  --on-alert: #24070c;
+  --alert-well: #421922;
+  --on-alert-well: #ffd6dc;
+  --inverse: #e6ebf1;
+  --on-inverse: #1b2430;
+  --inverse-signal: #864700;
   --scrim: #000000;
   --shadow: #000000;
 
   /* Brand-surface details derived from roles (never used for text). */
   --diagonal: color-mix(in srgb, var(--signal) 9%, transparent);
   --scanline: color-mix(in srgb, var(--ink) 3%, transparent);
-  --browser-theme-color: #13171d;
+  --browser-theme-color: #141b24;
   /* Optional emission role (RFC amendment 2): halos only, never text or fill,
      max 40 % alpha, blur <= 4px, never animated. Not rendered in Day. */
-  --glow: #ffb650;
+  --glow: #ffc06b;
   /* Argentine retrofuturistic accents (Sol de Mayo gold + Celeste band). */
   --ar-celeste: #74acdf;
-  --ar-gold: #ffd166;
+  --ar-gold: #f2ac52;
 
   /* RFC §3.3 families. */
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
@@ -111,105 +113,237 @@
   --dur-settle: 320ms;
 }
 
-/* Signal Day — warm technical-drawing paper with ink-black text. */
+/* Signal Day — white ceramic and pale aluminum instrument panels with dark slate ink. */
 @media (prefers-color-scheme: light) {
   :root:not([data-color-mode='dark']) {
     color-scheme: light;
-    --ground: #e6e1d5;
-    --sunken: #dcd6c8;
-    --base: #f2eee5;
-    --panel: #f7f4ee;
-    --raised: #fbf9f5;
+    --ground: #e8edf4;
+    --sunken: #e0e6ef;
+    --base: #eef2f7;
+    --panel: #f5f8fc;
+    --raised: #fcfcfe;
     --lifted: #ffffff;
-    --ink: #1b1e22;
-    --ink-muted: #4e545b;
-    --ink-faint: #7a8086;
-    --rule: #d3ccbd;
-    --rule-strong: #736d62;
-    --focus: #1a5f88;
-    --signal: #8f4b00;
+    --ink: #283344;
+    --ink-muted: #505e70;
+    --ink-faint: #606d80;
+    --rule: #d2dae6;
+    --rule-strong: #7a8798;
+    --focus: #145d86;
+    --signal: #864700;
     --on-signal: #ffffff;
-    --signal-well: #f6ddb8;
-    --on-signal-well: #3d2200;
-    --cue: #1a5f88;
+    --signal-well: #fce9c8;
+    --on-signal-well: #432300;
+    --cue: #145d86;
     --on-cue: #ffffff;
-    --cue-well: #d3e7f3;
-    --on-cue-well: #0b2e44;
-    --phosphor: #256a3b;
+    --cue-well: #d8eef9;
+    --on-cue-well: #0b334b;
+    --phosphor: #1e6448;
     --on-phosphor: #ffffff;
-    --phosphor-well: #d5ebd9;
-    --on-phosphor-well: #0e2e17;
-    --alert: #a8341c;
+    --phosphor-well: #d6f4e8;
+    --on-phosphor-well: #0e3425;
+    --alert: #9c293e;
     --on-alert: #ffffff;
-    --alert-well: #f7d7d0;
-    --on-alert-well: #4a1209;
-    --inverse: #1b1e22;
-    --on-inverse: #f2eee5;
-    --inverse-signal: #f2a33a;
-    --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
+    --alert-well: #fadde4;
+    --on-alert-well: #4e111e;
+    --inverse: #283344;
+    --on-inverse: #f5f8fc;
+    --inverse-signal: #f2ac52;
+    --scrim: #000000;
+    --shadow: #000000;
+    --diagonal: color-mix(in srgb, var(--cue) 9%, transparent);
     --scanline: transparent;
-    --glow: var(--signal);
-    --ar-celeste: #1a5f88;
-    --ar-gold: #9a6500;
-    --browser-theme-color: #f2eee5;
+    --glow: transparent;
+    --ar-celeste: #145d86;
+    --ar-gold: #864700;
+    --browser-theme-color: #eef2f7;
+    --elevation:
+      0 4px 14px color-mix(in srgb, var(--ink) 10%, transparent),
+      0 1px 3px color-mix(in srgb, var(--ink) 6%, transparent);
   }
 }
 
 :root[data-color-mode='light'] {
   color-scheme: light;
-  --ground: #e6e1d5;
-  --sunken: #dcd6c8;
-  --base: #f2eee5;
-  --panel: #f7f4ee;
-  --raised: #fbf9f5;
+  --ground: #e8edf4;
+  --sunken: #e0e6ef;
+  --base: #eef2f7;
+  --panel: #f5f8fc;
+  --raised: #fcfcfe;
   --lifted: #ffffff;
-  --ink: #1b1e22;
-  --ink-muted: #4e545b;
-  --ink-faint: #7a8086;
-  --rule: #d3ccbd;
-  --rule-strong: #736d62;
-  --focus: #1a5f88;
-  --signal: #8f4b00;
+  --ink: #283344;
+  --ink-muted: #505e70;
+  --ink-faint: #606d80;
+  --rule: #d2dae6;
+  --rule-strong: #7a8798;
+  --focus: #145d86;
+  --signal: #864700;
   --on-signal: #ffffff;
-  --signal-well: #f6ddb8;
-  --on-signal-well: #3d2200;
-  --cue: #1a5f88;
+  --signal-well: #fce9c8;
+  --on-signal-well: #432300;
+  --cue: #145d86;
   --on-cue: #ffffff;
-  --cue-well: #d3e7f3;
-  --on-cue-well: #0b2e44;
-  --phosphor: #256a3b;
+  --cue-well: #d8eef9;
+  --on-cue-well: #0b334b;
+  --phosphor: #1e6448;
   --on-phosphor: #ffffff;
-  --phosphor-well: #d5ebd9;
-  --on-phosphor-well: #0e2e17;
-  --alert: #a8341c;
+  --phosphor-well: #d6f4e8;
+  --on-phosphor-well: #0e3425;
+  --alert: #9c293e;
   --on-alert: #ffffff;
-  --alert-well: #f7d7d0;
-  --on-alert-well: #4a1209;
-  --inverse: #1b1e22;
-  --on-inverse: #f2eee5;
-  --inverse-signal: #f2a33a;
-  --diagonal: color-mix(in srgb, var(--signal) 10%, transparent);
+  --alert-well: #fadde4;
+  --on-alert-well: #4e111e;
+  --inverse: #283344;
+  --on-inverse: #f5f8fc;
+  --inverse-signal: #f2ac52;
+  --scrim: #000000;
+  --shadow: #000000;
+  --diagonal: color-mix(in srgb, var(--cue) 9%, transparent);
   --scanline: transparent;
-  --glow: var(--signal);
-  --ar-celeste: #1a5f88;
-  --ar-gold: #9a6500;
-  --browser-theme-color: #f2eee5;
+  --glow: transparent;
+  --ar-celeste: #145d86;
+  --ar-gold: #864700;
+  --browser-theme-color: #eef2f7;
+  --elevation:
+    0 4px 14px color-mix(in srgb, var(--ink) 10%, transparent),
+    0 1px 3px color-mix(in srgb, var(--ink) 6%, transparent);
 }
 
-/* Signal High Contrast (RFC §3.2) when the visitor asks for more contrast at night. */
+/* Signal High Contrast (RFC §3.2 — hornero-signal-contrast, plus Light High Contrast). */
 @media (prefers-contrast: more) {
   :root:not([data-color-mode='light']) {
     --ground: #000000;
-    --base: #000000;
-    --sunken: #000000;
-    --panel: #0a0a0a;
+    --sunken: #050607;
+    --base: #0a0c0f;
+    --panel: #101317;
+    --raised: #181c21;
+    --lifted: #22272e;
     --ink: #ffffff;
-    --ink-muted: #e0e0e0;
-    --signal: #ffc247;
-    --cue: #8fd3ff;
-    --focus: #8fd3ff;
-    --rule: #8a8a8a;
+    --ink-muted: #d9dcdf;
+    --ink-faint: #9da3a9;
+    --rule: #5c646d;
     --rule-strong: #ffffff;
+    --signal: #ffc247;
+    --on-signal: #000000;
+    --signal-well: #3d2c00;
+    --on-signal-well: #ffe6b0;
+    --cue: #8fd3ff;
+    --on-cue: #000000;
+    --cue-well: #0b2b3d;
+    --on-cue-well: #ddf2ff;
+    --phosphor: #8cf0a4;
+    --on-phosphor: #000000;
+    --phosphor-well: #0e3319;
+    --on-phosphor-well: #d4fade;
+    --alert: #ff8a73;
+    --on-alert: #000000;
+    --alert-well: #45120a;
+    --on-alert-well: #ffdcd4;
+    --inverse: #ffffff;
+    --on-inverse: #000000;
+    --inverse-signal: #7a4a00;
+    --scrim: #000000;
+    --shadow: #000000;
+    --focus: #8fd3ff;
+    --glow: transparent;
+    --scanline: transparent;
+    --browser-theme-color: #0a0c0f;
+    --ar-celeste: #8fd3ff;
+    --ar-gold: #ffc247;
+    --elevation: none;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-color-mode='dark']) {
+      --ground: #dde3ec;
+      --sunken: #d5dde8;
+      --base: #ffffff;
+      --panel: #f5f8fc;
+      --raised: #ffffff;
+      --lifted: #ffffff;
+      --ink: #0a0f17;
+      --ink-muted: #283344;
+      --ink-faint: #465366;
+      --rule: #68768a;
+      --rule-strong: #0a0f17;
+      --signal: #6b3700;
+      --on-signal: #ffffff;
+      --signal-well: #fce9c8;
+      --on-signal-well: #2e1700;
+      --cue: #0b476b;
+      --on-cue: #ffffff;
+      --cue-well: #d8eef9;
+      --on-cue-well: #062538;
+      --phosphor: #114d36;
+      --on-phosphor: #ffffff;
+      --phosphor-well: #d6f4e8;
+      --on-phosphor-well: #08261a;
+      --alert: #7d1a2c;
+      --on-alert: #ffffff;
+      --alert-well: #fadde4;
+      --on-alert-well: #3a0913;
+      --inverse: #0a0f17;
+      --on-inverse: #ffffff;
+      --inverse-signal: #ffc247;
+      --scrim: #000000;
+      --shadow: #000000;
+      --focus: #0b476b;
+      --diagonal: color-mix(in srgb, var(--cue) 10%, transparent);
+      --scanline: transparent;
+      --glow: transparent;
+      --browser-theme-color: #ffffff;
+      --ar-celeste: #0b476b;
+      --ar-gold: #6b3700;
+      --elevation: none;
+    }
+  }
+
+  :root[data-color-mode='light'] {
+    --ground: #dde3ec;
+    --sunken: #d5dde8;
+    --base: #ffffff;
+    --panel: #f5f8fc;
+    --raised: #ffffff;
+    --lifted: #ffffff;
+    --ink: #0a0f17;
+    --ink-muted: #283344;
+    --ink-faint: #465366;
+    --rule: #68768a;
+    --rule-strong: #0a0f17;
+    --signal: #6b3700;
+    --on-signal: #ffffff;
+    --signal-well: #fce9c8;
+    --on-signal-well: #2e1700;
+    --cue: #0b476b;
+    --on-cue: #ffffff;
+    --cue-well: #d8eef9;
+    --on-cue-well: #062538;
+    --phosphor: #114d36;
+    --on-phosphor: #ffffff;
+    --phosphor-well: #d6f4e8;
+    --on-phosphor-well: #08261a;
+    --alert: #7d1a2c;
+    --on-alert: #ffffff;
+    --alert-well: #fadde4;
+    --on-alert-well: #3a0913;
+    --inverse: #0a0f17;
+    --on-inverse: #ffffff;
+    --inverse-signal: #ffc247;
+    --scrim: #000000;
+    --shadow: #000000;
+    --focus: #0b476b;
+    --diagonal: color-mix(in srgb, var(--cue) 10%, transparent);
+    --scanline: transparent;
+    --glow: transparent;
+    --browser-theme-color: #ffffff;
+    --ar-celeste: #0b476b;
+    --ar-gold: #6b3700;
+    --elevation: none;
+  }
+
+  .site-nav {
+    background: var(--base);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -321,12 +455,32 @@ samp {
   background: var(--panel);
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) :not(pre) > code {
+    background: var(--sunken);
+  }
+}
+
+:root[data-color-mode='light'] :not(pre) > code {
+  background: var(--sunken);
+}
+
 kbd {
   padding: 0.05em 0.38em;
   border: 1px solid var(--rule-strong);
   border-bottom-width: 2px;
   border-radius: var(--radius-small);
   background: var(--panel);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) kbd {
+    background: var(--lifted);
+  }
+}
+
+:root[data-color-mode='light'] kbd {
+  background: var(--lifted);
 }
 
 pre {
@@ -340,15 +494,35 @@ pre {
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 4%, transparent);
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) pre:not(.astro-code) {
+    background: var(--lifted);
+    box-shadow: none;
+  }
+}
+
+:root[data-color-mode='light'] pre:not(.astro-code) {
+  background: var(--lifted);
+  box-shadow: none;
+}
+
 /* Shiki dual themes (astro.config.mjs), both AA-checked against their bg. */
-pre,
-pre span {
+pre.astro-code,
+pre.astro-code span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
 }
 
-:root[data-color-mode='light'] pre,
-:root[data-color-mode='light'] pre span {
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) pre.astro-code,
+  :root:not([data-color-mode='dark']) pre.astro-code span {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+  }
+}
+
+:root[data-color-mode='light'] pre.astro-code,
+:root[data-color-mode='light'] pre.astro-code span {
   color: var(--shiki-light) !important;
   background-color: var(--shiki-light-bg) !important;
 }
@@ -431,6 +605,16 @@ hr {
 
 .mark-on-light {
   display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) .mark-on-dark {
+    display: none;
+  }
+
+  :root:not([data-color-mode='dark']) .mark-on-light {
+    display: block;
+  }
 }
 
 :root[data-color-mode='light'] .mark-on-dark {
@@ -1582,6 +1766,12 @@ tbody tr:hover {
   box-shadow: 0 0 5px color-mix(in srgb, var(--phosphor) 55%, transparent);
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) .crt-toggle[aria-pressed='true'] .crt-led {
+    box-shadow: none;
+  }
+}
+
 :root[data-color-mode='light'] .crt-toggle[aria-pressed='true'] .crt-led {
   box-shadow: none;
 }
@@ -1633,13 +1823,25 @@ tbody tr:hover {
     0 0 14px color-mix(in srgb, var(--ar-gold) 26%, transparent);
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) .cta.primary:hover {
+    box-shadow: var(--elevation);
+  }
+}
+
 :root[data-color-mode='light'] .cta.primary:hover,
 :root[data-crt='off'] .cta.primary:hover {
   box-shadow: var(--elevation);
 }
 
 /* Elevated cockpit header hairline accent in Night + CRT mode. */
-:root[data-crt='on']:not([data-color-mode='light']) .site-nav {
+@media (prefers-color-scheme: dark) {
+  :root[data-crt='on']:not([data-color-mode='light']) .site-nav {
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--ar-celeste) 16%, transparent);
+  }
+}
+
+:root[data-crt='on'][data-color-mode='dark'] .site-nav {
   box-shadow: 0 1px 0 color-mix(in srgb, var(--ar-celeste) 16%, transparent);
 }
 
@@ -1678,6 +1880,12 @@ tbody tr:hover {
   border-color: var(--signal);
 }
 
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) .cyber-bezel:hover {
+    box-shadow: none;
+  }
+}
+
 :root[data-color-mode='light'] .cyber-bezel:hover,
 :root[data-crt='off'] .cyber-bezel:hover {
   box-shadow: none;
@@ -1698,6 +1906,26 @@ tbody tr:hover {
     color-mix(in srgb, var(--signal) 10%, transparent) 100%
   );
   pointer-events: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-color-mode='dark']) .cyber-horizon-divider {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--cue) 6%, transparent) 65%,
+      color-mix(in srgb, var(--cue) 11%, transparent) 100%
+    );
+  }
+}
+
+:root[data-color-mode='light'] .cyber-horizon-divider {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cue) 6%, transparent) 65%,
+    color-mix(in srgb, var(--cue) 11%, transparent) 100%
+  );
 }
 
 .cyber-horizon-divider::after {

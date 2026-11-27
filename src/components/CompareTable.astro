@@ -155,4 +155,14 @@ const filters = [
     background: color-mix(in oklab, var(--signal) 7%, transparent);
     font-weight: 500;
   }
+
+  @media (prefers-color-scheme: light) {
+    :global(:root:not([data-color-mode='dark'])) .compare-matrix .compare-hornero {
+      background: color-mix(in srgb, var(--cue) 6%, var(--panel));
+    }
+  }
+
+  :global(:root[data-color-mode='light']) .compare-matrix .compare-hornero {
+    background: color-mix(in srgb, var(--cue) 6%, var(--panel));
+  }
 </style>
