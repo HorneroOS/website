@@ -4,6 +4,7 @@
 import type { Locale } from '../ui';
 
 const es = {
+  plateLabel: 'Señal no encontrada',
   paginaNoEncontradaHorneroos: 'Página no encontrada | HorneroOS',
   estaPaginaNoExiste: 'Esta página no existe.',
   paginaNoEncontrada: 'Página no encontrada',
@@ -16,6 +17,7 @@ const es = {
 export type Messages = typeof es;
 
 const en: Messages = {
+  plateLabel: 'Signal not found',
   paginaNoEncontradaHorneroos: 'Page not found | HorneroOS',
   estaPaginaNoExiste: 'This page does not exist.',
   paginaNoEncontrada: 'Page not found',

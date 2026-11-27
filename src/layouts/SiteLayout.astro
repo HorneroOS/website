@@ -299,7 +299,7 @@ const community = {
         </label>
       </fieldset>
     </header>
-    <main id="main" class="app" tabindex="-1" data-pagefind-body>
+    <main id="main" class="app" tabindex="-1" data-pagefind-body={noindex ? undefined : ''}>
       <slot />
     </main>
     <footer class="site-footer">
