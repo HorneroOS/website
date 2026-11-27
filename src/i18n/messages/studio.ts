@@ -70,6 +70,7 @@ const es = {
   documentacionDeStudio: 'Documentación de Studio',
   configuracionYRecuperacionDeAudio: 'Configuración y recuperación de audio',
   guiaDeInicio: 'Guía de inicio',
+  ruteoDeAudioEnVivo: 'Ruteo en vivo (DAW + llamadas)',
   todaviaNoDisponible: 'Todavía no disponible',
   validacionDeHardwareLasInterfaces:
     'Validación de hardware: las interfaces de audio, MIDI, la codificación por GPU y las pantallas esperan fixtures físicos de QA.',
@@ -145,6 +146,7 @@ const en: Messages = {
   documentacionDeStudio: 'Studio documentation',
   configuracionYRecuperacionDeAudio: 'Audio setup & recovery',
   guiaDeInicio: 'Getting started guide',
+  ruteoDeAudioEnVivo: 'Live audio routing (DAW + calls)',
   todaviaNoDisponible: 'Not available yet',
   validacionDeHardwareLasInterfaces:
     'Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.',
