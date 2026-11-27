@@ -163,7 +163,7 @@ const colorRoles = [
       description.textContent = choice.dataset.themeDescription ?? '';
       identifier.textContent = choice.dataset.themeId ?? '';
       mode.textContent =
-        document.documentElement.lang === 'es'
+        document.documentElement.lang.startsWith('es')
           ? `paleta ${choice.dataset.themeMode ?? 'dark'}`
           : `${choice.dataset.themeMode ?? 'dark'} palette`;
 
@@ -175,7 +175,7 @@ const colorRoles = [
 
       choices.forEach((item) => item.setAttribute('aria-pressed', String(item === choice)));
       status.textContent =
-        document.documentElement.lang === 'es'
+        document.documentElement.lang.startsWith('es')
           ? `Paleta ${choice.dataset.themeName ?? 'Hornero'} seleccionada para el estudio de color.`
           : `${choice.dataset.themeName ?? 'Hornero'} palette selected for the color study.`;
     };

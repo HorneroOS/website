@@ -4,6 +4,8 @@
 import type { Locale } from '../ui';
 
 const es = {
+  plateLabel: 'Índice local',
+  plateMeta: 'Pagefind · en tu navegador',
   buscarHorneroos: 'Buscar | HorneroOS',
   buscaEnElSitioDe: 'Buscá en el sitio de HorneroOS y en la documentación.',
   buscar: 'Buscar',
@@ -19,6 +21,8 @@ const es = {
 export type Messages = typeof es;
 
 const en: Messages = {
+  plateLabel: 'Local index',
+  plateMeta: 'Pagefind · in your browser',
   buscarHorneroos: 'Search | HorneroOS',
   buscaEnElSitioDe: 'Search the HorneroOS site and documentation.',
   buscar: 'Search',
