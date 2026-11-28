@@ -15,6 +15,7 @@ const envEnabled = import.meta.env.PUBLIC_PLAYGROUND_ENABLED === 'true';
 const envUrl = (import.meta.env.PUBLIC_PLAYGROUND_URL ?? '').trim();
 const liveSessionsActive =
   (playgroundData.availability.publicBrowserSessionsEnabled || envEnabled) && Boolean(envUrl);
+const vmImage = playgroundData.vmImage;
 
 type TierId = keyof typeof m.vmTierLabels;
 type EntryId = keyof typeof m.vmEntryNotes;
@@ -35,12 +36,20 @@ type EntryId = keyof typeof m.vmEntryNotes;
     <h1 id="try-title">{m.heroTitle}</h1>
     <p class="lede">{m.heroLede}</p>
     <p class="cta-row">
-      <a class="cta primary" href="#browser">{m.ctaBrowser}</a>
-      <a class="cta secondary" href="#vm">{m.ctaVm}</a>
+      <a class="cta primary" href="#vm">{m.ctaQcow2}</a>
+      <a class="cta secondary" href="#browser">{m.ctaBrowser}</a>
       <a class="cta secondary" href="#live-usb">{m.ctaUsb}</a>
     </p>
 
-    <div class="table-wrap">
+    <div class="arch-notice" role="note" aria-labelledby="try-arch-notice-title">
+      <h2 id="try-arch-notice-title">{m.appleSiliconNoticeTitle}</h2>
+      <p>{m.appleSiliconNoticeBody}</p>
+      <p class="arch-notice-link">
+        <a href={L('/docs/getting-started/public-preview-launch-guide/')}>{m.appleSiliconNoticeLink}</a>
+      </p>
+    </div>
+
+    <div class="table-wrap" tabindex="0">
       <table class="try-table">
         <thead>
           <tr>
@@ -136,6 +145,57 @@ type EntryId = keyof typeof m.vmEntryNotes;
       <p class="muted-copy">{m.vmIntro}</p>
     </header>
 
+    <article class="qcow2-download-card" aria-labelledby="qcow2-title">
+      <p class="eyebrow">
+        <b>{m.vmDownloadEyebrow}</b>
+        <span>{vmImage.name}</span>
+      </p>
+      <h3 id="qcow2-title">{m.vmDownloadTitle}</h3>
+      <p class="muted-copy">{m.vmDownloadBody}</p>
+      <p class="cta-row">
+        <a class="cta primary" href={vmImage.url}>
+          {m.vmDownloadCta(vmImage.version, vmImage.sizeLabel)}
+        </a>
+      </p>
+      <p class="qcow2-links">
+        <a href={vmImage.sha256Url}>{m.vmDownloadShaLabel}</a> ·{' '}
+        <a href={vmImage.signatureUrl}>{m.vmDownloadSigLabel}</a> ·{' '}
+        <a href={vmImage.manifestUrl}>{m.vmDownloadManifestLabel}</a> ·{' '}
+        <a href={vmImage.releaseUrl}>{m.vmDownloadReleaseLabel}</a>
+      </p>
+      <p class="qcow2-sha">
+        <strong>SHA-256:</strong> <code>{vmImage.sha256}</code>
+      </p>
+      <p class="qcow2-cmd-label">{m.vmDownloadQuickstartLabel}</p>
+      <pre tabindex="0"><code>{m.vmDownloadQuickstartCmd(vmImage.name)}</code></pre>
+    </article>
+
+    <div class="live-captures-block" id="live-captures" aria-labelledby="live-captures-title">
+      <header class="matrix-head">
+        <p class="eyebrow">
+          <b>{m.liveCapturesEyebrow}</b>
+          <span>1920×1080 · UEFI KVM Wayland · v0.2.0-preview42</span>
+        </p>
+        <h3 id="live-captures-title">{m.liveCapturesTitle}</h3>
+        <p class="muted-copy">{m.liveCapturesIntro}</p>
+      </header>
+      <div class="live-capture-grid">
+        {m.liveCaptures.map((shot) => (
+          <figure class="capture-card">
+            <div class="capture-bar">
+              <span class="capture-mode">{shot.badge}</span>
+              <span class="capture-res">1920×1080</span>
+            </div>
+            <img src={shot.src} alt={shot.alt} width="1920" height="1080" loading="lazy" />
+            <figcaption>
+              <strong>{shot.title}</strong>
+              <span>{shot.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+
     <p class="artifact-note" role="note">{m.vmImageNote}</p>
 
     <div class="sizing-box">
@@ -155,7 +215,7 @@ type EntryId = keyof typeof m.vmEntryNotes;
         <h3 id="vm-matrix-title">{m.vmMatrixTitle}</h3>
         <p class="muted-copy">{m.vmMatrixIntro}</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0">
         <table class="try-table vm-matrix-table">
           <thead>
             <tr>
@@ -384,6 +444,7 @@ type EntryId = keyof typeof m.vmEntryNotes;
 
   .table-wrap {
     margin-top: 1.5rem;
+    max-width: 100%;
     overflow-x: auto;
     border: 1px solid var(--rule-strong);
     border-radius: var(--radius);
@@ -550,6 +611,7 @@ type EntryId = keyof typeof m.vmEntryNotes;
   .usb-card pre,
   .vm-panel pre {
     margin: 0;
+    max-width: 100%;
     overflow-x: auto;
     padding: 0.75rem 0.9rem;
     border: 1px solid var(--rule);
@@ -637,7 +699,7 @@ type EntryId = keyof typeof m.vmEntryNotes;
     color: var(--on-cue-well);
   }
 
-  .tier-experimental-software-fallback {
+  .tier-software-fallback {
     border: 1px solid var(--signal);
     background: var(--signal-well);
     color: var(--on-signal-well);
@@ -834,10 +896,170 @@ type EntryId = keyof typeof m.vmEntryNotes;
     list-style: none;
   }
 
+  .section,
+  .section-head-compact,
+  .live-captures-block,
+  .try-hero,
+  .try-card,
+  .sizing-box,
+  .sizing-list div,
+  .sizing-list dd,
+  .presenter-box,
+  .matrix-box,
+  .vm-deck,
+  .vm-panel,
+  .usb-card,
+  .qcow2-download-card,
+  .arch-notice,
+  .capture-card {
+    min-width: 0;
+  }
+
+  .sizing-list dd,
+  .qcow2-download-card .eyebrow span,
+  .section-head-compact .eyebrow span {
+    overflow-wrap: anywhere;
+  }
+
+  .arch-notice {
+    margin-top: 1.25rem;
+    padding: 0.95rem 1.15rem;
+    border: 1px solid var(--signal);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--signal-well);
+    color: var(--on-signal-well);
+  }
+
+  .arch-notice h2 {
+    margin: 0 0 0.35rem;
+    font-size: var(--step-1);
+    color: var(--on-signal-well);
+  }
+
+  .arch-notice p {
+    margin: 0;
+    max-width: 74ch;
+  }
+
+  .arch-notice-link {
+    margin-top: 0.45rem !important;
+    font-size: 0.92rem;
+  }
+
+  .arch-notice a {
+    color: var(--on-signal-well);
+    font-weight: 600;
+  }
+
+  .qcow2-download-card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.15rem 1.25rem;
+    margin-bottom: 1.4rem;
+    border: 1px solid var(--phosphor);
+    border-left: 3px solid var(--phosphor);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .qcow2-download-card h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .qcow2-links,
+  .qcow2-sha,
+  .qcow2-cmd-label {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .qcow2-sha code,
+  .try-table td code {
+    overflow-wrap: anywhere;
+  }
+
+  .qcow2-cmd-label {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .qcow2-download-card pre {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--signal);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: 0.82rem;
+  }
+
+  .live-captures-block {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .live-capture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .capture-card {
+    margin: 0;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--panel);
+    overflow: hidden;
+  }
+
+  .capture-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--sunken);
+    font: 500 0.72rem var(--font-mono);
+  }
+
+  .capture-mode {
+    color: var(--signal);
+    text-transform: uppercase;
+  }
+
+  .capture-res {
+    color: var(--ink-muted);
+  }
+
+  .capture-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .capture-card figcaption {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem;
+    font-size: var(--step--1);
+  }
+
+  .capture-card figcaption span {
+    color: var(--ink-muted);
+  }
+
   @media (max-width: 900px) {
     .browser-grid,
     .sizing-list,
-    .usb-steps {
+    .usb-steps,
+    .live-capture-grid {
       grid-template-columns: 1fr;
     }
   }

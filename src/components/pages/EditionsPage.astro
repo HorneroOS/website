@@ -23,6 +23,7 @@ const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
 
 const maturityLabels: Record<Maturity, string> = m.maturityLabels;
+const displayMaturity = (maturity: Maturity): Maturity => (maturity === 'planned' ? 'planned' : 'supported');
 type EditionId = 'desktop' | 'server' | 'agents' | 'studio' | 'gaming';
 const copy: Record<EditionId, { channel: string; tagline: string; body: string; href: string; link: string }> = m.copy(
   layouts.length,
@@ -94,7 +95,7 @@ const matrix = [
     </h2>
     <ol class="rows" role="list">
       {rows.map((row) => (
-        <li class:list={['row', `maturity-${row.maturity}`]} id={row.id}>
+        <li class:list={['row', `maturity-${displayMaturity(row.maturity)}`]} id={row.id}>
           <div class="row-id">
             <p class="eyebrow">
               <b>{row.channel}</b>
@@ -117,8 +118,8 @@ const matrix = [
                   <li>
                     <AppLogo id={backend.id} />
                     <strong>{compositorName(backend.id)}</strong>
-                    <span class="maturity" data-maturity={backend.maturity}>
-                      {maturityLabels[backend.maturity]}
+                    <span class="maturity" data-maturity={displayMaturity(backend.maturity)}>
+                      {maturityLabels[displayMaturity(backend.maturity)]}
                     </span>
                   </li>
                 ))}
@@ -161,8 +162,8 @@ const matrix = [
             <th scope="row">{m.madurez}</th>
             {rows.map((row) => (
               <td>
-                <span class="maturity" data-maturity={row.maturity}>
-                  {maturityLabels[row.maturity]}
+                <span class="maturity" data-maturity={displayMaturity(row.maturity)}>
+                  {maturityLabels[displayMaturity(row.maturity)]}
                 </span>
               </td>
             ))}

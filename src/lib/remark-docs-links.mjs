@@ -36,22 +36,36 @@ export default function remarkDocsLinks({ docsRoot, repo, sha, capturedFiles = {
       '/images/apps/kitty-appearance.webp': 'CAP-TERM-01',
     };
     const walk = (node) => {
-      if (node.type === 'image' && typeof node.url === 'string' && node.url.startsWith('/images/apps/')) {
-        const slot = pendingSlots[node.url];
-        const label = spanish ? 'Pendiente — captura en el equipo' : 'Pending — host capture';
-        const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        const capturedFile = slot ? capturedFiles[slot] : undefined;
-        node.type = 'html';
-        node.value = capturedFile
-          ? `<img data-capture-slot="${slot}" src="/captures/${capturedFile}" alt="${alt}" loading="lazy" />`
-          : slot
-            ? `<span data-capture-slot="${slot}"><em>${label} (${slot}): ${alt}</em></span>`
-            : `<span><em>${label}: ${alt}</em></span>`;
-        delete node.url;
-        delete node.alt;
-        delete node.title;
-        delete node.children;
-        return;
+      if (node.type === 'image' && typeof node.url === 'string') {
+        if (node.url.startsWith('/images/apps/')) {
+          const slot = pendingSlots[node.url];
+          const label = spanish ? 'Pendiente — captura en el equipo' : 'Pending — host capture';
+          const alt = (node.alt ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+          const capturedFile = slot ? capturedFiles[slot] : undefined;
+          node.type = 'html';
+          node.value = capturedFile
+            ? `<img data-capture-slot="${slot}" src="/captures/${capturedFile}" alt="${alt}" loading="lazy" />`
+            : slot
+              ? `<span data-capture-slot="${slot}"><em>${label} (${slot}): ${alt}</em></span>`
+              : `<span><em>${label}: ${alt}</em></span>`;
+          delete node.url;
+          delete node.alt;
+          delete node.title;
+          delete node.children;
+          return;
+        }
+        // Production CSP (img-src 'self' data:) blocks external badge images such as
+        // shields.io and github.com/.../badge.svg. Render clean inline text instead.
+        if (/^https?:\/\//i.test(node.url)) {
+          const label = (node.alt || '').trim();
+          node.type = 'text';
+          node.value = label ? `[${label}]` : '';
+          delete node.url;
+          delete node.alt;
+          delete node.title;
+          delete node.children;
+          return;
+        }
       }
       if (node.type === 'link' && typeof node.url === 'string') {
         const url = node.url;

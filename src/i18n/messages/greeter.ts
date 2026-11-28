@@ -12,7 +12,7 @@ const es = {
   disenoSignalEnMainSin: 'Diseño Signal · publicado',
   elGreeterDeHorneroos: 'El greeter de HorneroOS',
   laPantallaDeLoginEs:
-    'La pantalla de login es un greeter Signal con dos sabores —tema de SDDM y programa nativo para greetd— del mismo universo que la pantalla de bloqueo de la shell: un panel de instrumentos sobre Signal Night, con tipografía IBM Plex, el reloj al centro y el saludo de Javi. Debajo va un solo módulo de ingreso donde las cuentas son canales (CH 01, CH 02…) y el selector de sesión lista lo que SDDM ofrece: Desktop, Studio y Gaming, con las sesiones experimentales al final y nunca como predeterminada.',
+    'La pantalla de login es un greeter Signal con dos sabores —tema de SDDM y programa nativo para greetd— del mismo universo que la pantalla de bloqueo de la shell: un panel de instrumentos sobre Signal Night, con tipografía IBM Plex, el reloj al centro y el saludo de Javi. Debajo va un solo módulo de ingreso donde las cuentas son canales (CH 01, CH 02…) y el selector de sesión lista lo que SDDM ofrece: Desktop, Studio y Gaming, con sesiones alternativas al final.',
   elFondoNoEsUna:
     'El fondo no es una foto: es un horizonte de la pampa dibujado en código (HorizonField) —un sol a medio salir en franjas, un molino, un alambrado y una escala de instrumento sobre el horizonte— que se pinta una vez y queda quieto salvo el reloj. No se incluye ninguna foto ni video de terceros.',
   estadoEsteDisenoEstaEn: (v0: string | number | null | undefined): string =>
@@ -87,7 +87,7 @@ const en: Messages = {
   disenoSignalEnMainSin: 'Signal design · shipped',
   elGreeterDeHorneroos: 'The HorneroOS greeter',
   laPantallaDeLoginEs:
-    'The login screen is a Signal greeter in two flavours — an SDDM theme and a native greetd program — from the same universe as the shell lock screen: an instrument panel on Signal Night in IBM Plex type, with the clock in the centre and a greeting from Javi. Below it sits one sign-in module where accounts are channels (CH 01, CH 02…) and the session selector lists what SDDM offers: Desktop, Studio and Gaming, with experimental sessions last and never the default.',
+    'The login screen is a Signal greeter in two flavours — an SDDM theme and a native greetd program — from the same universe as the shell lock screen: an instrument panel on Signal Night in IBM Plex type, with the clock in the centre and a greeting from Javi. Below it sits one sign-in module where accounts are channels (CH 01, CH 02…) and the session selector lists what SDDM offers: Desktop, Studio and Gaming, with alternative sessions last.',
   elFondoNoEsUna:
     'The background is not a photograph: it is a Pampa horizon drawn in code (HorizonField) — a striped half-set sun, a windmill, a wire fence and an instrument scale along the horizon — painted once and still except for the clock. No third-party photo or video is bundled.',
   estadoEsteDisenoEstaEn: (v0: string | number | null | undefined): string =>

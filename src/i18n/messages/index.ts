@@ -75,12 +75,12 @@ const es = {
   horneroAppsTitle: 'Hornero Apps',
   horneroAppsSummary: (totalApps: number): string =>
     `${totalApps} aplicaciones verificadas en 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita.`,
-  horneroAppsAlt: 'Captura real de Hornero Apps en Signal Night mostrando la vista Discover.',
+  horneroAppsAlt: 'Captura real en vivo 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 mostrando Hornero Apps Discover.',
   explorarHorneroApps: 'Explorar Hornero Apps',
   horneroWelcomeTitle: 'Hornero Welcome · Signal Flight',
   horneroWelcomeSummary:
     'Recorrido guiado First Flight en 9 escenas, guía permanente Explore Hornero y novedades por versión con previews reversibles.',
-  horneroWelcomeAlt: 'Captura real de Hornero Welcome en Signal Day mostrando la escena Arrival.',
+  horneroWelcomeAlt: 'Captura real en vivo 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 mostrando Hornero Welcome Arrival.',
   conocerHorneroWelcome: 'Conocer Hornero Welcome',
   probarEnBrowserVmOLiveUsb: 'Probar en browser, VM o Live USB',
   estadoActualDesdeLosDatos: 'Estado actual, desde los datos de producto fijados',
@@ -166,7 +166,7 @@ const es = {
   plannedNote: (names: string[]): string =>
     `${names.join(' y ')} están planificadas: todavía no tienen imagen instalable.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
-    `Es un sistema para uso diario, con limitaciones concretas y declaradas: LUKS, BIOS heredado y Niri no están validados en la ISO actual y el rollback de SO sigue planificado${candidateVersion ? `; ${candidateVersion} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`,
+    `Es un sistema para uso diario, probado en al menos 3 equipos físicos y en KVM: LUKS y BIOS heredado no están validados en la ISO preview32 y el rollback de SO sigue planificado${candidateVersion ? `; ${candidateVersion} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`,
   terminalDeck: {
     heading: 'Consola interactiva horneroctl',
     tablistLabel: 'Comandos de horneroctl',
@@ -310,12 +310,12 @@ const en: Messages = {
   horneroAppsTitle: 'Hornero Apps',
   horneroAppsSummary: (totalApps: number): string =>
     `${totalApps} verified applications across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance.`,
-  horneroAppsAlt: 'Real capture of Hornero Apps in Signal Night showing the Discover view.',
+  horneroAppsAlt: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 showing Hornero Apps Discover.',
   explorarHorneroApps: 'Explore Hornero Apps',
   horneroWelcomeTitle: 'Hornero Welcome · Signal Flight',
   horneroWelcomeSummary:
     'Guided 9-scene First Flight tour, permanent Explore Hornero discovery hub, and version-aware What’s New with reversible previews.',
-  horneroWelcomeAlt: 'Real capture of Hornero Welcome in Signal Day showing the Arrival scene.',
+  horneroWelcomeAlt: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 showing Hornero Welcome Arrival.',
   conocerHorneroWelcome: 'Explore Hornero Welcome',
   probarEnBrowserVmOLiveUsb: 'Try in browser, VM, or Live USB',
   estadoActualDesdeLosDatos: 'Current status, from the pinned product data',
@@ -400,7 +400,7 @@ const en: Messages = {
     `Desktop plus ${count} creative specializations you pick at install time. Audio runs ${audioDefault} by default; ${audioOptIn.join(' and ')} only when you opt in.`,
   plannedNote: (names: string[]): string => `${names.join(' and ')} are planned: they have no installable image yet.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
-    `It is an everyday-use system with concrete, declared limitations: LUKS, legacy BIOS and Niri are not validated on the current ISO and OS rollback is still planned${candidateVersion ? `; ${candidateVersion} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`,
+    `It is an everyday-use system tested on 3+ physical computers and in KVM: LUKS and legacy BIOS are not validated on the preview32 ISO and OS rollback is still planned${candidateVersion ? `; ${candidateVersion} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`,
   terminalDeck: {
     heading: 'Interactive horneroctl deck',
     tablistLabel: 'horneroctl commands',

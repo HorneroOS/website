@@ -254,7 +254,7 @@ const orderedApps = [...apps].sort(
 
               <footer class="app-card-foot">
                 <div class="cmd-wrap">
-                  <code>{cmd}</code>
+                  <code tabindex="0">{cmd}</code>
                   <button
                     type="button"
                     class="copy-cmd-btn"
@@ -626,8 +626,28 @@ const orderedApps = [...apps].sort(
     letter-spacing: 0.06em;
   }
 
+  .apps-hero,
+  .capture-card,
+  .catalog-controls,
+  .controls-top,
+  .search-field,
+  .select-field,
+  .app-card,
+  .app-card article,
+  .app-card-head > div,
+  .app-card-foot,
+  .cmd-wrap,
+  .profile-card,
+  .enterprise-card,
+  .limit-card {
+    min-width: 0;
+  }
+
   .search-field input,
   .select-field select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     min-height: 2.75rem;
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--rule-strong);
@@ -784,6 +804,8 @@ const orderedApps = [...apps].sort(
   }
 
   .meta-pill {
+    max-width: 100%;
+    overflow-wrap: anywhere;
     padding: 0.14rem 0.45rem;
     border: 1px solid var(--rule);
     border-radius: var(--radius-small);
@@ -814,6 +836,7 @@ const orderedApps = [...apps].sort(
     background: var(--sunken);
     color: var(--ink-muted);
     font-size: 0.84rem;
+    overflow-wrap: anywhere;
   }
 
   .app-card-foot {
@@ -829,6 +852,7 @@ const orderedApps = [...apps].sort(
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+    max-width: 100%;
     padding: 0.35rem 0.55rem;
     border: 1px solid var(--rule);
     border-radius: var(--radius-small);
@@ -836,8 +860,10 @@ const orderedApps = [...apps].sort(
   }
 
   .cmd-wrap code {
+    flex: 1;
     min-width: 0;
     overflow-x: auto;
+    white-space: nowrap;
     font-size: 0.78rem;
     border: 0;
     padding: 0;
@@ -974,6 +1000,7 @@ const orderedApps = [...apps].sort(
   .profile-cli,
   .enterprise-card pre {
     margin: auto 0 0;
+    max-width: 100%;
     overflow-x: auto;
     padding: 0.6rem 0.75rem;
     border: 1px solid var(--rule);

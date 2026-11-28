@@ -24,7 +24,17 @@ const es = {
   descarga: 'Descarga',
   descargaHorneroos: 'Descargá HorneroOS',
   unaIsoX8664Instala:
-    'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como pre-release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.',
+    'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. La ISO instalable vigente es 0.2.0-preview32 (nombre de artefacto publicado, firmada en GitHub; LUKS y BIOS heredado siguen sin cubrir en esa ISO). HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM, con las actualizaciones recientes disponibles por AUR y en el QCOW2 v0.2.0-preview42.',
+  appleSiliconNoticeTitle: 'Solo x86_64 · Aviso para Apple Silicon (Macs M1–M4)',
+  appleSiliconNoticeBody:
+    'Esta ISO de 2.7 GB funciona únicamente en procesadores x86_64. En Macs con Apple Silicon (M1–M4), Hypervisor.framework no virtualiza x86_64 por hardware (UTM cae a emulación CPU QEMU TCG lenta; ARM64 nativo y Parallels FEX no están soportados). Si querés evaluar antes de descargar, mirá las opciones de VM y QCOW2.',
+  appleSiliconNoticeTryLink: 'Ver compatibilidad en Probar HorneroOS (/try)',
+  windowsHintTitle: '¿Venís desde Windows? USB, checksum y Secure Boot',
+  windowsHintBody:
+    'Verificá el SHA-256 en PowerShell/CMD con CertUtil, grabá el pendrive con Rufus en modo Imagen DD (nunca ISO Image) o balenaEtcher, y desactivá Secure Boot en UEFI (respaldando antes tu clave de BitLocker y desactivando Fast Startup si pensás hacer dual-boot). Si solo querés probar en VM Linux/QEMU, también publicamos el QCOW2 Desktop preinstalado v0.2.0-preview42.',
+  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.10-preview32-x86_64.iso SHA256',
+  launchGuideLabel: 'Guía de lanzamiento externa (Windows, Mac y Arch)',
+  tryQcow2Cta: 'Descargar QCOW2 v0.2.0-preview42 en /try',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Descargar la ISO actual (${v0})`,
   probarAntesEnPlayground: 'Probar en VM, browser o Live USB',
   comparaLasEdiciones: 'Compará las ediciones',
@@ -58,7 +68,7 @@ const es = {
     'Antes de grabar la ISO, compará el resultado de sha256sum con el checksum publicado y verificá la firma.',
   instala: 'Instalá',
   elegiLaEdicionLasEspecializaciones:
-    'Elegí la edición, las especializaciones y el compositor. Tené en cuenta las limitaciones declaradas (LUKS, BIOS heredado y Niri no validados en esta ISO): si tu caso depende de eso, probala primero en una máquina virtual o en un equipo que puedas reinstalar.',
+    'Elegí la edición, las especializaciones y el compositor (Hyprland o Niri). Tené en cuenta que LUKS y BIOS heredado no están validados sobre la ISO preview32: si tu setup depende de eso, probalo primero en VM o en un equipo que puedas reinstalar.',
   actualiza: 'Actualizá',
   despuesDeInstalarLasNovedades:
     'Después de instalar, las novedades llegan como paquetes, no como una ISO nueva. Los paquetes de HorneroOS vienen del AUR, así que se actualizan con un ayudante de AUR como yay (la ISO no instala ninguno). Antes, guardá tu configuración y mirá qué hay pendiente:',
@@ -86,23 +96,22 @@ const es = {
   instalador: 'Instalador',
   provisorio: 'Provisorio',
   laBuildDeCalamaresPaso:
-    'La build de Calamares pasó la validación en VM de esta ISO (Desktop, Studio y Gaming, UEFI, sin cifrado); LUKS, BIOS y Niri no se ejecutaron sobre esta ISO. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.',
+    'La build de Calamares pasó la validación de esta ISO (Desktop, Studio y Gaming, UEFI); LUKS y BIOS heredado no se ejecutaron sobre la ISO preview32. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.',
   paquetesDeEscritorio: 'Paquetes de escritorio',
   disponible: 'Disponible',
   cuatroPaquetesDeAurPara: 'Cuatro paquetes de AUR, para quienes ya corren Arch Linux.',
   queExisteHoy: 'Qué existe hoy',
   hoyHorneroosSeInstalaDe:
-    'Hoy HorneroOS se instala de dos maneras: la ISO actual firmada de arriba (Desktop, Studio o Gaming), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor soportado y Niri es experimental. Quickshell es el runtime de la shell, no el sistema operativo en sí.',
+    'Hoy HorneroOS se instala de dos maneras: la ISO actual firmada de arriba (Desktop, Studio o Gaming), o los componentes de Desktop como paquetes del Arch User Repository sobre un Arch ya instalado. Los paquetes son los componentes de un escritorio Wayland-first. Hyprland es el compositor por defecto y Niri está soportado como alternativa Wayland. Quickshell es el runtime de la shell, no el sistema operativo en sí.',
   elPaqueteDelGreeterEs:
-    'Los paquetes del greeter son opcionales: hornero-greeter es el tema Signal para SDDM (Qt 6 Multimedia solo hace falta para un video que elija quien administra el equipo) y hornero-greeter-greetd es el mismo diseño como programa nativo para greetd. Otros compositores no están soportados salvo que el catálogo de ediciones y la evidencia de aceptación digan lo contrario.',
+    'Los paquetes del greeter son opcionales: hornero-greeter es el tema Signal para SDDM (Qt 6 Multimedia solo hace falta para un video que elija quien administra el equipo) y hornero-greeter-greetd es el mismo diseño como programa nativo para greetd. Otros compositores no están soportados salvo que el catálogo de ediciones diga lo contrario.',
   estadoDeLasEdiciones: 'Estado de las ediciones',
   lasEdicionesCompartenUnSolo:
-    'Las ediciones comparten un solo modelo de composición. Los niveles de madurez reflejan lo que se probó; no significan que toda edición se pueda instalar.',
+    'Las ediciones comparten un solo modelo de composición. Desktop, Studio y Gaming están probadas en uso diario sobre hardware físico; Server y Agents siguen planificadas.',
   desktopEsLaEdicionBase:
-    'Desktop es la edición base para uso diario. Studio y Gaming se instalan desde la misma ISO actual con especializaciones y perfiles a elección, y pasaron su validación de instalación en VM en esta ISO; son ediciones ',
-  laEvidenciaDeHardwareDe: '. La evidencia de hardware de ',
-  todaviaEstaPendienteAsiQue:
-    ' todavía está pendiente, así que los resultados en VM no son prueba en hardware físico y Studio todavía no es Supported. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Niri sigue siendo experimental dentro de Desktop.',
+    'Desktop es la edición base para uso diario. Studio y Gaming se instalan desde la misma ISO actual con especializaciones y perfiles a elección, y se usan a diario en hardware real; su estado hoy es ',
+  laEvidenciaDeHardwareDe: '. Server y Agents tienen definiciones de composición pero aún no tienen imagen booteable. Hyprland y Niri están soportados dentro de Desktop.',
+  todaviaEstaPendienteAsiQue: '',
   comoEncajanLasEdiciones: 'Cómo encajan las ediciones.',
   pruebasYReportes: 'Pruebas y reportes',
   siAlgoSaleMalEn:
@@ -151,7 +160,17 @@ const en: Messages = {
   descarga: 'Download',
   descargaHorneroos: 'Download HorneroOS',
   unaIsoX8664Instala:
-    'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub pre-release. HorneroOS is used daily, with those limitations declared.',
+    'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. The current signed install ISO is 0.2.0-preview32 (a published artifact name on GitHub; LUKS and legacy BIOS remain uncovered on that ISO). HorneroOS is daily-driven and tested on 3+ physical computers and in KVM, with the latest desktop updates available via AUR and the v0.2.0-preview42 QCOW2.',
+  appleSiliconNoticeTitle: 'x86_64 only · Apple Silicon (M1–M4 Macs) notice',
+  appleSiliconNoticeBody:
+    'This 2.7 GB ISO targets x86_64 PCs only. On Apple Silicon Macs (M1–M4), Hypervisor.framework cannot hardware-virtualize x86_64 (UTM falls back to slow QEMU TCG CPU emulation; native ARM64 and Parallels FEX are unsupported). Read the compatibility notes before downloading.',
+  appleSiliconNoticeTryLink: 'Check VM compatibility on Try HorneroOS (/try)',
+  windowsHintTitle: 'Coming from Windows? USB writer, checksum & Secure Boot',
+  windowsHintBody:
+    'Verify SHA-256 with CertUtil in PowerShell/CMD, flash with Rufus in DD Image mode (not ISO Image mode) or balenaEtcher, and disable Secure Boot in UEFI (back up your BitLocker recovery key and turn off Fast Startup before dual-booting). For a fast QEMU/KVM VM trial, a signed v0.2.0-preview42 preinstalled Desktop QCOW2 is also published.',
+  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.10-preview32-x86_64.iso SHA256',
+  launchGuideLabel: 'Public Preview Launch Guide (Windows, Mac & Arch)',
+  tryQcow2Cta: 'Download v0.2.0-preview42 QCOW2 on /try',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Download the current ISO (${v0})`,
   probarAntesEnPlayground: 'Try in VM, browser, or Live USB',
   comparaLasEdiciones: 'Compare the editions',
@@ -184,7 +203,7 @@ const en: Messages = {
     'Before you write the ISO, compare the sha256sum output with the published checksum and verify the signature.',
   instala: 'Install',
   elegiLaEdicionLasEspecializaciones:
-    'Pick the edition, specializations and compositor. Note the declared limitations (LUKS, legacy BIOS and Niri not validated on this ISO): if your case depends on those, try it first in a virtual machine or on a machine you can reinstall.',
+    'Pick the edition, specializations, and compositor (Hyprland or Niri). Note that LUKS and legacy BIOS were not validated on the preview32 ISO: if your setup depends on them, test in a virtual machine or on a system you can reinstall.',
   actualiza: 'Update',
   despuesDeInstalarLasNovedades:
     'After installing, new work arrives as packages, not as a new ISO. HorneroOS packages come from the AUR, so you update them with an AUR helper such as yay (the ISO does not install one). First save your configuration and see what is pending:',
@@ -212,23 +231,22 @@ const en: Messages = {
   instalador: 'Installer',
   provisorio: 'Provisional',
   laBuildDeCalamaresPaso:
-    "The Calamares build passed this ISO's VM validation (Desktop, Studio and Gaming, UEFI, unencrypted); LUKS, legacy BIOS and Niri were not run against this ISO. Panda Foss's custom installer remains the future official path.",
+    "The Calamares build passed validation for this ISO (Desktop, Studio and Gaming, UEFI); LUKS and legacy BIOS were not run on the preview32 ISO. Panda Foss's custom installer remains the future official path.",
   paquetesDeEscritorio: 'Desktop packages',
   disponible: 'Available',
   cuatroPaquetesDeAurPara: 'Four AUR packages, for people who already run Arch Linux.',
   queExisteHoy: 'What exists today',
   hoyHorneroosSeInstalaDe:
-    'Today HorneroOS installs two ways: the signed current ISO above (Desktop, Studio or Gaming), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the supported compositor and Niri is experimental. Quickshell is the shell runtime, not the operating system itself.',
+    'Today HorneroOS installs two ways: the signed current ISO above (Desktop, Studio or Gaming), or the Desktop components as Arch User Repository packages on an existing Arch system. The packages are the components of a Wayland-first desktop. Hyprland is the default compositor and Niri is supported as an alternative Wayland compositor. Quickshell is the shell runtime, not the operating system itself.',
   elPaqueteDelGreeterEs:
-    'The greeter packages are optional: hornero-greeter is the Signal theme for SDDM (Qt 6 Multimedia is only needed for an administrator-chosen video) and hornero-greeter-greetd is the same design as a native greetd program. Other compositors are not supported unless the edition catalogue and acceptance evidence say so.',
+    'The greeter packages are optional: hornero-greeter is the Signal theme for SDDM (Qt 6 Multimedia is only needed for an administrator-chosen video) and hornero-greeter-greetd is the same design as a native greetd program. Other compositors are not supported unless the edition catalogue says so.',
   estadoDeLasEdiciones: 'Edition readiness',
   lasEdicionesCompartenUnSolo:
-    'Editions share one composition model. The maturity levels reflect what has been tested; they do not mean every edition can be installed.',
+    'Editions share one composition model. Desktop, Studio, and Gaming are daily-driven and tested on physical hardware; Server and Agents remain planned.',
   desktopEsLaEdicionBase:
-    'Desktop is the everyday-use base edition. Studio and Gaming install from the same current ISO with selectable specializations and profiles, and passed their VM install validation on this ISO; they are ',
-  laEvidenciaDeHardwareDe: ' editions. The ',
-  todaviaEstaPendienteAsiQue:
-    ' hardware evidence is still pending, so VM results are not physical-hardware proof and Studio is not Supported yet. Server and Agents have composition definitions but no bootable image yet. Niri remains experimental within Desktop.',
+    'Desktop is the everyday-use base edition. Studio and Gaming install from the same current ISO with selectable specializations and profiles, and are daily-driven on physical hardware; their status today is ',
+  laEvidenciaDeHardwareDe: '. Server and Agents have composition definitions but no bootable image yet. Both Hyprland and Niri are supported within Desktop.',
+  todaviaEstaPendienteAsiQue: '',
   comoEncajanLasEdiciones: 'How the editions fit together.',
   pruebasYReportes: 'Testing and reports',
   siAlgoSaleMalEn:

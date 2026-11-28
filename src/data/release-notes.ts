@@ -3,6 +3,14 @@
 // engineering record; ReleasesPage renders these first and keeps the full
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
+  '0.2.0-preview42': {
+    es: 'Lanzamiento de paquetes AUR y primera imagen QEMU QCOW2 preinstalada y firmada con GPG: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3 y Chromatic v3 en hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1 y horneroctl-bin 0.2.0_preview63-1. La ISO instalable sigue siendo la v0.2.0-preview32.',
+    en: 'AUR package release plus the first published, GPG-signed preinstalled QEMU QCOW2 image: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3, and Chromatic v3 across hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1, and horneroctl-bin 0.2.0_preview63-1. The install ISO remains v0.2.0-preview32.',
+  },
+  '0.2.0-preview41': {
+    es: 'Actualización de preparación en AUR (sin ISO): hornero-shell 1.3.9 (dependencias Qt6 Multimedia y PipeWire), hornero-config 0.4.10 (seed-user.sh missing-only para Instalar sobre Arch) y hornero-greeter-greetd 0.1.1.',
+    en: 'AUR product-readiness package release (no ISO): hornero-shell 1.3.9 (Qt6 Multimedia and PipeWire stack dependencies), hornero-config 0.4.10 (missing-only seed-user.sh for Install on Arch), and hornero-greeter-greetd 0.1.1.',
+  },
   '0.2.0-preview40': {
     es: 'Actualización de paquetes sin ISO nueva: hornero-shell 1.3.8 con la auditoría del Centro de control (los guardados ya no pierden secciones de tu shell.json), hornero-config 0.4.9 y horneroctl-bin 0.2.0_preview52 firmados. La ISO de instalación sigue siendo la actual (0.2.0-preview32).',
     en: 'A package update with no new ISO: hornero-shell 1.3.8 with the Control Center audit (saves no longer drop sections of your shell.json), hornero-config 0.4.9 and signed horneroctl-bin 0.2.0_preview52. The install ISO is still the current one (0.2.0-preview32).',

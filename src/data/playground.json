@@ -12,6 +12,17 @@
     "premium": "3840x2160",
     "profilesCount": 7
   },
+  "vmImage": {
+    "version": "0.2.0-preview42",
+    "name": "horneroos-0.2.0-preview42-desktop-qemu-x86_64.qcow2.zst",
+    "url": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/vm/horneroos-0.2.0-preview42-desktop-qemu-x86_64.qcow2.zst",
+    "sha256": "c1012413227f407d0a312fad7d7a34f789922303db13c752a9a9ed1a324e13c2",
+    "sha256Url": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/vm/horneroos-0.2.0-preview42-desktop-qemu-x86_64.qcow2.zst.sha256",
+    "signatureUrl": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/vm/horneroos-0.2.0-preview42-desktop-qemu-x86_64.qcow2.zst.sig",
+    "manifestUrl": "https://apvhgc6x8t0o0dzm.public.blob.vercel-storage.com/vm/horneroos-0.2.0-preview42-desktop-qemu-x86_64.qcow2.zst.manifest.json",
+    "sizeLabel": "2.6 GB",
+    "releaseUrl": "https://github.com/HorneroOS/hornero/releases/tag/v0.2.0-preview42"
+  },
   "vmCompatibility": [
     {
       "tierId": "officially-tested",
@@ -54,7 +65,7 @@
       ]
     },
     {
-      "tierId": "experimental-software-fallback",
+      "tierId": "software-fallback",
       "entries": [
         {
           "id": "virtualbox",

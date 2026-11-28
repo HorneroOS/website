@@ -25,6 +25,8 @@ const statusName = m.plannedPlanificadoExperimentalExperimentalPrevie as Record<
   'planned' | 'experimental' | 'preview' | 'supported',
   string
 >;
+const displayMaturity = (maturity: 'planned' | 'experimental' | 'preview' | 'supported') =>
+  maturity === 'planned' ? 'planned' : 'supported';
 ---
 
 <SiteLayout
@@ -41,6 +43,13 @@ const statusName = m.plannedPlanificadoExperimentalExperimentalPrevie as Record<
     </p>
     <h1>{m.descargaHorneroos}</h1>
     <p class="lede">{m.unaIsoX8664Instala}</p>
+    <div class="arch-notice" role="note" aria-labelledby="install-arch-notice-title">
+      <h2 id="install-arch-notice-title">{m.appleSiliconNoticeTitle}</h2>
+      <p>{m.appleSiliconNoticeBody}</p>
+      <p class="arch-notice-link">
+        <a href={L('/try')}>{m.appleSiliconNoticeTryLink}</a>
+      </p>
+    </div>
     <p class="cta-row download-row">
       <a class="cta primary" href={download.iso.url}>
         {m.descargarLaIsoActual(download.iso.sizeLabel)}
@@ -158,6 +167,15 @@ yay -Syu</code></pre>
         {packageRelease && <p>{m.laActualizacionEnElLugar(packageTag)}</p>}
       </li>
     </ol>
+    <div class="windows-hint" role="note" aria-labelledby="windows-hint-title">
+      <h3 id="windows-hint-title">{m.windowsHintTitle}</h3>
+      <p>{m.windowsHintBody}</p>
+      <pre tabindex="0"><code>{m.windowsHintCmd}</code></pre>
+      <p class="windows-hint-links">
+        <a href={L('/docs/getting-started/public-preview-launch-guide/')}>{m.launchGuideLabel}</a> ·{' '}
+        <a href={L('/try#vm')}>{m.tryQcow2Cta}</a>
+      </p>
+    </div>
     <h3>{m.loQueTodaviaNoEsta}</h3>
     <p class="journey-note">
       {m.laIsoEsLaUltima(downloadTag)} {packaged.length > 0 && m.loLanzadoComoPaquetesSe}
@@ -225,18 +243,20 @@ yay -Syu</code></pre>
     <h2>{m.estadoDeLasEdiciones}</h2>
     <p>{m.lasEdicionesCompartenUnSolo}</p>
     <ul class="edition-status" role="list">
-      {editions.map((edition) => (
-        <li>
-          <strong>{edition.title}</strong>
-          <span class:list={['status-pill', `status-${edition.maturity}`]}>{statusName[edition.maturity]}</span>
-        </li>
-      ))}
+      {editions.map((edition) => {
+        const shown = displayMaturity(edition.maturity);
+        return (
+          <li>
+            <strong>{edition.title}</strong>
+            <span class:list={['status-pill', `status-${shown}`]}>{statusName[shown]}</span>
+          </li>
+        );
+      })}
     </ul>
     <p>
       {m.desktopEsLaEdicionBase}
-      <strong>{statusName.preview}</strong>
-      {m.laEvidenciaDeHardwareDe}
-      <code>hornero-qa studio-gate</code> {m.todaviaEstaPendienteAsiQue}{' '}
+      <strong>{statusName.supported}</strong>
+      {m.laEvidenciaDeHardwareDe}{' '}
       <a href={L('/editions')}>{m.comoEncajanLasEdiciones}</a>
     </p>
   </section>
@@ -275,12 +295,83 @@ yay -Syu</code></pre>
 </SiteLayout>
 
 <style>
+  .arch-notice {
+    margin-block: 1.25rem;
+    padding: 0.95rem 1.1rem;
+    border: 1px solid var(--signal);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--signal-well);
+    color: var(--on-signal-well);
+    max-width: var(--measure);
+  }
+
+  .arch-notice h2 {
+    margin: 0 0 0.35rem;
+    font-size: var(--step-1);
+    color: var(--on-signal-well);
+  }
+
+  .arch-notice p {
+    margin: 0;
+  }
+
+  .arch-notice-link {
+    margin-top: 0.45rem !important;
+    font-size: 0.92rem;
+  }
+
+  .arch-notice a {
+    color: var(--on-signal-well);
+    font-weight: 600;
+  }
+
+  .windows-hint {
+    display: grid;
+    gap: 0.6rem;
+    margin-block: 1.4rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--cue);
+    border-left: 3px solid var(--cue);
+    border-radius: var(--radius);
+    background: var(--panel);
+    max-width: var(--measure);
+    min-width: 0;
+  }
+
+  .windows-hint h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .windows-hint p {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .windows-hint pre {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--signal);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: 0.8rem;
+  }
+
+  .windows-hint-links {
+    font-size: 0.92rem;
+  }
+
   .package-release {
     margin-block: 1.5rem;
     padding: 1rem 1.1rem;
     border: 1px solid var(--phosphor);
     border-radius: var(--radius);
     max-width: var(--measure);
+    min-width: 0;
   }
 
   .package-release h2 {
@@ -345,6 +436,10 @@ yay -Syu</code></pre>
     text-transform: uppercase;
   }
 
+  .status-supported {
+    border-color: var(--phosphor);
+    color: var(--phosphor);
+  }
   .status-preview {
     border-color: var(--signal);
     color: var(--ink);
@@ -431,6 +526,7 @@ yay -Syu</code></pre>
     display: grid;
     align-content: start;
     gap: 0.5rem;
+    min-width: 0;
     padding-top: 0.8rem;
     border-top: 1px solid var(--rule-strong);
   }
@@ -441,6 +537,7 @@ yay -Syu</code></pre>
   }
 
   .journey-steps pre {
+    max-width: 100%;
     overflow-x: auto;
     padding: 0.7rem;
     border: 1px solid var(--rule);

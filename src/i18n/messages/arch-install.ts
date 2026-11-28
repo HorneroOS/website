@@ -40,7 +40,7 @@ const es = {
   pathArchBullets: [
     'Sin reinstalar ni perder tu entorno actual',
     'El sembrado de configuración nunca sobrescribe archivos tuyos',
-    'Actualizás con paru o yay como cualquier paquete de Arch',
+    'Actualizás con yay (o paru) como cualquier paquete de Arch',
   ],
   pathArchCta: 'Empezar con el paso 01',
 
@@ -66,38 +66,38 @@ const es = {
   step1Items: [
     {
       label: 'Arch Linux x86_64 al día',
-      detail: 'Sistema actualizado con pacman -Syu. Derivados de Arch funcionan como ruta experimental.',
+      detail: 'Sistema actualizado con pacman -Syu. Derivados de Arch funcionan como ruta comunitaria no verificada oficialmente.',
     },
     {
       label: 'Wayland + Hyprland o Niri',
-      detail: 'Hyprland es el compositor soportado; Niri está disponible en modo experimental.',
+      detail: 'Hyprland es el compositor por defecto y Niri está soportado como alternativa Wayland.',
     },
     {
-      label: 'Ayudante del AUR (paru o yay)',
-      detail: 'Necesitás git y base-devel para compilar paquetes del AUR como tu usuario normal.',
+      label: 'Ayudante del AUR (yay)',
+      detail: 'Necesitás git y base-devel para compilar paquetes del AUR como tu usuario normal (paru también funciona).',
     },
     {
       label: 'Audio y GPU recomendados',
       detail: 'PipeWire + WirePlumber para audio completo y los drivers de tu GPU según la Arch Wiki.',
     },
   ],
-  step1HelperSummary: '¿No tenés paru ni yay instalado? Instalá yay en 4 comandos',
+  step1HelperSummary: '¿No tenés yay instalado? Instalá yay en 4 comandos',
   step1HelperNote:
     'El AUR es mantenido por la comunidad: revisá siempre el PKGBUILD antes de construir. Ejecutalo como tu usuario, nunca como root:',
 
   // Step 02: Install 4 core packages
   step2Title: 'Instalá los 4 paquetes principales',
   step2Lead:
-    'El escritorio HorneroOS se compone de cuatro paquetes del AUR. Podés instalarlos con paru o yay junto con el soporte base de sesión:',
+    'El escritorio HorneroOS se compone de cuatro paquetes del AUR. Instalalos con yay junto con el soporte base de sesión (y revisá cada PKGBUILD antes de compilar):',
   corePackages: [
     { name: 'hornero-shell', role: 'Shell Quickshell, barra, centro de control y presets de layout' },
     { name: 'hornero-config', role: 'Defaults del escritorio, packs de temas Signal y script de sembrado' },
     { name: 'hornero-greeter', role: 'Pantalla de login Hornero Signal para SDDM (opcional)' },
     { name: 'horneroctl-bin', role: 'CLI nativa del sistema para diagnóstico, snapshots y hardware' },
   ],
-  step2CmdPrimaryLabel: 'Con paru o yay (paquetes principales + soporte de sesión)',
+  step2CmdPrimaryLabel: 'Con yay (paquetes principales + soporte de sesión)',
   step2GreeterNote:
-    '¿Usás greetd en lugar de SDDM? Reemplazá hornero-greeter por hornero-greeter-greetd (mismo diseño Signal como binario nativo). Ningún paquete cambia tu display manager automáticamente.',
+    '¿Usás greetd en lugar de SDDM? Reemplazá hornero-greeter por hornero-greeter-greetd (mismo diseño Signal como binario nativo) y habilitá greetd en lugar de sddm. Ningún paquete cambia tu display manager automáticamente.',
 
   // Step 03: Initialize & verify
   step3Title: 'Inicializá, verificá y entrá a tu sesión',
@@ -161,25 +161,25 @@ const es = {
     'Si algo no se comporta como esperás o querés volver exactamente a tu estado anterior, tenés herramientas integradas y desinstalación limpia:',
   rollbackCards: [
     {
-      title: 'Recuperación rápida y snapshots Btrfs',
-      body: 'Creá un snapshot de configuración antes de cambios grandes y usá horneroctl recovery si necesitás restaurar un estado sano o inspeccionar snapshots Btrfs del sistema.',
-      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery',
+      title: 'Snapshots de configuración y diagnóstico de recuperación',
+      body: 'Creá un snapshot de configuración antes de cambios grandes y usá horneroctl recovery doctor (solo lectura) para inspeccionar el estado de recuperación y snapshots disponibles. El rollback del sistema operativo sigue planificado.',
+      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery doctor',
     },
     {
       title: 'Desinstalar por completo',
       body: 'Quitar HorneroOS es desinstalar los paquetes. Tus datos y tu sesión anterior siguen funcionando como siempre.',
-      cmd: 'paru -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
+      cmd: 'yay -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
     },
   ],
 
   // Honest scope
   scopeTitle: 'Alcance honesto',
   scopeItems: [
-    'Los paquetes traen el escritorio completo y los modos de experiencia. Las apps de Studio o Gaming se instalan con pacman/paru/yay como en cualquier Arch; la ISO sigue siendo la ruta que provisiona una edición entera.',
-    'Derivados de Arch (CachyOS, EndeavourOS y otros) no están verificados oficialmente: los paquetes son los mismos, pero tratá esa ruta como experimental.',
+    'Los paquetes traen el escritorio completo y los modos de experiencia. Las apps de Studio o Gaming se instalan con pacman/yay como en cualquier Arch; la ISO sigue siendo la ruta que provisiona una edición entera.',
+    'Derivados de Arch (CachyOS, EndeavourOS y otros) no están verificados oficialmente: los paquetes son los mismos, pero tratá esa ruta como no verificada.',
   ],
   packagesAhead: (pkg: string | null | undefined): string =>
-    `El escritorio por paquetes puede ir por delante de la ISO publicada${pkg ? ` (hoy: paquetes ${pkg})` : ''}: actualizar es el paru -Syu / yay -Syu de siempre.`,
+    `El escritorio por paquetes puede ir por delante de la ISO publicada${pkg ? ` (hoy: paquetes ${pkg})` : ''}: actualizar es el yay -Syu de siempre.`,
   linkFaq: 'Preguntas frecuentes',
   linkTroubleshooting: 'Problemas por síntoma',
   linkReleases: 'Releases y paquetes vigentes',
@@ -224,7 +224,7 @@ const en: Messages = {
   pathArchBullets: [
     'Zero reinstallation and zero dotfile overwrites',
     'First-time config seeding only fills in missing files',
-    'Updates alongside your system via paru or yay',
+    'Updates alongside your system via yay (or paru)',
   ],
   pathArchCta: 'Start with step 01',
 
@@ -250,15 +250,15 @@ const en: Messages = {
   step1Items: [
     {
       label: 'Updated Arch Linux x86_64',
-      detail: 'Run pacman -Syu first. Arch derivatives work as an experimental path.',
+      detail: 'Run pacman -Syu first. Arch derivatives work as an unverified community path.',
     },
     {
       label: 'Wayland + Hyprland or Niri',
-      detail: 'Hyprland is the supported compositor; Niri is available as an experimental option.',
+      detail: 'Hyprland is the default compositor and Niri is supported as an alternative Wayland compositor.',
     },
     {
-      label: 'AUR helper (paru or yay)',
-      detail: 'Requires git and base-devel to build AUR packages as your regular user.',
+      label: 'AUR helper (yay)',
+      detail: 'Requires git and base-devel to build AUR packages as your regular user (paru works too).',
     },
     {
       label: 'Recommended audio & GPU',
@@ -272,16 +272,16 @@ const en: Messages = {
   // Step 02: Install 4 core packages
   step2Title: 'Install the 4 core packages',
   step2Lead:
-    'The HorneroOS desktop is built from four AUR packages. Install them with paru or yay alongside base session support:',
+    'The HorneroOS desktop is built from four AUR packages. Install them with yay alongside base session support (and inspect each PKGBUILD before building):',
   corePackages: [
     { name: 'hornero-shell', role: 'Quickshell desktop shell, bar, Control Center and layout presets' },
     { name: 'hornero-config', role: 'Desktop defaults, Signal theme packs and user seeding script' },
     { name: 'hornero-greeter', role: 'Hornero Signal login screen for SDDM (optional)' },
     { name: 'horneroctl-bin', role: 'Native system CLI for diagnostics, snapshots and hardware' },
   ],
-  step2CmdPrimaryLabel: 'With paru or yay (core packages + session support)',
+  step2CmdPrimaryLabel: 'With yay (core packages + session support)',
   step2GreeterNote:
-    'Using greetd instead of SDDM? Swap hornero-greeter for hornero-greeter-greetd (same Signal design as a native binary). Neither package changes your display manager automatically.',
+    'Using greetd instead of SDDM? Swap hornero-greeter for hornero-greeter-greetd (same Signal design as a native binary) and enable greetd instead of sddm. Neither package changes your display manager automatically.',
 
   // Step 03: Initialize & verify
   step3Title: 'Initialize, verify & launch your session',
@@ -345,25 +345,25 @@ const en: Messages = {
     'If anything behaves unexpectedly or you want to return to your exact previous setup, built-in recovery tools and clean package removal have you covered:',
   rollbackCards: [
     {
-      title: 'Quick recovery & Btrfs snapshots',
-      body: 'Create a config snapshot before major changes and use horneroctl recovery to restore a healthy state or inspect Btrfs system snapshots.',
-      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery',
+      title: 'Config snapshots & recovery diagnostics',
+      body: 'Create a config snapshot before major changes and run horneroctl recovery doctor (read-only) to inspect recovery readiness and snapshot state. Full OS rollback remains planned.',
+      cmd: 'horneroctl config snapshot create --yes\nhorneroctl recovery doctor',
     },
     {
       title: 'Clean uninstall',
       body: 'Removing HorneroOS is just removing the packages. Your data and previous desktop session keep working as before.',
-      cmd: 'paru -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
+      cmd: 'yay -Rns hornero-shell hornero-config hornero-greeter horneroctl-bin',
     },
   ],
 
   // Honest scope
   scopeTitle: 'Honest scope',
   scopeItems: [
-    'The packages deliver the full desktop and experience modes. Studio or Gaming edition apps install with pacman/paru/yay like on any Arch; the ISO remains the path that provisions an entire edition at once.',
-    'Arch derivatives (CachyOS, EndeavourOS and others) are not officially verified: the packages are identical, but treat that path as experimental.',
+    'The packages deliver the full desktop and experience modes. Studio or Gaming edition apps install with pacman/yay like on any Arch; the ISO remains the path that provisions an entire edition at once.',
+    'Arch derivatives (CachyOS, EndeavourOS and others) are not officially verified: the packages are identical, but treat that path as unverified.',
   ],
   packagesAhead: (pkg: string | null | undefined): string =>
-    `The packaged desktop can run ahead of the published ISO${pkg ? ` (today: packages ${pkg})` : ''}: updating is the usual paru -Syu / yay -Syu.`,
+    `The packaged desktop can run ahead of the published ISO${pkg ? ` (today: packages ${pkg})` : ''}: updating is the usual yay -Syu.`,
   linkFaq: 'FAQ',
   linkTroubleshooting: 'Troubleshooting by symptom',
   linkReleases: 'Current releases & packages',

@@ -13,22 +13,23 @@ interface Props {
 }
 
 const { maturity, locale = 'es' } = Astro.props;
+const displayMaturity: Maturity = maturity === 'planned' ? 'planned' : 'supported';
 const steps: Maturity[] = ['planned', 'experimental', 'preview', 'supported'];
-const level = steps.indexOf(maturity) + 1;
+const level = steps.indexOf(displayMaturity) + 1;
 const names: Record<Maturity, string> =
   locale === 'es'
-    ? { planned: 'Planificado', experimental: 'Experimental', preview: 'Preview', supported: 'Soportado' }
-    : { planned: 'Planned', experimental: 'Experimental', preview: 'Preview', supported: 'Supported' };
+    ? { planned: 'Planificado', experimental: 'Soportado', preview: 'Soportado', supported: 'Soportado' }
+    : { planned: 'Planned', experimental: 'Supported', preview: 'Supported', supported: 'Supported' };
 const color: Record<Maturity, string> = {
   planned: 'var(--rule-strong)',
-  experimental: 'var(--cue)',
-  preview: 'var(--signal)',
+  experimental: 'var(--phosphor)',
+  preview: 'var(--phosphor)',
   supported: 'var(--phosphor)',
 };
 ---
 
-<span class="meter maturity-meter" style={`--meter-color:${color[maturity]}`}>
-  <span class="maturity" data-maturity={maturity}>{names[maturity]}</span>
+<span class="meter maturity-meter" style={`--meter-color:${color[displayMaturity]}`}>
+  <span class="maturity" data-maturity={displayMaturity}>{names[displayMaturity]}</span>
   <span class="meter-track" aria-hidden="true">
     {steps.map((_, index) => <i class={index < level ? 'on' : undefined} />)}
   </span>

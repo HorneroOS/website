@@ -1,5 +1,23 @@
 [
   {
+    "name": "v0.2.0-preview42",
+    "version": "0.2.0-preview42",
+    "date": "2026-11-28",
+    "status": "tagged",
+    "summary": "Hornero Signal Amendment 3, Chromatic v3, and Hornero Apps AUR package release: hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1, hornero-greeter 1.3.0-1, and hornero-greeter-greetd 0.2.0-1 are published on the AUR. ISO/QCOW2 RC build and validation in HorneroOS/installer are tracked separately; no ISO is uploaded for this record yet (preview32 remains the current signed Preview ISO).",
+    "manifest": "hornero-0.2.0-preview42",
+    "shell": {
+      "sha": "908215f3ef254cbbb5caa5c81663f6b27ad36f24",
+      "subject": "feat(welcome): reimagine Hornero Welcome with First Flight, Explore hub, and What's New (#753)"
+    },
+    "config": {
+      "sha": "22ec9499b25544795f164839f9ceba6781a577bd",
+      "subject": "feat(apps): add Flathub bootstrap, portals, AppImage entry, and Hornero Apps policy (#199)"
+    },
+    "installer": "future",
+    "iso": "future"
+  },
+  {
     "name": "v0.2.0-preview41",
     "version": "0.2.0-preview41",
     "date": "2026-11-25",

@@ -11,7 +11,7 @@ const es = {
   eyebrowArch: 'x86_64 · Arch + Flatpak + WebApp',
   heroTitle: 'Un solo lugar para software con procedencia real.',
   heroLede:
-    'Hornero Apps unifica repositorios oficiales de Arch, Flathub, canales firmados de proveedores, AppImages, Web Apps aisladas y AUR opt-in detrás de un catálogo declarativo firmado (catalog/apps.v1.json). Publicado en AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); el próximo corte de ISO lo incluirá junto a Hornero Signal y Hornero Welcome.',
+    'Hornero Apps unifica repositorios oficiales de Arch, Flathub, canales firmados de proveedores, AppImages, Web Apps aisladas y AUR opt-in detrás de un catálogo declarativo firmado (catalog/apps.v1.json). Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); el próximo corte de ISO lo incluirá junto a Hornero Signal y Hornero Welcome.',
   ctaCatalog: 'Explorar el catálogo',
   ctaProfiles: 'Ver perfiles de trabajo',
   ctaDocs: 'Leer guía técnica',
@@ -26,11 +26,11 @@ const es = {
     'Capturas reales de HorneroOS en ejecución (1920×1080), en modo oscuro azulado (Signal Night) y cerámica blanca (Signal Day).',
   captures: [
     {
-      src: '/captures/showcase/hornero-apps-discover-night.webp',
-      mode: 'Signal Night',
-      title: 'Vista Discover y colecciones curadas',
-      caption: 'Navegación por colecciones, categorías y badges de procedencia verificada en Signal Night.',
-      alt: 'Ventana de Hornero Apps en Signal Night mostrando la vista Discover con colecciones y categorías.',
+      src: '/captures/showcase/vm-apps-discover-1080p.webp',
+      mode: 'KVM 1080p · v0.2.0-preview42',
+      title: 'Vista Discover en sesión KVM en vivo',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 mostrando Hornero Apps Discover y badges de procedencia.',
+      alt: 'Captura real en vivo 1920×1080 UEFI KVM Wayland de HorneroOS v0.2.0-preview42 mostrando Hornero Apps Discover.',
     },
     {
       src: '/captures/showcase/hornero-apps-ai-day.webp',
@@ -166,7 +166,7 @@ const en: Messages = {
   eyebrowArch: 'x86_64 · Arch + Flatpak + WebApp',
   heroTitle: 'One place for software with clear provenance.',
   heroLede:
-    'Hornero Apps unifies official Arch repositories, Flathub, signed vendor channels, AppImages, isolated Web Apps, and opt-in AUR behind a signed declarative catalog (catalog/apps.v1.json). Shipped in AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); the next ISO cut will bundle it alongside Hornero Signal and Hornero Welcome.',
+    'Hornero Apps unifies official Arch repositories, Flathub, signed vendor channels, AppImages, isolated Web Apps, and opt-in AUR behind a signed declarative catalog (catalog/apps.v1.json). Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); the next ISO cut will bundle it alongside Hornero Signal and Hornero Welcome.',
   ctaCatalog: 'Explore catalog',
   ctaProfiles: 'Workstation profiles',
   ctaDocs: 'Read technical guide',
@@ -181,11 +181,11 @@ const en: Messages = {
     'Real captures from running HorneroOS (1920×1080), shown in blue-hour dark (Signal Night) and white ceramic (Signal Day).',
   captures: [
     {
-      src: '/captures/showcase/hornero-apps-discover-night.webp',
-      mode: 'Signal Night',
-      title: 'Discover view and curated collections',
-      caption: 'Browse curated collections, workflow categories, and verified provenance badges in Signal Night.',
-      alt: 'Hornero Apps window in Signal Night showing the Discover view with collections and categories.',
+      src: '/captures/showcase/vm-apps-discover-1080p.webp',
+      mode: 'KVM 1080p · v0.2.0-preview42',
+      title: 'Discover view in live KVM session',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 showing Hornero Apps Discover and provenance badges.',
+      alt: 'Real live 1920×1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing Hornero Apps Discover.',
     },
     {
       src: '/captures/showcase/hornero-apps-ai-day.webp',
