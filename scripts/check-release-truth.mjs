@@ -1,6 +1,6 @@
 // Regression guard against stale launch claims.
 //
-// The current published ISO is v0.2.0-preview32 (signed, Desktop +
+// The current published ISO is v0.2.0-preview42 (signed, Desktop +
 // Studio + Gaming Preview).
 // These exact phrases claimed the opposite and kept coming back in copy, so
 // the build fails if they reappear in site-authored source. Historical
@@ -80,7 +80,7 @@ for (const file of scanned) {
 
 for (const file of ['public/llms.txt', 'scripts/build-og.mjs', 'src/components/pages/InstallPage.astro']) {
   const text = readFileSync(file, 'utf8');
-  for (const match of text.matchAll(/horneroos-2026\.10-preview\d+-x86_64\.iso/g)) {
+  for (const match of text.matchAll(/horneroos-2026\.\d+-preview\d+-x86_64\.iso/g)) {
     if (match[0] !== CURRENT_ISO) {
       console.error(`${file}: names a stale ISO (${match[0]}); current is ${CURRENT_ISO}`);
       failures += 1;

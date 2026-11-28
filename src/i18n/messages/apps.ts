@@ -11,7 +11,7 @@ const es = {
   eyebrowArch: 'x86_64 · Arch + Flatpak + WebApp',
   heroTitle: 'Un solo lugar para software con procedencia real.',
   heroLede:
-    'Hornero Apps unifica repositorios oficiales de Arch, Flathub, canales firmados de proveedores, AppImages, Web Apps aisladas y AUR opt-in detrás de un catálogo declarativo firmado (catalog/apps.v1.json). Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); el próximo corte de ISO lo incluirá junto a Hornero Signal y Hornero Welcome.',
+    'Hornero Apps unifica repositorios oficiales de Arch, Flathub, canales firmados de proveedores, AppImages, Web Apps aisladas y AUR opt-in detrás de un catálogo declarativo firmado (catalog/apps.v1.json). Viene integrado de fábrica en la nueva ISO firmada v0.2.0-preview42 (3.3 GB), en el QCOW2 Desktop preinstalado v0.2.0-preview42 (2.6 GB) y en AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1), junto a Hornero Signal y Hornero Welcome.',
   ctaCatalog: 'Explorar el catálogo',
   ctaProfiles: 'Ver perfiles de trabajo',
   ctaDocs: 'Leer guía técnica',
@@ -166,7 +166,7 @@ const en: Messages = {
   eyebrowArch: 'x86_64 · Arch + Flatpak + WebApp',
   heroTitle: 'One place for software with clear provenance.',
   heroLede:
-    'Hornero Apps unifies official Arch repositories, Flathub, signed vendor channels, AppImages, isolated Web Apps, and opt-in AUR behind a signed declarative catalog (catalog/apps.v1.json). Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); the next ISO cut will bundle it alongside Hornero Signal and Hornero Welcome.',
+    'Hornero Apps unifies official Arch repositories, Flathub, signed vendor channels, AppImages, isolated Web Apps, and opt-in AUR behind a signed declarative catalog (catalog/apps.v1.json). Built into the new signed v0.2.0-preview42 ISO (3.3 GB), the signed v0.2.0-preview42 preinstalled Desktop QCOW2 (2.6 GB), and AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1) alongside Hornero Signal and Hornero Welcome.',
   ctaCatalog: 'Explore catalog',
   ctaProfiles: 'Workstation profiles',
   ctaDocs: 'Read technical guide',

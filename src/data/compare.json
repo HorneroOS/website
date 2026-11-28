@@ -147,8 +147,8 @@
       "name": "HorneroOS",
       "category": "os",
       "version": {
-        "es": "ISO 0.2.0-preview32 · QCOW2 y paquetes 0.2.0-preview42",
-        "en": "ISO 0.2.0-preview32 · QCOW2 & packages 0.2.0-preview42"
+        "es": "ISO, QCOW2 y paquetes 0.2.0-preview42",
+        "en": "ISO, QCOW2 & packages 0.2.0-preview42"
       },
       "href": "https://github.com/HorneroOS/hornero",
       "what": {
@@ -156,8 +156,8 @@
         "en": "An Arch-based operating system for everyday use, with Desktop, Studio and Gaming editions tested on physical hardware. Server and Agents are planned, with no installable image."
       },
       "install": {
-        "es": "ISO x86_64 firmada (0.2.0-preview32), QCOW2 preinstalado (0.2.0-preview42) o paquetes AUR para sistemas Arch existentes.",
-        "en": "Signed x86_64 ISO (0.2.0-preview32), preinstalled QCOW2 (0.2.0-preview42), or AUR packages for existing Arch systems."
+        "es": "ISO x86_64 firmada (0.2.0-preview42, 3.3 GB), QCOW2 preinstalado (0.2.0-preview42, 2.6 GB) o paquetes AUR para sistemas Arch existentes.",
+        "en": "Signed x86_64 ISO (0.2.0-preview42, 3.3 GB), preinstalled QCOW2 (0.2.0-preview42, 2.6 GB), or AUR packages for existing Arch systems."
       },
       "note": {
         "es": "Hyprland y Niri están soportados y probados en uso diario sobre al menos 3 computadoras físicas.",

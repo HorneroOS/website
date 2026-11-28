@@ -4,8 +4,8 @@
 // technical summary available in a details element.
 export const releaseNotes: Record<string, { es: string; en: string }> = {
   '0.2.0-preview42': {
-    es: 'Lanzamiento de paquetes AUR y primera imagen QEMU QCOW2 preinstalada y firmada con GPG: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3 y Chromatic v3 en hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1 y horneroctl-bin 0.2.0_preview63-1. La ISO instalable sigue siendo la v0.2.0-preview32.',
-    en: 'AUR package release plus the first published, GPG-signed preinstalled QEMU QCOW2 image: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3, and Chromatic v3 across hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1, and horneroctl-bin 0.2.0_preview63-1. The install ISO remains v0.2.0-preview32.',
+    es: 'Nueva ISO instalable firmada con GPG (horneroos-2026.11-preview42-x86_64.iso, 3.3 GB), QCOW2 Desktop preinstalado firmado (2.6 GB) y paquetes AUR: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3 y Chromatic v3 en hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1 y horneroctl-bin 0.2.0_preview63-1.',
+    en: 'New GPG-signed installable ISO (horneroos-2026.11-preview42-x86_64.iso, 3.3 GB), signed preinstalled Desktop QCOW2 (2.6 GB), and AUR packages: Hornero Apps (271 apps), Hornero Welcome (Signal Flight), Signal Amendment 3, and Chromatic v3 across hornero-shell 1.6.0-2, hornero-config 0.6.0-1, hornero-greeter 1.3.0-1, and horneroctl-bin 0.2.0_preview63-1.',
   },
   '0.2.0-preview41': {
     es: 'Actualización de preparación en AUR (sin ISO): hornero-shell 1.3.9 (dependencias Qt6 Multimedia y PipeWire), hornero-config 0.4.10 (seed-user.sh missing-only para Instalar sobre Arch) y hornero-greeter-greetd 0.1.1.',

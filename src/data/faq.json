@@ -19,8 +19,8 @@
         "en": "Is it ready for daily use?"
       },
       "answer": {
-        "es": "Sí. HorneroOS es un sistema operativo para uso diario: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome y el QCOW2 preinstalado están probados en uso diario sobre al menos 3 computadoras físicas reales y en KVM. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y el QCOW2/paquetes llegaron a 0.2.0-preview42. Limitaciones concretas: LUKS y BIOS heredado no están validados en la ISO preview32 y el rollback de SO sigue planificado.",
-        "en": "Yes. HorneroOS is an everyday-use operating system: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome, and the preinstalled QCOW2 are daily-driven and tested on 3+ real physical computers as well as KVM. The current ISO is 0.2.0-preview32 (a published artifact name) and the QCOW2/packages reached 0.2.0-preview42. Concrete limitations: LUKS and legacy BIOS are not validated on the preview32 ISO, and OS rollback is still planned."
+        "es": "Sí. HorneroOS es un sistema operativo para uso diario: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome, la ISO instalable y el QCOW2 preinstalado están probados en uso diario sobre al menos 3 computadoras físicas reales y en KVM. La versión actual es la 0.2.0-preview42 (nombre de artefacto publicado) tanto en ISO firmada (3.3 GB) como en QCOW2 (2.6 GB) y paquetes AUR. Limitaciones concretas: LUKS y BIOS heredado no están validados en la ISO actual y el rollback de SO sigue planificado.",
+        "en": "Yes. HorneroOS is an everyday-use operating system: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome, the installable ISO, and the preinstalled QCOW2 are daily-driven and tested on 3+ real physical computers as well as KVM. The current release is 0.2.0-preview42 (a published artifact name) across the signed ISO (3.3 GB), preinstalled QCOW2 (2.6 GB), and AUR packages. Concrete limitations: LUKS and legacy BIOS are not validated on the current ISO, and OS rollback is still planned."
       }
     },
     {

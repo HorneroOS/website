@@ -166,7 +166,7 @@ const es = {
   plannedNote: (names: string[]): string =>
     `${names.join(' y ')} están planificadas: todavía no tienen imagen instalable.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
-    `Es un sistema para uso diario, probado en al menos 3 equipos físicos y en KVM: LUKS y BIOS heredado no están validados en la ISO preview32 y el rollback de SO sigue planificado${candidateVersion ? `; ${candidateVersion} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`,
+    `Es un sistema para uso diario, probado en al menos 3 equipos físicos y en KVM: LUKS y BIOS heredado no están validados en la ISO actual y el rollback de SO sigue planificado${candidateVersion ? `; ${candidateVersion} se está preparando` : ''}. Si ya usás Arch, el escritorio también se instala como paquetes.`,
   terminalDeck: {
     heading: 'Consola interactiva horneroctl',
     tablistLabel: 'Comandos de horneroctl',
@@ -400,7 +400,7 @@ const en: Messages = {
     `Desktop plus ${count} creative specializations you pick at install time. Audio runs ${audioDefault} by default; ${audioOptIn.join(' and ')} only when you opt in.`,
   plannedNote: (names: string[]): string => `${names.join(' and ')} are planned: they have no installable image yet.`,
   limitsNote: (candidateVersion: string | null | undefined): string =>
-    `It is an everyday-use system tested on 3+ physical computers and in KVM: LUKS and legacy BIOS are not validated on the preview32 ISO and OS rollback is still planned${candidateVersion ? `; ${candidateVersion} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`,
+    `It is an everyday-use system tested on 3+ physical computers and in KVM: LUKS and legacy BIOS are not validated on the current ISO and OS rollback is still planned${candidateVersion ? `; ${candidateVersion} is in preparation` : ''}. If you already run Arch, the desktop also installs as packages.`,
   terminalDeck: {
     heading: 'Interactive horneroctl deck',
     tablistLabel: 'horneroctl commands',

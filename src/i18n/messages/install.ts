@@ -17,22 +17,22 @@ const es = {
     supported: 'Soportado',
   },
   descargaHorneroosTresPasosDescargar:
-    'Descargá HorneroOS: tres pasos (descargar la ISO de 2.7 GB, verificar SHA-256 y firma, elegir edición y compositor).',
+    'Descargá HorneroOS: tres pasos (descargar la ISO de 3.3 GB, verificar SHA-256 y firma, elegir edición y compositor).',
   descargaHorneroosIsoActualFirmada: 'Descargá HorneroOS | ISO actual firmada para x86_64',
   descargaHorneroosUnaIsoX86:
     'Descargá HorneroOS: una ISO x86_64 firmada con las ediciones Desktop, Studio y Gaming para uso diario, con checksum SHA-256 y firma GPG. Si ya usás Arch, el escritorio también se instala como paquetes.',
   descarga: 'Descarga',
   descargaHorneroos: 'Descargá HorneroOS',
   unaIsoX8664Instala:
-    'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. La ISO instalable vigente es 0.2.0-preview32 (nombre de artefacto publicado, firmada en GitHub; LUKS y BIOS heredado siguen sin cubrir en esa ISO). HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM, con las actualizaciones recientes disponibles por AUR y en el QCOW2 v0.2.0-preview42.',
+    'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. La ISO instalable vigente es 0.2.0-preview42 (3.3 GB, firmada, con Signal Flight, Hornero Apps, hornero-shell 1.6.0-2, hornero-config 0.6.0-1 y horneroctl-bin 0.2.0_preview63-1 integrados; LUKS y BIOS heredado siguen sin validación en esta ISO). HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM, junto al QCOW2 Desktop preinstalado v0.2.0-preview42 (2.6 GB) y los paquetes AUR.',
   appleSiliconNoticeTitle: 'Solo x86_64 · Aviso para Apple Silicon (Macs M1–M4)',
   appleSiliconNoticeBody:
-    'Esta ISO de 2.7 GB funciona únicamente en procesadores x86_64. En Macs con Apple Silicon (M1–M4), Hypervisor.framework no virtualiza x86_64 por hardware (UTM cae a emulación CPU QEMU TCG lenta; ARM64 nativo y Parallels FEX no están soportados). Si querés evaluar antes de descargar, mirá las opciones de VM y QCOW2.',
+    'Esta ISO de 3.3 GB funciona únicamente en procesadores x86_64. En Macs con Apple Silicon (M1–M4), Hypervisor.framework no virtualiza x86_64 por hardware (UTM cae a emulación CPU QEMU TCG lenta; ARM64 nativo y Parallels FEX no están soportados). Si querés evaluar antes de descargar, mirá las opciones de VM y QCOW2.',
   appleSiliconNoticeTryLink: 'Ver compatibilidad en Probar HorneroOS (/try)',
   windowsHintTitle: '¿Venís desde Windows? USB, checksum y Secure Boot',
   windowsHintBody:
-    'Verificá el SHA-256 en PowerShell/CMD con CertUtil, grabá el pendrive con Rufus en modo Imagen DD (nunca ISO Image) o balenaEtcher, y desactivá Secure Boot en UEFI (respaldando antes tu clave de BitLocker y desactivando Fast Startup si pensás hacer dual-boot). Si solo querés probar en VM Linux/QEMU, también publicamos el QCOW2 Desktop preinstalado v0.2.0-preview42.',
-  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.10-preview32-x86_64.iso SHA256',
+    'Verificá el SHA-256 en PowerShell/CMD con CertUtil, grabá el pendrive con Rufus en modo Imagen DD (nunca ISO Image) o balenaEtcher, y desactivá Secure Boot en UEFI (respaldando antes tu clave de BitLocker y desactivando Fast Startup si pensás hacer dual-boot). Si solo querés probar en VM Linux/QEMU, también publicamos el QCOW2 Desktop preinstalado v0.2.0-preview42 (2.6 GB).',
+  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.11-preview42-x86_64.iso SHA256',
   launchGuideLabel: 'Guía de lanzamiento externa (Windows, Mac y Arch)',
   tryQcow2Cta: 'Descargar QCOW2 v0.2.0-preview42 en /try',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Descargar la ISO actual (${v0})`,
@@ -68,7 +68,7 @@ const es = {
     'Antes de grabar la ISO, compará el resultado de sha256sum con el checksum publicado y verificá la firma.',
   instala: 'Instalá',
   elegiLaEdicionLasEspecializaciones:
-    'Elegí la edición, las especializaciones y el compositor (Hyprland o Niri). Tené en cuenta que LUKS y BIOS heredado no están validados sobre la ISO preview32: si tu setup depende de eso, probalo primero en VM o en un equipo que puedas reinstalar.',
+    'Elegí la edición, las especializaciones y el compositor (Hyprland o Niri). Tené en cuenta que LUKS y BIOS heredado no están validados sobre esta ISO: si tu setup depende de eso, probalo primero en VM o en un equipo que puedas reinstalar.',
   actualiza: 'Actualizá',
   despuesDeInstalarLasNovedades:
     'Después de instalar, las novedades llegan como paquetes, no como una ISO nueva. Los paquetes de HorneroOS vienen del AUR, así que se actualizan con un ayudante de AUR como yay (la ISO no instala ninguno). Antes, guardá tu configuración y mirá qué hay pendiente:',
@@ -96,7 +96,7 @@ const es = {
   instalador: 'Instalador',
   provisorio: 'Provisorio',
   laBuildDeCalamaresPaso:
-    'La build de Calamares pasó la validación de esta ISO (Desktop, Studio y Gaming, UEFI); LUKS y BIOS heredado no se ejecutaron sobre la ISO preview32. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.',
+    'La build de Calamares pasó la validación de esta ISO (Desktop, Studio y Gaming, UEFI); LUKS y BIOS heredado no se ejecutaron sobre esta ISO. El instalador a medida de Panda Foss sigue siendo el camino oficial futuro.',
   paquetesDeEscritorio: 'Paquetes de escritorio',
   disponible: 'Disponible',
   cuatroPaquetesDeAurPara: 'Cuatro paquetes de AUR, para quienes ya corren Arch Linux.',
@@ -153,22 +153,22 @@ const en: Messages = {
     supported: 'Supported',
   },
   descargaHorneroosTresPasosDescargar:
-    'Download HorneroOS: three steps (download the 2.7 GB ISO, verify SHA-256 and signature, pick edition and compositor).',
+    'Download HorneroOS: three steps (download the 3.3 GB ISO, verify SHA-256 and signature, pick edition and compositor).',
   descargaHorneroosIsoActualFirmada: 'Download HorneroOS | Signed current x86_64 ISO',
   descargaHorneroosUnaIsoX86:
     'Download HorneroOS: one signed x86_64 ISO with the Desktop, Studio and Gaming everyday-use editions, with a SHA-256 checksum and GPG signature. If you already run Arch, the desktop also installs as packages.',
   descarga: 'Download',
   descargaHorneroos: 'Download HorneroOS',
   unaIsoX8664Instala:
-    'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. The current signed install ISO is 0.2.0-preview32 (a published artifact name on GitHub; LUKS and legacy BIOS remain uncovered on that ISO). HorneroOS is daily-driven and tested on 3+ physical computers and in KVM, with the latest desktop updates available via AUR and the v0.2.0-preview42 QCOW2.',
+    'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. The current signed install ISO is 0.2.0-preview42 (3.3 GB, bundling Signal Flight, Hornero Apps, hornero-shell 1.6.0-2, hornero-config 0.6.0-1, and horneroctl-bin 0.2.0_preview63-1; LUKS and legacy BIOS remain uncovered on this ISO). HorneroOS is daily-driven and tested on 3+ physical computers and in KVM, alongside the signed v0.2.0-preview42 preinstalled Desktop QCOW2 (2.6 GB) and AUR packages.',
   appleSiliconNoticeTitle: 'x86_64 only · Apple Silicon (M1–M4 Macs) notice',
   appleSiliconNoticeBody:
-    'This 2.7 GB ISO targets x86_64 PCs only. On Apple Silicon Macs (M1–M4), Hypervisor.framework cannot hardware-virtualize x86_64 (UTM falls back to slow QEMU TCG CPU emulation; native ARM64 and Parallels FEX are unsupported). Read the compatibility notes before downloading.',
+    'This 3.3 GB ISO targets x86_64 PCs only. On Apple Silicon Macs (M1–M4), Hypervisor.framework cannot hardware-virtualize x86_64 (UTM falls back to slow QEMU TCG CPU emulation; native ARM64 and Parallels FEX are unsupported). Read the compatibility notes before downloading.',
   appleSiliconNoticeTryLink: 'Check VM compatibility on Try HorneroOS (/try)',
   windowsHintTitle: 'Coming from Windows? USB writer, checksum & Secure Boot',
   windowsHintBody:
-    'Verify SHA-256 with CertUtil in PowerShell/CMD, flash with Rufus in DD Image mode (not ISO Image mode) or balenaEtcher, and disable Secure Boot in UEFI (back up your BitLocker recovery key and turn off Fast Startup before dual-booting). For a fast QEMU/KVM VM trial, a signed v0.2.0-preview42 preinstalled Desktop QCOW2 is also published.',
-  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.10-preview32-x86_64.iso SHA256',
+    'Verify SHA-256 with CertUtil in PowerShell/CMD, flash with Rufus in DD Image mode (not ISO Image mode) or balenaEtcher, and disable Secure Boot in UEFI (back up your BitLocker recovery key and turn off Fast Startup before dual-booting). For a fast QEMU/KVM VM trial, a signed v0.2.0-preview42 preinstalled Desktop QCOW2 (2.6 GB) is also published.',
+  windowsHintCmd: 'CertUtil -hashfile horneroos-2026.11-preview42-x86_64.iso SHA256',
   launchGuideLabel: 'Public Preview Launch Guide (Windows, Mac & Arch)',
   tryQcow2Cta: 'Download v0.2.0-preview42 QCOW2 on /try',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Download the current ISO (${v0})`,
@@ -203,7 +203,7 @@ const en: Messages = {
     'Before you write the ISO, compare the sha256sum output with the published checksum and verify the signature.',
   instala: 'Install',
   elegiLaEdicionLasEspecializaciones:
-    'Pick the edition, specializations, and compositor (Hyprland or Niri). Note that LUKS and legacy BIOS were not validated on the preview32 ISO: if your setup depends on them, test in a virtual machine or on a system you can reinstall.',
+    'Pick the edition, specializations, and compositor (Hyprland or Niri). Note that LUKS and legacy BIOS were not validated on this ISO: if your setup depends on them, test in a virtual machine or on a system you can reinstall.',
   actualiza: 'Update',
   despuesDeInstalarLasNovedades:
     'After installing, new work arrives as packages, not as a new ISO. HorneroOS packages come from the AUR, so you update them with an AUR helper such as yay (the ISO does not install one). First save your configuration and see what is pending:',
@@ -231,7 +231,7 @@ const en: Messages = {
   instalador: 'Installer',
   provisorio: 'Provisional',
   laBuildDeCalamaresPaso:
-    "The Calamares build passed validation for this ISO (Desktop, Studio and Gaming, UEFI); LUKS and legacy BIOS were not run on the preview32 ISO. Panda Foss's custom installer remains the future official path.",
+    "The Calamares build passed validation for this ISO (Desktop, Studio and Gaming, UEFI); LUKS and legacy BIOS were not run on this ISO. Panda Foss's custom installer remains the future official path.",
   paquetesDeEscritorio: 'Desktop packages',
   disponible: 'Available',
   cuatroPaquetesDeAurPara: 'Four AUR packages, for people who already run Arch Linux.',

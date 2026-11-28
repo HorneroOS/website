@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { download } from '../../data/download';
 import playgroundData from '../../data/playground.json';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { messages } from '../../i18n/messages/try';
@@ -305,7 +306,7 @@ type EntryId = keyof typeof m.vmEntryNotes;
     <header class="section-head-compact">
       <p class="eyebrow">
         <b>{m.usbEyebrow}</b>
-        <span>horneroos-2026.10-preview32-x86_64.iso</span>
+        <span>{download.iso.name}</span>
       </p>
       <h2 id="usb-title">{m.usbTitle}</h2>
       <p class="muted-copy">{m.usbIntro}</p>
