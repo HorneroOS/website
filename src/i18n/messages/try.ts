@@ -11,7 +11,7 @@ const es = {
   eyebrowArch: 'x86_64 · KVM + VirGL + Live USB',
   heroTitle: 'Probá HorneroOS real sin tocar tu disco.',
   heroLede:
-    'Cada camino de esta página corre el sistema x86_64 real —Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps y horneroctl— nunca una simulación en JavaScript. HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM: v0.2.0-preview42 ya publica el QCOW2 Desktop preinstalado y los paquetes AUR, mientras que la ISO instalable vigente sigue siendo v0.2.0-preview32.',
+    'Cada camino de esta página corre el sistema x86_64 real —Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps y horneroctl— nunca una simulación en JavaScript. HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM: v0.2.0-preview42 publica tanto la nueva ISO instalable firmada (3.3 GB) como el QCOW2 Desktop preinstalado (2.6 GB) y los paquetes AUR con Signal Flight y Hornero Apps integrados.',
   ctaBrowser: 'En navegador / Self-host',
   ctaVm: 'VM local (60 FPS)',
   ctaQcow2: 'Descargar QCOW2 (v0.2.0-preview42)',
@@ -38,7 +38,7 @@ const es = {
       path: '3. Live USB en tu equipo',
       bestFor: 'Probar GPU, Wi-Fi, audio y pantallas reales antes de instalar',
       fidelity: 'Velocidad nativa de hardware (incluye entrada Safe Graphics)',
-      status: 'ISO firmada v0.2.0-preview32 disponible hoy · sin tocar el disco hasta confirmar Calamares',
+      status: 'ISO firmada v0.2.0-preview42 (3.3 GB) disponible hoy · sin tocar el disco hasta confirmar Calamares',
     },
   ],
   browserEyebrow: 'Camino 01 · Navegador',
@@ -98,7 +98,7 @@ zstd -d ${name}
   --image ${name.replace(/\.zst$/, '')} \\
   --ephemeral`,
   vmImageNote:
-    'Nota de artefactos: además del QCOW2 preinstalado v0.2.0-preview42 de arriba, podés bootear la ISO firmada v0.2.0-preview32 directo en QEMU, Quickemu, VMware o VirtualBox si querés probar el instalador Calamares.',
+    'Nota de artefactos: además del QCOW2 preinstalado v0.2.0-preview42 de arriba, podés bootear la nueva ISO firmada v0.2.0-preview42 (3.3 GB) directo en QEMU, Quickemu, VMware o VirtualBox si querés probar el instalador Calamares.',
   liveCapturesEyebrow: 'Capturas reales en KVM',
   liveCapturesTitle: 'Capturas reales 1920×1080 en KVM UEFI Wayland (v0.2.0-preview42)',
   liveCapturesIntro:
@@ -194,8 +194,8 @@ zstd -d ${name}
   --verify-sha256 /ruta/a/horneroos.qcow2.sha256 \\
   --ephemeral
 
-# O bootear directo la ISO oficial v0.2.0-preview32:
-./launchers/qemu/hornero-vm-run.sh --iso /ruta/a/horneroos-2026.10-preview32-x86_64.iso`,
+# O bootear directo la ISO oficial v0.2.0-preview42:
+./launchers/qemu/hornero-vm-run.sh --iso /ruta/a/horneroos-2026.11-preview42-x86_64.iso`,
       caveat: 'Requiere /dev/kvm y qemu-system-x86_64 en Linux. Usá --dry-run para inspeccionar los argumentos antes de lanzar.',
     },
     {
@@ -214,7 +214,7 @@ boot="efi"
 gl="on"
 preallocation="metadata"
 # Si booteás la ISO viva en lugar de un disco preinstalado:
-# iso="horneroos/horneroos-2026.10-preview32-x86_64.iso"
+# iso="horneroos/horneroos-2026.11-preview42-x86_64.iso"
 EOF
 
 quickemu --vm horneroos.conf`,
@@ -272,20 +272,20 @@ export QT_QUICK_BACKEND=software`,
   usbEyebrow: 'Camino 03 · Tu hardware real',
   usbTitle: 'Live USB sin alterar tus discos',
   usbIntro:
-    'Arrancá la ISO oficial firmada v0.2.0-preview32 desde un pendrive para probar tu GPU, Wi-Fi, audio y pantallas en memoria antes de decidir instalar.',
+    'Arrancá la ISO oficial firmada v0.2.0-preview42 desde un pendrive para probar tu GPU, Wi-Fi, audio y pantallas en memoria antes de decidir instalar.',
   usbSteps: [
     {
       n: '01',
       title: 'Descargá y verificá',
-      body: 'Bajá horneroos-2026.10-preview32-x86_64.iso (2.7 GB) y verificá su SHA-256 y firma GPG.',
-      cmd: `sha256sum horneroos-2026.10-preview32-x86_64.iso
-gpg --verify horneroos-2026.10-preview32-x86_64.iso.sig`,
+      body: 'Bajá horneroos-2026.11-preview42-x86_64.iso (3.3 GB) y verificá su SHA-256 y firma GPG.',
+      cmd: `sha256sum horneroos-2026.11-preview42-x86_64.iso
+gpg --verify horneroos-2026.11-preview42-x86_64.iso.sig`,
     },
     {
       n: '02',
       title: 'Grabá y arrancá (con Safe Graphics)',
       body: 'Confirmá el dispositivo con lsblk, escribí la ISO y desactivá Secure Boot si bloquea el arranque. Si tu GPU da pantalla negra, elegí Safe Graphics en el menú de arranque (nomodeset WLR_RENDERER=pixman).',
-      cmd: `sudo dd if=horneroos-2026.10-preview32-x86_64.iso of=/dev/sdX bs=4M status=progress conv=fsync`,
+      cmd: `sudo dd if=horneroos-2026.11-preview42-x86_64.iso of=/dev/sdX bs=4M status=progress conv=fsync`,
     },
     {
       n: '03',
@@ -331,7 +331,7 @@ const en: Messages = {
   eyebrowArch: 'x86_64 · KVM + VirGL + Live USB',
   heroTitle: 'Try real HorneroOS without touching your disk.',
   heroLede:
-    'Every path on this page boots real x86_64 HorneroOS — Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps, and horneroctl — never a mocked JavaScript desktop. HorneroOS is daily-driven and tested on 3+ physical computers as well as KVM: v0.2.0-preview42 ships the preinstalled Desktop QCOW2 and AUR packages today, while the current install ISO remains v0.2.0-preview32.',
+    'Every path on this page boots real x86_64 HorneroOS — Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps, and horneroctl — never a mocked JavaScript desktop. HorneroOS is daily-driven and tested on 3+ physical computers as well as KVM: v0.2.0-preview42 ships BOTH the new signed install ISO (3.3 GB) AND the signed preinstalled Desktop QCOW2 (2.6 GB) plus AUR packages, with Signal Flight and Hornero Apps built in.',
   ctaBrowser: 'Browser / Self-host',
   ctaVm: 'Local VM (60 FPS)',
   ctaQcow2: 'Download QCOW2 (v0.2.0-preview42)',
@@ -358,7 +358,7 @@ const en: Messages = {
       path: '3. Live USB on your hardware',
       bestFor: 'Testing real GPU, Wi-Fi, audio, and displays before installing',
       fidelity: 'Native hardware speed (includes Safe Graphics boot entry)',
-      status: 'Signed v0.2.0-preview32 ISO available today · nothing touches disk until Calamares confirms',
+      status: 'Signed v0.2.0-preview42 ISO (3.3 GB) available today · nothing touches disk until Calamares confirms',
     },
   ],
   browserEyebrow: 'Path 01 · Browser',
@@ -418,7 +418,7 @@ zstd -d ${name}
   --image ${name.replace(/\.zst$/, '')} \\
   --ephemeral`,
   vmImageNote:
-    'Artifact note: alongside the published v0.2.0-preview42 preinstalled QCOW2 above, you can still boot the signed v0.2.0-preview32 ISO directly in QEMU, Quickemu, VMware, or VirtualBox to test the Calamares installer.',
+    'Artifact note: alongside the published v0.2.0-preview42 preinstalled QCOW2 above, you can also boot the signed v0.2.0-preview42 ISO (3.3 GB) directly in QEMU, Quickemu, VMware, or VirtualBox to test the Calamares installer.',
   liveCapturesEyebrow: 'Real KVM captures',
   liveCapturesTitle: 'Real live 1920×1080 UEFI KVM Wayland captures (v0.2.0-preview42)',
   liveCapturesIntro:
@@ -514,8 +514,8 @@ zstd -d ${name}
   --verify-sha256 /path/to/horneroos.qcow2.sha256 \\
   --ephemeral
 
-# Or boot the official v0.2.0-preview32 Live ISO directly:
-./launchers/qemu/hornero-vm-run.sh --iso /path/to/horneroos-2026.10-preview32-x86_64.iso`,
+# Or boot the official v0.2.0-preview42 Live ISO directly:
+./launchers/qemu/hornero-vm-run.sh --iso /path/to/horneroos-2026.11-preview42-x86_64.iso`,
       caveat: 'Requires /dev/kvm and qemu-system-x86_64 on Linux. Pass --dry-run to inspect the generated QEMU command first.',
     },
     {
@@ -534,7 +534,7 @@ boot="efi"
 gl="on"
 preallocation="metadata"
 # If booting the Live ISO instead of a prebuilt disk:
-# iso="horneroos/horneroos-2026.10-preview32-x86_64.iso"
+# iso="horneroos/horneroos-2026.11-preview42-x86_64.iso"
 EOF
 
 quickemu --vm horneroos.conf`,
@@ -592,20 +592,20 @@ export QT_QUICK_BACKEND=software`,
   usbEyebrow: 'Path 03 · Your own hardware',
   usbTitle: 'Live USB without modifying your drives',
   usbIntro:
-    'Boot the signed v0.2.0-preview32 ISO from a USB stick to test real Wi-Fi, GPU, audio, and displays in RAM before deciding to install.',
+    'Boot the signed v0.2.0-preview42 ISO from a USB stick to test real Wi-Fi, GPU, audio, and displays in RAM before deciding to install.',
   usbSteps: [
     {
       n: '01',
       title: 'Download & verify',
-      body: 'Grab horneroos-2026.10-preview32-x86_64.iso (2.7 GB) and verify its SHA-256 checksum and GPG signature.',
-      cmd: `sha256sum horneroos-2026.10-preview32-x86_64.iso
-gpg --verify horneroos-2026.10-preview32-x86_64.iso.sig`,
+      body: 'Grab horneroos-2026.11-preview42-x86_64.iso (3.3 GB) and verify its SHA-256 checksum and GPG signature.',
+      cmd: `sha256sum horneroos-2026.11-preview42-x86_64.iso
+gpg --verify horneroos-2026.11-preview42-x86_64.iso.sig`,
     },
     {
       n: '02',
       title: 'Write & boot (Safe Graphics ready)',
       body: 'Confirm your USB device with lsblk, write the image, and disable Secure Boot if blocked. If your GPU hits a black screen, pick Safe Graphics in the boot menu (nomodeset WLR_RENDERER=pixman).',
-      cmd: `sudo dd if=horneroos-2026.10-preview32-x86_64.iso of=/dev/sdX bs=4M status=progress conv=fsync`,
+      cmd: `sudo dd if=horneroos-2026.11-preview42-x86_64.iso of=/dev/sdX bs=4M status=progress conv=fsync`,
     },
     {
       n: '03',

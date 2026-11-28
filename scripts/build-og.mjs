@@ -154,7 +154,7 @@ const cards = {
     eyebrow: 'Atmospheres',
     title: 'One desktop, five atmospheres.',
     line: 'Focus, Everyday, Signal, Gaming and Studio change how the desktop behaves, not your layout or theme.',
-    panel: `<ul class="ledger">${['Focus', 'Everyday', 'Signal', 'Gaming', 'Studio'].map((m, i) => `<li><b>${m}</b><span>CH 0${i + 1}</span></li>`).join('')}</ul><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'experience-modes'))}</b> not in a published ISO yet</p>`,
+    panel: `<ul class="ledger">${['Focus', 'Everyday', 'Signal', 'Gaming', 'Studio'].map((m, i) => `<li><b>${m}</b><span>CH 0${i + 1}</span></li>`).join('')}</ul><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'experience-modes'))}</b> ${order(ledger.find((f) => f.id === 'experience-modes').releasedIn) < order(download.version) ? 'not in a published ISO yet' : `included in the v${download.version} ISO`}</p>`,
   },
   chromatic: {
     eyebrow: 'Hornero Chromatic',

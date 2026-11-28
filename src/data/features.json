@@ -458,8 +458,8 @@
         "en": "Hornero Apps (271 verified apps)"
       },
       "summary": {
-        "es": "Tienda unificada y CLI horneroctl store sobre 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita. Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); entrará en el próximo corte de ISO.",
-        "en": "Unified store and horneroctl store CLI across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance. Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); queued for the next ISO cut."
+        "es": "Tienda unificada y CLI horneroctl store sobre 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita. Incluido en la ISO firmada v0.2.0-preview42 (3.3 GB), en el QCOW2 v0.2.0-preview42 (2.6 GB) y en AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1).",
+        "en": "Unified store and horneroctl store CLI across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance. Shipped in the signed v0.2.0-preview42 ISO (3.3 GB), the v0.2.0-preview42 QCOW2 (2.6 GB), and AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1)."
       },
       "evidence": [
         {
@@ -485,8 +485,8 @@
         "en": "Hornero Welcome (Signal Flight · 3 modes)"
       },
       "summary": {
-        "es": "Rediseño en tres modos: First Flight (9 escenas), Explore Hornero y What’s New, con previews reversibles y práctica por eventos reales. Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); entrará en el próximo corte de ISO.",
-        "en": "Three-mode redesign: First Flight (9 scenes), Explore Hornero, and What’s New, with reversible previews and real-event practice. Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); queued for the next ISO cut."
+        "es": "Rediseño en tres modos: First Flight (9 escenas), Explore Hornero y What’s New, con previews reversibles y práctica por eventos reales. Incluido en la ISO firmada v0.2.0-preview42 (3.3 GB), en el QCOW2 v0.2.0-preview42 (2.6 GB) y en AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1).",
+        "en": "Three-mode redesign: First Flight (9 scenes), Explore Hornero, and What’s New, with reversible previews and real-event practice. Shipped in the signed v0.2.0-preview42 ISO (3.3 GB), the v0.2.0-preview42 QCOW2 (2.6 GB), and AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1)."
       },
       "evidence": [
         {

@@ -11,7 +11,7 @@ const es = {
   eyebrowCli: 'horneroctl welcome',
   heroTitle: 'Tu estación de partida, del primer vuelo al uso diario.',
   heroLede:
-    'Hornero Welcome reúne tres modos en una sola ventana serena de 1080×680: First Flight para el primer inicio, Explore Hornero como guía permanente de funciones y atajos, y What’s New tras cada actualización. Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); la ISO v0.2.0-preview32 actual aún trae la ventana previa de 11 páginas y el próximo corte de ISO incluirá Signal Flight.',
+    'Hornero Welcome reúne tres modos en una sola ventana serena de 1080×680: First Flight para el primer inicio, Explore Hornero como guía permanente de funciones y atajos, y What’s New tras cada actualización. Viene integrado de fábrica en la nueva ISO firmada v0.2.0-preview42 (3.3 GB), en el QCOW2 Desktop preinstalado v0.2.0-preview42 (2.6 GB) y en AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1) junto a Hornero Signal y Hornero Apps.',
   ctaWalkthrough: 'Ver recorrido en video',
   ctaModes: 'Explorar los 3 modos',
   ctaDocs: 'Leer guía técnica',
@@ -168,7 +168,7 @@ const en: Messages = {
   eyebrowCli: 'horneroctl welcome',
   heroTitle: 'Your starting deck, from first flight to everyday use.',
   heroLede:
-    'Hornero Welcome brings three modes together in a calm 1080×680 window: First Flight for initial arrival, Explore Hornero as a permanent feature and shortcut hub, and What’s New after upgrades. Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); the current v0.2.0-preview32 ISO still carries the earlier 11-page window and the next ISO cut will bundle Signal Flight.',
+    'Hornero Welcome brings three modes together in a calm 1080×680 window: First Flight for initial arrival, Explore Hornero as a permanent feature and shortcut hub, and What’s New after upgrades. Built into the new signed v0.2.0-preview42 ISO (3.3 GB), the signed v0.2.0-preview42 preinstalled Desktop QCOW2 (2.6 GB), and AUR (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1) alongside Hornero Signal and Hornero Apps.',
   ctaWalkthrough: 'Watch walkthrough clip',
   ctaModes: 'Explore the 3 modes',
   ctaDocs: 'Read technical guide',
