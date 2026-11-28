@@ -60,7 +60,7 @@ export const feature = (id: string): Feature => {
 
 /** Catalogue maturity (editions, compositors) as a ledger stage. */
 export const stageFromMaturity = (maturity: Maturity): Stage =>
-  maturity === 'planned' ? 'planned' : maturity === 'experimental' ? 'experimental' : 'released';
+  maturity === 'planned' ? 'planned' : 'released';
 
 export const editionStage = (id: string): Stage => {
   const edition = editionCatalogue.editions.find((e) => e.id === id);

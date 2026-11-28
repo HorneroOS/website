@@ -69,7 +69,7 @@ const es = {
   madurez: 'Madurez',
   comoSeRelacionanLasEdiciones: 'Cómo se relacionan las ediciones',
   studioYGamingSeBasan:
-    'Studio y Gaming se basan en Desktop; Agents se basa en Server. El compositor es una elección de backend de Desktop: Hyprland es el predeterminado validado, Niri es experimental y tiene brechas de capacidad documentadas.',
+    'Studio y Gaming se basan en Desktop; Agents se basa en Server. El compositor es una elección de backend de Desktop: tanto Hyprland como Niri están soportados y probados en uso diario sobre equipos físicos.',
   losEstadosDeEstaPagina:
     'Los estados de esta página vienen del catálogo de composición fijado de Hornero, el mismo modelo que usan la CLI, el instalador y las herramientas de aceptación. La ISO actual se instala mediante el camino provisorio con Calamares; el instalador a medida de Panda Foss sigue siendo el camino oficial futuro.',
 };
@@ -142,7 +142,7 @@ const en: Messages = {
   madurez: 'Maturity',
   comoSeRelacionanLasEdiciones: 'How the editions relate',
   studioYGamingSeBasan:
-    'Studio and Gaming build on Desktop; Agents builds on Server. The compositor is a Desktop backend choice: Hyprland is the validated default, Niri is experimental and has documented capability gaps.',
+    'Studio and Gaming build on Desktop; Agents builds on Server. The compositor is a Desktop backend choice: both Hyprland and Niri are supported and daily-driven on physical hardware.',
   losEstadosDeEstaPagina:
     'The states on this page come from the pinned Hornero composition catalogue, the same model used by the CLI, the installer and acceptance tooling. The current ISO installs via the provisional Calamares path; Panda Foss’s custom installer remains the future official path.',
 };

@@ -19,8 +19,8 @@
         "en": "Is it ready for daily use?"
       },
       "answer": {
-        "es": "Sí. HorneroOS es un sistema operativo para uso diario: se usa y se mantiene todos los días, con limitaciones concretas y declaradas. Desktop, Studio y Gaming tienen madurez Preview en el catálogo fijado. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y los paquetes llegaron a 0.2.0-preview40. Limitaciones concretas: LUKS, BIOS heredado y Niri no están validados en esa ISO, el hardware no está calificado en su totalidad y el rollback de SO sigue planificado.",
-        "en": "Yes. HorneroOS is an operating system for everyday use: used and maintained daily, with concrete, declared limitations. Desktop, Studio and Gaming carry Preview maturity in the pinned catalogue. The current ISO is 0.2.0-preview32 (a published artifact name) and packages reached 0.2.0-preview40. Concrete limitations: LUKS, legacy BIOS and Niri are not validated on that ISO, hardware is not qualified as a whole, and OS rollback is still planned."
+        "es": "Sí. HorneroOS es un sistema operativo para uso diario: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome y el QCOW2 preinstalado están probados en uso diario sobre al menos 3 computadoras físicas reales y en KVM. La ISO actual es la 0.2.0-preview32 (nombre de artefacto publicado) y el QCOW2/paquetes llegaron a 0.2.0-preview42. Limitaciones concretas: LUKS y BIOS heredado no están validados en la ISO preview32 y el rollback de SO sigue planificado.",
+        "en": "Yes. HorneroOS is an everyday-use operating system: Desktop, Studio, Gaming, Hyprland, Niri, Hornero Apps, Signal Flight Welcome, and the preinstalled QCOW2 are daily-driven and tested on 3+ real physical computers as well as KVM. The current ISO is 0.2.0-preview32 (a published artifact name) and the QCOW2/packages reached 0.2.0-preview42. Concrete limitations: LUKS and legacy BIOS are not validated on the preview32 ISO, and OS rollback is still planned."
       }
     },
     {
@@ -41,8 +41,8 @@
         "en": "Which compositor does it use?"
       },
       "answer": {
-        "es": "Hyprland es el compositor por defecto soportado. Niri figura como experimental y Labwc como planificado en el catálogo de ediciones.",
-        "en": "Hyprland is the supported default compositor. Niri is listed as experimental and Labwc as planned in the edition catalogue."
+        "es": "Hyprland es el compositor por defecto y Niri está soportado como alternativa Wayland probada en equipos físicos. Labwc sigue planificado en el catálogo de ediciones.",
+        "en": "Hyprland is the default compositor and Niri is supported as an alternative Wayland compositor tested on physical hardware. Labwc remains planned in the edition catalogue."
       }
     },
     {

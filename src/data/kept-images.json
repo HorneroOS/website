@@ -19,7 +19,13 @@
     { "prefix": "public/og/", "category": "brand-card" },
     { "prefix": "src/assets/apps/", "category": "app-logo" },
     { "prefix": "public/wallpapers/argentina/", "category": "wallpaper-licensed" },
-    { "prefix": "public/captures/showcase/", "category": "showcase-capture", "note": "Real Light & Dark captures and walkthrough clip for /apps, /welcome, and homepage." },
+    { "prefix": "public/captures/showcase/", "category": "showcase-capture", "note": "Real Light & Dark captures, live KVM 1080p shots, and walkthrough clip for /apps, /welcome, /try, and homepage." },
+    { "path": "public/captures/showcase/vm-sddm-greeter-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of hornero-greeter SDDM on v0.2.0-preview42." },
+    { "path": "public/captures/showcase/vm-desktop-night-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of Signal Night desktop on v0.2.0-preview42." },
+    { "path": "public/captures/showcase/vm-desktop-day-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of Signal Day White Ceramic desktop on v0.2.0-preview42." },
+    { "path": "public/captures/showcase/vm-welcome-arrival-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of Hornero Welcome Signal Flight Arrival on v0.2.0-preview42." },
+    { "path": "public/captures/showcase/vm-apps-discover-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of Hornero Apps Discover view on v0.2.0-preview42." },
+    { "path": "public/captures/showcase/vm-launcher-1080p.webp", "category": "showcase-capture", "note": "Real live 1920x1080 UEFI KVM capture of the Hornero Shell Launcher overlay on v0.2.0-preview42." },
     { "prefix": "assets/wallpapers/theme-wallpapers/", "category": "wallpaper-licensed", "note": "Wallpaper previews on /themes; eight of them are currently unreferenced." },
     { "prefix": "assets/wallpapers/photos/", "category": "wallpaper-licensed", "note": "See provenance.json beside them." }
   ]

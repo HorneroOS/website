@@ -11,10 +11,15 @@ const es = {
   eyebrowArch: 'x86_64 · KVM + VirGL + Live USB',
   heroTitle: 'Probá HorneroOS real sin tocar tu disco.',
   heroLede:
-    'Cada camino de esta página corre el sistema x86_64 real —Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps y horneroctl— nunca una simulación en JavaScript. La ISO firmada actual es v0.2.0-preview32 (validada en VM; sin certificación de hardware físico todavía, y el próximo corte de ISO incluirá Signal, Apps y Welcome).',
+    'Cada camino de esta página corre el sistema x86_64 real —Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps y horneroctl— nunca una simulación en JavaScript. HorneroOS se usa a diario y está probado en al menos 3 computadoras físicas y en KVM: v0.2.0-preview42 ya publica el QCOW2 Desktop preinstalado y los paquetes AUR, mientras que la ISO instalable vigente sigue siendo v0.2.0-preview32.',
   ctaBrowser: 'En navegador / Self-host',
   ctaVm: 'VM local (60 FPS)',
+  ctaQcow2: 'Descargar QCOW2 (v0.2.0-preview42)',
   ctaUsb: 'Live USB en hardware',
+  appleSiliconNoticeTitle: 'Solo x86_64 · Aviso para Apple Silicon (Macs M1–M4)',
+  appleSiliconNoticeBody:
+    'HorneroOS compila únicamente imágenes x86_64 por ahora. En Macs con Apple Silicon (M1–M4), Hypervisor.framework no virtualiza x86_64 por hardware y UTM cae a emulación CPU QEMU TCG lenta; ARM64 nativo y Parallels FEX no están soportados. Para evaluar a 60 FPS usá una PC x86_64 o auto-hospedá Hornero Playground en Linux con /dev/kvm.',
+  appleSiliconNoticeLink: 'Leer guía completa para Mac, Windows y Arch',
   comparisonHeaders: ['Camino', 'Ideal para', 'Gráficos y audio', 'Estado y límite'],
   comparisonRows: [
     {
@@ -27,7 +32,7 @@ const es = {
       path: '2. VM local preinstalada',
       bestFor: 'Escritorio fluido a 60 FPS con teclado completo y tiempo ilimitado',
       fidelity: 'KVM + VirGL acelerado en Linux (software fallback en VirtualBox, UTM ARM y Hyper-V)',
-      status: 'Launchers listos · usá QCOW2/ISO verificada con SHA-256 + GPG',
+      status: 'QCOW2 v0.2.0-preview42 (2.6 GB, firmado con GPG) publicado hoy + launchers listos',
     },
     {
       path: '3. Live USB en tu equipo',
@@ -69,11 +74,79 @@ python3 -m hornero_playground --host 127.0.0.1 --port 8080 --dry-run --base-imag
 docker compose -f browser/streaming/docker-compose.yml up -d`,
   browserRepoLabel: 'Ver arquitectura e IaC en HorneroOS/playground',
   vmEyebrow: 'Camino 02 · Máquina virtual local',
-  vmTitle: 'VM local preinstalada o ISO verificada',
+  vmTitle: 'VM local preinstalada (QCOW2 v0.2.0-preview42) o ISO verificada',
   vmIntro:
     'Correr HorneroOS en una VM local te da tiempo ilimitado, atajos completos sin conflicto con el navegador y aceleración VirGL a 60 FPS en Linux KVM.',
+  vmDownloadEyebrow: 'Artefacto publicado y firmado · v0.2.0-preview42',
+  vmDownloadTitle: 'Descargá el QCOW2 Desktop preinstalado (v0.2.0-preview42)',
+  vmDownloadBody:
+    'Imagen QEMU/KVM x86_64 preinstalada (UEFI OVMF, PipeWire, Hornero Signal, Hornero Apps y Hornero Welcome), comprimida con zstd y firmada con la clave GPG oficial de HorneroOS.',
+  vmDownloadCta: (version: string, size: string): string =>
+    `Descargar Desktop QCOW2 (v${version}, ${size}, GPG-signed)`,
+  vmDownloadShaLabel: 'Checksum .sha256',
+  vmDownloadSigLabel: 'Firma GPG .sig',
+  vmDownloadManifestLabel: 'Manifiesto .manifest.json',
+  vmDownloadReleaseLabel: 'Release v0.2.0-preview42',
+  vmDownloadQuickstartLabel: 'Inicio rápido en QEMU/KVM (descomprimir, verificar y bootear con overlay efímero)',
+  vmDownloadQuickstartCmd: (name: string): string => `# 1. Verificá integridad y firma antes de descomprimir
+sha256sum -c ${name}.sha256
+gpg --verify ${name}.sig ${name}
+
+# 2. Descomprimí el disco QCOW2 (2.6 GB -> ~10 GB) y arrancá en KVM
+zstd -d ${name}
+./launchers/qemu/hornero-vm-run.sh \\
+  --image ${name.replace(/\.zst$/, '')} \\
+  --ephemeral`,
   vmImageNote:
-    'Nota de artefactos: la pipeline canónica de QCOW2/OVA (scripts/build-vm-image.sh + hornero-vm-run.sh) vive en installer + playground. Cuando no veas un QCOW2 preconstruido para la release deseada, descargá la ISO firmada v0.2.0-preview32 desde Instalar y booteala directo en cualquiera de estos hipervisores.',
+    'Nota de artefactos: además del QCOW2 preinstalado v0.2.0-preview42 de arriba, podés bootear la ISO firmada v0.2.0-preview32 directo en QEMU, Quickemu, VMware o VirtualBox si querés probar el instalador Calamares.',
+  liveCapturesEyebrow: 'Capturas reales en KVM',
+  liveCapturesTitle: 'Capturas reales 1920×1080 en KVM UEFI Wayland (v0.2.0-preview42)',
+  liveCapturesIntro:
+    'Capturas reales sin edición tomadas dentro de la VM KVM UEFI de HorneroOS v0.2.0-preview42 (virtio-vga / Wayland / Quickshell), desde el greeter SDDM hasta el escritorio y las aplicaciones.',
+  liveCaptures: [
+    {
+      src: '/captures/showcase/vm-sddm-greeter-1080p.webp',
+      badge: 'SDDM Greeter · 1080p KVM',
+      title: 'Hornero Greeter en SDDM (QMP screendump)',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 mostrando HorizonField y canales de usuario.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando el greeter SDDM Signal.',
+    },
+    {
+      src: '/captures/showcase/vm-desktop-night-1080p.webp',
+      badge: 'Signal Night · 1080p KVM',
+      title: 'Escritorio Signal Night en vivo',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 en Signal Night con barra superior y wallpaper.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando el escritorio Signal Night.',
+    },
+    {
+      src: '/captures/showcase/vm-desktop-day-1080p.webp',
+      badge: 'Signal Day · 1080p KVM',
+      title: 'Escritorio Signal Day (cerámica blanca)',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 tras cambiar en vivo a Signal Day.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando el escritorio Signal Day.',
+    },
+    {
+      src: '/captures/showcase/vm-welcome-arrival-1080p.webp',
+      badge: 'Hornero Welcome · 1080p KVM',
+      title: 'Signal Flight Arrival (escena 01 / 09)',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 con Hornero Welcome en primer arranque.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando Hornero Welcome Arrival.',
+    },
+    {
+      src: '/captures/showcase/vm-apps-discover-1080p.webp',
+      badge: 'Hornero Apps · 1080p KVM',
+      title: 'Hornero Apps Discover (271 apps)',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 mostrando el catálogo Hornero Apps.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando Hornero Apps Discover.',
+    },
+    {
+      src: '/captures/showcase/vm-launcher-1080p.webp',
+      badge: 'Launcher · 1080p KVM',
+      title: 'Overlay Launcher en sesión Wayland',
+      caption: 'Captura real live 1920×1080 UEFI KVM Wayland de v0.2.0-preview42 con el lanzador de Hornero Shell abierto.',
+      alt: 'Captura real en vivo 1920x1080 KVM UEFI de HorneroOS v0.2.0-preview42 mostrando el Launcher.',
+    },
+  ],
   vmSizingTitle: 'Recursos recomendados',
   vmSizing: [
     { k: 'RAM', v: '4 GiB mínimo (6–8 GiB recomendado para Studio o navegadores)' },
@@ -88,7 +161,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
   vmTierLabels: {
     'officially-tested': 'Probado oficialmente',
     'compatible-with-limitations': 'Compatible con limitaciones',
-    'experimental-software-fallback': 'Experimental / Fallback por software',
+    'software-fallback': 'Fallback por software',
     unsupported: 'No soportado',
   },
   vmAccelYes: 'Sí (GPU / 3D)',
@@ -173,7 +246,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'virtualbox',
       label: 'VirtualBox (fallback software)',
-      badge: 'Experimental · Sin aceleración 3D',
+      badge: 'Fallback software · Sin aceleración 3D',
       summary:
         'La aceleración 3D VMSVGA de VirtualBox provoca pantallas negras o cierres inmediatos bajo Hyprland y Niri.',
       command: `./launchers/virtualbox/hornero-vbox-import.sh \\
@@ -187,7 +260,7 @@ export QT_QUICK_BACKEND=software`,
     {
       id: 'utm',
       label: 'macOS UTM (advertencia Apple Silicon)',
-      badge: 'Experimental · Emulación TCG en M1–M4',
+      badge: 'Fallback software · Emulación TCG en M1–M4',
       summary:
         'HorneroOS compila solo imágenes x86_64 por ahora. En Mac con Intel virtualiza bien; en Apple Silicon no existe KVM para x86_64.',
       command: `./launchers/utm/build-utm-bundle.sh \\
@@ -258,10 +331,15 @@ const en: Messages = {
   eyebrowArch: 'x86_64 · KVM + VirGL + Live USB',
   heroTitle: 'Try real HorneroOS without touching your disk.',
   heroLede:
-    'Every path on this page boots real x86_64 HorneroOS — Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps, and horneroctl — never a mocked JavaScript desktop. The current signed ISO is v0.2.0-preview32 (VM-validated preview; no physical-hardware certification yet, and the next ISO cut will bundle Signal, Apps, and Welcome).',
+    'Every path on this page boots real x86_64 HorneroOS — Hyprland, Niri, Quickshell, Hornero Welcome, Hornero Apps, and horneroctl — never a mocked JavaScript desktop. HorneroOS is daily-driven and tested on 3+ physical computers as well as KVM: v0.2.0-preview42 ships the preinstalled Desktop QCOW2 and AUR packages today, while the current install ISO remains v0.2.0-preview32.',
   ctaBrowser: 'Browser / Self-host',
   ctaVm: 'Local VM (60 FPS)',
+  ctaQcow2: 'Download QCOW2 (v0.2.0-preview42)',
   ctaUsb: 'Live USB on hardware',
+  appleSiliconNoticeTitle: 'x86_64 only · Apple Silicon (M1–M4 Macs) notice',
+  appleSiliconNoticeBody:
+    'HorneroOS builds x86_64 images only right now. On Apple Silicon Macs (M1–M4), Hypervisor.framework cannot hardware-virtualize x86_64, so UTM falls back to slow QEMU TCG CPU emulation; native ARM64 and Parallels FEX are unsupported. For representative 60 FPS evaluation, use an x86_64 PC or self-host Hornero Playground on Linux with /dev/kvm.',
+  appleSiliconNoticeLink: 'Read full Mac, Windows & Arch launch guide',
   comparisonHeaders: ['Path', 'Best for', 'Graphics & audio', 'Status & limits'],
   comparisonRows: [
     {
@@ -274,7 +352,7 @@ const en: Messages = {
       path: '2. Local preinstalled VM',
       bestFor: 'Smooth 60 FPS desktop with full keyboard shortcuts and unlimited time',
       fidelity: 'Hardware KVM + VirGL on Linux (software fallback on VirtualBox, ARM UTM & Hyper-V)',
-      status: 'Launchers ready · boot verified QCOW2 or v0.2.0-preview32 ISO with SHA-256 + GPG',
+      status: 'v0.2.0-preview42 QCOW2 (2.6 GB, GPG-signed) published today + launchers ready',
     },
     {
       path: '3. Live USB on your hardware',
@@ -316,11 +394,79 @@ python3 -m hornero_playground --host 127.0.0.1 --port 8080 --dry-run --base-imag
 docker compose -f browser/streaming/docker-compose.yml up -d`,
   browserRepoLabel: 'Inspect architecture & Terraform IaC on HorneroOS/playground',
   vmEyebrow: 'Path 02 · Local Virtual Machine',
-  vmTitle: 'Preinstalled VM or verified ISO in your hypervisor',
+  vmTitle: 'Preinstalled Desktop QCOW2 (v0.2.0-preview42) or verified ISO',
   vmIntro:
     'Running HorneroOS in a local VM gives you unlimited time, full compositor keybindings without browser collisions, and 60 FPS VirGL acceleration on Linux KVM.',
+  vmDownloadEyebrow: 'Published & signed artifact · v0.2.0-preview42',
+  vmDownloadTitle: 'Download Preinstalled Desktop QCOW2 (v0.2.0-preview42)',
+  vmDownloadBody:
+    'Preinstalled x86_64 QEMU/KVM desktop disk (UEFI OVMF, PipeWire, Hornero Signal, Hornero Apps, and Hornero Welcome), zstd-compressed and signed with the official HorneroOS GPG release key.',
+  vmDownloadCta: (version: string, size: string): string =>
+    `Download Preinstalled Desktop QCOW2 (v${version}, ${size}, GPG-signed)`,
+  vmDownloadShaLabel: 'Checksum .sha256',
+  vmDownloadSigLabel: 'GPG signature .sig',
+  vmDownloadManifestLabel: 'Manifest .manifest.json',
+  vmDownloadReleaseLabel: 'Release v0.2.0-preview42',
+  vmDownloadQuickstartLabel: 'Quickstart on QEMU/KVM (verify, decompress, and boot with ephemeral CoW overlay)',
+  vmDownloadQuickstartCmd: (name: string): string => `# 1. Verify checksum and GPG signature before decompressing
+sha256sum -c ${name}.sha256
+gpg --verify ${name}.sig ${name}
+
+# 2. Decompress the QCOW2 image (2.6 GB -> ~10 GB) and boot in KVM
+zstd -d ${name}
+./launchers/qemu/hornero-vm-run.sh \\
+  --image ${name.replace(/\.zst$/, '')} \\
+  --ephemeral`,
   vmImageNote:
-    'Artifact note: the canonical QCOW2/OVA pipeline (scripts/build-vm-image.sh + hornero-vm-run.sh) lives across installer + playground. Whenever a prebuilt QCOW2 archive for your target release is not published yet, download the signed v0.2.0-preview32 ISO from Install and boot it directly in any hypervisor below.',
+    'Artifact note: alongside the published v0.2.0-preview42 preinstalled QCOW2 above, you can still boot the signed v0.2.0-preview32 ISO directly in QEMU, Quickemu, VMware, or VirtualBox to test the Calamares installer.',
+  liveCapturesEyebrow: 'Real KVM captures',
+  liveCapturesTitle: 'Real live 1920×1080 UEFI KVM Wayland captures (v0.2.0-preview42)',
+  liveCapturesIntro:
+    'Unedited full-desktop captures taken directly inside the booted HorneroOS v0.2.0-preview42 UEFI KVM virtual machine (virtio-vga / Wayland / Quickshell), from SDDM login to the live desktop and apps.',
+  liveCaptures: [
+    {
+      src: '/captures/showcase/vm-sddm-greeter-1080p.webp',
+      badge: 'SDDM Greeter · 1080p KVM',
+      title: 'Hornero Greeter on SDDM (QMP screendump)',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 showing HorizonField and account channels.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing the SDDM Signal greeter.',
+    },
+    {
+      src: '/captures/showcase/vm-desktop-night-1080p.webp',
+      badge: 'Signal Night · 1080p KVM',
+      title: 'Live Signal Night desktop',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 in Signal Night with top bar and wallpaper.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing the Signal Night desktop.',
+    },
+    {
+      src: '/captures/showcase/vm-desktop-day-1080p.webp',
+      badge: 'Signal Day · 1080p KVM',
+      title: 'Live Signal Day (white ceramic) desktop',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 after switching live to Signal Day.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing the Signal Day desktop.',
+    },
+    {
+      src: '/captures/showcase/vm-welcome-arrival-1080p.webp',
+      badge: 'Hornero Welcome · 1080p KVM',
+      title: 'Signal Flight Arrival (scene 01 / 09)',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 running Hornero Welcome First Flight.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing Hornero Welcome Arrival.',
+    },
+    {
+      src: '/captures/showcase/vm-apps-discover-1080p.webp',
+      badge: 'Hornero Apps · 1080p KVM',
+      title: 'Hornero Apps Discover (271 apps)',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 browsing the Hornero Apps catalog.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing Hornero Apps Discover.',
+    },
+    {
+      src: '/captures/showcase/vm-launcher-1080p.webp',
+      badge: 'Launcher · 1080p KVM',
+      title: 'Live Launcher overlay in Wayland session',
+      caption: 'Real live 1920×1080 UEFI KVM Wayland capture of v0.2.0-preview42 with the Hornero Shell launcher open.',
+      alt: 'Real live 1920x1080 UEFI KVM Wayland capture of HorneroOS v0.2.0-preview42 showing the live Launcher.',
+    },
+  ],
   vmSizingTitle: 'Recommended VM sizing',
   vmSizing: [
     { k: 'RAM', v: '4 GiB minimum (6–8 GiB recommended for Studio or browsers)' },
@@ -335,7 +481,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
   vmTierLabels: {
     'officially-tested': 'Officially tested',
     'compatible-with-limitations': 'Compatible with limitations',
-    'experimental-software-fallback': 'Experimental / Software fallback',
+    'software-fallback': 'Software fallback',
     unsupported: 'Unsupported',
   },
   vmAccelYes: 'Yes (GPU / 3D)',
@@ -420,7 +566,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'virtualbox',
       label: 'VirtualBox (software fallback)',
-      badge: 'Experimental · 3D disabled',
+      badge: 'Software fallback · 3D disabled',
       summary:
         'VirtualBox VMSVGA 3D acceleration causes black screens or immediate crashes under Hyprland and Niri.',
       command: `./launchers/virtualbox/hornero-vbox-import.sh \\
@@ -434,7 +580,7 @@ export QT_QUICK_BACKEND=software`,
     {
       id: 'utm',
       label: 'macOS UTM (Apple Silicon caveat)',
-      badge: 'Experimental · TCG on M1–M4',
+      badge: 'Software fallback · TCG on M1–M4',
       summary:
         'HorneroOS builds x86_64 images only right now. Intel Macs can hardware-virtualize; Apple Silicon cannot hardware-virtualize x86_64.',
       command: `./launchers/utm/build-utm-bundle.sh \\

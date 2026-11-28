@@ -50,7 +50,8 @@ const edition = (id: string) => {
   return found;
 };
 const compositor = (id: string) => editionCatalogue.compositors.find((item) => item.id === id);
-const maturityName = (maturity: Maturity) => m.maturityLabels[maturity];
+const displayMaturity = (maturity: Maturity): Maturity => (maturity === 'planned' ? 'planned' : 'supported');
+const maturityName = (maturity: Maturity) => m.maturityLabels[displayMaturity(maturity)];
 
 const studioApp = (id: string) => studioCatalogue.applications.find((app) => app.id === id)?.title ?? id;
 const studioSpec = (id: string) => {
@@ -437,7 +438,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
       <article class="showcase-card">
         <figure class="showcase-shot">
           <img
-            src="/captures/showcase/hornero-apps-discover-night.webp"
+            src="/captures/showcase/vm-apps-discover-1080p.webp"
             alt={m.horneroAppsAlt}
             width="1920"
             height="1080"
@@ -454,7 +455,7 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
       <article class="showcase-card">
         <figure class="showcase-shot">
           <img
-            src="/captures/showcase/welcome-arrival-day.webp"
+            src="/captures/showcase/vm-welcome-arrival-1080p.webp"
             alt={m.horneroWelcomeAlt}
             width="1920"
             height="1080"

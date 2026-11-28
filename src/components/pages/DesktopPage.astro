@@ -213,7 +213,7 @@ const keys = [
         <li>
           <strong>{c.id === 'hyprland' ? 'Hyprland' : 'Niri'}</strong>
           <StageBadge stage={stageFromMaturity(c.maturity)} locale={locale} />
-          <span>{c.id === 'hyprland' ? m.defaultCompositor : m.experimentalCompositor}</span>
+          <span>{c.id === 'hyprland' ? m.defaultCompositor : m.niriCompositor}</span>
         </li>
       ))}
     </ul>

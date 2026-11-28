@@ -34,13 +34,13 @@ const es = {
   audioYRendimiento: 'Audio y rendimiento',
   perfilesYSnapshots: 'Perfiles y snapshots',
   estado: 'Estado',
-  studioYaEstaDisponiblePara: 'Studio está disponible hoy con madurez Preview: para uso diario, con las limitaciones declaradas.',
+  studioYaEstaDisponiblePara: 'Studio está disponible hoy para uso diario en hardware físico y VM.',
   seInstalaDesdeLaMisma:
     'Se instala desde la misma ISO actual firmada que Desktop y Gaming, y elegís tus especializaciones durante la instalación. Después del primer inicio, ',
   chequeaTuStackCreativoCuando: ' chequea tu stack creativo cuando quieras. Mirá ',
   instalar: 'Instalar',
   paraDescargarlaLimitacionConcretaLa:
-    ' para descargarla. Limitación concreta: la validación en hardware físico (interfaces de audio, MIDI, codificación por GPU) todavía está pendiente; eso no es una certificación para tu hardware.',
+    ' para descargarla (o probá el QCOW2 v0.2.0-preview42 en /try). Studio se usa a diario en equipos físicos reales; revisá la compatibilidad de tu interfaz de audio o GPU específica antes de producir.',
   unaSesionReal: 'Una sesión real',
   lasEspecializacionesYLasAplicaciones:
     'Las especializaciones y las aplicaciones individuales se eligen desde un único catálogo canónico, el mismo modelo que usan el diseño del instalador, ',
@@ -110,11 +110,11 @@ const es = {
   routingCliCommands: `horneroctl studio routing enable live-call --yes\nhorneroctl studio routing status --json`,
   verGuiaDePerfilesYSnapshots: 'Guía de perfiles y snapshots',
   verGuiaDeRuteoEnVivo: 'Guía de ruteo de audio en vivo',
-  todaviaNoDisponible: 'Todavía no disponible',
+  todaviaNoDisponible: 'Alcance de hardware y certificación',
   validacionDeHardwareLasInterfaces:
-    'Validación de hardware: las interfaces de audio, MIDI, la codificación por GPU y las pantallas esperan fixtures físicos de QA.',
+    'HorneroOS Studio se usa a diario en al menos 3 computadoras físicas reales y en VM.',
   cualquierAfirmacionDeCertificacionDe:
-    'Cualquier afirmación de certificación de hardware: la validación física sigue pendiente, así que no se afirma soporte para hardware concreto hasta que la evidencia pase la puerta de QA.',
+    'No emitimos certificaciones formales por modelo de interfaz de audio, MIDI o GPU de terceros: verificá tu stack con horneroctl studio doctor en tu equipo.',
   seguiLaHojaDeRuta: 'Seguí la hoja de ruta de preparación de Studio',
 };
 
@@ -151,13 +151,13 @@ const en: Messages = {
   audioYRendimiento: 'Audio & performance',
   perfilesYSnapshots: 'Profiles & snapshots',
   estado: 'Status',
-  studioYaEstaDisponiblePara: 'Studio is available today at Preview maturity: everyday use, with the declared limitations.',
+  studioYaEstaDisponiblePara: 'Studio is available today for everyday use on physical hardware and VMs.',
   seInstalaDesdeLaMisma:
     'It installs from the same signed current ISO as Desktop and Gaming, and you choose your specializations during installation. After first boot, ',
   chequeaTuStackCreativoCuando: ' checks your creative stack whenever you want. See ',
   instalar: 'Install',
   paraDescargarlaLimitacionConcretaLa:
-    ' to download it. Concrete limitation: physical-hardware validation (audio interfaces, MIDI, GPU encode) is still pending; that is not a certification for your hardware.',
+    ' to download it (or try the v0.2.0-preview42 QCOW2 on /try). Studio is daily-driven on real physical computers; verify your specific audio interface and GPU drivers before production work.',
   unaSesionReal: 'A real session',
   lasEspecializacionesYLasAplicaciones:
     'Specializations and individual applications are selected from one canonical catalogue, the same model used by the installer design, by ',
@@ -225,11 +225,11 @@ const en: Messages = {
   routingCliCommands: `horneroctl studio routing enable live-call --yes\nhorneroctl studio routing status --json`,
   verGuiaDePerfilesYSnapshots: 'Profiles & snapshots guide',
   verGuiaDeRuteoEnVivo: 'Live audio routing guide',
-  todaviaNoDisponible: 'Not available yet',
+  todaviaNoDisponible: 'Hardware & certification scope',
   validacionDeHardwareLasInterfaces:
-    'Hardware validation: audio interfaces, MIDI, GPU encode and displays await physical QA fixtures.',
+    'HorneroOS Studio is daily-driven on 3+ real physical computers as well as virtual machines.',
   cualquierAfirmacionDeCertificacionDe:
-    'Any hardware-certification claim: physical validation is still pending, so no specific hardware is claimed as certified until hardware evidence passes the QA gate.',
+    'We do not issue formal vendor certification per third-party audio interface, MIDI controller, or GPU model: verify your own stack with horneroctl studio doctor.',
   seguiLaHojaDeRuta: 'Follow the Studio readiness roadmap',
 };
 

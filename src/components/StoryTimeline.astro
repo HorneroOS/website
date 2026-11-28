@@ -97,6 +97,8 @@ const display = (date: string) =>
 
   /* Rail: a horizontal strip that scrolls on narrow screens. */
   .story-rail {
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     padding-bottom: 1rem;
     scroll-snap-type: x proximity;

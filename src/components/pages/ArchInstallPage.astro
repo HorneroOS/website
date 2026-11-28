@@ -149,8 +149,8 @@ cd yay && makepkg -si</code></pre>
           >
             {m.copyLabel}
           </button>
-          <pre tabindex="0"><code>paru -Syu hornero-shell hornero-config hornero-greeter horneroctl-bin
-paru -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kitty dex hypridle cliphist wl-clipboard</code></pre>
+          <pre tabindex="0"><code>yay -Syu hornero-shell hornero-config hornero-greeter horneroctl-bin
+yay -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kitty dex hypridle cliphist wl-clipboard</code></pre>
         </div>
         <p class="step-note">{m.step2GreeterNote}</p>
       </li>
@@ -173,7 +173,7 @@ paru -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kit
           >
             {m.copyLabel}
           </button>
-          <pre tabindex="0"><code>tar -czf ~/hornero-pre-adopt-$(date +%F).tar.gz ~/.config/hypr ~/.config/ghostty ~/.config/environment.d 2&gt;/dev/null
+          <pre tabindex="0"><code>tar -czf ~/hornero-pre-adopt-$(date +%F).tar.gz ~/.config/hypr ~/.config/kitty ~/.config/ghostty ~/.config/environment.d 2&gt;/dev/null
 /usr/share/hornero/seed-user.sh --dest "$HOME" --dry-run
 /usr/share/hornero/seed-user.sh --dest "$HOME"</code></pre>
         </div>
@@ -191,8 +191,8 @@ paru -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk kit
           </button>
           <pre tabindex="0"><code>horneroctl doctor
 horneroctl hardware rollcall
-# Optional: enable greetd &amp; inspect AI/model isolation slice
-# sudo systemctl enable --now greetd
+# Optional: enable SDDM (hornero-greeter) or greetd (if using hornero-greeter-greetd)
+# sudo systemctl enable --now sddm
 # systemctl status app-models.slice</code></pre>
         </div>
         <p class="step-note">{m.step3SessionNote}</p>
@@ -222,7 +222,7 @@ horneroctl hardware rollcall
             <article class="extra-card">
               <h4>{extra.title}</h4>
               <p>{extra.desc}</p>
-              <code class="extra-cmd">{extra.cmd}</code>
+              <code class="extra-cmd" tabindex="0">{extra.cmd}</code>
             </article>
           ))}
         </div>
@@ -484,7 +484,22 @@ horneroctl hardware rollcall
     position: relative;
   }
 
+  .path-card,
+  .step-card,
+  .code-box,
+  .helper-details,
+  .helper-body,
+  .req-grid li,
+  .pkg-grid li,
+  .extra-card,
+  .keep-grid li,
+  .rollback-card {
+    min-width: 0;
+  }
+
   .code-box pre {
+    max-width: 100%;
+    overflow-x: auto;
     padding-right: 5.5rem;
     font-size: 0.85rem;
     line-height: 1.6;
@@ -640,6 +655,8 @@ horneroctl hardware rollcall
 
   .extra-cmd {
     justify-self: start;
+    max-width: 100%;
+    overflow-x: auto;
     margin-top: 0.25rem;
     padding: 0.2rem 0.5rem;
     border-left: 2px solid var(--signal);

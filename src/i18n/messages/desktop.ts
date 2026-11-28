@@ -20,7 +20,7 @@ const es = {
   elEscritorioTrabajando: 'El escritorio trabajando',
   ajustesDelEscritorio: 'Ajustes del escritorio',
   horneroosTraeValoresPorDefecto:
-    'HorneroOS trae valores por defecto para el escritorio y cada ajuste de esta lista se puede cambiar. Cada palanca muestra su estado: lo lanzado, lo que está en main sin lanzar y lo experimental salen del registro del proyecto, no de este texto.',
+    'HorneroOS trae valores por defecto para el escritorio y cada ajuste de esta lista se puede cambiar. Cada palanca muestra su estado desde el registro del proyecto: lo lanzado, lo lanzado en paquetes y lo que está en main.',
   unDiaDeTrabajoCon: 'Un día de trabajo, con el teclado',
   losAtajosDeLaConfiguracion:
     'Los atajos de la configuración por defecto de Hyprland. Pueden variar con tu versión y tu configuración.',
@@ -34,7 +34,7 @@ const es = {
   studioYGamingSonDesktop: 'Studio y Gaming son Desktop con un oficio: se eligen al instalar desde la misma ISO.',
   todasLasEdiciones: 'Todas las ediciones',
   defaultCompositor: 'El compositor por defecto.',
-  experimentalCompositor: 'Disponible para quien quiera probarlo; todavía experimental.',
+  niriCompositor: 'Compositor Wayland alternativo soportado y probado en hardware físico.',
 };
 
 export type Messages = typeof es;
@@ -56,7 +56,7 @@ const en: Messages = {
   elEscritorioTrabajando: 'The desktop at work',
   ajustesDelEscritorio: 'Desktop settings',
   horneroosTraeValoresPorDefecto:
-    'HorneroOS ships defaults for the desktop and every setting in this list can be changed. Each lever shows its status: what is released, what is on main but unreleased and what is experimental come from the project ledger, not from this text.',
+    'HorneroOS ships defaults for the desktop and every setting in this list can be changed. Each lever shows its status from the project ledger: what is released, what is released as packages, and what is on main.',
   unDiaDeTrabajoCon: 'A working day, from the keyboard',
   losAtajosDeLaConfiguracion:
     'The default Hyprland configuration’s shortcuts. They can vary with your version and configuration.',
@@ -71,7 +71,7 @@ const en: Messages = {
     'Studio and Gaming are Desktop with a craft: you choose them when installing from the same ISO.',
   todasLasEdiciones: 'All editions',
   defaultCompositor: 'The default compositor.',
-  experimentalCompositor: 'Available for those who want to try it; still experimental.',
+  niriCompositor: 'Supported alternative Wayland compositor tested on physical hardware.',
 };
 
 export const messages: Record<Locale, Messages> = { es, en };

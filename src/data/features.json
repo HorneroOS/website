@@ -1,6 +1,6 @@
 {
   "$comment": "Feature ledger. Hand-authored claims live here, never in page copy. `stage` is what the project asserts: shipping (in a published release; needs releasedIn naming a released (tagged, or recorded as published) release in product/releases.json), main (merged to main, in no published release), experimental (merged and flagged experimental) or planned. scripts/check-feature-ledger.mjs fails the build when a 'shipping' feature names a release that does not exist or is not released. When a release is cut, the release PR flips the matching entries; edition and compositor maturity is derived from the pinned catalogue (src/data/features.ts), not listed here. System rollback stays planned: do not promote it without a shipped backend.",
-  "reviewedAgainst": "0.2.0-preview41",
+  "reviewedAgainst": "0.2.0-preview42",
   "features": [
     {
       "id": "signal",
@@ -451,15 +451,15 @@
     },
     {
       "id": "hornero-apps",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview42",
       "title": {
         "es": "Hornero Apps (271 apps verificadas)",
         "en": "Hornero Apps (271 verified apps)"
       },
       "summary": {
-        "es": "Tienda unificada y CLI horneroctl store sobre 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita. Publicado en AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); entrará en el próximo corte de ISO.",
-        "en": "Unified store and horneroctl store CLI across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance. Shipped in AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); queued for the next ISO cut."
+        "es": "Tienda unificada y CLI horneroctl store sobre 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita. Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); entrará en el próximo corte de ISO.",
+        "en": "Unified store and horneroctl store CLI across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance. Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); queued for the next ISO cut."
       },
       "evidence": [
         {
@@ -478,15 +478,15 @@
     },
     {
       "id": "hornero-welcome",
-      "stage": "main",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview42",
       "title": {
         "es": "Hornero Welcome (Signal Flight · 3 modos)",
         "en": "Hornero Welcome (Signal Flight · 3 modes)"
       },
       "summary": {
-        "es": "Rediseño en tres modos: First Flight (9 escenas), Explore Hornero y What’s New, con previews reversibles y práctica por eventos reales. Publicado en AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); entrará en el próximo corte de ISO.",
-        "en": "Three-mode redesign: First Flight (9 scenes), Explore Hornero, and What’s New, with reversible previews and real-event practice. Shipped in AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); queued for the next ISO cut."
+        "es": "Rediseño en tres modos: First Flight (9 escenas), Explore Hornero y What’s New, con previews reversibles y práctica por eventos reales. Publicado en AUR y en el QCOW2 v0.2.0-preview42 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); entrará en el próximo corte de ISO.",
+        "en": "Three-mode redesign: First Flight (9 scenes), Explore Hornero, and What’s New, with reversible previews and real-event practice. Shipped in AUR and in the v0.2.0-preview42 QCOW2 (hornero-shell 1.6.0-2, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview63-1); queued for the next ISO cut."
       },
       "evidence": [
         {
@@ -501,15 +501,15 @@
     },
     {
       "id": "hornero-playground",
-      "stage": "experimental",
-      "releasedIn": null,
+      "stage": "shipping",
+      "releasedIn": "0.2.0-preview42",
       "title": {
-        "es": "Hornero Playground (Browser KVM, VM local y Live USB)",
-        "en": "Hornero Playground (Browser KVM, Local VM & Live USB)"
+        "es": "Hornero Playground (VM local QCOW2, Live USB y Browser KVM self-host)",
+        "en": "Hornero Playground (Local VM QCOW2, Live USB & self-host Browser KVM)"
       },
       "summary": {
-        "es": "Launchers locales (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), orquestador efímero KVM + WebRTC e IaC Terraform en HorneroOS/playground; clúster público y DistroSea en despliegue.",
-        "en": "Local VM launchers (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), ephemeral KVM + WebRTC orchestrator, and Terraform IaC in HorneroOS/playground; hosted cluster and DistroSea in rollout."
+        "es": "QCOW2 Desktop v0.2.0-preview42 firmado, launchers locales (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), orquestador efímero KVM + WebRTC e IaC Terraform en HorneroOS/playground; el clúster público alojado queda en standby a la espera de proveedor.",
+        "en": "Signed v0.2.0-preview42 Desktop QCOW2, local VM launchers (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), ephemeral KVM + WebRTC orchestrator, and Terraform IaC in HorneroOS/playground; the hosted public browser cluster stays on standby awaiting a provider."
       },
       "evidence": [
         {

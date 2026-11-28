@@ -376,6 +376,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
   background: var(--base);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -1145,6 +1146,7 @@ hr {
 .app {
   position: relative;
   flex: 1;
+  min-width: 0;
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
