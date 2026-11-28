@@ -1,0 +1,97 @@
+{
+  "$schema": "hornero.website.playground/1",
+  "availability": {
+    "publicBrowserSessionsEnabled": false,
+    "providerSelected": false,
+    "endpointEnvVar": "PUBLIC_PLAYGROUND_URL",
+    "featureFlagEnvVar": "PUBLIC_PLAYGROUND_ENABLED",
+    "status": "standby-awaiting-provider"
+  },
+  "visualBaseline": {
+    "official": "1920x1080",
+    "premium": "3840x2160",
+    "profilesCount": 7
+  },
+  "vmCompatibility": [
+    {
+      "tierId": "officially-tested",
+      "entries": [
+        {
+          "id": "qemu-kvm",
+          "name": "QEMU/KVM",
+          "driver": "virtio-vga-gl (VirGL)",
+          "hardwareAcceleration": true
+        },
+        {
+          "id": "libvirt",
+          "name": "libvirt / virt-manager",
+          "driver": "VirtIO 3D (virgl)",
+          "hardwareAcceleration": true
+        },
+        {
+          "id": "quickemu",
+          "name": "Quickemu",
+          "driver": "OVMF + gl=\"on\" (VirGL)",
+          "hardwareAcceleration": true
+        }
+      ]
+    },
+    {
+      "tierId": "compatible-with-limitations",
+      "entries": [
+        {
+          "id": "vmware",
+          "name": "VMware Workstation / Fusion",
+          "driver": "SVGA3D (vmwgfx)",
+          "hardwareAcceleration": true
+        },
+        {
+          "id": "gnome-boxes",
+          "name": "GNOME Boxes",
+          "driver": "VirtIO GL",
+          "hardwareAcceleration": true
+        }
+      ]
+    },
+    {
+      "tierId": "experimental-software-fallback",
+      "entries": [
+        {
+          "id": "virtualbox",
+          "name": "VirtualBox",
+          "driver": "VMSVGA (3D disabled / llvmpipe)",
+          "hardwareAcceleration": false
+        },
+        {
+          "id": "utm",
+          "name": "macOS UTM (Intel / Apple Silicon x86_64 TCG)",
+          "driver": "QEMU TCG",
+          "hardwareAcceleration": false
+        },
+        {
+          "id": "hyper-v",
+          "name": "Hyper-V",
+          "driver": "hyperv_fb (llvmpipe)",
+          "hardwareAcceleration": false
+        }
+      ]
+    },
+    {
+      "tierId": "unsupported",
+      "entries": [
+        {
+          "id": "arm64-native",
+          "name": "ARM64 native",
+          "driver": "N/A (x86_64 only)",
+          "hardwareAcceleration": false
+        },
+        {
+          "id": "parallels-arm64",
+          "name": "Parallels Apple Silicon x86_64",
+          "driver": "FEX x86_64",
+          "hardwareAcceleration": false
+        }
+      ]
+    }
+  ]
+}

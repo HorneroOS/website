@@ -36,9 +36,9 @@ const L = (path: string) => localizePath(path, locale);
         <figure class="capture-frame">
           <div class="capture-bar">
             <span class="capture-badge">{shot.badge}</span>
-            <span class="capture-res">1280×800</span>
+            <span class="capture-res">1920×1080</span>
           </div>
-          <img src={shot.src} alt={shot.alt} width="1280" height="800" loading="eager" />
+          <img src={shot.src} alt={shot.alt} width="1920" height="1080" loading="eager" />
           <figcaption>{shot.caption}</figcaption>
         </figure>
       ))}
@@ -49,7 +49,7 @@ const L = (path: string) => localizePath(path, locale);
     <header class="section-head-compact">
       <p class="eyebrow">
         <b>{m.videoEyebrow}</b>
-        <span>WebM · 1280×800</span>
+        <span>WebM · 1920×1080</span>
       </p>
       <h2 id="video-title">{m.videoTitle}</h2>
       <p class="muted-copy">{m.videoNote}</p>
@@ -108,9 +108,9 @@ const L = (path: string) => localizePath(path, locale);
         <figure class="capture-frame">
           <div class="capture-bar">
             <span class="capture-badge">{shot.badge}</span>
-            <span class="capture-res">1280×800</span>
+            <span class="capture-res">1920×1080</span>
           </div>
-          <img src={shot.src} alt={shot.alt} width="1280" height="800" loading="lazy" />
+          <img src={shot.src} alt={shot.alt} width="1920" height="1080" loading="lazy" />
           <figcaption>
             <strong>{shot.title}</strong>
             <span>{shot.caption}</span>

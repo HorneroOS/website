@@ -8,5 +8,8 @@ export const docsAreas = [
   { id: 'troubleshooting', label: 'Troubleshooting' },
   { id: 'security', label: 'Security & privacy' },
   { id: 'architecture', label: 'Architecture' },
+  { id: 'infrastructure', label: 'Infrastructure' },
+  { id: 'studio', label: 'Studio & media' },
+  { id: 'contributing', label: 'Contributing' },
   { id: 'development', label: 'Development' },
 ];

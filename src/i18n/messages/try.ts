@@ -4,7 +4,7 @@ import type { Locale } from '../ui';
 const es = {
   pageTitle: 'Probar HorneroOS | Hornero Playground (Navegador, VM local y Live USB)',
   pageDescription:
-    'Probá HorneroOS real sin modificar tu disco: stack autohospedable KVM + WebRTC en navegador, máquinas virtuales preinstaladas (QEMU, Quickemu, libvirt, VMware, VirtualBox, UTM) y Live USB.',
+    'Probá HorneroOS real sin modificar tu disco: stack autohospedable KVM + WebRTC en navegador, matriz honesta de VMs (QEMU, Quickemu, libvirt, VMware, VirtualBox, UTM, Hyper-V) y Live USB.',
   socialAlt: 'Hornero Playground: tres formas reales de probar HorneroOS sin borrar tu disco.',
   eyebrowPlayground: 'Hornero Playground',
   eyebrowRoute: 'horneroos.com/try',
@@ -21,12 +21,12 @@ const es = {
       path: '1. Navegador (Hornero Playground)',
       bestFor: 'Evaluación instantánea sin instalar nada local',
       fidelity: 'WebRTC 60 FPS + PipeWire Opus (noVNC fallback sin audio ni 3D)',
-      status: 'Orquestador + IaC listos para self-host · clúster público y DistroSea en despliegue (TTL 15 min)',
+      status: 'En espera (standby) sin proveedor cloud seleccionado · self-host listo con Docker + Terraform',
     },
     {
       path: '2. VM local preinstalada',
       bestFor: 'Escritorio fluido a 60 FPS con teclado completo y tiempo ilimitado',
-      fidelity: 'KVM + VirGL acelerado en Linux (software fallback en VirtualBox y UTM)',
+      fidelity: 'KVM + VirGL acelerado en Linux (software fallback en VirtualBox, UTM ARM y Hyper-V)',
       status: 'Launchers listos · usá QCOW2/ISO verificada con SHA-256 + GPG',
     },
     {
@@ -40,12 +40,25 @@ const es = {
   browserTitle: 'HorneroOS Browser Playground (KVM efímero + WebRTC)',
   browserIntro:
     'HorneroOS/playground levanta una máquina virtual KVM descartable por visitante sobre un disco base de solo lectura + overlay Copy-on-Write con límite estricto de 15 minutos, y transmite el escritorio Wayland real y audio PipeWire al navegador vía WebRTC (con fallback noVNC si hace falta).',
-  browserStatusTitle: 'Estado honesto del servicio público',
+  browserStandbyBadge: 'Standby · Esperando proveedor',
+  browserActiveBadge: 'En vivo · Sesiones WebRTC activas',
+  browserStatusTitle: 'Contrato de disponibilidad pública (sin sesiones falsas)',
   browserStatusBody:
-    'Hoy el orquestador en Python 3.12+ stdlib, el stack Docker Compose (coturn + WebRTC / noVNC) y los módulos Terraform/OpenTofu para Hetzner (AX42/EX44) y GCP están publicados para self-hosting. El clúster público alojado está en despliegue (seguilo en HorneroOS/playground#1) — no afirmamos un clúster público 24/7 activo hasta que esté levantado — y también avanzamos con la publicación orgánica en DistroSea (vía noVNC, sin 3D ni audio, como pista de descubrimiento).',
+    'Por defecto HorneroOS mantiene compromiso de gasto cloud $0/mes y ningún proveedor público seleccionado todavía (standby-awaiting-provider). El orquestador en Python 3.12+ stdlib, Docker Compose (coturn + WebRTC / noVNC) y Terraform/OpenTofu para Hetzner y GCP ya están listos para self-host. Las sesiones públicas en navegador solo se habilitan cuando PUBLIC_PLAYGROUND_ENABLED=true y PUBLIC_PLAYGROUND_URL apuntan a un clúster verificado.',
+  browserActiveTitle: 'Sesión pública en navegador habilitada',
+  browserActiveBody:
+    'El endpoint verificado de Hornero Playground está activo mediante configuración. Cada sesión corre en una VM KVM efímera con TTL de 15 minutos y red restringida.',
+  browserLaunchCta: 'Abrir sesión efímera en Hornero Playground',
+  browserInfraLinksTitle: 'Guías de infraestructura y producción',
+  browserInfraLinks: [
+    { label: 'Kit de decisión de proveedores cloud', href: '/docs/infrastructure/cloud-provider-decision-kit/' },
+    { label: 'Runbook de despliegue en 19 pasos', href: '/docs/infrastructure/playground-deployment-runbook/' },
+    { label: 'Flujo de YouTube y Modo Presentador', href: '/docs/studio/youtube-production-workflow/' },
+    { label: 'Estaciones virtuales y capturas Full HD', href: '/docs/contributing/virtual-workstations-and-screenshots/' },
+  ],
   browserSecurityNotes: [
     'Efímero por diseño: al cerrar la pestaña o cumplirse los 15 minutos, el overlay CoW y la sesión se destruyen por completo.',
-    'Aislamiento de red: los invitados usan netdev user,restrict=on por defecto; nunca ingreses contraseñas reales, SSH ni tokens en sesiones públicas.',
+    'Aislamiento de red: los invitados usan netdev user,restrict=on y nftables por defecto; nunca ingreses contraseñas reales, SSH ni tokens en sesiones públicas.',
     'Por qué no WASM en el navegador: v86/WebVM no soportan x86_64 Wayland + VirGL para Hyprland y Quickshell.',
   ],
   browserQuickstartTitle: 'Self-host en tu propio servidor Linux con /dev/kvm',
@@ -68,6 +81,30 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     { k: 'Disco', v: '32 GiB QCOW2/VDI dinámico (si instalás dentro de la VM)' },
     { k: 'Firmware', v: 'UEFI (OVMF) + verificación SHA-256 y GPG (FCFBEE43925AB5429362278AE59EAB44AA2498DC)' },
   ],
+  vmMatrixTitle: 'Matriz honesta de compatibilidad entre hipervisores (4 niveles)',
+  vmMatrixIntro:
+    'Clasificamos cada hipervisor según pruebas reales sobre Hyprland (Aquamarine), Niri (Smithay) y Quickshell (Qt 6), sin prometer aceleración 3D donde no existe.',
+  vmMatrixHeaders: ['Nivel', 'Hipervisor / Host', 'Driver / Backend', 'Aceleración', 'Detalle honesto'],
+  vmTierLabels: {
+    'officially-tested': 'Probado oficialmente',
+    'compatible-with-limitations': 'Compatible con limitaciones',
+    'experimental-software-fallback': 'Experimental / Fallback por software',
+    unsupported: 'No soportado',
+  },
+  vmAccelYes: 'Sí (GPU / 3D)',
+  vmAccelNo: 'No (CPU / N/A)',
+  vmEntryNotes: {
+    'qemu-kvm': 'Camino principal a 60 FPS con virtio-vga-gl, OVMF UEFI y overlays efímeros CoW mediante hornero-vm-run.sh.',
+    libvirt: '60 FPS vía VirtIO 3D (virgl) en virt-manager con firmware UEFI (OVMF_CODE.4m.fd) y OpenGL habilitado.',
+    quickemu: 'Arranque en un comando con horneroos.conf (boot="efi", gl="on") y 60 FPS nativos en Linux.',
+    vmware: 'Utilizable con svga.enable3d = "TRUE" (vmwgfx). Si Quickshell queda en blanco, usá QSG_RHI_BACKEND=opengl o software.',
+    'gnome-boxes': 'Reutiliza libvirt/VirGL de forma simple; ofrece menos controles finos para OVMF o Venus.',
+    virtualbox: 'Desactivá Enable 3D Acceleration (VMSVGA 3D provoca pantallas negras) y exportá LIBGL_ALWAYS_SOFTWARE=1 + QT_QUICK_BACKEND=software.',
+    utm: 'Virtualiza bien en Mac Intel; en Apple Silicon (M1–M4) cae a emulación CPU QEMU TCG x86_64 muy lenta.',
+    'hyper-v': 'Las VMs Linux Gen 2 no tienen Mesa Gallium3D nativo y caen a hyperv_fb + llvmpipe por CPU.',
+    'arm64-native': 'HorneroOS publica compilaciones x86_64 únicamente por ahora.',
+    'parallels-arm64': 'La emulación x86_64 derivada de FEX es lenta y Parallels Tools falla bajo sesiones Wayland puras.',
+  },
   vmTabsLabel: 'Elegí tu hipervisor',
   copyLabel: 'Copiar',
   copiedLabel: 'Copiado',
@@ -76,7 +113,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     {
       id: 'qemu',
       label: 'QEMU / KVM (Linux)',
-      badge: 'Recomendado · 60 FPS VirGL',
+      badge: 'Probado oficialmente · 60 FPS VirGL',
       summary:
         'Aceleración GPU nativa vía VirGL (virtio-vga-gl) + OVMF UEFI y overlay efímero CoW sin modificar la imagen base.',
       command: `./launchers/qemu/hornero-vm-run.sh \\
@@ -91,7 +128,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     {
       id: 'quickemu',
       label: 'Quickemu',
-      badge: '1 archivo horneroos.conf',
+      badge: 'Probado oficialmente · 1 archivo',
       summary:
         'Usá Quickemu con horneroos.conf junto a tu imagen QCOW2 o ISO oficial.',
       command: `cat <<'EOF' > horneroos.conf
@@ -113,7 +150,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'libvirt',
       label: 'libvirt / virt-manager',
-      badge: 'VirtIO + 3D VirGL',
+      badge: 'Probado oficialmente · VirGL',
       summary:
         'Importá un dominio UEFI OVMF con video Virtio 3D en virt-manager o GNOME Boxes.',
       command: `./launchers/libvirt/hornero-libvirt-import.sh \\
@@ -125,7 +162,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'vmware',
       label: 'VMware Workstation / Fusion',
-      badge: 'SVGA3D (vmwgfx)',
+      badge: 'Compatible con limitaciones · SVGA3D',
       summary:
         'VMware Workstation Pro y Fusion son gratuitos para uso personal y exponen vmwgfx, mucho más estable que VirtualBox bajo Wayland.',
       command: `./launchers/vmware/hornero-vmware-convert.sh \\
@@ -136,7 +173,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'virtualbox',
       label: 'VirtualBox (fallback software)',
-      badge: 'Sin aceleración 3D',
+      badge: 'Experimental · Sin aceleración 3D',
       summary:
         'La aceleración 3D VMSVGA de VirtualBox provoca pantallas negras o cierres inmediatos bajo Hyprland y Niri.',
       command: `./launchers/virtualbox/hornero-vbox-import.sh \\
@@ -150,7 +187,7 @@ export QT_QUICK_BACKEND=software`,
     {
       id: 'utm',
       label: 'macOS UTM (advertencia Apple Silicon)',
-      badge: 'Emulación TCG en M1–M4',
+      badge: 'Experimental · Emulación TCG en M1–M4',
       summary:
         'HorneroOS compila solo imágenes x86_64 por ahora. En Mac con Intel virtualiza bien; en Apple Silicon no existe KVM para x86_64.',
       command: `./launchers/utm/build-utm-bundle.sh \\
@@ -185,10 +222,12 @@ gpg --verify horneroos-2026.10-preview32-x86_64.iso.sig`,
 horneroctl version`,
     },
   ],
-  presenterEyebrow: 'Demos y grabaciones',
-  presenterTitle: 'Modo Presentador y captura limpia',
+  presenterEyebrow: 'Demos, YouTube y base visual',
+  presenterTitle: 'Modo Presentador y estándar Full HD 1920×1080',
   presenterBody:
-    'Para grabar demos o presentar en vivo sin notificaciones ni banners, usá el helper de HorneroOS/playground o el IPC de No Molestar incluido en Hornero Shell.',
+    'Para grabar demos, videos de YouTube o presentar en vivo sin notificaciones ni banners, usá el helper de HorneroOS/playground o el IPC de No Molestar incluido en Hornero Shell.',
+  visualBaselineLabel: (official: string, premium: string, profiles: number): string =>
+    `Base visual oficial: ${official} Full HD (escala 1.0) · Variantes hasta ${premium} 4K · ${profiles} perfiles de pantalla en QA y Demo Studio`,
   presenterCmd: `# Con el helper de HorneroOS/playground instalado:
 hornero-presenter on
 hornero-presenter off
@@ -197,6 +236,7 @@ hornero-presenter off
 qs ipc call notifs enableDnd && horneroctl mode set focus
 horneroctl capture screenshot
 horneroctl capture record`,
+  presenterGuideLabel: 'Leer guía completa de producción YouTube y Kdenlive',
   nextLinksTitle: 'Seguir explorando',
   nextLinks: [
     { label: 'Descargar ISO o instalar en Arch', href: '/install' },
@@ -211,7 +251,7 @@ export type Messages = typeof es;
 const en: Messages = {
   pageTitle: 'Try HorneroOS | Hornero Playground (Browser, Local VM & Live USB)',
   pageDescription:
-    'Try real HorneroOS without touching your disk: self-hostable KVM + WebRTC browser stack, preinstalled VM launchers (QEMU, Quickemu, libvirt, VMware, VirtualBox, UTM), and Live USB.',
+    'Try real HorneroOS without touching your disk: self-hostable KVM + WebRTC browser stack, honest VM compatibility matrix (QEMU, Quickemu, libvirt, VMware, VirtualBox, UTM, Hyper-V), and Live USB.',
   socialAlt: 'Hornero Playground: three real ways to try HorneroOS without wiping your disk.',
   eyebrowPlayground: 'Hornero Playground',
   eyebrowRoute: 'horneroos.com/try',
@@ -228,12 +268,12 @@ const en: Messages = {
       path: '1. Browser (Hornero Playground)',
       bestFor: 'Zero-install instant evaluation in a web browser',
       fidelity: '60 FPS WebRTC + PipeWire Opus audio (noVNC fallback has no audio or 3D)',
-      status: 'Self-hostable orchestrator + Terraform IaC ready · hosted cluster & DistroSea in rollout (15 min TTL)',
+      status: 'Standby awaiting cloud provider selection · self-hostable Docker + Terraform stack ready',
     },
     {
       path: '2. Local preinstalled VM',
       bestFor: 'Smooth 60 FPS desktop with full keyboard shortcuts and unlimited time',
-      fidelity: 'Hardware KVM + VirGL on Linux (software fallback on VirtualBox & Apple Silicon UTM)',
+      fidelity: 'Hardware KVM + VirGL on Linux (software fallback on VirtualBox, ARM UTM & Hyper-V)',
       status: 'Launchers ready · boot verified QCOW2 or v0.2.0-preview32 ISO with SHA-256 + GPG',
     },
     {
@@ -247,12 +287,25 @@ const en: Messages = {
   browserTitle: 'HorneroOS Browser Playground (ephemeral KVM + WebRTC)',
   browserIntro:
     'HorneroOS/playground spins up a disposable KVM virtual machine per visitor from a read-only base image + Copy-on-Write overlay with a strict 15-minute TTL, streaming the real Wayland desktop and PipeWire audio over WebRTC (with a noVNC fallback).',
-  browserStatusTitle: 'Honest availability status',
+  browserStandbyBadge: 'Standby · Awaiting provider',
+  browserActiveBadge: 'Live · WebRTC sessions enabled',
+  browserStatusTitle: 'Public availability contract (zero fake sessions)',
   browserStatusBody:
-    'Today the pure Python 3.12+ stdlib orchestrator, Docker Compose stack (coturn + WebRTC / noVNC), and Terraform/OpenTofu modules for Hetzner (AX42/EX44) and GCP are published for self-hosting. The public hosted cluster is in rollout (tracked in HorneroOS/playground#1) — we do not claim an active 24/7 public cluster before deployment — alongside an organic DistroSea listing (noVNC without 3D VirGL or audio, as a discovery funnel).',
+    'HorneroOS commits to $0/month default cloud spend and no public cloud provider has been selected yet (standby-awaiting-provider). Today the pure Python 3.12+ stdlib orchestrator, Docker Compose stack (coturn + WebRTC / noVNC), and Terraform/OpenTofu modules for Hetzner and GCP are published for self-hosting. Public browser sessions activate only when PUBLIC_PLAYGROUND_ENABLED=true and PUBLIC_PLAYGROUND_URL point to a verified cluster.',
+  browserActiveTitle: 'Public browser session launcher enabled',
+  browserActiveBody:
+    'A verified Hornero Playground endpoint is active via configuration. Every session runs in an ephemeral KVM virtual machine with a 15-minute TTL and restricted egress.',
+  browserLaunchCta: 'Launch ephemeral Hornero Playground session',
+  browserInfraLinksTitle: 'Infrastructure & production guides',
+  browserInfraLinks: [
+    { label: 'Cloud Provider Decision Kit', href: '/docs/infrastructure/cloud-provider-decision-kit/' },
+    { label: '19-Step Deployment Runbook', href: '/docs/infrastructure/playground-deployment-runbook/' },
+    { label: 'YouTube & Presenter Workflow', href: '/docs/studio/youtube-production-workflow/' },
+    { label: 'Virtual Workstations & Full HD Captures', href: '/docs/contributing/virtual-workstations-and-screenshots/' },
+  ],
   browserSecurityNotes: [
     'Ephemeral by design: closing the tab or hitting the 15-minute limit destroys the CoW overlay and session permanently.',
-    'Isolated guest egress: visitors run behind netdev user,restrict=on by default; never enter real passwords, SSH keys, or tokens in public sessions.',
+    'Isolated guest egress: visitors run behind netdev user,restrict=on and nftables drops by default; never enter real passwords, SSH keys, or tokens in public sessions.',
     'Why not in-browser WASM: v86/WebVM cannot run x86_64 Wayland + VirGL for Hyprland and Quickshell.',
   ],
   browserQuickstartTitle: 'Self-host on any Linux server with /dev/kvm',
@@ -275,6 +328,30 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     { k: 'Disk', v: '32 GiB dynamic QCOW2/VDI (when installing inside the VM)' },
     { k: 'Firmware', v: 'UEFI (OVMF) + SHA-256 & GPG check (FCFBEE43925AB5429362278AE59EAB44AA2498DC)' },
   ],
+  vmMatrixTitle: 'Honest 4-tier VM compatibility matrix',
+  vmMatrixIntro:
+    'Every hypervisor tier reflects real behavior with Hyprland (Aquamarine), Niri (Smithay), and Quickshell (Qt 6)—never claiming 3D acceleration where guests fall back to CPU.',
+  vmMatrixHeaders: ['Tier', 'Hypervisor / Host', 'Driver / Backend', 'Acceleration', 'Honest caveat'],
+  vmTierLabels: {
+    'officially-tested': 'Officially tested',
+    'compatible-with-limitations': 'Compatible with limitations',
+    'experimental-software-fallback': 'Experimental / Software fallback',
+    unsupported: 'Unsupported',
+  },
+  vmAccelYes: 'Yes (GPU / 3D)',
+  vmAccelNo: 'No (CPU / N/A)',
+  vmEntryNotes: {
+    'qemu-kvm': 'Primary 60 FPS path using virtio-vga-gl, OVMF UEFI, and ephemeral CoW overlays via hornero-vm-run.sh.',
+    libvirt: '60 FPS via VirtIO 3D (virgl) in virt-manager with UEFI firmware (OVMF_CODE.4m.fd) and OpenGL display enabled.',
+    quickemu: 'Single-command 60 FPS launch with horneroos.conf (boot="efi", gl="on") on Linux hosts.',
+    vmware: 'Usable with svga.enable3d = "TRUE" (vmwgfx). If Quickshell blanks on your GPU, export QSG_RHI_BACKEND=opengl or software.',
+    'gnome-boxes': 'Reuses libvirt/VirGL out of the box; exposes fewer custom OVMF or Venus controls.',
+    virtualbox: 'Uncheck Enable 3D Acceleration (VMSVGA 3D causes black screens/crashes) and export LIBGL_ALWAYS_SOFTWARE=1 + QT_QUICK_BACKEND=software.',
+    utm: 'Near-native speed on Intel Macs; on Apple Silicon (M1–M4) falls back to slow QEMU TCG x86_64 CPU emulation.',
+    'hyper-v': 'Standard Gen 2 Linux VMs lack upstream Mesa Gallium3D drivers and fall back to hyperv_fb + llvmpipe on CPU.',
+    'arm64-native': 'HorneroOS publishes x86_64 builds only right now.',
+    'parallels-arm64': 'FEX-derived x86_64 emulation is slow and Parallels Tools break under pure Wayland sessions.',
+  },
   vmTabsLabel: 'Select your hypervisor',
   copyLabel: 'Copy',
   copiedLabel: 'Copied',
@@ -283,7 +360,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     {
       id: 'qemu',
       label: 'QEMU / KVM (Linux)',
-      badge: 'Recommended · 60 FPS VirGL',
+      badge: 'Officially tested · 60 FPS VirGL',
       summary:
         'Hardware-accelerated GPU via VirGL (virtio-vga-gl) + OVMF UEFI and ephemeral CoW overlays leaving the base image untouched.',
       command: `./launchers/qemu/hornero-vm-run.sh \\
@@ -298,7 +375,7 @@ docker compose -f browser/streaming/docker-compose.yml up -d`,
     {
       id: 'quickemu',
       label: 'Quickemu',
-      badge: '1 horneroos.conf file',
+      badge: 'Officially tested · 1 file',
       summary:
         'Drop horneroos.conf beside your QCOW2 image or verified ISO and boot in one command.',
       command: `cat <<'EOF' > horneroos.conf
@@ -320,7 +397,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'libvirt',
       label: 'libvirt / virt-manager',
-      badge: 'VirtIO + 3D VirGL',
+      badge: 'Officially tested · VirGL',
       summary:
         'Import a UEFI OVMF domain with Virtio 3D acceleration for virt-manager or GNOME Boxes.',
       command: `./launchers/libvirt/hornero-libvirt-import.sh \\
@@ -332,7 +409,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'vmware',
       label: 'VMware Workstation / Fusion',
-      badge: 'SVGA3D (vmwgfx)',
+      badge: 'Compatible with limitations · SVGA3D',
       summary:
         'VMware Workstation Pro and Fusion are free for personal use and expose the upstream vmwgfx driver, handling Wayland much better than VirtualBox.',
       command: `./launchers/vmware/hornero-vmware-convert.sh \\
@@ -343,7 +420,7 @@ quickemu --vm horneroos.conf`,
     {
       id: 'virtualbox',
       label: 'VirtualBox (software fallback)',
-      badge: '3D acceleration disabled',
+      badge: 'Experimental · 3D disabled',
       summary:
         'VirtualBox VMSVGA 3D acceleration causes black screens or immediate crashes under Hyprland and Niri.',
       command: `./launchers/virtualbox/hornero-vbox-import.sh \\
@@ -357,7 +434,7 @@ export QT_QUICK_BACKEND=software`,
     {
       id: 'utm',
       label: 'macOS UTM (Apple Silicon caveat)',
-      badge: 'TCG emulation on M1–M4',
+      badge: 'Experimental · TCG on M1–M4',
       summary:
         'HorneroOS builds x86_64 images only right now. Intel Macs can hardware-virtualize; Apple Silicon cannot hardware-virtualize x86_64.',
       command: `./launchers/utm/build-utm-bundle.sh \\
@@ -392,10 +469,12 @@ gpg --verify horneroos-2026.10-preview32-x86_64.iso.sig`,
 horneroctl version`,
     },
   ],
-  presenterEyebrow: 'Demos & recording',
-  presenterTitle: 'Presenter & Recording Mode',
+  presenterEyebrow: 'Demos, YouTube & visual baseline',
+  presenterTitle: 'Presenter Mode & 1920×1080 Full HD baseline',
   presenterBody:
-    'For live talks, demos, or clean walkthrough clips without notification popups, use the HorneroOS/playground presenter helper or the shipped Quickshell Do Not Disturb IPC.',
+    'For live talks, YouTube shoots, or clean walkthrough clips without notification popups, use the HorneroOS/playground presenter helper or the shipped Quickshell Do Not Disturb IPC.',
+  visualBaselineLabel: (official: string, premium: string, profiles: number): string =>
+    `Official visual baseline: ${official} Full HD (scale 1.0) · Variants up to ${premium} 4K · ${profiles} QA & Demo Studio display profiles`,
   presenterCmd: `# With the HorneroOS/playground presenter helper installed:
 hornero-presenter on
 hornero-presenter off
@@ -404,6 +483,7 @@ hornero-presenter off
 qs ipc call notifs enableDnd && horneroctl mode set focus
 horneroctl capture screenshot
 horneroctl capture record`,
+  presenterGuideLabel: 'Read full YouTube & Kdenlive production workflow',
   nextLinksTitle: 'Keep exploring',
   nextLinks: [
     { label: 'Download ISO or install on Arch', href: '/install' },

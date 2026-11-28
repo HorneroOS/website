@@ -32,7 +32,7 @@ const es = {
   videoEyebrow: 'Grabación real en vivo',
   videoTitle: 'Recorrido real por Hornero Welcome',
   videoNote:
-    'Clip WebM capturado sobre HorneroOS real (1280×800), recorriendo llegada, personalización reversible, perfiles de trabajo, Javi y el modo Explore.',
+    'Clip WebM capturado sobre HorneroOS real (1920×1080), recorriendo llegada, personalización reversible, perfiles de trabajo, Javi y el modo Explore.',
   videoAria: 'Video de recorrido real de Hornero Welcome mostrando First Flight y Explore Hornero.',
   videoTranscript:
     'Resumen visual: apertura de Arrival en Signal Day y Night, previsualización de temas/layouts en Make It Yours, selección de modos en Workstation Builder, skins de Javi en Meet Javi y búsqueda unificada en Explore Hornero.',
@@ -189,7 +189,7 @@ const en: Messages = {
   videoEyebrow: 'Live real capture',
   videoTitle: 'Real walkthrough of Hornero Welcome',
   videoNote:
-    'WebM clip captured on running HorneroOS (1280×800), walking through Arrival, reversible customization, Workstation Builder, Javi, and Explore Hornero.',
+    'WebM clip captured on running HorneroOS (1920×1080), walking through Arrival, reversible customization, Workstation Builder, Javi, and Explore Hornero.',
   videoAria: 'Real walkthrough video of Hornero Welcome showing First Flight and Explore Hornero.',
   videoTranscript:
     'Visual summary: opening Arrival in Signal Day and Night, previewing themes and bar layouts in Make It Yours, picking Experience Modes in Workstation Builder, switching Javi skins in Meet Javi, and searching in Explore Hornero.',

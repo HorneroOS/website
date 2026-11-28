@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import playgroundData from '../../data/playground.json';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { messages } from '../../i18n/messages/try';
 
@@ -9,6 +10,14 @@ interface Props {
 const { locale } = Astro.props;
 const m = messages[locale];
 const L = (path: string) => localizePath(path, locale);
+
+const envEnabled = import.meta.env.PUBLIC_PLAYGROUND_ENABLED === 'true';
+const envUrl = (import.meta.env.PUBLIC_PLAYGROUND_URL ?? '').trim();
+const liveSessionsActive =
+  (playgroundData.availability.publicBrowserSessionsEnabled || envEnabled) && Boolean(envUrl);
+
+type TierId = keyof typeof m.vmTierLabels;
+type EntryId = keyof typeof m.vmEntryNotes;
 ---
 
 <SiteLayout
@@ -59,15 +68,41 @@ const L = (path: string) => localizePath(path, locale);
       <p class="eyebrow">
         <b>{m.browserEyebrow}</b>
         <span>HorneroOS/playground</span>
+        <span class:list={['status-badge', liveSessionsActive ? 'is-active' : 'is-standby']}>
+          {liveSessionsActive ? m.browserActiveBadge : m.browserStandbyBadge}
+        </span>
       </p>
       <h2 id="browser-title">{m.browserTitle}</h2>
       <p class="muted-copy">{m.browserIntro}</p>
     </header>
 
-    <div class="status-callout" role="note">
-      <h3>{m.browserStatusTitle}</h3>
-      <p>{m.browserStatusBody}</p>
-    </div>
+    {liveSessionsActive ? (
+      <div class="status-callout is-active" role="region" aria-labelledby="browser-live-heading">
+        <h3 id="browser-live-heading">{m.browserActiveTitle}</h3>
+        <p>{m.browserActiveBody}</p>
+        <p class="cta-row">
+          <a class="cta primary" href={envUrl} rel="noopener noreferrer" target="_blank">
+            {m.browserLaunchCta} <span aria-hidden="true">↗</span>
+          </a>
+        </p>
+      </div>
+    ) : (
+      <div class="status-callout" role="note" data-availability-status={playgroundData.availability.status}>
+        <div class="status-callout-head">
+          <h3>{m.browserStatusTitle}</h3>
+          <code class="status-code">{playgroundData.availability.status}</code>
+        </div>
+        <p>{m.browserStatusBody}</p>
+        <p class="infra-links-title">{m.browserInfraLinksTitle}:</p>
+        <ul class="infra-links-list" role="list">
+          {m.browserInfraLinks.map((link) => (
+            <li>
+              <a href={L(link.href)}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
 
     <div class="browser-grid">
       <article class="try-card">
@@ -113,6 +148,41 @@ const L = (path: string) => localizePath(path, locale);
           </div>
         ))}
       </dl>
+    </div>
+
+    <div class="matrix-box" aria-labelledby="vm-matrix-title">
+      <div class="matrix-head">
+        <h3 id="vm-matrix-title">{m.vmMatrixTitle}</h3>
+        <p class="muted-copy">{m.vmMatrixIntro}</p>
+      </div>
+      <div class="table-wrap">
+        <table class="try-table vm-matrix-table">
+          <thead>
+            <tr>
+              {m.vmMatrixHeaders.map((header) => (
+                <th scope="col">{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {playgroundData.vmCompatibility.map((group) =>
+              group.entries.map((entry) => (
+                <tr>
+                  <td>
+                    <span class:list={['tier-pill', `tier-${group.tierId}`]}>
+                      {m.vmTierLabels[group.tierId as TierId]}
+                    </span>
+                  </td>
+                  <th scope="row">{entry.name}</th>
+                  <td><code>{entry.driver}</code></td>
+                  <td>{entry.hardwareAcceleration ? m.vmAccelYes : m.vmAccelNo}</td>
+                  <td>{m.vmEntryNotes[entry.id as EntryId]}</td>
+                </tr>
+              )),
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="vm-deck" data-vm-deck>
@@ -199,7 +269,17 @@ const L = (path: string) => localizePath(path, locale);
       </p>
       <h3>{m.presenterTitle}</h3>
       <p class="muted-copy">{m.presenterBody}</p>
+      <p class="baseline-strip">
+        {m.visualBaselineLabel(
+          playgroundData.visualBaseline.official,
+          playgroundData.visualBaseline.premium,
+          playgroundData.visualBaseline.profilesCount,
+        )}
+      </p>
       <pre tabindex="0"><code>{m.presenterCmd}</code></pre>
+      <p class="card-link-row">
+        <a href={L('/docs/studio/youtube-production-workflow/')}>{m.presenterGuideLabel}</a>
+      </p>
     </div>
 
     <div class="related-strip">
@@ -350,6 +430,26 @@ const L = (path: string) => localizePath(path, locale);
     color: var(--ink-muted);
   }
 
+  .status-badge {
+    display: inline-block;
+    padding: 0.18rem 0.55rem;
+    border-radius: var(--radius-small);
+    font: 600 0.72rem var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .status-badge.is-standby {
+    border: 1px solid var(--cue);
+    background: var(--cue-well);
+    color: var(--on-cue-well);
+  }
+
+  .status-badge.is-active {
+    border: 1px solid var(--phosphor);
+    background: var(--phosphor-well);
+    color: var(--on-phosphor-well);
+  }
+
   .status-callout,
   .artifact-note {
     padding: 1rem 1.15rem;
@@ -360,9 +460,32 @@ const L = (path: string) => localizePath(path, locale);
     margin-bottom: 1.2rem;
   }
 
+  .status-callout.is-active {
+    border-color: var(--phosphor);
+    border-left-color: var(--phosphor);
+  }
+
+  .status-callout-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
   .status-callout h3 {
-    margin: 0 0 0.35rem;
+    margin: 0;
     font-size: var(--step-1);
+  }
+
+  .status-code {
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    color: var(--ink);
+    font: 500 0.76rem var(--font-mono);
   }
 
   .status-callout p,
@@ -373,7 +496,27 @@ const L = (path: string) => localizePath(path, locale);
   }
 
   .status-callout p {
+    margin-bottom: 0.75rem;
+  }
+
+  .status-callout p:last-child {
     margin-bottom: 0;
+  }
+
+  .infra-links-title {
+    margin: 0.5rem 0 0.35rem;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .infra-links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .browser-grid {
@@ -396,7 +539,8 @@ const L = (path: string) => localizePath(path, locale);
 
   .try-card h3,
   .sizing-box h3,
-  .presenter-box h3 {
+  .presenter-box h3,
+  .matrix-head h3 {
     margin: 0;
     font-size: var(--step-1);
   }
@@ -413,6 +557,10 @@ const L = (path: string) => localizePath(path, locale);
     border-radius: var(--radius-small);
     background: var(--sunken);
     font-size: 0.82rem;
+  }
+
+  .card-link-row {
+    margin: 0;
   }
 
   .bullet-list {
@@ -449,6 +597,55 @@ const L = (path: string) => localizePath(path, locale);
 
   .sizing-list dd {
     margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .matrix-box {
+    margin-bottom: 1.4rem;
+  }
+
+  .matrix-head {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .matrix-head .muted-copy {
+    margin: 0;
+  }
+
+  .vm-matrix-table {
+    margin-top: 0;
+  }
+
+  .tier-pill {
+    display: inline-block;
+    padding: 0.18rem 0.5rem;
+    border-radius: var(--radius-small);
+    font: 600 0.72rem var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .tier-officially-tested {
+    border: 1px solid var(--phosphor);
+    background: var(--phosphor-well);
+    color: var(--on-phosphor-well);
+  }
+
+  .tier-compatible-with-limitations {
+    border: 1px solid var(--cue);
+    background: var(--cue-well);
+    color: var(--on-cue-well);
+  }
+
+  .tier-experimental-software-fallback {
+    border: 1px solid var(--signal);
+    background: var(--signal-well);
+    color: var(--on-signal-well);
+  }
+
+  .tier-unsupported {
+    border: 1px solid var(--rule-strong);
+    background: var(--sunken);
     color: var(--ink-muted);
   }
 
@@ -603,6 +800,17 @@ const L = (path: string) => localizePath(path, locale);
     margin: 0;
     color: var(--ink-muted);
     font-size: 0.92rem;
+  }
+
+  .baseline-strip {
+    margin: 0;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--phosphor);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    color: var(--ink);
+    font: 500 0.84rem var(--font-mono);
   }
 
   .related-strip {

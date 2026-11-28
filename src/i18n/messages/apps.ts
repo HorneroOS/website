@@ -23,7 +23,7 @@ const es = {
   galleryEyebrow: 'Capturas reales',
   galleryTitle: 'Hornero Apps corriendo en Signal Night y Signal Day',
   galleryNote:
-    'Capturas reales de HorneroOS en ejecución (1280×800), en modo oscuro azulado (Signal Night) y cerámica blanca (Signal Day).',
+    'Capturas reales de HorneroOS en ejecución (1920×1080), en modo oscuro azulado (Signal Night) y cerámica blanca (Signal Day).',
   captures: [
     {
       src: '/captures/showcase/hornero-apps-discover-night.webp',
@@ -178,7 +178,7 @@ const en: Messages = {
   galleryEyebrow: 'Real captures',
   galleryTitle: 'Hornero Apps running in Signal Night and Signal Day',
   galleryNote:
-    'Real captures from running HorneroOS (1280×800), shown in blue-hour dark (Signal Night) and white ceramic (Signal Day).',
+    'Real captures from running HorneroOS (1920×1080), shown in blue-hour dark (Signal Night) and white ceramic (Signal Day).',
   captures: [
     {
       src: '/captures/showcase/hornero-apps-discover-night.webp',
