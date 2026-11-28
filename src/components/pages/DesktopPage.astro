@@ -5,7 +5,7 @@ import StageBadge from '../StageBadge.astro';
 import CaptureFigure from '../CaptureFigure.astro';
 import CaptureGallery from '../CaptureGallery.astro';
 import { feature, stageFromMaturity } from '../../data/features';
-import { editionCatalogue, editions, extensionCatalogue, layouts, themes } from '../../data/product';
+import { appsCatalog, editionCatalogue, editions, extensionCatalogue, layouts, themes } from '../../data/product';
 import { localizePath, type Locale } from '../../i18n/ui';
 import { messages } from '../../i18n/messages/desktop';
 
@@ -75,6 +75,39 @@ const levers = [
       en: 'The hornero that lives on the desktop. You can turn it off.',
     },
   },
+  {
+    id: 'apps',
+    href: '/apps',
+    stage: feature('hornero-apps').stage,
+    es: `${appsCatalog.total_apps} apps verificadas`,
+    en: `${appsCatalog.total_apps} verified apps`,
+    note: {
+      es: 'Hornero Apps: Arch, Flathub, Web Apps y 9 perfiles con procedencia.',
+      en: 'Hornero Apps: Arch, Flathub, Web Apps, and 9 profiles with provenance.',
+    },
+  },
+  {
+    id: 'welcome',
+    href: '/welcome',
+    stage: feature('hornero-welcome').stage,
+    es: 'Hornero Welcome',
+    en: 'Hornero Welcome',
+    note: {
+      es: 'First Flight (9 escenas), Explore Hornero y What’s New.',
+      en: 'First Flight (9 scenes), Explore Hornero, and What’s New.',
+    },
+  },
+  {
+    id: 'try',
+    href: '/try',
+    stage: feature('hornero-playground').stage,
+    es: 'Hornero Playground',
+    en: 'Hornero Playground',
+    note: {
+      es: 'Probá en browser self-host, VM local (60 FPS) o Live USB.',
+      en: 'Try in self-hosted browser, local VM (60 FPS), or Live USB.',
+    },
+  },
 ];
 
 // Quick keys documented in HorneroOS/docs desktop/shortcuts.md and everyday-apps.md.
@@ -115,6 +148,9 @@ const keys = [
     <p class="hero-ctas">
       <a class="cta primary" href={L('/install')}>
         {m.descargaLaIsoActual}
+      </a>
+      <a class="cta secondary" href={L('/try')}>
+        {m.probarHorneroOS}
       </a>
       <a class="cta secondary" href={L('/showroom')}>
         {m.verElShowroom}

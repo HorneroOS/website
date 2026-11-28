@@ -54,12 +54,15 @@ const enHref = localizePath(pathForSwitch, 'en');
 // for the current locale; labels come from the shared chrome dictionary.
 const systemLinks: NavLink[] = [
   { href: L('/why-horneroos'), label: t(locale, 'navWhy') },
+  { href: L('/try'), label: t(locale, 'navTry') },
   { href: L('/editions'), label: t(locale, 'navEditionsOverview') },
   { href: L('/desktop'), label: t(locale, 'navDesktopEdition') },
   { href: L('/studio'), label: t(locale, 'navStudio') },
   { href: L('/gaming'), label: t(locale, 'navGaming') },
 ];
 const experienceLinks: NavLink[] = [
+  { href: L('/apps'), label: t(locale, 'navApps') },
+  { href: L('/welcome'), label: t(locale, 'navWelcome') },
   { href: L('/showroom'), label: t(locale, 'navShowroom') },
   { href: L('/modes'), label: t(locale, 'navModes') },
   { href: L('/chromatic'), label: t(locale, 'navChromatic') },
@@ -80,6 +83,7 @@ const nav: NavItem[] = [
   { kind: 'group', label: t(locale, 'navSystem'), links: systemLinks },
   { kind: 'group', label: t(locale, 'navDesktop'), links: experienceLinks },
   { kind: 'group', label: t(locale, 'navStory'), links: projectLinks },
+  { kind: 'link', href: L('/try'), label: t(locale, 'navTry') },
   { kind: 'link', href: L('/docs/'), label: t(locale, 'navDocs') },
   { kind: 'link', href: L('/search/'), label: t(locale, 'navSearch') },
 ];

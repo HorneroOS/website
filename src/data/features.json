@@ -1,6 +1,6 @@
 {
   "$comment": "Feature ledger. Hand-authored claims live here, never in page copy. `stage` is what the project asserts: shipping (in a published release; needs releasedIn naming a released (tagged, or recorded as published) release in product/releases.json), main (merged to main, in no published release), experimental (merged and flagged experimental) or planned. scripts/check-feature-ledger.mjs fails the build when a 'shipping' feature names a release that does not exist or is not released. When a release is cut, the release PR flips the matching entries; edition and compositor maturity is derived from the pinned catalogue (src/data/features.ts), not listed here. System rollback stays planned: do not promote it without a shipped backend.",
-  "reviewedAgainst": "0.2.0-preview40",
+  "reviewedAgainst": "0.2.0-preview41",
   "features": [
     {
       "id": "signal",
@@ -446,6 +446,79 @@
         {
           "label": "shell#749",
           "href": "https://github.com/HorneroOS/shell/pull/749"
+        }
+      ]
+    },
+    {
+      "id": "hornero-apps",
+      "stage": "main",
+      "releasedIn": null,
+      "title": {
+        "es": "Hornero Apps (271 apps verificadas)",
+        "en": "Hornero Apps (271 verified apps)"
+      },
+      "summary": {
+        "es": "Tienda unificada y CLI horneroctl store sobre 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita. Publicado en AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); entrará en el próximo corte de ISO.",
+        "en": "Unified store and horneroctl store CLI across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance. Shipped in AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); queued for the next ISO cut."
+      },
+      "evidence": [
+        {
+          "label": "hornero#508",
+          "href": "https://github.com/HorneroOS/hornero/pull/508"
+        },
+        {
+          "label": "shell#752",
+          "href": "https://github.com/HorneroOS/shell/pull/752"
+        },
+        {
+          "label": "docs: Hornero Apps",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/hornero-apps.md"
+        }
+      ]
+    },
+    {
+      "id": "hornero-welcome",
+      "stage": "main",
+      "releasedIn": null,
+      "title": {
+        "es": "Hornero Welcome (Signal Flight · 3 modos)",
+        "en": "Hornero Welcome (Signal Flight · 3 modes)"
+      },
+      "summary": {
+        "es": "Rediseño en tres modos: First Flight (9 escenas), Explore Hornero y What’s New, con previews reversibles y práctica por eventos reales. Publicado en AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); entrará en el próximo corte de ISO.",
+        "en": "Three-mode redesign: First Flight (9 scenes), Explore Hornero, and What’s New, with reversible previews and real-event practice. Shipped in AUR (hornero-shell 1.6.0-1, hornero-config 0.6.0-1, horneroctl-bin 0.2.0_preview62-1); queued for the next ISO cut."
+      },
+      "evidence": [
+        {
+          "label": "shell#753",
+          "href": "https://github.com/HorneroOS/shell/pull/753"
+        },
+        {
+          "label": "docs: Hornero Welcome",
+          "href": "https://github.com/HorneroOS/docs/blob/main/desktop/hornero-welcome.md"
+        }
+      ]
+    },
+    {
+      "id": "hornero-playground",
+      "stage": "experimental",
+      "releasedIn": null,
+      "title": {
+        "es": "Hornero Playground (Browser KVM, VM local y Live USB)",
+        "en": "Hornero Playground (Browser KVM, Local VM & Live USB)"
+      },
+      "summary": {
+        "es": "Launchers locales (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), orquestador efímero KVM + WebRTC e IaC Terraform en HorneroOS/playground; clúster público y DistroSea en despliegue.",
+        "en": "Local VM launchers (QEMU/KVM, Quickemu, libvirt, VMware, VirtualBox, UTM), ephemeral KVM + WebRTC orchestrator, and Terraform IaC in HorneroOS/playground; hosted cluster and DistroSea in rollout."
+      },
+      "evidence": [
+        {
+          "label": "HorneroOS/playground",
+          "href": "https://github.com/HorneroOS/playground"
+        },
+        {
+          "label": "docs: Try HorneroOS",
+          "href": "https://github.com/HorneroOS/docs/blob/main/getting-started/try-horneroos.md"
         }
       ]
     }

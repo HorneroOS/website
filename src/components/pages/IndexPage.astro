@@ -18,6 +18,7 @@ import { feature } from '../../data/features';
 import { modes } from '../../data/modes';
 import { featuredStory } from '../../data/story';
 import {
+  appsCatalog,
   candidate,
   editionCatalogue,
   editions,
@@ -222,6 +223,9 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
       <div class="cta-row">
         <a href={L('/install')} class="cta primary">
           {m.descargaLaIsoActual}
+        </a>
+        <a href={L('/try')} class="cta secondary">
+          {m.probarHorneroOS}
         </a>
         <a href={L('/install/arch')} class="cta secondary">
           {m.yaUsasArchInstalaViaAur}
@@ -428,6 +432,43 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
         <a href={L('/studio#profiles-title')}>{m.verPerfilesEnStudio}</a>
       </div>
     </div>
+
+    <div class="showcase-pair">
+      <article class="showcase-card">
+        <figure class="showcase-shot">
+          <img
+            src="/captures/showcase/hornero-apps-discover-night.webp"
+            alt={m.horneroAppsAlt}
+            width="1280"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+        <div class="showcase-body">
+          <StageBadge stage={feature('hornero-apps').stage} locale={locale} />
+          <h3><a href={L('/apps')}>{m.horneroAppsTitle}</a></h3>
+          <p>{m.horneroAppsSummary(appsCatalog.total_apps)}</p>
+          <a class="text-link" href={L('/apps')}>{m.explorarHorneroApps}</a>
+        </div>
+      </article>
+      <article class="showcase-card">
+        <figure class="showcase-shot">
+          <img
+            src="/captures/showcase/welcome-arrival-day.webp"
+            alt={m.horneroWelcomeAlt}
+            width="1280"
+            height="800"
+            loading="lazy"
+          />
+        </figure>
+        <div class="showcase-body">
+          <StageBadge stage={feature('hornero-welcome').stage} locale={locale} />
+          <h3><a href={L('/welcome')}>{m.horneroWelcomeTitle}</a></h3>
+          <p>{m.horneroWelcomeSummary}</p>
+          <a class="text-link" href={L('/welcome')}>{m.conocerHorneroWelcome}</a>
+        </div>
+      </article>
+    </div>
     <ul class="world" role="list">
       <li>
         <StageBadge stage={chromaticFeature.stage} locale={locale} />
@@ -489,6 +530,9 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     <div class="cta-row">
       <a href={L('/install')} class="cta primary">
         {m.descargaLaIsoActual}
+      </a>
+      <a href={L('/try')} class="cta secondary">
+        {m.probarEnBrowserVmOLiveUsb}
       </a>
       <a href={L('/install/arch')} class="cta secondary">
         {m.yaUsasArchInstalaViaAur}
@@ -1221,6 +1265,54 @@ const description = m.horneroosEsUnaEstacionDe(latestTagged?.version ?? '0.2.0-p
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1.5rem;
+  }
+
+  .showcase-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+  }
+
+  .showcase-card {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .showcase-shot {
+    margin: 0;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-small);
+    overflow: hidden;
+  }
+
+  .showcase-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .showcase-body {
+    display: grid;
+    gap: 0.45rem;
+    align-content: start;
+  }
+
+  .showcase-body p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  @media (max-width: 780px) {
+    .showcase-pair {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ------------------------------------------------------------- get --- */

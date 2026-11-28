@@ -7,7 +7,8 @@
     "brand-artwork": "Original website identity artwork. Not a desktop capture, wallpaper or theme preview.",
     "app-logo": "Third-party application logo used nominatively to name an application (src/components/AppLogo.astro).",
     "wallpaper-licensed": "A licensed, credited photograph that HorneroOS ships as a wallpaper (CC BY / CC BY-SA, credit on /wallpapers). It shows a place, not the desktop.",
-    "mascot": "Javi sprite art rendered from the shell asset pin at build time (not stored in this repository)."
+    "mascot": "Javi sprite art rendered from the shell asset pin at build time (not stored in this repository).",
+    "showcase-capture": "Real HorneroOS desktop captures and walkthrough clip produced on running HorneroOS for the Apps and Welcome showcase pages."
   },
   "entries": [
     { "path": "public/favicon.svg", "category": "brand" },
@@ -18,6 +19,7 @@
     { "prefix": "public/og/", "category": "brand-card" },
     { "prefix": "src/assets/apps/", "category": "app-logo" },
     { "prefix": "public/wallpapers/argentina/", "category": "wallpaper-licensed" },
+    { "prefix": "public/captures/showcase/", "category": "showcase-capture", "note": "Real Light & Dark captures and walkthrough clip for /apps, /welcome, and homepage." },
     { "prefix": "assets/wallpapers/theme-wallpapers/", "category": "wallpaper-licensed", "note": "Wallpaper previews on /themes; eight of them are currently unreferenced." },
     { "prefix": "assets/wallpapers/photos/", "category": "wallpaper-licensed", "note": "See provenance.json beside them." }
   ]

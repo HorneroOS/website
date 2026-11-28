@@ -1,0 +1,636 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/try';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const m = messages[locale];
+const L = (path: string) => localizePath(path, locale);
+---
+
+<SiteLayout
+  title={m.pageTitle}
+  description={m.pageDescription}
+  socialImage="/og/try.png"
+  socialImageAlt={m.socialAlt}
+>
+  <section class="section try-hero" aria-labelledby="try-title">
+    <p class="plate-id">
+      <strong>{m.eyebrowPlayground}</strong>
+      <span>{m.eyebrowRoute}</span>
+      <span>{m.eyebrowArch}</span>
+    </p>
+    <h1 id="try-title">{m.heroTitle}</h1>
+    <p class="lede">{m.heroLede}</p>
+    <p class="cta-row">
+      <a class="cta primary" href="#browser">{m.ctaBrowser}</a>
+      <a class="cta secondary" href="#vm">{m.ctaVm}</a>
+      <a class="cta secondary" href="#live-usb">{m.ctaUsb}</a>
+    </p>
+
+    <div class="table-wrap">
+      <table class="try-table">
+        <thead>
+          <tr>
+            {m.comparisonHeaders.map((header) => (
+              <th scope="col">{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {m.comparisonRows.map((row) => (
+            <tr>
+              <th scope="row">{row.path}</th>
+              <td>{row.bestFor}</td>
+              <td>{row.fidelity}</td>
+              <td>{row.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="browser" aria-labelledby="browser-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.browserEyebrow}</b>
+        <span>HorneroOS/playground</span>
+      </p>
+      <h2 id="browser-title">{m.browserTitle}</h2>
+      <p class="muted-copy">{m.browserIntro}</p>
+    </header>
+
+    <div class="status-callout" role="note">
+      <h3>{m.browserStatusTitle}</h3>
+      <p>{m.browserStatusBody}</p>
+    </div>
+
+    <div class="browser-grid">
+      <article class="try-card">
+        <h3>{m.browserQuickstartTitle}</h3>
+        <pre tabindex="0"><code>{m.browserQuickstartCmd}</code></pre>
+        <p class="card-link-row">
+          <a href="https://github.com/HorneroOS/playground" rel="noopener noreferrer" target="_blank">
+            {m.browserRepoLabel} <span aria-hidden="true">↗</span>
+          </a>
+        </p>
+      </article>
+
+      <article class="try-card">
+        <h3>{m.browserStatusTitle}</h3>
+        <ul class="bullet-list">
+          {m.browserSecurityNotes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="vm" aria-labelledby="vm-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.vmEyebrow}</b>
+        <span>QCOW2 / OVMF / VirGL</span>
+      </p>
+      <h2 id="vm-title">{m.vmTitle}</h2>
+      <p class="muted-copy">{m.vmIntro}</p>
+    </header>
+
+    <p class="artifact-note" role="note">{m.vmImageNote}</p>
+
+    <div class="sizing-box">
+      <h3>{m.vmSizingTitle}</h3>
+      <dl class="sizing-list">
+        {m.vmSizing.map((item) => (
+          <div>
+            <dt>{item.k}</dt>
+            <dd>{item.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="vm-deck" data-vm-deck>
+      <div class="vm-deck-bar">
+        <span class="vm-deck-title">{m.vmTabsLabel}</span>
+        <button
+          type="button"
+          class="copy-btn"
+          data-vm-copy
+          data-label-copy={m.copyLabel}
+          data-label-copied={m.copiedLabel}
+          aria-label={m.copyAria}
+        >
+          {m.copyLabel}
+        </button>
+      </div>
+
+      <div class="vm-tabs" role="tablist" aria-label={m.vmTabsLabel}>
+        {m.hypervisors.map((hv, idx) => (
+          <button
+            type="button"
+            role="tab"
+            id={`hv-tab-${hv.id}`}
+            class="vm-tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-controls={`hv-panel-${hv.id}`}
+            tabindex={idx === 0 ? '0' : '-1'}
+            data-hv-tab={hv.id}
+            data-hv-cmd={hv.command}
+          >
+            {hv.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="vm-panels">
+        {m.hypervisors.map((hv, idx) => (
+          <div
+            role="tabpanel"
+            id={`hv-panel-${hv.id}`}
+            aria-labelledby={`hv-tab-${hv.id}`}
+            class="vm-panel"
+            hidden={idx !== 0}
+            data-hv-panel={hv.id}
+          >
+            <div class="hv-head">
+              <h3>{hv.label}</h3>
+              <span class="hv-badge">{hv.badge}</span>
+            </div>
+            <p class="hv-summary">{hv.summary}</p>
+            <pre tabindex="0"><code>{hv.command}</code></pre>
+            <p class="hv-caveat">{hv.caveat}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="live-usb" aria-labelledby="usb-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.usbEyebrow}</b>
+        <span>horneroos-2026.10-preview32-x86_64.iso</span>
+      </p>
+      <h2 id="usb-title">{m.usbTitle}</h2>
+      <p class="muted-copy">{m.usbIntro}</p>
+    </header>
+
+    <ol class="usb-steps" role="list">
+      {m.usbSteps.map((step) => (
+        <li class="usb-card">
+          <span class="step-n" aria-hidden="true">{step.n}</span>
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+          <pre tabindex="0"><code>{step.cmd}</code></pre>
+        </li>
+      ))}
+    </ol>
+
+    <div class="presenter-box">
+      <p class="eyebrow">
+        <b>{m.presenterEyebrow}</b>
+        <span>hornero-presenter</span>
+      </p>
+      <h3>{m.presenterTitle}</h3>
+      <p class="muted-copy">{m.presenterBody}</p>
+      <pre tabindex="0"><code>{m.presenterCmd}</code></pre>
+    </div>
+
+    <div class="related-strip">
+      <strong>{m.nextLinksTitle}:</strong>
+      <ul role="list">
+        {m.nextLinks.map((link) => (
+          <li>
+            <a href={L(link.href)}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</SiteLayout>
+
+<script is:inline>
+  (() => {
+    const deck = document.querySelector('[data-vm-deck]');
+    if (!deck) return;
+    const tabs = [...deck.querySelectorAll('[data-hv-tab]')];
+    const panels = [...deck.querySelectorAll('[data-hv-panel]')];
+    const copyBtn = deck.querySelector('[data-vm-copy]');
+    let activeCmd = tabs[0]?.getAttribute('data-hv-cmd') || '';
+    let timer = null;
+
+    const activate = (nextTab, focus = false) => {
+      const id = nextTab.getAttribute('data-hv-tab');
+      activeCmd = nextTab.getAttribute('data-hv-cmd') || '';
+      tabs.forEach((tab) => {
+        const selected = tab === nextTab;
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.getAttribute('data-hv-panel') !== id;
+      });
+      if (focus) nextTab.focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('keydown', (event) => {
+        let nextIndex = null;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = tabs.length - 1;
+        if (nextIndex === null) return;
+        event.preventDefault();
+        activate(tabs[nextIndex], true);
+      });
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      if (!activeCmd) return;
+      const labelCopy = copyBtn.getAttribute('data-label-copy') || 'Copy';
+      const labelCopied = copyBtn.getAttribute('data-label-copied') || 'Copied';
+      let ok = false;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(activeCmd);
+          ok = true;
+        }
+      } catch {
+        ok = false;
+      }
+      if (!ok) {
+        try {
+          const area = document.createElement('textarea');
+          area.value = activeCmd;
+          area.setAttribute('readonly', '');
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+          ok = true;
+        } catch {
+          ok = false;
+        }
+      }
+      if (ok) {
+        copyBtn.textContent = labelCopied;
+        copyBtn.setAttribute('data-copied', 'true');
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => {
+          copyBtn.textContent = labelCopy;
+          copyBtn.removeAttribute('data-copied');
+        }, 1600);
+      }
+    });
+  })();
+</script>
+
+<style>
+  .try-hero h1 {
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4.4rem);
+    line-height: 0.98;
+  }
+
+  .table-wrap {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .try-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.94rem;
+    text-align: left;
+  }
+
+  .try-table th,
+  .try-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .try-table thead th {
+    background: var(--sunken);
+    color: var(--signal);
+    font: 600 0.76rem var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .try-table tbody tr:last-child th,
+  .try-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .section-head-compact {
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .muted-copy {
+    max-width: 72ch;
+    color: var(--ink-muted);
+  }
+
+  .status-callout,
+  .artifact-note {
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--cue);
+    border-left: 3px solid var(--cue);
+    border-radius: var(--radius);
+    background: var(--panel);
+    margin-bottom: 1.2rem;
+  }
+
+  .status-callout h3 {
+    margin: 0 0 0.35rem;
+    font-size: var(--step-1);
+  }
+
+  .status-callout p,
+  .artifact-note {
+    margin: 0 0 1.2rem;
+    color: var(--ink-muted);
+    max-width: 74ch;
+  }
+
+  .status-callout p {
+    margin-bottom: 0;
+  }
+
+  .browser-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .try-card,
+  .sizing-box,
+  .presenter-box {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .try-card h3,
+  .sizing-box h3,
+  .presenter-box h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .try-card pre,
+  .presenter-box pre,
+  .usb-card pre,
+  .vm-panel pre {
+    margin: 0;
+    overflow-x: auto;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--signal);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: 0.82rem;
+  }
+
+  .bullet-list {
+    margin: 0;
+    padding-left: 1.15rem;
+    color: var(--ink-muted);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .sizing-box {
+    margin-bottom: 1.25rem;
+  }
+
+  .sizing-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1.5rem;
+    margin: 0;
+  }
+
+  .sizing-list div {
+    display: grid;
+    gap: 0.15rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .sizing-list dt {
+    color: var(--signal);
+    font: 600 0.74rem var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .sizing-list dd {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .vm-deck {
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--sunken);
+    overflow: hidden;
+  }
+
+  .vm-deck-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--panel);
+    font: 500 0.76rem var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .copy-btn {
+    min-height: 2rem;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-small);
+    background: var(--raised);
+    color: var(--ink);
+    font: 500 0.72rem var(--font-mono);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .copy-btn[data-copied='true'] {
+    border-color: var(--phosphor);
+    background: var(--phosphor-well);
+    color: var(--on-phosphor-well);
+  }
+
+  .vm-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+    background: var(--base);
+  }
+
+  .vm-tab {
+    min-height: 2.75rem;
+    padding: 0.45rem 0.95rem;
+    border: 0;
+    border-right: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-muted);
+    font: 500 0.82rem var(--font-mono);
+    cursor: pointer;
+  }
+
+  .vm-tab:hover {
+    color: var(--ink);
+    background: var(--panel);
+  }
+
+  .vm-tab[aria-selected='true'] {
+    background: var(--sunken);
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--signal);
+    font-weight: 600;
+  }
+
+  .vm-panel {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.15rem;
+  }
+
+  .vm-panel[hidden] {
+    display: none;
+  }
+
+  .hv-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hv-head h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .hv-badge {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--cue);
+    border-radius: var(--radius-small);
+    background: var(--cue-well);
+    color: var(--on-cue-well);
+    font: 600 0.72rem var(--font-mono);
+  }
+
+  .hv-summary,
+  .hv-caveat {
+    margin: 0;
+    color: var(--ink-muted);
+    max-width: 72ch;
+  }
+
+  .hv-caveat {
+    padding: 0.55rem 0.8rem;
+    border-left: 2px solid var(--signal);
+    background: var(--panel);
+    font-size: 0.9rem;
+  }
+
+  .usb-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 1.4rem;
+  }
+
+  .usb-card {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: 1.05rem;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .step-n {
+    color: var(--signal);
+    font: 600 0.82rem var(--font-mono);
+  }
+
+  .usb-card h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .usb-card p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.92rem;
+  }
+
+  .related-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.4rem;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .related-strip ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 900px) {
+    .browser-grid,
+    .sizing-list,
+    .usb-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

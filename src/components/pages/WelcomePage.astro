@@ -1,0 +1,435 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { localizePath, type Locale } from '../../i18n/ui';
+import { messages } from '../../i18n/messages/welcome';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const m = messages[locale];
+const L = (path: string) => localizePath(path, locale);
+---
+
+<SiteLayout
+  title={m.pageTitle}
+  description={m.pageDescription}
+  socialImage="/og/welcome.png"
+  socialImageAlt={m.socialAlt}
+>
+  <section class="section welcome-hero" aria-labelledby="welcome-title">
+    <p class="plate-id">
+      <strong>{m.eyebrowWelcome}</strong>
+      <span>{m.eyebrowFlight}</span>
+      <span>{m.eyebrowCli}</span>
+    </p>
+    <h1 id="welcome-title">{m.heroTitle}</h1>
+    <p class="lede">{m.heroLede}</p>
+    <p class="cta-row">
+      <a class="cta primary" href="#walkthrough">{m.ctaWalkthrough}</a>
+      <a class="cta secondary" href="#modes">{m.ctaModes}</a>
+      <a class="cta secondary" href={L('/docs/desktop/hornero-welcome/')}>{m.ctaDocs}</a>
+    </p>
+
+    <div class="dual-hero-captures">
+      {m.heroCaptures.map((shot) => (
+        <figure class="capture-frame">
+          <div class="capture-bar">
+            <span class="capture-badge">{shot.badge}</span>
+            <span class="capture-res">1280×800</span>
+          </div>
+          <img src={shot.src} alt={shot.alt} width="1280" height="800" loading="eager" />
+          <figcaption>{shot.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="walkthrough" aria-labelledby="video-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.videoEyebrow}</b>
+        <span>WebM · 1280×800</span>
+      </p>
+      <h2 id="video-title">{m.videoTitle}</h2>
+      <p class="muted-copy">{m.videoNote}</p>
+    </header>
+
+    <div class="video-bezel">
+      <video
+        controls
+        muted
+        playsinline
+        preload="metadata"
+        poster="/captures/showcase/welcome-arrival-day.webp"
+        aria-label={m.videoAria}
+      >
+        <source src="/captures/showcase/welcome-walkthrough.webm" type="video/webm" />
+      </video>
+      <p class="video-transcript">{m.videoTranscript}</p>
+    </div>
+  </section>
+
+  <section class="section" id="modes" aria-labelledby="modes-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.modesEyebrow}</b>
+        <span>firstRunCompleted · lastSeenReleaseVersion</span>
+      </p>
+      <h2 id="modes-title">{m.modesTitle}</h2>
+      <p class="muted-copy">{m.modesIntro}</p>
+    </header>
+
+    <ol class="modes-grid" role="list">
+      {m.modesList.map((mode) => (
+        <li class="mode-card">
+          <div class="mode-top">
+            <span class="mode-idx" aria-hidden="true">{mode.index}</span>
+            <span class="mode-when">{mode.when}</span>
+          </div>
+          <h3>{mode.name}</h3>
+          <p>{mode.summary}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="scenes-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.scenesEyebrow}</b>
+        <span>Signal Day &amp; Signal Night</span>
+      </p>
+      <h2 id="scenes-title">{m.scenesTitle}</h2>
+    </header>
+
+    <div class="scenes-grid">
+      {m.scenesCaptures.map((shot) => (
+        <figure class="capture-frame">
+          <div class="capture-bar">
+            <span class="capture-badge">{shot.badge}</span>
+            <span class="capture-res">1280×800</span>
+          </div>
+          <img src={shot.src} alt={shot.alt} width="1280" height="800" loading="lazy" />
+          <figcaption>
+            <strong>{shot.title}</strong>
+            <span>{shot.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <div class="scenes-list-panel">
+      <h3>{m.firstFlightScenesTitle}</h3>
+      <ol class="flight-scenes" role="list">
+        {m.firstFlightScenes.map((scene) => (
+          <li>
+            <span class="scene-n" aria-hidden="true">{scene.n}</span>
+            <div>
+              <strong>{scene.name}</strong>
+              <p>{scene.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="guarantees" aria-labelledby="guarantees-title">
+    <header class="section-head-compact">
+      <p class="eyebrow">
+        <b>{m.guaranteesEyebrow}</b>
+        <span>142–199 MB RSS · ≤90 ms</span>
+      </p>
+      <h2 id="guarantees-title">{m.guaranteesTitle}</h2>
+    </header>
+
+    <div class="guarantees-grid">
+      {m.guaranteesCards.map((card) => (
+        <article class="guarantee-card">
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="cli-box">
+      <p class="eyebrow"><b>{m.cliEyebrow}</b></p>
+      <pre tabindex="0"><code>{m.cliCommands}</code></pre>
+    </div>
+
+    <div class="related-strip">
+      <strong>{m.relatedLinksTitle}:</strong>
+      <ul role="list">
+        {m.relatedLinks.map((link) => (
+          <li>
+            <a href={L(link.href)}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .welcome-hero h1 {
+    max-width: 19ch;
+    font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4.4rem);
+    line-height: 0.98;
+  }
+
+  .dual-hero-captures {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .capture-frame {
+    margin: 0;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--panel);
+    overflow: hidden;
+  }
+
+  .capture-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--sunken);
+    font: 500 0.72rem var(--font-mono);
+  }
+
+  .capture-badge {
+    color: var(--signal);
+    text-transform: uppercase;
+  }
+
+  .capture-res {
+    color: var(--ink-muted);
+  }
+
+  .capture-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .capture-frame figcaption {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  .capture-frame figcaption strong {
+    color: var(--ink);
+  }
+
+  .section-head-compact {
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .muted-copy {
+    max-width: 72ch;
+    color: var(--ink-muted);
+  }
+
+  .video-bezel {
+    padding: 0.85rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--sunken);
+  }
+
+  .video-bezel video {
+    display: block;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: var(--radius-small);
+    background: var(--ground);
+  }
+
+  .video-transcript {
+    margin: 0.75rem 0 0;
+    color: var(--ink-muted);
+    font-size: var(--step--1);
+  }
+
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mode-card {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: 1.15rem;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--signal);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .mode-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font: 500 0.74rem var(--font-mono);
+  }
+
+  .mode-idx {
+    color: var(--signal);
+  }
+
+  .mode-when {
+    color: var(--cue);
+  }
+
+  .mode-card h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .mode-card p {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .scenes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .scenes-list-panel {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .scenes-list-panel h3 {
+    margin: 0 0 1rem;
+    font-size: var(--step-1);
+  }
+
+  .flight-scenes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .flight-scenes li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    align-items: start;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .scene-n {
+    color: var(--signal);
+    font: 600 0.78rem var(--font-mono);
+  }
+
+  .flight-scenes p {
+    margin: 0.2rem 0 0;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .guarantees-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .guarantee-card {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--cue);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .guarantee-card h3 {
+    margin: 0;
+    font-size: var(--step-1);
+  }
+
+  .guarantee-card p {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .cli-box {
+    margin-top: 1.4rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .cli-box pre {
+    margin: 0.6rem 0 0;
+    overflow-x: auto;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--signal);
+    border-radius: var(--radius-small);
+    background: var(--sunken);
+    font-size: 0.85rem;
+  }
+
+  .related-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.4rem;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .related-strip ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 900px) {
+    .dual-hero-captures,
+    .modes-grid,
+    .scenes-grid,
+    .flight-scenes,
+    .guarantees-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
