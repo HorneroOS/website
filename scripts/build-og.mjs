@@ -22,6 +22,7 @@ const out = join(root, 'public/og');
 const file = (path) => pathToFileURL(join(root, path)).href;
 const fonts = (name, f) => file(`node_modules/@fontsource/${name}/files/${f}`);
 const logo = readFileSync(join(root, 'src/assets/brand/logo-dark.svg'), 'utf8').replace(/<svg /, '<svg width="54" height="54" ');
+const appsData = JSON.parse(readFileSync(join(root, 'src/data/product/apps-catalog.json'), 'utf8'));
 const plugins = JSON.parse(readFileSync(join(root, 'src/data/product/extensions.json'), 'utf8')).plugins;
 const studioApps = new Map(
   JSON.parse(readFileSync(join(root, 'src/data/product/editions.json'), 'utf8')).studio.applications.map((a) => [a.id, a.title]),
@@ -179,6 +180,37 @@ const cards = {
     ]
       .map(([name, value]) => `<li><b>${name}</b><span>${value}</span></li>`)
       .join('')}</ul><p class="cap"><b>${stageLabel(ledger.find((f) => f.id === 'greeter-signal-original'))}</b> data from the pinned greeter, not a screenshot</p>`,
+  },
+  apps: {
+    eyebrow: 'Hornero Apps',
+    title: `${appsData.total_apps} verified apps.`,
+    line: 'Unified Arch, Flathub, vendor repos, AppImages, isolated Web Apps, and 9 workstation profiles with explicit provenance.',
+    panel: `<ul class="ledger">
+      <li><b>Verified apps</b><span>${appsData.total_apps}</span></li>
+      <li><b>Categories</b><span>${appsData.categories.length}</span></li>
+      <li><b>Collections</b><span>${appsData.collections.length}</span></li>
+      <li><b>Profiles</b><span>${appsData.profiles.length}</span></li>
+    </ul><p class="cap"><b>Catalog</b> horneroos.com/apps · horneroctl store</p>`,
+  },
+  welcome: {
+    eyebrow: 'Hornero Welcome',
+    title: 'Signal Flight: 3 modes.',
+    line: 'First Flight (9 scenes), permanent Explore Hornero discovery hub, and version-aware What’s New with reversible previews.',
+    panel: `<ol class="ledger steps">
+      <li><b>01</b><span>First Flight (9 calm scenes)</span></li>
+      <li><b>02</b><span>Explore Hornero (search &amp; keys)</span></li>
+      <li><b>03</b><span>What’s New (per release)</span></li>
+    </ol><p class="cap"><b>horneroctl welcome</b> zero telemetry · reversible TX</p>`,
+  },
+  try: {
+    eyebrow: 'Hornero Playground',
+    title: 'Try HorneroOS.',
+    line: 'Self-hostable KVM + WebRTC browser stack, local 60 FPS VM launchers (QEMU, Quickemu, libvirt, VMware), and Live USB.',
+    panel: `<ol class="ledger steps">
+      <li><b>01</b><span>Browser (self-host + rollout)</span></li>
+      <li><b>02</b><span>Local VM (VirGL / OVMF)</span></li>
+      <li><b>03</b><span>Live USB (Safe Graphics)</span></li>
+    </ol><p class="cap"><b>Real x86_64 OS</b> never a mocked JS desktop</p>`,
   },
 };
 

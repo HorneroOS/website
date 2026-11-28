@@ -31,6 +31,9 @@ The default language is Spanish (Argentina); English lives under /en/.
 - `/why-horneroos` — what it does, comparison with other operating systems
   and shells, limits and FAQ
 - `/install` — download the signed ISO, verification and requirements
+- `/try` — Hornero Playground: self-hostable KVM + WebRTC browser stack, local VM launchers, and Live USB
+- `/apps` — Hornero Apps: 271 verified applications, 12 categories, 10 collections, 9 profiles, and trust policies
+- `/welcome` — Hornero Welcome (Signal Flight): First Flight, Explore Hornero, and What's New
 - `/editions` — Desktop, Studio and Gaming for everyday use (Supported); Server and Agents planned
 - `/desktop` — the Desktop edition and its settings
 - `/studio` — creative workflows and applications

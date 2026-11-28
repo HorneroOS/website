@@ -26,6 +26,7 @@ const es = {
   unaIsoX8664Instala:
     'Una ISO x86_64 instala HorneroOS Desktop, la edición Studio con especializaciones creativas a elección, o la edición Gaming. Es la ISO actual (0.2.0-preview32, nombre de artefacto publicado). Pasó la validación de instalación en VMs desechables (UEFI, sin cifrado; LUKS, BIOS heredado y Niri no se ejecutaron sobre esta ISO, y eso sigue siendo una limitación concreta) y está publicada como pre-release firmada en GitHub. HorneroOS se usa a diario, con esas limitaciones declaradas.',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Descargar la ISO actual (${v0})`,
+  probarAntesEnPlayground: 'Probar en VM, browser o Live USB',
   comparaLasEdiciones: 'Compará las ediciones',
   yaUsasArchInstalaLos: 'Ya usás Arch? Instalá los paquetes',
   tambienAnunciadaEnLa: 'También anunciada en la ',
@@ -152,6 +153,7 @@ const en: Messages = {
   unaIsoX8664Instala:
     'One x86_64 ISO installs HorneroOS Desktop, the Studio edition with selectable creative specializations, or the Gaming edition. It is the current ISO (0.2.0-preview32, a published artifact name). It passed disposable-VM installation validation (UEFI, unencrypted; LUKS, legacy BIOS and Niri were not run against this ISO, and that remains a concrete limitation) and is published as a signed GitHub pre-release. HorneroOS is used daily, with those limitations declared.',
   descargarLaIsoActual: (v0: string | number | null | undefined): string => `Download the current ISO (${v0})`,
+  probarAntesEnPlayground: 'Try in VM, browser, or Live USB',
   comparaLasEdiciones: 'Compare the editions',
   yaUsasArchInstalaLos: 'Already run Arch? Install the packages',
   tambienAnunciadaEnLa: 'Also announced on the ',

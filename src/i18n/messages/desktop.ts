@@ -15,6 +15,7 @@ const es = {
   desktopEsElEscritorioSobre:
     'Desktop es el escritorio sobre el que se apoyan Studio y Gaming: shell propio sobre Quickshell, un launcher, un Dashboard, un Centro de control y un compositor Wayland. Todo lo que ves tiene un ajuste, con vista previa y vuelta atrás.',
   descargaLaIsoActual: 'Descargá la ISO actual',
+  probarHorneroOS: 'Probar sin instalar',
   verElShowroom: 'Ver el showroom',
   elEscritorioTrabajando: 'El escritorio trabajando',
   ajustesDelEscritorio: 'Ajustes del escritorio',
@@ -50,6 +51,7 @@ const en: Messages = {
   desktopEsElEscritorioSobre:
     'Desktop is the desktop that Studio and Gaming build on: its own shell on Quickshell, a launcher, a Dashboard, a Control Center and a Wayland compositor. Everything you see has a setting, with a preview and a way back.',
   descargaLaIsoActual: 'Download the current ISO',
+  probarHorneroOS: 'Try without installing',
   verElShowroom: 'See the showroom',
   elEscritorioTrabajando: 'The desktop at work',
   ajustesDelEscritorio: 'Desktop settings',

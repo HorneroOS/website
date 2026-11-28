@@ -69,8 +69,20 @@ const es = {
   horneroosEsUnSistemaOperativo:
     'HorneroOS es un sistema operativo basado en Arch: tres ediciones, una herramienta de sistema (horneroctl) y Hornero Shell para el escritorio.',
   descargaLaIsoActual: 'Descargá la ISO actual',
+  probarHorneroOS: 'Probar HorneroOS',
   elegiTuEdicion: 'Elegí tu edición',
   yaUsasArchInstalaViaAur: '¿Ya usás Arch? Instalá vía AUR',
+  horneroAppsTitle: 'Hornero Apps',
+  horneroAppsSummary: (totalApps: number): string =>
+    `${totalApps} aplicaciones verificadas en 12 categorías, 10 colecciones, 9 perfiles y 6 backends con procedencia explícita.`,
+  horneroAppsAlt: 'Captura real de Hornero Apps en Signal Night mostrando la vista Discover.',
+  explorarHorneroApps: 'Explorar Hornero Apps',
+  horneroWelcomeTitle: 'Hornero Welcome · Signal Flight',
+  horneroWelcomeSummary:
+    'Recorrido guiado First Flight en 9 escenas, guía permanente Explore Hornero y novedades por versión con previews reversibles.',
+  horneroWelcomeAlt: 'Captura real de Hornero Welcome en Signal Day mostrando la escena Arrival.',
+  conocerHorneroWelcome: 'Conocer Hornero Welcome',
+  probarEnBrowserVmOLiveUsb: 'Probar en browser, VM o Live USB',
   estadoActualDesdeLosDatos: 'Estado actual, desde los datos de producto fijados',
   elEscritorioTrabajando: 'El escritorio trabajando',
   todasLasCapturasSeleccionadas: 'Todas las capturas seleccionadas',
@@ -292,8 +304,20 @@ const en: Messages = {
   horneroosEsUnSistemaOperativo:
     'HorneroOS is an Arch-based operating system: three editions, one system tool (horneroctl) and Hornero Shell for the desktop.',
   descargaLaIsoActual: 'Download the current ISO',
+  probarHorneroOS: 'Try HorneroOS',
   elegiTuEdicion: 'Choose your edition',
   yaUsasArchInstalaViaAur: 'Already on Arch? Install via AUR',
+  horneroAppsTitle: 'Hornero Apps',
+  horneroAppsSummary: (totalApps: number): string =>
+    `${totalApps} verified applications across 12 categories, 10 collections, 9 profiles, and 6 backends with explicit provenance.`,
+  horneroAppsAlt: 'Real capture of Hornero Apps in Signal Night showing the Discover view.',
+  explorarHorneroApps: 'Explore Hornero Apps',
+  horneroWelcomeTitle: 'Hornero Welcome · Signal Flight',
+  horneroWelcomeSummary:
+    'Guided 9-scene First Flight tour, permanent Explore Hornero discovery hub, and version-aware What’s New with reversible previews.',
+  horneroWelcomeAlt: 'Real capture of Hornero Welcome in Signal Day showing the Arrival scene.',
+  conocerHorneroWelcome: 'Explore Hornero Welcome',
+  probarEnBrowserVmOLiveUsb: 'Try in browser, VM, or Live USB',
   estadoActualDesdeLosDatos: 'Current status, from the pinned product data',
   elEscritorioTrabajando: 'The desktop at work',
   todasLasCapturasSeleccionadas: 'Every selected capture',

@@ -11,6 +11,7 @@ import wallpapersJson from './wallpapers.json';
 import terminalsJson from './terminals.json';
 import paletteApplicationsJson from './palette-applications.json';
 import extensionsJson from './extensions.json';
+import appsCatalogJson from './apps-catalog.json';
 
 export interface LayoutBar {
   edge: 'top' | 'bottom' | 'left' | 'right';
@@ -290,3 +291,95 @@ export const extensionCatalogue = extensionsJson as unknown as {
   generatedFrom: string;
   plugins: ExtensionEntry[];
 };
+
+export interface AppCategory {
+  id: string;
+  name: string;
+  name_es: string;
+  description: string;
+  description_es: string;
+  icon: string;
+  order: number;
+}
+
+export interface AppCollection {
+  id: string;
+  name: string;
+  name_es: string;
+  description: string;
+  description_es: string;
+  icon: string;
+  apps: string[];
+}
+
+export interface AppProfile {
+  id: string;
+  name: string;
+  name_es: string;
+  description: string;
+  description_es: string;
+  apps: string[];
+  proprietaryOptIn: string[];
+}
+
+export interface AppSource {
+  backend: 'arch_native' | 'flatpak' | 'aur' | 'webapp' | 'vendor_repo' | 'appimage' | 'guided';
+  provenance:
+    | 'arch_official'
+    | 'flathub_verified'
+    | 'flathub_community'
+    | 'vendor_official'
+    | 'hornero_official'
+    | 'official_web_app'
+    | 'community_package';
+  package_id: string;
+  remote: string;
+  verified: boolean;
+  sandboxed: boolean;
+  recommended_reason: string;
+  recommended_reason_es: string;
+}
+
+export interface AppEntry {
+  id: string;
+  name: string;
+  publisher: string;
+  summary: string;
+  summary_es: string;
+  category: string;
+  tags: string[];
+  collections: string[];
+  profiles: string[];
+  featured: boolean;
+  license: string;
+  is_open_source: boolean;
+  pricing: 'free' | 'freemium' | 'paid';
+  requires_account: boolean;
+  wayland_support: 'native' | 'xwayland' | 'web' | 'cli' | 'unknown';
+  maturity: 'stable' | 'beta' | 'alpha' | 'preview' | 'deprecated';
+  status:
+    | 'installable_validated'
+    | 'installable_with_limitations'
+    | 'official_web_app'
+    | 'community_maintained'
+    | 'guided_setup_required'
+    | 'deprecated'
+    | 'pending_verification'
+    | 'unsupported';
+  recommended_source: string;
+  sources: AppSource[];
+  known_limitations: string;
+  homepage: string;
+}
+
+export interface AppCatalog {
+  version: number;
+  verified_at: string;
+  total_apps: number;
+  categories: AppCategory[];
+  collections: AppCollection[];
+  profiles: AppProfile[];
+  apps: AppEntry[];
+}
+
+export const appsCatalog = appsCatalogJson as unknown as AppCatalog;

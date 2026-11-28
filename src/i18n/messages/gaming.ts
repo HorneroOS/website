@@ -71,6 +71,8 @@ const es = {
   nuncaAfirmaCompatibilidadRendimientoNi: 'Nunca afirma compatibilidad, rendimiento ni latencia.',
   horneroosDesktopStudioYGaming: 'HorneroOS Desktop, Studio y Gaming se descargan desde ',
   laPaginaDeInstalacion: 'la página de instalación',
+  explorarHorneroApps: 'Hornero Apps',
+  probarEnPlayground: 'Probar sin instalar',
 };
 
 export type Messages = typeof es;
@@ -143,6 +145,8 @@ const en: Messages = {
   nuncaAfirmaCompatibilidadRendimientoNi: 'It never claims compatibility, performance or latency.',
   horneroosDesktopStudioYGaming: 'HorneroOS Desktop, Studio and Gaming are downloadable from ',
   laPaginaDeInstalacion: 'the install page',
+  explorarHorneroApps: 'Hornero Apps',
+  probarEnPlayground: 'Try without installing',
 };
 
 export const messages: Record<Locale, Messages> = { es, en };

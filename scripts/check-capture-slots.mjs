@@ -208,7 +208,10 @@ function checkSource() {
       const rel = relative(root, abs);
       if (!mediaExt.test(rel)) continue;
       if (slotFiles.has(rel)) continue;
-      if (rel.startsWith('src/assets/captures/') || rel.startsWith('public/captures/')) {
+      if (
+        rel.startsWith('src/assets/captures/') ||
+        (rel.startsWith('public/captures/') && !rel.startsWith('public/captures/showcase/'))
+      ) {
         fail(`${rel}: a captured file is not owned by any slot (run scripts/capture-ingest.mjs)`);
         continue;
       }

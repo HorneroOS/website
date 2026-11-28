@@ -6,7 +6,7 @@
 //          npm run data:bump   (move pins to current mains, then sync)
 //          npm run data:check  (CI: committed data == data from pins)
 //          npm run build       (runs --fetch-only first: pinned docs checkout)
-// Outputs: src/data/product/{layouts,themes,releases,editions,greeter,wallpapers,terminals,palette-applications,extensions}.json
+// Outputs: src/data/product/{layouts,themes,releases,editions,greeter,wallpapers,terminals,palette-applications,extensions,apps-catalog}.json
 //
 // Product facts on /layouts, /themes, /releases and /terminals come from these files, and
 // these files come only from the pinned commits: never edit them by hand.
@@ -28,6 +28,7 @@ const DATA = join(ROOT, 'src/data/product');
 const CACHE = join(ROOT, '.cache/product-src');
 const CHECK = process.argv.includes('--check');
 const BUMP = process.argv.includes('--bump');
+const LOCAL = process.argv.includes('--local');
 // --fetch-only: check out the pinned sources (the docs pages read
 // .cache/product-src/docs at build time) without regenerating any data.
 const FETCH_ONLY = process.argv.includes('--fetch-only');
@@ -603,7 +604,24 @@ if (BUMP) {
     pin.sha = sha;
   }
 }
-const dirs = Object.fromEntries(Object.entries(pins.sources).map(([name, pin]) => [name, checkout(name, pin)]));
+function localDirFor(name) {
+  const candidates = [
+    resolve(ROOT, '../github.com/HorneroOS', name),
+    resolve(ROOT, '..', name),
+  ];
+  return candidates.find((candidate) => existsSync(candidate)) ?? null;
+}
+
+const dirs = Object.fromEntries(
+  Object.entries(pins.sources).map(([name, pin]) => {
+    if (LOCAL) {
+      const local = localDirFor(name);
+      if (local) return [name, local];
+      fail(`--local requested, but no sibling checkout found for ${name}`);
+    }
+    return [name, checkout(name, pin)];
+  }),
+);
 if (FETCH_ONLY) {
   console.log(`fetched ${Object.keys(dirs).join(', ')} at their pins`);
   process.exit(0);
@@ -672,6 +690,90 @@ function extensions(pluginsDir) {
   };
 }
 
+// Canonical Hornero Apps catalog (HorneroOS/hornero catalog/apps.v1.json).
+// Emits a compact, deterministic projection for /apps and /en/apps.
+function appsCatalog(horneroDir) {
+  const catalog = readJson(join(horneroDir, 'catalog/apps.v1.json'));
+  if (catalog.apiVersion !== 'hornero.os/v1' || catalog.kind !== 'ApplicationCatalog') {
+    fail('catalog/apps.v1.json has an unsupported apiVersion or kind');
+  }
+  for (const key of ['categories', 'collections', 'profiles', 'apps']) {
+    if (!Array.isArray(catalog[key])) fail(`catalog/apps.v1.json is missing ${key} array`);
+  }
+  const categories = [...catalog.categories]
+    .sort((a, b) => (a.order ?? 999) - (b.order ?? 999) || a.id.localeCompare(b.id))
+    .map(({ id, name, name_es, description, description_es, icon, order }) => ({
+      id,
+      name,
+      name_es,
+      description,
+      description_es,
+      icon,
+      order,
+    }));
+  const collections = catalog.collections.map(({ id, name, name_es, description, description_es, icon, apps }) => ({
+    id,
+    name,
+    name_es,
+    description,
+    description_es,
+    icon,
+    apps: [...(apps ?? [])],
+  }));
+  const profiles = catalog.profiles.map(({ id, name, name_es, description, description_es, apps, proprietaryOptIn }) => ({
+    id,
+    name,
+    name_es,
+    description,
+    description_es,
+    apps: [...(apps ?? [])],
+    proprietaryOptIn: [...(proprietaryOptIn ?? [])],
+  }));
+  const apps = [...catalog.apps]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((app) => ({
+      id: app.id,
+      name: app.name,
+      publisher: app.publisher,
+      summary: app.summary,
+      summary_es: app.summary_es,
+      category: app.category,
+      tags: [...(app.tags ?? [])],
+      collections: [...(app.collections ?? [])],
+      profiles: [...(app.profiles ?? [])],
+      featured: app.featured === true,
+      license: app.license,
+      is_open_source: app.is_open_source === true,
+      pricing: app.pricing ?? 'free',
+      requires_account: app.requires_account === true,
+      wayland_support: app.wayland_support ?? 'unknown',
+      maturity: app.stability ?? 'stable',
+      status: app.status ?? 'installable_validated',
+      recommended_source: app.recommended_source ?? '',
+      sources: (app.sources ?? []).map((src) => ({
+        backend: src.backend,
+        provenance: src.provenance,
+        package_id: src.package_id,
+        remote: src.remote ?? '',
+        verified: src.verified === true,
+        sandboxed: src.sandboxed === true,
+        recommended_reason: src.recommended_reason ?? '',
+        recommended_reason_es: src.recommended_reason_es ?? '',
+      })),
+      known_limitations: app.known_limitations ?? '',
+      homepage: app.homepage ?? '',
+    }));
+  return {
+    version: catalog.schemaVersion ?? 1,
+    verified_at: catalog.verifiedAt ?? '',
+    total_apps: apps.length,
+    categories,
+    collections,
+    profiles,
+    apps,
+  };
+}
+
 const generated = {
   'layouts.json': layouts(dirs.shell),
   'themes.json': themes(dirs.config, officialThemes(dirs.hornero)),
@@ -682,6 +784,7 @@ const generated = {
   'terminals.json': terminalIntegrations(dirs.config),
   'palette-applications.json': paletteApplications(dirs.config),
   'extensions.json': extensions(dirs.plugins),
+  'apps-catalog.json': appsCatalog(dirs.hornero),
 };
 
 let drift = 0;
